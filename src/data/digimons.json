@@ -1,20 +1,20 @@
 [
   {
     "id": 1,
-    "name": "Agumon",
+    "name": "agumon",
     "image": "/images/digimons/01.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[25,28,27,26]",
+    "evolution": "[25,28,27,26,29]",
     "typeId": 1
   },
   {
     "id": 2,
-    "name": "Gabumon",
+    "name": "gabumon",
     "image": "/images/digimons/02.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[76,77,79,75,78]",
     "typeId": 1
   },
   {
@@ -28,7 +28,7 @@
   },
   {
     "id": 4,
-    "name": "Terriermon",
+    "name": "terriermon",
     "image": "/images/digimons/04.png",
     "level": 1,
     "dp": 2000,
@@ -37,7 +37,7 @@
   },
   {
     "id": 5,
-    "name": "Guilmon",
+    "name": "guilmon",
     "image": "/images/digimons/05.png",
     "level": 1,
     "dp": 2000,
@@ -46,25 +46,25 @@
   },
   {
     "id": 6,
-    "name": "Patamon",
+    "name": "patamon",
     "image": "/images/digimons/06.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[96,97,98]",
     "typeId": 2
   },
   {
     "id": 7,
-    "name": "Salamon",
+    "name": "salamon",
     "image": "/images/digimons/07.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[108]",
     "typeId": 2
   },
   {
     "id": 8,
-    "name": "Tentomon",
+    "name": "tentomon",
     "image": "/images/digimons/08.png",
     "level": 1,
     "dp": 2000,
@@ -73,7 +73,7 @@
   },
   {
     "id": 9,
-    "name": "Renamon",
+    "name": "renamon",
     "image": "/images/digimons/09.png",
     "level": 1,
     "dp": 2000,
@@ -82,7 +82,7 @@
   },
   {
     "id": 10,
-    "name": "Biyomon",
+    "name": "biyomon",
     "image": "/images/digimons/10.png",
     "level": 1,
     "dp": 2000,
@@ -91,16 +91,16 @@
   },
   {
     "id": 11,
-    "name": "Betamon",
+    "name": "betamon",
     "image": "/images/digimons/11.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[116,117,118,119,120]",
     "typeId": 3
   },
   {
     "id": 12,
-    "name": "Elecmon",
+    "name": "elecmon",
     "image": "/images/digimons/12.png",
     "level": 1,
     "dp": 2000,
@@ -109,7 +109,7 @@
   },
   {
     "id": 13,
-    "name": "DemiDevimon",
+    "name": "demidevimon",
     "image": "/images/digimons/13.png",
     "level": 1,
     "dp": 2000,
@@ -118,7 +118,7 @@
   },
   {
     "id": 14,
-    "name": "Gazimon",
+    "name": "gazimon",
     "image": "/images/digimons/14.png",
     "level": 1,
     "dp": 2000,
@@ -127,7 +127,7 @@
   },
   {
     "id": 15,
-    "name": "Gotsumon",
+    "name": "gotsumon",
     "image": "/images/digimons/15.png",
     "level": 1,
     "dp": 2000,
@@ -136,7 +136,7 @@
   },
   {
     "id": 16,
-    "name": "Flamemon",
+    "name": "flamemon",
     "image": "/images/digimons/16.png",
     "level": 1,
     "dp": 2000,
@@ -145,7 +145,7 @@
   },
   {
     "id": 17,
-    "name": "Dorumon",
+    "name": "dorumon",
     "image": "/images/digimons/17.png",
     "level": 1,
     "dp": 2000,
@@ -154,7 +154,7 @@
   },
   {
     "id": 18,
-    "name": "Lopmon",
+    "name": "lopmon",
     "image": "/images/digimons/18.png",
     "level": 1,
     "dp": 2000,
@@ -163,7 +163,7 @@
   },
   {
     "id": 19,
-    "name": "Palmon",
+    "name": "palmon",
     "image": "/images/digimons/19.png",
     "level": 1,
     "dp": 2000,
@@ -172,7 +172,7 @@
   },
   {
     "id": 20,
-    "name": "Gomamon",
+    "name": "gomamon",
     "image": "/images/digimons/20.png",
     "level": 1,
     "dp": 2000,
@@ -181,7 +181,7 @@
   },
   {
     "id": 21,
-    "name": "Armadillomon",
+    "name": "armadillomon",
     "image": "/images/digimons/21.png",
     "level": 1,
     "dp": 2000,
@@ -190,7 +190,7 @@
   },
   {
     "id": 22,
-    "name": "Hawkmon",
+    "name": "hawkmon",
     "image": "/images/digimons/22.png",
     "level": 1,
     "dp": 2000,
@@ -199,7 +199,7 @@
   },
   {
     "id": 23,
-    "name": "Meicoomon",
+    "name": "meicoomon",
     "image": "/images/digimons/23.png",
     "level": 1,
     "dp": 2000,
@@ -208,7 +208,7 @@
   },
   {
     "id": 24,
-    "name": "Hackmon",
+    "name": "hackmon",
     "image": "/images/digimons/24.png",
     "level": 1,
     "dp": 2000,
@@ -217,25 +217,25 @@
   },
   {
     "id": 25,
-    "name": "Greymon",
+    "name": "greymon",
     "image": "/images/digimons/25.png",
     "level": 2,
     "dp": 5000,
-    "evolution": "[35]",
+    "evolution": "[35,37,38]",
     "typeId": 2
   },
   {
     "id": 26,
-    "name": "DarkTyranomon",
+    "name": "darktyranomon",
     "image": "/images/digimons/26.png",
     "level": 2,
     "dp": 5000,
-    "evolution": "[]",
+    "evolution": "[33]",
     "typeId": 3
   },
   {
     "id": 27,
-    "name": "Tuskmon",
+    "name": "tuskmon",
     "image": "/images/digimons/27.png",
     "level": 2,
     "dp": 5000,
@@ -244,7 +244,7 @@
   },
   {
     "id": 28,
-    "name": "Tyranomon",
+    "name": "tyranomon",
     "image": "/images/digimons/28.png",
     "level": 2,
     "dp": 5000,
@@ -255,113 +255,113 @@
     "id": 29,
     "name": "v-dramon",
     "image": "/images/digimons/29.png",
-    "level": 1,
+    "level": 2,
     "dp": 5000,
-    "evolution": "[]",
+    "evolution": "[50]",
     "typeId": 1
   },
   {
     "id": 30,
-    "name": "MasterTyranomon",
+    "name": "mastertyranomon",
     "image": "/images/digimons/30.png",
     "level": 3,
-    "dp": 6000,
+    "dp": 8000,
     "evolution": "[]",
     "typeId": 2
   },
   {
     "id": 31,
-    "name": "Triceramon",
+    "name": "triceramon",
     "image": "/images/digimons/31.png",
     "level": 3,
-    "dp": 6000,
-    "evolution": "[]",
+    "dp": 8000,
+    "evolution": "[39,40]",
     "typeId": 2
   },
   {
     "id": 32,
-    "name": "Mametyramon",
+    "name": "mametyramon",
     "image": "/images/digimons/32.png",
     "level": 3,
-    "dp": 6000,
-    "evolution": "[]",
+    "dp": 8000,
+    "evolution": "[40]",
     "typeId": 3
   },
   {
     "id": 33,
-    "name": "MetalTyranomon",
+    "name": "metaltyranomon",
     "image": "/images/digimons/33.png",
     "level": 3,
-    "dp": 6000,
-    "evolution": "[]",
+    "dp": 8000,
+    "evolution": "[41,42]",
     "typeId": 3
   },
   {
     "id": 34,
-    "name": "Megadramon",
+    "name": "megadramon",
     "image": "/images/digimons/34.png",
     "level": 3,
-    "dp": 6000,
-    "evolution": "[]",
+    "dp": 8000,
+    "evolution": "[42,126,128]",
     "typeId": 3
   },
   {
     "id": 35,
-    "name": "SkullGreymon",
+    "name": "skullgreymon",
     "image": "/images/digimons/35.png",
     "level": 3,
-    "dp": 6000,
-    "evolution": "[]",
+    "dp": 8000,
+    "evolution": "[44,42]",
     "typeId": 3
   },
   {
     "id": 36,
-    "name": "WarGreymon",
+    "name": "wargreymon",
     "image": "/images/digimons/36.png",
-    "level": 3,
-    "dp": 6000,
-    "evolution": "[]",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[49]",
     "typeId": 2
   },
   {
     "id": 37,
-    "name": "MetalGreymon Virus",
+    "name": "metalgreymon virus",
     "image": "/images/digimons/37.png",
     "level": 3,
-    "dp": 6000,
-    "evolution": "[]",
+    "dp": 8000,
+    "evolution": "[44,46,42]",
     "typeId": 3
   },
   {
     "id": 38,
-    "name": "MetalGreymon Vaccine",
+    "name": "metalgreymon vaccine",
     "image": "/images/digimons/38.png",
     "level": 3,
-    "dp": 6000,
-    "evolution": "[]",
+    "dp": 8000,
+    "evolution": "[48,52,69,44,46]",
     "typeId": 2
   },
   {
     "id": 39,
-    "name": "Qinglongmon",
+    "name": "qinglongmon",
     "image": "/images/digimons/39.png",
     "level": 4,
     "dp": 12000,
-    "evolution": "[]",
+    "evolution": "[53]",
     "typeId": 4
   },
   {
     "id": 40,
-    "name": "Dinorexmon",
+    "name": "dinorexmon",
     "image": "/images/digimons/40.png",
     "level": 4,
     "dp": 12000,
-    "evolution": "[]",
+    "evolution": "[53]",
     "typeId": 3
   },
   {
     "id": 41,
-    "name": "RustTyranomon",
+    "name": "rusttyranomon",
     "image": "/images/digimons/41.png",
     "level": 4,
     "dp": 12000,
@@ -370,34 +370,34 @@
   },
   {
     "id": 42,
-    "name": "Mugendramon",
+    "name": "mugendramon",
     "image": "/images/digimons/42.png",
     "level": 4,
     "dp": 12000,
-    "evolution": "[]",
+    "evolution": "[53,55,43]",
     "typeId": 3
   },
   {
     "id": 43,
-    "name": "Chaosdramon",
+    "name": "chaosdramon",
     "image": "/images/digimons/43.png",
-    "level": 4,
-    "dp": 12000,
+    "level": 5,
+    "dp": 18000,
     "evolution": "[]",
     "typeId": 3
   },
   {
     "id": 44,
-    "name": "BlitzGreymon",
+    "name": "blitzgreymon",
     "image": "/images/digimons/44.png",
     "level": 4,
     "dp": 12000,
-    "evolution": "[]",
+    "evolution": "[73]",
     "typeId": 3
   },
   {
     "id": 45,
-    "name": "Omegamon Alter S",
+    "name": "omegamon alter s",
     "image": "/images/digimons/45.png",
     "level": 4,
     "dp": 12000,
@@ -406,25 +406,25 @@
   },
   {
     "id": 46,
-    "name": "Gaioumon",
+    "name": "gaioumon",
     "image": "/images/digimons/46.png",
     "level": 4,
     "dp": 12000,
-    "evolution": "[]",
+    "evolution": "[47]",
     "typeId": 3
   },
   {
     "id": 47,
-    "name": "Gaioumon Itto Mode",
+    "name": "gaioumon itto mode",
     "image": "/images/digimons/47.png",
-    "level": 4,
-    "dp": 12000,
+    "level": 5,
+    "dp": 18000,
     "evolution": "[]",
     "typeId": 3
   },
   {
     "id": 48,
-    "name": "VictoryGreymon",
+    "name": "victorygreymon",
     "image": "/images/digimons/48.png",
     "level": 4,
     "dp": 12000,
@@ -433,43 +433,43 @@
   },
   {
     "id": 49,
-    "name": "Omegamon",
+    "name": "omegamon",
     "image": "/images/digimons/49.png",
-    "level": 4,
-    "dp": 12000,
-    "evolution": "[]",
+    "level": 5,
+    "dp": 18000,
+    "evolution": "[58,59]",
     "typeId": 4
   },
   {
     "id": 50,
-    "name": "Aerov-dramon",
+    "name": "aerov-dramon",
     "image": "/images/digimons/50.png",
-    "level": 4,
-    "dp": 12000,
-    "evolution": "[]",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[70]",
     "typeId": 2
   },
   {
     "id": 51,
-    "name": "UlforceV-dramon",
+    "name": "ulforcev-dramon",
     "image": "/images/digimons/51.png",
     "level": 4,
     "dp": 12000,
-    "evolution": "[]",
+    "evolution": "[61]",
     "typeId": 2
   },
   {
     "id": 52,
-    "name": "AncientGreymon",
+    "name": "ancientgreymon",
     "image": "/images/digimons/52.png",
     "level": 4,
     "dp": 12000,
-    "evolution": "[]",
+    "evolution": "[62]",
     "typeId": 4
   },
   {
     "id": 53,
-    "name": "Huanglongmon",
+    "name": "huanglongmon",
     "image": "/images/digimons/53.png",
     "level": 5,
     "dp": 18000,
@@ -478,34 +478,34 @@
   },
   {
     "id": 54,
-    "name": "MoonMillenniumon",
+    "name": "moonmillenniumon",
     "image": "/images/digimons/54.png",
     "level": 5,
     "dp": 18000,
-    "evolution": "[]",
+    "evolution": "[68]",
     "typeId": 3
   },
   {
     "id": 55,
-    "name": "Millenniumon",
+    "name": "millenniumon",
     "image": "/images/digimons/55.png",
     "level": 5,
     "dp": 18000,
-    "evolution": "[]",
+    "evolution": "[68]",
     "typeId": 3
   },
   {
     "id": 56,
-    "name": "Omegamon Alter B",
+    "name": "omegamon alter b",
     "image": "/images/digimons/56.png",
-    "level": 5,
-    "dp": 18000,
+    "level": 6,
+    "dp": 20000,
     "evolution": "[]",
     "typeId": 4
   },
   {
     "id": 57,
-    "name": "Omegamon Zwart Defeat",
+    "name": "omegamon zwart defeat",
     "image": "/images/digimons/57.png",
     "level": 5,
     "dp": 18000,
@@ -514,25 +514,25 @@
   },
   {
     "id": 58,
-    "name": "Omegamon Zwart",
+    "name": "omegamon zwart",
     "image": "/images/digimons/58.png",
-    "level": 5,
-    "dp": 18000,
+    "level": 6,
+    "dp": 20000,
     "evolution": "[]",
     "typeId": 4
   },
   {
     "id": 59,
-    "name": "Omegamon Merciful Mode",
+    "name": "omegamon merciful mode",
     "image": "/images/digimons/59.png",
-    "level": 5,
-    "dp": 18000,
+    "level": 6,
+    "dp": 20000,
     "evolution": "[]",
     "typeId": 4
   },
   {
     "id": 60,
-    "name": "Goddramon",
+    "name": "goddramon",
     "image": "/images/digimons/60.png",
     "level": 5,
     "dp": 18000,
@@ -541,7 +541,7 @@
   },
   {
     "id": 61,
-    "name": "UlforceV-dramon Future Mode",
+    "name": "ulforcev-dramon future mode",
     "image": "/images/digimons/61.png",
     "level": 5,
     "dp": 18000,
@@ -550,7 +550,7 @@
   },
   {
     "id": 62,
-    "name": "Susanoomon",
+    "name": "susanoomon",
     "image": "/images/digimons/62.png",
     "level": 5,
     "dp": 18000,
@@ -559,10 +559,559 @@
   },
   {
     "id": 68,
-    "name": "ZeedMillenniumon",
+    "name": "zeedmillenniumon",
     "image": "/images/digimons/68.png",
     "level": 6,
     "dp": 20000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 70,
+    "name": "godramon",
+    "image": "/images/digimons/21.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 71,
+    "name": "kimeramon",
+    "image": "/images/digimons/01.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[55,54]",
+    "typeId": 1
+  },
+  {
+    "id": 72,
+    "name": "chaosdramon",
+    "image": "/images/digimons/35.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 73,
+    "name": "omegamon alter s",
+    "image": "/images/digimons/97.png",
+    "level": 5,
+    "dp": 18000,
+    "evolution": "[68]",
+    "typeId": 3
+  },
+  {
+    "id": 75,
+    "name": "lobomon",
+    "image": "/images/digimons/72.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[86,82,87,88,90,89]",
+    "typeId": 5
+  },
+  {
+    "id": 76,
+    "name": "garurumon",
+    "image": "/images/digimons/98.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[82,87,88,89,90,86]",
+    "typeId": 2
+  },
+  {
+    "id": 77,
+    "name": "garurumon virus",
+    "image": "/images/digimons/57.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[86,90,88,89]",
+    "typeId": 3
+  },
+  {
+    "id": 78,
+    "name": "dorulumon",
+    "image": "/images/digimons/07.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 79,
+    "name": "dobermon",
+    "image": "/images/digimons/85.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 80,
+    "name": "gabumon virus",
+    "image": "/images/digimons/12.png",
+    "level": 1,
+    "dp": 2000,
+    "evolution": "[77,75,79]",
+    "typeId": 3
+  },
+  {
+    "id": 81,
+    "name": "strabimon",
+    "image": "/images/digimons/81.png",
+    "level": 1,
+    "dp": 2000,
+    "evolution": "[76,77,75,78,79]",
+    "typeId": 5
+  },
+  {
+    "id": 82,
+    "name": "kendogarurumon",
+    "image": "/images/digimons/81.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[83,91,94,92,93,95]",
+    "typeId": 5
+  },
+  {
+    "id": 83,
+    "name": "acientgarurumon",
+    "image": "/images/digimons/06.png",
+    "level": 4,
+    "dp": 13000,
+    "evolution": "[]",
+    "typeId": 1
+  },
+  {
+    "id": 84,
+    "name": "rizegreymon",
+    "image": "/images/digimons/52.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 85,
+    "name": "burninggreymon",
+    "image": "/images/digimons/78.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[]",
+    "typeId": 5
+  },
+  {
+    "id": 86,
+    "name": "beowolfmon",
+    "image": "/images/digimons/37.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[91,94,92,83,93,95]",
+    "typeId": 5
+  },
+  {
+    "id": 87,
+    "name": "weregarurumon",
+    "image": "/images/digimons/04.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[95,94,92,83,91,93]",
+    "typeId": 2
+  },
+  {
+    "id": 88,
+    "name": "weregarurumon virus",
+    "image": "/images/digimons/71.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[95,94,92]",
+    "typeId": 3
+  },
+  {
+    "id": 89,
+    "name": "yaegerdorulumo",
+    "image": "/images/digimons/09.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 90,
+    "name": "cerberumon",
+    "image": "/images/digimons/49.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[95,94,92]",
+    "typeId": 2
+  },
+  {
+    "id": 91,
+    "name": "magnagarurumon",
+    "image": "/images/digimons/16.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[62]",
+    "typeId": 5
+  },
+  {
+    "id": 92,
+    "name": "metalgarurumon virus",
+    "image": "/images/digimons/57.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 93,
+    "name": "metalgarurumon",
+    "image": "/images/digimons/66.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 1
+  },
+  {
+    "id": 94,
+    "name": "cresgarurumon",
+    "image": "/images/digimons/98.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 1
+  },
+  {
+    "id": 95,
+    "name": "merukimon",
+    "image": "/images/digimons/03.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 96,
+    "name": "angemon",
+    "image": "/images/digimons/14.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[103,104]",
+    "typeId": 2
+  },
+  {
+    "id": 97,
+    "name": "unimon",
+    "image": "/images/digimons/25.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[100,99]",
+    "typeId": 2
+  },
+  {
+    "id": 98,
+    "name": "pegasusmon",
+    "image": "/images/digimons/63.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 4
+  },
+  {
+    "id": 99,
+    "name": "mammothmon",
+    "image": "/images/digimons/95.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[102]",
+    "typeId": 2
+  },
+  {
+    "id": 100,
+    "name": "piximon",
+    "image": "/images/digimons/72.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[101]",
+    "typeId": 1
+  },
+  {
+    "id": 101,
+    "name": "jijimon",
+    "image": "/images/digimons/47.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 102,
+    "name": "skullmammothmon",
+    "image": "/images/digimons/29.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 103,
+    "name": "magnaangemon",
+    "image": "/images/digimons/48.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[105,106]",
+    "typeId": 2
+  },
+  {
+    "id": 104,
+    "name": "shakkoumon",
+    "image": "/images/digimons/76.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[107]",
+    "typeId": 4
+  },
+  {
+    "id": 105,
+    "name": "slashangemon",
+    "image": "/images/digimons/09.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 106,
+    "name": "seraphimon",
+    "image": "/images/digimons/40.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 1
+  },
+  {
+    "id": 107,
+    "name": "vikemon",
+    "image": "/images/digimons/59.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 4
+  },
+  {
+    "id": 108,
+    "name": "gatomon",
+    "image": "/images/digimons/79.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[109]",
+    "typeId": 2
+  },
+  {
+    "id": 109,
+    "name": "angewomon",
+    "image": "/images/digimons/51.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[110,111,112,113]",
+    "typeId": 2
+  },
+  {
+    "id": 110,
+    "name": "magnadramon",
+    "image": "/images/digimons/85.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 111,
+    "name": "ophanimon",
+    "image": "/images/digimons/67.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 112,
+    "name": "ophanimon falldown mode",
+    "image": "/images/digimons/39.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[114]",
+    "typeId": 1
+  },
+  {
+    "id": 113,
+    "name": "mastemon",
+    "image": "/images/digimons/58.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[114]",
+    "typeId": 1
+  },
+  {
+    "id": 114,
+    "name": "ordinemon",
+    "image": "/images/digimons/90.png",
+    "level": 5,
+    "dp": 18000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 115,
+    "name": "gizamon",
+    "image": "/images/digimons/82.png",
+    "level": 1,
+    "dp": 2000,
+    "evolution": "[116,117,118,119,120]",
+    "typeId": 3
+  },
+  {
+    "id": 116,
+    "name": "seadramon",
+    "image": "/images/digimons/60.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[34,121,122]",
+    "typeId": 1
+  },
+  {
+    "id": 117,
+    "name": "airdramon",
+    "image": "/images/digimons/28.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[34,121,122]",
+    "typeId": 2
+  },
+  {
+    "id": 118,
+    "name": "tobiumon",
+    "image": "/images/digimons/56.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[121,122,123,124,125]",
+    "typeId": 1
+  },
+  {
+    "id": 119,
+    "name": "ebidramon",
+    "image": "/images/digimons/45.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[123,124,125]",
+    "typeId": 1
+  },
+  {
+    "id": 120,
+    "name": "gesomon",
+    "image": "/images/digimons/71.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[123,124,125]",
+    "typeId": 1
+  },
+  {
+    "id": 121,
+    "name": "megaseadramon",
+    "image": "/images/digimons/94.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[127,129]",
+    "typeId": 1
+  },
+  {
+    "id": 122,
+    "name": "dragomon",
+    "image": "/images/digimons/50.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 123,
+    "name": "gusokumon",
+    "image": "/images/digimons/55.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[126,127,128,130,131]",
+    "typeId": 2
+  },
+  {
+    "id": 124,
+    "name": "scorpiomon",
+    "image": "/images/digimons/70.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[126,127,128,130,131]",
+    "typeId": 1
+  },
+  {
+    "id": 125,
+    "name": "marinedevimon",
+    "image": "/images/digimons/45.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[127,129,130,131]",
+    "typeId": 3
+  },
+  {
+    "id": 126,
+    "name": "spinomon",
+    "image": "/images/digimons/26.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 127,
+    "name": "metalseadramon",
+    "image": "/images/digimons/40.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 1
+  },
+  {
+    "id": 128,
+    "name": "deathmon",
+    "image": "/images/digimons/73.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 129,
+    "name": "regalecusmon",
+    "image": "/images/digimons/15.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 130,
+    "name": "neptunemon",
+    "image": "/images/digimons/32.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 131,
+    "name": "pukumon",
+    "image": "/images/digimons/91.png",
+    "level": 4,
+    "dp": 12000,
     "evolution": "[]",
     "typeId": 3
   }

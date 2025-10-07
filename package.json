@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "seed": "tsx scripts/seed-simple.ts",
-    "export": "tsx scripts/export-db-to-json.ts"
+    "export": "tsx scripts/export-db-to-json.ts",
+    "update-dp": "tsx scripts/update-dp-by-level.ts",
+    "lowercase-names": "tsx scripts/lowercase-digimon-names.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

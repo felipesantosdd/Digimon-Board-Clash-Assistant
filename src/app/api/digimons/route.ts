@@ -28,8 +28,24 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Converter nome para lowercase
+    const lowerName = name.trim().toLowerCase();
+
+    // Verificar se já existe um Digimon com esse nome
+    const allDigimons = getAllDigimons();
+    const duplicateDigimon = allDigimons.find(
+      (d) => d.name.toLowerCase() === lowerName
+    );
+
+    if (duplicateDigimon) {
+      return NextResponse.json(
+        { error: `Já existe um Digimon com o nome "${lowerName}"` },
+        { status: 409 } // 409 Conflict
+      );
+    }
+
     const savedDigimon = createDigimon({
-      name,
+      name: lowerName,
       image,
       level,
       dp,

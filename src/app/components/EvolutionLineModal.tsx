@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Digimon } from "../database/database_type";
+import { capitalize } from "@/lib/utils";
 
 interface EvolutionLineModalProps {
   isOpen: boolean;
@@ -123,13 +124,13 @@ export default function EvolutionLineModal({
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-y-auto"
+        className="bg-gray-800 rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-4 rounded-t-lg flex justify-between items-center">
           <h2 className="text-2xl font-bold">
-            🔄 Linha Evolutiva - {digimon.name}
+            🔄 Linha Evolutiva - {capitalize(digimon.name)}
           </h2>
           <button
             onClick={onClose}
@@ -144,7 +145,7 @@ export default function EvolutionLineModal({
           {evolutionLine.length === 0 ? (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">🤔</div>
-              <h3 className="text-xl font-semibold text-gray-600">
+              <h3 className="text-xl font-semibold text-gray-300">
                 Linha evolutiva não encontrada
               </h3>
             </div>
@@ -157,7 +158,7 @@ export default function EvolutionLineModal({
                   <div key={levelIndex}>
                     <div className="flex items-center justify-center mb-4">
                       <div className="h-px bg-gray-300 flex-1 max-w-xs"></div>
-                      <h3 className="text-sm font-semibold text-gray-900 px-4 bg-white">
+                      <h3 className="text-sm font-semibold text-white px-4 bg-gray-800">
                         Level {levelIndex + 1}
                       </h3>
                       <div className="h-px bg-gray-300 flex-1 max-w-xs"></div>
@@ -166,7 +167,7 @@ export default function EvolutionLineModal({
                       {level.map((evo) => (
                         <div
                           key={evo.id}
-                          className={`bg-white rounded-lg shadow-lg overflow-hidden transition-all w-36 ${
+                          className={`bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all w-36 ${
                             evo.id === digimon.id ? "ring-4 ring-blue-400" : ""
                           }`}
                           style={{
@@ -201,8 +202,8 @@ export default function EvolutionLineModal({
 
                           {/* Info */}
                           <div className="p-2">
-                            <p className="text-sm font-bold text-gray-800 truncate capitalize">
-                              {evo.name}
+                            <p className="text-sm font-bold text-white truncate">
+                              {capitalize(evo.name)}
                             </p>
                             <div className="flex items-center justify-between mt-1">
                               <span
@@ -212,7 +213,7 @@ export default function EvolutionLineModal({
                               >
                                 {evo.type?.name}
                               </span>
-                              <span className="text-[10px] text-gray-600">
+                              <span className="text-[10px] text-gray-300">
                                 DP: {evo.dp}
                               </span>
                             </div>
@@ -228,9 +229,9 @@ export default function EvolutionLineModal({
         </div>
 
         {/* Footer */}
-        <div className="bg-gray-50 px-6 py-4 rounded-b-lg border-t">
+        <div className="bg-gray-800 px-6 py-4 rounded-b-lg border-t">
           <div className="flex items-center justify-between">
-            <div className="text-xs text-gray-700">
+            <div className="text-xs text-gray-200">
               💡 <span className="font-medium">Dica:</span> A borda colorida
               indica o caminho evolutivo
             </div>

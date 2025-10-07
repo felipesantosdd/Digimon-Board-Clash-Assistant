@@ -2,14 +2,14 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
       {/* Header */}
-      <header className="bg-white shadow-md">
+      <header className="bg-gray-800 shadow-md border-b border-gray-700">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo/Nome do Sistema */}
             <Link href="/">
-              <h1 className="text-2xl font-bold text-blue-600 cursor-pointer hover:text-blue-700 transition-colors">
+              <h1 className="text-2xl font-bold text-blue-400 cursor-pointer hover:text-blue-300 transition-colors">
                 Digimon Board Clash
               </h1>
             </Link>
@@ -39,10 +39,10 @@ export default function Home() {
       {/* Conteúdo Principal */}
       <main className="container mx-auto px-6 py-8">
         <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-          <h2 className="text-5xl font-bold text-gray-800 mb-4">
+          <h2 className="text-5xl font-bold text-white mb-4">
             Bem-vindo ao Digimon Board Clash!
           </h2>
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-xl text-gray-300 mb-8">
             Escolha uma opção no menu acima para começar
           </p>
         </div>

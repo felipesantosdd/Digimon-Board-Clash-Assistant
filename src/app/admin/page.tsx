@@ -6,6 +6,7 @@ import EvolutionModal from "../components/EvolutionModal";
 import AddDigimonModal from "../components/AddDigimonModal";
 import { Digimon } from "../database/database_type";
 import { useSnackbar } from "notistack";
+import { capitalize } from "@/lib/utils";
 
 export default function AdminPage() {
   const { enqueueSnackbar } = useSnackbar();
@@ -189,13 +190,13 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
       {/* Header */}
-      <header className="bg-white shadow-md">
+      <header className="bg-gray-800 shadow-md border-b border-gray-700">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link href="/">
-              <h1 className="text-2xl font-bold text-blue-600 cursor-pointer hover:text-blue-700 transition-colors">
+              <h1 className="text-2xl font-bold text-blue-400 cursor-pointer hover:text-blue-300 transition-colors">
                 Digimon Board Clash - Admin
               </h1>
             </Link>
@@ -220,10 +221,10 @@ export default function AdminPage() {
       <main className="container mx-auto px-6 py-8">
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+            <h2 className="text-3xl font-bold text-white mb-4">
               Configuração de Evoluções
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-300">
               Selecione um Digimon para configurar suas evoluções
             </p>
           </div>
@@ -241,10 +242,10 @@ export default function AdminPage() {
         </div>
 
         {/* Filtros */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="bg-gray-800 rounded-lg shadow-md p-6 mb-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-200 mb-2">
                 Buscar Digimon
               </label>
               <input
@@ -252,11 +253,11 @@ export default function AdminPage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Digite o nome do Digimon..."
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 text-white border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-200 mb-2">
                 Filtrar por Level
               </label>
               <select
@@ -264,7 +265,7 @@ export default function AdminPage() {
                 onChange={(e) =>
                   setLevelFilter(e.target.value ? Number(e.target.value) : null)
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 text-white py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="">Todos os Levels</option>
                 <option value="1">Level 1</option>
@@ -282,7 +283,7 @@ export default function AdminPage() {
         {loading ? (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">⏳</div>
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">
+            <h3 className="text-xl font-semibold text-gray-300 mb-2">
               Carregando Digimons...
             </h3>
             <p className="text-gray-500">
@@ -292,105 +293,137 @@ export default function AdminPage() {
         ) : (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {filteredDigimons.map((digimon) => (
-                <div
-                  key={digimon.id}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                >
-                  {/* Imagem do Digimon */}
-                  <div className="relative h-40 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
-                    <img
-                      src={`/images/digimons/${digimon.id
-                        .toString()
-                        .padStart(2, "0")}.png`}
-                      alt={digimon.name}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = "none";
-                        const fallback =
-                          target.nextElementSibling as HTMLElement;
-                        if (fallback) fallback.style.display = "flex";
-                      }}
-                    />
-                    <div
-                      className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-100 to-blue-100"
-                      style={{ display: "none" }}
-                    >
-                      <span className="text-4xl">🤖</span>
-                    </div>
-                  </div>
+              {filteredDigimons.map((digimon) => {
+                // Verificar se precisa de borda vermelha (level 1-3 sem evoluções)
+                const needsEvolution =
+                  digimon.level <= 3 &&
+                  (!digimon.evolution || digimon.evolution.length === 0);
 
-                  {/* Informações do Digimon */}
-                  <div className="p-4">
-                    <h3 className="text-lg font-bold text-gray-800 mb-2 capitalize">
-                      {digimon.name}
-                    </h3>
-
-                    <div className="space-y-2 mb-4">
-                      {/* Tipo */}
-                      <div className="flex items-center gap-2">
-                        <span
-                          className={`${getTypeColor(
-                            digimon.typeId
-                          )} text-white text-xs font-semibold px-2 py-1 rounded-full`}
-                        >
-                          {getTypeName(digimon.typeId)}
-                        </span>
-                      </div>
-
-                      {/* Level e DP */}
-                      <div className="flex justify-between text-sm text-gray-600">
-                        <span className="font-semibold">
-                          Lv:{" "}
-                          <span className="text-blue-600">{digimon.level}</span>
-                        </span>
-                        <span className="font-semibold">
-                          DP:{" "}
-                          <span className="text-orange-600">{digimon.dp}</span>
-                        </span>
-                      </div>
-
-                      {/* Evoluções */}
-                      <div className="text-xs text-gray-500">
-                        {digimon.evolution?.length || 0} evolução(ões)
-                      </div>
-                    </div>
-
-                    {/* Botões de ação */}
-                    <div className="space-y-2">
-                      <button
-                        onClick={() => handleConfigureEvolutions(digimon)}
-                        className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                return (
+                  <div
+                    key={digimon.id}
+                    className={`bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ${
+                      needsEvolution ? "ring-4 ring-red-500" : ""
+                    }`}
+                  >
+                    {/* Imagem do Digimon */}
+                    <div className="relative h-40 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
+                      <img
+                        src={`/images/digimons/${digimon.id
+                          .toString()
+                          .padStart(2, "0")}.png`}
+                        alt={digimon.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = "none";
+                          const fallback =
+                            target.nextElementSibling as HTMLElement;
+                          if (fallback) fallback.style.display = "flex";
+                        }}
+                      />
+                      <div
+                        className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-100 to-blue-100"
+                        style={{ display: "none" }}
                       >
-                        Configurar Evoluções
-                      </button>
+                        <span className="text-4xl">🤖</span>
+                      </div>
+                    </div>
 
-                      {process.env.NODE_ENV === "development" && (
+                    {/* Informações do Digimon */}
+                    <div className="p-4">
+                      <h3 className="text-lg font-bold text-white mb-2">
+                        {capitalize(digimon.name)}
+                      </h3>
+
+                      <div className="space-y-2 mb-4">
+                        {/* Tipo */}
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`${getTypeColor(
+                              digimon.typeId
+                            )} text-white text-xs font-semibold px-2 py-1 rounded-full`}
+                          >
+                            {getTypeName(digimon.typeId)}
+                          </span>
+                        </div>
+
+                        {/* Level e DP */}
+                        <div className="flex justify-between text-sm text-gray-300">
+                          <span className="font-semibold">
+                            Lv:{" "}
+                            <span className="text-blue-400">
+                              {digimon.level}
+                            </span>
+                          </span>
+                          <span className="font-semibold">
+                            DP:{" "}
+                            <span className="text-orange-400">
+                              {digimon.dp}
+                            </span>
+                          </span>
+                        </div>
+
+                        {/* Evoluções */}
+                        <div className="text-xs text-gray-400">
+                          {digimon.evolution?.length || 0} evolução(ões)
+                        </div>
+                      </div>
+
+                      {/* Botões de ação */}
+                      <div className="space-y-2">
                         <button
-                          onClick={() =>
-                            handleDeleteDigimon(digimon.id, digimon.name)
-                          }
-                          className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
+                          onClick={() => handleConfigureEvolutions(digimon)}
+                          className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
                         >
-                          🗑️ Excluir
+                          Configurar Evoluções
                         </button>
-                      )}
+
+                        {process.env.NODE_ENV === "development" && (
+                          <button
+                            onClick={() =>
+                              handleDeleteDigimon(
+                                digimon.id,
+                                capitalize(digimon.name)
+                              )
+                            }
+                            className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
+                          >
+                            🗑️ Excluir
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {filteredDigimons.length === 0 && (
               <div className="text-center py-12">
                 <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-xl font-semibold text-gray-600 mb-2">
+                <h3 className="text-xl font-semibold text-gray-300 mb-2">
                   Nenhum Digimon encontrado
                 </h3>
                 <p className="text-gray-500">
                   Tente ajustar os filtros de busca
                 </p>
+              </div>
+            )}
+
+            {/* Legenda */}
+            {filteredDigimons.length > 0 && (
+              <div className="mt-6 p-4 bg-gray-800 rounded-lg border border-gray-700">
+                <h4 className="text-sm font-semibold text-white mb-2">
+                  📋 Legenda:
+                </h4>
+                <div className="flex items-center gap-2 text-sm text-gray-200">
+                  <div className="w-6 h-6 rounded border-4 border-red-500"></div>
+                  <span>
+                    Digimons até Level 3{" "}
+                    <strong>sem evoluções configuradas</strong>
+                  </span>
+                </div>
               </div>
             )}
           </>
@@ -412,6 +445,7 @@ export default function AdminPage() {
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         onSuccess={handleAddDigimonSuccess}
+        allDigimons={digimons}
       />
     </div>
   );

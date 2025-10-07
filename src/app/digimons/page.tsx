@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Digimon } from "../database/database_type";
 import EvolutionLineModal from "../components/EvolutionLineModal";
+import { capitalize } from "@/lib/utils";
 
 export default function DigimonsPage() {
   const [digimons, setDigimons] = useState<Digimon[]>([]);
@@ -75,14 +76,14 @@ export default function DigimonsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
       {/* Header */}
-      <header className="bg-white shadow-md">
+      <header className="bg-gray-800 shadow-md border-b border-gray-700">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo/Nome do Sistema */}
             <Link href="/">
-              <h1 className="text-2xl font-bold text-blue-600 cursor-pointer hover:text-blue-700 transition-colors">
+              <h1 className="text-2xl font-bold text-blue-400 cursor-pointer hover:text-blue-300 transition-colors">
                 Digimon Board Clash
               </h1>
             </Link>
@@ -111,7 +112,7 @@ export default function DigimonsPage() {
 
       {/* Conteúdo Principal */}
       <main className="container mx-auto px-6 py-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-8">
+        <h2 className="text-3xl font-bold text-white mb-8">
           Digimons Disponíveis
         </h2>
 
@@ -119,10 +120,10 @@ export default function DigimonsPage() {
         {loading ? (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">⏳</div>
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">
+            <h3 className="text-xl font-semibold text-gray-300 mb-2">
               Carregando Digimons...
             </h3>
-            <p className="text-gray-500">
+            <p className="text-gray-400">
               Aguarde enquanto buscamos os dados do banco
             </p>
           </div>
@@ -133,7 +134,7 @@ export default function DigimonsPage() {
               <div
                 key={digimon.id}
                 onClick={() => handleDigimonClick(digimon)}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+                className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
               >
                 {/* Imagem do Digimon */}
                 <div className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
@@ -160,8 +161,8 @@ export default function DigimonsPage() {
 
                 {/* Informações do Digimon */}
                 <div className="p-4">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2 capitalize">
-                    {digimon.name}
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {capitalize(digimon.name)}
                   </h3>
 
                   <div className="space-y-2">
@@ -177,14 +178,14 @@ export default function DigimonsPage() {
                     </div>
 
                     {/* Level e DP */}
-                    <div className="flex justify-between text-sm text-gray-600">
+                    <div className="flex justify-between text-sm text-gray-300">
                       <span className="font-semibold">
                         Lv:{" "}
-                        <span className="text-blue-600">{digimon.level}</span>
+                        <span className="text-blue-400">{digimon.level}</span>
                       </span>
                       <span className="font-semibold">
                         DP:{" "}
-                        <span className="text-orange-600">{digimon.dp}</span>
+                        <span className="text-orange-400">{digimon.dp}</span>
                       </span>
                     </div>
                   </div>

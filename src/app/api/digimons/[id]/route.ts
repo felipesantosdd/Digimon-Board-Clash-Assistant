@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDigimonById, updateDigimon, deleteDigimon } from "@/lib/digimon-db";
+import {
+  getDigimonById,
+  updateDigimon,
+  deleteDigimon,
+  getAllDigimons,
+} from "@/lib/digimon-db";
 
 // PUT - Atualizar dados do Digimon (nome, level, dp, tipo)
 export async function PUT(
@@ -20,8 +25,24 @@ export async function PUT(
       );
     }
 
+    // Converter nome para lowercase
+    const lowerName = name.trim().toLowerCase();
+
+    // Verificar se já existe outro Digimon com esse nome
+    const allDigimons = getAllDigimons();
+    const duplicateDigimon = allDigimons.find(
+      (d) => d.name.toLowerCase() === lowerName && d.id !== Number(id)
+    );
+
+    if (duplicateDigimon) {
+      return NextResponse.json(
+        { error: `Já existe um Digimon com o nome "${lowerName}"` },
+        { status: 409 } // 409 Conflict
+      );
+    }
+
     console.log("💾 Executando UPDATE:", {
-      name,
+      name: lowerName,
       level,
       dp,
       typeId,
@@ -29,7 +50,7 @@ export async function PUT(
     });
 
     const updatedDigimon = updateDigimon(Number(id), {
-      name,
+      name: lowerName,
       level,
       dp,
       typeId,

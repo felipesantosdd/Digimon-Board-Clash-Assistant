@@ -2,22 +2,33 @@
 
 import { useState, useEffect } from "react";
 import { useSnackbar } from "notistack";
+import { capitalize } from "@/lib/utils";
 
 interface DigimonType {
   id: number;
   name: string;
 }
 
+interface Digimon {
+  id: number;
+  name: string;
+  level: number;
+  dp: number;
+  typeId: number;
+}
+
 interface AddDigimonModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess: () => void;
+  allDigimons: Digimon[];
 }
 
 export default function AddDigimonModal({
   isOpen,
   onClose,
   onSuccess,
+  allDigimons,
 }: AddDigimonModalProps) {
   const { enqueueSnackbar } = useSnackbar();
   const digimonTypes: DigimonType[] = [
@@ -29,6 +40,17 @@ export default function AddDigimonModal({
     { id: 6, name: "Unknown" },
   ];
 
+  // Mapeamento de níveis para DP padrão
+  const levelToDp: { [key: number]: number } = {
+    1: 2000,
+    2: 5000,
+    3: 8000,
+    4: 12000,
+    5: 18000,
+    6: 20000,
+    7: 25000,
+  };
+
   const [formData, setFormData] = useState({
     name: "",
     level: 1,
@@ -36,17 +58,30 @@ export default function AddDigimonModal({
     typeId: 1,
   });
 
+  const [dpDisplay, setDpDisplay] = useState("2"); // Valor exibido (sem os 000)
+  const [selectedPreEvolutions, setSelectedPreEvolutions] = useState<number[]>(
+    []
+  ); // IDs dos Digimons que evoluem para este
+  const [searchTerm, setSearchTerm] = useState("");
+
   const [loading, setLoading] = useState(false);
+
+  // Limpar formulário ao fechar
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      level: 1,
+      dp: 2000,
+      typeId: 1,
+    });
+    setDpDisplay("2");
+    setSelectedPreEvolutions([]);
+    setSearchTerm("");
+  };
 
   useEffect(() => {
     if (!isOpen) {
-      // Reset form quando fechar
-      setFormData({
-        name: "",
-        level: 1,
-        dp: 2000,
-        typeId: 1,
-      });
+      resetForm();
     }
   }, [isOpen]);
 
@@ -55,6 +90,7 @@ export default function AddDigimonModal({
     setLoading(true);
 
     try {
+      // 1. Criar o novo Digimon
       const response = await fetch("/api/digimons", {
         method: "POST",
         headers: {
@@ -70,9 +106,32 @@ export default function AddDigimonModal({
       });
 
       if (response.ok) {
+        const newDigimon = await response.json();
+
+        // 2. Atualizar os Digimons selecionados para adicionar este como evolução
+        if (selectedPreEvolutions.length > 0) {
+          for (const preEvoId of selectedPreEvolutions) {
+            const preEvo = allDigimons.find((d) => d.id === preEvoId);
+            if (preEvo) {
+              const currentEvolutions =
+                (preEvo as Digimon & { evolution?: number[] }).evolution || [];
+              await fetch(`/api/digimons/${preEvoId}/evolutions`, {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  evolution: [...currentEvolutions, newDigimon.id],
+                }),
+              });
+            }
+          }
+        }
+
         enqueueSnackbar("Digimon adicionado com sucesso!", {
           variant: "success",
         });
+        resetForm(); // Limpar formulário após sucesso
         onSuccess();
         onClose();
       } else {
@@ -93,11 +152,50 @@ export default function AddDigimonModal({
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: ["level", "dp", "typeId"].includes(name) ? Number(value) : value,
-    }));
+
+    if (name === "dp") {
+      // Armazenar o valor digitado
+      setDpDisplay(value);
+      // Converter para DP real (adicionar 000)
+      const dpValue = Number(value) * 1000;
+      setFormData((prev) => ({
+        ...prev,
+        dp: dpValue,
+      }));
+    } else if (name === "level") {
+      const levelValue = Number(value);
+      const defaultDp = levelToDp[levelValue] || 2000;
+
+      setFormData((prev) => ({
+        ...prev,
+        level: levelValue,
+        dp: defaultDp,
+      }));
+      setDpDisplay(String(defaultDp / 1000)); // Atualizar display
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: ["typeId"].includes(name) ? Number(value) : value,
+      }));
+    }
   };
+
+  const handlePreEvolutionToggle = (digimonId: number) => {
+    setSelectedPreEvolutions((prev) => {
+      if (prev.includes(digimonId)) {
+        return prev.filter((id) => id !== digimonId);
+      } else {
+        return [...prev, digimonId];
+      }
+    });
+  };
+
+  // Filtrar Digimons do nível anterior
+  const possiblePreEvolutions = allDigimons.filter(
+    (d) =>
+      d.level === formData.level - 1 &&
+      d.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   if (!isOpen) return null;
 
@@ -107,7 +205,7 @@ export default function AddDigimonModal({
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto"
+        className="bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -124,7 +222,7 @@ export default function AddDigimonModal({
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {/* Nome */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-200 mb-2">
               Nome do Digimon *
             </label>
             <input
@@ -134,13 +232,13 @@ export default function AddDigimonModal({
               onChange={handleChange}
               required
               placeholder="Ex: Agumon"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              className="w-full px-3 py-2 border text-white border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-blue-500"
             />
           </div>
 
           {/* Level */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">
+            <label className="block text-sm font-medium text-gray-200 mb-3">
               Level *
             </label>
             <div className="grid grid-cols-7 gap-2">
@@ -156,7 +254,7 @@ export default function AddDigimonModal({
                   className={`px-3 py-2 rounded-lg border-2 transition-all ${
                     formData.level === level
                       ? "border-green-500 bg-green-50 text-green-700 font-semibold"
-                      : "border-gray-300 hover:border-gray-400"
+                      : "border-gray-600 text-white hover:border-gray-500"
                   }`}
                 >
                   {level}
@@ -167,24 +265,31 @@ export default function AddDigimonModal({
 
           {/* DP */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              DP (Digimon Power) *
+            <label className="block text-sm font-medium text-gray-200 mb-2">
+              DP (Digimon Power) *{" "}
+              <span className="text-xs text-gray-500">(x1000)</span>
             </label>
-            <input
-              type="number"
-              name="dp"
-              value={formData.dp}
-              onChange={handleChange}
-              required
-              min="0"
-              step="1000"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            />
+            <div className="relative">
+              <input
+                type="number"
+                name="dp"
+                value={dpDisplay}
+                onChange={handleChange}
+                required
+                min="0"
+                step="1"
+                className="w-full text-white px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-blue-500"
+                placeholder="Ex: 2 = 2000 DP"
+              />
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">
+                = {formData.dp.toLocaleString()} DP
+              </span>
+            </div>
           </div>
 
           {/* Tipo */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">
+            <label className="block text-sm font-medium text-gray-200 mb-3">
               Tipo *
             </label>
             <div className="grid grid-cols-3 gap-3">
@@ -200,7 +305,7 @@ export default function AddDigimonModal({
                   className={`p-3 rounded-lg border-2 transition-all flex flex-col items-center gap-2 ${
                     formData.typeId === type.id
                       ? "border-green-500 bg-green-50"
-                      : "border-gray-300 hover:border-gray-400"
+                      : "border-gray-600 hover:border-gray-500"
                   }`}
                 >
                   <input
@@ -213,7 +318,7 @@ export default function AddDigimonModal({
                     className={`text-sm font-medium ${
                       formData.typeId === type.id
                         ? "text-green-700"
-                        : "text-gray-700"
+                        : "text-gray-200"
                     }`}
                   >
                     {type.name}
@@ -223,11 +328,82 @@ export default function AddDigimonModal({
             </div>
           </div>
 
+          {/* Pré-Evoluções (apenas se level > 1) */}
+          {formData.level > 1 && (
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="block text-sm font-medium text-gray-200">
+                  Pré-Evoluções (Level {formData.level - 1}) -{" "}
+                  {selectedPreEvolutions.length} selecionadas
+                </label>
+              </div>
+
+              {/* Barra de pesquisa */}
+              <div className="mb-3">
+                <input
+                  type="text"
+                  placeholder="Buscar Digimons..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full px-3 py-2 text-sm text-white border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-blue-500"
+                />
+              </div>
+
+              {/* Lista de Pré-Evoluções */}
+              <div className="grid grid-cols-1 gap-2 max-h-40 overflow-y-auto pr-2 border border-gray-700 rounded-lg p-2">
+                {possiblePreEvolutions.length > 0 ? (
+                  possiblePreEvolutions.map((preEvo) => (
+                    <div
+                      key={preEvo.id}
+                      className={`flex items-center p-2 rounded-lg border-2 transition-all cursor-pointer ${
+                        selectedPreEvolutions.includes(preEvo.id)
+                          ? "border-green-500 bg-green-50"
+                          : "border-gray-600 hover:border-gray-500"
+                      }`}
+                      onClick={() => handlePreEvolutionToggle(preEvo.id)}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedPreEvolutions.includes(preEvo.id)}
+                        onChange={() => {}}
+                        className="w-4 h-4 text-green-600"
+                      />
+                      <div className="flex-1 min-w-0 ml-3">
+                        <p className="font-semibold text-sm truncate text-white">
+                          {capitalize(preEvo.name)}
+                        </p>
+                        <p className="text-xs text-gray-200">
+                          Level {preEvo.level} • DP: {preEvo.dp}
+                        </p>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center py-4">
+                    <p className="text-sm text-gray-300">
+                      {searchTerm
+                        ? "Nenhum Digimon encontrado"
+                        : `Não há Digimons de level ${formData.level - 1}`}
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <p className="text-xs text-gray-300 mt-2">
+                💡 Estes Digimons evoluirão para{" "}
+                {formData.name || "este novo Digimon"}
+              </p>
+            </div>
+          )}
+
           {/* Botões */}
           <div className="flex gap-3 pt-2">
             <button
               type="button"
-              onClick={onClose}
+              onClick={() => {
+                resetForm();
+                onClose();
+              }}
               className="flex-1 px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors"
             >
               Cancelar
