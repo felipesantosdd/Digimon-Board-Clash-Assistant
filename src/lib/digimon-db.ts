@@ -111,6 +111,21 @@ export function updateDigimonEvolutions(
   return getDigimonById(id) || null;
 }
 
+export function updateDigimon(
+  id: number,
+  data: { name: string; level: number; dp: number; typeId: number }
+): Digimon | null {
+  const stmt = db.prepare(`
+    UPDATE digimons 
+    SET name = ?, level = ?, dp = ?, typeId = ?
+    WHERE id = ?
+  `);
+
+  stmt.run(data.name, data.level, data.dp, data.typeId, id);
+
+  return getDigimonById(id) || null;
+}
+
 export function deleteDigimon(id: number): void {
   db.prepare("DELETE FROM digimons WHERE id = ?").run(id);
 }

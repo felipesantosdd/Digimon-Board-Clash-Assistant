@@ -3,13 +3,17 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import EvolutionModal from "../components/EvolutionModal";
+import AddDigimonModal from "../components/AddDigimonModal";
 import { Digimon } from "../database/database_type";
+import { useSnackbar } from "notistack";
 
 export default function AdminPage() {
+  const { enqueueSnackbar } = useSnackbar();
   const [digimons, setDigimons] = useState<Digimon[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedDigimon, setSelectedDigimon] = useState<Digimon | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [levelFilter, setLevelFilter] = useState<number | null>(null);
 
@@ -67,11 +71,88 @@ export default function AdminPage() {
       } else {
         const error = await response.json();
         console.error("Erro ao salvar evoluções:", error.error);
-        alert(`Erro: ${error.error}`);
+        enqueueSnackbar(`Erro: ${error.error}`, { variant: "error" });
       }
     } catch (error) {
       console.error("Erro ao salvar evoluções:", error);
-      alert("Erro ao salvar evoluções");
+      enqueueSnackbar("Erro ao salvar evoluções", { variant: "error" });
+    }
+  };
+
+  const handleSaveDigimon = async (
+    digimonId: number,
+    data: { name: string; level: number; dp: number; typeId: number }
+  ) => {
+    try {
+      console.log("🚀 Fazendo PUT para:", `/api/digimons/${digimonId}`);
+      console.log("📤 Dados enviados:", data);
+
+      const response = await fetch(`/api/digimons/${digimonId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const updatedDigimon = await response.json();
+        // Atualizar a lista local
+        setDigimons((prev) =>
+          prev.map((digimon) =>
+            digimon.id === digimonId ? { ...digimon, ...data } : digimon
+          )
+        );
+        // Atualizar o digimon selecionado
+        setSelectedDigimon(updatedDigimon);
+        enqueueSnackbar("Digimon atualizado com sucesso!", {
+          variant: "success",
+        });
+      } else {
+        const error = await response.json();
+        enqueueSnackbar(`Erro: ${error.error}`, { variant: "error" });
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar Digimon:", error);
+      enqueueSnackbar("Erro ao atualizar Digimon", { variant: "error" });
+    }
+  };
+
+  const handleAddDigimonSuccess = async () => {
+    // Recarregar lista de Digimons
+    const response = await fetch("/api/digimons");
+    if (response.ok) {
+      const data = await response.json();
+      setDigimons(data);
+    }
+  };
+
+  const handleDeleteDigimon = async (
+    digimonId: number,
+    digimonName: string
+  ) => {
+    if (!confirm(`Tem certeza que deseja excluir ${digimonName}?`)) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/digimons/${digimonId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        // Remover da lista local
+        setDigimons((prev) => prev.filter((d) => d.id !== digimonId));
+        enqueueSnackbar(`${digimonName} excluído com sucesso!`, {
+          variant: "success",
+        });
+      } else {
+        const error = await response.json();
+        enqueueSnackbar(`Erro: ${error.error}`, { variant: "error" });
+      }
+    } catch (error) {
+      console.error("Erro ao excluir Digimon:", error);
+      enqueueSnackbar("Erro ao excluir Digimon", { variant: "error" });
     }
   };
 
@@ -149,12 +230,13 @@ export default function AdminPage() {
 
           {/* Botão Adicionar - Apenas em Development */}
           {process.env.NODE_ENV === "development" && (
-            <Link href="/admin/add-digimon">
-              <button className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md hover:shadow-lg flex items-center gap-2">
-                <span className="text-xl">➕</span>
-                Adicionar Digimon
-              </button>
-            </Link>
+            <button
+              onClick={() => setIsAddModalOpen(true)}
+              className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md hover:shadow-lg flex items-center gap-2"
+            >
+              <span className="text-xl">➕</span>
+              Adicionar Digimon
+            </button>
           )}
         </div>
 
@@ -275,13 +357,26 @@ export default function AdminPage() {
                       </div>
                     </div>
 
-                    {/* Botão de Configurar */}
-                    <button
-                      onClick={() => handleConfigureEvolutions(digimon)}
-                      className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-                    >
-                      Configurar Evoluções
-                    </button>
+                    {/* Botões de ação */}
+                    <div className="space-y-2">
+                      <button
+                        onClick={() => handleConfigureEvolutions(digimon)}
+                        className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                      >
+                        Configurar Evoluções
+                      </button>
+
+                      {process.env.NODE_ENV === "development" && (
+                        <button
+                          onClick={() =>
+                            handleDeleteDigimon(digimon.id, digimon.name)
+                          }
+                          className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
+                        >
+                          🗑️ Excluir
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -302,13 +397,21 @@ export default function AdminPage() {
         )}
       </main>
 
-      {/* Modal de Configuração */}
+      {/* Modal de Configuração de Evoluções e Edição */}
       <EvolutionModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         digimon={selectedDigimon}
         allDigimons={digimons}
         onSaveEvolutions={handleSaveEvolutions}
+        onSaveDigimon={handleSaveDigimon}
+      />
+
+      {/* Modal de Adicionar Digimon */}
+      <AddDigimonModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onSuccess={handleAddDigimonSuccess}
       />
     </div>
   );

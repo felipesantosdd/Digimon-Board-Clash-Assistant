@@ -4,11 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Digimon } from "../database/database_type";
+import EvolutionLineModal from "../components/EvolutionLineModal";
 
 export default function DigimonsPage() {
   const [digimons, setDigimons] = useState<Digimon[]>([]);
   const [loading, setLoading] = useState(true);
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
+  const [selectedDigimon, setSelectedDigimon] = useState<Digimon | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Carregar Digimons da API
   useEffect(() => {
@@ -64,6 +67,11 @@ export default function DigimonsPage() {
       return "/images/digimons/fallback.svg";
     }
     return `/images/digimons/${digimon.id.toString().padStart(2, "0")}.png`;
+  };
+
+  const handleDigimonClick = (digimon: Digimon) => {
+    setSelectedDigimon(digimon);
+    setIsModalOpen(true);
   };
 
   return (
@@ -124,7 +132,8 @@ export default function DigimonsPage() {
             {digimons.map((digimon) => (
               <div
                 key={digimon.id}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1"
+                onClick={() => handleDigimonClick(digimon)}
+                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
               >
                 {/* Imagem do Digimon */}
                 <div className="relative h-48 bg-gradient-to-br from-orange-100 to-blue-100">
@@ -185,6 +194,14 @@ export default function DigimonsPage() {
           </div>
         )}
       </main>
+
+      {/* Modal de Linha Evolutiva */}
+      <EvolutionLineModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        digimon={selectedDigimon}
+        allDigimons={digimons}
+      />
     </div>
   );
 }
