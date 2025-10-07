@@ -31,7 +31,7 @@ export const jsonDb = {
         }
         return [];
       },
-      get: (params?: any) => {
+      get: (params?: number | string) => {
         // Para queries com WHERE id = ?
         if (query.includes("digimons") && query.includes("WHERE id")) {
           const id = params;

@@ -5,7 +5,7 @@ import { jsonDb } from "./json-db";
 // Detectar ambiente: usa SQLite em dev, JSON em produção
 const isProduction = process.env.NODE_ENV === "production";
 
-let db: any;
+let db: Database.Database | typeof jsonDb;
 
 if (isProduction) {
   // Produção: usa dados do JSON
