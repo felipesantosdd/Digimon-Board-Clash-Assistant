@@ -49,7 +49,7 @@ export const jsonDb = {
         console.warn(
           "⚠️ Operações de escrita não são suportadas em produção (JSON mode)"
         );
-        return { changes: 0 };
+        return { changes: 0, lastInsertRowid: 0 };
       },
     };
   },
