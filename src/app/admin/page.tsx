@@ -137,13 +137,25 @@ export default function AdminPage() {
 
       {/* Conteúdo Principal */}
       <main className="container mx-auto px-6 py-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">
-            Configuração de Evoluções
-          </h2>
-          <p className="text-gray-600">
-            Selecione um Digimon para configurar suas evoluções
-          </p>
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+              Configuração de Evoluções
+            </h2>
+            <p className="text-gray-600">
+              Selecione um Digimon para configurar suas evoluções
+            </p>
+          </div>
+
+          {/* Botão Adicionar - Apenas em Development */}
+          {process.env.NODE_ENV === "development" && (
+            <Link href="/admin/add-digimon">
+              <button className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md hover:shadow-lg flex items-center gap-2">
+                <span className="text-xl">➕</span>
+                Adicionar Digimon
+              </button>
+            </Link>
+          )}
         </div>
 
         {/* Filtros */}
