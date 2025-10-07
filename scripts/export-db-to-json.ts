@@ -3,6 +3,14 @@ import path from "path";
 import fs from "fs";
 
 const dbPath = path.join(process.cwd(), "database.sqlite");
+
+// Verificar se o arquivo SQLite existe (não existe na Vercel)
+if (!fs.existsSync(dbPath)) {
+  console.log("⏭️  Pulando exportação: database.sqlite não encontrado");
+  console.log("   Usando arquivos JSON já versionados no git");
+  process.exit(0);
+}
+
 const db = new Database(dbPath);
 
 // Exportar digimon_types

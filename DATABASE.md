@@ -41,14 +41,16 @@ npm run build
 2. **Preparar para Deploy:**
 
    ```bash
-   npm run export    # Exportar para JSON (opcional, o build já faz isso)
-   npm run build     # Build automático exporta e builda
+   npm run export    # Exportar SQLite → JSON
+   git add src/data/*.json
+   git commit -m "Atualizar dados"
+   git push
    ```
 
 3. **Deploy na Vercel:**
    - O Vercel roda `npm run build`
-   - Os dados são exportados automaticamente para JSON
-   - Em produção, usa os arquivos JSON
+   - Como não há SQLite na Vercel, usa os JSONs versionados no git
+   - Em produção, lê dados dos arquivos JSON
 
 ## Adicionar Novos Dados
 
