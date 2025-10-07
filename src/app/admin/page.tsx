@@ -298,13 +298,13 @@ export default function AdminPage() {
                   className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                 >
                   {/* Imagem do Digimon */}
-                  <div className="relative h-32 bg-gradient-to-br from-orange-100 to-blue-100">
+                  <div className="relative h-40 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
                     <img
                       src={`/images/digimons/${digimon.id
                         .toString()
                         .padStart(2, "0")}.png`}
                       alt={digimon.name}
-                      className="w-full h-full object-contain p-2"
+                      className="w-full h-full object-cover"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.style.display = "none";
@@ -314,7 +314,7 @@ export default function AdminPage() {
                       }}
                     />
                     <div
-                      className="absolute inset-0 flex items-center justify-center"
+                      className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-100 to-blue-100"
                       style={{ display: "none" }}
                     >
                       <span className="text-4xl">🤖</span>

@@ -136,12 +136,12 @@ export default function DigimonsPage() {
                 className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
               >
                 {/* Imagem do Digimon */}
-                <div className="relative h-48 bg-gradient-to-br from-orange-100 to-blue-100">
+                <div className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
                   <Image
                     src={getImageSrc(digimon)}
                     alt={digimon.name}
                     fill
-                    className="object-contain p-4"
+                    className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     onError={() => handleImageError(digimon.id)}
                   />

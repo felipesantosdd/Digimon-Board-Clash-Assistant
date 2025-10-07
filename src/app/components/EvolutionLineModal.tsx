@@ -176,13 +176,13 @@ export default function EvolutionLineModal({
                           }}
                         >
                           {/* Imagem */}
-                          <div className="relative h-28 bg-gradient-to-br from-orange-100 to-blue-100">
+                          <div className="relative h-32 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
                             <img
                               src={`/images/digimons/${evo.id
                                 .toString()
                                 .padStart(2, "0")}.png`}
                               alt={evo.name}
-                              className="w-full h-full object-contain p-2"
+                              className="w-full h-full object-cover"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.style.display = "none";
@@ -192,7 +192,7 @@ export default function EvolutionLineModal({
                               }}
                             />
                             <div
-                              className="absolute inset-0 flex items-center justify-center"
+                              className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-100 to-blue-100"
                               style={{ display: "none" }}
                             >
                               <span className="text-4xl">🤖</span>

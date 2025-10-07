@@ -271,13 +271,13 @@ export default function EvolutionModal({
           ) : (
             // Modo de Visualização
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg flex items-center justify-center relative overflow-hidden">
+              <div className="w-20 h-20 bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg overflow-hidden relative">
                 <img
                   src={`/images/digimons/${digimon.id
                     .toString()
                     .padStart(2, "0")}.png`}
                   alt={digimon.name}
-                  className="w-full h-full object-contain p-2"
+                  className="w-full h-full object-cover"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = "none";
@@ -286,7 +286,7 @@ export default function EvolutionModal({
                   }}
                 />
                 <div
-                  className="absolute inset-0 flex items-center justify-center"
+                  className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-100 to-blue-100"
                   style={{ display: "none" }}
                 >
                   <span className="text-2xl">🤖</span>
@@ -346,13 +346,13 @@ export default function EvolutionModal({
                       onChange={() => handleEvolutionToggle(evolution.id)}
                       className="w-4 h-4 text-blue-600"
                     />
-                    <div className="w-10 h-10 bg-gradient-to-br from-orange-100 to-blue-100 rounded flex items-center justify-center relative overflow-hidden">
+                    <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-blue-100 rounded overflow-hidden relative">
                       <img
                         src={`/images/digimons/${evolution.id
                           .toString()
                           .padStart(2, "0")}.png`}
                         alt={evolution.name}
-                        className="w-full h-full object-contain p-1"
+                        className="w-full h-full object-cover"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
                           target.style.display = "none";
@@ -362,7 +362,7 @@ export default function EvolutionModal({
                         }}
                       />
                       <div
-                        className="absolute inset-0 flex items-center justify-center"
+                        className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-100 to-blue-100"
                         style={{ display: "none" }}
                       >
                         <span className="text-lg">🤖</span>
