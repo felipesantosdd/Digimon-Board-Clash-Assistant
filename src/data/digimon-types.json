@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Data",
+    "weakness": 3
+  },
+  {
+    "id": 2,
+    "name": "Vaccine",
+    "weakness": 1
+  },
+  {
+    "id": 3,
+    "name": "Virus",
+    "weakness": 2
+  },
+  {
+    "id": 4,
+    "name": "Free",
+    "weakness": null
+  },
+  {
+    "id": 5,
+    "name": "Variable",
+    "weakness": 4
+  },
+  {
+    "id": 6,
+    "name": "Unknown",
+    "weakness": null
+  }
+]
