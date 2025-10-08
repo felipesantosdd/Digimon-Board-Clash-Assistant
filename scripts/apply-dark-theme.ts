@@ -37,15 +37,12 @@ const replacements: [RegExp, string][] = [
   [/hover:text-gray-900\b/g, "hover:text-white"],
 ];
 
-
-
 let totalChanges = 0;
 
 filesToUpdate.forEach((filePath) => {
   const fullPath = path.join(process.cwd(), filePath);
 
   if (!fs.existsSync(fullPath)) {
-    
     return;
   }
 
@@ -62,14 +59,12 @@ filesToUpdate.forEach((filePath) => {
 
   if (fileChanges > 0) {
     fs.writeFileSync(fullPath, content, "utf-8");
-    
+
     totalChanges += fileChanges;
   } else {
-    
   }
 });
 
-
-
+console.log(
   `   Total de ${totalChanges} alterações em ${filesToUpdate.length} arquivos`
 );
