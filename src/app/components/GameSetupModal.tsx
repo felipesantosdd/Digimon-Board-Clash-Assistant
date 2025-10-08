@@ -8,7 +8,7 @@ import { GameState, GameDigimon } from "@/types/game";
 interface Tamer {
   id: number;
   name: string;
-  image: string;
+  image: string; // Este é o campo correto do banco de dados
 }
 
 interface GameSetupModalProps {
@@ -254,8 +254,21 @@ export default function GameSetupModal({
                           : "border-gray-700 bg-gray-800 opacity-50 cursor-not-allowed"
                       }`}
                     >
-                      <div className="w-10 h-10 flex items-center justify-center text-2xl">
-                        {tamer.image}
+                      <div className="w-10 h-10 flex-shrink-0 rounded-full overflow-hidden bg-gray-600">
+                        <img
+                          src={`/images/tamers/${Number(tamer.image)}.png`}
+                          alt={tamer.name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            // Fallback para emoji se a imagem não existir
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = "none";
+                            const parent = target.parentElement;
+                            if (parent) {
+                              parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-2xl">👤</div>`;
+                            }
+                          }}
+                        />
                       </div>
                       <div className="flex-1 text-left">
                         <p className="font-semibold text-white text-sm">

@@ -207,11 +207,6 @@ export default function AdminPage() {
                   Ver Digimons
                 </button>
               </Link>
-              <Link href="/tamers">
-                <button className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md">
-                  Tamers
-                </button>
-              </Link>
             </div>
           </div>
         </div>

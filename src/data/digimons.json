@@ -5,7 +5,7 @@
     "image": "/images/digimons/01.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[25,28,27,26,29]",
+    "evolution": "[25,28,27,26,29,143,153]",
     "typeId": 1
   },
   {
@@ -23,7 +23,7 @@
     "image": "/images/digimons/03.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[157]",
     "typeId": 4
   },
   {
@@ -32,7 +32,7 @@
     "image": "/images/digimons/04.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[148]",
     "typeId": 2
   },
   {
@@ -41,7 +41,7 @@
     "image": "/images/digimons/05.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[146]",
     "typeId": 3
   },
   {
@@ -50,7 +50,7 @@
     "image": "/images/digimons/06.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[96,97,98]",
+    "evolution": "[96,97,98,155]",
     "typeId": 2
   },
   {
@@ -59,7 +59,7 @@
     "image": "/images/digimons/07.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[108]",
+    "evolution": "[108,23]",
     "typeId": 2
   },
   {
@@ -68,7 +68,7 @@
     "image": "/images/digimons/08.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[150,154,156]",
     "typeId": 2
   },
   {
@@ -86,7 +86,7 @@
     "image": "/images/digimons/10.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[149,151,159]",
     "typeId": 2
   },
   {
@@ -104,7 +104,7 @@
     "image": "/images/digimons/12.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[152]",
     "typeId": 1
   },
   {
@@ -113,7 +113,7 @@
     "image": "/images/digimons/13.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[155]",
     "typeId": 3
   },
   {
@@ -140,7 +140,7 @@
     "image": "/images/digimons/16.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[153]",
     "typeId": 5
   },
   {
@@ -158,7 +158,7 @@
     "image": "/images/digimons/18.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[147]",
     "typeId": 1
   },
   {
@@ -185,7 +185,7 @@
     "image": "/images/digimons/21.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[132,133,137]",
     "typeId": 4
   },
   {
@@ -194,16 +194,16 @@
     "image": "/images/digimons/22.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[149,151,159]",
     "typeId": 4
   },
   {
     "id": 23,
     "name": "meicoomon",
     "image": "/images/digimons/23.png",
-    "level": 1,
-    "dp": 2000,
-    "evolution": "[]",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[158]",
     "typeId": 6
   },
   {
@@ -212,7 +212,7 @@
     "image": "/images/digimons/24.png",
     "level": 1,
     "dp": 2000,
-    "evolution": "[]",
+    "evolution": "[160]",
     "typeId": 1
   },
   {
@@ -671,7 +671,7 @@
     "image": "/images/digimons/81.png",
     "level": 3,
     "dp": 8000,
-    "evolution": "[83,91,94,92,93,95]",
+    "evolution": "[83,91,94,92,93,95,162]",
     "typeId": 5
   },
   {
@@ -716,7 +716,7 @@
     "image": "/images/digimons/04.png",
     "level": 3,
     "dp": 8000,
-    "evolution": "[95,94,92,83,91,93]",
+    "evolution": "[95,94,92,83,91,93,162]",
     "typeId": 2
   },
   {
@@ -725,7 +725,7 @@
     "image": "/images/digimons/71.png",
     "level": 3,
     "dp": 8000,
-    "evolution": "[95,94,92]",
+    "evolution": "[95,94,92,162]",
     "typeId": 3
   },
   {
@@ -860,7 +860,7 @@
     "image": "/images/digimons/48.png",
     "level": 3,
     "dp": 8000,
-    "evolution": "[105,106]",
+    "evolution": "[105,106,141,142]",
     "typeId": 2
   },
   {
@@ -869,7 +869,7 @@
     "image": "/images/digimons/76.png",
     "level": 3,
     "dp": 8000,
-    "evolution": "[107]",
+    "evolution": "[107,135,141]",
     "typeId": 4
   },
   {
@@ -1114,5 +1114,284 @@
     "dp": 12000,
     "evolution": "[]",
     "typeId": 3
+  },
+  {
+    "id": 132,
+    "name": "digmon",
+    "image": "/images/digimons/74.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 4
+  },
+  {
+    "id": 133,
+    "name": "ankylomon",
+    "image": "/images/digimons/01.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[104,136,138]",
+    "typeId": 1
+  },
+  {
+    "id": 134,
+    "name": "tapirmon",
+    "image": "/images/digimons/80.png",
+    "level": 1,
+    "dp": 2000,
+    "evolution": "[97,133]",
+    "typeId": 2
+  },
+  {
+    "id": 135,
+    "name": "lampmon",
+    "image": "/images/digimons/24.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 1
+  },
+  {
+    "id": 136,
+    "name": "vikaralamon",
+    "image": "/images/digimons/24.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[]",
+    "typeId": 1
+  },
+  {
+    "id": 137,
+    "name": "tortomon",
+    "image": "/images/digimons/74.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[138]",
+    "typeId": 2
+  },
+  {
+    "id": 138,
+    "name": "brachiomon",
+    "image": "/images/digimons/25.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[139]",
+    "typeId": 1
+  },
+  {
+    "id": 139,
+    "name": "cannondramon",
+    "image": "/images/digimons/69.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 1
+  },
+  {
+    "id": 140,
+    "name": "mekanorimon",
+    "image": "/images/digimons/09.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 141,
+    "name": "clavisangemon",
+    "image": "/images/digimons/48.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 142,
+    "name": "shadowseraphimon",
+    "image": "/images/digimons/26.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 143,
+    "name": "greymon virus",
+    "image": "/images/digimons/67.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 144,
+    "name": "rapidmon",
+    "image": "/images/digimons/09.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 145,
+    "name": "wormmon",
+    "image": "/images/digimons/76.png",
+    "level": 1,
+    "dp": 2000,
+    "evolution": "[150,154,156]",
+    "typeId": 4
+  },
+  {
+    "id": 146,
+    "name": "growlmon",
+    "image": "/images/digimons/55.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 147,
+    "name": "turuiemon",
+    "image": "/images/digimons/30.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 1
+  },
+  {
+    "id": 148,
+    "name": "gargomon",
+    "image": "/images/digimons/74.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 1
+  },
+  {
+    "id": 149,
+    "name": "birdramon",
+    "image": "/images/digimons/59.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 150,
+    "name": "kabuterimon",
+    "image": "/images/digimons/08.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 1
+  },
+  {
+    "id": 151,
+    "name": "halsemon",
+    "image": "/images/digimons/59.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 4
+  },
+  {
+    "id": 152,
+    "name": "leomon",
+    "image": "/images/digimons/58.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 153,
+    "name": "agnimon",
+    "image": "/images/digimons/95.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[85,38,84]",
+    "typeId": 4
+  },
+  {
+    "id": 154,
+    "name": "stingmon",
+    "image": "/images/digimons/20.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 4
+  },
+  {
+    "id": 155,
+    "name": "devimon",
+    "image": "/images/digimons/12.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 156,
+    "name": "kuwagamon",
+    "image": "/images/digimons/29.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 3
+  },
+  {
+    "id": 157,
+    "name": "exveemon",
+    "image": "/images/digimons/97.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 4
+  },
+  {
+    "id": 158,
+    "name": "meicrackmon",
+    "image": "/images/digimons/39.png",
+    "level": 3,
+    "dp": 8000,
+    "evolution": "[]",
+    "typeId": 6
+  },
+  {
+    "id": 159,
+    "name": "aquilamon",
+    "image": "/images/digimons/05.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 4
+  },
+  {
+    "id": 160,
+    "name": "baohuckmon",
+    "image": "/images/digimons/91.png",
+    "level": 2,
+    "dp": 5000,
+    "evolution": "[]",
+    "typeId": 1
+  },
+  {
+    "id": 161,
+    "name": "bancholilimon",
+    "image": "/images/digimons/15.png",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 1
+  },
+  {
+    "id": 162,
+    "name": "baihumon",
+    "image": "/images/digimons/08.png",
+    "level": 4,
+    "dp": 13000,
+    "evolution": "[]",
+    "typeId": 1
   }
 ]

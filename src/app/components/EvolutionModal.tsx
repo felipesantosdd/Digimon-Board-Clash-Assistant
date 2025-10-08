@@ -364,9 +364,7 @@ export default function EvolutionModal({
                 </div>
               </div>
               <div>
-                <p className="font-bold text-lg text-white">
-                  {editData.name}
-                </p>
+                <p className="font-bold text-lg text-white">{editData.name}</p>
                 <p className="text-sm text-white">
                   Level {editData.level} • DP: {editData.dp} •{" "}
                   {digimonTypes.find((t) => t.id === editData.typeId)?.name}

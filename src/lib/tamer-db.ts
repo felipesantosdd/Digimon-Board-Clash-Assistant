@@ -8,7 +8,11 @@ export interface Tamer {
 
 // Funções de Tamers
 export function getAllTamers(): Tamer[] {
-  return db.prepare("SELECT * FROM tamers ORDER BY id").all() as Tamer[];
+  const tamers = db
+    .prepare("SELECT * FROM tamers ORDER BY id")
+    .all() as Tamer[];
+  console.log("📊 getAllTamers retornando:", tamers);
+  return tamers;
 }
 
 export function getTamerById(id: number): Tamer | undefined {

@@ -1,6 +1,7 @@
 // Adaptador para ler dados do JSON em produção
 import digimonTypesData from "@/data/digimon-types.json";
 import digimonsData from "@/data/digimons.json";
+import tamersData from "@/data/tamers.json";
 
 interface DigimonType {
   id: number;
@@ -18,6 +19,12 @@ interface Digimon {
   evolution: string;
 }
 
+interface Tamer {
+  id: number;
+  name: string;
+  image: string;
+}
+
 export const jsonDb = {
   prepare: (query: string) => {
     return {
@@ -26,6 +33,9 @@ export const jsonDb = {
         if (query.includes("digimon_types")) {
           return digimonTypesData as DigimonType[];
         }
+        if (query.includes("tamers")) {
+          return tamersData as Tamer[];
+        }
         if (query.includes("digimons")) {
           return digimonsData as Digimon[];
         }
@@ -33,6 +43,10 @@ export const jsonDb = {
       },
       get: (params?: number | string) => {
         // Para queries com WHERE id = ?
+        if (query.includes("tamers") && query.includes("WHERE id")) {
+          const id = params;
+          return (tamersData as Tamer[]).find((t) => t.id === id) || null;
+        }
         if (query.includes("digimons") && query.includes("WHERE id")) {
           const id = params;
           return (digimonsData as Digimon[]).find((d) => d.id === id) || null;

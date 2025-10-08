@@ -186,6 +186,16 @@ export default function GamePage() {
       const data = await response.json();
       const evolution = data.evolution;
 
+      // Encontrar o jogador dono do Digimon
+      const ownerPlayer = gameState.players.find((p) =>
+        p.digimons.some((d) => d.id === digimon.id)
+      );
+
+      // Adicionar pontuação ao Tamer (se não for nível 3)
+      if (ownerPlayer && evolution.level !== 3) {
+        updateTamerScore(ownerPlayer.id, evolution.dp);
+      }
+
       // Atualizar o Digimon no gameState
       const updatedState = {
         ...gameState,
@@ -217,10 +227,13 @@ export default function GamePage() {
         ? "linha evolutiva"
         : "evolução aleatória";
 
+      const scoreMessage =
+        evolution.level !== 3 ? ` +${evolution.dp.toLocaleString()} pts!` : "";
+
       enqueueSnackbar(
         `🎉 ${capitalize(digimon.name)} evoluiu para ${capitalize(
           evolution.name
-        )}! (${evolutionType})`,
+        )}! (${evolutionType})${scoreMessage}`,
         { variant: "success" }
       );
 
@@ -229,6 +242,22 @@ export default function GamePage() {
     } catch (error) {
       console.error("Erro ao evoluir:", error);
       enqueueSnackbar("Erro ao processar evolução", { variant: "error" });
+    }
+  };
+
+  const updateTamerScore = (tamerId: number, points: number) => {
+    try {
+      const stored = localStorage.getItem("digimon_tamer_scores");
+      const scores = stored ? JSON.parse(stored) : {};
+
+      scores[tamerId] = (scores[tamerId] || 0) + points;
+
+      localStorage.setItem("digimon_tamer_scores", JSON.stringify(scores));
+      console.log(
+        `⭐ Pontuação atualizada - Tamer ${tamerId}: +${points} pts (Total: ${scores[tamerId]})`
+      );
+    } catch (error) {
+      console.error("Erro ao atualizar pontuação:", error);
     }
   };
 
@@ -448,7 +477,22 @@ export default function GamePage() {
               >
                 {/* Informações do Jogador */}
                 <div className="flex items-center gap-4 mb-6 pb-4 border-b border-gray-700">
-                  <div className="text-5xl">{player.avatar}</div>
+                  <div className="w-16 h-16 flex-shrink-0 rounded-full overflow-hidden bg-gray-700 border-2 border-gray-600">
+                    <img
+                      src={`/images/tamers/${player.avatar}.png`}
+                      alt={player.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback para emoji se a imagem não existir
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = "none";
+                        const parent = target.parentElement;
+                        if (parent) {
+                          parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-4xl">👤</div>`;
+                        }
+                      }}
+                    />
+                  </div>
                   <div className="flex-1">
                     <div className="text-xs text-gray-400 font-semibold mb-1">
                       Jogador {playerIndex + 1}

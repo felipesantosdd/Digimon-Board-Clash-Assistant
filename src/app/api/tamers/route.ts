@@ -5,6 +5,7 @@ import { getAllTamers, createTamer } from "@/lib/tamer-db";
 export async function GET() {
   try {
     const tamers = getAllTamers();
+    console.log("📊 API /tamers retornando:", tamers);
     return NextResponse.json(tamers);
   } catch (error) {
     console.error("Erro ao buscar Tamers:", error);

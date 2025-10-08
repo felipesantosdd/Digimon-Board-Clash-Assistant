@@ -19,6 +19,9 @@ const types = db.prepare("SELECT * FROM digimon_types").all();
 // Exportar digimons
 const digimons = db.prepare("SELECT * FROM digimons").all();
 
+// Exportar tamers
+const tamers = db.prepare("SELECT * FROM tamers").all();
+
 // Criar diretório de dados se não existir
 const dataDir = path.join(process.cwd(), "src", "data");
 if (!fs.existsSync(dataDir)) {
@@ -36,8 +39,14 @@ fs.writeFileSync(
   JSON.stringify(digimons, null, 2)
 );
 
+fs.writeFileSync(
+  path.join(dataDir, "tamers.json"),
+  JSON.stringify(tamers, null, 2)
+);
+
 console.log("✅ Dados exportados com sucesso!");
 console.log(`   - ${types.length} tipos de Digimon`);
 console.log(`   - ${digimons.length} Digimons`);
+console.log(`   - ${tamers.length} Tamers`);
 
 db.close();

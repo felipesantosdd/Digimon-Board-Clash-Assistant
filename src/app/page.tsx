@@ -3,17 +3,21 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import GameSetupModal from "./components/GameSetupModal";
+import { capitalize } from "@/lib/utils";
 
 interface Tamer {
   id: number;
   name: string;
-  avatar: string;
+  image: string;
 }
 
 export default function Home() {
   const [tamers, setTamers] = useState<Tamer[]>([]);
   const [loading, setLoading] = useState(true);
   const [isGameModalOpen, setIsGameModalOpen] = useState(false);
+  const [tamerScores, setTamerScores] = useState<{ [tamerId: number]: number }>(
+    {}
+  );
 
   useEffect(() => {
     const fetchTamers = async () => {
@@ -21,15 +25,8 @@ export default function Home() {
         const response = await fetch("/api/tamers");
         if (response.ok) {
           const data = await response.json();
-          // Mapear para incluir avatar (usando image como avatar)
-          const tamersWithAvatar = data.map(
-            (t: { id: number; name: string; image: string }) => ({
-              id: t.id,
-              name: t.name,
-              avatar: t.image,
-            })
-          );
-          setTamers(tamersWithAvatar);
+          console.log("📊 Tamers carregados da API:", data);
+          setTamers(data);
         } else {
           console.error("Erro ao carregar Tamers");
         }
@@ -42,6 +39,44 @@ export default function Home() {
 
     fetchTamers();
   }, []);
+
+  // Carregar pontuações do localStorage
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("digimon_tamer_scores");
+      if (stored) {
+        const scores = JSON.parse(stored);
+        setTamerScores(scores);
+      }
+    } catch (error) {
+      console.error("Erro ao carregar pontuações:", error);
+    }
+  }, []);
+
+  const getTamerScore = (tamerId: number): number => {
+    return tamerScores[tamerId] || 0;
+  };
+
+  const getRankedTamers = () => {
+    return [...tamers].sort((a, b) => {
+      const scoreA = getTamerScore(a.id);
+      const scoreB = getTamerScore(b.id);
+      return scoreB - scoreA; // Ordem decrescente
+    });
+  };
+
+  const getTrophyIcon = (rank: number): string | null => {
+    switch (rank) {
+      case 0:
+        return "🥇"; // Ouro
+      case 1:
+        return "🥈"; // Prata
+      case 2:
+        return "🥉"; // Bronze
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
@@ -64,11 +99,6 @@ export default function Home() {
               >
                 <span>▶️</span> Play
               </button>
-              <Link href="/tamers">
-                <button className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md">
-                  Tamers
-                </button>
-              </Link>
               <Link href="/digimons">
                 <button className="px-6 py-2 bg-orange-600 text-white font-semibold rounded-lg hover:bg-orange-700 transition-colors duration-200 shadow-sm hover:shadow-md">
                   Digimons
@@ -88,10 +118,10 @@ export default function Home() {
       <main className="container mx-auto px-6 py-8">
         <div className="mb-8">
           <h2 className="text-4xl font-bold text-white mb-2">
-            Selecione seu Tamer
+            🏆 Ranking de Tamers
           </h2>
           <p className="text-gray-300">
-            Escolha um Tamer para começar sua jornada no mundo digital
+            Evolua seus Digimons para ganhar pontos e conquistar o topo!
           </p>
         </div>
 
@@ -103,39 +133,71 @@ export default function Home() {
             </h3>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6">
-            {tamers.map((tamer) => (
-              <div
-                key={tamer.id}
-                className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border-2 border-transparent hover:border-blue-400"
-              >
-                <div className="p-6 flex flex-col items-center">
-                  {/* Avatar do Tamer */}
-                  <div className="text-6xl mb-4">{tamer.avatar}</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {getRankedTamers().map((tamer, index) => {
+              const score = getTamerScore(tamer.id);
+              const trophy = getTrophyIcon(index);
 
-                  {/* Nome do Tamer */}
-                  <h3 className="text-xl font-bold text-white text-center">
-                    {tamer.name}
-                  </h3>
+              return (
+                <div
+                  key={tamer.id}
+                  className="bg-gray-800 rounded-lg shadow-lg overflow-hidden border-2 border-gray-700 hover:border-blue-500 transition-all relative"
+                >
+                  {/* Troféu (apenas top 3) */}
+                  {trophy && (
+                    <div className="absolute top-3 right-3 text-4xl z-10 animate-pulse">
+                      {trophy}
+                    </div>
+                  )}
 
-                  {/* Botão Selecionar */}
-                  <button className="mt-4 w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
-                    Selecionar
-                  </button>
+                  <div className="p-6 flex items-center gap-4">
+                    {/* Avatar do Tamer */}
+                    <div className="w-20 h-20 flex-shrink-0 rounded-full overflow-hidden bg-gray-700 border-2 border-gray-600">
+                      <img
+                        src={`/images/tamers/${tamer.image}.png`}
+                        alt={tamer.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = "none";
+                          const parent = target.parentElement;
+                          if (parent) {
+                            parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-4xl">👤</div>`;
+                          }
+                        }}
+                      />
+                    </div>
+
+                    {/* Info do Tamer */}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-gray-400 text-sm font-semibold">
+                          #{index + 1}
+                        </span>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-2">
+                        {capitalize(tamer.name)}
+                      </h3>
+
+                      {/* Pontuação */}
+                      <div className="bg-gray-700 rounded-lg px-3 py-2 inline-block">
+                        <div className="flex items-center gap-2">
+                          <span className="text-yellow-400 text-xl">⭐</span>
+                          <div>
+                            <p className="text-xs text-gray-400">Pontuação</p>
+                            <p className="text-lg font-bold text-yellow-400">
+                              {score.toLocaleString()} pts
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
-
-        {/* Botão para adicionar novo Tamer */}
-        <div className="mt-8 text-center">
-          <Link href="/tamers">
-            <button className="px-8 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md hover:shadow-lg">
-              ➕ Criar Novo Tamer
-            </button>
-          </Link>
-        </div>
       </main>
 
       {/* Modal de Configuração do Jogo */}

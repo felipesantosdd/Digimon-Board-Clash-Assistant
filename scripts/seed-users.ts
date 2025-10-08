@@ -7,9 +7,9 @@ const db = new Database(dbPath);
 console.log("🌱 Cadastrando usuários...\n");
 
 const users = [
-  { name: "Felipe S. Oliveira", image: "👨‍💻" },
-  { name: "Talessa M. Rodrigues", image: "👩‍💼" },
-  { name: "Luiz F. de Almeida", image: "👨‍🎓" },
+  { name: "Felipe S. Oliveira", image: "01" },
+  { name: "Talessa M. Rodrigues", image: "02" },
+  { name: "Luiz F. de Almeida", image: "03" },
 ];
 
 const insertStmt = db.prepare(`
