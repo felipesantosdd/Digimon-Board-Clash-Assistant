@@ -344,9 +344,7 @@ export default function EvolutionModal({
             <div className="flex items-center gap-4">
               <div className="w-20 h-20 bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg overflow-hidden relative">
                 <img
-                  src={`/images/digimons/${digimon.id
-                    .toString()
-                    .padStart(2, "0")}.png`}
+                  src={`/gimons/${digimon.id.toString().padStart(2, "0")}.png`}
                   alt={digimon.name}
                   className="w-full h-full object-cover"
                   onError={(e) => {

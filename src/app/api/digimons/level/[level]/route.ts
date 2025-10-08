@@ -3,10 +3,11 @@ import { getDigimonsByLevel } from "@/lib/digimon-db";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { level: string } }
+  { params }: { params: Promise<{ level: string }> }
 ) {
   try {
-    const level = parseInt(params.level, 10);
+    const { level: levelStr } = await params;
+    const level = parseInt(levelStr, 10);
 
     if (isNaN(level) || level < 1 || level > 7) {
       return NextResponse.json(
