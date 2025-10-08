@@ -100,11 +100,13 @@ export default function DigimonsPage() {
                   Digimons
                 </button>
               </Link>
-              <Link href="/admin">
-                <button className="px-6 py-2 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors duration-200 shadow-sm hover:shadow-md">
-                  Admin
-                </button>
-              </Link>
+              {process.env.NODE_ENV === "development" && (
+                <Link href="/admin">
+                  <button className="px-6 py-2 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors duration-200 shadow-sm hover:shadow-md">
+                    Admin
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
