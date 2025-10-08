@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Verificar se há Digimons na linha evolutiva (evolution array)
-    let evolutionOptions = [];
+    let evolutionOptions: typeof nextLevelDigimons = [];
     if (currentDigimon.evolution && currentDigimon.evolution.length > 0) {
       evolutionOptions = nextLevelDigimons.filter((d) =>
         currentDigimon.evolution.includes(d.id)
