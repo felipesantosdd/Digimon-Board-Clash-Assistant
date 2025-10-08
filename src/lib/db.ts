@@ -34,6 +34,12 @@ if (isProduction) {
       evolution TEXT DEFAULT '[]',
       FOREIGN KEY (typeId) REFERENCES digimon_types(id)
     );
+
+    CREATE TABLE IF NOT EXISTS tamers (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      image TEXT NOT NULL
+    );
   `);
 }
 

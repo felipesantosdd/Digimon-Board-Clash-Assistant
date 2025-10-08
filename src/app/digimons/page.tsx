@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Digimon } from "../database/database_type";
 import EvolutionLineModal from "../components/EvolutionLineModal";
-import { capitalize } from "@/lib/utils";
+import { capitalize, getLevelName } from "@/lib/utils";
 
 export default function DigimonsPage() {
   const [digimons, setDigimons] = useState<Digimon[]>([]);
@@ -180,8 +180,9 @@ export default function DigimonsPage() {
                     {/* Level e DP */}
                     <div className="flex justify-between text-sm text-gray-300">
                       <span className="font-semibold">
-                        Lv:{" "}
-                        <span className="text-blue-400">{digimon.level}</span>
+                        <span className="text-blue-400">
+                          {getLevelName(digimon.level)}
+                        </span>
                       </span>
                       <span className="font-semibold">
                         DP:{" "}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Digimon } from "../database/database_type";
-import { capitalize } from "@/lib/utils";
+import { capitalize, getLevelName } from "@/lib/utils";
 
 interface EvolutionLineModalProps {
   isOpen: boolean;
@@ -159,7 +159,7 @@ export default function EvolutionLineModal({
                     <div className="flex items-center justify-center mb-4">
                       <div className="h-px bg-gray-300 flex-1 max-w-xs"></div>
                       <h3 className="text-sm font-semibold text-white px-4 bg-gray-800">
-                        Level {levelIndex + 1}
+                        {getLevelName(levelIndex + 1)}
                       </h3>
                       <div className="h-px bg-gray-300 flex-1 max-w-xs"></div>
                     </div>

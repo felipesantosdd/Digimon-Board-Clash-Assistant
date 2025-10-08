@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "seed": "tsx scripts/seed-simple.ts",
+    "seed:tamers": "tsx scripts/seed-tamers.ts",
+    "seed:users": "tsx scripts/seed-users.ts",
     "export": "tsx scripts/export-db-to-json.ts",
     "update-dp": "tsx scripts/update-dp-by-level.ts",
     "lowercase-names": "tsx scripts/lowercase-digimon-names.ts"

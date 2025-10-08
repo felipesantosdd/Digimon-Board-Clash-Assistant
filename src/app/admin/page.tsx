@@ -6,7 +6,7 @@ import EvolutionModal from "../components/EvolutionModal";
 import AddDigimonModal from "../components/AddDigimonModal";
 import { Digimon } from "../database/database_type";
 import { useSnackbar } from "notistack";
-import { capitalize } from "@/lib/utils";
+import { capitalize, getLevelName } from "@/lib/utils";
 
 export default function AdminPage() {
   const { enqueueSnackbar } = useSnackbar();
@@ -351,9 +351,8 @@ export default function AdminPage() {
                         {/* Level e DP */}
                         <div className="flex justify-between text-sm text-gray-300">
                           <span className="font-semibold">
-                            Lv:{" "}
                             <span className="text-blue-400">
-                              {digimon.level}
+                              {getLevelName(digimon.level)}
                             </span>
                           </span>
                           <span className="font-semibold">
