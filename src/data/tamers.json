@@ -2,16 +2,51 @@
   {
     "id": 15,
     "name": "Felipe S. Oliveira",
-    "image": "01"
+    "image": "/images/tamers/1759946926176_cropped-image.webp"
   },
   {
     "id": 16,
     "name": "Talessa M. Rodrigues",
-    "image": "02"
+    "image": "/images/tamers/1759946776866_cropped-image.webp"
   },
   {
     "id": 17,
     "name": "Luiz F. de Almeida",
-    "image": "03"
+    "image": "02"
+  },
+  {
+    "id": 18,
+    "name": "Cell",
+    "image": "04"
+  },
+  {
+    "id": 19,
+    "name": "Super Buu",
+    "image": "05"
+  },
+  {
+    "id": 20,
+    "name": "Vegeta",
+    "image": "06"
+  },
+  {
+    "id": 21,
+    "name": "Kid Buu",
+    "image": "07"
+  },
+  {
+    "id": 22,
+    "name": "Cooler",
+    "image": "08"
+  },
+  {
+    "id": 23,
+    "name": "Buu",
+    "image": "09"
+  },
+  {
+    "id": 24,
+    "name": "17",
+    "image": "10"
   }
 ]

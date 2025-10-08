@@ -113,15 +113,30 @@ export function updateDigimonEvolutions(
 
 export function updateDigimon(
   id: number,
-  data: { name: string; level: number; dp: number; typeId: number }
+  data: {
+    name: string;
+    level: number;
+    dp: number;
+    typeId: number;
+    image?: string;
+  }
 ): Digimon | null {
-  const stmt = db.prepare(`
-    UPDATE digimons 
-    SET name = ?, level = ?, dp = ?, typeId = ?
-    WHERE id = ?
-  `);
-
-  stmt.run(data.name, data.level, data.dp, data.typeId, id);
+  // Se image foi fornecida, incluir no update
+  if (data.image) {
+    const stmt = db.prepare(`
+      UPDATE digimons 
+      SET name = ?, level = ?, dp = ?, typeId = ?, image = ?
+      WHERE id = ?
+    `);
+    stmt.run(data.name, data.level, data.dp, data.typeId, data.image, id);
+  } else {
+    const stmt = db.prepare(`
+      UPDATE digimons 
+      SET name = ?, level = ?, dp = ?, typeId = ?
+      WHERE id = ?
+    `);
+    stmt.run(data.name, data.level, data.dp, data.typeId, id);
+  }
 
   return getDigimonById(id) || null;
 }

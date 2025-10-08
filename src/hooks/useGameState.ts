@@ -27,6 +27,7 @@ export function useGameState() {
               canEvolve: digimon.canEvolve ?? false, // Adicionar canEvolve se não existir
               originalId: digimon.originalId ?? digimon.id, // Adicionar originalId se não existir
               hasActedThisTurn: digimon.hasActedThisTurn ?? false, // Adicionar hasActedThisTurn se não existir
+              bag: digimon.bag ?? [], // Adicionar bag vazia se não existir
             })),
           })),
           currentTurnPlayerIndex: parsed.currentTurnPlayerIndex ?? 0, // Padrão: primeiro jogador

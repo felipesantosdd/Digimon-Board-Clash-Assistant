@@ -37,7 +37,7 @@ const replacements: [RegExp, string][] = [
   [/hover:text-gray-900\b/g, "hover:text-white"],
 ];
 
-console.log("🎨 Aplicando tema escuro...\n");
+
 
 let totalChanges = 0;
 
@@ -45,7 +45,7 @@ filesToUpdate.forEach((filePath) => {
   const fullPath = path.join(process.cwd(), filePath);
 
   if (!fs.existsSync(fullPath)) {
-    console.log(`⚠️  Arquivo não encontrado: ${filePath}`);
+    
     return;
   }
 
@@ -62,14 +62,14 @@ filesToUpdate.forEach((filePath) => {
 
   if (fileChanges > 0) {
     fs.writeFileSync(fullPath, content, "utf-8");
-    console.log(`✅ ${filePath.padEnd(50)} - ${fileChanges} alterações`);
+    
     totalChanges += fileChanges;
   } else {
-    console.log(`⏭️  ${filePath.padEnd(50)} - sem alterações`);
+    
   }
 });
 
-console.log(`\n🎉 Tema escuro aplicado!`);
-console.log(
+
+
   `   Total de ${totalChanges} alterações em ${filesToUpdate.length} arquivos`
 );

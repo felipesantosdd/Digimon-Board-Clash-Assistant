@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Digimon } from "../database/database_type";
 import { capitalize, getLevelName } from "@/lib/utils";
+import { getDigimonImagePath } from "@/lib/image-utils";
 
 interface EvolutionLineModalProps {
   isOpen: boolean;
@@ -120,7 +121,7 @@ export default function EvolutionLineModal({
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center z-50 p-4"
       onClick={onClose}
     >
       <div
@@ -179,25 +180,14 @@ export default function EvolutionLineModal({
                           {/* Imagem */}
                           <div className="relative h-32 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
                             <img
-                              src={`/images/digimons/${evo.id
-                                .toString()
-                                .padStart(2, "0")}.png`}
+                              src={evo.image || "/images/digimons/fallback.svg"}
                               alt={evo.name}
                               className="w-full h-full object-cover"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
-                                target.style.display = "none";
-                                const fallback =
-                                  target.nextElementSibling as HTMLElement;
-                                if (fallback) fallback.style.display = "flex";
+                                target.src = "/images/digimons/fallback.svg";
                               }}
                             />
-                            <div
-                              className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-100 to-blue-100"
-                              style={{ display: "none" }}
-                            >
-                              <span className="text-4xl">🤖</span>
-                            </div>
                           </div>
 
                           {/* Info */}

@@ -1,3 +1,5 @@
+import { GameItem } from "./item";
+
 // Tipos para o estado do jogo
 export interface GameDigimon {
   id: number;
@@ -10,6 +12,7 @@ export interface GameDigimon {
   canEvolve?: boolean; // Se o Digimon pode evoluir
   originalId?: number; // ID original do Digimon (antes das evoluções)
   hasActedThisTurn?: boolean; // Se já realizou uma ação neste turno
+  bag?: GameItem[]; // Inventário de itens do Digimon
 }
 
 export interface GamePlayer {

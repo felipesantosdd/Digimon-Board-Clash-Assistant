@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { useGameState } from "@/hooks/useGameState";
 import { capitalize, getLevelName } from "@/lib/utils";
+import { getTamerImagePath } from "@/lib/image-utils";
 import DigimonDetailsModal from "@/app/components/DigimonDetailsModal";
 import DamageDialog from "@/app/components/DamageDialog";
 import ReviveDialog from "@/app/components/ReviveDialog";
@@ -479,7 +480,7 @@ export default function GamePage() {
                 <div className="flex items-center gap-4 mb-6 pb-4 border-b border-gray-700">
                   <div className="w-16 h-16 flex-shrink-0 rounded-full overflow-hidden bg-gray-700 border-2 border-gray-600">
                     <img
-                      src={`/images/tamers/${player.avatar}.png`}
+                      src={getTamerImagePath(player.avatar)}
                       alt={player.name}
                       className="w-full h-full object-cover"
                       onError={(e) => {

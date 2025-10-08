@@ -1,193 +1,21 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import EvolutionModal from "../components/EvolutionModal";
-import AddDigimonModal from "../components/AddDigimonModal";
-import { Digimon } from "../database/database_type";
-import { useSnackbar } from "notistack";
-import { capitalize, getLevelName } from "@/lib/utils";
+import dynamic from "next/dynamic";
+
+// Importação dinâmica para evitar problemas de SSR
+const DigimonsTab = dynamic(() => import("../components/admin/DigimonsTab"), {
+  ssr: false,
+});
+const ItemsTab = dynamic(() => import("../components/admin/ItemsTab"), {
+  ssr: false,
+});
+
+type TabType = "digimons" | "items";
 
 export default function AdminPage() {
-  const { enqueueSnackbar } = useSnackbar();
-  const [digimons, setDigimons] = useState<Digimon[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedDigimon, setSelectedDigimon] = useState<Digimon | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [levelFilter, setLevelFilter] = useState<number | null>(null);
-
-  // Carregar Digimons da API
-  useEffect(() => {
-    const fetchDigimons = async () => {
-      try {
-        const response = await fetch("/api/digimons");
-        if (response.ok) {
-          const data = await response.json();
-          setDigimons(data);
-        } else {
-          console.error("Erro ao carregar Digimons");
-        }
-      } catch (error) {
-        console.error("Erro ao carregar Digimons:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchDigimons();
-  }, []);
-
-  const handleConfigureEvolutions = (digimon: Digimon) => {
-    setSelectedDigimon(digimon);
-    setIsModalOpen(true);
-  };
-
-  const handleSaveEvolutions = async (
-    digimonId: number,
-    evolutionIds: number[]
-  ) => {
-    try {
-      const response = await fetch(`/api/digimons/${digimonId}/evolutions`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ evolution: evolutionIds }),
-      });
-
-      if (response.ok) {
-        // Atualizar a lista local
-        setDigimons((prev) =>
-          prev.map((digimon) =>
-            digimon.id === digimonId
-              ? { ...digimon, evolution: evolutionIds }
-              : digimon
-          )
-        );
-        console.log(
-          `✅ Evoluções do Digimon ${digimonId} atualizadas com sucesso!`
-        );
-      } else {
-        const error = await response.json();
-        console.error("Erro ao salvar evoluções:", error.error);
-        enqueueSnackbar(`Erro: ${error.error}`, { variant: "error" });
-      }
-    } catch (error) {
-      console.error("Erro ao salvar evoluções:", error);
-      enqueueSnackbar("Erro ao salvar evoluções", { variant: "error" });
-    }
-  };
-
-  const handleSaveDigimon = async (
-    digimonId: number,
-    data: { name: string; level: number; dp: number; typeId: number }
-  ) => {
-    try {
-      console.log("🚀 Fazendo PUT para:", `/api/digimons/${digimonId}`);
-      console.log("📤 Dados enviados:", data);
-
-      const response = await fetch(`/api/digimons/${digimonId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        const updatedDigimon = await response.json();
-        // Atualizar a lista local
-        setDigimons((prev) =>
-          prev.map((digimon) =>
-            digimon.id === digimonId ? { ...digimon, ...data } : digimon
-          )
-        );
-        // Atualizar o digimon selecionado
-        setSelectedDigimon(updatedDigimon);
-        enqueueSnackbar("Digimon atualizado com sucesso!", {
-          variant: "success",
-        });
-      } else {
-        const error = await response.json();
-        enqueueSnackbar(`Erro: ${error.error}`, { variant: "error" });
-      }
-    } catch (error) {
-      console.error("Erro ao atualizar Digimon:", error);
-      enqueueSnackbar("Erro ao atualizar Digimon", { variant: "error" });
-    }
-  };
-
-  const handleAddDigimonSuccess = async () => {
-    // Recarregar lista de Digimons
-    const response = await fetch("/api/digimons");
-    if (response.ok) {
-      const data = await response.json();
-      setDigimons(data);
-    }
-  };
-
-  const handleDeleteDigimon = async (
-    digimonId: number,
-    digimonName: string
-  ) => {
-    if (!confirm(`Tem certeza que deseja excluir ${digimonName}?`)) {
-      return;
-    }
-
-    try {
-      const response = await fetch(`/api/digimons/${digimonId}`, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        // Remover da lista local
-        setDigimons((prev) => prev.filter((d) => d.id !== digimonId));
-        enqueueSnackbar(`${digimonName} excluído com sucesso!`, {
-          variant: "success",
-        });
-      } else {
-        const error = await response.json();
-        enqueueSnackbar(`Erro: ${error.error}`, { variant: "error" });
-      }
-    } catch (error) {
-      console.error("Erro ao excluir Digimon:", error);
-      enqueueSnackbar("Erro ao excluir Digimon", { variant: "error" });
-    }
-  };
-
-  const filteredDigimons = digimons.filter((digimon) => {
-    const matchesSearch = digimon.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesLevel = levelFilter === null || digimon.level === levelFilter;
-    return matchesSearch && matchesLevel;
-  });
-
-  const getTypeColor = (typeId: number) => {
-    const colors: { [key: number]: string } = {
-      1: "bg-blue-500", // Data
-      2: "bg-green-500", // Vaccine
-      3: "bg-purple-500", // Virus
-      4: "bg-gray-500", // Free
-      5: "bg-yellow-500", // Variable
-      6: "bg-red-500", // Unknown
-    };
-    return colors[typeId] || "bg-gray-500";
-  };
-
-  const getTypeName = (typeId: number) => {
-    const types: { [key: number]: string } = {
-      1: "Data",
-      2: "Vaccine",
-      3: "Virus",
-      4: "Free",
-      5: "Variable",
-      6: "Unknown",
-    };
-    return types[typeId] || "Unknown";
-  };
+  const [activeTab, setActiveTab] = useState<TabType>("digimons");
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
@@ -212,235 +40,54 @@ export default function AdminPage() {
         </div>
       </header>
 
-      {/* Conteúdo Principal */}
-      <main className="container mx-auto px-6 py-8">
-        <div className="mb-8 flex items-center justify-between">
-          <div>
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Configuração de Evoluções
-            </h2>
-            <p className="text-gray-300">
-              Selecione um Digimon para configurar suas evoluções
-            </p>
-          </div>
-
-          {/* Botão Adicionar - Apenas em Development */}
-          {process.env.NODE_ENV === "development" && (
-            <button
-              onClick={() => setIsAddModalOpen(true)}
-              className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md hover:shadow-lg flex items-center gap-2"
-            >
-              <span className="text-xl">➕</span>
-              Adicionar Digimon
-            </button>
-          )}
-        </div>
-
-        {/* Filtros */}
-        <div className="bg-gray-800 rounded-lg shadow-md p-6 mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-200 mb-2">
-                Buscar Digimon
-              </label>
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Digite o nome do Digimon..."
-                className="w-full px-3 py-2 text-white border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-200 mb-2">
-                Filtrar por Level
-              </label>
-              <select
-                value={levelFilter || ""}
-                onChange={(e) =>
-                  setLevelFilter(e.target.value ? Number(e.target.value) : null)
-                }
-                className="w-full px-3 text-white py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="">Todos os Levels</option>
-                <option value="1">Level 1</option>
-                <option value="2">Level 2</option>
-                <option value="3">Level 3</option>
-                <option value="4">Level 4</option>
-                <option value="5">Level 5</option>
-                <option value="6">Level 6</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        {/* Lista de Digimons */}
-        {loading ? (
-          <div className="text-center py-12">
-            <div className="text-6xl mb-4">⏳</div>
-            <h3 className="text-xl font-semibold text-gray-300 mb-2">
-              Carregando Digimons...
-            </h3>
-            <p className="text-gray-500">
-              Aguarde enquanto buscamos os dados do banco
-            </p>
-          </div>
-        ) : (
-          <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {filteredDigimons.map((digimon) => {
-                // Verificar se precisa de borda vermelha (level 1-3 sem evoluções)
-                const needsEvolution =
-                  digimon.level <= 3 &&
-                  (!digimon.evolution || digimon.evolution.length === 0);
-
-                return (
-                  <div
-                    key={digimon.id}
-                    className={`bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ${
-                      needsEvolution ? "ring-4 ring-red-500" : ""
-                    }`}
-                  >
-                    {/* Imagem do Digimon */}
-                    <div className="relative h-40 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
-                      <img
-                        src={`/images/digimons/${digimon.id
-                          .toString()
-                          .padStart(2, "0")}.png`}
-                        alt={digimon.name}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = "none";
-                          const fallback =
-                            target.nextElementSibling as HTMLElement;
-                          if (fallback) fallback.style.display = "flex";
-                        }}
-                      />
-                      <div
-                        className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-100 to-blue-100"
-                        style={{ display: "none" }}
-                      >
-                        <span className="text-4xl">🤖</span>
-                      </div>
-                    </div>
-
-                    {/* Informações do Digimon */}
-                    <div className="p-4">
-                      <h3 className="text-lg font-bold text-white mb-2">
-                        {capitalize(digimon.name)}
-                      </h3>
-
-                      <div className="space-y-2 mb-4">
-                        {/* Tipo */}
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`${getTypeColor(
-                              digimon.typeId
-                            )} text-white text-xs font-semibold px-2 py-1 rounded-full`}
-                          >
-                            {getTypeName(digimon.typeId)}
-                          </span>
-                        </div>
-
-                        {/* Level e DP */}
-                        <div className="flex justify-between text-sm text-gray-300">
-                          <span className="font-semibold">
-                            <span className="text-blue-400">
-                              {getLevelName(digimon.level)}
-                            </span>
-                          </span>
-                          <span className="font-semibold">
-                            DP:{" "}
-                            <span className="text-orange-400">
-                              {digimon.dp}
-                            </span>
-                          </span>
-                        </div>
-
-                        {/* Evoluções */}
-                        <div className="text-xs text-gray-400">
-                          {digimon.evolution?.length || 0} evolução(ões)
-                        </div>
-                      </div>
-
-                      {/* Botões de ação */}
-                      <div className="space-y-2">
-                        <button
-                          onClick={() => handleConfigureEvolutions(digimon)}
-                          className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-                        >
-                          Configurar Evoluções
-                        </button>
-
-                        {process.env.NODE_ENV === "development" && (
-                          <button
-                            onClick={() =>
-                              handleDeleteDigimon(
-                                digimon.id,
-                                capitalize(digimon.name)
-                              )
-                            }
-                            className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
-                          >
-                            🗑️ Excluir
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {filteredDigimons.length === 0 && (
-              <div className="text-center py-12">
-                <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-xl font-semibold text-gray-300 mb-2">
-                  Nenhum Digimon encontrado
+      {/* Tabs */}
+      <div className="container mx-auto px-6 py-6">
+        {/* Aviso de Produção */}
+        {process.env.NODE_ENV === "production" && (
+          <div className="bg-yellow-900 border-2 border-yellow-600 rounded-lg p-4 mb-6">
+            <div className="flex items-center gap-3">
+              <span className="text-3xl">⚠️</span>
+              <div>
+                <h3 className="text-yellow-400 font-bold text-lg">
+                  Modo Produção
                 </h3>
-                <p className="text-gray-500">
-                  Tente ajustar os filtros de busca
+                <p className="text-yellow-200 text-sm">
+                  Edições estão desabilitadas. Apenas visualização disponível.
                 </p>
               </div>
-            )}
-
-            {/* Legenda */}
-            {filteredDigimons.length > 0 && (
-              <div className="mt-6 p-4 bg-gray-800 rounded-lg border border-gray-700">
-                <h4 className="text-sm font-semibold text-white mb-2">
-                  📋 Legenda:
-                </h4>
-                <div className="flex items-center gap-2 text-sm text-gray-200">
-                  <div className="w-6 h-6 rounded border-4 border-red-500"></div>
-                  <span>
-                    Digimons até Level 3{" "}
-                    <strong>sem evoluções configuradas</strong>
-                  </span>
-                </div>
-              </div>
-            )}
-          </>
+            </div>
+          </div>
         )}
-      </main>
 
-      {/* Modal de Configuração de Evoluções e Edição */}
-      <EvolutionModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        digimon={selectedDigimon}
-        allDigimons={digimons}
-        onSaveEvolutions={handleSaveEvolutions}
-        onSaveDigimon={handleSaveDigimon}
-      />
+        <div className="bg-gray-800 rounded-lg shadow-md p-2 mb-6">
+          <div className="flex gap-2">
+            <button
+              onClick={() => setActiveTab("digimons")}
+              className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
+                activeTab === "digimons"
+                  ? "bg-blue-600 text-white shadow-md"
+                  : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+              }`}
+            >
+              🤖 Digimons
+            </button>
+            <button
+              onClick={() => setActiveTab("items")}
+              className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
+                activeTab === "items"
+                  ? "bg-purple-600 text-white shadow-md"
+                  : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+              }`}
+            >
+              🎒 Itens
+            </button>
+          </div>
+        </div>
 
-      {/* Modal de Adicionar Digimon */}
-      <AddDigimonModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onSuccess={handleAddDigimonSuccess}
-        allDigimons={digimons}
-      />
+        {/* Tab Content */}
+        {activeTab === "digimons" && <DigimonsTab />}
+        {activeTab === "items" && <ItemsTab />}
+      </div>
     </div>
   );
 }

@@ -7,6 +7,7 @@ export type User = {
 export type Digimon = {
   id: number;
   name: string;
+  image: string;
   typeId: number;
   level: number;
   dp: number;

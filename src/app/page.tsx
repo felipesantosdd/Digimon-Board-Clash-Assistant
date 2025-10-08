@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import GameSetupModal from "./components/GameSetupModal";
+import EditTamerModal from "./components/EditTamerModal";
 import { capitalize } from "@/lib/utils";
+import { getTamerImagePath } from "@/lib/image-utils";
 
 interface Tamer {
   id: number;
@@ -15,6 +17,8 @@ export default function Home() {
   const [tamers, setTamers] = useState<Tamer[]>([]);
   const [loading, setLoading] = useState(true);
   const [isGameModalOpen, setIsGameModalOpen] = useState(false);
+  const [isEditTamerModalOpen, setIsEditTamerModalOpen] = useState(false);
+  const [selectedTamer, setSelectedTamer] = useState<Tamer | null>(null);
   const [tamerScores, setTamerScores] = useState<{ [tamerId: number]: number }>(
     {}
   );
@@ -39,6 +43,29 @@ export default function Home() {
 
     fetchTamers();
   }, []);
+
+  const handleTamerClick = (tamer: Tamer) => {
+    // Desabilitar edição em produção
+    if (process.env.NODE_ENV === "production") {
+      return;
+    }
+
+    setSelectedTamer(tamer);
+    setIsEditTamerModalOpen(true);
+  };
+
+  const handleTamerUpdateSuccess = async () => {
+    // Recarregar lista de tamers
+    try {
+      const response = await fetch("/api/tamers");
+      if (response.ok) {
+        const data = await response.json();
+        setTamers(data);
+      }
+    } catch (error) {
+      console.error("Erro ao recarregar tamers:", error);
+    }
+  };
 
   // Carregar pontuações do localStorage
   useEffect(() => {
@@ -143,7 +170,12 @@ export default function Home() {
               return (
                 <div
                   key={tamer.id}
-                  className="bg-gray-800 rounded-lg shadow-lg overflow-hidden border-2 border-gray-700 hover:border-blue-500 transition-all relative"
+                  onClick={() => handleTamerClick(tamer)}
+                  className={`bg-gray-800 rounded-lg shadow-lg overflow-hidden border-2 border-gray-700 hover:border-blue-500 transition-all relative ${
+                    process.env.NODE_ENV === "development"
+                      ? "cursor-pointer"
+                      : ""
+                  }`}
                 >
                   {/* Troféu (apenas top 3) */}
                   {trophy && (
@@ -156,7 +188,7 @@ export default function Home() {
                     {/* Avatar do Tamer */}
                     <div className="w-20 h-20 flex-shrink-0 rounded-full overflow-hidden bg-gray-700 border-2 border-gray-600">
                       <img
-                        src={`/images/tamers/${tamer.image}.png`}
+                        src={getTamerImagePath(tamer.image)}
                         alt={tamer.name}
                         className="w-full h-full object-cover"
                         onError={(e) => {
@@ -206,6 +238,14 @@ export default function Home() {
       <GameSetupModal
         isOpen={isGameModalOpen}
         onClose={() => setIsGameModalOpen(false)}
+      />
+
+      {/* Modal de Edição de Tamer */}
+      <EditTamerModal
+        isOpen={isEditTamerModalOpen}
+        onClose={() => setIsEditTamerModalOpen(false)}
+        tamer={selectedTamer}
+        onSuccess={handleTamerUpdateSuccess}
       />
     </div>
   );

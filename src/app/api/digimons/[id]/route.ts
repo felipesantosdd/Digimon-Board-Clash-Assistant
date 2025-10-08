@@ -15,8 +15,8 @@ export async function PUT(
     const { id } = await params;
     const body = await request.json();
     console.log("🔍 API PUT recebeu:", { id, body });
-    const { name, level, dp, typeId } = body;
-    console.log("📋 Campos extraídos:", { name, level, dp, typeId });
+    const { name, level, dp, typeId, image } = body;
+    console.log("📋 Campos extraídos:", { name, level, dp, typeId, image });
 
     if (!name || !level || !dp || !typeId) {
       return NextResponse.json(
@@ -46,6 +46,7 @@ export async function PUT(
       level,
       dp,
       typeId,
+      image,
       id: Number(id),
     });
 
@@ -54,6 +55,7 @@ export async function PUT(
       level,
       dp,
       typeId,
+      ...(image && { image }),
     });
 
     console.log("✅ Digimon atualizado:", updatedDigimon);

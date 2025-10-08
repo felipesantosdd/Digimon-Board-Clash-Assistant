@@ -10,6 +10,9 @@
     "seed": "tsx scripts/seed-simple.ts",
     "seed:tamers": "tsx scripts/seed-tamers.ts",
     "seed:users": "tsx scripts/seed-users.ts",
+    "seed:items": "tsx scripts/seed-items.ts",
+    "convert-images": "tsx scripts/convert-images-to-webp.ts",
+    "cleanup-images": "tsx scripts/cleanup-old-images.ts",
     "export": "tsx scripts/export-db-to-json.ts",
     "update-dp": "tsx scripts/update-dp-by-level.ts",
     "lowercase-names": "tsx scripts/lowercase-digimon-names.ts"
@@ -22,7 +25,9 @@
     "next": "15.5.4",
     "notistack": "^3.0.2",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-easy-crop": "^5.5.3",
+    "sharp": "^0.34.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { GameState, GameDigimon } from "@/types/game";
+import { getTamerImagePath } from "@/lib/image-utils";
 
 interface Tamer {
   id: number;
@@ -109,6 +110,7 @@ export default function GameSetupModal({
               currentHp: digimon.dp,
               canEvolve: false,
               originalId: digimon.id,
+              bag: [], // Inicializar inventário vazio
             });
           }
         }
@@ -256,7 +258,7 @@ export default function GameSetupModal({
                     >
                       <div className="w-10 h-10 flex-shrink-0 rounded-full overflow-hidden bg-gray-600">
                         <img
-                          src={`/images/tamers/${Number(tamer.image)}.png`}
+                          src={getTamerImagePath(tamer.image)}
                           alt={tamer.name}
                           className="w-full h-full object-cover"
                           onError={(e) => {

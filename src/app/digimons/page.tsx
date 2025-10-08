@@ -64,11 +64,11 @@ export default function DigimonsPage() {
     setImageErrors((prev) => new Set(prev).add(digimonId));
   };
 
-  const getImageSrc = (digimon: { id: number }) => {
+  const getImageSrc = (digimon: Digimon) => {
     if (imageErrors.has(digimon.id)) {
       return "/images/digimons/fallback.svg";
     }
-    return `/images/digimons/${digimon.id.toString().padStart(2, "0")}.png`;
+    return digimon.image || "/images/digimons/fallback.svg";
   };
 
   const handleDigimonClick = (digimon: Digimon) => {

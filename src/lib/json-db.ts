@@ -2,6 +2,7 @@
 import digimonTypesData from "@/data/digimon-types.json";
 import digimonsData from "@/data/digimons.json";
 import tamersData from "@/data/tamers.json";
+import itemsData from "@/data/items.json";
 
 interface DigimonType {
   id: number;
@@ -25,10 +26,18 @@ interface Tamer {
   image: string;
 }
 
+interface Item {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  effect: string;
+}
+
 export const jsonDb = {
   prepare: (query: string) => {
     return {
-      all: () => {
+      all: (params?: number | string) => {
         // Detectar qual tabela está sendo consultada
         if (query.includes("digimon_types")) {
           return digimonTypesData as DigimonType[];
@@ -36,7 +45,15 @@ export const jsonDb = {
         if (query.includes("tamers")) {
           return tamersData as Tamer[];
         }
+        if (query.includes("items")) {
+          return itemsData as Item[];
+        }
         if (query.includes("digimons")) {
+          // Verificar se tem filtro por nível
+          if (query.includes("WHERE level = ?") && params !== undefined) {
+            const level = params as number;
+            return (digimonsData as Digimon[]).filter((d) => d.level === level);
+          }
           return digimonsData as Digimon[];
         }
         return [];
@@ -46,6 +63,10 @@ export const jsonDb = {
         if (query.includes("tamers") && query.includes("WHERE id")) {
           const id = params;
           return (tamersData as Tamer[]).find((t) => t.id === id) || null;
+        }
+        if (query.includes("items") && query.includes("WHERE id")) {
+          const id = params;
+          return (itemsData as Item[]).find((i) => i.id === id) || null;
         }
         if (query.includes("digimons") && query.includes("WHERE id")) {
           const id = params;

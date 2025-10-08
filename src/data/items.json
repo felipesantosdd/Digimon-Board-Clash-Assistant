@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "name": "Poção de Vida",
+    "description": "Restaura 1000 HP de um Digimon",
+    "image": "/images/items/potion.png",
+    "effect": "heal_1000"
+  },
+  {
+    "id": 2,
+    "name": "Super Poção",
+    "description": "Restaura 2000 HP de um Digimon",
+    "image": "/images/items/super-potion.png",
+    "effect": "heal_2000"
+  },
+  {
+    "id": 3,
+    "name": "Poção Completa",
+    "description": "Restaura completamente o HP de um Digimon",
+    "image": "/images/items/full-potion.png",
+    "effect": "heal_full"
+  },
+  {
+    "id": 4,
+    "name": "Reviver",
+    "description": "Revive um Digimon derrotado com metade do HP",
+    "image": "/images/items/revive.png",
+    "effect": "revive_half"
+  },
+  {
+    "id": 5,
+    "name": "Chip de Força",
+    "description": "Aumenta permanentemente o DP em 500",
+    "image": "/images/items/power-chip.png",
+    "effect": "boost_dp_500"
+  },
+  {
+    "id": 6,
+    "name": "Escudo Digital",
+    "description": "Protege de um ataque neste turno",
+    "image": "/images/items/shield.png",
+    "effect": "shield_turn"
+  },
+  {
+    "id": 7,
+    "name": "Cristal de Evolução",
+    "description": "Permite evolução imediata se disponível",
+    "image": "/images/items/evo-crystal.png",
+    "effect": "instant_evolution"
+  },
+  {
+    "id": 8,
+    "name": "Elixir Mágico",
+    "description": "Restaura HP e remove debuffs",
+    "image": "/images/items/elixir.png",
+    "effect": "heal_cleanse"
+  },
+  {
+    "id": 9,
+    "name": "Opção de Vida P",
+    "description": "Restaura 2000 Pontos de Vida",
+    "image": "/images/items/1759941795057_8586614.webp",
+    "effect": "heal_2000"
+  }
+]
