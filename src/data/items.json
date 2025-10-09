@@ -31,7 +31,7 @@
     "id": 5,
     "name": "Chip de Força",
     "description": "Aumenta permanentemente o DP em 500",
-    "image": "/images/items/power-chip.png",
+    "image": "/images/items/1759949520582_image.webp",
     "effect": "boost_dp_500"
   },
   {
