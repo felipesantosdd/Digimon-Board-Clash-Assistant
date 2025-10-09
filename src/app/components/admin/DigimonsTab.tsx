@@ -254,8 +254,10 @@ export default function DigimonsTab() {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {filteredDigimons.map((digimon) => {
+          {/* Se houver busca ou filtro, mostrar em grid simples */}
+          {searchTerm || levelFilter ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {filteredDigimons.map((digimon) => {
               const needsEvolution =
                 digimon.level <= 3 &&
                 (!digimon.evolution || digimon.evolution.length === 0);
@@ -339,8 +341,98 @@ export default function DigimonsTab() {
               );
             })}
           </div>
+        ) : (
+          /* Seções por Nível - quando não há filtros */
+          <div className="space-y-8">
+            {[1, 2, 3, 4, 5, 6, 7].map((level) => {
+              const digimonsInLevel = digimons.filter((d) => d.level === level);
 
-          {filteredDigimons.length === 0 && (
+              if (digimonsInLevel.length === 0) return null;
+
+              return (
+                <div key={level}>
+                  {/* Cabeçalho da Seção */}
+                  <div className="flex items-center gap-4 mb-4">
+                    <h3 className="text-2xl font-bold text-white">
+                      {getLevelName(level)}
+                    </h3>
+                    <div className="flex-1 h-px bg-gradient-to-r from-blue-500 to-transparent"></div>
+                    <span className="text-gray-400 text-sm font-semibold">
+                      {digimonsInLevel.length}{" "}
+                      {digimonsInLevel.length === 1 ? "Digimon" : "Digimons"}
+                    </span>
+                  </div>
+
+                  {/* Grid de Cards */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {digimonsInLevel.map((digimon) => {
+                      const needsEvolution =
+                        digimon.level <= 3 &&
+                        (!digimon.evolution || digimon.evolution.length === 0);
+
+                      return (
+                        <div
+                          key={digimon.id}
+                          className={`bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ${
+                            needsEvolution ? "ring-4 ring-red-500" : ""
+                          }`}
+                        >
+                          <div className="relative h-40 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
+                            <img
+                              src={digimon.image}
+                              alt={digimon.name}
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.src = "/images/digimons/fallback.svg";
+                              }}
+                            />
+                          </div>
+
+                          <div className="p-4">
+                            <h3 className="text-lg font-bold text-white mb-2">
+                              {capitalize(digimon.name)}
+                            </h3>
+
+                            <div className="space-y-2 mb-4">
+                              <div className="flex items-center gap-2">
+                                <span
+                                  className={`${getTypeColor(
+                                    digimon.typeId
+                                  )} text-white text-xs font-semibold px-2 py-1 rounded-full`}
+                                >
+                                  {getTypeName(digimon.typeId)}
+                                </span>
+                              </div>
+
+                              <div className="flex justify-between text-sm text-gray-300">
+                                <span>
+                                  DP:{" "}
+                                  <span className="font-bold text-orange-400">
+                                    {digimon.dp}
+                                  </span>
+                                </span>
+                              </div>
+                            </div>
+
+                            <button
+                              onClick={() => handleConfigureEvolutions(digimon)}
+                              className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                            >
+                              ⚙️ Gerenciar
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+          {filteredDigimons.length === 0 && (searchTerm || levelFilter) && (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">🔍</div>
               <h3 className="text-xl font-semibold text-gray-300 mb-2">
@@ -349,7 +441,7 @@ export default function DigimonsTab() {
             </div>
           )}
 
-          {filteredDigimons.length > 0 && (
+          {filteredDigimons.length > 0 && (searchTerm || levelFilter) && (
             <div className="mt-6 p-4 bg-gray-800 rounded-lg border border-gray-700">
               <h4 className="text-sm font-semibold text-white mb-2">
                 📋 Legenda:

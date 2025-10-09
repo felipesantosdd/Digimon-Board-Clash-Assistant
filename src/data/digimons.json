@@ -560,7 +560,7 @@
   {
     "id": 70,
     "name": "godramon",
-    "image": "/images/digimons/21.webp",
+    "image": "/images/digimons/1760026705003_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -569,7 +569,7 @@
   {
     "id": 71,
     "name": "kimeramon",
-    "image": "/images/digimons/01.webp",
+    "image": "/images/digimons/1760026652034_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[55,54]",
@@ -623,7 +623,7 @@
   {
     "id": 78,
     "name": "dorulumon",
-    "image": "/images/digimons/07.webp",
+    "image": "/images/digimons/1760026017107_image.webp",
     "level": 2,
     "dp": 5000,
     "evolution": "[]",
@@ -668,7 +668,7 @@
   {
     "id": 83,
     "name": "acientgarurumon",
-    "image": "/images/digimons/06.webp",
+    "image": "/images/digimons/1760026269691_image.webp",
     "level": 4,
     "dp": 13000,
     "evolution": "[]",
@@ -767,7 +767,7 @@
   {
     "id": 94,
     "name": "cresgarurumon",
-    "image": "/images/digimons/98.png",
+    "image": "/images/digimons/1760026427478_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -830,7 +830,7 @@
   {
     "id": 101,
     "name": "jijimon",
-    "image": "/images/digimons/47.png",
+    "image": "/images/digimons/1760026581844_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -1073,7 +1073,7 @@
   {
     "id": 128,
     "name": "deathmon",
-    "image": "/images/digimons/73.png",
+    "image": "/images/digimons/1760026479076_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -1136,7 +1136,7 @@
   {
     "id": 135,
     "name": "lampmon",
-    "image": "/images/digimons/24.webp",
+    "image": "/images/digimons/1760026773457_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -1190,7 +1190,7 @@
   {
     "id": 141,
     "name": "clavisangemon",
-    "image": "/images/digimons/48.webp",
+    "image": "/images/digimons/1760026324237_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
