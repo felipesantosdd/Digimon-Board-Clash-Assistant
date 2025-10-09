@@ -98,11 +98,14 @@ export class EffectsManager {
    * Valida se um efeito pode ser aplicado
    */
   static canApplyEffect(effect: Effect, digimon: GameDigimon): boolean {
-    switch (effect.type) {
-      case "heal":
-        // Só pode curar se não estiver com HP cheio
-        return digimon.currentHp < digimon.dp;
+    // Verificar por tipo
+    if (effect.type === "heal") {
+      // Só pode curar se não estiver com HP cheio
+      return digimon.currentHp < digimon.dp;
+    }
 
+    // Verificar por código (efeitos especiais)
+    switch (effect.code) {
       case "revive_half":
         // Só pode reviver se estiver morto
         return digimon.currentHp <= 0;
