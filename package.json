@@ -15,6 +15,7 @@
     "seed:effects": "tsx scripts/seed-effects.ts",
     "convert-images": "tsx scripts/convert-images-to-webp.ts",
     "cleanup-images": "tsx scripts/cleanup-old-images.ts",
+    "cleanup-unused": "tsx scripts/cleanup-unused-images.ts",
     "export": "tsx scripts/export-db-to-json.ts",
     "update-dp": "tsx scripts/update-dp-by-level.ts",
     "lowercase-names": "tsx scripts/lowercase-digimon-names.ts"
