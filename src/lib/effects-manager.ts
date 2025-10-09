@@ -12,7 +12,7 @@ export class EffectsManager {
     digimon: GameDigimon;
     message: string;
   } {
-    let updatedDigimon = { ...digimon };
+    const updatedDigimon = { ...digimon };
     let message = "";
 
     switch (effect.type) {

@@ -336,7 +336,7 @@ export default function BossDropsTab() {
                       Nenhum drop configurado para este boss
                     </p>
                     <p className="text-xs mt-1">
-                      Clique em "Adicionar Drop" para configurar
+                      Clique em &quot;Adicionar Drop&quot; para configurar
                     </p>
                   </div>
                 ) : (
@@ -430,7 +430,7 @@ export default function BossDropsTab() {
           <div className="text-6xl mb-4">🎁</div>
           <p className="text-gray-300 mb-4">Nenhum drop configurado ainda</p>
           <p className="text-sm text-gray-400">
-            Clique em "Adicionar Drop" em qualquer boss para começar
+            Clique em &quot;Adicionar Drop&quot; em qualquer boss para começar
           </p>
         </div>
       )}
