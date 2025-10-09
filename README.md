@@ -54,22 +54,36 @@ Este projeto é um **assistente digital** para o jogo de tabuleiro físico que:
    - Sistema de vantagem/desvantagem de tipos (Data/Vaccine/Virus)
    - Cálculo automático de dano baseado em DP e rolagem
    - Contra-ataque automático
-   - Verificação automática de chance de evolução pós-combate
+   - Sistema de XP oculto (ganha XP ao receber dano)
+   - **Sem volta**: Após selecionar alvo, jogador deve completar o ataque
 
-3. **Sistema de Evolução**
+3. **Sistema de Evolução (XP Oculto)**
 
-   - Evolução baseada em dano recebido (chance aumenta conforme HP baixa)
+   - Sistema de experiência oculto (0-100%)
+   - Ganha 0.5% XP para cada 1% de HP perdido
+   - XP não é visível (surpresa ao atingir 100%)
    - Seleção entre 2 opções de evolução aleatórias
    - Visualização de linha evolutiva completa
-   - Evolução instantânea via itens especiais
+   - XP resetada para 0% após evoluir
 
-4. **Sistema de Inventário**
+4. **Sistema de Inventário (Bag)**
 
-   - Cada Digimon possui uma mochila (bag) de itens
-   - Aplicação de efeitos (cura, buff, dano, revive, etc)
-   - Sistema de stackable items
+   - Cada Digimon possui uma mochila (bag) individual
+   - **Usar Item**: Aplica efeitos de cura (gasta ação)
+   - **Dar Item**: Transfere para aliado (gasta ação)
+   - **Descartar Item**: Remove do inventário (não gasta ação)
+   - Sistema de stackable items (quantidade)
+   - Modal visual mostrando todos os itens
 
-5. **Painel Administrativo**
+5. **Sistema de Defesa**
+
+   - Digimon pode defender aliados de nível igual ou inferior
+   - Defesa dura 1 turno (expira ao passar turno)
+   - Ao atacar defendido, ataque é redirecionado para defensor
+   - Badge visual mostra quem está protegendo quem
+   - Apenas um defensor por Digimon
+
+6. **Painel Administrativo**
 
    - Gerenciamento de Digimons (CRUD completo)
    - Gerenciamento de Itens com efeitos
@@ -77,7 +91,7 @@ Este projeto é um **assistente digital** para o jogo de tabuleiro físico que:
    - Gerenciamento de Efeitos do jogo
    - Upload e crop de imagens
 
-6. **Banco de Dados**
+7. **Banco de Dados**
    - 145+ Digimons cadastrados (níveis 3 a 7)
    - Sistema de tipos e evoluções
    - Itens com efeitos variados
@@ -90,7 +104,8 @@ Este projeto é um **assistente digital** para o jogo de tabuleiro físico que:
 - **Controle de Base**: Ocupação e conquista de bases inimigas
 - **Eventos Globais**: Cartas de evento do Deck do Mundo
 - **Casas Especiais**: Casas de captura e área central
-- **Cura Passiva**: Recuperação automática ao pular turno
+- **Sistema de Exploração**: Implementar loot com D20 (botão já existe)
+- **Esconder**: Mecânica de ocultação (em planejamento)
 
 ---
 
@@ -169,28 +184,37 @@ Resultado:
 - **Dano total** = soma do dano de todos os atacantes
 - **Contra-ataque**: Defensor escolhe **UM** atacante para contra-atacar
 
-### 🧬 Sistema de Evolução
+### 🧬 Sistema de Evolução (Refatorado - XP Oculto)
 
-#### Chance de Evolução Automática:
+#### Sistema de XP de Evolução:
 
-- **Ativação**: Após receber dano em combate
-- **Chance Base**: 20%
-- **Bônus por Dano**: +5% a cada 10% de HP perdido (do HP máximo)
-- **Cálculo**: `Chance = 20% + (% de HP perdido ÷ 10) × 5%`
+- **Mecânica**: Sistema de experiência oculto (0-100%)
+- **Ganho de XP**: 0.5% para cada 1% de HP perdido em batalha
+- **Acumulação**: XP acumula até 100% (trava no máximo)
+- **Surpresa**: Jogador não vê a barra de XP, tornando a evolução uma surpresa!
 
-#### Exemplos de Chance:
+#### Exemplos de Ganho de XP:
 
-- 100% HP → 20% de chance
-- 50% HP → 45% de chance (20 + 25)
-- 10% HP → 65% de chance (20 + 45)
+- Perde 10% HP → Ganha 5% XP
+- Perde 20% HP → Ganha 10% XP
+- Perde 50% HP → Ganha 25% XP
+- Perde 100% HP (morte) → Não ganha XP
 
-#### Processo de Evolução:
+#### Como Funciona:
 
-1. Sistema rola D100 e compara com a chance
-2. Se sucesso, jogador **puxa 2 cartas** do deck do próximo nível
-3. Jogador **escolhe 1** para evoluir
-4. Carta não escolhida volta para o **fundo do deck**
-5. HP é restaurado para o novo DP máximo
+1. **Batalha**: Digimon participa de combate (atacando OU sendo atacado)
+2. **Ganho de XP**: Ganha XP proporcional ao HP perdido (0.5% XP por 1% HP)
+3. **100% XP**: Badge de evolução ✨ aparece no card
+4. **Evolução**: Jogador clica no botão para evoluir
+5. **Escolha**: Sistema oferece 2 opções aleatórias do próximo nível
+6. **Reset**: Após evoluir, XP volta para 0% e HP para 100%
+
+#### Características:
+
+- ✅ **XP Oculto**: Jogador não sabe quanto XP tem (suspense!)
+- ✅ **Cura não reduz XP**: Usar poções não diminui progresso
+- ✅ **Múltiplas batalhas**: Quanto mais luta, mais XP acumula
+- ✅ **Consistente**: Sempre 0.5% XP por 1% HP perdido
 
 #### Limites de Evolução:
 
@@ -201,7 +225,7 @@ Resultado:
 
 - Item "Instant Evolution" permite evoluir imediatamente
 - Segue o mesmo processo de escolha entre 2 cartas
-- Ignora restrições de chance
+- Ignora restrições de XP
 
 ### 💎 Sistema de Itens e Efeitos
 
@@ -223,12 +247,72 @@ Resultado:
 - ⬆️ **Power Boost**: +500 DP permanente
 - 🧬 **Instant Evolution**: Evolui imediatamente
 
-#### Sistema de Inventário:
+#### Sistema de Inventário (Bag):
 
-- Cada Digimon possui uma **mochila (bag)**
-- Itens são stackable (mesmos itens acumulam quantidade)
-- Aplicação de item durante o turno do jogador
-- Efeitos são aplicados imediatamente
+- Cada Digimon possui uma **mochila (bag)** individual
+- Itens são **stackable** (mesmos itens acumulam quantidade)
+- **Acesso**: Clique no Digimon → Botão 🎒 **Bag**
+
+#### Ações com Itens:
+
+1. **✓ Usar Item:**
+
+   - Aplica o efeito no próprio Digimon
+   - Remove 1 unidade do item
+   - **Gasta a ação do turno**
+   - Efeitos disponíveis: cura de HP
+
+2. **🎁 Dar Item:**
+
+   - Transfere 1 unidade para outro Digimon aliado vivo
+   - Se o aliado já tem o item, incrementa a quantidade
+   - **Gasta a ação do turno**
+
+3. **🗑️ Descartar Item:**
+   - Remove o item completamente do inventário
+   - **NÃO gasta ação**
+   - Útil para liberar espaço
+
+#### Regras de Itens:
+
+- ✅ Só pode usar/dar itens no **seu turno**
+- ✅ Só pode usar/dar se o Digimon **ainda não agiu**
+- ✅ Usar poção **não reduz XP de evolução**
+- ✅ Itens podem ser obtidos via exploração ou drops de bosses
+
+### 🛡️ Sistema de Defesa
+
+#### Mecânica de Defender:
+
+- **Ação**: Digimon escolhe um aliado para proteger
+- **Restrição**: Só pode defender aliados de **nível igual ou inferior**
+- **Duração**: Defesa dura **1 turno** (resetada ao passar turno)
+- **Custo**: **Gasta a ação do turno**
+
+#### Como Funciona:
+
+1. **Defender**: Jogador seleciona um Digimon e clica em 🛡️ **Defender**
+2. **Escolha**: Seleciona um aliado vivo de nível igual ou inferior
+3. **Proteção**: Badge aparece no aliado: "🛡️ [Nome do Defensor]"
+4. **Interceptação**: Se o aliado for atacado, o defensor intercepta
+5. **Batalha**: Ataque é totalmente redirecionado para o defensor
+6. **Contra-ataque**: Defensor revida normalmente
+
+#### Regras de Defesa:
+
+- ✅ Apenas **um defensor** por Digimon
+- ✅ Não pode defender quem **já está sendo defendido**
+- ✅ Defensor recebe **todo o dano** do ataque
+- ✅ Cálculo de tipo usa **defensor vs atacante**
+- ✅ Defesa é removida após **interceptar um ataque**
+- ✅ Defesa é removida se o **defendido evoluir**
+- ✅ Defesa expira ao **passar o turno** do defensor
+
+#### Estratégia:
+
+- Use para proteger Digimons fracos ou de alto valor
+- Digimons fortes podem defender múltiplos aliados em turnos consecutivos
+- Cuidado: defender gasta sua ação, impedindo ataque/exploração
 
 ### 👹 Sistema de Bosses
 
@@ -247,16 +331,36 @@ Resultado:
 
 ### ⏱️ Fluxo de Turno (Implementado)
 
-1. **Início do Turno**: Sistema destaca jogador atual
-2. **Seleção de Digimon**: Jogador escolhe qual Digimon vai agir
-3. **Ação do Digimon**:
-   - **Atacar**: Escolhe alvo e realiza combate
-   - **Usar Item**: Aplica item da bag
-   - **Evoluir**: Se tiver direito a evolução
-   - **Passar**: Aguarda próximo turno
-4. **Múltiplas Ações**: Jogador pode agir com todos seus Digimons
+1. **Início do Turno**: Sistema destaca jogador atual e reseta ações
+2. **Seleção de Digimon**: Jogador clica em um Digimon para ver opções
+3. **Ações Disponíveis** (cada Digimon age 1x por turno):
+
+   **Ações que GASTAM o turno:**
+
+   - ⚔️ **Atacar**: Escolhe alvo inimigo e realiza combate (sem volta!)
+   - 🛡️ **Defender**: Protege um aliado de nível igual ou inferior
+   - 💰 **Explorar**: Rola D20 para ganhar itens/loot (a implementar)
+   - 😴 **Descansar**: Recupera 20% do HP máximo
+   - ✓ **Usar Item**: Aplica efeito de item do inventário
+   - 🎁 **Dar Item**: Transfere item para outro Digimon aliado
+
+   **Ações que NÃO gastam o turno:**
+
+   - ✨ **Evoluir**: Se tiver XP 100% (badge dourado aparece)
+   - 🎒 **Bag**: Abrir inventário (pode descartar itens)
+   - 🗑️ **Descartar Item**: Remove item do inventário
+
+4. **Múltiplas Ações**: Jogador age com cada Digimon (1 ação cada)
 5. **Fim do Turno**: Clica em "Finalizar Turno"
-6. **Próximo Jogador**: Sistema passa para o próximo
+6. **Reset**: Defesas expiram, ações resetam
+7. **Próximo Jogador**: Sistema passa automaticamente
+
+#### Regras de Ação:
+
+- ✅ Cada Digimon age **1 vez por turno**
+- ✅ Badge ⏸️ indica que Digimon já agiu
+- ✅ Não pode usar/dar itens ou defender após agir
+- ✅ **Atacar não tem volta** - pense bem antes de selecionar o alvo!
 
 ### 🗺️ Tabuleiro (Planejado)
 
@@ -420,7 +524,8 @@ Abra [http://localhost:3000](http://localhost:3000) no navegador.
 ### Utilitários
 
 - `npm run convert-images` - Converte imagens para WebP
-- `npm run cleanup-images` - Remove imagens antigas
+- `npm run cleanup-images` - Remove imagens antigas (PNG/JPG)
+- `npm run cleanup-unused` - Remove imagens não referenciadas no banco
 - `npm run update-dp` - Atualiza DP por nível
 - `npm run lowercase-names` - Normaliza nomes dos Digimons
 
