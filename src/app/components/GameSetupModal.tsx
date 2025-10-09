@@ -117,7 +117,9 @@ export default function GameSetupModal({
               canEvolve: false,
               originalId: digimon.id,
               bag: [], // Inicializar inventário vazio
-              evolutionProgress: 0, // Inicializar XP de evolução
+              evolutionProgress: 0, // Iniciar XP em 0
+              provokedBy: null,
+              lastProvokeTurn: null,
             });
           }
         }
@@ -137,7 +139,9 @@ export default function GameSetupModal({
                 canEvolve: false,
                 originalId: digimon.id,
                 bag: [], // Inicializar inventário vazio
-                evolutionProgress: 0, // Inicializar XP de evolução
+                evolutionProgress: 0, // Iniciar XP em 0
+                provokedBy: null,
+                lastProvokeTurn: null,
               });
             }
           }

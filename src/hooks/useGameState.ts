@@ -50,6 +50,8 @@ export function useGameState() {
               bag: digimon.bag ?? [], // Adicionar bag vazia se não existir
               defending: digimon.defending ?? null, // Adicionar defending se não existir
               evolutionProgress: digimon.evolutionProgress ?? 0, // Adicionar XP de evolução se não existir
+              provokedBy: digimon.provokedBy ?? null, // Adicionar provocação se não existir
+              lastProvokeTurn: digimon.lastProvokeTurn ?? null, // Adicionar cooldown de provocação se não existir
             })),
           })),
           currentTurnPlayerIndex: parsed.currentTurnPlayerIndex ?? 0, // Padrão: primeiro jogador

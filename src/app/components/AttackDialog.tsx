@@ -77,6 +77,28 @@ export default function AttackDialog({
       return;
     }
 
+    // 💢 VERIFICAR SE ATACANTE ESTÁ PROVOCADO
+    if (attacker && attacker.digimon.provokedBy) {
+      const provoker = players
+        .flatMap((p) => p.digimons)
+        .find((d) => d.id === attacker.digimon.provokedBy);
+
+      if (provoker && provoker.currentHp > 0) {
+        // Só pode atacar o provocador
+        if (digimon.id !== provoker.id) {
+          enqueueSnackbar(
+            `💢 ${capitalize(
+              attacker.digimon.name
+            )} está provocado por ${capitalize(
+              provoker.name
+            )}! Só pode atacar ele!`,
+            { variant: "warning" }
+          );
+          return;
+        }
+      }
+    }
+
     // 🛡️ VERIFICAR SE O ALVO TEM DEFENSOR
     const defender = players
       .flatMap((p) => p.digimons)

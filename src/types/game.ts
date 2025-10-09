@@ -15,6 +15,8 @@ export interface GameDigimon {
   bag?: GameItem[]; // Inventário de itens do Digimon
   defending?: number | null; // ID do Digimon que está sendo defendido
   evolutionProgress?: number; // Progresso de evolução em % (0-100)
+  provokedBy?: number | null; // ID do Digimon que provocou este
+  lastProvokeTurn?: number | null; // Último turno global que este Digimon provocou
 }
 
 export interface GamePlayer {

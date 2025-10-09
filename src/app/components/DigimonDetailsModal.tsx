@@ -14,6 +14,7 @@ interface DigimonDetailsModalProps {
   onRest: (digimon: GameDigimon) => void;
   onAttack: (digimon: GameDigimon) => void;
   onDefend?: (digimon: GameDigimon, targetDigimonId: number) => void;
+  onProvoke?: (digimon: GameDigimon, targetDigimonId: number) => void;
   isCurrentPlayerTurn: boolean;
   onUseItem?: (digimon: GameDigimon, itemId: number) => void;
   onDiscardItem?: (digimon: GameDigimon, itemId: number) => void;
@@ -23,6 +24,8 @@ interface DigimonDetailsModalProps {
     itemId: number
   ) => void;
   playerDigimons?: GameDigimon[]; // Lista de digimons do jogador para transferência
+  allPlayers?: GameDigimon[][]; // Todos os jogadores com seus Digimons (para provocar)
+  currentTurnCount?: number; // Turno global atual
 }
 
 export default function DigimonDetailsModal({
@@ -35,16 +38,20 @@ export default function DigimonDetailsModal({
   onRest,
   onAttack,
   onDefend,
+  onProvoke,
   isCurrentPlayerTurn,
   onUseItem,
   onDiscardItem,
   onGiveItem,
   playerDigimons = [],
+  allPlayers = [],
+  currentTurnCount = 0,
 }: DigimonDetailsModalProps) {
   const [showBag, setShowBag] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
   const [showGiveDialog, setShowGiveDialog] = useState(false);
   const [showDefendDialog, setShowDefendDialog] = useState(false);
+  const [showProvokeDialog, setShowProvokeDialog] = useState(false);
 
   if (!isOpen || !digimon) return null;
 
@@ -84,6 +91,27 @@ export default function DigimonDetailsModal({
       setShowDefendDialog(false);
       onClose();
     }
+  };
+
+  const handleProvoke = (targetDigimonId: number) => {
+    if (onProvoke && digimon) {
+      onProvoke(digimon, targetDigimonId);
+      setShowProvokeDialog(false);
+      onClose();
+    }
+  };
+
+  // Verificar se pode provocar (cooldown de 3 turnos)
+  const canProvoke = () => {
+    if (!digimon || digimon.level < 2) return false;
+    if (!digimon.lastProvokeTurn) return true;
+    return currentTurnCount - digimon.lastProvokeTurn >= 3;
+  };
+
+  const getProvokeCooldown = () => {
+    if (!digimon || !digimon.lastProvokeTurn) return 0;
+    const turnsLeft = 3 - (currentTurnCount - digimon.lastProvokeTurn);
+    return Math.max(0, turnsLeft);
   };
 
   return (
@@ -177,6 +205,34 @@ export default function DigimonDetailsModal({
             </div>
           </div>
 
+          {/* Barra de Evolução (XP) - COMENTADO (Mecânica Oculta) */}
+          {/* {!isDead && (
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-gray-300 font-semibold text-sm">
+                  ⭐ Progresso de Evolução (TESTE)
+                </span>
+                <span className="text-blue-400 font-bold text-lg">
+                  {(digimon.evolutionProgress || 0).toFixed(1)}%
+                </span>
+              </div>
+              <div className="w-full bg-gray-700 rounded-full h-6 overflow-hidden border-2 border-gray-600 shadow-inner">
+                <div
+                  className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-500 ease-out flex items-center justify-center"
+                  style={{
+                    width: `${digimon.evolutionProgress || 0}%`,
+                  }}
+                >
+                  {(digimon.evolutionProgress || 0) >= 30 && (
+                    <span className="text-sm font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+                      {(digimon.evolutionProgress || 0).toFixed(1)}%
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          )} */}
+
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-3 pt-2">
             <div className="bg-gray-700 rounded-lg p-3 border border-gray-600">
@@ -268,7 +324,7 @@ export default function DigimonDetailsModal({
                     </button>
                   </div>
 
-                  {/* Linha 2 - Botões (Bag e Defender ativos) */}
+                  {/* Linha 2 - Botões (Bag, Defender e Provocar) */}
                   <div className="grid grid-cols-3 gap-2">
                     <button
                       onClick={() => setShowBag(true)}
@@ -285,11 +341,25 @@ export default function DigimonDetailsModal({
                       <span className="text-xs">Defender</span>
                     </button>
                     <button
-                      disabled
-                      className="px-4 py-2 bg-gray-600 text-gray-400 font-bold rounded-lg cursor-not-allowed opacity-50 flex flex-col items-center justify-center gap-1"
+                      onClick={() => setShowProvokeDialog(true)}
+                      disabled={!canProvoke()}
+                      className={`px-4 py-2 font-bold rounded-lg transition-all transform shadow-lg flex flex-col items-center justify-center gap-1 ${
+                        canProvoke()
+                          ? "bg-orange-600 text-white hover:bg-orange-700 hover:scale-105"
+                          : "bg-gray-600 text-gray-400 cursor-not-allowed opacity-50"
+                      }`}
+                      title={
+                        !canProvoke() && digimon && digimon.level < 2
+                          ? "Apenas Level 2+ pode provocar"
+                          : !canProvoke()
+                          ? `Cooldown: ${getProvokeCooldown()} turnos restantes`
+                          : "Provocar inimigo"
+                      }
                     >
-                      <span className="text-2xl">🌫️</span>
-                      <span className="text-xs">Esconder</span>
+                      <span className="text-2xl">💢</span>
+                      <span className="text-xs">
+                        {canProvoke() ? "Provocar" : `${getProvokeCooldown()}T`}
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -807,6 +877,182 @@ export default function DigimonDetailsModal({
             <div className="bg-gray-900 px-6 py-4 rounded-b-lg border-t border-gray-700">
               <button
                 onClick={() => setShowDefendDialog(false)}
+                className="w-full px-4 py-2 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-all"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Selecionar Digimon para Provocar */}
+      {showProvokeDialog && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[70]"
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowProvokeDialog(false);
+          }}
+        >
+          <div
+            className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl border-2 border-orange-500 m-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-6 py-4 rounded-t-lg">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-bold flex items-center gap-2">
+                  <span className="text-2xl">💢</span>
+                  Provocar Inimigo
+                </h3>
+                <button
+                  onClick={() => setShowProvokeDialog(false)}
+                  className="text-white hover:text-gray-200 text-3xl font-bold leading-none"
+                >
+                  ×
+                </button>
+              </div>
+              <p className="text-sm text-orange-100 mt-1">
+                Selecione um inimigo para provocar. Ele só poderá atacar você no
+                próximo turno dele!
+              </p>
+            </div>
+
+            {/* Lista de Inimigos */}
+            <div className="p-4 max-h-96 overflow-y-auto">
+              <div className="space-y-3">
+                {allPlayers.map((enemyDigimons, playerIndex) => {
+                  // Filtrar apenas inimigos vivos
+                  const validEnemies = enemyDigimons.filter(
+                    (d) => d.currentHp > 0
+                  );
+
+                  if (validEnemies.length === 0) return null;
+
+                  return (
+                    <div key={playerIndex}>
+                      <div className="space-y-2">
+                        {validEnemies.map((targetDigimon) => {
+                          const hpPercentage =
+                            (targetDigimon.currentHp / targetDigimon.dp) * 100;
+                          const hpColor =
+                            hpPercentage > 75
+                              ? "text-green-400"
+                              : hpPercentage > 50
+                              ? "text-yellow-400"
+                              : hpPercentage > 25
+                              ? "text-orange-400"
+                              : "text-red-400";
+
+                          return (
+                            <button
+                              key={targetDigimon.id}
+                              onClick={() => handleProvoke(targetDigimon.id)}
+                              className="w-full bg-gray-700 hover:bg-gray-600 border border-gray-600 hover:border-orange-500 rounded-lg p-3 transition-all text-left"
+                            >
+                              <div className="flex items-center gap-3">
+                                {/* Imagem */}
+                                <div className="w-16 h-16 bg-gray-800 rounded-lg overflow-hidden border-2 border-gray-600 flex-shrink-0 relative">
+                                  {targetDigimon.image ? (
+                                    <img
+                                      src={targetDigimon.image}
+                                      alt={targetDigimon.name}
+                                      className="w-full h-full object-contain"
+                                    />
+                                  ) : (
+                                    <div className="w-full h-full flex items-center justify-center text-2xl">
+                                      ❓
+                                    </div>
+                                  )}
+                                  {/* Badge de Nível */}
+                                  <div className="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold px-1 py-0.5 rounded-br">
+                                    Lv{targetDigimon.level}
+                                  </div>
+                                </div>
+
+                                {/* Info */}
+                                <div className="flex-1 min-w-0">
+                                  <h4 className="text-white font-bold text-sm truncate mb-1">
+                                    {capitalize(targetDigimon.name)}
+                                  </h4>
+
+                                  {/* Tipo */}
+                                  <div className="flex items-center gap-2 mb-2">
+                                    <span className="text-[10px] bg-blue-600 text-white font-bold px-1.5 py-0.5 rounded">
+                                      {
+                                        {
+                                          1: "Data",
+                                          2: "Vaccine",
+                                          3: "Virus",
+                                          4: "Free",
+                                          5: "Variable",
+                                          6: "Unknown",
+                                        }[targetDigimon.typeId]
+                                      }
+                                    </span>
+                                    <span className="text-[10px] bg-purple-600 text-white font-bold px-1.5 py-0.5 rounded">
+                                      {targetDigimon.dp.toLocaleString()} DP
+                                    </span>
+                                  </div>
+
+                                  {/* Barra de HP */}
+                                  <div className="space-y-1">
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-[10px] text-gray-400">
+                                        HP
+                                      </span>
+                                      <span
+                                        className={`text-xs font-bold ${hpColor}`}
+                                      >
+                                        {targetDigimon.currentHp.toLocaleString()}{" "}
+                                        / {targetDigimon.dp.toLocaleString()}
+                                      </span>
+                                    </div>
+                                    <div className="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
+                                      <div
+                                        className={`h-full transition-all ${
+                                          hpPercentage > 75
+                                            ? "bg-green-500"
+                                            : hpPercentage > 50
+                                            ? "bg-yellow-500"
+                                            : hpPercentage > 25
+                                            ? "bg-orange-500"
+                                            : "bg-red-500"
+                                        }`}
+                                        style={{ width: `${hpPercentage}%` }}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Ícone */}
+                                <div className="text-2xl flex-shrink-0">💢</div>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {allPlayers.every((enemies) =>
+                  enemies.every((d) => d.currentHp <= 0)
+                ) && (
+                  <div className="text-center py-8">
+                    <p className="text-gray-400 text-sm">
+                      Nenhum inimigo vivo disponível para provocar
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="bg-gray-900 px-6 py-4 rounded-b-lg border-t border-gray-700">
+              <button
+                onClick={() => setShowProvokeDialog(false)}
                 className="w-full px-4 py-2 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-all"
               >
                 Cancelar
