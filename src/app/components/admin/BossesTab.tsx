@@ -144,15 +144,19 @@ export default function BossesTab() {
     reader.readAsDataURL(file);
   };
 
-  const handleCroppedImage = (croppedFile: File) => {
-    setImageFile(croppedFile);
+  const handleCroppedImage = (croppedImage: Blob) => {
+    // Converter Blob para File
+    const file = new File([croppedImage], "boss-image.webp", {
+      type: "image/webp",
+    });
+    setImageFile(file);
 
     // Criar preview da imagem cortada
     const reader = new FileReader();
     reader.onload = () => {
       setImagePreview(reader.result as string);
     };
-    reader.readAsDataURL(croppedFile);
+    reader.readAsDataURL(file);
 
     setShowCropper(false);
   };
