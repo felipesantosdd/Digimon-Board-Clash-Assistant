@@ -154,7 +154,7 @@ export function createBossDrop(drop: Omit<BossDrop, "id">): BossDrop {
 
   return db
     .prepare("SELECT * FROM boss_drops WHERE id = ?")
-    .get(result.lastInsertRowid) as BossDrop;
+    .get(Number(result.lastInsertRowid)) as BossDrop;
 }
 
 export function updateBossDrop(
