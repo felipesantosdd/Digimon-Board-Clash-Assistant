@@ -36,7 +36,7 @@ export function useGameState() {
           }))
         );
 
-        // Migração: adicionar currentHp, turnCount e currentTurnPlayerIndex se não existirem
+        // Migração: adicionar campos novos se não existirem
         const migratedState: GameState = {
           ...parsed,
           players: parsed.players.map((player) => ({
@@ -48,6 +48,8 @@ export function useGameState() {
               originalId: digimon.originalId ?? digimon.id, // Adicionar originalId se não existir
               hasActedThisTurn: digimon.hasActedThisTurn ?? false, // Adicionar hasActedThisTurn se não existir
               bag: digimon.bag ?? [], // Adicionar bag vazia se não existir
+              defending: digimon.defending ?? null, // Adicionar defending se não existir
+              evolutionProgress: digimon.evolutionProgress ?? 0, // Adicionar XP de evolução se não existir
             })),
           })),
           currentTurnPlayerIndex: parsed.currentTurnPlayerIndex ?? 0, // Padrão: primeiro jogador

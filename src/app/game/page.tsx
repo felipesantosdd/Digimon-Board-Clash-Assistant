@@ -159,34 +159,37 @@ export default function GamePage() {
 
   const applyDamageToDigimon = (digimon: GameDigimon, damageAmount: number) => {
     if (!gameState)
-      return { newHp: digimon.currentHp, evolutionUnlocked: false };
+      return {
+        newHp: digimon.currentHp,
+        evolutionUnlocked: false,
+        xpGained: 0,
+      };
 
     let evolutionUnlocked = false;
 
     // Calcular nova HP
     const newHp = Math.max(0, digimon.currentHp - damageAmount);
 
-    // Calcular % de vida perdida TOTAL (não apenas deste dano)
-    const hpLostPercentage = ((digimon.dp - newHp) / digimon.dp) * 100;
+    // Calcular % de HP perdido NESTA BATALHA
+    const hpLostPercentage = (damageAmount / digimon.dp) * 100;
 
-    // Chance base de 20% + 5% a cada 10% de vida perdida
-    const evolutionChance = 20 + Math.floor(hpLostPercentage / 10) * 5;
+    // Ganho de XP: 0.5% para cada 1% de HP perdido
+    const xpGained = hpLostPercentage * 0.5;
 
-    // Rolar D100 para verificar evolução (apenas se ainda não pode evoluir)
-    if (!digimon.canEvolve && newHp > 0) {
-      const roll = Math.floor(Math.random() * 100) + 1;
-      if (roll <= evolutionChance) {
-        evolutionUnlocked = true;
-        enqueueSnackbar(
-          `🌟 EVOLUÇÃO LIBERADA! ${capitalize(
-            digimon.name
-          )} pode evoluir! (Rolou ${roll}/${evolutionChance})`,
-          { variant: "success" }
-        );
-      }
+    // Calcular novo progresso de evolução
+    const currentProgress = digimon.evolutionProgress || 0;
+    const newProgress = Math.min(100, currentProgress + xpGained);
+
+    // Verificar se atingiu 100% e pode evoluir (apenas se ainda não pode evoluir)
+    if (!digimon.canEvolve && newProgress >= 100 && newHp > 0) {
+      evolutionUnlocked = true;
+      enqueueSnackbar(
+        `🌟 EVOLUÇÃO LIBERADA! ${capitalize(digimon.name)} pode evoluir!`,
+        { variant: "success" }
+      );
     }
 
-    return { newHp, evolutionUnlocked };
+    return { newHp, evolutionUnlocked, xpGained, newProgress };
   };
 
   const handleAttackConfirm = (
@@ -233,6 +236,7 @@ export default function GamePage() {
             return {
               ...d,
               currentHp: defenderResult.newHp,
+              evolutionProgress: defenderResult.newProgress,
               canEvolve: defenderResult.evolutionUnlocked
                 ? true
                 : d.canEvolve || false,
@@ -248,6 +252,7 @@ export default function GamePage() {
             return {
               ...d,
               currentHp: attackerResult.newHp,
+              evolutionProgress: attackerResult.newProgress,
               canEvolve: attackerResult.evolutionUnlocked
                 ? true
                 : d.canEvolve || false,
@@ -332,6 +337,7 @@ export default function GamePage() {
                 typeId: evolution.typeId,
                 currentHp: evolution.dp, // HP resetado para 100%
                 canEvolve: false, // Reset da flag de evolução
+                evolutionProgress: 0, // Resetar XP de evolução
                 originalId: d.originalId || digimon.id, // Guardar ID original
               };
             }

@@ -14,6 +14,7 @@ export interface GameDigimon {
   hasActedThisTurn?: boolean; // Se já realizou uma ação neste turno
   bag?: GameItem[]; // Inventário de itens do Digimon
   defending?: number | null; // ID do Digimon que está sendo defendido
+  evolutionProgress?: number; // Progresso de evolução em % (0-100)
 }
 
 export interface GamePlayer {
