@@ -546,7 +546,7 @@ export default function BossesTab() {
           image={imageToCrop}
           onCropComplete={handleCroppedImage}
           onCancel={() => setShowCropper(false)}
-          aspect={1}
+          aspectRatio={1}
           outputSize={512}
         />
       )}
