@@ -190,15 +190,15 @@ export default function DigimonsPage() {
                         className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
                       >
                         {/* Imagem do Digimon */}
-                        <div className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
-                          <Image
-                            src={getImageSrc(digimon)}
-                            alt={digimon.name}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            onError={() => handleImageError(digimon.id)}
-                          />
+                            <div className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
+                              <Image
+                                src={getImageSrc(digimon)}
+                                alt={digimon.name}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                onError={() => handleImageError(digimon.id)}
+                              />
                           {/* Indicador de fallback */}
                           {imageErrors.has(digimon.id) && (
                             <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-yellow-50 to-orange-100">

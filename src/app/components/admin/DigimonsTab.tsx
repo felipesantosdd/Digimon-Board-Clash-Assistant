@@ -269,17 +269,17 @@ export default function DigimonsTab() {
                       needsEvolution ? "ring-4 ring-red-500" : ""
                     }`}
                   >
-                    <div className="relative h-40 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
-                      <img
-                        src={digimon.image}
-                        alt={digimon.name}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src = "/images/digimons/fallback.svg";
-                        }}
-                      />
-                    </div>
+                     <div className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
+                       <img
+                         src={digimon.image}
+                         alt={digimon.name}
+                         className="w-full h-full object-cover"
+                         onError={(e) => {
+                           const target = e.target as HTMLImageElement;
+                           target.src = "/images/digimons/fallback.svg";
+                         }}
+                       />
+                     </div>
 
                     <div className="p-4">
                       <h3 className="text-lg font-bold text-white mb-2">
@@ -382,17 +382,17 @@ export default function DigimonsTab() {
                               needsEvolution ? "ring-4 ring-red-500" : ""
                             }`}
                           >
-                            <div className="relative h-40 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
-                              <img
-                                src={digimon.image}
-                                alt={digimon.name}
-                                className="w-full h-full object-cover"
-                                onError={(e) => {
-                                  const target = e.target as HTMLImageElement;
-                                  target.src = "/images/digimons/fallback.svg";
-                                }}
-                              />
-                            </div>
+                     <div className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
+                       <img
+                         src={digimon.image}
+                         alt={digimon.name}
+                         className="w-full h-full object-cover"
+                         onError={(e) => {
+                           const target = e.target as HTMLImageElement;
+                           target.src = "/images/digimons/fallback.svg";
+                         }}
+                       />
+                     </div>
 
                             <div className="p-4">
                               <h3 className="text-lg font-bold text-white mb-2">

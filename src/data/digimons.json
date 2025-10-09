@@ -326,7 +326,7 @@
   {
     "id": 37,
     "name": "metalgreymon virus",
-    "image": "/images/digimons/37.webp",
+    "image": "/images/digimons/1760027238680_image.webp",
     "level": 3,
     "dp": 8000,
     "evolution": "[44,46,42]",
@@ -385,15 +385,6 @@
     "dp": 12000,
     "evolution": "[73]",
     "typeId": 3
-  },
-  {
-    "id": 45,
-    "name": "omegamon alter s",
-    "image": "/images/digimons/45.png",
-    "level": 4,
-    "dp": 12000,
-    "evolution": "[]",
-    "typeId": 4
   },
   {
     "id": 46,
@@ -587,7 +578,7 @@
   {
     "id": 73,
     "name": "omegamon alter s",
-    "image": "/images/digimons/97.png",
+    "image": "/images/digimons/1760027808099_image.webp",
     "level": 5,
     "dp": 18000,
     "evolution": "[68]",
@@ -677,7 +668,7 @@
   {
     "id": 84,
     "name": "rizegreymon",
-    "image": "/images/digimons/52.webp",
+    "image": "/images/digimons/1760028067375_image.webp",
     "level": 3,
     "dp": 8000,
     "evolution": "[]",
@@ -740,7 +731,7 @@
   {
     "id": 91,
     "name": "magnagarurumon",
-    "image": "/images/digimons/16.webp",
+    "image": "/images/digimons/1760027373618_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[62]",
@@ -749,7 +740,7 @@
   {
     "id": 92,
     "name": "metalgarurumon virus",
-    "image": "/images/digimons/57.png",
+    "image": "/images/digimons/1760027580822_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -758,7 +749,7 @@
   {
     "id": 93,
     "name": "metalgarurumon",
-    "image": "/images/digimons/66.png",
+    "image": "/images/digimons/1760027551399_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -776,7 +767,7 @@
   {
     "id": 95,
     "name": "merukimon",
-    "image": "/images/digimons/03.webp",
+    "image": "/images/digimons/1760027506436_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -911,7 +902,7 @@
   {
     "id": 110,
     "name": "magnadramon",
-    "image": "/images/digimons/85.webp",
+    "image": "/images/digimons/1760027338529_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -920,7 +911,7 @@
   {
     "id": 111,
     "name": "ophanimon",
-    "image": "/images/digimons/67.png",
+    "image": "/images/digimons/1760028338454_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -938,7 +929,7 @@
   {
     "id": 113,
     "name": "mastemon",
-    "image": "/images/digimons/58.png",
+    "image": "/images/digimons/1760027452634_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[114]",
@@ -1064,7 +1055,7 @@
   {
     "id": 127,
     "name": "metalseadramon",
-    "image": "/images/digimons/40.webp",
+    "image": "/images/digimons/1760027651010_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -1091,7 +1082,7 @@
   {
     "id": 130,
     "name": "neptunemon",
-    "image": "/images/digimons/32.webp",
+    "image": "/images/digimons/1760027691844_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -1325,7 +1316,7 @@
   {
     "id": 156,
     "name": "kuwagamon",
-    "image": "/images/digimons/29.webp",
+    "image": "/images/digimons/1760027911025_image.webp",
     "level": 2,
     "dp": 5000,
     "evolution": "[]",
