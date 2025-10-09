@@ -547,7 +547,7 @@ export default function BossesTab() {
           onCropComplete={handleCroppedImage}
           onCancel={() => setShowCropper(false)}
           aspect={1}
-          outputSize={{ width: 512, height: 512 }}
+          outputSize={512}
         />
       )}
     </div>
