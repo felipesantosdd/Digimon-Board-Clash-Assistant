@@ -80,9 +80,35 @@ export default function GamePage() {
   const handleNextTurn = () => {
     if (!gameState) return;
 
-    const nextPlayerIndex =
+    console.log("⏭️ [TURN] Passando turno...");
+
+    // Encontrar próximo jogador com Digimons vivos
+    let nextPlayerIndex =
       (gameState.currentTurnPlayerIndex + 1) % gameState.players.length;
-    const isNewRound = nextPlayerIndex === 0;
+    let attempts = 0;
+    const maxAttempts = gameState.players.length;
+
+    // Loop para encontrar o próximo jogador com Digimons vivos
+    while (attempts < maxAttempts) {
+      const nextPlayer = gameState.players[nextPlayerIndex];
+      const hasAliveDigimons = nextPlayer.digimons.some((d) => d.currentHp > 0);
+
+      if (hasAliveDigimons) {
+        // Encontrou um jogador com Digimons vivos!
+        console.log(
+          "✅ [TURN] Próximo jogador com Digimons vivos:",
+          nextPlayer.name
+        );
+        break;
+      }
+
+      // Jogador derrotado, pular para o próximo
+      console.log("⏭️ [TURN] Pulando jogador derrotado:", nextPlayer.name);
+      nextPlayerIndex = (nextPlayerIndex + 1) % gameState.players.length;
+      attempts++;
+    }
+
+    const isNewRound = nextPlayerIndex <= gameState.currentTurnPlayerIndex;
 
     // Resetar hasActedThisTurn do próximo jogador
     const updatedState = {
