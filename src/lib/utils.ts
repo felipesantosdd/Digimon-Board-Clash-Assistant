@@ -69,6 +69,28 @@ export const DIGIMON_TYPE_NAMES = {
 } as const;
 
 /**
+ * Cores dos tipos de Digimon (classes Tailwind)
+ */
+export const DIGIMON_TYPE_COLORS = {
+  [DIGIMON_TYPES.DATA]: "bg-blue-600 text-white",
+  [DIGIMON_TYPES.VACCINE]: "bg-green-600 text-white",
+  [DIGIMON_TYPES.VIRUS]: "bg-purple-600 text-white",
+  [DIGIMON_TYPES.FREE]: "bg-gray-100 text-gray-900",
+  [DIGIMON_TYPES.VARIABLE]: "bg-gray-600 text-white",
+  [DIGIMON_TYPES.UNKNOWN]: "bg-black text-white",
+} as const;
+
+/**
+ * Retorna a classe de cor para um tipo de Digimon
+ */
+export function getTypeColor(typeId: number): string {
+  return (
+    DIGIMON_TYPE_COLORS[typeId as keyof typeof DIGIMON_TYPE_COLORS] ||
+    "bg-gray-600"
+  );
+}
+
+/**
  * Calcula a vantagem de tipo entre dois Digimons
  * @param attackerTypeId - ID do tipo do Digimon atacante
  * @param defenderTypeId - ID do tipo do Digimon defensor

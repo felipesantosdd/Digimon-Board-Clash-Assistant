@@ -4,7 +4,12 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { useGameState } from "@/hooks/useGameState";
-import { capitalize, getLevelName, DIGIMON_TYPE_NAMES } from "@/lib/utils";
+import {
+  capitalize,
+  getLevelName,
+  DIGIMON_TYPE_NAMES,
+  getTypeColor,
+} from "@/lib/utils";
 import { getTamerImagePath } from "@/lib/image-utils";
 import DigimonDetailsModal from "@/app/components/DigimonDetailsModal";
 import AttackDialog from "@/app/components/AttackDialog";
@@ -137,10 +142,7 @@ export default function GamePage() {
     };
 
     saveGameState(updatedState);
-    enqueueSnackbar(
-      `Turno de ${capitalize(gameState.players[nextPlayerIndex].name)}!`,
-      { variant: "info" }
-    );
+    // Toast removido - menos invasivo
   };
 
   const handleDigimonClick = (
@@ -307,22 +309,7 @@ export default function GamePage() {
     console.log("💾 [ATTACK] Chamando saveGameState...");
     saveGameState(updatedState);
 
-    // Mensagens de feedback
-    enqueueSnackbar(
-      `⚔️ ${capitalize(
-        attackerDigimon.digimon.name
-      )} causou ${attackerDamage.toLocaleString()} de dano em ${capitalize(
-        targetDigimon.name
-      )}!`,
-      { variant: "warning" }
-    );
-
-    enqueueSnackbar(
-      `🛡️ ${capitalize(
-        targetDigimon.name
-      )} contra-atacou causando ${defenderDamage.toLocaleString()} de dano!`,
-      { variant: "info" }
-    );
+    // Toasts removidos - menos invasivo
 
     // Não fechar o modal automaticamente - deixar usuário ver os resultados
   };
@@ -411,12 +398,7 @@ export default function GamePage() {
       const scoreMessage =
         evolution.level !== 3 ? ` +${evolution.dp.toLocaleString()} pts!` : "";
 
-      enqueueSnackbar(
-        `🎉 ${capitalize(digimon.name)} evoluiu para ${capitalize(
-          evolution.name
-        )}! (${evolutionType})${scoreMessage}`,
-        { variant: "success" }
-      );
+      // Toast removido - animação já mostra a evolução
 
       // Resetar estado de evolução
       setEvolvingDigimon(null);
@@ -527,13 +509,7 @@ export default function GamePage() {
 
     console.log("💾 [LOOT] Chamando saveGameState...");
     saveGameState(updatedState);
-
-    enqueueSnackbar(
-      `${capitalize(
-        digimon.name
-      )} saqueou e encontrou ${lootAmount} DP! (D20: ${roll})`,
-      { variant: "success" }
-    );
+    // Toast removido - menos invasivo
   };
 
   const handleRest = (digimon: GameDigimon) => {
@@ -579,14 +555,7 @@ export default function GamePage() {
 
     console.log("💾 [REST] Chamando saveGameState...");
     saveGameState(updatedState);
-
-    const hpPercentage = Math.round((actualHeal / digimon.dp) * 100);
-    enqueueSnackbar(
-      `${capitalize(
-        digimon.name
-      )} descansou e recuperou ${actualHeal.toLocaleString()} HP (${hpPercentage}%)!`,
-      { variant: "success" }
-    );
+    // Toast removido - menos invasivo
   };
 
   const handleUseItem = (digimon: GameDigimon, itemId: number) => {
@@ -666,10 +635,7 @@ export default function GamePage() {
     };
 
     saveGameState(updatedState);
-    enqueueSnackbar(
-      `${capitalize(digimon.name)} ${effectMessage} usando ${item.name}!`,
-      { variant: "success" }
-    );
+    // Toast removido - menos invasivo
   };
 
   const handleDiscardItem = (digimon: GameDigimon, itemId: number) => {
@@ -713,7 +679,7 @@ export default function GamePage() {
     };
 
     saveGameState(updatedState);
-    enqueueSnackbar(`${item.name} foi descartado!`, { variant: "info" });
+    // Toast removido - menos invasivo
   };
 
   const handleGiveItem = (
@@ -800,16 +766,7 @@ export default function GamePage() {
     };
 
     saveGameState(updatedState);
-    const targetDigimon = gameState.players
-      .flatMap((p) => p.digimons)
-      .find((d) => d.id === toDigimonId);
-
-    enqueueSnackbar(
-      `${capitalize(fromDigimon.name)} deu ${item.name} para ${capitalize(
-        targetDigimon?.name || "outro digimon"
-      )}!`,
-      { variant: "success" }
-    );
+    // Toast removido - menos invasivo
   };
 
   const handleDefend = (digimon: GameDigimon, targetDigimonId: number) => {
@@ -869,12 +826,7 @@ export default function GamePage() {
     };
 
     saveGameState(updatedState);
-    enqueueSnackbar(
-      `🛡️ ${capitalize(digimon.name)} está defendendo ${capitalize(
-        targetDigimon.name
-      )}!`,
-      { variant: "success" }
-    );
+    // Toast removido - menos invasivo
   };
 
   const handleProvoke = (digimon: GameDigimon, targetDigimonId: number) => {
@@ -950,12 +902,7 @@ export default function GamePage() {
     };
 
     saveGameState(updatedState);
-    enqueueSnackbar(
-      `💢 ${capitalize(digimon.name)} provocou ${capitalize(
-        targetDigimon.name
-      )}! Ele só pode atacar você no próximo turno!`,
-      { variant: "warning" }
-    );
+    // Toast removido - menos invasivo
   };
 
   const handleAttack = (digimon: GameDigimon) => {
@@ -1363,7 +1310,11 @@ export default function GamePage() {
                                   {capitalize(digimon.name)}
                                 </h5>
                                 <div className="flex gap-1 sm:gap-1.5 md:gap-2 items-center mb-0.5 sm:mb-1 flex-wrap">
-                                  <div className="bg-blue-600 text-white text-[10px] sm:text-xs font-bold px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded whitespace-nowrap">
+                                  <div
+                                    className={`${getTypeColor(
+                                      digimon.typeId
+                                    )} text-[10px] sm:text-xs font-bold px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded whitespace-nowrap`}
+                                  >
                                     {
                                       DIGIMON_TYPE_NAMES[
                                         digimon.typeId as keyof typeof DIGIMON_TYPE_NAMES

@@ -109,12 +109,7 @@ export default function AttackDialog({
     if (defender) {
       // Redirecionar ataque para o defensor
       targetDigimon = defender;
-      enqueueSnackbar(
-        `🛡️ ${capitalize(defender.name)} está defendendo ${capitalize(
-          digimon.name
-        )}! O ataque será redirecionado!`,
-        { variant: "info" }
-      );
+      // Toast removido - redirecionamento é visual (badge já mostra)
     }
 
     setSelectedDigimon(targetDigimon);
@@ -162,30 +157,7 @@ export default function AttackDialog({
         );
         setBattleComplete(true);
 
-        // Feedback de críticos/falhas
-        if (result.attackerDiceRoll === 20) {
-          enqueueSnackbar(
-            `🎉 ${capitalize(attacker.digimon.name)} rolou CRÍTICO! 20!`,
-            { variant: "success" }
-          );
-        } else if (result.attackerDiceRoll === 1) {
-          enqueueSnackbar(
-            `💀 ${capitalize(attacker.digimon.name)} falhou... Rolou 1!`,
-            { variant: "error" }
-          );
-        }
-
-        if (result.defenderDiceRoll === 20) {
-          enqueueSnackbar(
-            `🎉 ${capitalize(selectedDigimon.name)} rolou CRÍTICO! 20!`,
-            { variant: "success" }
-          );
-        } else if (result.defenderDiceRoll === 1) {
-          enqueueSnackbar(
-            `💀 ${capitalize(selectedDigimon.name)} falhou... Rolou 1!`,
-            { variant: "error" }
-          );
-        }
+        // Toasts removidos - resultados são visíveis na tela de batalha
       }
     }, 100);
   };

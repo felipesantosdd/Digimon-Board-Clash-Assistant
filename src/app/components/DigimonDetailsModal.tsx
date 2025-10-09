@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { GameDigimon } from "@/types/game";
-import { capitalize, getLevelName } from "@/lib/utils";
+import { capitalize, getLevelName, getTypeColor } from "@/lib/utils";
 
 interface DigimonDetailsModalProps {
   isOpen: boolean;
@@ -796,7 +796,11 @@ export default function DigimonDetailsModal({
 
                             {/* Tipo */}
                             <div className="flex items-center gap-2 mb-2">
-                              <span className="text-[10px] bg-blue-600 text-white font-bold px-1.5 py-0.5 rounded">
+                              <span
+                                className={`text-[10px] ${getTypeColor(
+                                  targetDigimon.typeId
+                                )} font-bold px-1.5 py-0.5 rounded`}
+                              >
                                 {
                                   {
                                     1: "Data",
@@ -979,7 +983,11 @@ export default function DigimonDetailsModal({
 
                                   {/* Tipo */}
                                   <div className="flex items-center gap-2 mb-2">
-                                    <span className="text-[10px] bg-blue-600 text-white font-bold px-1.5 py-0.5 rounded">
+                                    <span
+                                      className={`text-[10px] ${getTypeColor(
+                                        targetDigimon.typeId
+                                      )} font-bold px-1.5 py-0.5 rounded`}
+                                    >
                                       {
                                         {
                                           1: "Data",

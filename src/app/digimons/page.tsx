@@ -50,14 +50,14 @@ export default function DigimonsPage() {
 
   const getTypeColor = (typeId: number) => {
     const colors: { [key: number]: string } = {
-      1: "bg-blue-500", // Data
-      2: "bg-green-500", // Vaccine
-      3: "bg-purple-500", // Virus
-      4: "bg-gray-500", // Free
-      5: "bg-yellow-500", // Variable
-      6: "bg-red-500", // Unknown
+      1: "bg-blue-600 text-white", // Data
+      2: "bg-green-600 text-white", // Vaccine
+      3: "bg-purple-600 text-white", // Virus
+      4: "bg-gray-100 text-gray-900", // Free
+      5: "bg-gray-600 text-white", // Variable
+      6: "bg-black text-white", // Unknown
     };
-    return colors[typeId] || "bg-gray-500";
+    return colors[typeId] || "bg-gray-600 text-white";
   };
 
   const handleImageError = (digimonId: number) => {
@@ -190,15 +190,15 @@ export default function DigimonsPage() {
                         className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
                       >
                         {/* Imagem do Digimon */}
-                            <div className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
-                              <Image
-                                src={getImageSrc(digimon)}
-                                alt={digimon.name}
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                onError={() => handleImageError(digimon.id)}
-                              />
+                        <div className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
+                          <Image
+                            src={getImageSrc(digimon)}
+                            alt={digimon.name}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            onError={() => handleImageError(digimon.id)}
+                          />
                           {/* Indicador de fallback */}
                           {imageErrors.has(digimon.id) && (
                             <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-yellow-50 to-orange-100">
