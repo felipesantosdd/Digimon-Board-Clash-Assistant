@@ -167,11 +167,11 @@ export default function ReviveDialog({
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-[60] p-4"
+      className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-[60] p-2 sm:p-4"
       onClick={onClose}
     >
       <div
-        className="bg-gray-800 rounded-lg shadow-2xl max-w-md w-full border-2 border-yellow-500"
+        className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl max-h-[95vh] overflow-y-auto border-2 border-yellow-500"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}

@@ -8,7 +8,6 @@ interface DigimonDetailsModalProps {
   onClose: () => void;
   digimon: GameDigimon | null;
   playerName: string;
-  onDamage: (digimon: GameDigimon) => void;
   onEvolve: (digimon: GameDigimon) => void;
   onLoot: (digimon: GameDigimon) => void;
   onRest: (digimon: GameDigimon) => void;
@@ -21,7 +20,6 @@ export default function DigimonDetailsModal({
   onClose,
   digimon,
   playerName,
-  onDamage,
   onEvolve,
   onLoot,
   onRest,
@@ -35,11 +33,11 @@ export default function DigimonDetailsModal({
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-md flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-md flex items-center justify-center z-50 p-2 sm:p-4"
       onClick={onClose}
     >
       <div
-        className="bg-gray-800 rounded-lg shadow-xl max-w-md w-full border-2 border-gray-700"
+        className="bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl max-h-[95vh] overflow-y-auto border-2 border-gray-700"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -57,7 +55,7 @@ export default function DigimonDetailsModal({
         </div>
 
         {/* Imagem do Digimon */}
-        <div className="relative h-64 bg-gradient-to-br from-gray-700 to-gray-900 overflow-hidden">
+        <div className="relative h-72 sm:h-96 lg:h-[32rem] bg-gradient-to-br from-gray-700 to-gray-900 overflow-hidden">
           {/* Overlay de Morte */}
           {isDead && (
             <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center z-10">
@@ -74,7 +72,7 @@ export default function DigimonDetailsModal({
             <img
               src={digimon.image}
               alt={digimon.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
               style={
                 isDead
                   ? {
@@ -188,7 +186,7 @@ export default function DigimonDetailsModal({
                     className="px-4 py-2 bg-yellow-600 text-white font-bold rounded-lg hover:bg-yellow-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
                   >
                     <span className="text-2xl">💰</span>
-                    <span className="text-xs">Saquear</span>
+                    <span className="text-xs">Explorar</span>
                   </button>
                   <button
                     onClick={() => {
@@ -231,47 +229,35 @@ export default function DigimonDetailsModal({
                 </div>
               )}
 
-              {/* Botões de Gerenciamento */}
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  onClick={() => {
-                    onDamage(digimon);
-                    // Não fecha o modal - mantém aberto
-                  }}
-                  className="px-6 py-3 bg-orange-600 text-white font-bold rounded-lg hover:bg-orange-700 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
-                >
-                  <span className="text-xl">💥</span>
-                  <span>Aplicar Dano</span>
-                </button>
-                <button
-                  onClick={() => {
-                    onEvolve(digimon);
-                    // Não fecha o modal - mantém aberto
-                  }}
-                  disabled={!digimon.canEvolve}
-                  className={`px-6 py-3 font-bold rounded-lg transition-all shadow-lg flex items-center justify-center gap-2 relative overflow-hidden ${
-                    digimon.canEvolve
-                      ? "bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 text-white transform hover:scale-105 animate-pulse"
-                      : "bg-gray-600 text-gray-400 cursor-not-allowed opacity-50"
-                  }`}
-                  style={
-                    digimon.canEvolve
-                      ? {
-                          backgroundSize: "200% 100%",
-                          animation:
-                            "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite, gradient 3s ease infinite",
-                        }
-                      : undefined
-                  }
-                >
-                  <span className="text-xl relative z-10">
-                    {digimon.canEvolve ? "✨" : "🔒"}
-                  </span>
-                  <span className="relative z-10">
-                    {digimon.canEvolve ? "Evolução" : "Bloqueado"}
-                  </span>
-                </button>
-              </div>
+              {/* Botão de Evolução */}
+              <button
+                onClick={() => {
+                  onEvolve(digimon);
+                  // Não fecha o modal - mantém aberto
+                }}
+                disabled={!digimon.canEvolve}
+                className={`w-full px-6 py-3 font-bold rounded-lg transition-all shadow-lg flex items-center justify-center gap-2 relative overflow-hidden ${
+                  digimon.canEvolve
+                    ? "bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 text-white transform hover:scale-105 animate-pulse"
+                    : "bg-gray-600 text-gray-400 cursor-not-allowed opacity-50"
+                }`}
+                style={
+                  digimon.canEvolve
+                    ? {
+                        backgroundSize: "200% 100%",
+                        animation:
+                          "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite, gradient 3s ease infinite",
+                      }
+                    : undefined
+                }
+              >
+                <span className="text-xl relative z-10">
+                  {digimon.canEvolve ? "✨" : "🔒"}
+                </span>
+                <span className="relative z-10">
+                  {digimon.canEvolve ? "Evolução" : "Bloqueado"}
+                </span>
+              </button>
             </div>
           ) : (
             <div className="text-center py-2">

@@ -25,6 +25,16 @@ export async function POST(request: NextRequest) {
     const allDigimons = getAllDigimons();
     const nextLevel = currentDigimon.level + 1;
 
+    // BLOQUEIO TEMPORÁRIO: Não permitir evoluções para Mega (levels 4-7)
+    if (nextLevel >= 4) {
+      return NextResponse.json(
+        {
+          error: "Evoluções Mega estão temporariamente bloqueadas para testes",
+        },
+        { status: 403 }
+      );
+    }
+
     // Buscar Digimons do próximo level
     const nextLevelDigimons = allDigimons.filter((d) => d.level === nextLevel);
 

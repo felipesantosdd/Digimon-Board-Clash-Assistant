@@ -96,15 +96,21 @@ export default function GameSetupModal({
       // Embaralhar Digimons disponíveis
       const shuffled = [...allLevel1Digimons].sort(() => Math.random() - 0.5);
 
-      // Sortear 3 Digimons ÚNICOS para cada jogador
+      // Sortear 3 Digimons ÚNICOS para cada jogador com tipos diferentes
       const usedDigimonIds = new Set<number>();
       const playersWithDigimons = selectedTamersData.map((tamer) => {
         const playerDigimons: GameDigimon[] = [];
+        const usedTypes = new Set<number>(); // Rastrear tipos já usados por este jogador
 
-        // Pegar 3 Digimons únicos
+        // Pegar 3 Digimons únicos com tipos diferentes
         for (const digimon of shuffled) {
-          if (!usedDigimonIds.has(digimon.id) && playerDigimons.length < 3) {
+          if (
+            !usedDigimonIds.has(digimon.id) &&
+            !usedTypes.has(digimon.typeId) &&
+            playerDigimons.length < 3
+          ) {
             usedDigimonIds.add(digimon.id);
+            usedTypes.add(digimon.typeId);
             playerDigimons.push({
               ...digimon,
               currentHp: digimon.dp,
@@ -112,6 +118,26 @@ export default function GameSetupModal({
               originalId: digimon.id,
               bag: [], // Inicializar inventário vazio
             });
+          }
+        }
+
+        // Se não conseguimos 3 Digimons com tipos diferentes, tentar com repetição de tipo
+        if (playerDigimons.length < 3) {
+          // Limpar tipos usados para permitir repetição
+          usedTypes.clear();
+
+          for (const digimon of shuffled) {
+            if (!usedDigimonIds.has(digimon.id) && playerDigimons.length < 3) {
+              usedDigimonIds.add(digimon.id);
+              usedTypes.add(digimon.typeId);
+              playerDigimons.push({
+                ...digimon,
+                currentHp: digimon.dp,
+                canEvolve: false,
+                originalId: digimon.id,
+                bag: [], // Inicializar inventário vazio
+              });
+            }
           }
         }
 
@@ -194,6 +220,44 @@ export default function GameSetupModal({
 
         {/* Content */}
         <div className="p-6 space-y-6">
+          {/* Informações sobre Seleção de Digimons */}
+          <div className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 rounded-lg p-4 border border-blue-500/30">
+            <h3 className="text-lg font-bold text-blue-300 mb-2">
+              🎲 Regras de Seleção de Digimons
+            </h3>
+            <div className="space-y-2 text-sm text-gray-300">
+              <p>
+                • Cada jogador receberá{" "}
+                <span className="text-blue-400 font-semibold">
+                  3 Digimons únicos
+                </span>
+              </p>
+              <p>
+                • Digimons são{" "}
+                <span className="text-purple-400 font-semibold">
+                  aleatórios
+                </span>{" "}
+                e{" "}
+                <span className="text-green-400 font-semibold">
+                  sem repetições
+                </span>
+              </p>
+              <p>
+                • Cada jogador terá Digimons de{" "}
+                <span className="text-yellow-400 font-semibold">
+                  tipos diferentes
+                </span>{" "}
+                (Vaccine, Virus, Data, etc.)
+              </p>
+              <p>
+                • Sistema de vantagens:{" "}
+                <span className="text-red-400">
+                  Vaccine &gt; Virus &gt; Data &gt; Vaccine
+                </span>
+              </p>
+            </div>
+          </div>
+
           {/* Número de Jogadores */}
           <div>
             <label className="block text-sm font-medium text-gray-200 mb-3">

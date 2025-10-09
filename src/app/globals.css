@@ -30,3 +30,23 @@ body {
     background-position: 0% 50%;
   }
 }
+
+/* Animação de borda gradiente arco-íris girando */
+@keyframes rainbow-rotate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.rainbow-shadow-pulse {
+  position: relative;
+  border: 5px solid transparent !important;
+  background: linear-gradient(#374151, #0051d4) padding-box,
+    linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #0000ff, #8b00ff, #ff0000)
+      border-box !important;
+  animation: rainbow-rotate 3s linear infinite;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3) !important;
+}

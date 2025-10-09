@@ -43,3 +43,112 @@ export function getLevelName(level: number): string {
       return `Level ${level}`;
   }
 }
+
+/**
+ * Tipos de Digimon e suas vantagens
+ */
+export const DIGIMON_TYPES = {
+  VACCINE: 1,
+  VIRUS: 2,
+  DATA: 3,
+  FREE: 4,
+  UNKNOWN: 5,
+  VARIABLE: 6,
+} as const;
+
+/**
+ * Nomes dos tipos de Digimon
+ */
+export const DIGIMON_TYPE_NAMES = {
+  [DIGIMON_TYPES.VACCINE]: "Vaccine",
+  [DIGIMON_TYPES.VIRUS]: "Virus",
+  [DIGIMON_TYPES.DATA]: "Data",
+  [DIGIMON_TYPES.FREE]: "Free",
+  [DIGIMON_TYPES.UNKNOWN]: "Unknown",
+  [DIGIMON_TYPES.VARIABLE]: "Variable",
+} as const;
+
+/**
+ * Calcula a vantagem de tipo entre dois Digimons
+ * @param attackerTypeId - ID do tipo do Digimon atacante
+ * @param defenderTypeId - ID do tipo do Digimon defensor
+ * @returns Vantagem: 1 = vantagem, 0 = neutro, -1 = desvantagem
+ */
+export function calculateTypeAdvantage(
+  attackerTypeId: number,
+  defenderTypeId: number
+): number {
+  // Apenas Vaccine, Virus e Data têm vantagens entre si
+  const hasAdvantage = [
+    DIGIMON_TYPES.VACCINE,
+    DIGIMON_TYPES.VIRUS,
+    DIGIMON_TYPES.DATA,
+  ];
+
+  if (
+    !hasAdvantage.includes(attackerTypeId) ||
+    !hasAdvantage.includes(defenderTypeId)
+  ) {
+    return 0; // Neutro para tipos especiais
+  }
+
+  // Vaccine > Virus > Data > Vaccine (pedra papel tesoura)
+  if (
+    attackerTypeId === DIGIMON_TYPES.VACCINE &&
+    defenderTypeId === DIGIMON_TYPES.VIRUS
+  ) {
+    return 1; // Vaccine tem vantagem sobre Virus
+  }
+  if (
+    attackerTypeId === DIGIMON_TYPES.VIRUS &&
+    defenderTypeId === DIGIMON_TYPES.DATA
+  ) {
+    return 1; // Virus tem vantagem sobre Data
+  }
+  if (
+    attackerTypeId === DIGIMON_TYPES.DATA &&
+    defenderTypeId === DIGIMON_TYPES.VACCINE
+  ) {
+    return 1; // Data tem vantagem sobre Vaccine
+  }
+
+  // Casos de desvantagem (o inverso dos acima)
+  if (
+    attackerTypeId === DIGIMON_TYPES.VIRUS &&
+    defenderTypeId === DIGIMON_TYPES.VACCINE
+  ) {
+    return -1; // Virus tem desvantagem contra Vaccine
+  }
+  if (
+    attackerTypeId === DIGIMON_TYPES.DATA &&
+    defenderTypeId === DIGIMON_TYPES.VIRUS
+  ) {
+    return -1; // Data tem desvantagem contra Virus
+  }
+  if (
+    attackerTypeId === DIGIMON_TYPES.VACCINE &&
+    defenderTypeId === DIGIMON_TYPES.DATA
+  ) {
+    return -1; // Vaccine tem desvantagem contra Data
+  }
+
+  return 0; // Neutro (mesmo tipo)
+}
+
+/**
+ * Aplica modificador de dano baseado na vantagem de tipo
+ * @param baseDamage - Dano base
+ * @param typeAdvantage - Vantagem de tipo (1, 0, ou -1)
+ * @returns Dano modificado
+ */
+export function applyTypeAdvantageDamage(
+  baseDamage: number,
+  typeAdvantage: number
+): number {
+  if (typeAdvantage === 1) {
+    return Math.round(baseDamage * 1.35); // +35% de vantagem
+  } else if (typeAdvantage === -1) {
+    return Math.round(baseDamage * 0.65); // -35% de desvantagem
+  }
+  return baseDamage; // Neutro
+}

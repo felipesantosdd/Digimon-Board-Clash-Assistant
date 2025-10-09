@@ -57,7 +57,7 @@ export default function EvolutionModal({
   };
 
   // Estados para edição do Digimon
-  const [editMode, setEditMode] = useState(false);
+  const [editMode, setEditMode] = useState(true); // Sempre em modo de edição
   const [editData, setEditData] = useState({
     name: "",
     level: 1,
@@ -73,7 +73,6 @@ export default function EvolutionModal({
 
   // Limpar formulário de edição
   const resetEditForm = () => {
-    setEditMode(false);
     setSearchTerm("");
     setImageFile(null);
     setImagePreview("");
@@ -98,7 +97,6 @@ export default function EvolutionModal({
         typeId: digimon.typeId,
       });
       setDpDisplay(String(digimon.dp / 1000)); // Converter DP para exibição
-      setEditMode(false);
       setSearchTerm("");
     }
   }, [digimon]);
@@ -208,7 +206,6 @@ export default function EvolutionModal({
           ...editData,
           ...(imagePath && { image: imagePath }),
         });
-        setEditMode(false);
         setSearchTerm("");
         setImageFile(null);
         setImagePreview("");
@@ -222,6 +219,59 @@ export default function EvolutionModal({
         });
       }
     }
+  };
+
+  const handleSaveAll = async () => {
+    // Salvar evoluções
+    onSaveEvolutions(digimon.id, selectedEvolutions);
+
+    // Salvar dados do Digimon sempre (já que sempre está em modo de edição)
+    if (onSaveDigimon) {
+      try {
+        let imagePath: string | undefined = undefined;
+
+        // Se há uma nova imagem, fazer upload
+        if (imageFile) {
+          const formDataUpload = new FormData();
+          formDataUpload.append("file", imageFile);
+          formDataUpload.append("type", "digimon");
+
+          // Enviar imagem antiga para deletar
+          if (digimon.image) {
+            formDataUpload.append("oldImage", digimon.image);
+          }
+
+          const uploadResponse = await fetch("/api/upload", {
+            method: "POST",
+            body: formDataUpload,
+          });
+
+          if (uploadResponse.ok) {
+            const { path } = await uploadResponse.json();
+            imagePath = path;
+          } else {
+            throw new Error("Erro ao fazer upload da imagem");
+          }
+        }
+
+        await onSaveDigimon(digimon.id, {
+          ...editData,
+          ...(imagePath && { image: imagePath }),
+        });
+
+        enqueueSnackbar("Dados do Digimon salvos com sucesso!", {
+          variant: "success",
+        });
+      } catch (error) {
+        console.error("Erro ao salvar Digimon:", error);
+        enqueueSnackbar("Erro ao salvar dados do Digimon", {
+          variant: "error",
+        });
+      }
+    }
+
+    resetEditForm(); // Limpar formulário ao salvar
+    onClose();
   };
 
   const handleSave = () => {
@@ -276,10 +326,12 @@ export default function EvolutionModal({
   };
 
   // Filtrar Digimons que podem ser evoluções (não o próprio Digimon e apenas do nível seguinte)
+  // BLOQUEIO TEMPORÁRIO: Não permitir evoluções para Mega (levels 4-7)
   const possibleEvolutions = allDigimons.filter(
     (d) =>
       d.id !== digimon.id &&
       d.level === digimon.level + 1 &&
+      d.level < 4 && // Bloquear Mega levels
       d.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -306,9 +358,27 @@ export default function EvolutionModal({
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-white">
-              Configurar Evoluções - {capitalize(digimon.name)}
-            </h2>
+            <div className="flex items-center gap-4">
+              {/* Imagem do Digimon no header - clicável */}
+              <div
+                className="w-16 h-16 bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg overflow-hidden relative cursor-pointer hover:scale-105 transition-transform"
+                onClick={() => fileInputRef.current?.click()}
+                title="Clique para alterar imagem"
+              >
+                <img
+                  src={digimon.image || "/images/digimons/fallback.svg"}
+                  alt={digimon.name}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "/images/digimons/fallback.svg";
+                  }}
+                />
+              </div>
+              <h2 className="text-2xl font-bold text-white">
+                Configurar Evoluções - {capitalize(digimon.name)}
+              </h2>
+            </div>
             <button
               onClick={onClose}
               className="text-gray-500 hover:text-gray-200 text-2xl"
@@ -320,220 +390,125 @@ export default function EvolutionModal({
           <div className="mb-4 p-4 bg-gray-800 rounded-lg">
             <div className="flex justify-between items-center mb-2">
               <h3 className="font-semibold text-white">Dados do Digimon:</h3>
-              {process.env.NODE_ENV === "development" && onSaveDigimon && (
-                <button
-                  onClick={() => {
-                    if (editMode) {
-                      resetEditForm(); // Restaurar dados originais ao cancelar edição
-                    }
-                    setEditMode(!editMode);
-                  }}
-                  className="text-sm px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  {editMode ? "Cancelar" : "✏️ Editar"}
-                </button>
-              )}
             </div>
 
-            {editMode ? (
-              // Modo de Edição
-              <div className="space-y-3">
-                {/* Imagem */}
-                <div>
-                  <label className="block text-xs font-medium text-white mb-2">
-                    Imagem do Digimon
-                  </label>
-                  <div className="flex items-center gap-3">
-                    {/* Preview */}
-                    <div className="w-20 h-20 bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg flex items-center justify-center overflow-hidden">
-                      {imagePreview ? (
-                        <img
-                          src={imagePreview}
-                          alt="Preview"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <img
-                          src={digimon.image}
-                          alt={digimon.name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.src = "/images/digimons/fallback.svg";
-                          }}
-                        />
-                      )}
-                    </div>
+            {/* Modo de Edição */}
+            <div className="space-y-3">
+              {/* Input de arquivo oculto */}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="hidden"
+              />
 
-                    {/* Upload Button */}
-                    <div className="flex-1">
+              {/* Nome */}
+              <div>
+                <label className="block text-xs font-medium text-white mb-1">
+                  Nome
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={editData.name}
+                  onChange={handleEditChange}
+                  className="w-full px-3 py-2 text-sm border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+
+              {/* Level */}
+              <div>
+                <label className="block text-xs font-medium text-white mb-2">
+                  Level
+                </label>
+                <div className="grid grid-cols-7 gap-1">
+                  {[1, 2, 3, 4, 5, 6, 7].map((level) => (
+                    <button
+                      key={level}
+                      type="button"
+                      onClick={() =>
+                        handleEditChange({
+                          target: { name: "level", value: level.toString() },
+                        } as React.ChangeEvent<HTMLSelectElement>)
+                      }
+                      className={`px-2 py-1 rounded border-2 text-xs transition-all ${
+                        editData.level === level
+                          ? "border-blue-500 bg-blue-50 text-blue-700 font-semibold"
+                          : "border-gray-600 hover:border-gray-500"
+                      }`}
+                    >
+                      {level}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tipos */}
+              <div>
+                <label className="block text-xs font-medium text-white mb-2">
+                  Tipo
+                </label>
+                <div className="grid grid-cols-6 gap-1">
+                  {digimonTypes.map((type) => (
+                    <button
+                      key={type.id}
+                      type="button"
+                      onClick={() =>
+                        handleEditChange({
+                          target: {
+                            name: "typeId",
+                            value: type.id.toString(),
+                          },
+                        } as React.ChangeEvent<HTMLSelectElement>)
+                      }
+                      className={`p-2 rounded border-2 transition-all flex flex-col items-center gap-1 ${
+                        editData.typeId === type.id
+                          ? "border-blue-500 bg-blue-50"
+                          : "border-gray-600 hover:border-gray-500"
+                      }`}
+                    >
                       <input
-                        ref={fileInputRef}
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        className="hidden"
+                        type="checkbox"
+                        checked={editData.typeId === type.id}
+                        onChange={() => {}}
+                        className="w-3 h-3 text-blue-600 rounded focus:ring-blue-500"
                       />
-                      <button
-                        type="button"
-                        onClick={() => fileInputRef.current?.click()}
-                        className="w-full px-3 py-2 text-sm bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
-                      >
-                        📁 {imageFile ? "Trocar Imagem" : "Alterar Imagem"}
-                      </button>
-                      <p className="text-xs text-gray-400 mt-1">
-                        PNG, JPG ou SVG (máx 5MB)
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Nome */}
-                <div>
-                  <label className="block text-xs font-medium text-white mb-1">
-                    Nome
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={editData.name}
-                    onChange={handleEditChange}
-                    className="w-full px-3 py-2 text-sm border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-
-                {/* Level */}
-                <div>
-                  <label className="block text-xs font-medium text-white mb-2">
-                    Level
-                  </label>
-                  <div className="grid grid-cols-7 gap-1">
-                    {[1, 2, 3, 4, 5, 6, 7].map((level) => (
-                      <button
-                        key={level}
-                        type="button"
-                        onClick={() =>
-                          handleEditChange({
-                            target: { name: "level", value: level.toString() },
-                          } as React.ChangeEvent<HTMLSelectElement>)
-                        }
-                        className={`px-2 py-1 rounded border-2 text-xs transition-all ${
-                          editData.level === level
-                            ? "border-blue-500 bg-blue-50 text-blue-700 font-semibold"
-                            : "border-gray-600 hover:border-gray-500"
+                      <span
+                        className={`text-[10px] font-medium ${
+                          editData.typeId === type.id
+                            ? "text-blue-700"
+                            : "text-white"
                         }`}
                       >
-                        {level}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* DP e Tipo */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-medium text-white mb-1">
-                      DP{" "}
-                      <span className="text-[10px] text-gray-500">(x1000)</span>
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="number"
-                        name="dp"
-                        value={dpDisplay}
-                        onChange={handleEditChange}
-                        step="1"
-                        className="w-full px-3 py-2 text-sm border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Ex: 2"
-                      />
-                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-gray-400">
-                        = {editData.dp.toLocaleString()}
+                        {type.name}
                       </span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-medium text-white mb-2">
-                      Tipo
-                    </label>
-                    <div className="grid grid-cols-2 gap-1">
-                      {digimonTypes.map((type) => (
-                        <button
-                          key={type.id}
-                          type="button"
-                          onClick={() =>
-                            handleEditChange({
-                              target: {
-                                name: "typeId",
-                                value: type.id.toString(),
-                              },
-                            } as React.ChangeEvent<HTMLSelectElement>)
-                          }
-                          className={`p-2 rounded border-2 transition-all flex flex-col items-center gap-1 ${
-                            editData.typeId === type.id
-                              ? "border-blue-500 bg-blue-50"
-                              : "border-gray-600 hover:border-gray-500"
-                          }`}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={editData.typeId === type.id}
-                            onChange={() => {}}
-                            className="w-3 h-3 text-blue-600 rounded focus:ring-blue-500"
-                          />
-                          <span
-                            className={`text-[10px] font-medium ${
-                              editData.typeId === type.id
-                                ? "text-blue-700"
-                                : "text-white"
-                            }`}
-                          >
-                            {type.name}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                    </button>
+                  ))}
                 </div>
-
-                <button
-                  onClick={handleSaveDigimonData}
-                  className="w-full px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 transition-colors"
-                >
-                  💾 Salvar Alterações
-                </button>
               </div>
-            ) : (
-              // Modo de Visualização
-              <div className="flex items-center gap-4">
-                <div className="w-20 h-20 bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg overflow-hidden relative">
-                  <img
-                    src={digimon.image || "/images/digimons/fallback.svg"}
-                    alt={digimon.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "/images/digimons/fallback.svg";
-                    }}
+
+              {/* DP */}
+              <div>
+                <label className="block text-xs font-medium text-white mb-1">
+                  DP <span className="text-[10px] text-gray-500">(x1000)</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type="number"
+                    name="dp"
+                    value={dpDisplay}
+                    onChange={handleEditChange}
+                    step="1"
+                    className="w-full px-3 py-2 text-sm border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Ex: 2"
                   />
-                  <div
-                    className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-100 to-blue-100"
-                    style={{ display: "none" }}
-                  >
-                    <span className="text-2xl">🤖</span>
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-lg text-white">
-                    {editData.name}
-                  </p>
-                  <p className="text-sm text-white">
-                    Level {editData.level} • DP: {editData.dp} •{" "}
-                    {digimonTypes.find((t) => t.id === editData.typeId)?.name}
-                  </p>
+                  <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-gray-400">
+                    = {editData.dp.toLocaleString()}
+                  </span>
                 </div>
               </div>
-            )}
+            </div>
           </div>
 
           <div className="mb-4">
@@ -546,6 +521,16 @@ export default function EvolutionModal({
                 {possibleEvolutions.length} Digimons disponíveis
               </div>
             </div>
+
+            {/* Aviso sobre bloqueio de Mega */}
+            {digimon.level >= 3 && (
+              <div className="mb-4 p-3 bg-yellow-900/50 border border-yellow-500/50 rounded-lg">
+                <p className="text-yellow-300 text-sm font-semibold">
+                  ⚠️ Evoluções Mega (Level 4+) estão temporariamente bloqueadas
+                  para testes
+                </p>
+              </div>
+            )}
 
             {/* Barra de pesquisa */}
             <div className="mb-4">
@@ -631,10 +616,10 @@ export default function EvolutionModal({
             </button>
             {process.env.NODE_ENV === "development" && (
               <button
-                onClick={handleSave}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                onClick={handleSaveAll}
+                className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
               >
-                Salvar Evoluções
+                💾 Salvar Tudo
               </button>
             )}
           </div>
