@@ -48,9 +48,9 @@ export default function GamePage() {
     }
   }, [gameState, isLoading, router, enqueueSnackbar]);
 
-  // Verificar condição de vitória
+  // Verificar condição de vitória (apenas quando modal de ataque estiver fechado)
   useEffect(() => {
-    if (!gameState) return;
+    if (!gameState || showAttackDialog) return; // Não verificar se modal estiver aberto
 
     const playersWithAliveDigimons = gameState.players.filter((player) =>
       player.digimons.some((digimon) => digimon.currentHp > 0)
@@ -69,7 +69,7 @@ export default function GamePage() {
         aliveDigimons,
       });
     }
-  }, [gameState]);
+  }, [gameState, showAttackDialog]);
 
   const handleEndGame = () => {
     clearGameState();
