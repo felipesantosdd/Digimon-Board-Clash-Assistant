@@ -56,6 +56,7 @@ if (isProduction) {
       description TEXT NOT NULL,
       image TEXT NOT NULL,
       effectId INTEGER,
+      dropChance INTEGER DEFAULT 0 CHECK(dropChance >= 0 AND dropChance <= 100),
       FOREIGN KEY (effectId) REFERENCES effects(id)
     );
 

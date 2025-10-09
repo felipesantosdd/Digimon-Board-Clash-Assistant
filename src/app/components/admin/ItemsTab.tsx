@@ -214,7 +214,7 @@ export default function ItemsTab() {
                     {item.description}
                   </p>
 
-                  <div className="mb-4">
+                  <div className="mb-4 space-y-2">
                     {item.effectId && (
                       <span
                         className={`${
@@ -225,6 +225,26 @@ export default function ItemsTab() {
                         {getEffectInfo(item.effectId).label}
                       </span>
                     )}
+
+                    {/* Drop Chance */}
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-gray-400">
+                        Chance de encontrar:
+                      </span>
+                      <span
+                        className={`text-xs font-bold px-2 py-1 rounded ${
+                          (item.dropChance || 0) === 0
+                            ? "bg-gray-600 text-gray-300"
+                            : (item.dropChance || 0) <= 10
+                            ? "bg-red-600 text-white"
+                            : (item.dropChance || 0) <= 25
+                            ? "bg-yellow-600 text-white"
+                            : "bg-green-600 text-white"
+                        }`}
+                      >
+                        {item.dropChance || 0}%
+                      </span>
+                    </div>
                   </div>
 
                   {/* Botões de ação */}

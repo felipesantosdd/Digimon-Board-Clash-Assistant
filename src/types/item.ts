@@ -5,6 +5,7 @@ export interface Item {
   image: string;
   effect: string; // Deprecated - use effectId
   effectId?: number; // ID do efeito na tabela effects
+  dropChance?: number; // Chance de 0-100% de encontrar o item explorando
 }
 
 export interface GameItem extends Item {

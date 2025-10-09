@@ -32,6 +32,7 @@ interface Item {
   description: string;
   image: string;
   effect: string;
+  dropChance?: number;
 }
 
 export const jsonDb = {

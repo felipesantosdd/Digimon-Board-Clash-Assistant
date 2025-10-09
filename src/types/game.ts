@@ -7,6 +7,8 @@ export interface GameDigimon {
   image: string;
   level: number;
   dp: number;
+  baseDp?: number; // DP base do Digimon (sem buffs)
+  dpBonus?: number; // Bônus de DP acumulado (de itens, buffs, etc)
   typeId: number;
   currentHp: number; // HP atual do Digimon (inicia igual ao DP)
   canEvolve?: boolean; // Se o Digimon pode evoluir
@@ -32,4 +34,5 @@ export interface GameState {
   players: GamePlayer[];
   currentTurnPlayerIndex: number; // Índice do jogador no turno atual
   turnCount: number; // Contador de turnos
+  reviveAttemptThisTurn?: boolean; // Se já tentou reviver neste turno
 }

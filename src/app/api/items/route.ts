@@ -19,11 +19,19 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, description, image, effect } = body;
+    const { name, description, image, effect, effectId, dropChance } = body;
 
-    if (!name || !description || !effect) {
+    if (!name || !description || (!effect && !effectId)) {
       return NextResponse.json(
         { error: "Campos obrigatórios faltando" },
+        { status: 400 }
+      );
+    }
+
+    // Validar dropChance (0-100)
+    if (dropChance !== undefined && (dropChance < 0 || dropChance > 100)) {
+      return NextResponse.json(
+        { error: "Chance de drop deve estar entre 0 e 100" },
         { status: 400 }
       );
     }
@@ -32,7 +40,9 @@ export async function POST(request: NextRequest) {
       name,
       description,
       image: image || "/images/items/fallback.svg",
-      effect,
+      effect: effect || "", // Para compatibilidade
+      effectId: effectId || undefined,
+      dropChance: dropChance || 0,
     });
 
     return NextResponse.json(newItem, { status: 201 });

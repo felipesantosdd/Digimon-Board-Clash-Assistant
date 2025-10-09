@@ -46,6 +46,7 @@ export default function AddItemModal({
     description: "",
     effectId: 1,
     image: "/images/items/fallback.svg",
+    dropChance: 0,
   });
 
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -83,6 +84,7 @@ export default function AddItemModal({
         description: editingItem.description,
         effectId: editingItem.effectId || 1,
         image: editingItem.image,
+        dropChance: editingItem.dropChance || 0,
       });
       setImagePreview(editingItem.image);
     } else {
@@ -96,6 +98,7 @@ export default function AddItemModal({
       description: "",
       effectId: effects.length > 0 ? effects[0].id : 1,
       image: "/images/items/fallback.svg",
+      dropChance: 0,
     });
     setImageFile(null);
     setImagePreview("");
@@ -393,6 +396,32 @@ export default function AddItemModal({
                   }
                 </p>
               )}
+            </div>
+
+            {/* Chance de Drop */}
+            <div>
+              <label className="block text-sm font-medium text-gray-200 mb-2">
+                Chance de Encontrar (0-100%) *
+              </label>
+              <div className="relative">
+                <input
+                  type="number"
+                  name="dropChance"
+                  value={formData.dropChance}
+                  onChange={handleChange}
+                  min="0"
+                  max="100"
+                  required
+                  placeholder="Ex: 30"
+                  className="w-full px-3 py-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 pr-10"
+                />
+                <span className="absolute right-3 top-2 text-gray-400 text-sm">
+                  %
+                </span>
+              </div>
+              <p className="text-xs text-gray-400 mt-1">
+                Probabilidade de encontrar este item ao explorar o mapa
+              </p>
             </div>
 
             {/* Botões */}

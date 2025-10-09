@@ -108,7 +108,7 @@ export default function ReviveDialog({
   const attemptRevive = () => {
     setIsRolling(true);
 
-    const baseChance = 20;
+    const baseChance = 15; // Reduzido de 20% para 15%
     const modifierValue = modifier ? parseInt(modifier, 10) : 0;
     const totalChance = baseChance + modifierValue;
 
@@ -161,7 +161,7 @@ export default function ReviveDialog({
 
   if (!isOpen) return null;
 
-  const baseChance = 20;
+  const baseChance = 15; // Reduzido de 20% para 15%
   const modifierValue = modifier ? parseInt(modifier, 10) : 0;
   const totalChance = Math.min(baseChance + modifierValue, 100);
 
@@ -190,7 +190,10 @@ export default function ReviveDialog({
             <p className="text-gray-300 text-sm text-center">
               💀 Este Digimon está morto. Você pode tentar revivê-lo, mas a
               chance base é de apenas{" "}
-              <span className="text-yellow-400 font-bold">20%</span>.
+              <span className="text-yellow-400 font-bold">15%</span>.
+            </p>
+            <p className="text-orange-400 text-xs text-center mt-2 font-semibold">
+              ⚠️ Apenas UMA tentativa de reviver por turno!
             </p>
           </div>
 

@@ -33,11 +33,17 @@ export function getItemById(id: number): Item | undefined {
 // Criar novo item
 export function createItem(item: Omit<Item, "id">): Item {
   const stmt = db.prepare(`
-    INSERT INTO items (name, description, image, effect)
-    VALUES (?, ?, ?, ?)
+    INSERT INTO items (name, description, image, effect, dropChance)
+    VALUES (?, ?, ?, ?, ?)
   `);
 
-  const result = stmt.run(item.name, item.description, item.image, item.effect);
+  const result = stmt.run(
+    item.name,
+    item.description,
+    item.image,
+    item.effect,
+    item.dropChance || 0
+  );
 
   return {
     id: result.lastInsertRowid as number,
@@ -65,6 +71,10 @@ export function updateItem(id: number, item: Partial<Omit<Item, "id">>): void {
   if (item.effect !== undefined) {
     fields.push("effect = ?");
     values.push(item.effect);
+  }
+  if (item.dropChance !== undefined) {
+    fields.push("dropChance = ?");
+    values.push(item.dropChance);
   }
 
   if (fields.length === 0) return;

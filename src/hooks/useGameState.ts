@@ -52,10 +52,13 @@ export function useGameState() {
               evolutionProgress: digimon.evolutionProgress ?? 0, // Adicionar XP de evolução se não existir
               provokedBy: digimon.provokedBy ?? null, // Adicionar provocação se não existir
               lastProvokeTurn: digimon.lastProvokeTurn ?? null, // Adicionar cooldown de provocação se não existir
+              baseDp: digimon.baseDp ?? digimon.dp, // Inicializar baseDp se não existir
+              dpBonus: digimon.dpBonus ?? 0, // Inicializar dpBonus se não existir
             })),
           })),
           currentTurnPlayerIndex: parsed.currentTurnPlayerIndex ?? 0, // Padrão: primeiro jogador
           turnCount: parsed.turnCount ?? 1, // Padrão: turno 1
+          reviveAttemptThisTurn: parsed.reviveAttemptThisTurn ?? false, // Padrão: não tentou reviver
         };
 
         console.log("🔄 [LOAD] Estado após migração:", migratedState);

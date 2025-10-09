@@ -18,7 +18,8 @@
     "cleanup-unused": "tsx scripts/cleanup-unused-images.ts",
     "export": "tsx scripts/export-db-to-json.ts",
     "update-dp": "tsx scripts/update-dp-by-level.ts",
-    "lowercase-names": "tsx scripts/lowercase-digimon-names.ts"
+    "lowercase-names": "tsx scripts/lowercase-digimon-names.ts",
+    "migrate:drop-chance": "tsx scripts/add-drop-chance-migration.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
