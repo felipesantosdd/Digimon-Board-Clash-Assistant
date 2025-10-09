@@ -326,12 +326,10 @@ export default function EvolutionModal({
   };
 
   // Filtrar Digimons que podem ser evoluções (não o próprio Digimon e apenas do nível seguinte)
-  // BLOQUEIO TEMPORÁRIO: Não permitir evoluções para Mega (levels 4-7)
   const possibleEvolutions = allDigimons.filter(
     (d) =>
       d.id !== digimon.id &&
       d.level === digimon.level + 1 &&
-      d.level < 4 && // Bloquear Mega levels
       d.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -521,16 +519,6 @@ export default function EvolutionModal({
                 {possibleEvolutions.length} Digimons disponíveis
               </div>
             </div>
-
-            {/* Aviso sobre bloqueio de Mega */}
-            {digimon.level >= 3 && (
-              <div className="mb-4 p-3 bg-yellow-900/50 border border-yellow-500/50 rounded-lg">
-                <p className="text-yellow-300 text-sm font-semibold">
-                  ⚠️ Evoluções Mega (Level 4+) estão temporariamente bloqueadas
-                  para testes
-                </p>
-              </div>
-            )}
 
             {/* Barra de pesquisa */}
             <div className="mb-4">

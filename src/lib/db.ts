@@ -41,12 +41,43 @@ if (isProduction) {
       image TEXT NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS effects (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      description TEXT NOT NULL,
+      code TEXT NOT NULL UNIQUE,
+      type TEXT NOT NULL CHECK(type IN ('heal', 'damage', 'buff', 'debuff', 'special', 'boss')),
+      value INTEGER DEFAULT 0
+    );
+
     CREATE TABLE IF NOT EXISTS items (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
       description TEXT NOT NULL,
       image TEXT NOT NULL,
-      effect TEXT NOT NULL
+      effectId INTEGER,
+      FOREIGN KEY (effectId) REFERENCES effects(id)
+    );
+
+    CREATE TABLE IF NOT EXISTS bosses (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      image TEXT NOT NULL,
+      description TEXT NOT NULL,
+      effectId INTEGER,
+      dp INTEGER NOT NULL,
+      typeId INTEGER NOT NULL,
+      FOREIGN KEY (typeId) REFERENCES digimon_types(id),
+      FOREIGN KEY (effectId) REFERENCES effects(id)
+    );
+
+    CREATE TABLE IF NOT EXISTS boss_drops (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      bossId INTEGER NOT NULL,
+      itemId INTEGER NOT NULL,
+      dropChance INTEGER NOT NULL CHECK(dropChance >= 1 AND dropChance <= 100),
+      FOREIGN KEY (bossId) REFERENCES bosses(id),
+      FOREIGN KEY (itemId) REFERENCES items(id)
     );
   `);
 }

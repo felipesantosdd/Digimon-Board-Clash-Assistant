@@ -22,12 +22,21 @@ const digimons = db.prepare("SELECT * FROM digimons").all();
 // Exportar tamers
 const tamers = db.prepare("SELECT * FROM tamers").all();
 
+// Exportar effects
+let effects: unknown[] = [];
+try {
+  effects = db.prepare("SELECT * FROM effects").all();
+} catch (error) {
+  console.log("⚠️  Tabela 'effects' não encontrada, pulando");
+  effects = [];
+}
+
 // Exportar items (se a tabela existir)
 let items = [];
 try {
   items = db.prepare("SELECT * FROM items").all();
 } catch (error) {
-  console.log("⚠️  Tabela 'items' não encontrada, usando dados padrão");
+  console.log("⚠️  Tabela 'items' não encontrada, pulando");
   items = [
     {
       id: 1,
@@ -88,6 +97,24 @@ try {
   ];
 }
 
+// Exportar bosses (se a tabela existir)
+let bosses: unknown[] = [];
+try {
+  bosses = db.prepare("SELECT * FROM bosses").all();
+} catch (error) {
+  console.log("⚠️  Tabela 'bosses' não encontrada, pulando");
+  bosses = [];
+}
+
+// Exportar boss_drops (se a tabela existir)
+let bossDrops: unknown[] = [];
+try {
+  bossDrops = db.prepare("SELECT * FROM boss_drops").all();
+} catch (error) {
+  console.log("⚠️  Tabela 'boss_drops' não encontrada, pulando");
+  bossDrops = [];
+}
+
 // Criar diretório de dados se não existir
 const dataDir = path.join(process.cwd(), "src", "data");
 if (!fs.existsSync(dataDir)) {
@@ -111,14 +138,32 @@ fs.writeFileSync(
 );
 
 fs.writeFileSync(
+  path.join(dataDir, "effects.json"),
+  JSON.stringify(effects, null, 2)
+);
+
+fs.writeFileSync(
   path.join(dataDir, "items.json"),
   JSON.stringify(items, null, 2)
+);
+
+fs.writeFileSync(
+  path.join(dataDir, "bosses.json"),
+  JSON.stringify(bosses, null, 2)
+);
+
+fs.writeFileSync(
+  path.join(dataDir, "boss-drops.json"),
+  JSON.stringify(bossDrops, null, 2)
 );
 
 console.log("✅ Dados exportados com sucesso!");
 console.log(`   - ${types.length} tipos de Digimon`);
 console.log(`   - ${digimons.length} Digimons`);
 console.log(`   - ${tamers.length} Tamers`);
+console.log(`   - ${effects.length} Efeitos`);
 console.log(`   - ${items.length} Itens`);
+console.log(`   - ${bosses.length} Bosses`);
+console.log(`   - ${bossDrops.length} Boss Drops`);
 
 db.close();

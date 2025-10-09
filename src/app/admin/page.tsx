@@ -11,8 +11,17 @@ const DigimonsTab = dynamic(() => import("../components/admin/DigimonsTab"), {
 const ItemsTab = dynamic(() => import("../components/admin/ItemsTab"), {
   ssr: false,
 });
+const BossesTab = dynamic(() => import("../components/admin/BossesTab"), {
+  ssr: false,
+});
+const BossDropsTab = dynamic(() => import("../components/admin/BossDropsTab"), {
+  ssr: false,
+});
+const EffectsTab = dynamic(() => import("../components/admin/EffectsTab"), {
+  ssr: false,
+});
 
-type TabType = "digimons" | "items";
+type TabType = "digimons" | "items" | "bosses" | "drops" | "effects";
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<TabType>("digimons");
@@ -60,10 +69,10 @@ export default function AdminPage() {
         )}
 
         <div className="bg-gray-800 rounded-lg shadow-md p-2 mb-6">
-          <div className="flex gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
             <button
               onClick={() => setActiveTab("digimons")}
-              className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
+              className={`px-4 py-3 rounded-lg font-semibold transition-all ${
                 activeTab === "digimons"
                   ? "bg-blue-600 text-white shadow-md"
                   : "bg-gray-700 text-gray-300 hover:bg-gray-600"
@@ -73,7 +82,7 @@ export default function AdminPage() {
             </button>
             <button
               onClick={() => setActiveTab("items")}
-              className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
+              className={`px-4 py-3 rounded-lg font-semibold transition-all ${
                 activeTab === "items"
                   ? "bg-purple-600 text-white shadow-md"
                   : "bg-gray-700 text-gray-300 hover:bg-gray-600"
@@ -81,12 +90,45 @@ export default function AdminPage() {
             >
               🎒 Itens
             </button>
+            <button
+              onClick={() => setActiveTab("effects")}
+              className={`px-4 py-3 rounded-lg font-semibold transition-all ${
+                activeTab === "effects"
+                  ? "bg-yellow-600 text-white shadow-md"
+                  : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+              }`}
+            >
+              ✨ Efeitos
+            </button>
+            <button
+              onClick={() => setActiveTab("bosses")}
+              className={`px-4 py-3 rounded-lg font-semibold transition-all ${
+                activeTab === "bosses"
+                  ? "bg-red-600 text-white shadow-md"
+                  : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+              }`}
+            >
+              🐉 Bosses
+            </button>
+            <button
+              onClick={() => setActiveTab("drops")}
+              className={`px-4 py-3 rounded-lg font-semibold transition-all ${
+                activeTab === "drops"
+                  ? "bg-green-600 text-white shadow-md"
+                  : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+              }`}
+            >
+              🎁 Drops
+            </button>
           </div>
         </div>
 
         {/* Tab Content */}
         {activeTab === "digimons" && <DigimonsTab />}
         {activeTab === "items" && <ItemsTab />}
+        {activeTab === "effects" && <EffectsTab />}
+        {activeTab === "bosses" && <BossesTab />}
+        {activeTab === "drops" && <BossDropsTab />}
       </div>
     </div>
   );

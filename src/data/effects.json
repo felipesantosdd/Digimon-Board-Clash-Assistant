@@ -1,0 +1,130 @@
+[
+  {
+    "id": 1,
+    "name": "Cura Pequena",
+    "description": "Restaura 1000 HP",
+    "code": "heal_1000",
+    "type": "heal",
+    "value": 1000
+  },
+  {
+    "id": 2,
+    "name": "Cura Média",
+    "description": "Restaura 2000 HP",
+    "code": "heal_2000",
+    "type": "heal",
+    "value": 2000
+  },
+  {
+    "id": 3,
+    "name": "Cura Grande",
+    "description": "Restaura 5000 HP",
+    "code": "heal_5000",
+    "type": "heal",
+    "value": 5000
+  },
+  {
+    "id": 4,
+    "name": "Dano Pequeno",
+    "description": "Causa 500 de dano",
+    "code": "damage_500",
+    "type": "damage",
+    "value": 500
+  },
+  {
+    "id": 5,
+    "name": "Dano Médio",
+    "description": "Causa 1000 de dano",
+    "code": "damage_1000",
+    "type": "damage",
+    "value": 1000
+  },
+  {
+    "id": 6,
+    "name": "Força Aumentada",
+    "description": "Aumenta DP em 500 permanentemente",
+    "code": "boost_dp_500",
+    "type": "buff",
+    "value": 500
+  },
+  {
+    "id": 7,
+    "name": "Poder Máximo",
+    "description": "Aumenta DP em 1000 permanentemente",
+    "code": "boost_dp_1000",
+    "type": "buff",
+    "value": 1000
+  },
+  {
+    "id": 8,
+    "name": "Cura Completa",
+    "description": "Restaura HP ao máximo",
+    "code": "heal_full",
+    "type": "special",
+    "value": 0
+  },
+  {
+    "id": 9,
+    "name": "Reviver",
+    "description": "Revive com metade do HP",
+    "code": "revive_half",
+    "type": "special",
+    "value": 0
+  },
+  {
+    "id": 10,
+    "name": "Evolução Instantânea",
+    "description": "Libera evolução imediatamente",
+    "code": "instant_evolution",
+    "type": "special",
+    "value": 0
+  },
+  {
+    "id": 11,
+    "name": "Escudo Digital",
+    "description": "Protege de um ataque neste turno",
+    "code": "shield_turn",
+    "type": "special",
+    "value": 0
+  },
+  {
+    "id": 12,
+    "name": "Limpeza",
+    "description": "Remove todos os debuffs",
+    "code": "heal_cleanse",
+    "type": "special",
+    "value": 0
+  },
+  {
+    "id": 13,
+    "name": "Aura Sombria",
+    "description": "Aumenta dano causado em 20%",
+    "code": "boss_dark_aura",
+    "type": "boss",
+    "value": 20
+  },
+  {
+    "id": 14,
+    "name": "Dreno Vampírico",
+    "description": "Absorve 30% do dano causado como HP",
+    "code": "boss_vampire_drain",
+    "type": "boss",
+    "value": 30
+  },
+  {
+    "id": 15,
+    "name": "Fúria Oceânica",
+    "description": "Causa dano em área a todos os inimigos",
+    "code": "boss_ocean_fury",
+    "type": "boss",
+    "value": 0
+  },
+  {
+    "id": 16,
+    "name": "Regeneração",
+    "description": "Recupera 5% do HP máximo a cada turno",
+    "code": "boss_regeneration",
+    "type": "boss",
+    "value": 5
+  }
+]

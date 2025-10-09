@@ -40,6 +40,8 @@ export async function POST(request: NextRequest) {
       directory = "digimons";
     } else if (type === "tamer") {
       directory = "tamers";
+    } else if (type === "boss") {
+      directory = "bosses";
     }
 
     // Salvar em public/images/{directory}/

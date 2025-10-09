@@ -31,16 +31,6 @@ export async function PUT(
     // Validar se todos os IDs de evolução existem e são do nível seguinte
     const nextLevel = digimon.level + 1;
 
-    // BLOQUEIO TEMPORÁRIO: Não permitir evoluções para Mega (levels 4-7)
-    if (nextLevel >= 4) {
-      return NextResponse.json(
-        {
-          error: "Evoluções Mega estão temporariamente bloqueadas para testes",
-        },
-        { status: 403 }
-      );
-    }
-
     for (const evoId of evolution) {
       const evoDigimon = getDigimonById(evoId);
       if (!evoDigimon) {
@@ -53,16 +43,6 @@ export async function PUT(
         return NextResponse.json(
           { error: `Todas as evoluções devem ser do level ${nextLevel}` },
           { status: 400 }
-        );
-      }
-      // BLOQUEIO TEMPORÁRIO: Não permitir evoluções para Mega (levels 4-7)
-      if (evoDigimon.level >= 4) {
-        return NextResponse.json(
-          {
-            error:
-              "Evoluções Mega estão temporariamente bloqueadas para testes",
-          },
-          { status: 403 }
         );
       }
     }

@@ -12,6 +12,26 @@ interface AddItemModalProps {
   editingItem?: Item | null;
 }
 
+type EffectType = "heal" | "damage" | "buff" | "debuff" | "special" | "boss";
+
+interface Effect {
+  id: number;
+  name: string;
+  description: string;
+  code: string;
+  type: EffectType;
+  value: number;
+}
+
+const effectTypeIcons: Record<EffectType, string> = {
+  heal: "💚",
+  damage: "💥",
+  buff: "⬆️",
+  debuff: "⬇️",
+  special: "✨",
+  boss: "👹",
+};
+
 export default function AddItemModal({
   isOpen,
   onClose,
@@ -24,7 +44,7 @@ export default function AddItemModal({
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    effect: "heal_1000",
+    effectId: 1,
     image: "/images/items/fallback.svg",
   });
 
@@ -33,24 +53,35 @@ export default function AddItemModal({
   const [imageToCrop, setImageToCrop] = useState<string>("");
   const [showCropper, setShowCropper] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [effects, setEffects] = useState<Effect[]>([]);
 
-  const effectOptions = [
-    { value: "heal_1000", label: "Curar 1000 HP" },
-    { value: "heal_2000", label: "Curar 2000 HP" },
-    { value: "heal_full", label: "Curar HP Completo" },
-    { value: "revive_half", label: "Reviver com 50% HP" },
-    { value: "boost_dp_500", label: "Aumentar DP +500" },
-    { value: "shield_turn", label: "Escudo (1 turno)" },
-    { value: "instant_evolution", label: "Evolução Instantânea" },
-    { value: "heal_cleanse", label: "Curar + Limpar Debuffs" },
-  ];
+  // Buscar efeitos da API
+  useEffect(() => {
+    const fetchEffects = async () => {
+      try {
+        const response = await fetch("/api/effects");
+        if (response.ok) {
+          const data = await response.json();
+          // Filtrar apenas efeitos que não são do tipo "boss"
+          const itemEffects = data.filter((e: Effect) => e.type !== "boss");
+          setEffects(itemEffects);
+        }
+      } catch (error) {
+        console.error("Erro ao carregar efeitos:", error);
+      }
+    };
+
+    if (isOpen) {
+      fetchEffects();
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (editingItem) {
       setFormData({
         name: editingItem.name,
         description: editingItem.description,
-        effect: editingItem.effect,
+        effectId: editingItem.effectId || 1,
         image: editingItem.image,
       });
       setImagePreview(editingItem.image);
@@ -63,7 +94,7 @@ export default function AddItemModal({
     setFormData({
       name: "",
       description: "",
-      effect: "heal_1000",
+      effectId: effects.length > 0 ? effects[0].id : 1,
       image: "/images/items/fallback.svg",
     });
     setImageFile(null);
@@ -343,17 +374,25 @@ export default function AddItemModal({
                 Efeito *
               </label>
               <select
-                name="effect"
-                value={formData.effect}
+                name="effectId"
+                value={formData.effectId}
                 onChange={handleChange}
                 className="w-full px-3 py-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               >
-                {effectOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
+                {effects.map((effect) => (
+                  <option key={effect.id} value={effect.id}>
+                    {effectTypeIcons[effect.type]} {effect.name}
                   </option>
                 ))}
               </select>
+              {effects.length > 0 && formData.effectId && (
+                <p className="text-xs text-gray-400 mt-2">
+                  {
+                    effects.find((e) => e.id === Number(formData.effectId))
+                      ?.description
+                  }
+                </p>
+              )}
             </div>
 
             {/* Botões */}

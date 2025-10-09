@@ -42,22 +42,8 @@
     "effect": "shield_turn"
   },
   {
-    "id": 7,
-    "name": "Cristal de Evolução",
-    "description": "Permite evolução imediata se disponível",
-    "image": "/images/items/evo-crystal.png",
-    "effect": "instant_evolution"
-  },
-  {
-    "id": 8,
-    "name": "Elixir Mágico",
-    "description": "Restaura HP e remove debuffs",
-    "image": "/images/items/elixir.png",
-    "effect": "heal_cleanse"
-  },
-  {
     "id": 9,
-    "name": "Opção de Vida P",
+    "name": "Poção de Vida P",
     "description": "Restaura 2000 Pontos de Vida",
     "image": "/images/items/1759941795057_8586614.webp",
     "effect": "heal_2000"

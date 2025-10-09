@@ -3,7 +3,8 @@ export interface Item {
   name: string;
   description: string;
   image: string;
-  effect: string;
+  effect: string; // Deprecated - use effectId
+  effectId?: number; // ID do efeito na tabela effects
 }
 
 export interface GameItem extends Item {

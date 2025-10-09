@@ -11,6 +11,8 @@
     "seed:tamers": "tsx scripts/seed-tamers.ts",
     "seed:users": "tsx scripts/seed-users.ts",
     "seed:items": "tsx scripts/seed-items.ts",
+    "seed:bosses": "tsx scripts/seed-bosses.ts",
+    "seed:effects": "tsx scripts/seed-effects.ts",
     "convert-images": "tsx scripts/convert-images-to-webp.ts",
     "cleanup-images": "tsx scripts/cleanup-old-images.ts",
     "export": "tsx scripts/export-db-to-json.ts",

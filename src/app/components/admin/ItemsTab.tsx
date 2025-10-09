@@ -5,9 +5,30 @@ import { useSnackbar } from "notistack";
 import AddItemModal from "../AddItemModal";
 import { Item } from "@/types/item";
 
+type EffectType = "heal" | "damage" | "buff" | "debuff" | "special" | "boss";
+
+interface Effect {
+  id: number;
+  name: string;
+  description: string;
+  code: string;
+  type: EffectType;
+  value: number;
+}
+
+const effectTypeIcons: Record<EffectType, string> = {
+  heal: "💚",
+  damage: "💥",
+  buff: "⬆️",
+  debuff: "⬇️",
+  special: "✨",
+  boss: "👹",
+};
+
 export default function ItemsTab() {
   const { enqueueSnackbar } = useSnackbar();
   const [items, setItems] = useState<Item[]>([]);
+  const [effects, setEffects] = useState<Effect[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<Item | null>(null);
@@ -15,6 +36,7 @@ export default function ItemsTab() {
 
   useEffect(() => {
     fetchItems();
+    fetchEffects();
   }, []);
 
   const fetchItems = async () => {
@@ -30,6 +52,18 @@ export default function ItemsTab() {
       console.error("Erro ao carregar itens:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchEffects = async () => {
+    try {
+      const response = await fetch("/api/effects");
+      if (response.ok) {
+        const data = await response.json();
+        setEffects(data);
+      }
+    } catch (error) {
+      console.error("Erro ao carregar efeitos:", error);
     }
   };
 
@@ -79,27 +113,25 @@ export default function ItemsTab() {
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const getEffectLabel = (effect: string) => {
-    const effects: { [key: string]: string } = {
-      heal_1000: "Curar 1000 HP",
-      heal_2000: "Curar 2000 HP",
-      heal_full: "Curar HP Completo",
-      revive_half: "Reviver 50% HP",
-      boost_dp_500: "DP +500",
-      shield_turn: "Escudo 1 Turno",
-      instant_evolution: "Evolução Instantânea",
-      heal_cleanse: "Curar + Limpar",
-    };
-    return effects[effect] || effect;
-  };
+  const getEffectInfo = (effectId: number) => {
+    const effect = effects.find((e) => e.id === effectId);
+    if (!effect)
+      return { label: "Desconhecido", color: "bg-gray-500", icon: "❓" };
 
-  const getEffectColor = (effect: string) => {
-    if (effect.includes("heal")) return "bg-green-500";
-    if (effect.includes("revive")) return "bg-yellow-500";
-    if (effect.includes("boost")) return "bg-orange-500";
-    if (effect.includes("shield")) return "bg-blue-500";
-    if (effect.includes("evolution")) return "bg-purple-500";
-    return "bg-gray-500";
+    const colorMap: Record<EffectType, string> = {
+      heal: "bg-green-500",
+      damage: "bg-red-500",
+      buff: "bg-blue-500",
+      debuff: "bg-orange-500",
+      special: "bg-purple-500",
+      boss: "bg-pink-500",
+    };
+
+    return {
+      label: effect.name,
+      color: colorMap[effect.type],
+      icon: effectTypeIcons[effect.type],
+    };
   };
 
   return (
@@ -183,13 +215,16 @@ export default function ItemsTab() {
                   </p>
 
                   <div className="mb-4">
-                    <span
-                      className={`${getEffectColor(
-                        item.effect
-                      )} text-white text-xs font-semibold px-2 py-1 rounded-full`}
-                    >
-                      {getEffectLabel(item.effect)}
-                    </span>
+                    {item.effectId && (
+                      <span
+                        className={`${
+                          getEffectInfo(item.effectId).color
+                        } text-white text-xs font-semibold px-2 py-1 rounded-full`}
+                      >
+                        {getEffectInfo(item.effectId).icon}{" "}
+                        {getEffectInfo(item.effectId).label}
+                      </span>
+                    )}
                   </div>
 
                   {/* Botões de ação */}
