@@ -48,24 +48,24 @@ export function getLevelName(level: number): string {
  * Tipos de Digimon e suas vantagens
  */
 export const DIGIMON_TYPES = {
-  VACCINE: 1,
-  VIRUS: 2,
-  DATA: 3,
+  DATA: 1,
+  VACCINE: 2,
+  VIRUS: 3,
   FREE: 4,
-  UNKNOWN: 5,
-  VARIABLE: 6,
+  VARIABLE: 5,
+  UNKNOWN: 6,
 } as const;
 
 /**
  * Nomes dos tipos de Digimon
  */
 export const DIGIMON_TYPE_NAMES = {
+  [DIGIMON_TYPES.DATA]: "Data",
   [DIGIMON_TYPES.VACCINE]: "Vaccine",
   [DIGIMON_TYPES.VIRUS]: "Virus",
-  [DIGIMON_TYPES.DATA]: "Data",
   [DIGIMON_TYPES.FREE]: "Free",
-  [DIGIMON_TYPES.UNKNOWN]: "Unknown",
   [DIGIMON_TYPES.VARIABLE]: "Variable",
+  [DIGIMON_TYPES.UNKNOWN]: "Unknown",
 } as const;
 
 /**

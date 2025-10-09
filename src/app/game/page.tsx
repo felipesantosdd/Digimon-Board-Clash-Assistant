@@ -110,19 +110,20 @@ export default function GamePage() {
 
     const isNewRound = nextPlayerIndex <= gameState.currentTurnPlayerIndex;
 
-    // Resetar hasActedThisTurn do próximo jogador
+    // Resetar hasActedThisTurn e defending do próximo jogador
     const updatedState = {
       ...gameState,
       currentTurnPlayerIndex: nextPlayerIndex,
       turnCount: isNewRound ? gameState.turnCount + 1 : gameState.turnCount,
       players: gameState.players.map((player, idx) => {
         if (idx === nextPlayerIndex) {
-          // Resetar ações dos Digimons do próximo jogador
+          // Resetar ações e defesas dos Digimons do próximo jogador
           return {
             ...player,
             digimons: player.digimons.map((d) => ({
               ...d,
               hasActedThisTurn: false,
+              defending: null, // Resetar defesa
             })),
           };
         }
@@ -195,7 +196,7 @@ export default function GamePage() {
   ) => {
     console.log("⚔️ [ATTACK] Iniciando confirmação de ataque...");
     console.log("⚔️ [ATTACK] Atacante:", attackerDigimon?.digimon.name);
-    console.log("⚔️ [ATTACK] Defensor:", targetDigimon.name);
+    console.log("⚔️ [ATTACK] Alvo original:", targetDigimon.name);
     console.log("⚔️ [ATTACK] Danos:", { attackerDamage, defenderDamage });
 
     if (!gameState || !attackerDigimon) {
@@ -207,10 +208,11 @@ export default function GamePage() {
     }
 
     console.log("✅ [ATTACK] Validação passou! Processando ataque...");
+    console.log("🎯 [ATTACK] Alvo:", targetDigimon.name);
 
-    // Aplicar dano ao defensor
+    // Aplicar dano ao alvo (já foi redirecionado no AttackDialog se necessário)
     const defenderResult = applyDamageToDigimon(targetDigimon, attackerDamage);
-    console.log("🛡️ [ATTACK] Resultado defensor:", defenderResult);
+    console.log("🛡️ [ATTACK] Resultado alvo:", defenderResult);
 
     // Aplicar dano ao atacante (contra-ataque)
     const attackerResult = applyDamageToDigimon(
@@ -225,15 +227,16 @@ export default function GamePage() {
       players: gameState.players.map((player) => ({
         ...player,
         digimons: player.digimons.map((d) => {
-          // Atualizar defensor
+          // Atualizar alvo
           if (d.id === targetDigimon.id) {
-            console.log("🎯 [ATTACK] Atualizando defensor:", d.name);
+            console.log("🎯 [ATTACK] Atualizando alvo:", d.name);
             return {
               ...d,
               currentHp: defenderResult.newHp,
               canEvolve: defenderResult.evolutionUnlocked
                 ? true
                 : d.canEvolve || false,
+              defending: null, // Remove defesa ao ser atacado (interceptou)
             };
           }
           // Atualizar atacante E marcar como já agiu
@@ -311,13 +314,14 @@ export default function GamePage() {
         updateTamerScore(ownerPlayer.id, evolution.dp);
       }
 
-      // Atualizar o Digimon no gameState
+      // Atualizar o Digimon no gameState e resetar defesas que apontam para ele
       const updatedState = {
         ...gameState,
         players: gameState.players.map((player) => ({
           ...player,
           digimons: player.digimons.map((d) => {
             if (d.id === digimon.id) {
+              // Evoluir o Digimon
               return {
                 ...d,
                 id: evolution.id,
@@ -329,6 +333,13 @@ export default function GamePage() {
                 currentHp: evolution.dp, // HP resetado para 100%
                 canEvolve: false, // Reset da flag de evolução
                 originalId: d.originalId || digimon.id, // Guardar ID original
+              };
+            }
+            // Resetar defesa se estava defendendo o Digimon que evoluiu
+            if (d.defending === digimon.id) {
+              return {
+                ...d,
+                defending: null,
               };
             }
             return d;
@@ -515,6 +526,294 @@ export default function GamePage() {
       `${capitalize(
         digimon.name
       )} descansou e recuperou ${actualHeal.toLocaleString()} HP (${hpPercentage}%)!`,
+      { variant: "success" }
+    );
+  };
+
+  const handleUseItem = (digimon: GameDigimon, itemId: number) => {
+    console.log("💊 [ITEM] Usando item...");
+    console.log("💊 [ITEM] Digimon:", digimon.name, "| Item ID:", itemId);
+
+    if (!gameState || !selectedDigimon) {
+      console.log("❌ [ITEM] Validação falhou");
+      return;
+    }
+
+    const item = digimon.bag?.find((i) => i.id === itemId);
+    if (!item) {
+      enqueueSnackbar("Item não encontrado!", { variant: "error" });
+      return;
+    }
+
+    // Aplicar efeito do item
+    let newHp = digimon.currentHp;
+    let effectMessage = "";
+
+    switch (item.effect) {
+      case "heal_1000":
+        newHp = Math.min(digimon.dp, digimon.currentHp + 1000);
+        effectMessage = `restaurou ${(
+          newHp - digimon.currentHp
+        ).toLocaleString()} HP`;
+        break;
+      case "heal_2000":
+        newHp = Math.min(digimon.dp, digimon.currentHp + 2000);
+        effectMessage = `restaurou ${(
+          newHp - digimon.currentHp
+        ).toLocaleString()} HP`;
+        break;
+      case "heal_full":
+        newHp = digimon.dp;
+        effectMessage = "restaurou HP completamente";
+        break;
+      default:
+        effectMessage = `usou ${item.name}`;
+    }
+
+    // Atualizar estado
+    const updatedState = {
+      ...gameState,
+      players: gameState.players.map((player) => {
+        if (player.id === selectedDigimon.playerId) {
+          return {
+            ...player,
+            digimons: player.digimons.map((d) => {
+              if ((d.originalId || d.id) === selectedDigimon.originalId) {
+                // Remover ou decrementar item
+                const updatedBag = (d.bag || [])
+                  .map((bagItem) => {
+                    if (bagItem.id === itemId) {
+                      return bagItem.quantity > 1
+                        ? { ...bagItem, quantity: bagItem.quantity - 1 }
+                        : null;
+                    }
+                    return bagItem;
+                  })
+                  .filter((i) => i !== null);
+
+                return {
+                  ...d,
+                  currentHp: newHp,
+                  bag: updatedBag,
+                  hasActedThisTurn: true,
+                };
+              }
+              return d;
+            }),
+          };
+        }
+        return player;
+      }),
+    };
+
+    saveGameState(updatedState);
+    enqueueSnackbar(
+      `${capitalize(digimon.name)} ${effectMessage} usando ${item.name}!`,
+      { variant: "success" }
+    );
+  };
+
+  const handleDiscardItem = (digimon: GameDigimon, itemId: number) => {
+    console.log("🗑️ [ITEM] Descartando item...");
+    console.log("🗑️ [ITEM] Digimon:", digimon.name, "| Item ID:", itemId);
+
+    if (!gameState || !selectedDigimon) {
+      console.log("❌ [ITEM] Validação falhou");
+      return;
+    }
+
+    const item = digimon.bag?.find((i) => i.id === itemId);
+    if (!item) {
+      enqueueSnackbar("Item não encontrado!", { variant: "error" });
+      return;
+    }
+
+    // Atualizar estado
+    const updatedState = {
+      ...gameState,
+      players: gameState.players.map((player) => {
+        if (player.id === selectedDigimon.playerId) {
+          return {
+            ...player,
+            digimons: player.digimons.map((d) => {
+              if ((d.originalId || d.id) === selectedDigimon.originalId) {
+                // Remover item completamente
+                const updatedBag = (d.bag || []).filter((i) => i.id !== itemId);
+
+                return {
+                  ...d,
+                  bag: updatedBag,
+                };
+              }
+              return d;
+            }),
+          };
+        }
+        return player;
+      }),
+    };
+
+    saveGameState(updatedState);
+    enqueueSnackbar(`${item.name} foi descartado!`, { variant: "info" });
+  };
+
+  const handleGiveItem = (
+    fromDigimon: GameDigimon,
+    toDigimonId: number,
+    itemId: number
+  ) => {
+    console.log("🎁 [ITEM] Dando item...");
+    console.log(
+      "🎁 [ITEM] De:",
+      fromDigimon.name,
+      "| Para:",
+      toDigimonId,
+      "| Item ID:",
+      itemId
+    );
+
+    if (!gameState || !selectedDigimon) {
+      console.log("❌ [ITEM] Validação falhou");
+      return;
+    }
+
+    const item = fromDigimon.bag?.find((i) => i.id === itemId);
+    if (!item) {
+      enqueueSnackbar("Item não encontrado!", { variant: "error" });
+      return;
+    }
+
+    // Atualizar estado
+    const updatedState = {
+      ...gameState,
+      players: gameState.players.map((player) => {
+        if (player.id === selectedDigimon.playerId) {
+          return {
+            ...player,
+            digimons: player.digimons.map((d) => {
+              // Remover do digimon atual
+              if ((d.originalId || d.id) === selectedDigimon.originalId) {
+                const updatedBag = (d.bag || [])
+                  .map((bagItem) => {
+                    if (bagItem.id === itemId) {
+                      return bagItem.quantity > 1
+                        ? { ...bagItem, quantity: bagItem.quantity - 1 }
+                        : null;
+                    }
+                    return bagItem;
+                  })
+                  .filter((i) => i !== null);
+
+                return {
+                  ...d,
+                  bag: updatedBag,
+                  hasActedThisTurn: true,
+                };
+              }
+
+              // Adicionar ao digimon alvo
+              if (d.id === toDigimonId) {
+                const existingItem = d.bag?.find((i) => i.id === itemId);
+                let updatedBag;
+
+                if (existingItem) {
+                  // Incrementar quantidade
+                  updatedBag = (d.bag || []).map((i) =>
+                    i.id === itemId ? { ...i, quantity: i.quantity + 1 } : i
+                  );
+                } else {
+                  // Adicionar novo item
+                  updatedBag = [...(d.bag || []), { ...item, quantity: 1 }];
+                }
+
+                return {
+                  ...d,
+                  bag: updatedBag,
+                };
+              }
+
+              return d;
+            }),
+          };
+        }
+        return player;
+      }),
+    };
+
+    saveGameState(updatedState);
+    const targetDigimon = gameState.players
+      .flatMap((p) => p.digimons)
+      .find((d) => d.id === toDigimonId);
+
+    enqueueSnackbar(
+      `${capitalize(fromDigimon.name)} deu ${item.name} para ${capitalize(
+        targetDigimon?.name || "outro digimon"
+      )}!`,
+      { variant: "success" }
+    );
+  };
+
+  const handleDefend = (digimon: GameDigimon, targetDigimonId: number) => {
+    console.log("🛡️ [DEFEND] Iniciando defesa...");
+    console.log(
+      "🛡️ [DEFEND] Defensor:",
+      digimon.name,
+      "| Alvo:",
+      targetDigimonId
+    );
+
+    if (!gameState || !selectedDigimon) {
+      console.log("❌ [DEFEND] Validação falhou");
+      return;
+    }
+
+    const targetDigimon = gameState.players
+      .flatMap((p) => p.digimons)
+      .find((d) => d.id === targetDigimonId);
+
+    if (!targetDigimon) {
+      enqueueSnackbar("Digimon alvo não encontrado!", { variant: "error" });
+      return;
+    }
+
+    // Verificar se pode defender (mesmo nível ou inferior)
+    if (targetDigimon.level > digimon.level) {
+      enqueueSnackbar(
+        "Você só pode defender Digimons de nível igual ou inferior!",
+        { variant: "warning" }
+      );
+      return;
+    }
+
+    // Atualizar estado
+    const updatedState = {
+      ...gameState,
+      players: gameState.players.map((player) => {
+        if (player.id === selectedDigimon.playerId) {
+          return {
+            ...player,
+            digimons: player.digimons.map((d) => {
+              if ((d.originalId || d.id) === selectedDigimon.originalId) {
+                // Marcar como defendendo e gastou ação
+                return {
+                  ...d,
+                  defending: targetDigimonId,
+                  hasActedThisTurn: true,
+                };
+              }
+              return d;
+            }),
+          };
+        }
+        return player;
+      }),
+    };
+
+    saveGameState(updatedState);
+    enqueueSnackbar(
+      `🛡️ ${capitalize(digimon.name)} está defendendo ${capitalize(
+        targetDigimon.name
+      )}!`,
       { variant: "success" }
     );
   };
@@ -877,6 +1176,23 @@ export default function GamePage() {
                                     ⏸️
                                   </div>
                                 )}
+                              {/* Badge de Defesa - Mostra no defendido quem o está defendendo */}
+                              {(() => {
+                                const defender = player.digimons.find(
+                                  (d) =>
+                                    d.defending === digimon.id &&
+                                    d.currentHp > 0
+                                );
+                                return (
+                                  defender &&
+                                  !isDead && (
+                                    <div className="absolute bottom-1 right-1 bg-cyan-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-cyan-400 flex items-center gap-1">
+                                      <span>🛡️</span>
+                                      <span>{capitalize(defender.name)}</span>
+                                    </div>
+                                  )
+                                );
+                              })()}
                             </div>
 
                             {/* Dados do Digimon - Lado Direito */}
@@ -1015,6 +1331,16 @@ export default function GamePage() {
         onLoot={handleLoot}
         onRest={handleRest}
         onAttack={handleAttack}
+        onDefend={handleDefend}
+        onUseItem={handleUseItem}
+        onDiscardItem={handleDiscardItem}
+        onGiveItem={handleGiveItem}
+        playerDigimons={
+          selectedDigimon
+            ? gameState?.players.find((p) => p.id === selectedDigimon.playerId)
+                ?.digimons || []
+            : []
+        }
         isCurrentPlayerTurn={
           selectedDigimon !== null &&
           gameState !== null &&

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { GameDigimon } from "@/types/game";
 import { capitalize, getLevelName } from "@/lib/utils";
 
@@ -12,7 +13,16 @@ interface DigimonDetailsModalProps {
   onLoot: (digimon: GameDigimon) => void;
   onRest: (digimon: GameDigimon) => void;
   onAttack: (digimon: GameDigimon) => void;
+  onDefend?: (digimon: GameDigimon, targetDigimonId: number) => void;
   isCurrentPlayerTurn: boolean;
+  onUseItem?: (digimon: GameDigimon, itemId: number) => void;
+  onDiscardItem?: (digimon: GameDigimon, itemId: number) => void;
+  onGiveItem?: (
+    fromDigimon: GameDigimon,
+    toDigimonId: number,
+    itemId: number
+  ) => void;
+  playerDigimons?: GameDigimon[]; // Lista de digimons do jogador para transferência
 }
 
 export default function DigimonDetailsModal({
@@ -24,12 +34,57 @@ export default function DigimonDetailsModal({
   onLoot,
   onRest,
   onAttack,
+  onDefend,
   isCurrentPlayerTurn,
+  onUseItem,
+  onDiscardItem,
+  onGiveItem,
+  playerDigimons = [],
 }: DigimonDetailsModalProps) {
+  const [showBag, setShowBag] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
+  const [showGiveDialog, setShowGiveDialog] = useState(false);
+  const [showDefendDialog, setShowDefendDialog] = useState(false);
+
   if (!isOpen || !digimon) return null;
 
   const hpPercentage = (digimon.currentHp / digimon.dp) * 100;
   const isDead = digimon.currentHp <= 0;
+
+  const handleUseItem = (itemId: number) => {
+    if (onUseItem && digimon) {
+      onUseItem(digimon, itemId);
+      setShowBag(false);
+    }
+  };
+
+  const handleDiscardItem = (itemId: number) => {
+    if (onDiscardItem && digimon) {
+      onDiscardItem(digimon, itemId);
+    }
+  };
+
+  const handleOpenGiveDialog = (itemId: number) => {
+    setSelectedItemId(itemId);
+    setShowGiveDialog(true);
+  };
+
+  const handleGiveItem = (toDigimonId: number) => {
+    if (onGiveItem && digimon && selectedItemId !== null) {
+      onGiveItem(digimon, toDigimonId, selectedItemId);
+      setShowGiveDialog(false);
+      setSelectedItemId(null);
+      setShowBag(false);
+    }
+  };
+
+  const handleDefend = (targetDigimonId: number) => {
+    if (onDefend && digimon) {
+      onDefend(digimon, targetDigimonId);
+      setShowDefendDialog(false);
+      onClose();
+    }
+  };
 
   return (
     <div
@@ -177,37 +232,66 @@ export default function DigimonDetailsModal({
             <div className="space-y-3">
               {/* Botões de Ação (apenas se for turno do jogador) */}
               {isCurrentPlayerTurn && !digimon.hasActedThisTurn && (
-                <div className="grid grid-cols-3 gap-2">
-                  <button
-                    onClick={() => {
-                      onLoot(digimon);
-                      onClose();
-                    }}
-                    className="px-4 py-2 bg-yellow-600 text-white font-bold rounded-lg hover:bg-yellow-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
-                  >
-                    <span className="text-2xl">💰</span>
-                    <span className="text-xs">Explorar</span>
-                  </button>
-                  <button
-                    onClick={() => {
-                      onRest(digimon);
-                      onClose();
-                    }}
-                    className="px-4 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
-                  >
-                    <span className="text-2xl">😴</span>
-                    <span className="text-xs">Descansar</span>
-                  </button>
-                  <button
-                    onClick={() => {
-                      onAttack(digimon);
-                      onClose();
-                    }}
-                    className="px-4 py-2 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
-                  >
-                    <span className="text-2xl">⚔️</span>
-                    <span className="text-xs">Atacar</span>
-                  </button>
+                <div className="space-y-2">
+                  {/* Linha 1 - Botões Ativos */}
+                  <div className="grid grid-cols-3 gap-2">
+                    <button
+                      onClick={() => {
+                        onAttack(digimon);
+                        onClose();
+                      }}
+                      className="px-4 py-2 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
+                    >
+                      <span className="text-2xl">⚔️</span>
+                      <span className="text-xs">Atacar</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        onRest(digimon);
+                        onClose();
+                      }}
+                      className="px-4 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
+                    >
+                      <span className="text-2xl">😴</span>
+                      <span className="text-xs">Descansar</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        onLoot(digimon);
+                        onClose();
+                      }}
+                      className="px-4 py-2 bg-yellow-600 text-white font-bold rounded-lg hover:bg-yellow-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
+                    >
+                      <span className="text-2xl">💰</span>
+                      <span className="text-xs">Explorar</span>
+                    </button>
+                  </div>
+
+                  {/* Linha 2 - Botões (Bag e Defender ativos) */}
+                  <div className="grid grid-cols-3 gap-2">
+                    <button
+                      onClick={() => setShowBag(true)}
+                      className="px-4 py-2 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
+                    >
+                      <span className="text-2xl">🎒</span>
+                      <span className="text-xs">Bag</span>
+                    </button>
+                    <button
+                      onClick={() => setShowDefendDialog(true)}
+                      className="px-4 py-2 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
+                    >
+                      <span className="text-2xl">🛡️</span>
+                      <span className="text-xs">Defender</span>
+                    </button>
+                    <button
+                      disabled
+                      className="px-4 py-2 bg-gray-600 text-gray-400 font-bold rounded-lg cursor-not-allowed opacity-50 flex flex-col items-center justify-center gap-1"
+                    >
+                      <span className="text-2xl">🌫️</span>
+                      <span className="text-xs">Esconder</span>
+                    </button>
+                  </div>
                 </div>
               )}
 
@@ -268,6 +352,469 @@ export default function DigimonDetailsModal({
           )}
         </div>
       </div>
+
+      {/* Modal de Bag */}
+      {showBag && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[60]"
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowBag(false);
+          }}
+        >
+          <div
+            className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-lg max-h-[80vh] overflow-y-auto border-2 border-purple-500 m-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-4 rounded-t-lg sticky top-0 z-10">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-xl font-bold flex items-center gap-2">
+                    <span className="text-2xl">🎒</span>
+                    Inventário
+                  </h3>
+                  <p className="text-sm text-purple-100 mt-1">
+                    {capitalize(digimon.name)}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowBag(false)}
+                  className="text-white hover:text-gray-200 text-3xl font-bold leading-none"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+
+            {/* Lista de Itens */}
+            <div className="p-4">
+              {!digimon.bag || digimon.bag.length === 0 ? (
+                <div className="text-center py-12">
+                  <div className="text-6xl mb-4">🎒</div>
+                  <p className="text-gray-400 font-semibold text-lg">
+                    Inventário vazio
+                  </p>
+                  <p className="text-gray-500 text-sm mt-2">
+                    Este Digimon não possui itens
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {digimon.bag.map((item, index) => (
+                    <div
+                      key={`${item.id}-${index}`}
+                      className="bg-gray-700 rounded-lg p-4 border border-gray-600 hover:border-purple-500 transition-all"
+                    >
+                      <div className="flex gap-4">
+                        {/* Imagem do Item */}
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 bg-gray-800 rounded-lg overflow-hidden border-2 border-gray-600 flex items-center justify-center">
+                            {item.image ? (
+                              <img
+                                src={item.image}
+                                alt={item.name}
+                                className="w-full h-full object-contain"
+                              />
+                            ) : (
+                              <span className="text-3xl">📦</span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Informações do Item */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between gap-2">
+                            <h4 className="text-white font-bold text-base">
+                              {item.name}
+                            </h4>
+                            <div className="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-full flex-shrink-0">
+                              x{item.quantity}
+                            </div>
+                          </div>
+                          <p className="text-gray-300 text-sm mt-1 line-clamp-2">
+                            {item.description}
+                          </p>
+                          <div className="mt-2 flex items-center gap-2">
+                            <span className="text-xs text-purple-400 font-semibold bg-purple-900/30 px-2 py-1 rounded">
+                              {item.effect}
+                            </span>
+                          </div>
+
+                          {/* Botões de Ação */}
+                          {isCurrentPlayerTurn && !digimon.hasActedThisTurn && (
+                            <div className="mt-3 flex gap-2">
+                              <button
+                                onClick={() => handleUseItem(item.id)}
+                                className="flex-1 px-3 py-1.5 bg-green-600 text-white text-xs font-bold rounded hover:bg-green-700 transition-all"
+                              >
+                                ✓ Usar
+                              </button>
+                              <button
+                                onClick={() => handleOpenGiveDialog(item.id)}
+                                className="flex-1 px-3 py-1.5 bg-blue-600 text-white text-xs font-bold rounded hover:bg-blue-700 transition-all"
+                              >
+                                🎁 Dar
+                              </button>
+                              <button
+                                onClick={() => handleDiscardItem(item.id)}
+                                className="flex-1 px-3 py-1.5 bg-red-600 text-white text-xs font-bold rounded hover:bg-red-700 transition-all"
+                              >
+                                🗑️ Descartar
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div className="bg-gray-900 px-6 py-4 rounded-b-lg border-t border-gray-700 sticky bottom-0">
+              <button
+                onClick={() => setShowBag(false)}
+                className="w-full px-4 py-2 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-all"
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Selecionar Digimon para Dar Item */}
+      {showGiveDialog && selectedItemId !== null && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[70]"
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowGiveDialog(false);
+            setSelectedItemId(null);
+          }}
+        >
+          <div
+            className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-md border-2 border-blue-500 m-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-4 rounded-t-lg">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-bold flex items-center gap-2">
+                  <span className="text-2xl">🎁</span>
+                  Dar Item
+                </h3>
+                <button
+                  onClick={() => {
+                    setShowGiveDialog(false);
+                    setSelectedItemId(null);
+                  }}
+                  className="text-white hover:text-gray-200 text-3xl font-bold leading-none"
+                >
+                  ×
+                </button>
+              </div>
+              <p className="text-sm text-blue-100 mt-1">
+                Selecione o Digimon que vai receber o item
+              </p>
+            </div>
+
+            {/* Item Selecionado */}
+            {(() => {
+              const selectedItem = digimon?.bag?.find(
+                (i) => i.id === selectedItemId
+              );
+              return selectedItem ? (
+                <div className="bg-gray-700 border-b-2 border-blue-500 p-4">
+                  <div className="flex items-center gap-3">
+                    {/* Imagem do Item */}
+                    <div className="w-12 h-12 bg-gray-800 rounded-lg overflow-hidden border-2 border-blue-500 flex-shrink-0">
+                      {selectedItem.image ? (
+                        <img
+                          src={selectedItem.image}
+                          alt={selectedItem.name}
+                          className="w-full h-full object-contain"
+                        />
+                      ) : (
+                        <span className="text-2xl flex items-center justify-center h-full">
+                          📦
+                        </span>
+                      )}
+                    </div>
+                    {/* Info do Item */}
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-white font-bold text-sm">
+                        {selectedItem.name}
+                      </h4>
+                      <p className="text-gray-300 text-xs mt-0.5 line-clamp-1">
+                        {selectedItem.description}
+                      </p>
+                    </div>
+                    {/* Quantidade */}
+                    <div className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                      x1
+                    </div>
+                  </div>
+                </div>
+              ) : null;
+            })()}
+
+            {/* Lista de Digimons */}
+            <div className="p-4 max-h-96 overflow-y-auto">
+              <div className="space-y-2">
+                {playerDigimons
+                  .filter((d) => d.id !== digimon?.id && d.currentHp > 0)
+                  .map((targetDigimon) => (
+                    <button
+                      key={targetDigimon.id}
+                      onClick={() => handleGiveItem(targetDigimon.id)}
+                      className="w-full bg-gray-700 hover:bg-gray-600 border border-gray-600 hover:border-blue-500 rounded-lg p-3 transition-all text-left"
+                    >
+                      <div className="flex items-center gap-3">
+                        {/* Imagem */}
+                        <div className="w-12 h-12 bg-gray-800 rounded-lg overflow-hidden border-2 border-gray-600 flex-shrink-0">
+                          {targetDigimon.image ? (
+                            <img
+                              src={targetDigimon.image}
+                              alt={targetDigimon.name}
+                              className="w-full h-full object-contain"
+                            />
+                          ) : (
+                            <span className="text-2xl">❓</span>
+                          )}
+                        </div>
+
+                        {/* Info */}
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-white font-bold text-sm truncate">
+                            {capitalize(targetDigimon.name)}
+                          </h4>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-xs text-gray-400">
+                              HP: {targetDigimon.currentHp.toLocaleString()} /{" "}
+                              {targetDigimon.dp.toLocaleString()}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Ícone */}
+                        <div className="text-2xl">→</div>
+                      </div>
+                    </button>
+                  ))}
+
+                {playerDigimons.filter(
+                  (d) => d.id !== digimon?.id && d.currentHp > 0
+                ).length === 0 && (
+                  <div className="text-center py-8">
+                    <p className="text-gray-400 text-sm">
+                      Nenhum outro Digimon vivo disponível
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="bg-gray-900 px-6 py-4 rounded-b-lg border-t border-gray-700">
+              <button
+                onClick={() => {
+                  setShowGiveDialog(false);
+                  setSelectedItemId(null);
+                }}
+                className="w-full px-4 py-2 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-all"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Selecionar Digimon para Defender */}
+      {showDefendDialog && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[70]"
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowDefendDialog(false);
+          }}
+        >
+          <div
+            className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-xl border-2 border-cyan-500 m-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-4 rounded-t-lg">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-bold flex items-center gap-2">
+                  <span className="text-2xl">🛡️</span>
+                  Defender Aliado
+                </h3>
+                <button
+                  onClick={() => setShowDefendDialog(false)}
+                  className="text-white hover:text-gray-200 text-3xl font-bold leading-none"
+                >
+                  ×
+                </button>
+              </div>
+              <p className="text-sm text-cyan-100 mt-1">
+                Selecione um aliado de nível igual ou inferior para proteger
+              </p>
+            </div>
+
+            {/* Lista de Digimons */}
+            <div className="p-4 max-h-96 overflow-y-auto">
+              <div className="space-y-2">
+                {playerDigimons
+                  .filter(
+                    (d) =>
+                      d.id !== digimon?.id &&
+                      d.currentHp > 0 &&
+                      d.level <= (digimon?.level || 0) &&
+                      // Não pode defender quem já está sendo defendido
+                      !playerDigimons.some(
+                        (defender) =>
+                          defender.defending === d.id && defender.currentHp > 0
+                      )
+                  )
+                  .map((targetDigimon) => {
+                    const hpPercentage =
+                      (targetDigimon.currentHp / targetDigimon.dp) * 100;
+                    const hpColor =
+                      hpPercentage > 75
+                        ? "text-green-400"
+                        : hpPercentage > 50
+                        ? "text-yellow-400"
+                        : hpPercentage > 25
+                        ? "text-orange-400"
+                        : "text-red-400";
+
+                    return (
+                      <button
+                        key={targetDigimon.id}
+                        onClick={() => handleDefend(targetDigimon.id)}
+                        className="w-full bg-gray-700 hover:bg-gray-600 border border-gray-600 hover:border-cyan-500 rounded-lg p-3 transition-all text-left"
+                      >
+                        <div className="flex items-center gap-3">
+                          {/* Imagem */}
+                          <div className="w-16 h-16 bg-gray-800 rounded-lg overflow-hidden border-2 border-gray-600 flex-shrink-0 relative">
+                            {targetDigimon.image ? (
+                              <img
+                                src={targetDigimon.image}
+                                alt={targetDigimon.name}
+                                className="w-full h-full object-contain"
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center text-2xl">
+                                ❓
+                              </div>
+                            )}
+                            {/* Badge de Nível */}
+                            <div className="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold px-1 py-0.5 rounded-br">
+                              Lv{targetDigimon.level}
+                            </div>
+                          </div>
+
+                          {/* Info */}
+                          <div className="flex-1 min-w-0">
+                            <h4 className="text-white font-bold text-sm truncate mb-1">
+                              {capitalize(targetDigimon.name)}
+                            </h4>
+
+                            {/* Tipo */}
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-[10px] bg-blue-600 text-white font-bold px-1.5 py-0.5 rounded">
+                                {
+                                  {
+                                    1: "Data",
+                                    2: "Vaccine",
+                                    3: "Virus",
+                                    4: "Free",
+                                    5: "Variable",
+                                    6: "Unknown",
+                                  }[targetDigimon.typeId]
+                                }
+                              </span>
+                              <span className="text-[10px] bg-purple-600 text-white font-bold px-1.5 py-0.5 rounded">
+                                {targetDigimon.dp.toLocaleString()} DP
+                              </span>
+                            </div>
+
+                            {/* Barra de HP */}
+                            <div className="space-y-1">
+                              <div className="flex items-center justify-between">
+                                <span className="text-[10px] text-gray-400">
+                                  HP
+                                </span>
+                                <span
+                                  className={`text-xs font-bold ${hpColor}`}
+                                >
+                                  {targetDigimon.currentHp.toLocaleString()} /{" "}
+                                  {targetDigimon.dp.toLocaleString()}
+                                </span>
+                              </div>
+                              <div className="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
+                                <div
+                                  className={`h-full transition-all ${
+                                    hpPercentage > 75
+                                      ? "bg-green-500"
+                                      : hpPercentage > 50
+                                      ? "bg-yellow-500"
+                                      : hpPercentage > 25
+                                      ? "bg-orange-500"
+                                      : "bg-red-500"
+                                  }`}
+                                  style={{ width: `${hpPercentage}%` }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Ícone */}
+                          <div className="text-2xl flex-shrink-0">🛡️</div>
+                        </div>
+                      </button>
+                    );
+                  })}
+
+                {playerDigimons.filter(
+                  (d) =>
+                    d.id !== digimon?.id &&
+                    d.currentHp > 0 &&
+                    d.level <= (digimon?.level || 0) &&
+                    !playerDigimons.some(
+                      (defender) =>
+                        defender.defending === d.id && defender.currentHp > 0
+                    )
+                ).length === 0 && (
+                  <div className="text-center py-8">
+                    <p className="text-gray-400 text-sm">
+                      Nenhum aliado disponível para defender
+                    </p>
+                    <p className="text-gray-500 text-xs mt-1">
+                      Digimons já protegidos ou de nível superior não podem ser
+                      defendidos
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="bg-gray-900 px-6 py-4 rounded-b-lg border-t border-gray-700">
+              <button
+                onClick={() => setShowDefendDialog(false)}
+                className="w-full px-4 py-2 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-all"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

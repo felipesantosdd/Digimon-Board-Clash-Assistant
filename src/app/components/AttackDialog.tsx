@@ -77,7 +77,25 @@ export default function AttackDialog({
       return;
     }
 
-    setSelectedDigimon(digimon);
+    // 🛡️ VERIFICAR SE O ALVO TEM DEFENSOR
+    const defender = players
+      .flatMap((p) => p.digimons)
+      .find((d) => d.defending === digimon.id && d.currentHp > 0);
+
+    let targetDigimon = digimon;
+
+    if (defender) {
+      // Redirecionar ataque para o defensor
+      targetDigimon = defender;
+      enqueueSnackbar(
+        `🛡️ ${capitalize(defender.name)} está defendendo ${capitalize(
+          digimon.name
+        )}! O ataque será redirecionado!`,
+        { variant: "info" }
+      );
+    }
+
+    setSelectedDigimon(targetDigimon);
     setBattleResult(null);
     setAttackerDiceValue(0);
     setDefenderDiceValue(0);
@@ -150,17 +168,6 @@ export default function AttackDialog({
     }, 100);
   };
 
-  const handleBack = () => {
-    if (step === "battle") {
-      setSelectedDigimon(null);
-      setBattleResult(null);
-      setBattleComplete(false);
-      setAttackerDiceValue(0);
-      setDefenderDiceValue(0);
-      setStep("select-digimon");
-    }
-  };
-
   const handleClose = () => {
     setSelectedDigimon(null);
     setStep("select-digimon");
@@ -177,7 +184,7 @@ export default function AttackDialog({
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-[60] p-2 sm:p-4"
-      onClick={handleClose}
+      onClick={step === "select-digimon" ? handleClose : undefined}
     >
       <div
         className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-7xl max-h-[95vh] overflow-y-auto border-2 border-red-500"
@@ -271,20 +278,27 @@ export default function AttackDialog({
 
         {/* Footer */}
         <div className="bg-gray-700 px-6 py-4 rounded-b-lg flex gap-3">
-          {step !== "select-digimon" && !battleComplete && (
+          {step === "select-digimon" && (
             <button
-              onClick={handleBack}
-              className="px-4 py-2 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors border border-gray-600"
+              onClick={handleClose}
+              className="flex-1 px-4 py-2 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors border border-gray-600"
             >
-              ← Voltar
+              Cancelar
             </button>
           )}
-          <button
-            onClick={handleClose}
-            className="flex-1 px-4 py-2 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors border border-gray-600"
-          >
-            {battleComplete ? "Fechar" : "Cancelar"}
-          </button>
+          {step === "battle" && battleComplete && (
+            <button
+              onClick={handleClose}
+              className="flex-1 px-4 py-2 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors border border-gray-600"
+            >
+              Fechar
+            </button>
+          )}
+          {step === "battle" && !battleComplete && (
+            <div className="flex-1 text-center py-2 text-yellow-400 font-semibold">
+              ⚠️ Execute o ataque para prosseguir
+            </div>
+          )}
         </div>
       </div>
     </div>
