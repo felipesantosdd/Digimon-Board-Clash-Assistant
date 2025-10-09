@@ -79,7 +79,7 @@ export function calculateTypeAdvantage(
   defenderTypeId: number
 ): number {
   // Apenas Vaccine, Virus e Data têm vantagens entre si
-  const hasAdvantage = [
+  const hasAdvantage: number[] = [
     DIGIMON_TYPES.VACCINE,
     DIGIMON_TYPES.VIRUS,
     DIGIMON_TYPES.DATA,

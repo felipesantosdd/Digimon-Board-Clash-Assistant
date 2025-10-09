@@ -35,7 +35,6 @@ export default function AttackDialog({
   currentPlayerId,
 }: AttackDialogProps) {
   const { enqueueSnackbar } = useSnackbar();
-  const [selectedPlayerId, setSelectedPlayerId] = useState<number | null>(null);
   const [selectedDigimon, setSelectedDigimon] = useState<GameDigimon | null>(
     null
   );
@@ -53,7 +52,6 @@ export default function AttackDialog({
   // Resetar ao abrir
   useEffect(() => {
     if (isOpen) {
-      setSelectedPlayerId(null);
       setSelectedDigimon(null);
       setStep("select-digimon");
       setBattleResult(null);
@@ -79,7 +77,6 @@ export default function AttackDialog({
       return;
     }
 
-    setSelectedPlayerId(playerId);
     setSelectedDigimon(digimon);
     setBattleResult(null);
     setAttackerDiceValue(0);
@@ -118,7 +115,11 @@ export default function AttackDialog({
         setIsRolling(false);
 
         // Aplicar dano imediatamente
-        onConfirm(selectedDigimon, result.attackerDamage, result.defenderDamage);
+        onConfirm(
+          selectedDigimon,
+          result.attackerDamage,
+          result.defenderDamage
+        );
         setBattleComplete(true);
 
         // Feedback de críticos/falhas
@@ -152,7 +153,6 @@ export default function AttackDialog({
   const handleBack = () => {
     if (step === "battle") {
       setSelectedDigimon(null);
-      setSelectedPlayerId(null);
       setBattleResult(null);
       setBattleComplete(false);
       setAttackerDiceValue(0);
@@ -162,7 +162,6 @@ export default function AttackDialog({
   };
 
   const handleClose = () => {
-    setSelectedPlayerId(null);
     setSelectedDigimon(null);
     setStep("select-digimon");
     setBattleResult(null);

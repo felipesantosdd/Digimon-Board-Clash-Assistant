@@ -1,7 +1,7 @@
 "use client";
 
 import { GameDigimon } from "@/types/game";
-import { capitalize, getLevelName, DIGIMON_TYPE_NAMES } from "@/lib/utils";
+import { capitalize, DIGIMON_TYPE_NAMES } from "@/lib/utils";
 import D20Display from "./D20Display";
 
 interface BattleViewProps {
