@@ -258,179 +258,186 @@ export default function DigimonsTab() {
           {searchTerm || levelFilter ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {filteredDigimons.map((digimon) => {
-              const needsEvolution =
-                digimon.level <= 3 &&
-                (!digimon.evolution || digimon.evolution.length === 0);
+                const needsEvolution =
+                  digimon.level <= 3 &&
+                  (!digimon.evolution || digimon.evolution.length === 0);
 
-              return (
-                <div
-                  key={digimon.id}
-                  className={`bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ${
-                    needsEvolution ? "ring-4 ring-red-500" : ""
-                  }`}
-                >
-                  <div className="relative h-40 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
-                    <img
-                      src={digimon.image}
-                      alt={digimon.name}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = "/images/digimons/fallback.svg";
-                      }}
-                    />
-                  </div>
+                return (
+                  <div
+                    key={digimon.id}
+                    className={`bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ${
+                      needsEvolution ? "ring-4 ring-red-500" : ""
+                    }`}
+                  >
+                    <div className="relative h-40 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
+                      <img
+                        src={digimon.image}
+                        alt={digimon.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = "/images/digimons/fallback.svg";
+                        }}
+                      />
+                    </div>
 
-                  <div className="p-4">
-                    <h3 className="text-lg font-bold text-white mb-2">
-                      {capitalize(digimon.name)}
-                    </h3>
+                    <div className="p-4">
+                      <h3 className="text-lg font-bold text-white mb-2">
+                        {capitalize(digimon.name)}
+                      </h3>
 
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2">
-                        <span
-                          className={`${getTypeColor(
-                            digimon.typeId
-                          )} text-white text-xs font-semibold px-2 py-1 rounded-full`}
-                        >
-                          {getTypeName(digimon.typeId)}
-                        </span>
-                      </div>
-
-                      <div className="flex justify-between text-sm text-gray-300">
-                        <span className="font-semibold">
-                          <span className="text-blue-400">
-                            {getLevelName(digimon.level)}
+                      <div className="space-y-2 mb-4">
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`${getTypeColor(
+                              digimon.typeId
+                            )} text-white text-xs font-semibold px-2 py-1 rounded-full`}
+                          >
+                            {getTypeName(digimon.typeId)}
                           </span>
-                        </span>
-                        <span className="font-semibold">
-                          DP:{" "}
-                          <span className="text-orange-400">{digimon.dp}</span>
-                        </span>
+                        </div>
+
+                        <div className="flex justify-between text-sm text-gray-300">
+                          <span className="font-semibold">
+                            <span className="text-blue-400">
+                              {getLevelName(digimon.level)}
+                            </span>
+                          </span>
+                          <span className="font-semibold">
+                            DP:{" "}
+                            <span className="text-orange-400">
+                              {digimon.dp}
+                            </span>
+                          </span>
+                        </div>
+
+                        <div className="text-xs text-gray-400">
+                          {digimon.evolution?.length || 0} evolução(ões)
+                        </div>
                       </div>
 
-                      <div className="text-xs text-gray-400">
-                        {digimon.evolution?.length || 0} evolução(ões)
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <button
-                        onClick={() => handleConfigureEvolutions(digimon)}
-                        className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-                      >
-                        Editar
-                      </button>
-
-                      {process.env.NODE_ENV === "development" && (
+                      <div className="space-y-2">
                         <button
-                          onClick={() =>
-                            handleDeleteDigimon(
-                              digimon.id,
-                              capitalize(digimon.name)
-                            )
-                          }
-                          className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
+                          onClick={() => handleConfigureEvolutions(digimon)}
+                          className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
                         >
-                          🗑️ Excluir
+                          Editar
                         </button>
-                      )}
+
+                        {process.env.NODE_ENV === "development" && (
+                          <button
+                            onClick={() =>
+                              handleDeleteDigimon(
+                                digimon.id,
+                                capitalize(digimon.name)
+                              )
+                            }
+                            className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
+                          >
+                            🗑️ Excluir
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          /* Seções por Nível - quando não há filtros */
-          <div className="space-y-8">
-            {[1, 2, 3, 4, 5, 6, 7].map((level) => {
-              const digimonsInLevel = digimons.filter((d) => d.level === level);
+                );
+              })}
+            </div>
+          ) : (
+            /* Seções por Nível - quando não há filtros */
+            <div className="space-y-8">
+              {[1, 2, 3, 4, 5, 6, 7].map((level) => {
+                const digimonsInLevel = digimons.filter(
+                  (d) => d.level === level
+                );
 
-              if (digimonsInLevel.length === 0) return null;
+                if (digimonsInLevel.length === 0) return null;
 
-              return (
-                <div key={level}>
-                  {/* Cabeçalho da Seção */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <h3 className="text-2xl font-bold text-white">
-                      {getLevelName(level)}
-                    </h3>
-                    <div className="flex-1 h-px bg-gradient-to-r from-blue-500 to-transparent"></div>
-                    <span className="text-gray-400 text-sm font-semibold">
-                      {digimonsInLevel.length}{" "}
-                      {digimonsInLevel.length === 1 ? "Digimon" : "Digimons"}
-                    </span>
-                  </div>
+                return (
+                  <div key={level}>
+                    {/* Cabeçalho da Seção */}
+                    <div className="flex items-center gap-4 mb-4">
+                      <h3 className="text-2xl font-bold text-white">
+                        {getLevelName(level)}
+                      </h3>
+                      <div className="flex-1 h-px bg-gradient-to-r from-blue-500 to-transparent"></div>
+                      <span className="text-gray-400 text-sm font-semibold">
+                        {digimonsInLevel.length}{" "}
+                        {digimonsInLevel.length === 1 ? "Digimon" : "Digimons"}
+                      </span>
+                    </div>
 
-                  {/* Grid de Cards */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {digimonsInLevel.map((digimon) => {
-                      const needsEvolution =
-                        digimon.level <= 3 &&
-                        (!digimon.evolution || digimon.evolution.length === 0);
+                    {/* Grid de Cards */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                      {digimonsInLevel.map((digimon) => {
+                        const needsEvolution =
+                          digimon.level <= 3 &&
+                          (!digimon.evolution ||
+                            digimon.evolution.length === 0);
 
-                      return (
-                        <div
-                          key={digimon.id}
-                          className={`bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ${
-                            needsEvolution ? "ring-4 ring-red-500" : ""
-                          }`}
-                        >
-                          <div className="relative h-40 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
-                            <img
-                              src={digimon.image}
-                              alt={digimon.name}
-                              className="w-full h-full object-cover"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.src = "/images/digimons/fallback.svg";
-                              }}
-                            />
-                          </div>
-
-                          <div className="p-4">
-                            <h3 className="text-lg font-bold text-white mb-2">
-                              {capitalize(digimon.name)}
-                            </h3>
-
-                            <div className="space-y-2 mb-4">
-                              <div className="flex items-center gap-2">
-                                <span
-                                  className={`${getTypeColor(
-                                    digimon.typeId
-                                  )} text-white text-xs font-semibold px-2 py-1 rounded-full`}
-                                >
-                                  {getTypeName(digimon.typeId)}
-                                </span>
-                              </div>
-
-                              <div className="flex justify-between text-sm text-gray-300">
-                                <span>
-                                  DP:{" "}
-                                  <span className="font-bold text-orange-400">
-                                    {digimon.dp}
-                                  </span>
-                                </span>
-                              </div>
+                        return (
+                          <div
+                            key={digimon.id}
+                            className={`bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ${
+                              needsEvolution ? "ring-4 ring-red-500" : ""
+                            }`}
+                          >
+                            <div className="relative h-40 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
+                              <img
+                                src={digimon.image}
+                                alt={digimon.name}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.src = "/images/digimons/fallback.svg";
+                                }}
+                              />
                             </div>
 
-                            <button
-                              onClick={() => handleConfigureEvolutions(digimon)}
-                              className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
-                            >
-                              ⚙️ Gerenciar
-                            </button>
+                            <div className="p-4">
+                              <h3 className="text-lg font-bold text-white mb-2">
+                                {capitalize(digimon.name)}
+                              </h3>
+
+                              <div className="space-y-2 mb-4">
+                                <div className="flex items-center gap-2">
+                                  <span
+                                    className={`${getTypeColor(
+                                      digimon.typeId
+                                    )} text-white text-xs font-semibold px-2 py-1 rounded-full`}
+                                  >
+                                    {getTypeName(digimon.typeId)}
+                                  </span>
+                                </div>
+
+                                <div className="flex justify-between text-sm text-gray-300">
+                                  <span>
+                                    DP:{" "}
+                                    <span className="font-bold text-orange-400">
+                                      {digimon.dp}
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+
+                              <button
+                                onClick={() =>
+                                  handleConfigureEvolutions(digimon)
+                                }
+                                className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                              >
+                                ⚙️ Gerenciar
+                              </button>
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
+                );
+              })}
+            </div>
+          )}
 
           {filteredDigimons.length === 0 && (searchTerm || levelFilter) && (
             <div className="text-center py-12">
