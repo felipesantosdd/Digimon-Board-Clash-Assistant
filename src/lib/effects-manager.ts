@@ -1,4 +1,5 @@
 import { Effect } from "./effects-db";
+import { EffectType } from "@/types/effect";
 import { GameDigimon } from "@/types/game";
 
 export class EffectsManager {

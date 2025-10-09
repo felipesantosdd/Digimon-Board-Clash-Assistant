@@ -378,15 +378,6 @@
     "typeId": 3
   },
   {
-    "id": 43,
-    "name": "chaosdramon",
-    "image": "/images/digimons/43.png",
-    "level": 5,
-    "dp": 18000,
-    "evolution": "[]",
-    "typeId": 3
-  },
-  {
     "id": 44,
     "name": "blitzgreymon",
     "image": "/images/digimons/44.webp",
@@ -587,7 +578,7 @@
   {
     "id": 72,
     "name": "chaosdramon",
-    "image": "/images/digimons/35.webp",
+    "image": "/images/digimons/1759982711132_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -1181,7 +1172,7 @@
   {
     "id": 139,
     "name": "cannondramon",
-    "image": "/images/digimons/69.png",
+    "image": "/images/digimons/1759982522227_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -1379,7 +1370,7 @@
   {
     "id": 161,
     "name": "bancholilimon",
-    "image": "/images/digimons/15.webp",
+    "image": "/images/digimons/1759982367122_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -1388,7 +1379,7 @@
   {
     "id": 162,
     "name": "baihumon",
-    "image": "/images/digimons/08.webp",
+    "image": "/images/digimons/1759982348976_image.webp",
     "level": 4,
     "dp": 13000,
     "evolution": "[]",

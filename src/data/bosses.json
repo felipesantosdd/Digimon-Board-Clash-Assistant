@@ -5,7 +5,7 @@
     "image": "/images/bosses/1759980426815_image.blob",
     "description": "Um Digimon Anjo Caído do tipo Vírus. Extremamente perigoso!",
     "effect": "boss_dark_aura",
-    "dp": 15000,
+    "dp": 5000,
     "typeId": 3
   },
   {
