@@ -20,8 +20,11 @@ const BossDropsTab = dynamic(() => import("../components/admin/BossDropsTab"), {
 const EffectsTab = dynamic(() => import("../components/admin/EffectsTab"), {
   ssr: false,
 });
+const TamersTab = dynamic(() => import("../components/admin/TamersTab"), {
+  ssr: false,
+});
 
-type TabType = "digimons" | "items" | "bosses" | "drops" | "effects";
+type TabType = "digimons" | "items" | "bosses" | "drops" | "effects" | "tamers";
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<TabType>("digimons");
@@ -69,7 +72,7 @@ export default function AdminPage() {
         )}
 
         <div className="bg-gray-800 rounded-lg shadow-md p-2 mb-6">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
             <button
               onClick={() => setActiveTab("digimons")}
               className={`px-4 py-3 rounded-lg font-semibold transition-all ${
@@ -120,6 +123,16 @@ export default function AdminPage() {
             >
               🎁 Drops
             </button>
+            <button
+              onClick={() => setActiveTab("tamers")}
+              className={`px-4 py-3 rounded-lg font-semibold transition-all ${
+                activeTab === "tamers"
+                  ? "bg-orange-600 text-white shadow-md"
+                  : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+              }`}
+            >
+              👤 Tamers
+            </button>
           </div>
         </div>
 
@@ -129,6 +142,7 @@ export default function AdminPage() {
         {activeTab === "effects" && <EffectsTab />}
         {activeTab === "bosses" && <BossesTab />}
         {activeTab === "drops" && <BossDropsTab />}
+        {activeTab === "tamers" && <TamersTab />}
       </div>
     </div>
   );

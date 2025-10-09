@@ -234,9 +234,33 @@ export default function EditTamerModal({
                 <label className="block text-sm font-medium text-gray-200 mb-2">
                   Imagem do Tamer
                 </label>
-                <div className="flex items-center gap-4">
-                  {/* Preview */}
-                  <div className="w-24 h-24 bg-gray-700 rounded-full flex items-center justify-center overflow-hidden">
+                <div className="flex flex-col items-center gap-3">
+                  {/* Input oculto */}
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="hidden"
+                  />
+
+                  {/* Preview - Clicável */}
+                  <div
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      console.log("🖱️ Imagem clicada!");
+                      console.log("📎 Ref atual:", fileInputRef.current);
+                      if (fileInputRef.current) {
+                        console.log("✅ Ref existe, chamando click()");
+                        fileInputRef.current.click();
+                      } else {
+                        console.error("❌ Ref não encontrado!");
+                      }
+                    }}
+                    className="relative w-32 h-32 bg-gray-700 rounded-full flex items-center justify-center overflow-hidden cursor-pointer group hover:ring-4 hover:ring-blue-500/50 transition-all"
+                    title="Clique para alterar a imagem"
+                  >
                     {imagePreview ? (
                       <img
                         src={imagePreview}
@@ -258,39 +282,20 @@ export default function EditTamerModal({
                         }}
                       />
                     )}
+
+                    {/* Overlay com ícone ao hover */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all flex items-center justify-center">
+                      <span className="text-4xl opacity-0 group-hover:opacity-100 transition-opacity">
+                        📷
+                      </span>
+                    </div>
                   </div>
 
-                  {/* Upload Button */}
-                  <div className="flex-1">
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                      className="hidden"
-                    />
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log("🖱️ Botão de selecionar imagem clicado!");
-                        console.log("📎 Ref atual:", fileInputRef.current);
-                        if (fileInputRef.current) {
-                          console.log("✅ Ref existe, chamando click()");
-                          fileInputRef.current.click();
-                        } else {
-                          console.error("❌ Ref não encontrado!");
-                        }
-                      }}
-                      className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
-                    >
-                      📁 {imageFile ? "Trocar Imagem" : "Alterar Imagem"}
-                    </button>
-                    <p className="text-xs text-gray-400 mt-2">
-                      PNG, JPG ou SVG (máx 2MB)
-                    </p>
-                  </div>
+                  <p className="text-xs text-gray-400 text-center">
+                    Clique na imagem para alterar
+                    <br />
+                    PNG, JPG ou SVG (máx 2MB)
+                  </p>
                 </div>
               </div>
 
