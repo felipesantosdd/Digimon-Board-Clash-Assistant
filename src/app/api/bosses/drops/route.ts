@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
 
     const newDrop = db
       .prepare("SELECT * FROM boss_drops WHERE id = ?")
-      .get(result.lastInsertRowid);
+      .get(Number(result.lastInsertRowid));
 
     return NextResponse.json(newDrop, { status: 201 });
   } catch (error) {
