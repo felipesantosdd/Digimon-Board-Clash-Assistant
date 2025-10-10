@@ -46,11 +46,15 @@ export default function DefeatScreen({
   if (!isOpen) return null;
 
   return (
-    <div className={`fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-[200] transition-opacity duration-500 ${isClosing ? 'opacity-0' : 'opacity-100'}`}>
+    <div
+      className={`fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-[200] transition-opacity duration-500 ${
+        isClosing ? "opacity-0" : "opacity-100"
+      }`}
+    >
       <div className="relative w-full max-w-2xl mx-4">
         {/* Fundo com efeito de fogo */}
         <div className="absolute inset-0 bg-gradient-to-b from-red-900 via-black to-red-900 rounded-2xl opacity-80"></div>
-        
+
         {/* Efeitos de chamas animadas */}
         <div className="absolute inset-0 overflow-hidden rounded-2xl">
           {[...Array(8)].map((_, i) => (
@@ -80,10 +84,11 @@ export default function DefeatScreen({
           </div>
 
           {/* Boss vitorioso */}
-          <div className="bg-gradient-to-r from-red-900 to-red-800 rounded-xl p-4 sm:p-6 mb-6 border-2 border-red-500">
-            <div className="flex items-center gap-4">
-              <div className="relative">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-red-400 shadow-lg">
+          <div className="bg-gradient-to-r from-red-900 to-red-800 rounded-xl p-6 sm:p-8 mb-6 border-2 border-red-500">
+            <div className="text-center">
+              {/* Imagem grande do boss vitorioso */}
+              <div className="relative mx-auto mb-4">
+                <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-red-400 shadow-2xl mx-auto">
                   <img
                     src={boss.image}
                     alt={boss.name}
@@ -92,21 +97,31 @@ export default function DefeatScreen({
                 </div>
                 {/* Efeito de brilho vermelho */}
                 <div className="absolute inset-0 bg-red-500 rounded-full opacity-30 animate-pulse"></div>
+                {/* Coroa de vencedor */}
+                <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 text-4xl sm:text-5xl animate-bounce">
+                  👑
+                </div>
               </div>
-              
-              <div className="flex-1">
-                <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">
+
+              <div className="text-center">
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                   👹 {boss.name}
                 </h3>
-                <p className="text-red-200 text-sm sm:text-base">
+                <p className="text-red-200 text-lg sm:text-xl mb-4">
                   O boss permaneceu invicto!
                 </p>
-                <div className="mt-2 flex gap-2">
-                  <div className="bg-red-700 px-2 py-1 rounded text-xs sm:text-sm text-red-200">
-                    {boss.calculatedDp >= 1000 ? `${Math.floor(boss.calculatedDp / 1000)}k DP` : `${boss.calculatedDp} DP`}
+                <div className="flex justify-center gap-3">
+                  <div className="bg-red-700 px-3 py-2 rounded-lg text-sm sm:text-base text-red-200 font-semibold">
+                    {boss.calculatedDp >= 1000
+                      ? `${Math.floor(boss.calculatedDp / 1000)}k DP`
+                      : `${boss.calculatedDp} DP`}
                   </div>
-                  <div className="bg-red-700 px-2 py-1 rounded text-xs sm:text-sm text-red-200">
-                    {boss.typeId === 1 ? "Data" : boss.typeId === 2 ? "Vaccine" : "Virus"}
+                  <div className="bg-red-700 px-3 py-2 rounded-lg text-sm sm:text-base text-red-200 font-semibold">
+                    {boss.typeId === 1
+                      ? "Data"
+                      : boss.typeId === 2
+                      ? "Vaccine"
+                      : "Virus"}
                   </div>
                 </div>
               </div>
@@ -148,11 +163,15 @@ export default function DefeatScreen({
             </h4>
             <div className="grid grid-cols-2 gap-4 text-center">
               <div>
-                <p className="text-2xl font-bold text-red-500">{boss.spawnedAtTurn}</p>
+                <p className="text-2xl font-bold text-red-500">
+                  {boss.spawnedAtTurn}
+                </p>
                 <p className="text-sm text-gray-400">Turno de Spawn</p>
               </div>
               <div>
-                <p className="text-2xl font-bold text-red-500">{defeatedPlayers.length}</p>
+                <p className="text-2xl font-bold text-red-500">
+                  {defeatedPlayers.length}
+                </p>
                 <p className="text-sm text-gray-400">Jogadores Derrotados</p>
               </div>
             </div>
@@ -177,7 +196,8 @@ export default function DefeatScreen({
           {/* Mensagem motivacional */}
           <div className="mt-6 text-center">
             <p className="text-gray-400 text-sm italic">
-              "A derrota é apenas uma oportunidade para evoluir e ficar mais forte!"
+              "A derrota é apenas uma oportunidade para evoluir e ficar mais
+              forte!"
             </p>
           </div>
         </div>

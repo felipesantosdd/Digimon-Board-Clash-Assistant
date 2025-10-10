@@ -66,7 +66,7 @@ export default function GamePage() {
     allOptions?: Array<{ id: number; name: string; image: string }>;
   } | null>(null);
   const [isAttackingBoss, setIsAttackingBoss] = useState(false);
-  
+
   // Estados para derrota e drops
   const [showDefeatScreen, setShowDefeatScreen] = useState(false);
   const [showBossDropModal, setShowBossDropModal] = useState(false);
@@ -130,8 +130,14 @@ export default function GamePage() {
     );
 
     // Verificar se todos os Digimons foram eliminados e há um boss ativo
-    if (playersWithAliveDigimons.length === 0 && gameState.activeBoss && !gameState.activeBoss.isDefeated) {
-      console.log("💀 [DEFEAT] Todos os Digimons foram eliminados e o boss está vivo!");
+    if (
+      playersWithAliveDigimons.length === 0 &&
+      gameState.activeBoss &&
+      !gameState.activeBoss.isDefeated
+    ) {
+      console.log(
+        "💀 [DEFEAT] Todos os Digimons foram eliminados e o boss está vivo!"
+      );
       setShowDefeatScreen(true);
       return;
     }
@@ -310,7 +316,7 @@ export default function GamePage() {
               );
               return {
                 ...withoutExpiredStatuses,
-              hasActedThisTurn: false,
+                hasActedThisTurn: false,
                 defending: null, // Resetar defesa
                 // provokedBy: NÃO resetar - mantém até o próximo turno do provocado
               };
@@ -863,7 +869,9 @@ export default function GamePage() {
         setBossDropData({
           boss: gameState.activeBoss,
           winnerName: attackerDigimon.playerName,
-          winnerAvatar: getTamerImagePath(gameState.players[gameState.currentTurnPlayerIndex].avatar),
+          winnerAvatar: getTamerImagePath(
+            gameState.players[gameState.currentTurnPlayerIndex].avatar
+          ),
           drops: items,
         });
         setShowBossDropModal(true);
@@ -879,7 +887,9 @@ export default function GamePage() {
         setBossDropData({
           boss: gameState.activeBoss,
           winnerName: attackerDigimon.playerName,
-          winnerAvatar: getTamerImagePath(gameState.players[gameState.currentTurnPlayerIndex].avatar),
+          winnerAvatar: getTamerImagePath(
+            gameState.players[gameState.currentTurnPlayerIndex].avatar
+          ),
           drops: [],
         });
         setShowBossDropModal(true);
@@ -928,14 +938,14 @@ export default function GamePage() {
     if (!gameState || !reviveTarget) return;
 
     // Marcar que tentou reviver neste turno (independente do sucesso)
-      const updatedState = {
-        ...gameState,
+    const updatedState = {
+      ...gameState,
       reviveAttemptThisTurn: true, // Marcar tentativa
       players: success
         ? gameState.players.map((player) => ({
-          ...player,
-          digimons: player.digimons.map((d) => {
-            if (d.id === reviveTarget.digimon.id) {
+            ...player,
+            digimons: player.digimons.map((d) => {
+              if (d.id === reviveTarget.digimon.id) {
                 const revivedHp = Math.max(1, Math.floor(d.dp * 0.15)); // 15% da vida, mínimo 1
                 return {
                   ...d,
@@ -944,14 +954,14 @@ export default function GamePage() {
                   hasActedThisTurn: true, // Sem pontos de ação
                   actionPoints: 0, // Garantir que não tem pontos de ação
                 };
-            }
-            return d;
-          }),
+              }
+              return d;
+            }),
           }))
         : gameState.players, // Se falhou, não modifica os players
-      };
+    };
 
-      saveGameState(updatedState);
+    saveGameState(updatedState);
 
     if (success) {
       enqueueSnackbar(
@@ -1097,13 +1107,13 @@ export default function GamePage() {
         );
 
         // Marcar como agiu mesmo sem encontrar nada
-    const updatedState = {
-      ...gameState,
+        const updatedState = {
+          ...gameState,
           players: gameState.players.map((player, playerIndex) => {
             if (playerIndex === gameState.currentTurnPlayerIndex) {
-          return {
-            ...player,
-            digimons: player.digimons.map((d) => {
+              return {
+                ...player,
+                digimons: player.digimons.map((d) => {
                   if (d.id === digimon.id) {
                     return {
                       ...d,
@@ -1167,21 +1177,21 @@ export default function GamePage() {
                         });
                       }
 
-                return {
-                  ...d,
+                      return {
+                        ...d,
                         bag: newBag,
-                  hasActedThisTurn: true,
+                        hasActedThisTurn: true,
+                      };
+                    }
+                    return d;
+                  }),
                 };
               }
-              return d;
+              return player;
             }),
           };
-        }
-        return player;
-      }),
-    };
 
-    saveGameState(updatedState);
+          saveGameState(updatedState);
 
           // Mensagem mais detalhada sobre o item encontrado
           const itemRarity =
@@ -1191,12 +1201,12 @@ export default function GamePage() {
               ? "⭐"
               : "";
 
-    enqueueSnackbar(
+          enqueueSnackbar(
             `💰 ${capitalize(digimon.name)} encontrou ${itemRarity} ${
               foundItem.name
             }! ${itemRarity ? "Sorte!" : ""}`,
-      { variant: "success" }
-    );
+            { variant: "success" }
+          );
         }
       }
     } catch (error) {
@@ -1551,7 +1561,7 @@ export default function GamePage() {
 
     // Verificar se pode defender (mesmo nível ou inferior)
     if (targetDigimon.level > digimon.level) {
-    enqueueSnackbar(
+      enqueueSnackbar(
         "Você só pode defender Digimons de nível igual ou inferior!",
         { variant: "warning" }
       );
@@ -2118,7 +2128,7 @@ export default function GamePage() {
                                     <div className="absolute bottom-1 right-1 bg-cyan-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-cyan-400 flex items-center gap-1">
                                       <span>🛡️</span>
                                       <span>{capitalize(defender.name)}</span>
-                                  </div>
+                                    </div>
                                   )
                                 );
                               })()}
@@ -2398,11 +2408,14 @@ export default function GamePage() {
           isOpen={showDefeatScreen}
           onClose={() => setShowDefeatScreen(false)}
           boss={gameState.activeBoss}
-          defeatedPlayers={gameState?.players.map((player) => ({
-            name: player.name,
-            avatar: getTamerImagePath(player.avatar),
-            aliveDigimons: player.digimons.filter((d) => d.currentHp > 0).length,
-          })) || []}
+          defeatedPlayers={
+            gameState?.players.map((player) => ({
+              name: player.name,
+              avatar: getTamerImagePath(player.avatar),
+              aliveDigimons: player.digimons.filter((d) => d.currentHp > 0)
+                .length,
+            })) || []
+          }
         />
       )}
 

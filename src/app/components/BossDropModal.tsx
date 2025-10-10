@@ -59,7 +59,7 @@ export default function BossDropModal({
       <div className="relative w-full max-w-2xl mx-4">
         {/* Fundo com efeito dourado */}
         <div className="absolute inset-0 bg-gradient-to-b from-yellow-900 via-black to-yellow-900 rounded-2xl opacity-80"></div>
-        
+
         {/* Efeitos de brilho animados */}
         <div className="absolute inset-0 overflow-hidden rounded-2xl">
           {[...Array(12)].map((_, i) => (
@@ -104,7 +104,7 @@ export default function BossDropModal({
                   <div className="text-red-500 text-2xl font-bold">❌</div>
                 </div>
               </div>
-              
+
               <div className="flex-1">
                 <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">
                   👹 {boss.name}
@@ -114,10 +114,16 @@ export default function BossDropModal({
                 </p>
                 <div className="mt-2 flex gap-2">
                   <div className="bg-red-700 px-2 py-1 rounded text-xs sm:text-sm text-red-200">
-                    {boss.calculatedDp >= 1000 ? `${Math.floor(boss.calculatedDp / 1000)}k DP` : `${boss.calculatedDp} DP`}
+                    {boss.calculatedDp >= 1000
+                      ? `${Math.floor(boss.calculatedDp / 1000)}k DP`
+                      : `${boss.calculatedDp} DP`}
                   </div>
                   <div className="bg-red-700 px-2 py-1 rounded text-xs sm:text-sm text-red-200">
-                    {boss.typeId === 1 ? "Data" : boss.typeId === 2 ? "Vaccine" : "Virus"}
+                    {boss.typeId === 1
+                      ? "Data"
+                      : boss.typeId === 2
+                      ? "Vaccine"
+                      : "Virus"}
                   </div>
                 </div>
               </div>
@@ -150,14 +156,16 @@ export default function BossDropModal({
               <h3 className="text-lg sm:text-xl font-bold text-yellow-400 mb-4 text-center">
                 🎁 Recompensas Obtidas
               </h3>
-              
+
               {showItems ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {drops.map((item, index) => (
                     <div
                       key={item.id}
                       className={`bg-gradient-to-r from-yellow-800 to-yellow-700 rounded-lg p-4 border-2 border-yellow-500 transition-all duration-500 ${
-                        index === currentItemIndex ? 'scale-105 shadow-lg' : 'opacity-70'
+                        index === currentItemIndex
+                          ? "scale-105 shadow-lg"
+                          : "opacity-70"
                       }`}
                     >
                       <div className="flex items-center gap-3">
