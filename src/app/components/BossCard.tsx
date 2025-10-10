@@ -77,23 +77,32 @@ export default function BossCard({
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 drop-shadow-lg">
                 {boss.name}
               </h2>
-              <p className="text-gray-300 text-xs sm:text-sm line-clamp-2">{boss.description}</p>
+              <p className="text-gray-300 text-xs sm:text-sm line-clamp-2">
+                {boss.description}
+              </p>
             </div>
 
             {/* Stats e Barra de HP */}
             <div className="flex gap-2 items-center">
               {/* DP */}
               <div className="bg-black/40 rounded-lg p-1.5 sm:p-2 border border-red-500/30">
-                <div className="text-gray-400 text-[9px] sm:text-[10px]">DP</div>
+                <div className="text-gray-400 text-[9px] sm:text-[10px]">
+                  DP
+                </div>
                 <div className="text-white text-sm sm:text-lg font-bold">
-                  {boss.calculatedDp >= 1000 ? `${Math.floor(boss.calculatedDp / 1000)}k` : boss.calculatedDp.toLocaleString()}
+                  {boss.calculatedDp >= 1000
+                    ? `${Math.floor(boss.calculatedDp / 1000)}k`
+                    : boss.calculatedDp.toLocaleString()}
                 </div>
               </div>
-              
+
               {/* Barra de HP */}
               <div className="flex-1 space-y-0.5">
                 <div className="flex justify-between text-[10px] sm:text-xs text-gray-400">
-                  <span>HP: {boss.currentHp.toLocaleString()} / {boss.maxHp.toLocaleString()}</span>
+                  <span>
+                    HP: {boss.currentHp.toLocaleString()} /{" "}
+                    {boss.maxHp.toLocaleString()}
+                  </span>
                   <span>{hpPercentage.toFixed(0)}%</span>
                 </div>
                 <div className="w-full h-4 sm:h-5 bg-gray-800 rounded-full overflow-hidden border border-gray-700">

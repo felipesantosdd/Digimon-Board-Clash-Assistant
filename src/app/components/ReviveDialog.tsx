@@ -38,7 +38,7 @@ export default function ReviveDialog({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const size = 140;
+    const size = window.innerWidth < 640 ? 100 : 140;
     canvas.width = size;
     canvas.height = size;
 
@@ -47,7 +47,7 @@ export default function ReviveDialog({
 
     const centerX = size / 2;
     const centerY = size / 2;
-    const radius = 60;
+    const radius = size * 0.43;
 
     // Desenhar círculo (D100)
     ctx.beginPath();
@@ -78,12 +78,12 @@ export default function ReviveDialog({
 
     // Borda
     ctx.strokeStyle = isRolling ? "#ffffff" : "#374151";
-    ctx.lineWidth = isRolling ? 5 : 3;
+    ctx.lineWidth = isRolling ? size * 0.036 : size * 0.021;
     ctx.stroke();
 
     // Número no centro
     ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 40px Arial";
+    ctx.font = `bold ${size * 0.29}px Arial`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.shadowColor = "rgba(0, 0, 0, 0.7)";
@@ -92,8 +92,8 @@ export default function ReviveDialog({
     ctx.shadowBlur = 0;
 
     // Label D100
-    ctx.font = "bold 12px Arial";
-    ctx.fillText("D100", centerX, centerY + radius + 15);
+    ctx.font = `bold ${size * 0.086}px Arial`;
+    ctx.fillText("D100", centerX, centerY + radius + size * 0.107);
   }, [diceValue, isRolling]);
 
   const handleModifierChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -171,35 +171,35 @@ export default function ReviveDialog({
       onClick={onClose}
     >
       <div
-        className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl max-h-[95vh] overflow-y-auto border-2 border-yellow-500"
+        className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl max-h-[96vh] overflow-y-auto border-2 border-yellow-500"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-yellow-600 to-orange-600 text-white px-6 py-4 rounded-t-lg">
-          <h3 className="text-xl font-bold flex items-center gap-2">
-            <span className="text-2xl">✨</span>
+        <div className="bg-gradient-to-r from-yellow-600 to-orange-600 text-white px-3 sm:px-6 py-2 sm:py-4 rounded-t-lg sticky top-0 z-10">
+          <h3 className="text-base sm:text-xl font-bold flex items-center gap-2">
+            <span className="text-lg sm:text-2xl">✨</span>
             Reviver Digimon
           </h3>
-          <p className="text-sm text-yellow-100 mt-1">{digimonName}</p>
+          <p className="text-xs sm:text-sm text-yellow-100 mt-0.5 sm:mt-1">{digimonName}</p>
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-4">
+        <div className="p-3 sm:p-6 space-y-3 sm:space-y-4">
           {/* Explicação */}
-          <div className="bg-gray-700 rounded-lg p-4 border border-gray-600">
-            <p className="text-gray-300 text-sm text-center">
+          <div className="bg-gray-700 rounded-lg p-2 sm:p-4 border border-gray-600">
+            <p className="text-gray-300 text-xs sm:text-sm text-center">
               💀 Este Digimon está morto. Você pode tentar revivê-lo, mas a
               chance base é de apenas{" "}
               <span className="text-yellow-400 font-bold">15%</span>.
             </p>
-            <p className="text-orange-400 text-xs text-center mt-2 font-semibold">
+            <p className="text-orange-400 text-[10px] sm:text-xs text-center mt-1 sm:mt-2 font-semibold">
               ⚠️ Apenas UMA tentativa de reviver por turno!
             </p>
           </div>
 
           {/* Campo de Modificador */}
           <div>
-            <label className="block text-sm font-semibold text-gray-300 mb-2">
+            <label className="block text-xs sm:text-sm font-semibold text-gray-300 mb-1 sm:mb-2">
               Modificador de Chance (0-100%)
             </label>
             <input
@@ -213,25 +213,25 @@ export default function ReviveDialog({
               placeholder="Ex: 15"
               disabled={isRolling}
               autoFocus
-              className="w-full px-4 py-3 bg-gray-700 text-white text-xl font-bold text-center rounded-lg border-2 border-gray-600 focus:border-yellow-500 focus:outline-none transition-colors disabled:opacity-50"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 text-white text-lg sm:text-xl font-bold text-center rounded-lg border-2 border-gray-600 focus:border-yellow-500 focus:outline-none transition-colors disabled:opacity-50"
             />
-            <p className="text-xs text-gray-400 mt-1 text-center">
+            <p className="text-[10px] sm:text-xs text-gray-400 mt-1 text-center">
               Adiciona % extra à chance base (máx: 100)
             </p>
           </div>
 
           {/* Cálculo da Chance */}
-          <div className="bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg p-4 border-2 border-yellow-500 shadow-lg">
-            <div className="space-y-3">
+          <div className="bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg p-2 sm:p-4 border-2 border-yellow-500 shadow-lg">
+            <div className="space-y-2 sm:space-y-3">
               {/* Chance Base */}
-              <div className="flex justify-between items-center text-sm">
+              <div className="flex justify-between items-center text-xs sm:text-sm">
                 <span className="text-gray-400">Chance Base:</span>
                 <span className="text-white font-bold">{baseChance}%</span>
               </div>
 
               {/* Modificador */}
               {modifierValue > 0 && (
-                <div className="flex justify-between items-center text-sm">
+                <div className="flex justify-between items-center text-xs sm:text-sm">
                   <span className="text-gray-400">Modificador:</span>
                   <span className="text-yellow-400 font-bold">
                     +{modifierValue}%
@@ -243,20 +243,20 @@ export default function ReviveDialog({
               <div className="border-t border-gray-600"></div>
 
               {/* Chance Total */}
-              <div className="text-center pt-2">
-                <div className="text-xs text-gray-400 mb-2">
+              <div className="text-center pt-1 sm:pt-2">
+                <div className="text-[10px] sm:text-xs text-gray-400 mb-1 sm:mb-2">
                   ✨ CHANCE TOTAL ✨
                 </div>
-                <div className="text-4xl font-extrabold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+                <div className="text-2xl sm:text-4xl font-extrabold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
                   {totalChance}%
                 </div>
-                <div className="text-xs text-gray-400 mt-1">
+                <div className="text-[10px] sm:text-xs text-gray-400 mt-0.5 sm:mt-1">
                   Precisa rolar ≤ {totalChance} em um D100
                 </div>
               </div>
 
               {/* Barra de Chance Visual */}
-              <div className="w-full bg-gray-600 rounded-full h-3 overflow-hidden border border-gray-500 mt-2">
+              <div className="w-full bg-gray-600 rounded-full h-2 sm:h-3 overflow-hidden border border-gray-500 mt-2">
                 <div
                   className="h-full bg-gradient-to-r from-yellow-500 to-orange-500 transition-all duration-300"
                   style={{ width: `${totalChance}%` }}
@@ -266,9 +266,9 @@ export default function ReviveDialog({
           </div>
 
           {/* D100 Visual */}
-          <div className="bg-gray-700 rounded-lg p-4 border border-gray-600">
-            <div className="flex flex-col items-center gap-3">
-              <p className="text-gray-300 text-sm font-semibold">
+          <div className="bg-gray-700 rounded-lg p-2 sm:p-4 border border-gray-600">
+            <div className="flex flex-col items-center gap-2 sm:gap-3">
+              <p className="text-gray-300 text-xs sm:text-sm font-semibold">
                 🎲 Dado de 100 Faces
               </p>
               <canvas
@@ -276,10 +276,13 @@ export default function ReviveDialog({
                 className={`transition-transform duration-100 ${
                   isRolling ? "animate-spin" : ""
                 }`}
-                style={{ width: "140px", height: "140px" }}
+                style={{ 
+                  width: window.innerWidth < 640 ? "100px" : "140px", 
+                  height: window.innerWidth < 640 ? "100px" : "140px" 
+                }}
               />
               {isRolling && (
-                <p className="text-yellow-400 font-bold animate-pulse text-sm">
+                <p className="text-yellow-400 font-bold animate-pulse text-xs sm:text-sm">
                   Rolando o destino...
                 </p>
               )}
@@ -288,18 +291,18 @@ export default function ReviveDialog({
         </div>
 
         {/* Footer */}
-        <div className="bg-gray-900 px-6 py-4 rounded-b-lg border-t border-gray-700 flex gap-3">
+        <div className="bg-gray-900 px-3 sm:px-6 py-2 sm:py-4 rounded-b-lg border-t border-gray-700 flex gap-2 sm:gap-3">
           <button
             onClick={onClose}
             disabled={isRolling}
-            className="flex-1 px-4 py-2 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 px-2 sm:px-4 py-2 bg-gray-700 text-white text-xs sm:text-base font-semibold rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Cancelar
           </button>
           <button
             onClick={attemptRevive}
             disabled={isRolling}
-            className={`flex-1 px-4 py-2 font-semibold rounded-lg transition-all ${
+            className={`flex-1 px-2 sm:px-4 py-2 text-xs sm:text-base font-semibold rounded-lg transition-all ${
               isRolling
                 ? "bg-gray-600 text-gray-400 cursor-not-allowed"
                 : "bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:from-yellow-600 hover:to-orange-600 transform hover:scale-105"
