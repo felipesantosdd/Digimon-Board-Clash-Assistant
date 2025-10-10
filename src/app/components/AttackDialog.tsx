@@ -31,6 +31,7 @@ interface AttackDialogProps {
     name: string;
     image?: string;
     currentHp: number;
+    maxHp: number;
     calculatedDp: number;
     typeId: number;
   } | null;

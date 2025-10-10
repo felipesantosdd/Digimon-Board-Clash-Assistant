@@ -8,6 +8,7 @@ interface BossAttackCardProps {
     name: string;
     image?: string;
     currentHp: number;
+    maxHp: number;
     calculatedDp: number;
     typeId: number;
   };
@@ -18,7 +19,7 @@ export default function BossAttackCard({
   boss,
   onBossSelect,
 }: BossAttackCardProps) {
-  const hpPercentage = Math.max(0, (boss.currentHp / boss.calculatedDp) * 100);
+  const hpPercentage = Math.max(0, Math.min(100, (boss.currentHp / boss.maxHp) * 100));
 
   return (
     <div className="bg-gradient-to-br from-red-800 to-red-900 rounded-lg p-3 sm:p-4 border-2 border-red-600">
@@ -45,7 +46,7 @@ export default function BossAttackCard({
             </span>
             <span className="text-red-300 text-xs sm:text-sm font-bold">
               {boss.currentHp.toLocaleString()} /{" "}
-              {boss.calculatedDp.toLocaleString()}
+              {boss.maxHp.toLocaleString()}
             </span>
           </div>
           <div className="w-full bg-red-900 rounded-full h-1.5 sm:h-2 overflow-hidden border border-red-700">

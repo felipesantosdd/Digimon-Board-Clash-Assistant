@@ -290,7 +290,7 @@ export default function GamePage() {
               );
               return {
                 ...withoutExpiredStatuses,
-                hasActedThisTurn: false,
+              hasActedThisTurn: false,
                 defending: null, // Resetar defesa
                 // provokedBy: NÃO resetar - mantém até o próximo turno do provocado
               };
@@ -854,9 +854,7 @@ export default function GamePage() {
     }
 
     // Não fechar o modal automaticamente - deixar o usuário decidir
-    setIsAttackingBoss(false);
-    setSelectedDigimon(null);
-    setAttackerDigimon(null);
+    // Não limpar estados para manter o modal aberto
   };
 
   // ============= FIM DAS FUNÇÕES DE BOSS =============
@@ -881,14 +879,14 @@ export default function GamePage() {
     if (!gameState || !reviveTarget) return;
 
     // Marcar que tentou reviver neste turno (independente do sucesso)
-    const updatedState = {
-      ...gameState,
+      const updatedState = {
+        ...gameState,
       reviveAttemptThisTurn: true, // Marcar tentativa
       players: success
         ? gameState.players.map((player) => ({
-            ...player,
-            digimons: player.digimons.map((d) => {
-              if (d.id === reviveTarget.digimon.id) {
+          ...player,
+          digimons: player.digimons.map((d) => {
+            if (d.id === reviveTarget.digimon.id) {
                 const revivedHp = Math.max(1, Math.floor(d.dp * 0.15)); // 15% da vida, mínimo 1
                 return {
                   ...d,
@@ -897,14 +895,14 @@ export default function GamePage() {
                   hasActedThisTurn: true, // Sem pontos de ação
                   actionPoints: 0, // Garantir que não tem pontos de ação
                 };
-              }
-              return d;
-            }),
+            }
+            return d;
+          }),
           }))
         : gameState.players, // Se falhou, não modifica os players
-    };
+      };
 
-    saveGameState(updatedState);
+      saveGameState(updatedState);
 
     if (success) {
       enqueueSnackbar(
@@ -1050,13 +1048,13 @@ export default function GamePage() {
         );
 
         // Marcar como agiu mesmo sem encontrar nada
-        const updatedState = {
-          ...gameState,
+    const updatedState = {
+      ...gameState,
           players: gameState.players.map((player, playerIndex) => {
             if (playerIndex === gameState.currentTurnPlayerIndex) {
-              return {
-                ...player,
-                digimons: player.digimons.map((d) => {
+          return {
+            ...player,
+            digimons: player.digimons.map((d) => {
                   if (d.id === digimon.id) {
                     return {
                       ...d,
@@ -1120,21 +1118,21 @@ export default function GamePage() {
                         });
                       }
 
-                      return {
-                        ...d,
+                return {
+                  ...d,
                         bag: newBag,
-                        hasActedThisTurn: true,
-                      };
-                    }
-                    return d;
-                  }),
+                  hasActedThisTurn: true,
                 };
               }
-              return player;
+              return d;
             }),
           };
+        }
+        return player;
+      }),
+    };
 
-          saveGameState(updatedState);
+    saveGameState(updatedState);
 
           // Mensagem mais detalhada sobre o item encontrado
           const itemRarity =
@@ -1144,12 +1142,12 @@ export default function GamePage() {
               ? "⭐"
               : "";
 
-          enqueueSnackbar(
+    enqueueSnackbar(
             `💰 ${capitalize(digimon.name)} encontrou ${itemRarity} ${
               foundItem.name
             }! ${itemRarity ? "Sorte!" : ""}`,
-            { variant: "success" }
-          );
+      { variant: "success" }
+    );
         }
       }
     } catch (error) {
@@ -1504,7 +1502,7 @@ export default function GamePage() {
 
     // Verificar se pode defender (mesmo nível ou inferior)
     if (targetDigimon.level > digimon.level) {
-      enqueueSnackbar(
+    enqueueSnackbar(
         "Você só pode defender Digimons de nível igual ou inferior!",
         { variant: "warning" }
       );
@@ -2071,7 +2069,7 @@ export default function GamePage() {
                                     <div className="absolute bottom-1 right-1 bg-cyan-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-cyan-400 flex items-center gap-1">
                                       <span>🛡️</span>
                                       <span>{capitalize(defender.name)}</span>
-                                    </div>
+                                  </div>
                                   )
                                 );
                               })()}
@@ -2300,9 +2298,7 @@ export default function GamePage() {
           setAttackerDigimon(null);
           setIsAttackingBoss(false);
         }}
-        onConfirm={
-          isAttackingBoss ? handleBossAttackConfirm : handleAttackConfirm
-        }
+        onConfirm={handleAttackConfirm}
         onEvolve={handleEvolve}
         attacker={attackerDigimon}
         players={gameState?.players || []}
@@ -2317,6 +2313,7 @@ export default function GamePage() {
                 name: gameState.activeBoss.name,
                 image: gameState.activeBoss.image,
                 currentHp: gameState.activeBoss.currentHp,
+                maxHp: gameState.activeBoss.maxHp,
                 calculatedDp: gameState.activeBoss.calculatedDp,
                 typeId: gameState.activeBoss.typeId,
               }
