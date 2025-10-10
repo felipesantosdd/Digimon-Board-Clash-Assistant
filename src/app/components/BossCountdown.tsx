@@ -30,7 +30,7 @@ export default function BossCountdown({ turnsRemaining }: BossCountdownProps) {
           </div>
 
           {/* Contagem Regressiva */}
-          <div className="flex items-center gap-4">
+          {/* <div className="flex items-center gap-4">
             <div className="flex flex-col items-center">
               <div className="relative">
                 <div className="absolute inset-0 bg-red-500 rounded-lg blur-xl opacity-50"></div>
@@ -44,7 +44,7 @@ export default function BossCountdown({ turnsRemaining }: BossCountdownProps) {
                 {turnsRemaining === 1 ? "Turno" : "Turnos"}
               </div>
             </div>
-          </div>
+          </div>*/}
 
           {/* Aviso */}
           {/*  <div className="bg-yellow-500/10 border-2 border-yellow-500/50 rounded-lg p-4 max-w-md">

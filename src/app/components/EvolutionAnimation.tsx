@@ -28,14 +28,13 @@ export default function EvolutionAnimation({
   const [rotations, setRotations] = useState(0);
   const [imageError, setImageError] = useState(false);
 
-  // Lista de imagens apenas das evoluções possíveis (sem o original)
-  const evolutionImages =
-    possibleEvolutions.length > 0 ? possibleEvolutions.map((e) => e.image) : [];
+  // Lista de imagens: Digimon original + evoluções possíveis
+  const allImages = [digimonImage, ...(possibleEvolutions.map((e) => e.image))];
 
-  // Encontrar o índice da evolução final
+  // Encontrar o índice da evolução final (índice +1 porque o original está no índice 0)
   const finalEvolutionIndex =
     evolutionImage && possibleEvolutions.length > 0
-      ? possibleEvolutions.findIndex((e) => e.image === evolutionImage)
+      ? possibleEvolutions.findIndex((e) => e.image === evolutionImage) + 1 // +1 porque o original está no índice 0
       : -1;
 
   useEffect(() => {
@@ -61,29 +60,33 @@ export default function EvolutionAnimation({
     timers.push(setTimeout(() => setStage(2), 3000));
 
     // Durante a rotação, trocar imagens a cada giro (360 graus)
-    if (possibleEvolutions.length > 0 && evolutionImages.length > 0) {
-      // Criar sequência sem repetição, terminando na evolução final
-      const totalRotations = 16;
+    if (allImages.length > 0) {
+      // Criar sequência que alterna entre o Digimon original e suas evoluções possíveis
+      const totalRotations = 12; // Reduzido para 12 rotações
       const sequence: number[] = [];
 
-      // Preencher sequência com índices aleatórios (sem repetir consecutivos)
-      let lastIndex = -1;
+      // Preencher sequência alternando entre original (0) e evoluções (1+)
       for (let i = 0; i < totalRotations - 1; i++) {
-        let nextIndex;
-        do {
-          nextIndex = Math.floor(Math.random() * evolutionImages.length);
-        } while (nextIndex === lastIndex && evolutionImages.length > 1);
-
-        sequence.push(nextIndex);
-        lastIndex = nextIndex;
+        if (i % 2 === 0) {
+          // Posições pares: Digimon original (índice 0)
+          sequence.push(0);
+        } else {
+          // Posições ímpares: Uma evolução aleatória (índice 1+)
+          const evolutionIndex = Math.floor(Math.random() * possibleEvolutions.length) + 1;
+          sequence.push(evolutionIndex);
+        }
       }
 
       // Garantir que a última é a evolução final
       if (finalEvolutionIndex >= 0) {
         sequence.push(finalEvolutionIndex);
+      } else if (possibleEvolutions.length > 0) {
+        // Se não encontrou, usar uma evolução aleatória
+        const randomEvolutionIndex = Math.floor(Math.random() * possibleEvolutions.length) + 1;
+        sequence.push(randomEvolutionIndex);
       } else {
-        // Se não encontrou, usar uma aleatória
-        sequence.push(Math.floor(Math.random() * evolutionImages.length));
+        // Se não há evoluções, manter o original
+        sequence.push(0);
       }
 
       // Aplicar sequência - trocar a imagem no meio da rotação (180°)
@@ -104,7 +107,7 @@ export default function EvolutionAnimation({
       });
     }
 
-    // Stage 3: Para rotação e mostra evolução final (11s = 3s parado + 8s rotação)
+    // Stage 3: Para rotação e mostra evolução final (9s = 3s parado + 6s rotação)
     timers.push(
       setTimeout(() => {
         setStage(3);
@@ -112,11 +115,11 @@ export default function EvolutionAnimation({
         if (finalEvolutionIndex >= 0) {
           setCurrentImageIndex(finalEvolutionIndex);
         }
-      }, 11000)
+      }, 9000)
     );
 
-    // Permitir fechar (11.5s)
-    timers.push(setTimeout(() => setCanClose(true), 11500));
+    // Permitir fechar (9.5s)
+    timers.push(setTimeout(() => setCanClose(true), 9500));
 
     return () => {
       timers.forEach((timer) => clearTimeout(timer));
@@ -124,7 +127,7 @@ export default function EvolutionAnimation({
   }, [
     isOpen,
     possibleEvolutions.length,
-    evolutionImages.length,
+    allImages.length,
     finalEvolutionIndex,
   ]);
 
@@ -186,9 +189,7 @@ export default function EvolutionAnimation({
                   stage === 1
                     ? digimonImage // Stage 1: Digimon original
                     : stage === 2 || stage === 3
-                    ? evolutionImages[currentImageIndex] ||
-                      evolutionImage ||
-                      digimonImage // Stage 2/3: Evoluções
+                    ? allImages[currentImageIndex] || digimonImage // Stage 2/3: Evoluções
                     : digimonImage
                 }
                 alt={
@@ -196,14 +197,16 @@ export default function EvolutionAnimation({
                     ? evolutionName
                     : stage === 2
                     ? "???"
-                    : digimonName
+                    : currentImageIndex === 0
+                    ? digimonName
+                    : possibleEvolutions[currentImageIndex - 1]?.name || "???"
                 }
                 onClick={handleClose}
                 onError={() => {
                   console.error("❌ [EVOLVE] Erro ao carregar imagem:", {
                     stage,
                     currentImageIndex,
-                    image: evolutionImages[currentImageIndex],
+                    image: allImages[currentImageIndex],
                   });
                   setImageError(true);
                 }}
@@ -282,7 +285,11 @@ export default function EvolutionAnimation({
           {stage === 3 && evolutionName
             ? capitalize(evolutionName)
             : stage === 2
-            ? "???"
+            ? currentImageIndex === 0
+              ? capitalize(digimonName)
+              : possibleEvolutions[currentImageIndex - 1]?.name
+              ? capitalize(possibleEvolutions[currentImageIndex - 1].name)
+              : "???"
             : capitalize(digimonName)}
         </h2>
         <p

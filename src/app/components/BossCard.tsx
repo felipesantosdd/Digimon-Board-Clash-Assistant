@@ -48,7 +48,7 @@ export default function BossCard({
         {/* Badges no topo direito */}
         <div className="absolute top-1 right-1 sm:top-2 sm:right-2 flex flex-col gap-1 z-10">
           {/* Badge "BOSS" */}
-          <div 
+          <div
             className="bg-red-600 text-white font-bold px-1.5 sm:px-2 py-0.5 rounded text-[10px] sm:text-xs shadow-lg border border-white animate-pulse cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
@@ -58,7 +58,7 @@ export default function BossCard({
           >
             👹 BOSS
           </div>
-          
+
           {/* Badge de Turno */}
           <div className="bg-yellow-500 text-black font-bold px-1.5 sm:px-2 py-0.5 rounded text-[10px] sm:text-xs shadow-lg border border-white">
             T{boss.spawnedAtTurn}

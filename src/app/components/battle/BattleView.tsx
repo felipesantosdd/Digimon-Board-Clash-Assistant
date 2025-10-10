@@ -49,8 +49,12 @@ export default function BattleView({
 
   // Para bosses, usar lógica especial de HP máximo
   // Assumir que boss tem HP máximo = DP * 3 (baseado no BossManager)
-  const attackerMaxHp = isAttackerBoss ? attacker.digimon.dp * 3 : attacker.digimon.dp;
-  const defenderMaxHp = isDefenderBoss ? defender.digimon.dp * 3 : defender.digimon.dp;
+  const attackerMaxHp = isAttackerBoss
+    ? attacker.digimon.dp * 3
+    : attacker.digimon.dp;
+  const defenderMaxHp = isDefenderBoss
+    ? defender.digimon.dp * 3
+    : defender.digimon.dp;
 
   const attackerDead = attackerNewHp <= 0;
   const defenderDead = defenderNewHp <= 0;
@@ -167,7 +171,10 @@ export default function BattleView({
                 >
                   <span className="text-[9px] sm:text-xs font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                     {Math.round(
-                      Math.max(0, Math.min(100, (attackerNewHp / attackerMaxHp) * 100))
+                      Math.max(
+                        0,
+                        Math.min(100, (attackerNewHp / attackerMaxHp) * 100)
+                      )
                     )}
                     %
                   </span>
@@ -301,7 +308,10 @@ export default function BattleView({
                 >
                   <span className="text-[9px] sm:text-xs font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                     {Math.round(
-                      Math.max(0, Math.min(100, (defenderNewHp / defenderMaxHp) * 100))
+                      Math.max(
+                        0,
+                        Math.min(100, (defenderNewHp / defenderMaxHp) * 100)
+                      )
                     )}
                     %
                   </span>
