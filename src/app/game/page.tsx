@@ -359,7 +359,7 @@ export default function GamePage() {
     const hpLostPercentage = (damageAmount / digimon.dp) * 100;
 
     // Ganho de XP: 0.5% para cada 1% de HP perdido
-    const xpGained = hpLostPercentage * 0.5;
+    const xpGained = hpLostPercentage * 1;
 
     // Calcular novo progresso de evolução
     const currentProgress = digimon.evolutionProgress || 0;

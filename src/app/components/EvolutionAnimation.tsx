@@ -29,7 +29,7 @@ export default function EvolutionAnimation({
   const [imageError, setImageError] = useState(false);
 
   // Lista de imagens: Digimon original + evoluções possíveis
-  const allImages = [digimonImage, ...(possibleEvolutions.map((e) => e.image))];
+  const allImages = [digimonImage, ...possibleEvolutions.map((e) => e.image)];
 
   // Encontrar o índice da evolução final (índice +1 porque o original está no índice 0)
   const finalEvolutionIndex =
@@ -72,7 +72,8 @@ export default function EvolutionAnimation({
           sequence.push(0);
         } else {
           // Posições ímpares: Uma evolução aleatória (índice 1+)
-          const evolutionIndex = Math.floor(Math.random() * possibleEvolutions.length) + 1;
+          const evolutionIndex =
+            Math.floor(Math.random() * possibleEvolutions.length) + 1;
           sequence.push(evolutionIndex);
         }
       }
@@ -82,7 +83,8 @@ export default function EvolutionAnimation({
         sequence.push(finalEvolutionIndex);
       } else if (possibleEvolutions.length > 0) {
         // Se não encontrou, usar uma evolução aleatória
-        const randomEvolutionIndex = Math.floor(Math.random() * possibleEvolutions.length) + 1;
+        const randomEvolutionIndex =
+          Math.floor(Math.random() * possibleEvolutions.length) + 1;
         sequence.push(randomEvolutionIndex);
       } else {
         // Se não há evoluções, manter o original
@@ -225,46 +227,42 @@ export default function EvolutionAnimation({
                 </div>
               )}
 
-              {/* Estrelas que somem e aparecem */}
+              {/* Raios de luz que aparecem e desaparecem */}
               {stage >= 1 && (
-                <>
-                  <div className="absolute top-0 left-1/4 text-yellow-400 text-base sm:text-xl animate-ping">
-                    ✨
-                  </div>
-                  <div className="absolute top-1/4 right-1/4 text-yellow-300 text-lg sm:text-2xl animate-ping animation-delay-200">
-                    ⭐
-                  </div>
-                  <div className="absolute bottom-1/4 left-1/3 text-orange-400 text-base sm:text-xl animate-ping animation-delay-400">
-                    ✨
-                  </div>
-                  <div className="absolute top-1/2 right-1/3 text-yellow-400 text-lg sm:text-2xl animate-ping animation-delay-600">
-                    ⭐
-                  </div>
-                  <div className="absolute bottom-1/3 right-1/4 text-orange-300 text-base sm:text-xl animate-ping animation-delay-800">
-                    ✨
-                  </div>
-                  <div className="absolute top-1/3 left-1/4 text-yellow-200 text-lg sm:text-2xl animate-ping animation-delay-1000">
-                    ⭐
-                  </div>
-                </>
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  {/* Raios de luz dinâmicos */}
+                  {[...Array(8)].map((_, i) => (
+                    <div
+                      key={`light-${i}`}
+                      className="absolute w-0.5 sm:w-1 h-full bg-gradient-to-t from-transparent via-yellow-400 to-transparent opacity-0 animate-pulse"
+                      style={{
+                        transform: `rotate(${i * 45}deg)`,
+                        animationDelay: `${i * 200}ms`,
+                        animationDuration: '1.5s',
+                        animationIterationCount: 'infinite',
+                        animationTimingFunction: 'ease-in-out',
+                      }}
+                    />
+                  ))}
+                  
+                  {/* Raios adicionais com diferentes ângulos e timing */}
+                  {[...Array(6)].map((_, i) => (
+                    <div
+                      key={`light-extra-${i}`}
+                      className="absolute w-0.5 sm:w-1 h-full bg-gradient-to-t from-transparent via-orange-400 to-transparent opacity-0 animate-pulse"
+                      style={{
+                        transform: `rotate(${i * 60 + 22.5}deg)`,
+                        animationDelay: `${i * 300 + 100}ms`,
+                        animationDuration: '2s',
+                        animationIterationCount: 'infinite',
+                        animationTimingFunction: 'ease-in-out',
+                      }}
+                    />
+                  ))}
+                </div>
               )}
             </div>
 
-            {/* Raios de luz */}
-            {stage >= 2 && (
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                {[...Array(12)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute w-0.5 sm:w-1 h-full bg-gradient-to-t from-transparent via-yellow-400 to-transparent opacity-40 animate-pulse"
-                    style={{
-                      transform: `rotate(${i * 30}deg)`,
-                      animationDelay: `${i * 100}ms`,
-                    }}
-                  />
-                ))}
-              </div>
-            )}
           </div>
         </div>
       </div>
