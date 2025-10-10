@@ -17,8 +17,11 @@ import ReviveDialog from "@/app/components/ReviveDialog";
 import EvolutionAnimation from "@/app/components/EvolutionAnimation";
 import BossCard from "@/app/components/BossCard";
 import BossCountdown from "@/app/components/BossCountdown";
-import type { GameDigimon } from "@/types/game";
+import DefeatScreen from "@/app/components/DefeatScreen";
+import BossDropModal from "@/app/components/BossDropModal";
+import type { GameDigimon, GameBoss } from "@/types/game";
 import type { BattleResult } from "@/lib/battle-manager";
+import type { Item } from "@/types/item";
 import { BossManager } from "@/lib/boss-manager";
 
 export default function GamePage() {
@@ -63,6 +66,16 @@ export default function GamePage() {
     allOptions?: Array<{ id: number; name: string; image: string }>;
   } | null>(null);
   const [isAttackingBoss, setIsAttackingBoss] = useState(false);
+  
+  // Estados para derrota e drops
+  const [showDefeatScreen, setShowDefeatScreen] = useState(false);
+  const [showBossDropModal, setShowBossDropModal] = useState(false);
+  const [bossDropData, setBossDropData] = useState<{
+    boss: GameBoss;
+    winnerName: string;
+    winnerAvatar: string;
+    drops: Item[];
+  } | null>(null);
 
   useEffect(() => {
     // Se não há estado de jogo e não está carregando, redirecionar para home
@@ -108,13 +121,20 @@ export default function GamePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState?.turnCount]); // Executar quando o turno mudar
 
-  // Verificar condição de vitória (apenas quando modal de ataque estiver fechado)
+  // Verificar condição de vitória/derrota (apenas quando modal de ataque estiver fechado)
   useEffect(() => {
     if (!gameState || showAttackDialog) return; // Não verificar se modal estiver aberto
 
     const playersWithAliveDigimons = gameState.players.filter((player) =>
       player.digimons.some((digimon) => digimon.currentHp > 0)
     );
+
+    // Verificar se todos os Digimons foram eliminados e há um boss ativo
+    if (playersWithAliveDigimons.length === 0 && gameState.activeBoss && !gameState.activeBoss.isDefeated) {
+      console.log("💀 [DEFEAT] Todos os Digimons foram eliminados e o boss está vivo!");
+      setShowDefeatScreen(true);
+      return;
+    }
 
     // Se apenas um jogador tem Digimons vivos, declarar vencedor
     if (playersWithAliveDigimons.length === 1) {
@@ -290,7 +310,7 @@ export default function GamePage() {
               );
               return {
                 ...withoutExpiredStatuses,
-                hasActedThisTurn: false,
+              hasActedThisTurn: false,
                 defending: null, // Resetar defesa
                 // provokedBy: NÃO resetar - mantém até o próximo turno do provocado
               };
@@ -839,12 +859,30 @@ export default function GamePage() {
         );
         const items = await Promise.all(itemsPromises);
 
+        // Mostrar modal de drop do boss
+        setBossDropData({
+          boss: gameState.activeBoss,
+          winnerName: attackerDigimon.playerName,
+          winnerAvatar: getTamerImagePath(gameState.players[gameState.currentTurnPlayerIndex].avatar),
+          drops: items,
+        });
+        setShowBossDropModal(true);
+
         enqueueSnackbar(
           `🎁 ${attackerDigimon.playerName} ganhou ${rewards.length} item(ns)!`,
           { variant: "success" }
         );
 
         console.log("🎁 [BOSS] Recompensas:", items);
+      } else if (killerPlayerIndex >= 0) {
+        // Boss derrotado mas sem drops
+        setBossDropData({
+          boss: gameState.activeBoss,
+          winnerName: attackerDigimon.playerName,
+          winnerAvatar: getTamerImagePath(gameState.players[gameState.currentTurnPlayerIndex].avatar),
+          drops: [],
+        });
+        setShowBossDropModal(true);
       }
 
       // Atualizar estado com boss derrotado
@@ -890,14 +928,14 @@ export default function GamePage() {
     if (!gameState || !reviveTarget) return;
 
     // Marcar que tentou reviver neste turno (independente do sucesso)
-    const updatedState = {
-      ...gameState,
+      const updatedState = {
+        ...gameState,
       reviveAttemptThisTurn: true, // Marcar tentativa
       players: success
         ? gameState.players.map((player) => ({
-            ...player,
-            digimons: player.digimons.map((d) => {
-              if (d.id === reviveTarget.digimon.id) {
+          ...player,
+          digimons: player.digimons.map((d) => {
+            if (d.id === reviveTarget.digimon.id) {
                 const revivedHp = Math.max(1, Math.floor(d.dp * 0.15)); // 15% da vida, mínimo 1
                 return {
                   ...d,
@@ -906,14 +944,14 @@ export default function GamePage() {
                   hasActedThisTurn: true, // Sem pontos de ação
                   actionPoints: 0, // Garantir que não tem pontos de ação
                 };
-              }
-              return d;
-            }),
+            }
+            return d;
+          }),
           }))
         : gameState.players, // Se falhou, não modifica os players
-    };
+      };
 
-    saveGameState(updatedState);
+      saveGameState(updatedState);
 
     if (success) {
       enqueueSnackbar(
@@ -1059,13 +1097,13 @@ export default function GamePage() {
         );
 
         // Marcar como agiu mesmo sem encontrar nada
-        const updatedState = {
-          ...gameState,
+    const updatedState = {
+      ...gameState,
           players: gameState.players.map((player, playerIndex) => {
             if (playerIndex === gameState.currentTurnPlayerIndex) {
-              return {
-                ...player,
-                digimons: player.digimons.map((d) => {
+          return {
+            ...player,
+            digimons: player.digimons.map((d) => {
                   if (d.id === digimon.id) {
                     return {
                       ...d,
@@ -1129,21 +1167,21 @@ export default function GamePage() {
                         });
                       }
 
-                      return {
-                        ...d,
+                return {
+                  ...d,
                         bag: newBag,
-                        hasActedThisTurn: true,
-                      };
-                    }
-                    return d;
-                  }),
+                  hasActedThisTurn: true,
                 };
               }
-              return player;
+              return d;
             }),
           };
+        }
+        return player;
+      }),
+    };
 
-          saveGameState(updatedState);
+    saveGameState(updatedState);
 
           // Mensagem mais detalhada sobre o item encontrado
           const itemRarity =
@@ -1153,12 +1191,12 @@ export default function GamePage() {
               ? "⭐"
               : "";
 
-          enqueueSnackbar(
+    enqueueSnackbar(
             `💰 ${capitalize(digimon.name)} encontrou ${itemRarity} ${
               foundItem.name
             }! ${itemRarity ? "Sorte!" : ""}`,
-            { variant: "success" }
-          );
+      { variant: "success" }
+    );
         }
       }
     } catch (error) {
@@ -1513,7 +1551,7 @@ export default function GamePage() {
 
     // Verificar se pode defender (mesmo nível ou inferior)
     if (targetDigimon.level > digimon.level) {
-      enqueueSnackbar(
+    enqueueSnackbar(
         "Você só pode defender Digimons de nível igual ou inferior!",
         { variant: "warning" }
       );
@@ -2080,7 +2118,7 @@ export default function GamePage() {
                                     <div className="absolute bottom-1 right-1 bg-cyan-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-cyan-400 flex items-center gap-1">
                                       <span>🛡️</span>
                                       <span>{capitalize(defender.name)}</span>
-                                    </div>
+                                  </div>
                                   )
                                 );
                               })()}
@@ -2353,6 +2391,35 @@ export default function GamePage() {
         possibleEvolutions={evolvingDigimon?.allOptions || []}
         onComplete={executeEvolution}
       />
+
+      {/* Tela de Derrota */}
+      {gameState?.activeBoss && (
+        <DefeatScreen
+          isOpen={showDefeatScreen}
+          onClose={() => setShowDefeatScreen(false)}
+          boss={gameState.activeBoss}
+          defeatedPlayers={gameState?.players.map((player) => ({
+            name: player.name,
+            avatar: getTamerImagePath(player.avatar),
+            aliveDigimons: player.digimons.filter((d) => d.currentHp > 0).length,
+          })) || []}
+        />
+      )}
+
+      {/* Modal de Drop do Boss */}
+      {bossDropData && (
+        <BossDropModal
+          isOpen={showBossDropModal}
+          onClose={() => {
+            setShowBossDropModal(false);
+            setBossDropData(null);
+          }}
+          boss={bossDropData.boss}
+          winnerName={bossDropData.winnerName}
+          winnerAvatar={bossDropData.winnerAvatar}
+          drops={bossDropData.drops}
+        />
+      )}
     </div>
   );
 }

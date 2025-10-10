@@ -51,12 +51,10 @@ export default function BattleView({
 
   // Para bosses, usar lógica especial de HP máximo
   // Se maxHp foi passado (para bosses), usar esse valor, senão usar DP
-  const attackerMaxHp = isAttackerBoss && attacker.maxHp
-    ? attacker.maxHp
-    : attacker.digimon.dp;
-  const defenderMaxHp = isDefenderBoss && defender.maxHp
-    ? defender.maxHp
-    : defender.digimon.dp;
+  const attackerMaxHp =
+    isAttackerBoss && attacker.maxHp ? attacker.maxHp : attacker.digimon.dp;
+  const defenderMaxHp =
+    isDefenderBoss && defender.maxHp ? defender.maxHp : defender.digimon.dp;
 
   const attackerDead = attackerNewHp <= 0;
   const defenderDead = defenderNewHp <= 0;
