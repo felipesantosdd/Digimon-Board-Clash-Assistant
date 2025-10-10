@@ -289,7 +289,7 @@ export default function AttackDialog({
                     onBossSelect={handleBossSelect}
                   />
                 )}
-                
+
                 {/* Players */}
                 {players
                   .filter((p) => p.id !== currentPlayerId)

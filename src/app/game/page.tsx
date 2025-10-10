@@ -786,15 +786,25 @@ export default function GamePage() {
     const updatedBoss = { ...gameState.activeBoss };
     updatedBoss.currentHp = Math.max(0, updatedBoss.currentHp - attackerDamage);
 
-    // Atualizar HP do Digimon atacante (contra-ataque do boss)
+    // Aplicar dano ao Digimon atacante (contra-ataque do boss) COM XP de evolução
+    const attackerResult = applyDamageToDigimon(
+      attackerDigimon.digimon,
+      defenderDamage
+    );
+
+    console.log("⚔️ [BOSS] Resultado atacante:", attackerResult);
+
+    // Atualizar HP do Digimon atacante e progresso de evolução
     const updatedPlayers = gameState.players.map((player) => ({
       ...player,
       digimons: player.digimons.map((d) => {
         if (d.id === attackerDigimon.digimon.id) {
           return {
             ...d,
-            currentHp: Math.max(0, d.currentHp - defenderDamage),
+            currentHp: attackerResult.newHp,
             hasActedThisTurn: true,
+            evolutionProgress: attackerResult.newProgress || d.evolutionProgress || 0,
+            canEvolve: attackerResult.evolutionUnlocked || d.canEvolve || false,
           };
         }
         return d;

@@ -188,7 +188,7 @@ export default function ReviveDialog({
         {/* Content */}
         <div className="p-3 sm:p-6 space-y-3 sm:space-y-4">
           {/* Explicação */}
-          <div className="bg-gray-700 rounded-lg p-2 sm:p-4 border border-gray-600">
+          {/*   <div className="bg-gray-700 rounded-lg p-2 sm:p-4 border border-gray-600">
             <p className="text-gray-300 text-xs sm:text-sm text-center">
               💀 Este Digimon está morto. Você pode tentar revivê-lo, mas a
               chance base é de apenas{" "}
@@ -197,10 +197,10 @@ export default function ReviveDialog({
             <p className="text-orange-400 text-[10px] sm:text-xs text-center mt-1 sm:mt-2 font-semibold">
               ⚠️ Apenas UMA tentativa de reviver por turno!
             </p>
-          </div>
+          </div>*/}
 
           {/* Campo de Modificador */}
-          <div>
+          {/* <div>
             <label className="block text-xs sm:text-sm font-semibold text-gray-300 mb-1 sm:mb-2">
               Modificador de Chance (0-100%)
             </label>
@@ -220,7 +220,7 @@ export default function ReviveDialog({
             <p className="text-[10px] sm:text-xs text-gray-400 mt-1 text-center">
               Adiciona % extra à chance base (máx: 100)
             </p>
-          </div>
+          </div>*/}
 
           {/* Cálculo da Chance */}
           <div className="bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg p-2 sm:p-4 border-2 border-yellow-500 shadow-lg">
