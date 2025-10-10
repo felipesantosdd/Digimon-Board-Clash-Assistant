@@ -227,101 +227,99 @@ export default function EvolutionAnimation({
                 </div>
               )}
 
-              {/* Raios de luz pequenos espalhados */}
-              {stage >= 1 && (
-                <>
-                  {/* Raios pequenos em posições aleatórias */}
-                  <div className="absolute top-0 left-1/4 pointer-events-none">
-                    <div
-                      className="w-0.5 sm:w-1 h-8 sm:h-12 bg-gradient-to-t from-transparent via-yellow-400 to-transparent opacity-0 animate-pulse"
-                      style={{
-                        animationDelay: "0ms",
-                        animationDuration: "1.5s",
-                        animationIterationCount: "infinite",
-                        animationTimingFunction: "ease-in-out",
-                      }}
-                    />
-                  </div>
-                  <div className="absolute top-1/4 right-1/4 pointer-events-none">
-                    <div
-                      className="w-0.5 sm:w-1 h-6 sm:h-10 bg-gradient-to-t from-transparent via-yellow-300 to-transparent opacity-0 animate-pulse"
-                      style={{
-                        animationDelay: "200ms",
-                        animationDuration: "1.8s",
-                        animationIterationCount: "infinite",
-                        animationTimingFunction: "ease-in-out",
-                      }}
-                    />
-                  </div>
-                  <div className="absolute bottom-1/4 left-1/3 pointer-events-none">
-                    <div
-                      className="w-0.5 sm:w-1 h-7 sm:h-11 bg-gradient-to-t from-transparent via-orange-400 to-transparent opacity-0 animate-pulse"
-                      style={{
-                        animationDelay: "400ms",
-                        animationDuration: "1.6s",
-                        animationIterationCount: "infinite",
-                        animationTimingFunction: "ease-in-out",
-                      }}
-                    />
-                  </div>
-                  <div className="absolute top-1/2 right-1/3 pointer-events-none">
-                    <div
-                      className="w-0.5 sm:w-1 h-9 sm:h-13 bg-gradient-to-t from-transparent via-yellow-400 to-transparent opacity-0 animate-pulse"
-                      style={{
-                        animationDelay: "600ms",
-                        animationDuration: "2s",
-                        animationIterationCount: "infinite",
-                        animationTimingFunction: "ease-in-out",
-                      }}
-                    />
-                  </div>
-                  <div className="absolute bottom-1/3 right-1/4 pointer-events-none">
-                    <div
-                      className="w-0.5 sm:w-1 h-5 sm:h-9 bg-gradient-to-t from-transparent via-orange-300 to-transparent opacity-0 animate-pulse"
-                      style={{
-                        animationDelay: "800ms",
-                        animationDuration: "1.7s",
-                        animationIterationCount: "infinite",
-                        animationTimingFunction: "ease-in-out",
-                      }}
-                    />
-                  </div>
-                  <div className="absolute top-1/3 left-1/4 pointer-events-none">
-                    <div
-                      className="w-0.5 sm:w-1 h-8 sm:h-12 bg-gradient-to-t from-transparent via-yellow-200 to-transparent opacity-0 animate-pulse"
-                      style={{
-                        animationDelay: "1000ms",
-                        animationDuration: "1.9s",
-                        animationIterationCount: "infinite",
-                        animationTimingFunction: "ease-in-out",
-                      }}
-                    />
-                  </div>
-                  <div className="absolute top-3/4 left-1/2 pointer-events-none">
-                    <div
-                      className="w-0.5 sm:w-1 h-6 sm:h-10 bg-gradient-to-t from-transparent via-orange-400 to-transparent opacity-0 animate-pulse"
-                      style={{
-                        animationDelay: "1200ms",
-                        animationDuration: "1.4s",
-                        animationIterationCount: "infinite",
-                        animationTimingFunction: "ease-in-out",
-                      }}
-                    />
-                  </div>
-                  <div className="absolute bottom-0 right-1/2 pointer-events-none">
-                    <div
-                      className="w-0.5 sm:w-1 h-7 sm:h-11 bg-gradient-to-t from-transparent via-yellow-300 to-transparent opacity-0 animate-pulse"
-                      style={{
-                        animationDelay: "1400ms",
-                        animationDuration: "1.8s",
-                        animationIterationCount: "infinite",
-                        animationTimingFunction: "ease-in-out",
-                      }}
-                    />
-                  </div>
-                </>
-              )}
+               {/* Estrelas arredondadas com brilho */}
+               {stage >= 1 && (
+                 <>
+                   {/* Estrela grande central */}
+                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
+                     <div
+                       className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-yellow-300 via-yellow-400 to-yellow-500 shadow-lg shadow-yellow-400/50 animate-pulse"
+                       style={{
+                         clipPath: "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)",
+                         animationDelay: "0ms",
+                         animationDuration: "2s",
+                       }}
+                     />
+                   </div>
+                   
+                   {/* Estrela menor superior esquerda */}
+                   <div className="absolute top-1/4 left-1/4">
+                     <div
+                       className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-yellow-200 via-yellow-300 to-yellow-400 shadow-lg shadow-yellow-300/50 animate-pulse"
+                       style={{
+                         clipPath: "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)",
+                         animationDelay: "500ms",
+                         animationDuration: "1.8s",
+                       }}
+                     />
+                   </div>
+                   
+                   {/* Estrela menor inferior esquerda */}
+                   <div className="absolute bottom-1/4 left-1/3">
+                     <div
+                       className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-gradient-to-br from-orange-300 via-orange-400 to-orange-500 shadow-lg shadow-orange-400/50 animate-pulse"
+                       style={{
+                         clipPath: "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)",
+                         animationDelay: "1000ms",
+                         animationDuration: "2.2s",
+                       }}
+                     />
+                   </div>
+                   
+                   {/* Estrela média direita */}
+                   <div className="absolute top-1/3 right-1/4">
+                     <div
+                       className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-yellow-300 via-yellow-400 to-orange-400 shadow-lg shadow-yellow-400/50 animate-pulse"
+                       style={{
+                         clipPath: "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)",
+                         animationDelay: "300ms",
+                         animationDuration: "1.6s",
+                       }}
+                     />
+                   </div>
+                   
+                   {/* Estrela pequena inferior direita */}
+                   <div className="absolute bottom-1/3 right-1/3">
+                     <div
+                       className="w-3 h-3 sm:w-5 sm:h-5 rounded-full bg-gradient-to-br from-orange-200 via-orange-300 to-orange-400 shadow-lg shadow-orange-300/50 animate-pulse"
+                       style={{
+                         clipPath: "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)",
+                         animationDelay: "800ms",
+                         animationDuration: "2.4s",
+                       }}
+                     />
+                   </div>
+                   
+                   {/* Estrela média superior direita */}
+                   <div className="absolute top-1/6 right-1/5">
+                     <div
+                       className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 shadow-lg shadow-yellow-500/50 animate-pulse"
+                       style={{
+                         clipPath: "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)",
+                         animationDelay: "1200ms",
+                         animationDuration: "1.9s",
+                       }}
+                     />
+                   </div>
+                 </>
+               )}
             </div>
+
+            {/* Raios de luz */}
+            {stage >= 2 && (
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                {[...Array(12)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute w-0.5 sm:w-1 h-full bg-gradient-to-t from-transparent via-yellow-400 to-transparent opacity-40 animate-pulse"
+                    style={{
+                      transform: `rotate(${i * 30}deg)`,
+                      animationDelay: `${i * 100}ms`,
+                    }}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
