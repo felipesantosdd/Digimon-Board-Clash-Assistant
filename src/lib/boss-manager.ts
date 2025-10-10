@@ -125,6 +125,7 @@ export class BossManager {
       effectId: 1,
       dp: dp, // DP base (não usado mais no cálculo)
       typeId: bossDigimon.typeId,
+      level: bossDigimon.level, // Adicionar nível do boss para cálculos de Armor
       currentHp: hp,
       maxHp: hp,
       calculatedDp: dp, // DP de combate = valor máximo do nível

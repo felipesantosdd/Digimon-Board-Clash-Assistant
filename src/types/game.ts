@@ -38,6 +38,7 @@ export interface GamePlayer {
 
 // Boss ativo no jogo
 export interface GameBoss extends Boss {
+  level: number; // Nível do boss (para cálculo de Armor)
   currentHp: number; // HP atual do boss
   maxHp: number; // HP máximo calculado (média DP × 3)
   calculatedDp: number; // DP calculado (média dos jogadores vivos)

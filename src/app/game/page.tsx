@@ -10,6 +10,7 @@ import {
   DIGIMON_TYPE_NAMES,
   getTypeColor,
   generateRandomStats,
+  generateArmorStats,
 } from "@/lib/utils";
 import TypeIcon from "../components/TypeIcons";
 import { getTamerImagePath } from "@/lib/image-utils";
@@ -675,12 +676,47 @@ export default function GamePage() {
           ...player,
           digimons: player.digimons.map((d) => {
             if (d.id === digimon.id) {
-              // Gerar HP e DP aleatórios baseados no novo nível
-              const { hp, dp } = generateRandomStats(evolution.level);
-
-              console.log(
-                `🎲 [EVOLVE] Stats aleatórios gerados - HP: ${hp}, DP: ${dp}`
-              );
+              // Para Armor (nível 0), usar stats dinâmicos baseados no nível mais alto em jogo
+              let hp: number, dp: number;
+              
+              if (evolution.level === 0) {
+                // Encontrar o nível mais alto entre Digimons e Boss
+                let highestLevel = 1;
+                
+                // Verificar Digimons de todos os jogadores
+                gameState.players.forEach(p => {
+                  p.digimons.forEach(dig => {
+                    if (dig.level > highestLevel) {
+                      highestLevel = dig.level;
+                    }
+                  });
+                });
+                
+                // Verificar Boss se existir
+                if (gameState.activeBoss && !gameState.activeBoss.isDefeated) {
+                  if (gameState.activeBoss.level > highestLevel) {
+                    highestLevel = gameState.activeBoss.level;
+                  }
+                }
+                
+                // Gerar stats de Armor baseados no nível mais alto
+                const armorStats = generateArmorStats(highestLevel);
+                hp = armorStats.hp;
+                dp = armorStats.dp;
+                
+                console.log(
+                  `🛡️ [ARMOR] Nível mais alto em jogo: ${highestLevel}, Stats gerados - HP: ${hp}, DP: ${dp}`
+                );
+              } else {
+                // Evoluções normais usam stats aleatórios do nível
+                const stats = generateRandomStats(evolution.level);
+                hp = stats.hp;
+                dp = stats.dp;
+                
+                console.log(
+                  `🎲 [EVOLVE] Stats aleatórios gerados - HP: ${hp}, DP: ${dp}`
+                );
+              }
 
               // Limpar TODOS os status e adicionar novo Animado
               // Evoluir renova completamente, não acumula buffs antigos

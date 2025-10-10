@@ -45,7 +45,7 @@ export default function EvolutionModal({
   const { enqueueSnackbar } = useSnackbar();
   const [selectedEvolutions, setSelectedEvolutions] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  
+
   // Estado para controlar a aba ativa de níveis
   const [selectedLevelTab, setSelectedLevelTab] = useState<number>(1);
 

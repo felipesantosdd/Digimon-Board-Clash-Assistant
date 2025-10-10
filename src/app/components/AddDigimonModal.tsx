@@ -363,7 +363,10 @@ export default function AddDigimonModal({
                     type="button"
                     onClick={() =>
                       handleChange({
-                        target: { name: "level", value: level.value.toString() },
+                        target: {
+                          name: "level",
+                          value: level.value.toString(),
+                        },
                       } as React.ChangeEvent<HTMLSelectElement>)
                     }
                     className={`px-2 py-2 rounded-lg border-2 transition-all text-xs ${

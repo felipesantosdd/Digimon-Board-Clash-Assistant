@@ -124,10 +124,6 @@ export default function DigimonsTab({
 
         // Recarregar a lista para garantir sincronização
         await fetchDigimons();
-
-        enqueueSnackbar("Digimon atualizado com sucesso!", {
-          variant: "success",
-        });
       } else {
         const error = await response.json();
         enqueueSnackbar(`Erro: ${error.error}`, { variant: "error" });
