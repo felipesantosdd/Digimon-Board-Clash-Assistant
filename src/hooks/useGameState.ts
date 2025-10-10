@@ -60,6 +60,9 @@ export function useGameState() {
           currentTurnPlayerIndex: parsed.currentTurnPlayerIndex ?? 0, // Padrão: primeiro jogador
           turnCount: parsed.turnCount ?? 1, // Padrão: turno 1
           reviveAttemptThisTurn: parsed.reviveAttemptThisTurn ?? false, // Padrão: não tentou reviver
+          activeBoss: parsed.activeBoss ?? null, // Boss ativo
+          lastBossDefeatedTurn: parsed.lastBossDefeatedTurn ?? undefined, // Último turno que derrotou boss
+          bossesDefeated: parsed.bossesDefeated ?? 0, // Quantidade de bosses derrotados
         };
 
         console.log("🔄 [LOAD] Estado após migração:", migratedState);

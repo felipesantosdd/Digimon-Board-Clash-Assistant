@@ -15,8 +15,11 @@ import DigimonDetailsModal from "@/app/components/DigimonDetailsModal";
 import AttackDialog from "@/app/components/AttackDialog";
 import ReviveDialog from "@/app/components/ReviveDialog";
 import EvolutionAnimation from "@/app/components/EvolutionAnimation";
-import type { GameDigimon, DigimonStatus } from "@/types/game";
+import BossCard from "@/app/components/BossCard";
+import BossCountdown from "@/app/components/BossCountdown";
+import type { GameDigimon } from "@/types/game";
 import type { BattleResult } from "@/lib/battle-manager";
+import { BossManager } from "@/lib/boss-manager";
 
 export default function GamePage() {
   const router = useRouter();
@@ -59,6 +62,7 @@ export default function GamePage() {
     evolutionType?: string;
     allOptions?: Array<{ id: number; name: string; image: string }>;
   } | null>(null);
+  const [isAttackingBoss, setIsAttackingBoss] = useState(false);
 
   useEffect(() => {
     // Se não há estado de jogo e não está carregando, redirecionar para home
@@ -67,6 +71,42 @@ export default function GamePage() {
       router.push("/");
     }
   }, [gameState, isLoading, router, enqueueSnackbar]);
+
+  // Sistema de Boss: Spawn e Turno do Mundo
+  useEffect(() => {
+    if (!gameState) return;
+
+    const checkBossSpawn = async () => {
+      // Verificar se deve spawnar um boss
+      const shouldSpawn = BossManager.shouldSpawnBoss(
+        gameState.turnCount,
+        gameState.lastBossDefeatedTurn,
+        gameState.activeBoss
+      );
+
+      if (shouldSpawn) {
+        console.log("👹 [BOSS] Spawnando novo boss...");
+        const newBoss = await BossManager.spawnBoss(
+          gameState.players,
+          gameState.turnCount
+        );
+
+        if (newBoss) {
+          console.log("✅ [BOSS] Boss spawnado:", newBoss.name);
+          saveGameState({
+            ...gameState,
+            activeBoss: newBoss,
+          });
+          enqueueSnackbar(`👹 BOSS APARECEU: ${newBoss.name}!`, {
+            variant: "warning",
+          });
+        }
+      }
+    };
+
+    checkBossSpawn();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameState?.turnCount]); // Executar quando o turno mudar
 
   // Verificar condição de vitória (apenas quando modal de ataque estiver fechado)
   useEffect(() => {
@@ -200,7 +240,32 @@ export default function GamePage() {
       attempts++;
     }
 
-    const isNewRound = nextPlayerIndex <= gameState.currentTurnPlayerIndex;
+    // Verificar se é o ÚLTIMO jogador passando o turno (fim da rodada)
+    const isLastPlayer = nextPlayerIndex === 0;
+    const isNewRound = isLastPlayer;
+
+    // Se é o último jogador passando turno E há um boss ativo, executar Turno do Mundo ANTES
+    const updatedPlayers = gameState.players;
+    if (
+      isLastPlayer &&
+      gameState.activeBoss &&
+      !gameState.activeBoss.isDefeated
+    ) {
+      console.log("🌍 [BOSS] Executando Turno do Mundo (fim da rodada)...");
+      const result = BossManager.executeWorldTurn(
+        gameState.activeBoss,
+        updatedPlayers
+      );
+
+      enqueueSnackbar(
+        `🌍 TURNO DO MUNDO! ${gameState.activeBoss.name} causou ${result.damagePerDigimon} de dano em cada Digimon!`,
+        { variant: "error" }
+      );
+
+      console.log(
+        `💥 [BOSS] Dano por Digimon: ${result.damagePerDigimon} (${result.affectedDigimons} afetados)`
+      );
+    }
 
     // Resetar hasActedThisTurn, defending, provokedBy e reviveAttempt do próximo jogador
     const updatedState = {
@@ -208,7 +273,7 @@ export default function GamePage() {
       currentTurnPlayerIndex: nextPlayerIndex,
       turnCount: isNewRound ? gameState.turnCount + 1 : gameState.turnCount,
       reviveAttemptThisTurn: false, // Resetar tentativa de reviver
-      players: gameState.players.map((player, idx) => {
+      players: updatedPlayers.map((player, idx) => {
         if (idx === nextPlayerIndex) {
           // Resetar ações, defesas e remover status expirados dos Digimons do próximo jogador
           // MANTÉM provocação - ela só expira quando o provocado atacar
@@ -225,7 +290,7 @@ export default function GamePage() {
               );
               return {
                 ...withoutExpiredStatuses,
-                hasActedThisTurn: false,
+              hasActedThisTurn: false,
                 defending: null, // Resetar defesa
                 // provokedBy: NÃO resetar - mantém até o próximo turno do provocado
               };
@@ -652,6 +717,143 @@ export default function GamePage() {
     }
   };
 
+  // ============= FUNÇÕES DE BOSS =============
+
+  const handleAttackBoss = () => {
+    if (!gameState || !gameState.activeBoss || !selectedDigimon) return;
+
+    const currentPlayer = gameState.players[gameState.currentTurnPlayerIndex];
+    const attackingDigimon = currentPlayer.digimons.find(
+      (d) => d.id === selectedDigimon.digimon.id
+    );
+
+    if (!attackingDigimon || attackingDigimon.currentHp <= 0) {
+      enqueueSnackbar("Digimon inválido ou morto!", { variant: "error" });
+      return;
+    }
+
+    if (attackingDigimon.hasActedThisTurn) {
+      enqueueSnackbar("Este Digimon já agiu neste turno!", {
+        variant: "warning",
+      });
+      return;
+    }
+
+    setIsAttackingBoss(true);
+    setAttackerDigimon({
+      digimon: attackingDigimon,
+      playerName: currentPlayer.name,
+    });
+
+    // Criar um "GameDigimon" falso para o boss para usar com AttackDialog
+    const bossAsDigimon: GameDigimon = {
+      id: -1, // ID negativo para identificar como boss
+      name: gameState.activeBoss.name,
+      image: gameState.activeBoss.image,
+      level: 7, // Boss sempre level max
+      dp: gameState.activeBoss.calculatedDp,
+      typeId: gameState.activeBoss.typeId,
+      currentHp: gameState.activeBoss.currentHp,
+    };
+
+    // Abrir dialog de ataque normal, mas com o boss como alvo
+    setShowAttackDialog(true);
+    // O AttackDialog vai usar attackerDigimon e o selectedDigimon (que será o boss)
+    setSelectedDigimon({
+      digimon: bossAsDigimon,
+      playerName: "BOSS",
+      playerId: -1,
+      originalId: -1,
+    });
+  };
+
+  const handleBossAttackConfirm = async (
+    targetDigimon: GameDigimon,
+    attackerDamage: number,
+    defenderDamage: number
+  ) => {
+    if (!gameState || !gameState.activeBoss || !attackerDigimon) return;
+
+    console.log("👹 [BOSS] Processando ataque ao boss...");
+
+    const updatedBoss = { ...gameState.activeBoss };
+    updatedBoss.currentHp = Math.max(0, updatedBoss.currentHp - attackerDamage);
+
+    // Atualizar HP do Digimon atacante (contra-ataque do boss)
+    const updatedPlayers = gameState.players.map((player) => ({
+      ...player,
+      digimons: player.digimons.map((d) => {
+        if (d.id === attackerDigimon.digimon.id) {
+          return {
+            ...d,
+            currentHp: Math.max(0, d.currentHp - defenderDamage),
+            hasActedThisTurn: true,
+          };
+        }
+        return d;
+      }),
+    }));
+
+    // Verificar se o boss foi derrotado
+    if (updatedBoss.currentHp <= 0) {
+      console.log("💀 [BOSS] Boss derrotado!");
+      updatedBoss.isDefeated = true;
+
+      // Calcular recompensas
+      const rewards = await BossManager.calculateBossRewards(
+        gameState.activeBoss.id
+      );
+
+      enqueueSnackbar(
+        `🎉 ${gameState.activeBoss.name} foi derrotado por ${attackerDigimon.playerName}!`,
+        { variant: "success" }
+      );
+
+      // Dar recompensas ao jogador que deu o golpe final
+      const killerPlayerIndex = updatedPlayers.findIndex(
+        (p) => p.id === gameState.players[gameState.currentTurnPlayerIndex].id
+      );
+
+      if (killerPlayerIndex >= 0 && rewards.length > 0) {
+        // Buscar dados dos itens
+        const itemsPromises = rewards.map((itemId) =>
+          fetch(`/api/items/${itemId}`).then((res) => res.json())
+        );
+        const items = await Promise.all(itemsPromises);
+
+        enqueueSnackbar(
+          `🎁 ${attackerDigimon.playerName} ganhou ${rewards.length} item(ns)!`,
+          { variant: "success" }
+        );
+
+        console.log("🎁 [BOSS] Recompensas:", items);
+      }
+
+      // Atualizar estado com boss derrotado
+      saveGameState({
+        ...gameState,
+        activeBoss: updatedBoss,
+        players: updatedPlayers,
+        lastBossDefeatedTurn: gameState.turnCount,
+        bossesDefeated: (gameState.bossesDefeated || 0) + 1,
+      });
+    } else {
+      // Boss ainda vivo, apenas atualizar HP
+      saveGameState({
+        ...gameState,
+        activeBoss: updatedBoss,
+        players: updatedPlayers,
+      });
+    }
+
+    setShowAttackDialog(false);
+    setIsAttackingBoss(false);
+    setSelectedDigimon(null);
+    setAttackerDigimon(null);
+  };
+
+  // ============= FIM DAS FUNÇÕES DE BOSS =============
+
   const updateTamerScore = (tamerId: number, points: number) => {
     try {
       const stored = localStorage.getItem("digimon_tamer_scores");
@@ -672,14 +874,14 @@ export default function GamePage() {
     if (!gameState || !reviveTarget) return;
 
     // Marcar que tentou reviver neste turno (independente do sucesso)
-    const updatedState = {
-      ...gameState,
+      const updatedState = {
+        ...gameState,
       reviveAttemptThisTurn: true, // Marcar tentativa
       players: success
         ? gameState.players.map((player) => ({
-            ...player,
-            digimons: player.digimons.map((d) => {
-              if (d.id === reviveTarget.digimon.id) {
+          ...player,
+          digimons: player.digimons.map((d) => {
+            if (d.id === reviveTarget.digimon.id) {
                 const revivedHp = Math.max(1, Math.floor(d.dp * 0.15)); // 15% da vida, mínimo 1
                 return {
                   ...d,
@@ -688,14 +890,14 @@ export default function GamePage() {
                   hasActedThisTurn: true, // Sem pontos de ação
                   actionPoints: 0, // Garantir que não tem pontos de ação
                 };
-              }
-              return d;
-            }),
+            }
+            return d;
+          }),
           }))
         : gameState.players, // Se falhou, não modifica os players
-    };
+      };
 
-    saveGameState(updatedState);
+      saveGameState(updatedState);
 
     if (success) {
       enqueueSnackbar(
@@ -841,13 +1043,13 @@ export default function GamePage() {
         );
 
         // Marcar como agiu mesmo sem encontrar nada
-        const updatedState = {
-          ...gameState,
+    const updatedState = {
+      ...gameState,
           players: gameState.players.map((player, playerIndex) => {
             if (playerIndex === gameState.currentTurnPlayerIndex) {
-              return {
-                ...player,
-                digimons: player.digimons.map((d) => {
+          return {
+            ...player,
+            digimons: player.digimons.map((d) => {
                   if (d.id === digimon.id) {
                     return {
                       ...d,
@@ -911,21 +1113,21 @@ export default function GamePage() {
                         });
                       }
 
-                      return {
-                        ...d,
+                return {
+                  ...d,
                         bag: newBag,
-                        hasActedThisTurn: true,
-                      };
-                    }
-                    return d;
-                  }),
+                  hasActedThisTurn: true,
                 };
               }
-              return player;
+              return d;
             }),
           };
+        }
+        return player;
+      }),
+    };
 
-          saveGameState(updatedState);
+    saveGameState(updatedState);
 
           // Mensagem mais detalhada sobre o item encontrado
           const itemRarity =
@@ -935,12 +1137,12 @@ export default function GamePage() {
               ? "⭐"
               : "";
 
-          enqueueSnackbar(
+    enqueueSnackbar(
             `💰 ${capitalize(digimon.name)} encontrou ${itemRarity} ${
               foundItem.name
             }! ${itemRarity ? "Sorte!" : ""}`,
-            { variant: "success" }
-          );
+      { variant: "success" }
+    );
         }
       }
     } catch (error) {
@@ -1295,7 +1497,7 @@ export default function GamePage() {
 
     // Verificar se pode defender (mesmo nível ou inferior)
     if (targetDigimon.level > digimon.level) {
-      enqueueSnackbar(
+    enqueueSnackbar(
         "Você só pode defender Digimons de nível igual ou inferior!",
         { variant: "warning" }
       );
@@ -1631,6 +1833,39 @@ export default function GamePage() {
           </p>
         </div>
 
+        {/* Boss Card ou Contagem Regressiva */}
+        <div className="mb-6 sm:mb-8 md:mb-10">
+          {gameState.activeBoss && !gameState.activeBoss.isDefeated ? (
+            <BossCard
+              boss={gameState.activeBoss}
+              onAttack={handleAttackBoss}
+              canAttack={
+                !!selectedDigimon &&
+                selectedDigimon.digimon.currentHp > 0 &&
+                !selectedDigimon.digimon.hasActedThisTurn
+              }
+              isAttacking={isAttackingBoss}
+            />
+          ) : (
+            (() => {
+              // Calcular turnos restantes
+              const turnsUntilBoss = BossManager.shouldSpawnBoss(
+                gameState.turnCount,
+                gameState.lastBossDefeatedTurn,
+                gameState.activeBoss
+              )
+                ? 0
+                : gameState.lastBossDefeatedTurn !== undefined
+                ? gameState.lastBossDefeatedTurn + 2 - gameState.turnCount
+                : 2 - gameState.turnCount;
+
+              return turnsUntilBoss > 0 ? (
+                <BossCountdown turnsRemaining={turnsUntilBoss} />
+              ) : null;
+            })()
+          )}
+        </div>
+
         {/* Lista de Jogadores com seus Digimons */}
         <div className="space-y-3 sm:space-y-4 md:space-y-6">
           {gameState.players.map((player, playerIndex) => {
@@ -1829,7 +2064,7 @@ export default function GamePage() {
                                     <div className="absolute bottom-1 right-1 bg-cyan-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-cyan-400 flex items-center gap-1">
                                       <span>🛡️</span>
                                       <span>{capitalize(defender.name)}</span>
-                                    </div>
+                                  </div>
                                   )
                                 );
                               })()}
@@ -2056,8 +2291,11 @@ export default function GamePage() {
         onClose={() => {
           setShowAttackDialog(false);
           setAttackerDigimon(null);
+          setIsAttackingBoss(false);
         }}
-        onConfirm={handleAttackConfirm}
+        onConfirm={
+          isAttackingBoss ? handleBossAttackConfirm : handleAttackConfirm
+        }
         onEvolve={handleEvolve}
         attacker={attackerDigimon}
         players={gameState?.players || []}
