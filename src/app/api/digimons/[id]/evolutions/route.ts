@@ -28,20 +28,12 @@ export async function PUT(
       );
     }
 
-    // Validar se todos os IDs de evolução existem e são do nível seguinte
-    const nextLevel = digimon.level + 1;
-
+    // Validar se todos os IDs de evolução existem (sem restrição de nível)
     for (const evoId of evolution) {
       const evoDigimon = getDigimonById(evoId);
       if (!evoDigimon) {
         return NextResponse.json(
           { error: `Digimon com ID ${evoId} não existe` },
-          { status: 400 }
-        );
-      }
-      if (evoDigimon.level !== nextLevel) {
-        return NextResponse.json(
-          { error: `Todas as evoluções devem ser do level ${nextLevel}` },
           { status: 400 }
         );
       }
