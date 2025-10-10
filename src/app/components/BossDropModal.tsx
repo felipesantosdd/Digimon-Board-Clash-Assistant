@@ -170,7 +170,7 @@ export default function BossDropModal({
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-lg flex items-center justify-center text-2xl">
-                          {item.icon || "📦"}
+                          📦
                         </div>
                         <div className="flex-1">
                           <h4 className="font-bold text-white text-sm sm:text-base">
