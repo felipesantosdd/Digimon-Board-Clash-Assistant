@@ -84,7 +84,7 @@ export default function BossCard({
             <div className="grid grid-cols-2 gap-2">
               <div className="bg-black/40 rounded-lg p-3 border border-red-500/30">
                 <div className="text-gray-400 text-xs">DP</div>
-                <div className="text-white text-1xl font-bold">
+                <div className="text-white text-2xl font-bold">
                   {boss.calculatedDp.toLocaleString()}
                 </div>
               </div>
