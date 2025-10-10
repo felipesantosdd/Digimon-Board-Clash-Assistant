@@ -10,7 +10,11 @@ interface Tamer {
   image: string;
 }
 
-export default function TamersTab() {
+interface TamersTabProps {
+  isProduction?: boolean;
+}
+
+export default function TamersTab({ isProduction = false }: TamersTabProps) {
   const { enqueueSnackbar } = useSnackbar();
   const [tamers, setTamers] = useState<Tamer[]>([]);
   const [loading, setLoading] = useState(true);
@@ -134,22 +138,24 @@ export default function TamersTab() {
                 </h3>
 
                 {/* Botões de Ação */}
-                <div className="space-y-2">
-                  <button
-                    onClick={() => handleEdit(tamer)}
-                    className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
-                  >
-                    <span>✏️</span>
-                    <span>Editar</span>
-                  </button>
-                  <button
-                    onClick={() => handleDelete(tamer)}
-                    className="w-full px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center gap-2"
-                  >
-                    <span>🗑️</span>
-                    <span>Deletar</span>
-                  </button>
-                </div>
+                {!isProduction && (
+                  <div className="space-y-2">
+                    <button
+                      onClick={() => handleEdit(tamer)}
+                      className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                    >
+                      <span>✏️</span>
+                      <span>Editar</span>
+                    </button>
+                    <button
+                      onClick={() => handleDelete(tamer)}
+                      className="w-full px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center gap-2"
+                    >
+                      <span>🗑️</span>
+                      <span>Deletar</span>
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -178,4 +184,3 @@ export default function TamersTab() {
     </div>
   );
 }
-

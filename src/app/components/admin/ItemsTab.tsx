@@ -25,7 +25,11 @@ const effectTypeIcons: Record<EffectType, string> = {
   boss: "👹",
 };
 
-export default function ItemsTab() {
+interface ItemsTabProps {
+  isProduction?: boolean;
+}
+
+export default function ItemsTab({ isProduction = false }: ItemsTabProps) {
   const { enqueueSnackbar } = useSnackbar();
   const [items, setItems] = useState<Item[]>([]);
   const [effects, setEffects] = useState<Effect[]>([]);
@@ -144,8 +148,8 @@ export default function ItemsTab() {
           <p className="text-gray-300">Gerencie os itens disponíveis no jogo</p>
         </div>
 
-        {/* Botão Adicionar - Apenas em Development */}
-        {process.env.NODE_ENV === "development" && (
+        {/* Botão Adicionar - Apenas quando não for produção */}
+        {!isProduction && (
           <button
             onClick={() => {
               setEditingItem(null);
@@ -248,25 +252,23 @@ export default function ItemsTab() {
                   </div>
 
                   {/* Botões de ação */}
-                  <div className="space-y-2">
-                    {process.env.NODE_ENV === "development" && (
+                  {!isProduction && (
+                    <div className="space-y-2">
                       <button
                         onClick={() => handleEditItem(item)}
                         className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
                       >
                         ✏️ Editar
                       </button>
-                    )}
 
-                    {process.env.NODE_ENV === "development" && (
                       <button
                         onClick={() => handleDeleteItem(item.id, item.name)}
                         className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
                       >
                         🗑️ Excluir
                       </button>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

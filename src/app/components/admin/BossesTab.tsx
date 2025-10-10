@@ -44,7 +44,11 @@ const digimonTypes = [
   { id: 6, name: "Unknown" },
 ];
 
-export default function BossesTab() {
+interface BossesTabProps {
+  isProduction?: boolean;
+}
+
+export default function BossesTab({ isProduction = false }: BossesTabProps) {
   const { enqueueSnackbar } = useSnackbar();
   const [bosses, setBosses] = useState<Boss[]>([]);
   const [effects, setEffects] = useState<Effect[]>([]);
@@ -276,17 +280,21 @@ export default function BossesTab() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-white">🐉 Gerenciar Bosses</h2>
-        <button
-          onClick={handleAddNew}
-          className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
-        >
-          ➕ Adicionar Boss
-        </button>
+        <h2 className="text-2xl font-bold text-white">
+          🐉 {isProduction ? "Biblioteca de Bosses" : "Gerenciar Bosses"}
+        </h2>
+        {!isProduction && (
+          <button
+            onClick={handleAddNew}
+            className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
+          >
+            ➕ Adicionar Boss
+          </button>
+        )}
       </div>
 
       {/* Formulário de Edição/Criação */}
-      {(editingBoss || isAddingNew) && (
+      {!isProduction && (editingBoss || isAddingNew) && (
         <div className="bg-gray-700 rounded-lg p-6 border-2 border-blue-500">
           <h3 className="text-xl font-bold text-white mb-4">
             {editingBoss ? "Editar Boss" : "Novo Boss"}
@@ -508,20 +516,22 @@ export default function BossesTab() {
               </div>
 
               {/* Botões */}
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handleEdit(boss)}
-                  className="flex-1 px-3 py-2 bg-blue-600 text-white text-sm font-semibold rounded hover:bg-blue-700 transition-colors"
-                >
-                  ✏️ Editar
-                </button>
-                <button
-                  onClick={() => handleDelete(boss.id)}
-                  className="flex-1 px-3 py-2 bg-red-600 text-white text-sm font-semibold rounded hover:bg-red-700 transition-colors"
-                >
-                  🗑️ Deletar
-                </button>
-              </div>
+              {!isProduction && (
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleEdit(boss)}
+                    className="flex-1 px-3 py-2 bg-blue-600 text-white text-sm font-semibold rounded hover:bg-blue-700 transition-colors"
+                  >
+                    ✏️ Editar
+                  </button>
+                  <button
+                    onClick={() => handleDelete(boss.id)}
+                    className="flex-1 px-3 py-2 bg-red-600 text-white text-sm font-semibold rounded hover:bg-red-700 transition-colors"
+                  >
+                    🗑️ Deletar
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         ))}
@@ -531,12 +541,14 @@ export default function BossesTab() {
         <div className="text-center py-12 bg-gray-700 rounded-lg">
           <div className="text-6xl mb-4">🐉</div>
           <p className="text-gray-300 mb-4">Nenhum boss cadastrado</p>
-          <button
-            onClick={handleAddNew}
-            className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
-          >
-            ➕ Adicionar Primeiro Boss
-          </button>
+          {!isProduction && (
+            <button
+              onClick={handleAddNew}
+              className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
+            >
+              ➕ Adicionar Primeiro Boss
+            </button>
+          )}
         </div>
       )}
 

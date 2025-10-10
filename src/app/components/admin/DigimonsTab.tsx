@@ -2,12 +2,19 @@
 
 import { useState, useEffect } from "react";
 import EvolutionModal from "../EvolutionModal";
+import EvolutionLineModal from "../EvolutionLineModal";
 import AddDigimonModal from "../AddDigimonModal";
 import { Digimon } from "../../database/database_type";
 import { useSnackbar } from "notistack";
 import { capitalize, getLevelName } from "@/lib/utils";
 
-export default function DigimonsTab() {
+interface DigimonsTabProps {
+  isProduction?: boolean;
+}
+
+export default function DigimonsTab({
+  isProduction = false,
+}: DigimonsTabProps) {
   const { enqueueSnackbar } = useSnackbar();
   const [digimons, setDigimons] = useState<Digimon[]>([]);
   const [loading, setLoading] = useState(true);
@@ -16,6 +23,10 @@ export default function DigimonsTab() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [levelFilter, setLevelFilter] = useState<number | null>(null);
+
+  // Estados para visualização de linha evolutiva
+  const [viewingDigimon, setViewingDigimon] = useState<Digimon | null>(null);
+  const [isEvolutionLineOpen, setIsEvolutionLineOpen] = useState(false);
 
   // Carregar Digimons da API
   useEffect(() => {
@@ -42,6 +53,11 @@ export default function DigimonsTab() {
     // Permitir visualização mas não edição em produção
     setSelectedDigimon(digimon);
     setIsModalOpen(true);
+  };
+
+  const handleViewEvolutionLine = (digimon: Digimon) => {
+    setViewingDigimon(digimon);
+    setIsEvolutionLineOpen(true);
   };
 
   const handleSaveEvolutions = async (
@@ -269,7 +285,11 @@ export default function DigimonsTab() {
                       needsEvolution ? "ring-4 ring-red-500" : ""
                     }`}
                   >
-                    <div className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
+                    <div
+                      className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden cursor-pointer"
+                      onClick={() => handleViewEvolutionLine(digimon)}
+                      title="Clique para ver a linha evolutiva"
+                    >
                       <img
                         src={digimon.image}
                         alt={digimon.name}
@@ -316,15 +336,15 @@ export default function DigimonsTab() {
                         </div>
                       </div>
 
-                      <div className="space-y-2">
-                        <button
-                          onClick={() => handleConfigureEvolutions(digimon)}
-                          className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-                        >
-                          Editar
-                        </button>
+                      {!isProduction && (
+                        <div className="space-y-2">
+                          <button
+                            onClick={() => handleConfigureEvolutions(digimon)}
+                            className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                          >
+                            Editar
+                          </button>
 
-                        {process.env.NODE_ENV === "development" && (
                           <button
                             onClick={() =>
                               handleDeleteDigimon(
@@ -336,8 +356,8 @@ export default function DigimonsTab() {
                           >
                             🗑️ Excluir
                           </button>
-                        )}
-                      </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 );
@@ -382,7 +402,11 @@ export default function DigimonsTab() {
                               needsEvolution ? "ring-4 ring-red-500" : ""
                             }`}
                           >
-                            <div className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
+                            <div
+                              className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden cursor-pointer"
+                              onClick={() => handleViewEvolutionLine(digimon)}
+                              title="Clique para ver a linha evolutiva"
+                            >
                               <img
                                 src={digimon.image}
                                 alt={digimon.name}
@@ -420,14 +444,16 @@ export default function DigimonsTab() {
                                 </div>
                               </div>
 
-                              <button
-                                onClick={() =>
-                                  handleConfigureEvolutions(digimon)
-                                }
-                                className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
-                              >
-                                ⚙️ Gerenciar
-                              </button>
+                              {!isProduction && (
+                                <button
+                                  onClick={() =>
+                                    handleConfigureEvolutions(digimon)
+                                  }
+                                  className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                                >
+                                  ⚙️ Gerenciar
+                                </button>
+                              )}
                             </div>
                           </div>
                         );
@@ -479,6 +505,14 @@ export default function DigimonsTab() {
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         onSuccess={handleAddDigimonSuccess}
+        allDigimons={digimons}
+      />
+
+      {/* Modal de Linha Evolutiva */}
+      <EvolutionLineModal
+        isOpen={isEvolutionLineOpen}
+        onClose={() => setIsEvolutionLineOpen(false)}
+        digimon={viewingDigimon}
         allDigimons={digimons}
       />
     </>

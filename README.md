@@ -6,8 +6,269 @@ Sistema de gerenciamento e assistente para partidas de Digimon Board Clash, um j
 
 ---
 
+## 🏗️ Overview do Sistema
+
+### Arquitetura Geral
+
+O **Digimon Board Clash** é uma aplicação web **full-stack** construída com Next.js 15, utilizando o **App Router** e **React Server Components**. O sistema funciona como um assistente digital para o jogo de tabuleiro físico, gerenciando todo o estado do jogo e executando cálculos complexos automaticamente.
+
+#### Componentes Principais:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      FRONTEND (React)                        │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  │   Game UI    │  │  Admin UI    │  │  Battle UI   │      │
+│  │   (Client)   │  │   (Client)   │  │   (Client)   │      │
+│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘      │
+│         │                 │                 │               │
+│         └─────────────────┴─────────────────┘               │
+│                           ↓                                  │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │         State Management (useGameState Hook)        │   │
+│  │  • LocalStorage Persistence                         │   │
+│  │  • Real-time Game State                             │   │
+│  │  • Turn Management                                  │   │
+│  └─────────────────────┬───────────────────────────────┘   │
+└────────────────────────┼─────────────────────────────────────┘
+                         ↓
+┌─────────────────────────────────────────────────────────────┐
+│                    API ROUTES (Next.js)                      │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  │  /api/       │  │  /api/       │  │  /api/       │      │
+│  │  digimons    │  │  items       │  │  bosses      │      │
+│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘      │
+│         │                 │                 │               │
+│         └─────────────────┴─────────────────┘               │
+│                           ↓                                  │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │      Business Logic (lib/ folder)                   │   │
+│  │  • battle-manager.ts   → Combate e Dano             │   │
+│  │  • effects-manager.ts  → Efeitos e Itens            │   │
+│  │  • boss-manager.ts     → Lógica de Bosses           │   │
+│  └─────────────────────┬───────────────────────────────┘   │
+└────────────────────────┼─────────────────────────────────────┘
+                         ↓
+┌─────────────────────────────────────────────────────────────┐
+│                    DATA LAYER                                │
+│  ┌─────────────────────┐  ┌─────────────────────┐          │
+│  │   Development       │  │    Production       │          │
+│  │  (SQLite Local)     │  │   (JSON Files)      │          │
+│  │  • database.sqlite  │  │  • src/data/*.json  │          │
+│  │  • CRUD completo    │  │  • Read-only        │          │
+│  └─────────────────────┘  └─────────────────────┘          │
+│                                                              │
+│  📊 Dados:                                                   │
+│  • 145+ Digimons (níveis 3-7)                               │
+│  • Itens e Efeitos                                          │
+│  • Bosses e Drops                                           │
+│  • Tamers (Avatares)                                        │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Fluxo de Dados
+
+#### 1. **Inicialização do Jogo**
+
+```
+Usuário → GameSetupModal → API /digimons/random-level1
+       → Cria estado inicial → Salva em LocalStorage
+```
+
+#### 2. **Durante o Jogo (Combate)**
+
+```
+Jogador seleciona ação → useGameState atualiza estado
+       → battle-manager.ts calcula dano
+       → effects-manager.ts aplica efeitos
+       → Estado atualizado → LocalStorage
+       → UI re-renderiza com novo estado
+```
+
+#### 3. **Painel Administrativo**
+
+```
+Admin edita Digimon → API /digimons/[id] → SQLite (dev)
+       → npm run export → Gera JSON → Git commit → Deploy
+```
+
+### Dual Database System
+
+O sistema opera com **dois modos** dependendo do ambiente:
+
+#### 🔧 **Desenvolvimento Local**
+
+- **SQLite** (`better-sqlite3`)
+- CRUD completo via painel admin
+- Scripts de seed para popular dados
+- Imagens armazenadas em `public/images/`
+
+#### ☁️ **Produção (Vercel)**
+
+- **JSON estáticos** em `src/data/*.json`
+- Read-only (sem writes em produção)
+- Build process: `export-db-to-json.ts` converte SQLite → JSON
+- JSON files versionados no Git
+
+### State Management
+
+#### Client-Side State (LocalStorage)
+
+O estado completo do jogo é armazenado no **localStorage** do navegador:
+
+```typescript
+{
+  players: [
+    {
+      id: string,
+      name: string,
+      tamerId: number,
+      digimons: [
+        {
+          id: string,
+          baseDigimonId: number,
+          currentHp: number,
+          maxHp: number,
+          xp: number,  // Sistema oculto
+          level: number,
+          bag: Item[], // Inventário individual
+          defending: string | null,
+          hasActed: boolean
+        }
+      ]
+    }
+  ],
+  currentPlayerIndex: number,
+  turnNumber: number,
+  boss: GameBoss | null
+}
+```
+
+#### Server-Side Data (API Routes)
+
+APIs fornecem dados estáticos (Digimons, Itens, etc):
+
+- **GET** `/api/digimons` - Lista todos
+- **GET** `/api/digimons/[id]` - Detalhes
+- **GET** `/api/digimons/level/[level]` - Por nível
+- **POST** `/api/digimons/evolve` - Opções de evolução
+- **POST/PUT/DELETE** - Admin only
+
+### Principais Gerenciadores
+
+#### 🎯 **battle-manager.ts**
+
+Responsável por toda a lógica de combate:
+
+- Cálculo de dano baseado em D20
+- Modificadores de tipo (Data/Vaccine/Virus)
+- Sistema de contra-ataque
+- Ganho de XP proporcional ao dano recebido
+- Verificação de morte
+
+#### ✨ **effects-manager.ts**
+
+Gerencia todos os efeitos do jogo:
+
+- Aplicação de heal/damage/buff/debuff
+- Efeitos de itens (Potion, Revive, etc)
+- Efeitos de bosses
+- Validações de efeitos
+
+#### 👹 **boss-manager.ts**
+
+Controla a lógica de bosses:
+
+- Sistema de drops com probabilidade
+- Cálculo de recompensas
+- Integração com items e effects
+
+### Renderização e Performance
+
+#### React Server Components
+
+- Páginas principais usam **Server Components**
+- Reduz bundle JavaScript no cliente
+- Dados fetched no servidor
+
+#### Client Components
+
+- Componentes interativos marcados com `"use client"`
+- Modais, formulários, game state
+- Hooks customizados (`useGameState`)
+
+#### Otimizações
+
+- Imagens em **WebP** (70-90% menor que PNG)
+- TailwindCSS para CSS minificado
+- Turbopack para builds rápidos
+- Code splitting automático (Next.js)
+
+### Build e Deploy Process
+
+```bash
+# 1. Build Trigger (Vercel)
+git push origin main
+
+# 2. Install Dependencies
+npm install
+
+# 3. Pre-build Script
+npm run build
+  ↓
+tsx scripts/export-db-to-json.ts
+  ↓
+  • Se database.sqlite existe → exporta para JSON
+  • Se não existe → usa JSON versionados
+
+# 4. Next.js Build
+next build --turbopack
+  ↓
+  • Compila TypeScript
+  • Bundling com Turbopack
+  • Otimiza assets
+
+# 5. Deploy
+Vercel serverless functions + Static assets
+```
+
+### Segurança e Validação
+
+- **TypeScript** para type-safety em todo código
+- **Zod** (potencial) para validação de schemas
+- **ESLint** para code quality
+- Sem autenticação (jogo local/casual)
+- Admin panel sem proteção (desenvolvimento)
+
+### Limitações Atuais
+
+- ❌ Sem multiplayer online (localStorage apenas)
+- ❌ Sem persistência de partidas na nuvem
+- ❌ Admin panel não protegido por login
+- ❌ Sem analytics ou tracking
+- ❌ Sem sistema de ranking/leaderboard
+
+### Escalabilidade Futura
+
+Para evoluir para um sistema multiplayer:
+
+1. **Database**: Migrar para PostgreSQL/Supabase
+2. **Real-time**: WebSockets ou Supabase Realtime
+3. **Auth**: NextAuth.js ou Supabase Auth
+4. **State**: Migrar de LocalStorage para Server State
+5. **API**: Adicionar middleware de autenticação
+
+---
+
 ## 📋 Índice
 
+- [Overview do Sistema](#️-overview-do-sistema)
+  - [Arquitetura Geral](#arquitetura-geral)
+  - [Fluxo de Dados](#fluxo-de-dados)
+  - [Dual Database System](#dual-database-system)
+  - [State Management](#state-management)
+  - [Principais Gerenciadores](#principais-gerenciadores)
+  - [Build e Deploy Process](#build-e-deploy-process)
 - [Objetivo do Jogo](#-objetivo-do-jogo)
 - [Sistema Implementado](#-sistema-implementado)
 - [Regras do Jogo](#-regras-do-jogo)

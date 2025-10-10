@@ -34,7 +34,13 @@ const digimonTypes = [
   { id: 6, name: "Unknown" },
 ];
 
-export default function BossDropsTab() {
+interface BossDropsTabProps {
+  isProduction?: boolean;
+}
+
+export default function BossDropsTab({
+  isProduction = false,
+}: BossDropsTabProps) {
   const { enqueueSnackbar } = useSnackbar();
   const [drops, setDrops] = useState<BossDrop[]>([]);
   const [bosses, setBosses] = useState<Boss[]>([]);
@@ -243,90 +249,93 @@ export default function BossDropsTab() {
                   </div>
 
                   {/* Botão Adicionar Drop */}
-                  <button
-                    onClick={() => handleAddNew(boss.id)}
-                    className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
-                  >
-                    <span>➕</span>
-                    <span className="hidden sm:inline">Adicionar Drop</span>
-                  </button>
+                  {!isProduction && (
+                    <button
+                      onClick={() => handleAddNew(boss.id)}
+                      className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
+                    >
+                      <span>➕</span>
+                      <span className="hidden sm:inline">Adicionar Drop</span>
+                    </button>
+                  )}
                 </div>
               </div>
 
               {/* Formulário de Adicionar/Editar Drop */}
-              {(isAddingDrop ||
-                (editingDrop && editingDrop.bossId === boss.id)) && (
-                <div className="bg-gray-600 p-4 border-t-2 border-blue-500">
-                  <h4 className="text-lg font-bold text-white mb-3">
-                    {editingDrop ? "✏️ Editar Drop" : "➕ Novo Drop"}
-                  </h4>
+              {!isProduction &&
+                (isAddingDrop ||
+                  (editingDrop && editingDrop.bossId === boss.id)) && (
+                  <div className="bg-gray-600 p-4 border-t-2 border-blue-500">
+                    <h4 className="text-lg font-bold text-white mb-3">
+                      {editingDrop ? "✏️ Editar Drop" : "➕ Novo Drop"}
+                    </h4>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* Item */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-300 mb-2">
-                        Item
-                      </label>
-                      <select
-                        value={formData.itemId}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            itemId: Number(e.target.value),
-                          })
-                        }
-                        className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Item */}
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-300 mb-2">
+                          Item
+                        </label>
+                        <select
+                          value={formData.itemId}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              itemId: Number(e.target.value),
+                            })
+                          }
+                          className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
+                        >
+                          {items.map((item) => (
+                            <option key={item.id} value={item.id}>
+                              {item.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* Chance de Drop */}
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-300 mb-2">
+                          Chance de Drop (%)
+                        </label>
+                        <input
+                          type="number"
+                          value={formData.dropChance}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              dropChance: Number(e.target.value),
+                            })
+                          }
+                          className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
+                          min="1"
+                          max="100"
+                          step="5"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Botões */}
+                    <div className="flex gap-3 mt-4">
+                      <button
+                        onClick={handleSave}
+                        className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
                       >
-                        {items.map((item) => (
-                          <option key={item.id} value={item.id}>
-                            {item.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    {/* Chance de Drop */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-300 mb-2">
-                        Chance de Drop (%)
-                      </label>
-                      <input
-                        type="number"
-                        value={formData.dropChance}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            dropChance: Number(e.target.value),
-                          })
-                        }
-                        className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
-                        min="1"
-                        max="100"
-                        step="5"
-                      />
+                        💾 Salvar
+                      </button>
+                      <button
+                        onClick={() => {
+                          setEditingDrop(null);
+                          setAddingForBoss(null);
+                        }}
+                        className="px-4 py-2 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors"
+                      >
+                        ❌ Cancelar
+                      </button>
                     </div>
                   </div>
-
-                  {/* Botões */}
-                  <div className="flex gap-3 mt-4">
-                    <button
-                      onClick={handleSave}
-                      className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-                    >
-                      💾 Salvar
-                    </button>
-                    <button
-                      onClick={() => {
-                        setEditingDrop(null);
-                        setAddingForBoss(null);
-                      }}
-                      className="px-4 py-2 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors"
-                    >
-                      ❌ Cancelar
-                    </button>
-                  </div>
-                </div>
-              )}
+                )}
 
               {/* Lista de Drops do Boss */}
               <div className="p-4">
@@ -399,20 +408,22 @@ export default function BossDropsTab() {
                             </div>
 
                             {/* Botões */}
-                            <div className="flex gap-2">
-                              <button
-                                onClick={() => handleEdit(drop)}
-                                className="flex-1 px-3 py-1.5 bg-blue-600 text-white text-xs font-semibold rounded hover:bg-blue-700 transition-colors"
-                              >
-                                ✏️ Editar
-                              </button>
-                              <button
-                                onClick={() => handleDelete(drop.id)}
-                                className="flex-1 px-3 py-1.5 bg-red-600 text-white text-xs font-semibold rounded hover:bg-red-700 transition-colors"
-                              >
-                                🗑️ Deletar
-                              </button>
-                            </div>
+                            {!isProduction && (
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() => handleEdit(drop)}
+                                  className="flex-1 px-3 py-1.5 bg-blue-600 text-white text-xs font-semibold rounded hover:bg-blue-700 transition-colors"
+                                >
+                                  ✏️ Editar
+                                </button>
+                                <button
+                                  onClick={() => handleDelete(drop.id)}
+                                  className="flex-1 px-3 py-1.5 bg-red-600 text-white text-xs font-semibold rounded hover:bg-red-700 transition-colors"
+                                >
+                                  🗑️ Deletar
+                                </button>
+                              </div>
+                            )}
                           </div>
                         );
                       })}

@@ -100,19 +100,12 @@ export default function Home() {
               >
                 <span>▶️</span> <span className="hidden sm:inline">Play</span>
               </button>
-              <Link href="/digimons">
+              <Link href="/biblioteca">
                 <button className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-orange-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-orange-700 transition-colors duration-200 shadow-sm hover:shadow-md">
-                  <span className="hidden sm:inline">Digimons</span>
-                  <span className="sm:hidden">📱</span>
+                  <span className="hidden sm:inline">Biblioteca</span>
+                  <span className="sm:hidden">📚</span>
                 </button>
               </Link>
-              {process.env.NODE_ENV === "development" && (
-                <Link href="/admin">
-                  <button className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-purple-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-purple-700 transition-colors duration-200 shadow-sm hover:shadow-md hidden sm:block">
-                    Admin
-                  </button>
-                </Link>
-              )}
             </div>
           </div>
         </div>

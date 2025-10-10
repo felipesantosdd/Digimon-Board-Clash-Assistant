@@ -24,7 +24,11 @@ const effectTypes = [
   { id: "boss", name: "Boss", icon: "👹", color: "bg-pink-600" },
 ];
 
-export default function EffectsTab() {
+interface EffectsTabProps {
+  isProduction?: boolean;
+}
+
+export default function EffectsTab({ isProduction = false }: EffectsTabProps) {
   const { enqueueSnackbar } = useSnackbar();
   const [effects, setEffects] = useState<Effect[]>([]);
   const [loading, setLoading] = useState(true);
@@ -175,17 +179,19 @@ export default function EffectsTab() {
             ))}
           </select>
 
-          <button
-            onClick={handleAddNew}
-            className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors whitespace-nowrap"
-          >
-            ➕ Adicionar
-          </button>
+          {!isProduction && (
+            <button
+              onClick={handleAddNew}
+              className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors whitespace-nowrap"
+            >
+              ➕ Adicionar
+            </button>
+          )}
         </div>
       </div>
 
       {/* Formulário de Edição/Criação */}
-      {(editingEffect || isAddingNew) && (
+      {!isProduction && (editingEffect || isAddingNew) && (
         <div className="bg-gray-700 rounded-lg p-6 border-2 border-blue-500">
           <h3 className="text-xl font-bold text-white mb-4">
             {editingEffect ? "✏️ Editar Efeito" : "➕ Novo Efeito"}
