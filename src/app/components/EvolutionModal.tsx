@@ -360,42 +360,208 @@ export default function EvolutionModal({
 
           {/* Conteúdo com scroll */}
           <div className="flex-1 overflow-y-auto px-6">
-          <div className="mb-4 p-4 bg-gray-700 rounded-lg">
-            <div className="flex justify-between items-center mb-2">
-              <h3 className="font-semibold text-white">Dados do Digimon:</h3>
-            </div>
-
-            {/* Modo de Edição */}
-            <div className="space-y-3">
-              {/* Input de arquivo oculto */}
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="hidden"
-              />
-
-              {/* Nome */}
-              <div>
-                <label className="block text-xs font-medium text-white mb-1">
-                  Nome
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={editData.name}
-                  onChange={handleEditChange}
-                  className="w-full px-3 py-2 text-sm border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
+            <div className="mb-4 p-4 bg-gray-700 rounded-lg">
+              <div className="flex justify-between items-center mb-2">
+                <h3 className="font-semibold text-white">Dados do Digimon:</h3>
               </div>
 
-              {/* Level */}
-              <div>
-                <label className="block text-xs font-medium text-white mb-2">
-                  Level
-                </label>
-                <div className="grid grid-cols-4 gap-1">
+              {/* Modo de Edição */}
+              <div className="space-y-3">
+                {/* Input de arquivo oculto */}
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="hidden"
+                />
+
+                {/* Nome */}
+                <div>
+                  <label className="block text-xs font-medium text-white mb-1">
+                    Nome
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={editData.name}
+                    onChange={handleEditChange}
+                    className="w-full px-3 py-2 text-sm border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+
+                {/* Level */}
+                <div>
+                  <label className="block text-xs font-medium text-white mb-2">
+                    Level
+                  </label>
+                  <div className="grid grid-cols-4 gap-1">
+                    {[
+                      { value: 0, label: "Armor" },
+                      { value: 1, label: "Rookie" },
+                      { value: 2, label: "Champion" },
+                      { value: 3, label: "Ultimate" },
+                      { value: 4, label: "Mega 1" },
+                      { value: 5, label: "Mega 2" },
+                      { value: 6, label: "Mega 3" },
+                      { value: 7, label: "Mega 4" },
+                    ].map((level) => (
+                      <button
+                        key={level.value}
+                        type="button"
+                        onClick={() =>
+                          handleEditChange({
+                            target: {
+                              name: "level",
+                              value: level.value.toString(),
+                            },
+                          } as React.ChangeEvent<HTMLSelectElement>)
+                        }
+                        className={`px-1 py-1 rounded border-2 text-[10px] transition-all ${
+                          editData.level === level.value
+                            ? "border-blue-500 bg-blue-50 text-blue-700 font-semibold"
+                            : "border-gray-600 hover:border-gray-500"
+                        }`}
+                      >
+                        {level.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Tipos */}
+                <div>
+                  <label className="block text-xs font-medium text-white mb-2">
+                    Tipo
+                  </label>
+                  <div className="grid grid-cols-6 gap-1">
+                    {digimonTypes.map((type) => (
+                      <button
+                        key={type.id}
+                        type="button"
+                        onClick={() =>
+                          handleEditChange({
+                            target: {
+                              name: "typeId",
+                              value: type.id.toString(),
+                            },
+                          } as React.ChangeEvent<HTMLSelectElement>)
+                        }
+                        className={`p-2 rounded border-2 transition-all flex flex-col items-center gap-1 ${
+                          editData.typeId === type.id
+                            ? "border-blue-500 bg-blue-50"
+                            : "border-gray-600 hover:border-gray-500"
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={editData.typeId === type.id}
+                          onChange={() => {}}
+                          className="w-3 h-3 text-blue-600 rounded focus:ring-blue-500"
+                        />
+                        <span
+                          className={`text-[10px] font-medium ${
+                            editData.typeId === type.id
+                              ? "text-blue-700"
+                              : "text-white"
+                          }`}
+                        >
+                          {type.name}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Status Ativo/Inativo */}
+                <div>
+                  <label className="block text-xs font-medium text-white mb-2">
+                    Status
+                  </label>
+                  <div className="space-y-2">
+                    {/* Switch Ativo/Inativo */}
+                    <div className="flex items-center gap-2 p-3 bg-gray-700 rounded-lg">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setEditData((prev) => ({
+                            ...prev,
+                            active: !prev.active,
+                          }))
+                        }
+                        className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                          editData.active ? "bg-green-500" : "bg-gray-500"
+                        }`}
+                      >
+                        <span
+                          className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                            editData.active ? "translate-x-5" : "translate-x-1"
+                          }`}
+                        />
+                      </button>
+                      <span
+                        className={`text-xs font-medium ${
+                          editData.active ? "text-green-400" : "text-gray-400"
+                        }`}
+                      >
+                        {editData.active ? "✅ Ativo" : "⚠️ Inativo"}
+                      </span>
+                      <p className="text-[10px] text-gray-400 ml-auto">
+                        {editData.active
+                          ? "Disponível no jogo"
+                          : "Indisponível para novos jogos"}
+                      </p>
+                    </div>
+
+                    {/* Switch Pode ser Boss */}
+                    <div className="flex items-center gap-2 p-3 bg-gray-700 rounded-lg">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setEditData((prev) => ({ ...prev, boss: !prev.boss }))
+                        }
+                        className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                          editData.boss ? "bg-red-500" : "bg-gray-500"
+                        }`}
+                      >
+                        <span
+                          className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                            editData.boss ? "translate-x-5" : "translate-x-1"
+                          }`}
+                        />
+                      </button>
+                      <span
+                        className={`text-xs font-medium ${
+                          editData.boss ? "text-red-400" : "text-gray-400"
+                        }`}
+                      >
+                        {editData.boss ? "👹 Pode ser Boss" : "🐉 Normal"}
+                      </span>
+                      <p className="text-[10px] text-gray-400 ml-auto">
+                        {editData.boss
+                          ? "Pode aparecer como boss"
+                          : "Apenas jogável"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="font-semibold text-white">
+                  Selecionar Evoluções ({selectedEvolutions.length}{" "}
+                  selecionadas):
+                </h3>
+                <div className="text-sm text-gray-200">
+                  {possibleEvolutions.length} Digimons disponíveis
+                </div>
+              </div>
+
+              {/* Abas de Níveis */}
+              <div className="mb-4">
+                <div className="flex gap-2 overflow-x-auto pb-2">
                   {[
                     { value: 0, label: "Armor" },
                     { value: 1, label: "Rookie" },
@@ -409,18 +575,11 @@ export default function EvolutionModal({
                     <button
                       key={level.value}
                       type="button"
-                      onClick={() =>
-                        handleEditChange({
-                          target: {
-                            name: "level",
-                            value: level.value.toString(),
-                          },
-                        } as React.ChangeEvent<HTMLSelectElement>)
-                      }
-                      className={`px-1 py-1 rounded border-2 text-[10px] transition-all ${
-                        editData.level === level.value
-                          ? "border-blue-500 bg-blue-50 text-blue-700 font-semibold"
-                          : "border-gray-600 hover:border-gray-500"
+                      onClick={() => setSelectedLevelTab(level.value)}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                        selectedLevelTab === level.value
+                          ? "bg-blue-600 text-white shadow-lg"
+                          : "bg-gray-700 text-gray-300 hover:bg-gray-600"
                       }`}
                     >
                       {level.label}
@@ -429,246 +588,89 @@ export default function EvolutionModal({
                 </div>
               </div>
 
-              {/* Tipos */}
-              <div>
-                <label className="block text-xs font-medium text-white mb-2">
-                  Tipo
-                </label>
-                <div className="grid grid-cols-6 gap-1">
-                  {digimonTypes.map((type) => (
-                    <button
-                      key={type.id}
-                      type="button"
-                      onClick={() =>
-                        handleEditChange({
-                          target: {
-                            name: "typeId",
-                            value: type.id.toString(),
-                          },
-                        } as React.ChangeEvent<HTMLSelectElement>)
-                      }
-                      className={`p-2 rounded border-2 transition-all flex flex-col items-center gap-1 ${
-                        editData.typeId === type.id
-                          ? "border-blue-500 bg-blue-50"
-                          : "border-gray-600 hover:border-gray-500"
-                      }`}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={editData.typeId === type.id}
-                        onChange={() => {}}
-                        className="w-3 h-3 text-blue-600 rounded focus:ring-blue-500"
-                      />
-                      <span
-                        className={`text-[10px] font-medium ${
-                          editData.typeId === type.id
-                            ? "text-blue-700"
-                            : "text-white"
-                        }`}
-                      >
-                        {type.name}
-                      </span>
-                    </button>
-                  ))}
-                </div>
+              {/* Barra de pesquisa */}
+              <div className="mb-4">
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder={`Buscar ${
+                    [
+                      "Armor",
+                      "Rookie",
+                      "Champion",
+                      "Ultimate",
+                      "Mega 1",
+                      "Mega 2",
+                      "Mega 3",
+                      "Mega 4",
+                    ][selectedLevelTab]
+                  } para evolução...`}
+                  className="w-full px-3 text-white py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
               </div>
 
-              {/* Status Ativo/Inativo */}
-              <div>
-                <label className="block text-xs font-medium text-white mb-2">
-                  Status
-                </label>
-                <div className="space-y-2">
-                  {/* Switch Ativo/Inativo */}
-                  <div className="flex items-center gap-2 p-3 bg-gray-700 rounded-lg">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setEditData((prev) => ({
-                          ...prev,
-                          active: !prev.active,
-                        }))
-                      }
-                      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
-                        editData.active ? "bg-green-500" : "bg-gray-500"
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-96 overflow-y-auto">
+                {possibleEvolutions.length > 0 ? (
+                  possibleEvolutions.map((evolution) => (
+                    <div
+                      key={evolution.id}
+                      className={`p-3 border rounded-lg cursor-pointer transition-all ${
+                        selectedEvolutions.includes(evolution.id)
+                          ? "border-blue-500 bg-blue-900 text-white"
+                          : "border-gray-700 hover:border-gray-600 bg-gray-800 text-white"
                       }`}
+                      onClick={() => handleEvolutionToggle(evolution.id)}
                     >
-                      <span
-                        className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
-                          editData.active ? "translate-x-5" : "translate-x-1"
-                        }`}
-                      />
-                    </button>
-                    <span
-                      className={`text-xs font-medium ${
-                        editData.active ? "text-green-400" : "text-gray-400"
-                      }`}
-                    >
-                      {editData.active ? "✅ Ativo" : "⚠️ Inativo"}
-                    </span>
-                    <p className="text-[10px] text-gray-400 ml-auto">
-                      {editData.active
-                        ? "Disponível no jogo"
-                        : "Indisponível para novos jogos"}
-                    </p>
-                  </div>
-
-                  {/* Switch Pode ser Boss */}
-                  <div className="flex items-center gap-2 p-3 bg-gray-700 rounded-lg">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setEditData((prev) => ({ ...prev, boss: !prev.boss }))
-                      }
-                      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
-                        editData.boss ? "bg-red-500" : "bg-gray-500"
-                      }`}
-                    >
-                      <span
-                        className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
-                          editData.boss ? "translate-x-5" : "translate-x-1"
-                        }`}
-                      />
-                    </button>
-                    <span
-                      className={`text-xs font-medium ${
-                        editData.boss ? "text-red-400" : "text-gray-400"
-                      }`}
-                    >
-                      {editData.boss ? "👹 Pode ser Boss" : "🐉 Normal"}
-                    </span>
-                    <p className="text-[10px] text-gray-400 ml-auto">
-                      {editData.boss
-                        ? "Pode aparecer como boss"
-                        : "Apenas jogável"}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-4">
-            <div className="flex justify-between items-center mb-3">
-              <h3 className="font-semibold text-white">
-                Selecionar Evoluções ({selectedEvolutions.length} selecionadas):
-              </h3>
-              <div className="text-sm text-gray-200">
-                {possibleEvolutions.length} Digimons disponíveis
-              </div>
-            </div>
-
-            {/* Abas de Níveis */}
-            <div className="mb-4">
-              <div className="flex gap-2 overflow-x-auto pb-2">
-                {[
-                  { value: 0, label: "Armor" },
-                  { value: 1, label: "Rookie" },
-                  { value: 2, label: "Champion" },
-                  { value: 3, label: "Ultimate" },
-                  { value: 4, label: "Mega 1" },
-                  { value: 5, label: "Mega 2" },
-                  { value: 6, label: "Mega 3" },
-                  { value: 7, label: "Mega 4" },
-                ].map((level) => (
-                  <button
-                    key={level.value}
-                    type="button"
-                    onClick={() => setSelectedLevelTab(level.value)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                      selectedLevelTab === level.value
-                        ? "bg-blue-600 text-white shadow-lg"
-                        : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-                    }`}
-                  >
-                    {level.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Barra de pesquisa */}
-            <div className="mb-4">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder={`Buscar ${
-                  [
-                    "Armor",
-                    "Rookie",
-                    "Champion",
-                    "Ultimate",
-                    "Mega 1",
-                    "Mega 2",
-                    "Mega 3",
-                    "Mega 4",
-                  ][selectedLevelTab]
-                } para evolução...`}
-                className="w-full px-3 text-white py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-96 overflow-y-auto">
-              {possibleEvolutions.length > 0 ? (
-                possibleEvolutions.map((evolution) => (
-                  <div
-                    key={evolution.id}
-                    className={`p-3 border rounded-lg cursor-pointer transition-all ${
-                      selectedEvolutions.includes(evolution.id)
-                        ? "border-blue-500 bg-blue-900 text-white"
-                        : "border-gray-700 hover:border-gray-600 bg-gray-800 text-white"
-                    }`}
-                    onClick={() => handleEvolutionToggle(evolution.id)}
-                  >
-                    <div className="flex items-center gap-3">
-                      <input
-                        type="checkbox"
-                        checked={selectedEvolutions.includes(evolution.id)}
-                        onChange={() => handleEvolutionToggle(evolution.id)}
-                        className="w-4 h-4 text-blue-600"
-                      />
-                      <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-blue-100 rounded overflow-hidden relative">
-                        <img
-                          src={
-                            evolution.image || "/images/digimons/fallback1.jpg"
-                          }
-                          alt={evolution.name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.src = "/images/digimons/fallback1.jpg";
-                          }}
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedEvolutions.includes(evolution.id)}
+                          onChange={() => handleEvolutionToggle(evolution.id)}
+                          className="w-4 h-4 text-blue-600"
                         />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-sm truncate text-white">
-                          {capitalize(evolution.name)}
-                        </p>
-                        <p className="text-xs text-gray-200">
-                          Level {evolution.level}
-                        </p>
+                        <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-blue-100 rounded overflow-hidden relative">
+                          <img
+                            src={
+                              evolution.image ||
+                              "/images/digimons/fallback1.jpg"
+                            }
+                            alt={evolution.name}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = "/images/digimons/fallback1.jpg";
+                            }}
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-sm truncate text-white">
+                            {capitalize(evolution.name)}
+                          </p>
+                          <p className="text-xs text-gray-200">
+                            Level {evolution.level}
+                          </p>
+                        </div>
                       </div>
                     </div>
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-8">
+                    <div className="text-4xl mb-2">🔍</div>
+                    <h4 className="text-lg font-semibold text-white mb-2">
+                      Nenhum Digimon encontrado
+                    </h4>
+                    <p className="text-gray-200">
+                      {searchTerm
+                        ? "Tente ajustar sua busca"
+                        : `Não há Digimons de level ${
+                            digimon.level + 1
+                          } disponíveis`}
+                    </p>
                   </div>
-                ))
-              ) : (
-                <div className="col-span-full text-center py-8">
-                  <div className="text-4xl mb-2">🔍</div>
-                  <h4 className="text-lg font-semibold text-white mb-2">
-                    Nenhum Digimon encontrado
-                  </h4>
-                  <p className="text-gray-200">
-                    {searchTerm
-                      ? "Tente ajustar sua busca"
-                      : `Não há Digimons de level ${
-                          digimon.level + 1
-                        } disponíveis`}
-                  </p>
-                </div>
-              )}
+                )}
+              </div>
             </div>
-          </div>
           </div>
 
           {/* Footer fixo com botões */}

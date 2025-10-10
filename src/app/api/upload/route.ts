@@ -69,9 +69,13 @@ export async function POST(request: NextRequest) {
         try {
           if (fs.existsSync(oldImagePath)) {
             await unlink(oldImagePath);
-            console.log(`✅ [UPLOAD] Imagem antiga removida automaticamente: ${oldImage}`);
+            console.log(
+              `✅ [UPLOAD] Imagem antiga removida automaticamente: ${oldImage}`
+            );
           } else {
-            console.log(`⚠️  [UPLOAD] Imagem antiga não encontrada: ${oldImage}`);
+            console.log(
+              `⚠️  [UPLOAD] Imagem antiga não encontrada: ${oldImage}`
+            );
           }
         } catch (error) {
           console.error(
@@ -81,7 +85,9 @@ export async function POST(request: NextRequest) {
           // Não falhar o upload se a remoção falhar
         }
       } else {
-        console.log(`ℹ️  [UPLOAD] Imagem antiga é padrão, não será removida: ${oldImage}`);
+        console.log(
+          `ℹ️  [UPLOAD] Imagem antiga é padrão, não será removida: ${oldImage}`
+        );
       }
     }
 
