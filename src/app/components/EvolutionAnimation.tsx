@@ -227,42 +227,101 @@ export default function EvolutionAnimation({
                 </div>
               )}
 
-              {/* Raios de luz que aparecem e desaparecem */}
+              {/* Raios de luz pequenos espalhados */}
               {stage >= 1 && (
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  {/* Raios de luz dinâmicos */}
-                  {[...Array(8)].map((_, i) => (
+                <>
+                  {/* Raios pequenos em posições aleatórias */}
+                  <div className="absolute top-0 left-1/4 pointer-events-none">
                     <div
-                      key={`light-${i}`}
-                      className="absolute w-0.5 sm:w-1 h-full bg-gradient-to-t from-transparent via-yellow-400 to-transparent opacity-0 animate-pulse"
+                      className="w-0.5 sm:w-1 h-8 sm:h-12 bg-gradient-to-t from-transparent via-yellow-400 to-transparent opacity-0 animate-pulse"
                       style={{
-                        transform: `rotate(${i * 45}deg)`,
-                        animationDelay: `${i * 200}ms`,
-                        animationDuration: '1.5s',
-                        animationIterationCount: 'infinite',
-                        animationTimingFunction: 'ease-in-out',
+                        animationDelay: "0ms",
+                        animationDuration: "1.5s",
+                        animationIterationCount: "infinite",
+                        animationTimingFunction: "ease-in-out",
                       }}
                     />
-                  ))}
-                  
-                  {/* Raios adicionais com diferentes ângulos e timing */}
-                  {[...Array(6)].map((_, i) => (
+                  </div>
+                  <div className="absolute top-1/4 right-1/4 pointer-events-none">
                     <div
-                      key={`light-extra-${i}`}
-                      className="absolute w-0.5 sm:w-1 h-full bg-gradient-to-t from-transparent via-orange-400 to-transparent opacity-0 animate-pulse"
+                      className="w-0.5 sm:w-1 h-6 sm:h-10 bg-gradient-to-t from-transparent via-yellow-300 to-transparent opacity-0 animate-pulse"
                       style={{
-                        transform: `rotate(${i * 60 + 22.5}deg)`,
-                        animationDelay: `${i * 300 + 100}ms`,
-                        animationDuration: '2s',
-                        animationIterationCount: 'infinite',
-                        animationTimingFunction: 'ease-in-out',
+                        animationDelay: "200ms",
+                        animationDuration: "1.8s",
+                        animationIterationCount: "infinite",
+                        animationTimingFunction: "ease-in-out",
                       }}
                     />
-                  ))}
-                </div>
+                  </div>
+                  <div className="absolute bottom-1/4 left-1/3 pointer-events-none">
+                    <div
+                      className="w-0.5 sm:w-1 h-7 sm:h-11 bg-gradient-to-t from-transparent via-orange-400 to-transparent opacity-0 animate-pulse"
+                      style={{
+                        animationDelay: "400ms",
+                        animationDuration: "1.6s",
+                        animationIterationCount: "infinite",
+                        animationTimingFunction: "ease-in-out",
+                      }}
+                    />
+                  </div>
+                  <div className="absolute top-1/2 right-1/3 pointer-events-none">
+                    <div
+                      className="w-0.5 sm:w-1 h-9 sm:h-13 bg-gradient-to-t from-transparent via-yellow-400 to-transparent opacity-0 animate-pulse"
+                      style={{
+                        animationDelay: "600ms",
+                        animationDuration: "2s",
+                        animationIterationCount: "infinite",
+                        animationTimingFunction: "ease-in-out",
+                      }}
+                    />
+                  </div>
+                  <div className="absolute bottom-1/3 right-1/4 pointer-events-none">
+                    <div
+                      className="w-0.5 sm:w-1 h-5 sm:h-9 bg-gradient-to-t from-transparent via-orange-300 to-transparent opacity-0 animate-pulse"
+                      style={{
+                        animationDelay: "800ms",
+                        animationDuration: "1.7s",
+                        animationIterationCount: "infinite",
+                        animationTimingFunction: "ease-in-out",
+                      }}
+                    />
+                  </div>
+                  <div className="absolute top-1/3 left-1/4 pointer-events-none">
+                    <div
+                      className="w-0.5 sm:w-1 h-8 sm:h-12 bg-gradient-to-t from-transparent via-yellow-200 to-transparent opacity-0 animate-pulse"
+                      style={{
+                        animationDelay: "1000ms",
+                        animationDuration: "1.9s",
+                        animationIterationCount: "infinite",
+                        animationTimingFunction: "ease-in-out",
+                      }}
+                    />
+                  </div>
+                  <div className="absolute top-3/4 left-1/2 pointer-events-none">
+                    <div
+                      className="w-0.5 sm:w-1 h-6 sm:h-10 bg-gradient-to-t from-transparent via-orange-400 to-transparent opacity-0 animate-pulse"
+                      style={{
+                        animationDelay: "1200ms",
+                        animationDuration: "1.4s",
+                        animationIterationCount: "infinite",
+                        animationTimingFunction: "ease-in-out",
+                      }}
+                    />
+                  </div>
+                  <div className="absolute bottom-0 right-1/2 pointer-events-none">
+                    <div
+                      className="w-0.5 sm:w-1 h-7 sm:h-11 bg-gradient-to-t from-transparent via-yellow-300 to-transparent opacity-0 animate-pulse"
+                      style={{
+                        animationDelay: "1400ms",
+                        animationDuration: "1.8s",
+                        animationIterationCount: "infinite",
+                        animationTimingFunction: "ease-in-out",
+                      }}
+                    />
+                  </div>
+                </>
               )}
             </div>
-
           </div>
         </div>
       </div>
