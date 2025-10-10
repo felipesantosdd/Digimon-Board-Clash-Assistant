@@ -373,11 +373,14 @@ export default function EvolutionModal({
   );
 
   // Ordenar para que os selecionados apareçam primeiro
-  const selectedList = evolutionDirection === "future" ? selectedEvolutions : selectedPreEvolutions;
+  const selectedList =
+    evolutionDirection === "future"
+      ? selectedEvolutions
+      : selectedPreEvolutions;
   const possibleEvolutions = filteredDigimons.sort((a, b) => {
     const aSelected = selectedList.includes(a.id);
     const bSelected = selectedList.includes(b.id);
-    
+
     if (aSelected && !bSelected) return -1;
     if (!aSelected && bSelected) return 1;
     return a.name.localeCompare(b.name); // Alfabético para os não selecionados

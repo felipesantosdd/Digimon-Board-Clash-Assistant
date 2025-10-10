@@ -325,7 +325,7 @@ export default function EvolutionLineModal({
                               {/* Badge de seleção */}
                               {evo.id === digimon.id && (
                                 <div className="absolute top-2 right-2 bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full shadow-lg">
-                                  SELEcionado
+                                  Selecionado
                                 </div>
                               )}
                             </div>
