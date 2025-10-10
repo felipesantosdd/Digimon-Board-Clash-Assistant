@@ -409,6 +409,13 @@ export default function GamePage() {
       return;
     }
 
+    // Verificar se é ataque ao boss (ID negativo)
+    if (targetDigimon.id < 0 && gameState.activeBoss) {
+      console.log("👹 [BOSS ATTACK] Detectado ataque ao boss!");
+      handleBossAttackConfirm(targetDigimon, attackerDamage, defenderDamage);
+      return;
+    }
+
     console.log("✅ [ATTACK] Validação passou! Processando ataque...");
     console.log("🎯 [ATTACK] Alvo:", targetDigimon.name);
 
@@ -2303,6 +2310,14 @@ export default function GamePage() {
           gameState?.players[gameState.currentTurnPlayerIndex]?.id || 0
         }
         getStatusModifier={getStatusDamageModifier}
+        activeBoss={gameState?.activeBoss ? {
+          id: gameState.activeBoss.id,
+          name: gameState.activeBoss.name,
+          image: gameState.activeBoss.image,
+          currentHp: gameState.activeBoss.currentHp,
+          calculatedDp: gameState.activeBoss.calculatedDp,
+          typeId: gameState.activeBoss.typeId,
+        } : null}
       />
 
       {/* Dialog de Reviver */}

@@ -7,6 +7,7 @@ import { capitalize } from "@/lib/utils";
 import { BattleManager, BattleResult } from "@/lib/battle-manager";
 import PlayerWithDigimons from "./battle/PlayerWithDigimons";
 import BattleView from "./battle/BattleView";
+import BossAttackCard from "./battle/BossAttackCard";
 
 interface AttackDialogProps {
   isOpen: boolean;
@@ -25,6 +26,14 @@ interface AttackDialogProps {
   players: GamePlayer[];
   currentPlayerId: number;
   getStatusModifier?: (digimon: GameDigimon) => number;
+  activeBoss?: {
+    id: number;
+    name: string;
+    image?: string;
+    currentHp: number;
+    calculatedDp: number;
+    typeId: number;
+  } | null;
 }
 
 export default function AttackDialog({
@@ -36,6 +45,7 @@ export default function AttackDialog({
   players,
   currentPlayerId,
   getStatusModifier = () => 0,
+  activeBoss,
 }: AttackDialogProps) {
   const { enqueueSnackbar } = useSnackbar();
   const [selectedDigimon, setSelectedDigimon] = useState<GameDigimon | null>(
@@ -120,6 +130,46 @@ export default function AttackDialog({
     }
 
     setSelectedDigimon(targetDigimon);
+    setBattleResult(null);
+    setAttackerAttackDice(0);
+    setAttackerDefenseDice(0);
+    setDefenderAttackDice(0);
+    setDefenderDefenseDice(0);
+    setIsRolling(false);
+    setBattleComplete(false);
+    setStep("battle");
+  };
+
+  const handleBossSelect = () => {
+    if (!activeBoss) {
+      enqueueSnackbar("Nenhum boss ativo no momento!", {
+        variant: "warning",
+      });
+      return;
+    }
+
+    if (activeBoss.currentHp <= 0) {
+      enqueueSnackbar("O boss já foi derrotado!", {
+        variant: "warning",
+      });
+      return;
+    }
+
+    // Converter boss para GameDigimon para compatibilidade
+    const bossAsDigimon: GameDigimon = {
+      id: -1, // ID negativo para identificar como boss
+      name: activeBoss.name,
+      image: activeBoss.image || "",
+      level: 7, // Boss sempre level max
+      dp: activeBoss.calculatedDp,
+      typeId: activeBoss.typeId,
+      currentHp: activeBoss.currentHp,
+      hasActedThisTurn: false,
+      provokedBy: undefined,
+      canEvolve: false,
+    };
+
+    setSelectedDigimon(bossAsDigimon);
     setBattleResult(null);
     setAttackerAttackDice(0);
     setAttackerDefenseDice(0);
@@ -228,9 +278,18 @@ export default function AttackDialog({
           {step === "select-digimon" && (
             <div>
               <h4 className="text-sm sm:text-lg font-bold text-white mb-2 sm:mb-4">
-                Selecione o Digimon alvo
+                Selecione o alvo do ataque
               </h4>
               <div className="space-y-2 sm:space-y-6">
+                {/* Boss Card (se houver boss ativo) */}
+                {activeBoss && activeBoss.currentHp > 0 && (
+                  <BossAttackCard
+                    boss={activeBoss}
+                    onBossSelect={handleBossSelect}
+                  />
+                )}
+                
+                {/* Players */}
                 {players
                   .filter((p) => p.id !== currentPlayerId)
                   .map((player) => (
