@@ -202,8 +202,8 @@ export default function DefeatScreen({
           {/* Mensagem motivacional */}
           <div className="mt-3 sm:mt-6 text-center">
             <p className="text-gray-400 text-xs sm:text-sm italic">
-              &quot;A derrota é apenas uma oportunidade para evoluir e ficar mais
-              forte!&quot;
+              &quot;A derrota é apenas uma oportunidade para evoluir e ficar
+              mais forte!&quot;
             </p>
           </div>
         </div>
