@@ -44,14 +44,18 @@ export default function EvolutionModal({
 }: EvolutionModalProps) {
   const { enqueueSnackbar } = useSnackbar();
   const [selectedEvolutions, setSelectedEvolutions] = useState<number[]>([]);
-  const [selectedPreEvolutions, setSelectedPreEvolutions] = useState<number[]>([]);
+  const [selectedPreEvolutions, setSelectedPreEvolutions] = useState<number[]>(
+    []
+  );
   const [searchTerm, setSearchTerm] = useState("");
 
   // Estado para controlar a aba ativa de níveis
   const [selectedLevelTab, setSelectedLevelTab] = useState<number>(1);
-  
+
   // Estado para controlar se está vendo evoluções anteriores ou futuras
-  const [evolutionDirection, setEvolutionDirection] = useState<'future' | 'previous'>('future');
+  const [evolutionDirection, setEvolutionDirection] = useState<
+    "future" | "previous"
+  >("future");
 
   // Sistema de stats dinâmicos - não precisamos mais de DP fixo
 
@@ -89,13 +93,13 @@ export default function EvolutionModal({
   useEffect(() => {
     if (digimon) {
       setSelectedEvolutions(digimon.evolution || []);
-      
+
       // Buscar pré-evoluções (Digimons que evoluem para este)
       const preEvos = allDigimons
-        .filter(d => d.evolution?.includes(digimon.id))
-        .map(d => d.id);
+        .filter((d) => d.evolution?.includes(digimon.id))
+        .map((d) => d.id);
       setSelectedPreEvolutions(preEvos);
-      
+
       setEditData({
         name: digimon.name,
         level: digimon.level,
@@ -107,14 +111,14 @@ export default function EvolutionModal({
       // Inicializar aba com nível +1 do Digimon para evoluções futuras
       setSelectedLevelTab(digimon.level + 1);
       // Iniciar vendo evoluções futuras
-      setEvolutionDirection('future');
+      setEvolutionDirection("future");
     }
   }, [digimon, allDigimons]);
 
   if (!isOpen || !digimon) return null;
 
   const handleEvolutionToggle = (evolutionId: number) => {
-    if (evolutionDirection === 'future') {
+    if (evolutionDirection === "future") {
       setSelectedEvolutions((prev) => {
         if (prev.includes(evolutionId)) {
           return prev.filter((id) => id !== evolutionId);
@@ -246,12 +250,12 @@ export default function EvolutionModal({
   const handleSaveAll = async () => {
     // Salvar evoluções futuras
     onSaveEvolutions(digimon.id, selectedEvolutions);
-    
+
     // Salvar pré-evoluções (atualizar os Digimons anteriores para incluir este como evolução)
     if (selectedPreEvolutions.length > 0) {
       try {
         for (const preEvoId of selectedPreEvolutions) {
-          const preEvo = allDigimons.find(d => d.id === preEvoId);
+          const preEvo = allDigimons.find((d) => d.id === preEvoId);
           if (preEvo) {
             // Adicionar este Digimon às evoluções do pré-evolução
             const currentEvolutions = preEvo.evolution || [];
@@ -266,12 +270,15 @@ export default function EvolutionModal({
             }
           }
         }
-        
+
         // Remover este Digimon das evoluções dos pré-evos não selecionados
-        const allPreEvos = allDigimons.filter(d => d.evolution?.includes(digimon.id));
+        const allPreEvos = allDigimons.filter((d) =>
+          d.evolution?.includes(digimon.id)
+        );
         for (const preEvo of allPreEvos) {
           if (!selectedPreEvolutions.includes(preEvo.id)) {
-            const updatedEvolutions = preEvo.evolution?.filter(id => id !== digimon.id) || [];
+            const updatedEvolutions =
+              preEvo.evolution?.filter((id) => id !== digimon.id) || [];
             await fetch(`/api/digimons/${preEvo.id}/evolutions`, {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
@@ -358,20 +365,23 @@ export default function EvolutionModal({
   };
 
   // Filtrar Digimons baseado na direção (futuras ou anteriores)
-  const possibleEvolutions = evolutionDirection === 'future'
-    ? allDigimons.filter(
-        (d) =>
-          d.id !== digimon.id &&
-          d.level === selectedLevelTab &&
-          d.name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : allDigimons.filter(
-        (d) =>
-          d.id !== digimon.id &&
-          d.level === selectedLevelTab &&
-          d.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-          d.evolution?.includes(digimon.id) // Apenas Digimons que evoluem para este
-      );
+  const filteredDigimons = allDigimons.filter(
+    (d) =>
+      d.id !== digimon.id &&
+      d.level === selectedLevelTab &&
+      d.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Ordenar para que os selecionados apareçam primeiro
+  const selectedList = evolutionDirection === "future" ? selectedEvolutions : selectedPreEvolutions;
+  const possibleEvolutions = filteredDigimons.sort((a, b) => {
+    const aSelected = selectedList.includes(a.id);
+    const bSelected = selectedList.includes(b.id);
+    
+    if (aSelected && !bSelected) return -1;
+    if (!aSelected && bSelected) return 1;
+    return a.name.localeCompare(b.name); // Alfabético para os não selecionados
+  });
 
   return (
     <>
@@ -622,14 +632,14 @@ export default function EvolutionModal({
                 <button
                   type="button"
                   onClick={() => {
-                    setEvolutionDirection('previous');
+                    setEvolutionDirection("previous");
                     setSelectedLevelTab(digimon.level - 1);
                     setSearchTerm("");
                   }}
                   className={`flex-1 px-4 py-3 rounded-lg font-semibold transition-all ${
-                    evolutionDirection === 'previous'
-                      ? 'bg-purple-600 text-white shadow-lg'
-                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    evolutionDirection === "previous"
+                      ? "bg-purple-600 text-white shadow-lg"
+                      : "bg-gray-700 text-gray-300 hover:bg-gray-600"
                   }`}
                 >
                   ⬅️ Evoluções Anteriores ({selectedPreEvolutions.length})
@@ -637,14 +647,14 @@ export default function EvolutionModal({
                 <button
                   type="button"
                   onClick={() => {
-                    setEvolutionDirection('future');
+                    setEvolutionDirection("future");
                     setSelectedLevelTab(digimon.level + 1);
                     setSearchTerm("");
                   }}
                   className={`flex-1 px-4 py-3 rounded-lg font-semibold transition-all ${
-                    evolutionDirection === 'future'
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    evolutionDirection === "future"
+                      ? "bg-blue-600 text-white shadow-lg"
+                      : "bg-gray-700 text-gray-300 hover:bg-gray-600"
                   }`}
                 >
                   ➡️ Evoluções Futuras ({selectedEvolutions.length})
@@ -653,7 +663,7 @@ export default function EvolutionModal({
 
               <div className="flex justify-between items-center mb-3">
                 <h3 className="font-semibold text-white">
-                  {evolutionDirection === 'future' 
+                  {evolutionDirection === "future"
                     ? `Evoluções Futuras (${selectedEvolutions.length} selecionadas)`
                     : `Evoluções Anteriores (${selectedPreEvolutions.length} selecionadas)`}
                 </h3>
@@ -719,10 +729,15 @@ export default function EvolutionModal({
                     <div
                       key={evolution.id}
                       className={`p-3 border rounded-lg cursor-pointer transition-all ${
-                        (evolutionDirection === 'future' 
-                          ? selectedEvolutions.includes(evolution.id)
-                          : selectedPreEvolutions.includes(evolution.id))
-                          ? (evolutionDirection === 'future' ? "border-blue-500 bg-blue-900" : "border-purple-500 bg-purple-900") + " text-white"
+                        (
+                          evolutionDirection === "future"
+                            ? selectedEvolutions.includes(evolution.id)
+                            : selectedPreEvolutions.includes(evolution.id)
+                        )
+                          ? (evolutionDirection === "future"
+                              ? "border-blue-500 bg-blue-900"
+                              : "border-purple-500 bg-purple-900") +
+                            " text-white"
                           : "border-gray-700 hover:border-gray-600 bg-gray-800 text-white"
                       }`}
                       onClick={() => handleEvolutionToggle(evolution.id)}
@@ -730,11 +745,17 @@ export default function EvolutionModal({
                       <div className="flex items-center gap-3">
                         <input
                           type="checkbox"
-                          checked={evolutionDirection === 'future' 
-                            ? selectedEvolutions.includes(evolution.id)
-                            : selectedPreEvolutions.includes(evolution.id)}
+                          checked={
+                            evolutionDirection === "future"
+                              ? selectedEvolutions.includes(evolution.id)
+                              : selectedPreEvolutions.includes(evolution.id)
+                          }
                           onChange={() => handleEvolutionToggle(evolution.id)}
-                          className={`w-4 h-4 ${evolutionDirection === 'future' ? 'text-blue-600' : 'text-purple-600'}`}
+                          className={`w-4 h-4 ${
+                            evolutionDirection === "future"
+                              ? "text-blue-600"
+                              : "text-purple-600"
+                          }`}
                         />
                         <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-blue-100 rounded overflow-hidden relative">
                           <img
