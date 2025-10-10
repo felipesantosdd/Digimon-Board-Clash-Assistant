@@ -56,21 +56,30 @@ export class BattleManager {
   }
 
   /**
+   * Arredonda valor para múltiplo de 100
+   */
+  private roundToHundred(value: number): number {
+    return Math.round(value / 100) * 100;
+  }
+
+  /**
    * Calcula o dano bruto baseado no DP e no D20 de ataque
-   * Fórmula: DP × (D20_Ataque × 0.05)
+   * Fórmula: DP × (D20_Ataque × 0.05) arredondado para múltiplo de 100
    */
   private calculateRawDamage(dp: number, attackRoll: number): number {
     const multiplier = attackRoll * 0.05; // 5% por ponto do dado
-    return Math.round(dp * multiplier);
+    const rawDamage = dp * multiplier;
+    return this.roundToHundred(rawDamage);
   }
 
   /**
    * Calcula a redução de dano baseada no DP e no D20 de defesa
-   * Fórmula: DP × (D20_Defesa × 0.05)
+   * Fórmula: DP × (D20_Defesa × 0.05) arredondado para múltiplo de 100
    */
   private calculateDefenseReduction(dp: number, defenseRoll: number): number {
     const multiplier = defenseRoll * 0.05; // 5% por ponto do dado
-    return Math.round(dp * multiplier);
+    const reduction = dp * multiplier;
+    return this.roundToHundred(reduction);
   }
 
   /**
@@ -78,9 +87,9 @@ export class BattleManager {
    */
   private applyTypeAdvantage(baseDamage: number, advantage: number): number {
     if (advantage === 1) {
-      return Math.round(baseDamage * 1.35); // +35%
+      return this.roundToHundred(baseDamage * 1.35); // +35%
     } else if (advantage === -1) {
-      return Math.round(baseDamage * 0.65); // -35%
+      return this.roundToHundred(baseDamage * 0.65); // -35%
     }
     return baseDamage;
   }
@@ -172,14 +181,12 @@ export class BattleManager {
       this.defenderTypeAdvantage
     );
 
-    // Aplicar modificadores de status (+20 ou -20)
-    attackerNetDamage = Math.max(
-      0,
-      attackerNetDamage + this.attackerStatusModifier
+    // Aplicar modificadores de status (+20 ou -20) e arredondar para múltiplo de 100
+    attackerNetDamage = this.roundToHundred(
+      Math.max(0, attackerNetDamage + this.attackerStatusModifier)
     );
-    defenderNetDamage = Math.max(
-      0,
-      defenderNetDamage + this.defenderStatusModifier
+    defenderNetDamage = this.roundToHundred(
+      Math.max(0, defenderNetDamage + this.defenderStatusModifier)
     );
 
     console.log("💥 [BATTLE] Dano final:", {

@@ -110,9 +110,7 @@ export default function DefeatScreen({
                 </p>
                 <div className="flex justify-center gap-2 sm:gap-3">
                   <div className="bg-red-700 px-2 py-1 sm:px-3 sm:py-2 rounded text-xs sm:text-sm md:text-base text-red-200 font-semibold">
-                    {boss.calculatedDp >= 1000
-                      ? `${Math.floor(boss.calculatedDp / 1000)}k DP`
-                      : `${boss.calculatedDp} DP`}
+                    ⚔️ {boss.calculatedDp.toLocaleString()} ATK
                   </div>
                   <div className="bg-red-700 px-2 py-1 sm:px-3 sm:py-2 rounded text-xs sm:text-sm md:text-base text-red-200 font-semibold">
                     {boss.typeId === 1

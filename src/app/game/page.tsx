@@ -9,7 +9,9 @@ import {
   getLevelName,
   DIGIMON_TYPE_NAMES,
   getTypeColor,
+  generateRandomStats,
 } from "@/lib/utils";
+import TypeIcon from "../components/TypeIcons";
 import { getTamerImagePath } from "@/lib/image-utils";
 import DigimonDetailsModal from "@/app/components/DigimonDetailsModal";
 import AttackDialog from "@/app/components/AttackDialog";
@@ -284,7 +286,9 @@ export default function GamePage() {
       );
 
       enqueueSnackbar(
-        `🌍 TURNO DO MUNDO! ${gameState.activeBoss.name} causou ${result.damagePerDigimon} de dano em cada Digimon!`,
+        `🌍 TURNO DO MUNDO! ${
+          gameState.activeBoss.name
+        } causou ${result.damagePerDigimon.toLocaleString()} de dano em cada Digimon!`,
         { variant: "error" }
       );
 
@@ -671,13 +675,11 @@ export default function GamePage() {
           ...player,
           digimons: player.digimons.map((d) => {
             if (d.id === digimon.id) {
-              // Manter buffs de DP através da evolução
-              const dpBonus = d.dpBonus || 0;
-              const newBaseDp = evolution.dp;
-              const newTotalDp = newBaseDp + dpBonus;
+              // Gerar HP e DP aleatórios baseados no novo nível
+              const { hp, dp } = generateRandomStats(evolution.level);
 
               console.log(
-                `💪 [EVOLVE] Mantendo buffs - Base: ${newBaseDp}, Bônus: ${dpBonus}, Total: ${newTotalDp}`
+                `🎲 [EVOLVE] Stats aleatórios gerados - HP: ${hp}, DP: ${dp}`
               );
 
               // Limpar TODOS os status e adicionar novo Animado
@@ -693,18 +695,18 @@ export default function GamePage() {
                 `✨ [EVOLVE] Limpando todos os status e adicionando Animado único (dura 3 turnos)`
               );
 
-              // Evoluir o Digimon mantendo buffs de DP e ganhando Animado
+              // Evoluir o Digimon com novos stats aleatórios
               return {
                 ...d,
                 id: evolution.id,
                 name: evolution.name,
                 image: evolution.image,
                 level: evolution.level,
-                baseDp: newBaseDp, // DP base da evolução
-                dpBonus: dpBonus, // Manter bônus acumulado
-                dp: newTotalDp, // DP total = base + bônus
+                baseDp: dp, // DP aleatório base
+                dpBonus: 0, // Resetar bônus na evolução
+                dp: dp, // DP total = novo DP aleatório
                 typeId: evolution.typeId,
-                currentHp: newTotalDp, // HP resetado para 100% do novo DP total
+                currentHp: hp, // HP aleatório completo
                 canEvolve: false, // Reset da flag de evolução
                 evolutionProgress: 0, // Resetar XP de evolução
                 originalId: d.originalId || digimon.id, // Guardar ID original
@@ -1731,7 +1733,7 @@ export default function GamePage() {
                     target.style.display = "none";
                     const parent = target.parentElement;
                     if (parent) {
-                      parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-6xl bg-gray-700">👤</div>`;
+                      parent.innerHTML = `<div class="w-full h-full bg-gray-700"></div>`;
                     }
                   }}
                 />
@@ -1766,9 +1768,7 @@ export default function GamePage() {
                         className="w-full h-full object-contain"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-4xl">
-                        ❓
-                      </div>
+                      <div className="w-full h-full bg-gray-600"></div>
                     )}
                   </div>
                   <p className="text-white font-bold text-center text-xs sm:text-sm md:text-base truncate">
@@ -1958,7 +1958,7 @@ export default function GamePage() {
                         target.style.display = "none";
                         const parent = target.parentElement;
                         if (parent) {
-                          parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-4xl">👤</div>`;
+                          parent.innerHTML = `<div class="w-full h-full bg-gray-700"></div>`;
                         }
                       }}
                     />
@@ -2036,6 +2036,12 @@ export default function GamePage() {
                                           filter:
                                             "grayscale(100%) brightness(0.7)",
                                         }
+                                      : (digimon as { active?: boolean })
+                                          .active === false
+                                      ? {
+                                          filter:
+                                            "grayscale(100%) opacity(0.6)",
+                                        }
                                       : digimon.hasActedThisTurn &&
                                         playerIndex ===
                                           gameState.currentTurnPlayerIndex
@@ -2044,11 +2050,15 @@ export default function GamePage() {
                                         }
                                       : undefined
                                   }
+                                  title={
+                                    (digimon as { active?: boolean }).active ===
+                                    false
+                                      ? `⚠️ ${digimon.name} (Inativo - Não disponível no Time Stranger)`
+                                      : digimon.name
+                                  }
                                 />
                               ) : (
-                                <div className="w-full h-full flex items-center justify-center text-4xl">
-                                  ❓
-                                </div>
+                                <div className="w-full h-full bg-gray-600"></div>
                               )}
                               {/* Badge de Level */}
                               <div className="absolute top-1 left-1 bg-blue-600 text-white text-xs font-bold px-1 py-0.5 rounded">
@@ -2057,7 +2067,7 @@ export default function GamePage() {
 
                               {/* Ícones de Status e Provocação - Na imagem do Digimon */}
                               {!isDead && (
-                                <div className="absolute top-1 right-1 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                                <div className="absolute top-1 right-1 flex flex-col gap-1 pointer-events-none">
                                   {/* Status: Animado e Medo */}
                                   {digimon.statuses &&
                                     digimon.statuses.map((status, idx) => (
@@ -2071,10 +2081,10 @@ export default function GamePage() {
                                         }
                                       >
                                         <div
-                                          className={`text-xl ${
+                                          className={`text-xl animate-pulse ${
                                             status.type === "animado"
-                                              ? "text-green-400 drop-shadow-[0_0_4px_rgba(34,197,94,0.8)]"
-                                              : "text-red-400 drop-shadow-[0_0_4px_rgba(239,68,68,0.8)]"
+                                              ? "text-green-400 drop-shadow-[0_0_6px_rgba(34,197,94,1)]"
+                                              : "text-red-400 drop-shadow-[0_0_6px_rgba(239,68,68,1)]"
                                           }`}
                                         >
                                           {status.type === "animado"
@@ -2096,7 +2106,7 @@ export default function GamePage() {
                                     return (
                                       provoker && (
                                         <div
-                                          className="text-orange-400 text-xl drop-shadow-[0_0_4px_rgba(251,146,60,0.8)]"
+                                          className="text-orange-400 text-xl animate-pulse drop-shadow-[0_0_6px_rgba(251,146,60,1)]"
                                           title={`💢 Provocado por ${capitalize(
                                             provoker.name
                                           )}`}
@@ -2145,16 +2155,21 @@ export default function GamePage() {
                                   <div
                                     className={`${getTypeColor(
                                       digimon.typeId
-                                    )} text-[10px] sm:text-xs font-bold px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded whitespace-nowrap`}
+                                    )} text-[10px] sm:text-xs font-bold px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded whitespace-nowrap flex items-center gap-1`}
                                   >
+                                    <TypeIcon
+                                      typeId={digimon.typeId}
+                                      size={10}
+                                      className="text-white"
+                                    />
                                     {
                                       DIGIMON_TYPE_NAMES[
                                         digimon.typeId as keyof typeof DIGIMON_TYPE_NAMES
                                       ]
                                     }
                                   </div>
-                                  <div className="bg-purple-600 text-white text-[10px] sm:text-xs font-bold px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded whitespace-nowrap">
-                                    {digimon.dp.toLocaleString()} DP
+                                  <div className="bg-red-600 text-white text-[10px] sm:text-xs font-bold px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded whitespace-nowrap">
+                                    ⚔️ {digimon.dp.toLocaleString()} ATK
                                   </div>
                                 </div>
 

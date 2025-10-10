@@ -10,9 +10,10 @@ export type Digimon = {
   image: string;
   typeId: number;
   level: number;
-  dp: number;
   evolution: number[];
   type?: DigimonType;
+  active?: boolean;
+  boss?: boolean;
 };
 
 export type DigimonType = {

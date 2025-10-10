@@ -19,11 +19,19 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, image, level, dp, typeId, evolution = [] } = body;
+    const {
+      name,
+      image,
+      level,
+      typeId,
+      evolution = [],
+      active = true,
+      boss = false,
+    } = body;
 
-    if (!name || !image || !level || !dp || !typeId) {
+    if (!name || !image || !level || !typeId) {
       return NextResponse.json(
-        { error: "Campos obrigatórios: name, image, level, dp, typeId" },
+        { error: "Campos obrigatórios: name, image, level, typeId" },
         { status: 400 }
       );
     }
@@ -48,9 +56,11 @@ export async function POST(request: NextRequest) {
       name: lowerName,
       image,
       level,
-      dp,
+      dp: 0, // DP será calculado dinamicamente
       typeId,
       evolution,
+      active,
+      boss,
     });
 
     return NextResponse.json(savedDigimon, { status: 201 });

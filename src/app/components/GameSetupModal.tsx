@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { GameState, GameDigimon } from "@/types/game";
 import { getTamerImagePath } from "@/lib/image-utils";
+import { generateRandomStats } from "@/lib/utils";
 
 interface Tamer {
   id: number;
@@ -93,8 +94,17 @@ export default function GameSetupModal({
         "currentHp" | "canEvolve" | "originalId"
       >[];
 
+      // FILTRAR apenas Digimons ATIVOS (active !== false)
+      const activeDigimons = allLevel1Digimons.filter(
+        (d) => (d as { active?: boolean }).active !== false
+      );
+
+      console.log(
+        `🎮 Digimons Level 1: ${allLevel1Digimons.length} total, ${activeDigimons.length} ativos`
+      );
+
       // Embaralhar Digimons disponíveis
-      const shuffled = [...allLevel1Digimons].sort(() => Math.random() - 0.5);
+      const shuffled = [...activeDigimons].sort(() => Math.random() - 0.5);
 
       // Sortear 3 Digimons ÚNICOS para cada jogador com tipos diferentes
       const usedDigimonIds = new Set<number>();
@@ -111,9 +121,14 @@ export default function GameSetupModal({
           ) {
             usedDigimonIds.add(digimon.id);
             usedTypes.add(digimon.typeId);
+
+            // Gerar HP e DP aleatórios baseados no nível
+            const { hp, dp } = generateRandomStats(digimon.level);
+
             playerDigimons.push({
               ...digimon,
-              currentHp: digimon.dp,
+              dp, // DP aleatório
+              currentHp: hp, // HP aleatório
               canEvolve: false,
               originalId: digimon.id,
               bag: [], // Inicializar inventário vazio
@@ -133,9 +148,14 @@ export default function GameSetupModal({
             if (!usedDigimonIds.has(digimon.id) && playerDigimons.length < 3) {
               usedDigimonIds.add(digimon.id);
               usedTypes.add(digimon.typeId);
+
+              // Gerar HP e DP aleatórios baseados no nível
+              const { hp, dp } = generateRandomStats(digimon.level);
+
               playerDigimons.push({
                 ...digimon,
-                currentHp: digimon.dp,
+                dp, // DP aleatório
+                currentHp: hp, // HP aleatório
                 canEvolve: false,
                 originalId: digimon.id,
                 bag: [], // Inicializar inventário vazio
@@ -337,7 +357,7 @@ export default function GameSetupModal({
                             target.style.display = "none";
                             const parent = target.parentElement;
                             if (parent) {
-                              parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-2xl">👤</div>`;
+                              parent.innerHTML = `<div class="w-full h-full bg-gray-700"></div>`;
                             }
                           }}
                         />

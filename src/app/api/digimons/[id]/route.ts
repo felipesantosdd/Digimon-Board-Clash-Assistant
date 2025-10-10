@@ -15,12 +15,19 @@ export async function PUT(
     const { id } = await params;
     const body = await request.json();
     console.log("🔍 API PUT recebeu:", { id, body });
-    const { name, level, dp, typeId, image } = body;
-    console.log("📋 Campos extraídos:", { name, level, dp, typeId, image });
+    const { name, level, typeId, image, active, boss } = body;
+    console.log("📋 Campos extraídos:", {
+      name,
+      level,
+      typeId,
+      image,
+      active,
+      boss,
+    });
 
-    if (!name || !level || !dp || !typeId) {
+    if (!name || !level || !typeId) {
       return NextResponse.json(
-        { error: "Campos obrigatórios: name, level, dp, typeId" },
+        { error: "Campos obrigatórios: name, level, typeId" },
         { status: 400 }
       );
     }
@@ -44,18 +51,20 @@ export async function PUT(
     console.log("💾 Executando UPDATE:", {
       name: lowerName,
       level,
-      dp,
       typeId,
       image,
+      active,
+      boss,
       id: Number(id),
     });
 
     const updatedDigimon = updateDigimon(Number(id), {
       name: lowerName,
       level,
-      dp,
       typeId,
       ...(image && { image }),
+      ...(active !== undefined && { active }),
+      ...(boss !== undefined && { boss }),
     });
 
     console.log("✅ Digimon atualizado:", updatedDigimon);
@@ -82,13 +91,6 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  if (process.env.NODE_ENV === "production") {
-    return NextResponse.json(
-      { error: "Operações de exclusão não são permitidas em produção." },
-      { status: 403 }
-    );
-  }
-
   try {
     const { id } = await params;
     const digimonId = Number(id);

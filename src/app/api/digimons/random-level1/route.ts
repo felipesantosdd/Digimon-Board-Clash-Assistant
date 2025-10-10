@@ -15,12 +15,13 @@ export async function GET(request: Request) {
       );
     }
 
-    // Buscar todos os Digimons level 1
-    const level1Digimons = getDigimonsByLevel(1);
+    // Buscar todos os Digimons level 1 (apenas ATIVOS)
+    const allLevel1Digimons = getDigimonsByLevel(1);
+    const level1Digimons = allLevel1Digimons.filter((d) => d.active !== false);
 
     if (level1Digimons.length === 0) {
       return NextResponse.json(
-        { error: "Nenhum Digimon level 1 encontrado" },
+        { error: "Nenhum Digimon level 1 ativo encontrado" },
         { status: 404 }
       );
     }

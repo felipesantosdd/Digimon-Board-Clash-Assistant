@@ -59,7 +59,8 @@ O **Digimon Board Clash** é uma aplicação web **full-stack** construída com 
 │  └─────────────────────┘  └─────────────────────┘          │
 │                                                              │
 │  📊 Dados:                                                   │
-│  • 145+ Digimons (níveis 3-7)                               │
+│  • 503 Digimons (153 ativos, 350 inativos)                 │
+│  • Sistema de HP/DP aleatório por nível                     │
 │  • Itens e Efeitos                                          │
 │  • Bosses e Drops                                           │
 │  • Tamers (Avatares)                                        │
@@ -344,19 +345,28 @@ Este projeto é um **assistente digital** para o jogo de tabuleiro físico que:
    - Badge visual mostra quem está protegendo quem
    - Apenas um defensor por Digimon
 
-6. **Painel Administrativo**
+6. **Painel Administrativo (/biblioteca)**
 
-   - Gerenciamento de Digimons (CRUD completo)
-   - Gerenciamento de Itens com efeitos
-   - Gerenciamento de Bosses e seus drops
-   - Gerenciamento de Efeitos do jogo
-   - Upload e crop de imagens
+   - **Gerenciamento de Digimons** (CRUD completo em dev)
+     - Switch de status Ativo/Inativo
+     - Visualização de linha evolutiva
+     - Upload e crop de imagens
+     - Filtros visuais para inativos (cinza)
+   - **Gerenciamento de Itens** com efeitos
+   - **Gerenciamento de Bosses** e seus drops
+   - **Gerenciamento de Efeitos** do jogo
+   - **Modo Produção**: Apenas visualização (sem edição)
 
 7. **Banco de Dados**
-   - 145+ Digimons cadastrados (níveis 3 a 7)
-   - Sistema de tipos e evoluções
-   - Itens com efeitos variados
-   - Bosses com sistema de drops
+   - **503 Digimons cadastrados** (níveis 1 a 6)
+     - 153 ativos (com imagem)
+     - 350 inativos (sem imagem)
+   - **Sistema de HP/DP Aleatório**
+     - Stats gerados dinamicamente por nível
+     - Intervalos configurados por nível
+   - **Sistema de tipos e evoluções** completo
+   - **Itens com efeitos** variados
+   - **Bosses com sistema de drops**
 
 ### 🚧 Funcionalidades em Desenvolvimento
 
@@ -374,23 +384,48 @@ Este projeto é um **assistente digital** para o jogo de tabuleiro físico que:
 
 ### ⚙️ Setup Inicial
 
-- Cada jogador recebe **3 Digimons iniciais** de nível 3 (Rookies)
+- Cada jogador recebe **3 Digimons iniciais** de nível 1 (Rookies)
 - Cada jogador escolhe um **Tamer** (avatar)
 - Cada Digimon possui:
-  - **HP = DP** (Digimon Power da carta original)
+  - **HP e DP Aleatórios**: Gerados dentro do intervalo do nível
   - **Ataque = DP** (modificado por dado D20 durante combate)
-  - **Tipo Elemental**: Data, Vaccine ou Virus
+  - **Tipo Elemental**: Data, Vaccine, Virus, Free, Variable ou Unknown
 - **Tabuleiro Hexagonal** (a ser implementado) com bases nos cantos
+
+#### Sistema de Stats Aleatórios:
+
+Ao iniciar o jogo ou evoluir, HP e DP são gerados aleatoriamente:
+
+- **Nível 1**: 1,600 ~ 2,400
+- **Nível 2**: 4,000 ~ 6,000
+- **Nível 3**: 6,400 ~ 9,600
+- **Nível 4**: 10,000 ~ 14,000
+- **Nível 5**: 15,000 ~ 18,000
+- **Nível 6**: 19,000 ~ 24,000
+
+**Benefícios:**
+
+- ✅ Cada partida é única
+- ✅ Variedade no poder dos Digimons
+- ✅ Estratégia baseada nos stats recebidos
+- ✅ Valores limpos (múltiplos de 100)
 
 ### 📊 Sistema de Atributos
 
-#### Conversão de Cards para o Jogo:
+#### Sistema de Stats Dinâmico:
 
 ```
-HP Máximo = DP da Carta
-Ataque Base = DP da Carta
+HP = DP = Valor aleatório no intervalo do nível (múltiplo de 100)
 Dano Real = DP × (D20 × 5%) × Modificador de Tipo
 ```
+
+**Importante:**
+
+- HP = DP (sempre 100% de vida)
+- Stats são **gerados aleatoriamente** ao iniciar o jogo
+- Stats são **re-gerados** ao evoluir (novo valor, HP 100%)
+- Valores sempre são **múltiplos de 100**
+- Bônus de DP são **resetados** na evolução
 
 #### Tipos e Vantagens:
 
@@ -400,43 +435,58 @@ Dano Real = DP × (D20 × 5%) × Modificador de Tipo
 - **Tipo desvantajoso**: -35% de dano
 - **Mesmo tipo ou Free/Variable**: sem modificador
 
-#### Escala de Poder por Nível:
+#### Escala de Poder por Nível (Intervalos):
 
-- **Nível 3 (Rookie)**: ~3.000 DP
-- **Nível 4 (Champion)**: ~5.000 DP
-- **Nível 5 (Ultimate)**: ~9.000 DP
-- **Nível 6 (Mega)**: ~12.000 DP
-- **Nível 7 (Ultra/Super Mega)**: ~15.000+ DP
+- **Nível 1 (Rookie)**: 1.600 - 2.400 HP/DP
+- **Nível 2 (Champion)**: 4.000 - 6.000 HP/DP
+- **Nível 3 (Ultimate)**: 6.400 - 9.600 HP/DP
+- **Nível 4 (Mega)**: 10.000 - 14.000 HP/DP
+- **Nível 5 (Ultra)**: 15.000 - 18.000 HP/DP
+- **Nível 6 (Super Mega)**: 19.000 - 24.000 HP/DP
 
 ### ⚔️ Sistema de Combate
 
 #### Mecânica de Combate 1v1:
 
 1. **Seleção**: Atacante escolhe um defensor
-2. **Rolagem**: Ambos rolam D20 simultaneamente
+2. **Rolagem**: Ambos rolam 2×D20 (maior = ataque, menor = defesa)
 3. **Cálculo de Dano**:
    ```
-   Dano Base = DP do Atacante × (Dado × 5%)
-   Dano Final = Dano Base × Modificador de Tipo
+   Dano Bruto = DP × (D20_Ataque × 5%)
+   Defesa = DP × (D20_Defesa × 5%)
+   Dano Líquido = (Dano Bruto - Defesa) × Modificador de Tipo
+   Dano Final = Arredondado para múltiplo de 100
    ```
 4. **Aplicação**: Danos são aplicados simultaneamente
 5. **Contra-ataque**: Defensor sempre contra-ataca automaticamente
 6. **Evolução**: Após combate, sistema verifica chance de evolução
 
+**Importante:**
+
+- ✅ Todos os valores de dano são **múltiplos de 100**
+- ✅ Dano mínimo possível: 0 (após defesa)
+- ✅ Sistema de 2 dados torna combate mais estratégico
+
 #### Exemplo de Combate:
 
 ```
-Agumon (Data, 3000 DP) vs Gabumon (Vaccine, 3000 DP)
+Agumon (Data, 6,400 DP) vs Gabumon (Vaccine, 6,400 DP)
 
-Agumon rola 15 → 3000 × (15 × 5%) = 2250 dano base
-  → 2250 × 0.65 (desvantagem) = 1462 dano final
+Agumon rola [18, 8]:
+  - Ataque: 18 → 6,400 × (18 × 5%) = 5,760 → arredonda = 5,800
+  - Defesa: 8 → 6,400 × (8 × 5%) = 2,560 → arredonda = 2,600
 
-Gabumon rola 12 → 3000 × (12 × 5%) = 1800 dano base
-  → 1800 × 1.35 (vantagem) = 2430 dano final
+Gabumon rola [14, 6]:
+  - Ataque: 14 → 6,400 × (14 × 5%) = 4,480 → arredonda = 4,500
+  - Defesa: 6 → 6,400 × (6 × 5%) = 1,920 → arredonda = 1,900
+
+Dano Líquido:
+  - Agumon causa: (5,800 - 1,900) × 0.65 (desv.) = 2,535 → 2,500
+  - Gabumon causa: (4,500 - 2,600) × 1.35 (vant.) = 2,565 → 2,600
 
 Resultado:
-  Agumon: 3000 - 2430 = 570 HP (19% HP, alta chance de evolução)
-  Gabumon: 3000 - 1462 = 1538 HP (51% HP)
+  - Agumon: 6,400 - 2,600 = 3,800 HP (59% HP)
+  - Gabumon: 6,400 - 2,500 = 3,900 HP (61% HP)
 ```
 
 #### Sistema de Ataque em Equipe (a implementar):
@@ -444,6 +494,78 @@ Resultado:
 - Múltiplos Digimons podem atacar o mesmo alvo
 - **Dano total** = soma do dano de todos os atacantes
 - **Contra-ataque**: Defensor escolhe **UM** atacante para contra-atacar
+
+### 🎲 Sistema de Stats Aleatórios (NOVO!)
+
+#### Como Funciona:
+
+Este jogo utiliza **stats aleatórios dinâmicos** onde HP = DP, mas os valores variam a cada jogo:
+
+1. **Início do Jogo**:
+
+   - Cada Digimon Level 1 recebe HP/DP aleatório entre 1,600 e 2,400
+   - HP = DP (sempre 100% de HP)
+   - Valores são sempre **múltiplos de 100**
+   - Exemplo: Agumon pode ter 2,000 HP e 2,000 DP
+
+2. **Durante Evoluções**:
+   - Ao evoluir, **novo valor** é gerado
+   - Baseado no intervalo do novo nível
+   - HP resetado para 100% do novo DP
+   - **Bônus de DP são resetados**
+   - Exemplo: Greymon Level 2 pode receber 5,200 HP/DP
+
+#### Intervalos Completos:
+
+| Nível | HP Mínimo | HP Máximo | DP Mínimo | DP Máximo |
+| ----- | --------- | --------- | --------- | --------- |
+| 1     | 1,600     | 2,400     | 1,600     | 2,400     |
+| 2     | 4,000     | 6,000     | 4,000     | 6,000     |
+| 3     | 6,400     | 9,600     | 6,400     | 9,600     |
+| 4     | 10,000    | 14,000    | 10,000    | 14,000    |
+| 5     | 15,000    | 18,000    | 15,000    | 18,000    |
+| 6     | 19,000    | 24,000    | 19,000    | 24,000    |
+
+#### Vantagens do Sistema:
+
+- ✅ **Variedade**: Nenhuma partida é igual
+- ✅ **Imprevisibilidade**: Estratégia adapta-se aos stats recebidos
+- ✅ **Balanceamento**: Intervalos impedem extremos muito desbalanceados
+- ✅ **Rejogabilidade**: Incentiva múltiplas partidas
+- ✅ **Valores Limpos**: Sempre múltiplos de 100 (ex: 2,000 / 4,500 / 8,300)
+
+#### Impacto Estratégico:
+
+- Digimons com stats altos têm mais resistência e poder de ataque
+- Decisões de evolução baseiam-se nos valores recebidos
+- Itens de buff tornam-se mais valiosos
+- Sorte inicial pode definir estratégias (tanque vs ofensivo)
+
+### 🟢 Sistema de Status Ativo/Inativo
+
+#### Digimons Ativos:
+
+- ✅ **153 Digimons** com imagens
+- ✅ Disponíveis para novos jogos
+- ✅ Aparecem nas opções de evolução
+- ✅ Exibidos normalmente na biblioteca
+
+#### Digimons Inativos:
+
+- ⚠️ **350 Digimons** sem imagens
+- ❌ **Não aparecem** em novos jogos
+- ❌ **Não são opções** de evolução
+- 🎨 Exibidos em **cinza** na biblioteca
+- 🔧 Badge "⚠️ INATIVO" para identificação
+
+#### Gerenciamento (Modo Dev):
+
+No painel administrativo em desenvolvimento:
+
+- **Switch Ativo/Inativo** em modais de criação/edição
+- Estados visuais claros (verde = ativo, cinza = inativo)
+- Permite ativar Digimons ao adicionar imagens
+- Previne uso acidental de Digimons sem arte
 
 ### 🧬 Sistema de Evolução (Refatorado - XP Oculto)
 
@@ -850,18 +972,29 @@ digimon-board-clash/
 
 ## 🛠️ Recursos Administrativos
 
-### Painel Admin (`/admin`)
+### Biblioteca (`/biblioteca`)
 
-Acesse o painel administrativo completo para gerenciar:
+Acesse a biblioteca completa para visualizar e gerenciar (em dev):
+
+**Nota:** Em produção, apenas visualização está disponível. Em desenvolvimento, todas as funcionalidades de edição estão ativas.
 
 #### 🐉 Digimons Tab
 
-- Visualizar todos os Digimons (145+)
-- Adicionar novos Digimons
-- Editar Digimons existentes (nome, DP, tipo, nível)
-- Deletar Digimons
-- Upload e crop de imagem
-- Visualizar linha evolutiva
+- **Visualizar todos os Digimons** (503 total)
+  - 153 ativos (com imagem)
+  - 350 inativos (sem imagem, exibidos em cinza)
+- **Adicionar novos Digimons**
+  - Switch Ativo/Inativo
+  - Configuração de evoluções
+- **Editar Digimons existentes**
+  - Nome, DP, tipo, nível
+  - Status ativo/inativo
+  - Upload e crop de imagem
+- **Deletar Digimons** (apenas em dev)
+- **Visualizar linha evolutiva completa**
+  - Linhas coloridas conectando evoluções
+  - Ícones de tipo personalizados
+- **Modo Produção**: Apenas visualização (botões de edição ocultos)
 
 #### 💎 Items Tab
 

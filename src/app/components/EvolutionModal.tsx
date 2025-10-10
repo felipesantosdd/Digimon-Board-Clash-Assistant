@@ -17,9 +17,10 @@ interface EvolutionModalProps {
     data: {
       name: string;
       level: number;
-      dp: number;
       typeId: number;
       image?: string;
+      active?: boolean;
+      boss?: boolean;
     }
   ) => void;
 }
@@ -45,26 +46,17 @@ export default function EvolutionModal({
   const [selectedEvolutions, setSelectedEvolutions] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Mapeamento de níveis para DP padrão
-  const levelToDp: { [key: number]: number } = {
-    1: 2000,
-    2: 5000,
-    3: 8000,
-    4: 12000,
-    5: 18000,
-    6: 20000,
-    7: 25000,
-  };
+  // Sistema de stats dinâmicos - não precisamos mais de DP fixo
 
   // Estados para edição do Digimon
   const [editMode, setEditMode] = useState(true); // Sempre em modo de edição
   const [editData, setEditData] = useState({
     name: "",
     level: 1,
-    dp: 2000,
     typeId: 1,
+    active: true,
+    boss: false,
   });
-  const [dpDisplay, setDpDisplay] = useState("2"); // Valor exibido (sem os 000)
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
   const [imageToCrop, setImageToCrop] = useState<string>("");
@@ -80,10 +72,10 @@ export default function EvolutionModal({
       setEditData({
         name: digimon.name,
         level: digimon.level,
-        dp: digimon.dp,
         typeId: digimon.typeId,
+        active: digimon.active !== false,
+        boss: digimon.boss || false,
       });
-      setDpDisplay(String(digimon.dp / 1000));
     }
   };
 
@@ -93,10 +85,10 @@ export default function EvolutionModal({
       setEditData({
         name: digimon.name,
         level: digimon.level,
-        dp: digimon.dp,
         typeId: digimon.typeId,
+        active: digimon.active !== false,
+        boss: digimon.boss || false,
       });
-      setDpDisplay(String(digimon.dp / 1000)); // Converter DP para exibição
       setSearchTerm("");
     }
   }, [digimon]);
@@ -286,43 +278,14 @@ export default function EvolutionModal({
     const { name, value } = e.target;
     console.log("🔄 handleEditChange:", { name, value, type: typeof value });
 
-    if (name === "dp") {
-      // Armazenar o valor digitado
-      setDpDisplay(value);
-      // Converter para DP real (adicionar 000)
-      const dpValue = Number(value) * 1000;
-      setEditData((prev) => {
-        const newData = {
-          ...prev,
-          dp: dpValue,
-        };
-        console.log("📝 editData atualizado:", newData);
-        return newData;
-      });
-    } else if (name === "level") {
-      const levelValue = Number(value);
-      const defaultDp = levelToDp[levelValue] || 2000;
-
-      setEditData((prev) => {
-        const newData = {
-          ...prev,
-          level: levelValue,
-          dp: defaultDp,
-        };
-        console.log("📝 editData atualizado:", newData);
-        return newData;
-      });
-      setDpDisplay(String(defaultDp / 1000)); // Atualizar display
-    } else {
-      setEditData((prev) => {
-        const newData = {
-          ...prev,
-          [name]: ["typeId"].includes(name) ? Number(value) : value,
-        };
-        console.log("📝 editData atualizado:", newData);
-        return newData;
-      });
-    }
+    setEditData((prev) => {
+      const newData = {
+        ...prev,
+        [name]: ["typeId", "level"].includes(name) ? Number(value) : value,
+      };
+      console.log("📝 editData atualizado:", newData);
+      return newData;
+    });
   };
 
   // Filtrar Digimons que podem ser evoluções (não o próprio Digimon e apenas do nível seguinte)
@@ -364,12 +327,12 @@ export default function EvolutionModal({
                 title="Clique para alterar imagem"
               >
                 <img
-                  src={digimon.image || "/images/digimons/fallback.svg"}
+                  src={digimon.image || "/images/digimons/fallback1.jpg"}
                   alt={digimon.name}
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    target.src = "/images/digimons/fallback.svg";
+                    target.src = "/images/digimons/fallback1.jpg";
                   }}
                 />
               </div>
@@ -486,24 +449,76 @@ export default function EvolutionModal({
                 </div>
               </div>
 
-              {/* DP */}
+              {/* Status Ativo/Inativo */}
               <div>
-                <label className="block text-xs font-medium text-white mb-1">
-                  DP <span className="text-[10px] text-gray-500">(x1000)</span>
+                <label className="block text-xs font-medium text-white mb-2">
+                  Status
                 </label>
-                <div className="relative">
-                  <input
-                    type="number"
-                    name="dp"
-                    value={dpDisplay}
-                    onChange={handleEditChange}
-                    step="1"
-                    className="w-full px-3 py-2 text-sm border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Ex: 2"
-                  />
-                  <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-gray-400">
-                    = {editData.dp.toLocaleString()}
-                  </span>
+                <div className="space-y-2">
+                  {/* Switch Ativo/Inativo */}
+                  <div className="flex items-center gap-2 p-3 bg-gray-700 rounded-lg">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setEditData((prev) => ({
+                          ...prev,
+                          active: !prev.active,
+                        }))
+                      }
+                      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                        editData.active ? "bg-green-500" : "bg-gray-500"
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                          editData.active ? "translate-x-5" : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                    <span
+                      className={`text-xs font-medium ${
+                        editData.active ? "text-green-400" : "text-gray-400"
+                      }`}
+                    >
+                      {editData.active ? "✅ Ativo" : "⚠️ Inativo"}
+                    </span>
+                    <p className="text-[10px] text-gray-400 ml-auto">
+                      {editData.active
+                        ? "Disponível no jogo"
+                        : "Indisponível para novos jogos"}
+                    </p>
+                  </div>
+
+                  {/* Switch Pode ser Boss */}
+                  <div className="flex items-center gap-2 p-3 bg-gray-700 rounded-lg">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setEditData((prev) => ({ ...prev, boss: !prev.boss }))
+                      }
+                      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                        editData.boss ? "bg-red-500" : "bg-gray-500"
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                          editData.boss ? "translate-x-5" : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                    <span
+                      className={`text-xs font-medium ${
+                        editData.boss ? "text-red-400" : "text-gray-400"
+                      }`}
+                    >
+                      {editData.boss ? "👹 Pode ser Boss" : "🐉 Normal"}
+                    </span>
+                    <p className="text-[10px] text-gray-400 ml-auto">
+                      {editData.boss
+                        ? "Pode aparecer como boss"
+                        : "Apenas jogável"}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -553,13 +568,13 @@ export default function EvolutionModal({
                       <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-blue-100 rounded overflow-hidden relative">
                         <img
                           src={
-                            evolution.image || "/images/digimons/fallback.svg"
+                            evolution.image || "/images/digimons/fallback1.jpg"
                           }
                           alt={evolution.name}
                           className="w-full h-full object-cover"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
-                            target.src = "/images/digimons/fallback.svg";
+                            target.src = "/images/digimons/fallback1.jpg";
                           }}
                         />
                       </div>
@@ -568,7 +583,7 @@ export default function EvolutionModal({
                           {capitalize(evolution.name)}
                         </p>
                         <p className="text-xs text-gray-200">
-                          Level {evolution.level} • DP: {evolution.dp}
+                          Level {evolution.level}
                         </p>
                       </div>
                     </div>

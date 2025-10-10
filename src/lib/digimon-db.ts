@@ -11,9 +11,11 @@ export interface Digimon {
   name: string;
   image: string;
   level: number;
-  dp: number;
+  dp: number; // Calculado dinamicamente, não armazenado no banco
   typeId: number;
   evolution: number[];
+  active?: boolean; // Indica se o Digimon está ativo (presente no CSV oficial)
+  boss?: boolean; // Indica se pode ser usado como boss
   type?: DigimonType;
 }
 
@@ -45,26 +47,40 @@ export function getAllDigimons(): Digimon[] {
   const digimons = db
     .prepare("SELECT * FROM digimons ORDER BY level, name")
     .all() as Array<
-    Omit<Digimon, "evolution" | "type"> & { evolution: string }
+    Omit<Digimon, "evolution" | "type" | "active" | "boss"> & {
+      evolution: string;
+      active?: number; // SQLite armazena como INTEGER (0 ou 1)
+      boss?: number; // SQLite armazena como INTEGER (0 ou 1)
+    }
   >;
 
   return digimons.map((d) => ({
     ...d,
+    dp: 0, // DP será calculado dinamicamente baseado no nível
     evolution: JSON.parse(d.evolution || "[]"),
+    active: d.active === undefined ? true : d.active === 1, // Converter INTEGER para boolean
+    boss: d.boss === 1, // Converter INTEGER para boolean
     type: getDigimonTypeById(d.typeId),
   }));
 }
 
 export function getDigimonById(id: number): Digimon | undefined {
   const digimon = db.prepare("SELECT * FROM digimons WHERE id = ?").get(id) as
-    | (Omit<Digimon, "evolution" | "type"> & { evolution: string })
+    | (Omit<Digimon, "evolution" | "type" | "active" | "boss"> & {
+        evolution: string;
+        active?: number;
+        boss?: number;
+      })
     | undefined;
 
   if (!digimon) return undefined;
 
   return {
     ...digimon,
+    dp: 0, // DP será calculado dinamicamente
     evolution: JSON.parse(digimon.evolution || "[]"),
+    active: digimon.active === undefined ? true : digimon.active === 1,
+    boss: digimon.boss === 1,
     type: getDigimonTypeById(digimon.typeId),
   };
 }
@@ -73,29 +89,37 @@ export function getDigimonsByLevel(level: number): Digimon[] {
   const digimons = db
     .prepare("SELECT * FROM digimons WHERE level = ? ORDER BY name")
     .all(level) as Array<
-    Omit<Digimon, "evolution" | "type"> & { evolution: string }
+    Omit<Digimon, "evolution" | "type" | "active" | "boss"> & {
+      evolution: string;
+      active?: number;
+      boss?: number;
+    }
   >;
 
   return digimons.map((d) => ({
     ...d,
+    dp: 0, // DP será calculado dinamicamente
     evolution: JSON.parse(d.evolution || "[]"),
+    active: d.active === undefined ? true : d.active === 1,
+    boss: d.boss === 1,
     type: getDigimonTypeById(d.typeId),
   }));
 }
 
 export function createDigimon(digimon: Omit<Digimon, "id">): Digimon {
   const stmt = db.prepare(`
-    INSERT INTO digimons (name, image, level, dp, typeId, evolution)
-    VALUES (?, ?, ?, ?, ?, ?)
+    INSERT INTO digimons (name, image, level, typeId, evolution, active, boss)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
   `);
 
   const result = stmt.run(
     digimon.name,
     digimon.image,
     digimon.level,
-    digimon.dp,
     digimon.typeId,
-    JSON.stringify(digimon.evolution || [])
+    JSON.stringify(digimon.evolution || []),
+    digimon.active !== false ? 1 : 0,
+    digimon.boss === true ? 1 : 0
   );
 
   return getDigimonById(Number(result.lastInsertRowid))!;
@@ -116,27 +140,43 @@ export function updateDigimon(
   data: {
     name: string;
     level: number;
-    dp: number;
     typeId: number;
     image?: string;
+    active?: boolean;
+    boss?: boolean;
   }
 ): Digimon | null {
-  // Se image foi fornecida, incluir no update
-  if (data.image) {
-    const stmt = db.prepare(`
-      UPDATE digimons 
-      SET name = ?, level = ?, dp = ?, typeId = ?, image = ?
-      WHERE id = ?
-    `);
-    stmt.run(data.name, data.level, data.dp, data.typeId, data.image, id);
-  } else {
-    const stmt = db.prepare(`
-      UPDATE digimons 
-      SET name = ?, level = ?, dp = ?, typeId = ?
-      WHERE id = ?
-    `);
-    stmt.run(data.name, data.level, data.dp, data.typeId, id);
+  // Construir query dinamicamente
+  const fields: string[] = [];
+  const values: (string | number)[] = [];
+
+  fields.push("name = ?", "level = ?", "typeId = ?");
+  values.push(data.name, data.level, data.typeId);
+
+  if (data.image !== undefined) {
+    fields.push("image = ?");
+    values.push(data.image);
   }
+
+  if (data.active !== undefined) {
+    fields.push("active = ?");
+    values.push(data.active ? 1 : 0);
+  }
+
+  if (data.boss !== undefined) {
+    fields.push("boss = ?");
+    values.push(data.boss ? 1 : 0);
+  }
+
+  values.push(id);
+
+  const stmt = db.prepare(`
+    UPDATE digimons 
+    SET ${fields.join(", ")}
+    WHERE id = ?
+  `);
+
+  stmt.run(...values);
 
   return getDigimonById(id) || null;
 }

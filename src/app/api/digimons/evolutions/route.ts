@@ -25,8 +25,10 @@ export async function POST(request: NextRequest) {
     const allDigimons = getAllDigimons();
     const nextLevel = currentDigimon.level + 1;
 
-    // Buscar Digimons do próximo level
-    const nextLevelDigimons = allDigimons.filter((d) => d.level === nextLevel);
+    // Buscar Digimons do próximo level (apenas ATIVOS)
+    const nextLevelDigimons = allDigimons.filter(
+      (d) => d.level === nextLevel && d.active !== false
+    );
 
     if (nextLevelDigimons.length === 0) {
       return NextResponse.json(

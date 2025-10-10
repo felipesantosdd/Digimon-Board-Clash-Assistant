@@ -174,3 +174,53 @@ export function applyTypeAdvantageDamage(
   }
   return baseDamage; // Neutro
 }
+
+/**
+ * Intervalos de HP e DP por nível
+ */
+export const LEVEL_STATS_RANGES = {
+  1: { min: 1600, max: 2400 },
+  2: { min: 4000, max: 6000 },
+  3: { min: 6400, max: 9600 },
+  4: { min: 10000, max: 14000 },
+  5: { min: 15000, max: 18000 },
+  6: { min: 19000, max: 24000 },
+  7: { min: 19000, max: 24000 }, // Level 7 usa o mesmo range que Level 6
+} as const;
+
+/**
+ * Gera HP e DP aleatórios dentro do intervalo do nível
+ * @param level - Nível do Digimon (1-7)
+ * @returns Objeto com HP e DP aleatórios (múltiplos de 100)
+ */
+export function generateRandomStats(level: number): { hp: number; dp: number } {
+  const range =
+    LEVEL_STATS_RANGES[level as keyof typeof LEVEL_STATS_RANGES] ||
+    LEVEL_STATS_RANGES[1];
+
+  // Gerar valor base aleatório
+  const randomValue =
+    Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+
+  // Arredondar para múltiplo de 100
+  const roundedValue = Math.round(randomValue / 100) * 100;
+
+  // HP e DP são iguais (sempre 100% do HP)
+  return { hp: roundedValue, dp: roundedValue };
+}
+
+/**
+ * Gera stats para boss (sempre valor máximo do nível)
+ * @param level - Nível do Boss (1-7)
+ * @returns Objeto com HP (máx × 3) e DP (máx)
+ */
+export function generateBossStats(level: number): { hp: number; dp: number } {
+  const range =
+    LEVEL_STATS_RANGES[level as keyof typeof LEVEL_STATS_RANGES] ||
+    LEVEL_STATS_RANGES[1];
+
+  const maxDp = range.max;
+  const maxHp = maxDp * 3;
+
+  return { hp: maxHp, dp: maxDp };
+}

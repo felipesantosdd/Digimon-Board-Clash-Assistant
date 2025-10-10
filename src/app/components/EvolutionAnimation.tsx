@@ -219,12 +219,7 @@ export default function EvolutionAnimation({
 
               {/* Fallback se houver erro de imagem */}
               {imageError && (
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 rounded-lg">
-                  <div className="text-center">
-                    <div className="text-6xl mb-2">❓</div>
-                    <p className="text-white text-sm">Imagem não encontrada</p>
-                  </div>
-                </div>
+                <div className="absolute inset-0 bg-gray-800 bg-opacity-50 rounded-lg"></div>
               )}
 
               {/* Estrelas que somem e aparecem */}

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import EvolutionModal from "../EvolutionModal";
 import EvolutionLineModal from "../EvolutionLineModal";
 import AddDigimonModal from "../AddDigimonModal";
+import TypeIcon from "../TypeIcons";
 import { Digimon } from "../../database/database_type";
 import { useSnackbar } from "notistack";
 import { capitalize, getLevelName } from "@/lib/utils";
@@ -95,9 +96,10 @@ export default function DigimonsTab({
     data: {
       name: string;
       level: number;
-      dp: number;
       typeId: number;
       image?: string;
+      active?: boolean;
+      boss?: boolean;
     }
   ) => {
     try {
@@ -166,13 +168,16 @@ export default function DigimonsTab({
     }
   };
 
-  const filteredDigimons = digimons.filter((digimon) => {
-    const matchesSearch = digimon.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesLevel = levelFilter === null || digimon.level === levelFilter;
-    return matchesSearch && matchesLevel;
-  });
+  const filteredDigimons = digimons
+    .filter((digimon) => {
+      const matchesSearch = digimon.name
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const matchesLevel =
+        levelFilter === null || digimon.level === levelFilter;
+      return matchesSearch && matchesLevel;
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   const getTypeColor = (typeId: number) => {
     const colors: { [key: number]: string } = {
@@ -291,12 +296,12 @@ export default function DigimonsTab({
                       title="Clique para ver a linha evolutiva"
                     >
                       <img
-                        src={digimon.image}
+                        src={digimon.image || "/images/digimons/fallback1.jpg"}
                         alt={digimon.name}
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "/images/digimons/fallback.svg";
+                          target.src = "/images/digimons/fallback1.jpg";
                         }}
                       />
                     </div>
@@ -311,8 +316,13 @@ export default function DigimonsTab({
                           <span
                             className={`${getTypeColor(
                               digimon.typeId
-                            )} text-white text-xs font-semibold px-2 py-1 rounded-full`}
+                            )} text-white text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1`}
                           >
+                            <TypeIcon
+                              typeId={digimon.typeId}
+                              size={12}
+                              className="text-white"
+                            />
                             {getTypeName(digimon.typeId)}
                           </span>
                         </div>
@@ -323,12 +333,6 @@ export default function DigimonsTab({
                               {getLevelName(digimon.level)}
                             </span>
                           </span>
-                          <span className="font-semibold">
-                            DP:{" "}
-                            <span className="text-orange-400">
-                              {digimon.dp}
-                            </span>
-                          </span>
                         </div>
 
                         <div className="text-xs text-gray-400">
@@ -336,28 +340,28 @@ export default function DigimonsTab({
                         </div>
                       </div>
 
-                      {!isProduction && (
-                        <div className="space-y-2">
+                      <div className="space-y-2">
+                        {!isProduction && (
                           <button
                             onClick={() => handleConfigureEvolutions(digimon)}
                             className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
                           >
                             Editar
                           </button>
+                        )}
 
-                          <button
-                            onClick={() =>
-                              handleDeleteDigimon(
-                                digimon.id,
-                                capitalize(digimon.name)
-                              )
-                            }
-                            className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
-                          >
-                            🗑️ Excluir
-                          </button>
-                        </div>
-                      )}
+                        <button
+                          onClick={() =>
+                            handleDeleteDigimon(
+                              digimon.id,
+                              capitalize(digimon.name)
+                            )
+                          }
+                          className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
+                        >
+                          🗑️ Excluir
+                        </button>
+                      </div>
                     </div>
                   </div>
                 );
@@ -367,9 +371,9 @@ export default function DigimonsTab({
             /* Seções por Nível - quando não há filtros */
             <div className="space-y-8">
               {[1, 2, 3, 4, 5, 6, 7].map((level) => {
-                const digimonsInLevel = digimons.filter(
-                  (d) => d.level === level
-                );
+                const digimonsInLevel = digimons
+                  .filter((d) => d.level === level)
+                  .sort((a, b) => a.name.localeCompare(b.name));
 
                 if (digimonsInLevel.length === 0) return null;
 
@@ -405,17 +409,34 @@ export default function DigimonsTab({
                             <div
                               className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden cursor-pointer"
                               onClick={() => handleViewEvolutionLine(digimon)}
-                              title="Clique para ver a linha evolutiva"
+                              title={
+                                digimon.active === false
+                                  ? "⚠️ Digimon Inativo - Não disponível no Time Stranger. Clique para ver linha evolutiva."
+                                  : "Clique para ver a linha evolutiva"
+                              }
                             >
                               <img
-                                src={digimon.image}
+                                src={
+                                  digimon.image ||
+                                  "/images/digimons/fallback1.jpg"
+                                }
                                 alt={digimon.name}
                                 className="w-full h-full object-cover"
+                                style={
+                                  digimon.active === false
+                                    ? { filter: "grayscale(100%) opacity(0.6)" }
+                                    : undefined
+                                }
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
-                                  target.src = "/images/digimons/fallback.svg";
+                                  target.src = "/images/digimons/fallback1.jpg";
                                 }}
                               />
+                              {digimon.active === false && (
+                                <div className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                                  ⚠️ INATIVO
+                                </div>
+                              )}
                             </div>
 
                             <div className="p-4">
@@ -428,32 +449,51 @@ export default function DigimonsTab({
                                   <span
                                     className={`${getTypeColor(
                                       digimon.typeId
-                                    )} text-white text-xs font-semibold px-2 py-1 rounded-full`}
+                                    )} text-white text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1`}
                                   >
+                                    <TypeIcon
+                                      typeId={digimon.typeId}
+                                      size={12}
+                                      className="text-white"
+                                    />
                                     {getTypeName(digimon.typeId)}
                                   </span>
                                 </div>
 
                                 <div className="flex justify-between text-sm text-gray-300">
                                   <span>
-                                    DP:{" "}
-                                    <span className="font-bold text-orange-400">
-                                      {digimon.dp}
+                                    Evoluções:{" "}
+                                    <span className="font-bold text-purple-400">
+                                      {digimon.evolution?.length || 0}
                                     </span>
                                   </span>
                                 </div>
                               </div>
 
-                              {!isProduction && (
+                              <div className="space-y-2">
+                                {!isProduction && (
+                                  <button
+                                    onClick={() =>
+                                      handleConfigureEvolutions(digimon)
+                                    }
+                                    className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                                  >
+                                    Editar
+                                  </button>
+                                )}
+
                                 <button
                                   onClick={() =>
-                                    handleConfigureEvolutions(digimon)
+                                    handleDeleteDigimon(
+                                      digimon.id,
+                                      capitalize(digimon.name)
+                                    )
                                   }
-                                  className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                                  className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
                                 >
-                                  ⚙️ Gerenciar
+                                  🗑️ Excluir
                                 </button>
-                              )}
+                              </div>
                             </div>
                           </div>
                         );

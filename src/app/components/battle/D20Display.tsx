@@ -123,12 +123,10 @@ export default function D20Display({
       )}
 
       {!isRolling && value > 0 && damageDealt !== undefined && (
-        <div className="bg-gray-600 rounded p-1.5 sm:p-2 text-center w-full">
-          <p className="text-[10px] sm:text-xs text-gray-400">Dano</p>
-          <p className="text-sm sm:text-xl font-bold text-blue-400">
-            {damageDealt >= 1000
-              ? `${Math.floor(damageDealt / 1000)}k`
-              : damageDealt.toLocaleString()}
+        <div className="bg-red-900 rounded p-1.5 sm:p-2 text-center w-full">
+          <p className="text-[10px] sm:text-xs text-red-300">💥 Dano</p>
+          <p className="text-sm sm:text-xl font-bold text-red-400">
+            {damageDealt.toLocaleString()}
           </p>
         </div>
       )}

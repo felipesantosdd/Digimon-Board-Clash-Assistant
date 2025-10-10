@@ -277,7 +277,7 @@ export default function EditTamerModal({
                           target.style.display = "none";
                           const parent = target.parentElement;
                           if (parent) {
-                            parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-4xl">👤</div>`;
+                            parent.innerHTML = `<div class="w-full h-full bg-gray-700"></div>`;
                           }
                         }}
                       />

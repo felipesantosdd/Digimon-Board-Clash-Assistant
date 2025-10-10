@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { GameDigimon } from "@/types/game";
 import { capitalize, getLevelName, getTypeColor } from "@/lib/utils";
+import TypeIcon from "./TypeIcons";
 
 interface DigimonDetailsModalProps {
   isOpen: boolean;
@@ -131,7 +132,9 @@ export default function DigimonDetailsModal({
           >
             ×
           </button>
-          <h2 className="text-xl sm:text-2xl font-bold pr-8">{capitalize(digimon.name)}</h2>
+          <h2 className="text-xl sm:text-2xl font-bold pr-8">
+            {capitalize(digimon.name)}
+          </h2>
           <p className="text-xs sm:text-sm text-blue-100 mt-0.5 sm:mt-1">
             Parceiro de {capitalize(playerName)}
           </p>
@@ -144,7 +147,9 @@ export default function DigimonDetailsModal({
             <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center z-10">
               <div className="text-center">
                 <div className="text-5xl sm:text-7xl mb-2 sm:mb-3">💀</div>
-                <p className="text-red-400 font-bold text-lg sm:text-xl">MORTO</p>
+                <p className="text-red-400 font-bold text-lg sm:text-xl">
+                  MORTO
+                </p>
                 <p className="text-gray-300 text-xs sm:text-sm mt-1 sm:mt-2">
                   Este Digimon foi derrotado
                 </p>
@@ -165,16 +170,14 @@ export default function DigimonDetailsModal({
               }
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-6xl sm:text-8xl">
-              ❓
-            </div>
+            <div className="w-full h-full bg-gray-600"></div>
           )}
           {/* Badges */}
           <div className="absolute top-2 left-2 sm:top-3 sm:left-3 bg-blue-600 text-white text-xs sm:text-sm font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg shadow-lg">
             {getLevelName(digimon.level)}
           </div>
-          <div className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-purple-600 text-white text-xs sm:text-sm font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg shadow-lg">
-            {digimon.dp >= 1000 ? `${Math.floor(digimon.dp / 1000)}k` : digimon.dp.toLocaleString()} DP
+          <div className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-red-600 text-white text-xs sm:text-sm font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg shadow-lg">
+            ⚔️ {digimon.dp.toLocaleString()} ATK
           </div>
         </div>
 
@@ -236,22 +239,28 @@ export default function DigimonDetailsModal({
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-2 sm:gap-3 pt-1 sm:pt-2">
             <div className="bg-gray-700 rounded-lg p-2 sm:p-3 border border-gray-600">
-              <div className="text-[10px] sm:text-xs text-gray-400 mb-0.5 sm:mb-1">Level</div>
+              <div className="text-[10px] sm:text-xs text-gray-400 mb-0.5 sm:mb-1">
+                Level
+              </div>
               <div className="text-lg sm:text-2xl font-bold text-blue-400">
                 {digimon.level}
               </div>
             </div>
             <div className="bg-gray-700 rounded-lg p-2 sm:p-3 border border-gray-600">
-              <div className="text-[10px] sm:text-xs text-gray-400 mb-0.5 sm:mb-1">DP</div>
-              <div className="text-lg sm:text-2xl font-bold text-purple-400">
-                {digimon.dp >= 1000 ? `${Math.floor(digimon.dp / 1000)}k` : digimon.dp.toLocaleString()}
+              <div className="text-[10px] sm:text-xs text-gray-400 mb-0.5 sm:mb-1">
+                ATK
+              </div>
+              <div className="text-lg sm:text-2xl font-bold text-red-400">
+                {digimon.dp.toLocaleString()}
               </div>
             </div>
           </div>
 
           {/* Status */}
           <div className="bg-gray-700 rounded-lg p-2 sm:p-3 border border-gray-600">
-            <div className="text-[10px] sm:text-xs text-gray-400 mb-0.5 sm:mb-1">Status</div>
+            <div className="text-[10px] sm:text-xs text-gray-400 mb-0.5 sm:mb-1">
+              Status
+            </div>
             <div className="flex items-center gap-2">
               {hpPercentage > 75 ? (
                 <>
@@ -263,7 +272,9 @@ export default function DigimonDetailsModal({
               ) : hpPercentage > 50 ? (
                 <>
                   <span className="text-lg sm:text-2xl">👍</span>
-                  <span className="text-yellow-400 font-bold text-sm sm:text-base">Bom estado</span>
+                  <span className="text-yellow-400 font-bold text-sm sm:text-base">
+                    Bom estado
+                  </span>
                 </>
               ) : hpPercentage > 25 ? (
                 <>
@@ -275,7 +286,9 @@ export default function DigimonDetailsModal({
               ) : (
                 <>
                   <span className="text-lg sm:text-2xl">🆘</span>
-                  <span className="text-red-400 font-bold text-sm sm:text-base">Crítico!</span>
+                  <span className="text-red-400 font-bold text-sm sm:text-base">
+                    Crítico!
+                  </span>
                 </>
               )}
             </div>
@@ -652,7 +665,7 @@ export default function DigimonDetailsModal({
                               className="w-full h-full object-contain"
                             />
                           ) : (
-                            <span className="text-2xl">❓</span>
+                            <div className="w-full h-full bg-gray-600"></div>
                           )}
                         </div>
 
@@ -778,9 +791,7 @@ export default function DigimonDetailsModal({
                                 className="w-full h-full object-contain"
                               />
                             ) : (
-                              <div className="w-full h-full flex items-center justify-center text-2xl">
-                                ❓
-                              </div>
+                              <div className="w-full h-full bg-gray-600"></div>
                             )}
                             {/* Badge de Nível */}
                             <div className="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold px-1 py-0.5 rounded-br">
@@ -799,8 +810,13 @@ export default function DigimonDetailsModal({
                               <span
                                 className={`text-[10px] ${getTypeColor(
                                   targetDigimon.typeId
-                                )} font-bold px-1.5 py-0.5 rounded`}
+                                )} font-bold px-1.5 py-0.5 rounded flex items-center gap-1`}
                               >
+                                <TypeIcon
+                                  typeId={targetDigimon.typeId}
+                                  size={8}
+                                  className="text-white"
+                                />
                                 {
                                   {
                                     1: "Data",
@@ -812,8 +828,8 @@ export default function DigimonDetailsModal({
                                   }[targetDigimon.typeId]
                                 }
                               </span>
-                              <span className="text-[10px] bg-purple-600 text-white font-bold px-1.5 py-0.5 rounded">
-                                {targetDigimon.dp.toLocaleString()} DP
+                              <span className="text-[10px] bg-red-600 text-white font-bold px-1.5 py-0.5 rounded">
+                                ⚔️ {targetDigimon.dp.toLocaleString()} ATK
                               </span>
                             </div>
 
@@ -965,9 +981,7 @@ export default function DigimonDetailsModal({
                                       className="w-full h-full object-contain"
                                     />
                                   ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-2xl">
-                                      ❓
-                                    </div>
+                                    <div className="w-full h-full bg-gray-600"></div>
                                   )}
                                   {/* Badge de Nível */}
                                   <div className="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold px-1 py-0.5 rounded-br">
@@ -986,8 +1000,13 @@ export default function DigimonDetailsModal({
                                     <span
                                       className={`text-[10px] ${getTypeColor(
                                         targetDigimon.typeId
-                                      )} font-bold px-1.5 py-0.5 rounded`}
+                                      )} font-bold px-1.5 py-0.5 rounded flex items-center gap-1`}
                                     >
+                                      <TypeIcon
+                                        typeId={targetDigimon.typeId}
+                                        size={8}
+                                        className="text-white"
+                                      />
                                       {
                                         {
                                           1: "Data",
@@ -999,8 +1018,8 @@ export default function DigimonDetailsModal({
                                         }[targetDigimon.typeId]
                                       }
                                     </span>
-                                    <span className="text-[10px] bg-purple-600 text-white font-bold px-1.5 py-0.5 rounded">
-                                      {targetDigimon.dp.toLocaleString()} DP
+                                    <span className="text-[10px] bg-red-600 text-white font-bold px-1.5 py-0.5 rounded">
+                                      ⚔️ {targetDigimon.dp.toLocaleString()} ATK
                                     </span>
                                   </div>
 

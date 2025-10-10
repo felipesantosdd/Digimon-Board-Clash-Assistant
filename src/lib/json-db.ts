@@ -53,9 +53,14 @@ export const jsonDb = {
           // Verificar se tem filtro por nível
           if (query.includes("WHERE level = ?") && params !== undefined) {
             const level = params as number;
-            return (digimonsData as Digimon[]).filter((d) => d.level === level);
+            return (digimonsData as Array<Record<string, unknown>>)
+              .filter((d) => d.level === level)
+              .map((d) => ({ ...d, dp: 0 }));
           }
-          return digimonsData as Digimon[];
+          return (digimonsData as Array<Record<string, unknown>>).map((d) => ({
+            ...d,
+            dp: 0,
+          }));
         }
         return [];
       },
@@ -71,7 +76,10 @@ export const jsonDb = {
         }
         if (query.includes("digimons") && query.includes("WHERE id")) {
           const id = params;
-          return (digimonsData as Digimon[]).find((d) => d.id === id) || null;
+          const digimon = (digimonsData as Array<Record<string, unknown>>).find(
+            (d) => d.id === id
+          );
+          return digimon ? { ...digimon, dp: 0 } : null;
         }
         if (query.includes("digimon_types") && query.includes("WHERE id")) {
           const id = params;

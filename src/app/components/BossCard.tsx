@@ -98,10 +98,8 @@ export default function BossCard({
                   ? "Vaccine"
                   : "Virus"}
               </div>
-              <div className="bg-purple-600 text-white text-[10px] sm:text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 rounded">
-                {boss.calculatedDp >= 1000
-                  ? `${Math.floor(boss.calculatedDp / 1000)}k DP`
-                  : `${boss.calculatedDp} DP`}
+              <div className="bg-red-600 text-white text-[10px] sm:text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 rounded">
+                ⚔️ {boss.calculatedDp.toLocaleString()} ATK
               </div>
             </div>
 

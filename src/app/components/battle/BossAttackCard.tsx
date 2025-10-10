@@ -69,9 +69,7 @@ export default function BossAttackCard({
               DP
             </div>
             <div className="text-sm sm:text-lg font-bold text-red-200">
-              {boss.calculatedDp >= 1000
-                ? `${Math.floor(boss.calculatedDp / 1000)}k`
-                : boss.calculatedDp.toLocaleString()}
+              ⚔️ {boss.calculatedDp.toLocaleString()} ATK
             </div>
           </div>
 

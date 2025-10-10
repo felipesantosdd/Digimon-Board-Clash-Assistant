@@ -14,7 +14,6 @@ interface Digimon {
   id: number;
   name: string;
   level: number;
-  dp: number;
   typeId: number;
 }
 
@@ -41,25 +40,15 @@ export default function AddDigimonModal({
     { id: 6, name: "Unknown" },
   ];
 
-  // Mapeamento de níveis para DP padrão
-  const levelToDp: { [key: number]: number } = {
-    1: 2000,
-    2: 5000,
-    3: 8000,
-    4: 12000,
-    5: 18000,
-    6: 20000,
-    7: 25000,
-  };
+  // Sistema de stats dinâmicos - não precisamos mais de DP fixo
 
   const [formData, setFormData] = useState({
     name: "",
     level: 1,
-    dp: 2000,
     typeId: 1,
+    active: true,
+    boss: false,
   });
-
-  const [dpDisplay, setDpDisplay] = useState("2"); // Valor exibido (sem os 000)
   const [selectedPreEvolutions, setSelectedPreEvolutions] = useState<number[]>(
     []
   ); // IDs dos Digimons que evoluem para este
@@ -76,10 +65,10 @@ export default function AddDigimonModal({
     setFormData({
       name: "",
       level: 1,
-      dp: 2000,
       typeId: 1,
+      active: true,
+      boss: false,
     });
-    setDpDisplay("2");
     setSelectedPreEvolutions([]);
     setSearchTerm("");
     setImageFile(null);
@@ -236,31 +225,10 @@ export default function AddDigimonModal({
   ) => {
     const { name, value } = e.target;
 
-    if (name === "dp") {
-      // Armazenar o valor digitado
-      setDpDisplay(value);
-      // Converter para DP real (adicionar 000)
-      const dpValue = Number(value) * 1000;
-      setFormData((prev) => ({
-        ...prev,
-        dp: dpValue,
-      }));
-    } else if (name === "level") {
-      const levelValue = Number(value);
-      const defaultDp = levelToDp[levelValue] || 2000;
-
-      setFormData((prev) => ({
-        ...prev,
-        level: levelValue,
-        dp: defaultDp,
-      }));
-      setDpDisplay(String(defaultDp / 1000)); // Atualizar display
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: ["typeId"].includes(name) ? Number(value) : value,
-      }));
-    }
+    setFormData((prev) => ({
+      ...prev,
+      [name]: ["typeId", "level"].includes(name) ? Number(value) : value,
+    }));
   };
 
   const handlePreEvolutionToggle = (digimonId: number) => {
@@ -401,30 +369,6 @@ export default function AddDigimonModal({
               </div>
             </div>
 
-            {/* DP */}
-            <div>
-              <label className="block text-sm font-medium text-gray-200 mb-2">
-                DP (Digimon Power) *{" "}
-                <span className="text-xs text-gray-500">(x1000)</span>
-              </label>
-              <div className="relative">
-                <input
-                  type="number"
-                  name="dp"
-                  value={dpDisplay}
-                  onChange={handleChange}
-                  required
-                  min="0"
-                  step="1"
-                  className="w-full text-white px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-blue-500"
-                  placeholder="Ex: 2 = 2000 DP"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">
-                  = {formData.dp.toLocaleString()} DP
-                </span>
-              </div>
-            </div>
-
             {/* Tipo */}
             <div>
               <label className="block text-sm font-medium text-gray-200 mb-3">
@@ -463,6 +407,83 @@ export default function AddDigimonModal({
                     </span>
                   </button>
                 ))}
+              </div>
+            </div>
+
+            {/* Status Ativo/Inativo */}
+            <div>
+              <label className="block text-sm font-medium text-gray-200 mb-3">
+                Status
+              </label>
+              <div className="space-y-3">
+                {/* Switch Ativo/Inativo */}
+                <div className="flex items-center gap-3 p-4 bg-gray-700 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          active: !prev.active,
+                        }))
+                      }
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                        formData.active ? "bg-green-500" : "bg-gray-500"
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                          formData.active ? "translate-x-6" : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                    <span
+                      className={`text-sm font-medium ${
+                        formData.active ? "text-green-400" : "text-gray-400"
+                      }`}
+                    >
+                      {formData.active ? "✅ Ativo" : "⚠️ Inativo"}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-400 ml-auto">
+                    {formData.active
+                      ? "Digimon disponível no jogo"
+                      : "Digimon indisponível para novos jogos"}
+                  </p>
+                </div>
+
+                {/* Switch Pode ser Boss */}
+                <div className="flex items-center gap-3 p-4 bg-gray-700 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setFormData((prev) => ({ ...prev, boss: !prev.boss }))
+                      }
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                        formData.boss ? "bg-red-500" : "bg-gray-500"
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                          formData.boss ? "translate-x-6" : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                    <span
+                      className={`text-sm font-medium ${
+                        formData.boss ? "text-red-400" : "text-gray-400"
+                      }`}
+                    >
+                      {formData.boss ? "👹 Pode ser Boss" : "🐉 Digimon Normal"}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-400 ml-auto">
+                    {formData.boss
+                      ? "Pode aparecer como boss no jogo"
+                      : "Apenas como Digimon jogável"}
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -511,7 +532,7 @@ export default function AddDigimonModal({
                             {capitalize(preEvo.name)}
                           </p>
                           <p className="text-xs text-gray-200">
-                            Level {preEvo.level} • DP: {preEvo.dp}
+                            Level {preEvo.level}
                           </p>
                         </div>
                       </div>

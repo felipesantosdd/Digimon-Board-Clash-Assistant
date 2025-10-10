@@ -114,9 +114,7 @@ export default function BossDropModal({
                 </p>
                 <div className="mt-2 flex gap-2">
                   <div className="bg-red-700 px-2 py-1 rounded text-xs sm:text-sm text-red-200">
-                    {boss.calculatedDp >= 1000
-                      ? `${Math.floor(boss.calculatedDp / 1000)}k DP`
-                      : `${boss.calculatedDp} DP`}
+                    ⚔️ {boss.calculatedDp.toLocaleString()} ATK
                   </div>
                   <div className="bg-red-700 px-2 py-1 rounded text-xs sm:text-sm text-red-200">
                     {boss.typeId === 1

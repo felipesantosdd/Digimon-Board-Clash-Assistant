@@ -2,28 +2,10 @@
   {
     "id": 4,
     "name": "Devimon",
-    "image": "/images/bosses/1759980426815_image.blob",
+    "image": "/images/bosses/1760065150107_image.webp",
     "description": "Um Digimon Anjo Caído do tipo Vírus. Extremamente perigoso!",
     "effect": "boss_dark_aura",
     "dp": 5000,
     "typeId": 3
-  },
-  {
-    "id": 5,
-    "name": "Myotismon",
-    "image": "/images/bosses/1759980441794_image.blob",
-    "description": "Um vampiro Digimon com poderes sombrios devastadores.",
-    "effect": "boss_vampire_drain",
-    "dp": 25000,
-    "typeId": 3
-  },
-  {
-    "id": 6,
-    "name": "MetalSeadramon",
-    "image": "/images/bosses/1759980451656_image.blob",
-    "description": "Mestre dos oceanos digitais, com poder destrutivo imenso.",
-    "effect": "boss_ocean_fury",
-    "dp": 30000,
-    "typeId": 1
   }
 ]

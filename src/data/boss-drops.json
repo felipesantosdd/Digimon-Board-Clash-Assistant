@@ -1,53 +1,5 @@
 [
   {
-    "id": 13,
-    "bossId": 5,
-    "itemId": 2,
-    "dropChance": 70,
-    "minQuantity": 1,
-    "maxQuantity": 1
-  },
-  {
-    "id": 14,
-    "bossId": 5,
-    "itemId": 3,
-    "dropChance": 40,
-    "minQuantity": 1,
-    "maxQuantity": 1
-  },
-  {
-    "id": 15,
-    "bossId": 5,
-    "itemId": 4,
-    "dropChance": 15,
-    "minQuantity": 1,
-    "maxQuantity": 1
-  },
-  {
-    "id": 16,
-    "bossId": 6,
-    "itemId": 3,
-    "dropChance": 60,
-    "minQuantity": 1,
-    "maxQuantity": 1
-  },
-  {
-    "id": 17,
-    "bossId": 6,
-    "itemId": 4,
-    "dropChance": 30,
-    "minQuantity": 1,
-    "maxQuantity": 1
-  },
-  {
-    "id": 18,
-    "bossId": 6,
-    "itemId": 5,
-    "dropChance": 10,
-    "minQuantity": 1,
-    "maxQuantity": 1
-  },
-  {
     "id": 19,
     "bossId": 4,
     "itemId": 9,

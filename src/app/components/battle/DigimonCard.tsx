@@ -43,9 +43,7 @@ export default function DigimonCard({
               }`}
             />
           ) : (
-            <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-xl sm:text-2xl bg-gray-700 rounded">
-              ❓
-            </div>
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gray-700 rounded"></div>
           )}
 
           {/* Badge de Vantagem/Desvantagem */}
@@ -81,6 +79,11 @@ export default function DigimonCard({
           {/* Level */}
           <p className="text-[10px] sm:text-xs text-gray-400">
             {getLevelName(digimon.level)}
+          </p>
+
+          {/* ATK */}
+          <p className="text-[10px] sm:text-xs text-red-400 font-bold">
+            ⚔️ {digimon.dp.toLocaleString()} ATK
           </p>
 
           {/* Barra de HP */}

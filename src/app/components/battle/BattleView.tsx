@@ -112,9 +112,7 @@ export default function BattleView({
                   }`}
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-6xl">
-                  ❓
-                </div>
+                <div className="w-full h-full bg-gray-600"></div>
               )}
 
               {battleComplete && attackerDead && (
@@ -128,10 +126,8 @@ export default function BattleView({
                 </div>
               )}
 
-              <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-purple-600 text-white text-[10px] sm:text-xs font-bold px-1 py-0.5 sm:px-2 sm:py-1 rounded">
-                {attacker.digimon.dp >= 1000
-                  ? `${Math.floor(attacker.digimon.dp / 1000)}k`
-                  : attacker.digimon.dp.toLocaleString()}{" "}
+              <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-1 py-0.5 sm:px-2 sm:py-1 rounded">
+                ⚔️ {attacker.digimon.dp.toLocaleString()}
               </div>
 
               {attacker.typeAdvantage !== 0 && (
@@ -249,9 +245,7 @@ export default function BattleView({
                   }`}
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-6xl">
-                  ❓
-                </div>
+                <div className="w-full h-full bg-gray-600"></div>
               )}
 
               {battleComplete && defenderDead && (
@@ -265,10 +259,8 @@ export default function BattleView({
                 </div>
               )}
 
-              <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-purple-600 text-white text-[10px] sm:text-xs font-bold px-1 py-0.5 sm:px-2 sm:py-1 rounded">
-                {defender.digimon.dp >= 1000
-                  ? `${Math.floor(defender.digimon.dp / 1000)}k`
-                  : defender.digimon.dp.toLocaleString()}{" "}
+              <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-1 py-0.5 sm:px-2 sm:py-1 rounded">
+                ⚔️ {defender.digimon.dp.toLocaleString()}
               </div>
 
               {defender.typeAdvantage !== 0 && (
