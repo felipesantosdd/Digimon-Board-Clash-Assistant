@@ -248,16 +248,6 @@ export default function EvolutionModal({
           if (uploadResponse.ok) {
             const { path } = await uploadResponse.json();
             imagePath = path;
-
-            // Se o Digimon estava inativo e recebeu uma imagem, ativá-lo automaticamente
-            if (!editData.active && path) {
-              enqueueSnackbar(
-                "Digimon ativado automaticamente ao adicionar imagem!",
-                {
-                  variant: "info",
-                }
-              );
-            }
           } else {
             throw new Error("Erro ao fazer upload da imagem");
           }
@@ -334,10 +324,11 @@ export default function EvolutionModal({
         onClick={onClose}
       >
         <div
-          className="bg-gray-800 rounded-lg p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden"
+          className="bg-gray-800 rounded-lg max-w-4xl w-full mx-4 max-h-[90vh] flex flex-col overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex justify-between items-center mb-4">
+          {/* Header fixo */}
+          <div className="flex justify-between items-center p-6 pb-4 border-b border-gray-700">
             <div className="flex items-center gap-4">
               {/* Imagem do Digimon no header - clicável */}
               <div
@@ -367,7 +358,9 @@ export default function EvolutionModal({
             </button>
           </div>
 
-          <div className="mb-4 p-4 bg-gray-800 rounded-lg">
+          {/* Conteúdo com scroll */}
+          <div className="flex-1 overflow-y-auto px-6">
+          <div className="mb-4 p-4 bg-gray-700 rounded-lg">
             <div className="flex justify-between items-center mb-2">
               <h3 className="font-semibold text-white">Dados do Digimon:</h3>
             </div>
@@ -676,25 +669,29 @@ export default function EvolutionModal({
               )}
             </div>
           </div>
+          </div>
 
-          <div className="flex justify-end gap-3">
-            <button
-              onClick={() => {
-                resetEditForm(); // Limpar ao fechar modal
-                onClose();
-              }}
-              className="px-4 py-2 text-gray-200 hover:text-white transition-colors font-semibold"
-            >
-              Cancelar
-            </button>
-            {process.env.NODE_ENV === "development" && (
+          {/* Footer fixo com botões */}
+          <div className="border-t border-gray-700 p-6 pt-4 bg-gray-800">
+            <div className="flex justify-end gap-3">
               <button
-                onClick={handleSaveAll}
-                className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
+                onClick={() => {
+                  resetEditForm(); // Limpar ao fechar modal
+                  onClose();
+                }}
+                className="px-4 py-2 text-gray-200 hover:text-white transition-colors font-semibold"
               >
-                💾 Salvar Tudo
+                Cancelar
               </button>
-            )}
+              {process.env.NODE_ENV === "development" && (
+                <button
+                  onClick={handleSaveAll}
+                  className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
+                >
+                  💾 Salvar Tudo
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>

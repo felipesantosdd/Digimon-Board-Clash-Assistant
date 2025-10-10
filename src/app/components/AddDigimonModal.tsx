@@ -269,11 +269,11 @@ export default function AddDigimonModal({
         onClick={onClose}
       >
         <div
-          className="bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+          className="bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Header */}
-          <div className="bg-green-600 text-white px-6 py-4 rounded-t-lg">
+          {/* Header fixo */}
+          <div className="bg-green-600 text-white px-6 py-4 flex-shrink-0">
             <h2 className="text-2xl font-bold">➕ Adicionar Novo Digimon</h2>
             {process.env.NODE_ENV === "development" && (
               <p className="text-green-100 text-sm mt-1">
@@ -282,7 +282,8 @@ export default function AddDigimonModal({
             )}
           </div>
 
-          {/* Form */}
+          {/* Form com scroll */}
+          <div className="flex-1 overflow-y-auto">
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
             {/* Imagem */}
             <div>
@@ -567,8 +568,12 @@ export default function AddDigimonModal({
               </div>
             )}
 
-            {/* Botões */}
-            <div className="flex gap-3 pt-2">
+          </form>
+          </div>
+
+          {/* Footer fixo com botões */}
+          <div className="border-t border-gray-700 p-6 pt-4 bg-gray-800 flex-shrink-0">
+            <div className="flex gap-3">
               <button
                 type="button"
                 onClick={() => {
@@ -581,14 +586,15 @@ export default function AddDigimonModal({
               </button>
 
               <button
-                type="submit"
+                type="button"
+                onClick={handleSubmit}
                 disabled={loading}
                 className="flex-1 px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
                 {loading ? "Adicionando..." : "➕ Adicionar"}
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </>
