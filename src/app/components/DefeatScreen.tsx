@@ -145,12 +145,16 @@ export default function DefeatScreen({
                     className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border-2 border-gray-500 flex-shrink-0"
                   />
                   <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-gray-300 text-xs sm:text-sm truncate">{player.name}</p>
+                    <p className="font-semibold text-gray-300 text-xs sm:text-sm truncate">
+                      {player.name}
+                    </p>
                     <p className="text-[10px] sm:text-xs text-gray-400">
                       {player.aliveDigimons} Digimon(s) restante(s)
                     </p>
                   </div>
-                  <div className="text-red-500 text-lg sm:text-2xl flex-shrink-0">💀</div>
+                  <div className="text-red-500 text-lg sm:text-2xl flex-shrink-0">
+                    💀
+                  </div>
                 </div>
               ))}
             </div>
@@ -166,13 +170,17 @@ export default function DefeatScreen({
                 <p className="text-xl sm:text-2xl font-bold text-red-500">
                   {boss.spawnedAtTurn}
                 </p>
-                <p className="text-xs sm:text-sm text-gray-400">Turno de Spawn</p>
+                <p className="text-xs sm:text-sm text-gray-400">
+                  Turno de Spawn
+                </p>
               </div>
               <div>
                 <p className="text-xl sm:text-2xl font-bold text-red-500">
                   {defeatedPlayers.length}
                 </p>
-                <p className="text-xs sm:text-sm text-gray-400">Jogadores Derrotados</p>
+                <p className="text-xs sm:text-sm text-gray-400">
+                  Jogadores Derrotados
+                </p>
               </div>
             </div>
           </div>
