@@ -28,6 +28,8 @@ export function capitalizeWords(str: string): string {
  */
 export function getLevelName(level: number): string {
   switch (level) {
+    case 0:
+      return "Armor";
     case 1:
       return "Rookie";
     case 2:
@@ -179,6 +181,7 @@ export function applyTypeAdvantageDamage(
  * Intervalos de HP e DP por nível
  */
 export const LEVEL_STATS_RANGES = {
+  0: { min: 1600, max: 2400 }, // Armor - mesmo range que Rookie
   1: { min: 1600, max: 2400 },
   2: { min: 4000, max: 6000 },
   3: { min: 6400, max: 9600 },

@@ -254,12 +254,14 @@ export default function DigimonsTab({
               className="w-full px-3 text-white bg-gray-700 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="">Todos os Levels</option>
-              <option value="1">Level 1</option>
-              <option value="2">Level 2</option>
-              <option value="3">Level 3</option>
-              <option value="4">Level 4</option>
-              <option value="5">Level 5</option>
-              <option value="6">Level 6</option>
+              <option value="0">Armor</option>
+              <option value="1">Rookie</option>
+              <option value="2">Champion</option>
+              <option value="3">Ultimate</option>
+              <option value="4">Mega 1</option>
+              <option value="5">Mega 2</option>
+              <option value="6">Mega 3</option>
+              <option value="7">Mega 4</option>
             </select>
           </div>
         </div>
@@ -370,7 +372,7 @@ export default function DigimonsTab({
           ) : (
             /* Seções por Nível - quando não há filtros */
             <div className="space-y-8">
-              {[1, 2, 3, 4, 5, 6, 7].map((level) => {
+              {[0, 1, 2, 3, 4, 5, 6, 7].map((level) => {
                 const digimonsInLevel = digimons
                   .filter((d) => d.level === level)
                   .sort((a, b) => a.name.localeCompare(b.name));

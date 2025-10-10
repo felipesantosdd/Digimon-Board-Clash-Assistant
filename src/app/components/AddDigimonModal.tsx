@@ -347,23 +347,32 @@ export default function AddDigimonModal({
               <label className="block text-sm font-medium text-gray-200 mb-3">
                 Level *
               </label>
-              <div className="grid grid-cols-7 gap-2">
-                {[1, 2, 3, 4, 5, 6, 7].map((level) => (
+              <div className="grid grid-cols-4 gap-2">
+                {[
+                  { value: 0, label: "Armor" },
+                  { value: 1, label: "Rookie" },
+                  { value: 2, label: "Champion" },
+                  { value: 3, label: "Ultimate" },
+                  { value: 4, label: "Mega 1" },
+                  { value: 5, label: "Mega 2" },
+                  { value: 6, label: "Mega 3" },
+                  { value: 7, label: "Mega 4" },
+                ].map((level) => (
                   <button
-                    key={level}
+                    key={level.value}
                     type="button"
                     onClick={() =>
                       handleChange({
-                        target: { name: "level", value: level.toString() },
+                        target: { name: "level", value: level.value.toString() },
                       } as React.ChangeEvent<HTMLSelectElement>)
                     }
-                    className={`px-3 py-2 rounded-lg border-2 transition-all ${
-                      formData.level === level
+                    className={`px-2 py-2 rounded-lg border-2 transition-all text-xs ${
+                      formData.level === level.value
                         ? "border-green-500 bg-green-50 text-green-700 font-semibold"
                         : "border-gray-600 text-white hover:border-gray-500"
                     }`}
                   >
-                    {level}
+                    {level.label}
                   </button>
                 ))}
               </div>

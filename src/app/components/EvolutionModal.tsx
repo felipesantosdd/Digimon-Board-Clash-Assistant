@@ -45,6 +45,9 @@ export default function EvolutionModal({
   const { enqueueSnackbar } = useSnackbar();
   const [selectedEvolutions, setSelectedEvolutions] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  
+  // Estado para controlar a aba ativa de níveis
+  const [selectedLevelTab, setSelectedLevelTab] = useState<number>(1);
 
   // Sistema de stats dinâmicos - não precisamos mais de DP fixo
 
@@ -90,6 +93,8 @@ export default function EvolutionModal({
         boss: digimon.boss || false,
       });
       setSearchTerm("");
+      // Inicializar aba com nível +1 do Digimon
+      setSelectedLevelTab(digimon.level + 1);
     }
   }, [digimon]);
 
@@ -253,7 +258,7 @@ export default function EvolutionModal({
           if (uploadResponse.ok) {
             const { path } = await uploadResponse.json();
             imagePath = path;
-            
+
             // Se o Digimon estava inativo e recebeu uma imagem, ativá-lo automaticamente
             if (!editData.active && path) {
               enqueueSnackbar(
@@ -312,11 +317,11 @@ export default function EvolutionModal({
     });
   };
 
-  // Filtrar Digimons que podem ser evoluções (não o próprio Digimon e apenas do nível seguinte)
+  // Filtrar Digimons que podem ser evoluções (não o próprio Digimon, qualquer nível)
   const possibleEvolutions = allDigimons.filter(
     (d) =>
       d.id !== digimon.id &&
-      d.level === digimon.level + 1 &&
+      d.level === selectedLevelTab &&
       d.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -407,23 +412,35 @@ export default function EvolutionModal({
                 <label className="block text-xs font-medium text-white mb-2">
                   Level
                 </label>
-                <div className="grid grid-cols-7 gap-1">
-                  {[1, 2, 3, 4, 5, 6, 7].map((level) => (
+                <div className="grid grid-cols-4 gap-1">
+                  {[
+                    { value: 0, label: "Armor" },
+                    { value: 1, label: "Rookie" },
+                    { value: 2, label: "Champion" },
+                    { value: 3, label: "Ultimate" },
+                    { value: 4, label: "Mega 1" },
+                    { value: 5, label: "Mega 2" },
+                    { value: 6, label: "Mega 3" },
+                    { value: 7, label: "Mega 4" },
+                  ].map((level) => (
                     <button
-                      key={level}
+                      key={level.value}
                       type="button"
                       onClick={() =>
                         handleEditChange({
-                          target: { name: "level", value: level.toString() },
+                          target: {
+                            name: "level",
+                            value: level.value.toString(),
+                          },
                         } as React.ChangeEvent<HTMLSelectElement>)
                       }
-                      className={`px-2 py-1 rounded border-2 text-xs transition-all ${
-                        editData.level === level
+                      className={`px-1 py-1 rounded border-2 text-[10px] transition-all ${
+                        editData.level === level.value
                           ? "border-blue-500 bg-blue-50 text-blue-700 font-semibold"
                           : "border-gray-600 hover:border-gray-500"
                       }`}
                     >
-                      {level}
+                      {level.label}
                     </button>
                   ))}
                 </div>
@@ -551,11 +568,39 @@ export default function EvolutionModal({
           <div className="mb-4">
             <div className="flex justify-between items-center mb-3">
               <h3 className="font-semibold text-white">
-                Selecionar Evoluções para Level {digimon.level + 1} (
-                {selectedEvolutions.length} selecionadas):
+                Selecionar Evoluções ({selectedEvolutions.length} selecionadas):
               </h3>
               <div className="text-sm text-gray-200">
                 {possibleEvolutions.length} Digimons disponíveis
+              </div>
+            </div>
+
+            {/* Abas de Níveis */}
+            <div className="mb-4">
+              <div className="flex gap-2 overflow-x-auto pb-2">
+                {[
+                  { value: 0, label: "Armor" },
+                  { value: 1, label: "Rookie" },
+                  { value: 2, label: "Champion" },
+                  { value: 3, label: "Ultimate" },
+                  { value: 4, label: "Mega 1" },
+                  { value: 5, label: "Mega 2" },
+                  { value: 6, label: "Mega 3" },
+                  { value: 7, label: "Mega 4" },
+                ].map((level) => (
+                  <button
+                    key={level.value}
+                    type="button"
+                    onClick={() => setSelectedLevelTab(level.value)}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                      selectedLevelTab === level.value
+                        ? "bg-blue-600 text-white shadow-lg"
+                        : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                    }`}
+                  >
+                    {level.label}
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -565,7 +610,18 @@ export default function EvolutionModal({
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Buscar Digimons para evolução..."
+                placeholder={`Buscar ${
+                  [
+                    "Armor",
+                    "Rookie",
+                    "Champion",
+                    "Ultimate",
+                    "Mega 1",
+                    "Mega 2",
+                    "Mega 3",
+                    "Mega 4",
+                  ][selectedLevelTab]
+                } para evolução...`}
                 className="w-full px-3 text-white py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
