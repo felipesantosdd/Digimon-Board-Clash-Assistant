@@ -284,291 +284,292 @@ export default function AddDigimonModal({
 
           {/* Form com scroll */}
           <div className="flex-1 overflow-y-auto">
-          <form onSubmit={handleSubmit} className="p-6 space-y-4">
-            {/* Imagem */}
-            <div>
-              <label className="block text-sm font-medium text-gray-200 mb-2">
-                Imagem do Digimon
-              </label>
-              <div className="flex items-center gap-4">
-                {/* Preview */}
-                <div className="w-32 h-32 bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg flex items-center justify-center overflow-hidden">
-                  {imagePreview ? (
-                    <img
-                      src={imagePreview}
-                      alt="Preview"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <span className="text-6xl">🤖</span>
-                  )}
-                </div>
-
-                {/* Upload Button */}
-                <div className="flex-1">
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className="hidden"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => fileInputRef.current?.click()}
-                    className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
-                  >
-                    📁 Selecionar Imagem
-                  </button>
-                  <p className="text-xs text-gray-400 mt-2">
-                    PNG, JPG ou SVG (máx 5MB)
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Nome */}
-            <div>
-              <label className="block text-sm font-medium text-gray-200 mb-2">
-                Nome do Digimon *
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                placeholder="Ex: Agumon"
-                className="w-full px-3 py-2 border text-white border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-blue-500"
-              />
-            </div>
-
-            {/* Level */}
-            <div>
-              <label className="block text-sm font-medium text-gray-200 mb-3">
-                Level *
-              </label>
-              <div className="grid grid-cols-4 gap-2">
-                {[
-                  { value: 0, label: "Armor" },
-                  { value: 1, label: "Rookie" },
-                  { value: 2, label: "Champion" },
-                  { value: 3, label: "Ultimate" },
-                  { value: 4, label: "Mega 1" },
-                  { value: 5, label: "Mega 2" },
-                  { value: 6, label: "Mega 3" },
-                  { value: 7, label: "Mega 4" },
-                ].map((level) => (
-                  <button
-                    key={level.value}
-                    type="button"
-                    onClick={() =>
-                      handleChange({
-                        target: {
-                          name: "level",
-                          value: level.value.toString(),
-                        },
-                      } as React.ChangeEvent<HTMLSelectElement>)
-                    }
-                    className={`px-2 py-2 rounded-lg border-2 transition-all text-xs ${
-                      formData.level === level.value
-                        ? "border-green-500 bg-green-50 text-green-700 font-semibold"
-                        : "border-gray-600 text-white hover:border-gray-500"
-                    }`}
-                  >
-                    {level.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Tipo */}
-            <div>
-              <label className="block text-sm font-medium text-gray-200 mb-3">
-                Tipo *
-              </label>
-              <div className="grid grid-cols-3 gap-3">
-                {digimonTypes.map((type) => (
-                  <button
-                    key={type.id}
-                    type="button"
-                    onClick={() =>
-                      handleChange({
-                        target: { name: "typeId", value: type.id.toString() },
-                      } as React.ChangeEvent<HTMLSelectElement>)
-                    }
-                    className={`p-3 rounded-lg border-2 transition-all flex flex-col items-center gap-2 ${
-                      formData.typeId === type.id
-                        ? "border-green-500 bg-green-50"
-                        : "border-gray-600 hover:border-gray-500"
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={formData.typeId === type.id}
-                      onChange={() => {}}
-                      className="w-5 h-5 text-green-600 rounded focus:ring-green-500"
-                    />
-                    <span
-                      className={`text-sm font-medium ${
-                        formData.typeId === type.id
-                          ? "text-green-700"
-                          : "text-gray-200"
-                      }`}
-                    >
-                      {type.name}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Status Ativo/Inativo */}
-            <div>
-              <label className="block text-sm font-medium text-gray-200 mb-3">
-                Status
-              </label>
-              <div className="space-y-3">
-                {/* Switch Ativo/Inativo */}
-                <div className="flex items-center gap-3 p-4 bg-gray-700 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setFormData((prev) => ({
-                          ...prev,
-                          active: !prev.active,
-                        }))
-                      }
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                        formData.active ? "bg-green-500" : "bg-gray-500"
-                      }`}
-                    >
-                      <span
-                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                          formData.active ? "translate-x-6" : "translate-x-1"
-                        }`}
-                      />
-                    </button>
-                    <span
-                      className={`text-sm font-medium ${
-                        formData.active ? "text-green-400" : "text-gray-400"
-                      }`}
-                    >
-                      {formData.active ? "✅ Ativo" : "⚠️ Inativo"}
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-400 ml-auto">
-                    {formData.active
-                      ? "Digimon disponível no jogo"
-                      : "Digimon indisponível para novos jogos"}
-                  </p>
-                </div>
-
-                {/* Switch Pode ser Boss */}
-                <div className="flex items-center gap-3 p-4 bg-gray-700 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setFormData((prev) => ({ ...prev, boss: !prev.boss }))
-                      }
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                        formData.boss ? "bg-red-500" : "bg-gray-500"
-                      }`}
-                    >
-                      <span
-                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                          formData.boss ? "translate-x-6" : "translate-x-1"
-                        }`}
-                      />
-                    </button>
-                    <span
-                      className={`text-sm font-medium ${
-                        formData.boss ? "text-red-400" : "text-gray-400"
-                      }`}
-                    >
-                      {formData.boss ? "👹 Pode ser Boss" : "🐉 Digimon Normal"}
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-400 ml-auto">
-                    {formData.boss
-                      ? "Pode aparecer como boss no jogo"
-                      : "Apenas como Digimon jogável"}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Pré-Evoluções (apenas se level > 1) */}
-            {formData.level > 1 && (
+            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+              {/* Imagem */}
               <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label className="block text-sm font-medium text-gray-200">
-                    Pré-Evoluções (Level {formData.level - 1}) -{" "}
-                    {selectedPreEvolutions.length} selecionadas
-                  </label>
-                </div>
+                <label className="block text-sm font-medium text-gray-200 mb-2">
+                  Imagem do Digimon
+                </label>
+                <div className="flex items-center gap-4">
+                  {/* Preview */}
+                  <div className="w-32 h-32 bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg flex items-center justify-center overflow-hidden">
+                    {imagePreview ? (
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span className="text-6xl">🤖</span>
+                    )}
+                  </div>
 
-                {/* Barra de pesquisa */}
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    placeholder="Buscar Digimons..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full px-3 py-2 text-sm text-white border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-blue-500"
-                  />
+                  {/* Upload Button */}
+                  <div className="flex-1">
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="hidden"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
+                    >
+                      📁 Selecionar Imagem
+                    </button>
+                    <p className="text-xs text-gray-400 mt-2">
+                      PNG, JPG ou SVG (máx 5MB)
+                    </p>
+                  </div>
                 </div>
-
-                {/* Lista de Pré-Evoluções */}
-                <div className="grid grid-cols-1 gap-2 max-h-40 overflow-y-auto pr-2 border border-gray-700 rounded-lg p-2">
-                  {possiblePreEvolutions.length > 0 ? (
-                    possiblePreEvolutions.map((preEvo) => (
-                      <div
-                        key={preEvo.id}
-                        className={`flex items-center p-2 rounded-lg border-2 transition-all cursor-pointer ${
-                          selectedPreEvolutions.includes(preEvo.id)
-                            ? "border-green-500 bg-green-50"
-                            : "border-gray-600 hover:border-gray-500"
-                        }`}
-                        onClick={() => handlePreEvolutionToggle(preEvo.id)}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={selectedPreEvolutions.includes(preEvo.id)}
-                          onChange={() => {}}
-                          className="w-4 h-4 text-green-600"
-                        />
-                        <div className="flex-1 min-w-0 ml-3">
-                          <p className="font-semibold text-sm truncate text-white">
-                            {capitalize(preEvo.name)}
-                          </p>
-                          <p className="text-xs text-gray-200">
-                            Level {preEvo.level}
-                          </p>
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="text-center py-4">
-                      <p className="text-sm text-gray-300">
-                        {searchTerm
-                          ? "Nenhum Digimon encontrado"
-                          : `Não há Digimons de level ${formData.level - 1}`}
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                <p className="text-xs text-gray-300 mt-2">
-                  💡 Estes Digimons evoluirão para{" "}
-                  {formData.name || "este novo Digimon"}
-                </p>
               </div>
-            )}
 
-          </form>
+              {/* Nome */}
+              <div>
+                <label className="block text-sm font-medium text-gray-200 mb-2">
+                  Nome do Digimon *
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Ex: Agumon"
+                  className="w-full px-3 py-2 border text-white border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-blue-500"
+                />
+              </div>
+
+              {/* Level */}
+              <div>
+                <label className="block text-sm font-medium text-gray-200 mb-3">
+                  Level *
+                </label>
+                <div className="grid grid-cols-4 gap-2">
+                  {[
+                    { value: 0, label: "Armor" },
+                    { value: 1, label: "Rookie" },
+                    { value: 2, label: "Champion" },
+                    { value: 3, label: "Ultimate" },
+                    { value: 4, label: "Mega 1" },
+                    { value: 5, label: "Mega 2" },
+                    { value: 6, label: "Mega 3" },
+                    { value: 7, label: "Mega 4" },
+                  ].map((level) => (
+                    <button
+                      key={level.value}
+                      type="button"
+                      onClick={() =>
+                        handleChange({
+                          target: {
+                            name: "level",
+                            value: level.value.toString(),
+                          },
+                        } as React.ChangeEvent<HTMLSelectElement>)
+                      }
+                      className={`px-2 py-2 rounded-lg border-2 transition-all text-xs ${
+                        formData.level === level.value
+                          ? "border-green-500 bg-green-50 text-green-700 font-semibold"
+                          : "border-gray-600 text-white hover:border-gray-500"
+                      }`}
+                    >
+                      {level.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tipo */}
+              <div>
+                <label className="block text-sm font-medium text-gray-200 mb-3">
+                  Tipo *
+                </label>
+                <div className="grid grid-cols-3 gap-3">
+                  {digimonTypes.map((type) => (
+                    <button
+                      key={type.id}
+                      type="button"
+                      onClick={() =>
+                        handleChange({
+                          target: { name: "typeId", value: type.id.toString() },
+                        } as React.ChangeEvent<HTMLSelectElement>)
+                      }
+                      className={`p-3 rounded-lg border-2 transition-all flex flex-col items-center gap-2 ${
+                        formData.typeId === type.id
+                          ? "border-green-500 bg-green-50"
+                          : "border-gray-600 hover:border-gray-500"
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={formData.typeId === type.id}
+                        onChange={() => {}}
+                        className="w-5 h-5 text-green-600 rounded focus:ring-green-500"
+                      />
+                      <span
+                        className={`text-sm font-medium ${
+                          formData.typeId === type.id
+                            ? "text-green-700"
+                            : "text-gray-200"
+                        }`}
+                      >
+                        {type.name}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Status Ativo/Inativo */}
+              <div>
+                <label className="block text-sm font-medium text-gray-200 mb-3">
+                  Status
+                </label>
+                <div className="space-y-3">
+                  {/* Switch Ativo/Inativo */}
+                  <div className="flex items-center gap-3 p-4 bg-gray-700 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            active: !prev.active,
+                          }))
+                        }
+                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                          formData.active ? "bg-green-500" : "bg-gray-500"
+                        }`}
+                      >
+                        <span
+                          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                            formData.active ? "translate-x-6" : "translate-x-1"
+                          }`}
+                        />
+                      </button>
+                      <span
+                        className={`text-sm font-medium ${
+                          formData.active ? "text-green-400" : "text-gray-400"
+                        }`}
+                      >
+                        {formData.active ? "✅ Ativo" : "⚠️ Inativo"}
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-400 ml-auto">
+                      {formData.active
+                        ? "Digimon disponível no jogo"
+                        : "Digimon indisponível para novos jogos"}
+                    </p>
+                  </div>
+
+                  {/* Switch Pode ser Boss */}
+                  <div className="flex items-center gap-3 p-4 bg-gray-700 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setFormData((prev) => ({ ...prev, boss: !prev.boss }))
+                        }
+                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                          formData.boss ? "bg-red-500" : "bg-gray-500"
+                        }`}
+                      >
+                        <span
+                          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                            formData.boss ? "translate-x-6" : "translate-x-1"
+                          }`}
+                        />
+                      </button>
+                      <span
+                        className={`text-sm font-medium ${
+                          formData.boss ? "text-red-400" : "text-gray-400"
+                        }`}
+                      >
+                        {formData.boss
+                          ? "👹 Pode ser Boss"
+                          : "🐉 Digimon Normal"}
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-400 ml-auto">
+                      {formData.boss
+                        ? "Pode aparecer como boss no jogo"
+                        : "Apenas como Digimon jogável"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Pré-Evoluções (apenas se level > 1) */}
+              {formData.level > 1 && (
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="block text-sm font-medium text-gray-200">
+                      Pré-Evoluções (Level {formData.level - 1}) -{" "}
+                      {selectedPreEvolutions.length} selecionadas
+                    </label>
+                  </div>
+
+                  {/* Barra de pesquisa */}
+                  <div className="mb-3">
+                    <input
+                      type="text"
+                      placeholder="Buscar Digimons..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="w-full px-3 py-2 text-sm text-white border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-blue-500"
+                    />
+                  </div>
+
+                  {/* Lista de Pré-Evoluções */}
+                  <div className="grid grid-cols-1 gap-2 max-h-40 overflow-y-auto pr-2 border border-gray-700 rounded-lg p-2">
+                    {possiblePreEvolutions.length > 0 ? (
+                      possiblePreEvolutions.map((preEvo) => (
+                        <div
+                          key={preEvo.id}
+                          className={`flex items-center p-2 rounded-lg border-2 transition-all cursor-pointer ${
+                            selectedPreEvolutions.includes(preEvo.id)
+                              ? "border-green-500 bg-green-50"
+                              : "border-gray-600 hover:border-gray-500"
+                          }`}
+                          onClick={() => handlePreEvolutionToggle(preEvo.id)}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedPreEvolutions.includes(preEvo.id)}
+                            onChange={() => {}}
+                            className="w-4 h-4 text-green-600"
+                          />
+                          <div className="flex-1 min-w-0 ml-3">
+                            <p className="font-semibold text-sm truncate text-white">
+                              {capitalize(preEvo.name)}
+                            </p>
+                            <p className="text-xs text-gray-200">
+                              Level {preEvo.level}
+                            </p>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center py-4">
+                        <p className="text-sm text-gray-300">
+                          {searchTerm
+                            ? "Nenhum Digimon encontrado"
+                            : `Não há Digimons de level ${formData.level - 1}`}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  <p className="text-xs text-gray-300 mt-2">
+                    💡 Estes Digimons evoluirão para{" "}
+                    {formData.name || "este novo Digimon"}
+                  </p>
+                </div>
+              )}
+            </form>
           </div>
 
           {/* Footer fixo com botões */}
