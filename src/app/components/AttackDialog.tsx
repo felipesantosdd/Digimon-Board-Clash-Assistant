@@ -321,6 +321,7 @@ export default function AttackDialog({
                 defenseDice: defenderDefenseDice,
                 damage: battleResult.defenderDamage,
                 typeAdvantage: battleResult.defenderTypeAdvantage,
+                maxHp: selectedDigimon.id < 0 && activeBoss ? activeBoss.maxHp : undefined,
               }}
               isRolling={isRolling}
               battleComplete={battleComplete}
@@ -352,6 +353,7 @@ export default function AttackDialog({
                   attacker.digimon,
                   selectedDigimon
                 ).getDefenderTypeAdvantage(),
+                maxHp: selectedDigimon.id < 0 && activeBoss ? activeBoss.maxHp : undefined,
               }}
               isRolling={isRolling}
               battleComplete={battleComplete}

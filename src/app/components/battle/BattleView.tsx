@@ -12,6 +12,7 @@ interface BattleViewProps {
     defenseDice: number;
     damage: number;
     typeAdvantage: number;
+    maxHp?: number; // Para bosses
   };
   defender: {
     digimon: GameDigimon;
@@ -19,6 +20,7 @@ interface BattleViewProps {
     defenseDice: number;
     damage: number;
     typeAdvantage: number;
+    maxHp?: number; // Para bosses
   };
   isRolling: boolean;
   battleComplete: boolean;
@@ -48,12 +50,12 @@ export default function BattleView({
   const isDefenderBoss = defender.digimon.id < 0;
 
   // Para bosses, usar lógica especial de HP máximo
-  // Assumir que boss tem HP máximo = DP * 3 (baseado no BossManager)
-  const attackerMaxHp = isAttackerBoss
-    ? attacker.digimon.dp * 3
+  // Se maxHp foi passado (para bosses), usar esse valor, senão usar DP
+  const attackerMaxHp = isAttackerBoss && attacker.maxHp
+    ? attacker.maxHp
     : attacker.digimon.dp;
-  const defenderMaxHp = isDefenderBoss
-    ? defender.digimon.dp * 3
+  const defenderMaxHp = isDefenderBoss && defender.maxHp
+    ? defender.maxHp
     : defender.digimon.dp;
 
   const attackerDead = attackerNewHp <= 0;
