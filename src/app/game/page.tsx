@@ -515,7 +515,10 @@ export default function GamePage() {
 
       console.log("🔄 [EVOLVE] Opções para animação:", animationOptions);
       console.log("✨ [EVOLVE] Evolução final:", finalEvolution);
-      console.log("🖼️ [EVOLVE] Imagens das opções:", animationOptions?.map((o: any) => o.image));
+      console.log(
+        "🖼️ [EVOLVE] Imagens das opções:",
+        animationOptions?.map((o: any) => o.image)
+      );
 
       // Mostrar animação de evolução com opções variadas e a evolução final
       setEvolvingDigimon({

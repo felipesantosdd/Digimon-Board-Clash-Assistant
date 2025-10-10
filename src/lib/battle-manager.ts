@@ -87,18 +87,32 @@ export class BattleManager {
 
   /**
    * Executa o combate completo com sistema de 2 dados por Digimon
-   * Cada Digimon rola 1 D20 de ataque e 1 D20 de defesa
+   * Cada Digimon rola 2 D20: o maior é ataque, o menor é defesa
    */
   public executeBattle(): BattleResult {
-    // Rolar 4 dados (2 para cada Digimon)
-    const attackerAttackRoll = this.rollD20(); // Ataque do atacante
-    const attackerDefenseRoll = this.rollD20(); // Defesa do atacante
-    const defenderAttackRoll = this.rollD20(); // Ataque do defensor
-    const defenderDefenseRoll = this.rollD20(); // Defesa do defensor
+    // Rolar 2 dados para cada Digimon
+    const attackerDice1 = this.rollD20();
+    const attackerDice2 = this.rollD20();
+    const defenderDice1 = this.rollD20();
+    const defenderDice2 = this.rollD20();
+
+    // Determinar qual é ataque e qual é defesa (maior = ataque, menor = defesa)
+    const attackerAttackRoll = Math.max(attackerDice1, attackerDice2);
+    const attackerDefenseRoll = Math.min(attackerDice1, attackerDice2);
+    const defenderAttackRoll = Math.max(defenderDice1, defenderDice2);
+    const defenderDefenseRoll = Math.min(defenderDice1, defenderDice2);
 
     console.log("🎲 [BATTLE] Dados rolados:", {
-      atacante: { ataque: attackerAttackRoll, defesa: attackerDefenseRoll },
-      defensor: { ataque: defenderAttackRoll, defesa: defenderDefenseRoll },
+      atacante: {
+        dados: [attackerDice1, attackerDice2],
+        ataque: attackerAttackRoll,
+        defesa: attackerDefenseRoll,
+      },
+      defensor: {
+        dados: [defenderDice1, defenderDice2],
+        ataque: defenderAttackRoll,
+        defesa: defenderDefenseRoll,
+      },
     });
 
     // Detectar críticos (apenas nos dados de ATAQUE)
