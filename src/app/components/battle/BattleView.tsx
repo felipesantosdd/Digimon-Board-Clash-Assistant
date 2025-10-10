@@ -43,6 +43,15 @@ export default function BattleView({
     defender.digimon.currentHp - (battleComplete ? attacker.damage : 0)
   );
 
+  // Detectar se é boss (ID negativo)
+  const isAttackerBoss = attacker.digimon.id < 0;
+  const isDefenderBoss = defender.digimon.id < 0;
+
+  // Para bosses, usar lógica especial de HP máximo
+  // Assumir que boss tem HP máximo = DP * 3 (baseado no BossManager)
+  const attackerMaxHp = isAttackerBoss ? attacker.digimon.dp * 3 : attacker.digimon.dp;
+  const defenderMaxHp = isDefenderBoss ? defender.digimon.dp * 3 : defender.digimon.dp;
+
   const attackerDead = attackerNewHp <= 0;
   const defenderDead = defenderNewHp <= 0;
 
@@ -143,7 +152,7 @@ export default function BattleView({
                 <span className="text-gray-400 font-semibold">HP</span>
                 <span className="text-green-400 font-bold">
                   {attackerNewHp.toLocaleString()} /{" "}
-                  {attacker.digimon.dp.toLocaleString()}
+                  {attackerMaxHp.toLocaleString()}
                 </span>
               </div>
               <div className="w-full bg-gray-600 rounded-full h-2.5 sm:h-4 overflow-hidden border border-gray-500">
@@ -152,13 +161,13 @@ export default function BattleView({
                   style={{
                     width: `${Math.max(
                       0,
-                      (attackerNewHp / attacker.digimon.dp) * 100
+                      Math.min(100, (attackerNewHp / attackerMaxHp) * 100)
                     )}%`,
                   }}
                 >
                   <span className="text-[9px] sm:text-xs font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                     {Math.round(
-                      Math.max(0, (attackerNewHp / attacker.digimon.dp) * 100)
+                      Math.max(0, Math.min(100, (attackerNewHp / attackerMaxHp) * 100))
                     )}
                     %
                   </span>
@@ -277,7 +286,7 @@ export default function BattleView({
                 <span className="text-gray-400 font-semibold">HP</span>
                 <span className="text-green-400 font-bold">
                   {defenderNewHp.toLocaleString()} /{" "}
-                  {defender.digimon.dp.toLocaleString()}
+                  {defenderMaxHp.toLocaleString()}
                 </span>
               </div>
               <div className="w-full bg-gray-600 rounded-full h-2.5 sm:h-4 overflow-hidden border border-gray-500">
@@ -286,13 +295,13 @@ export default function BattleView({
                   style={{
                     width: `${Math.max(
                       0,
-                      (defenderNewHp / defender.digimon.dp) * 100
+                      Math.min(100, (defenderNewHp / defenderMaxHp) * 100)
                     )}%`,
                   }}
                 >
                   <span className="text-[9px] sm:text-xs font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                     {Math.round(
-                      Math.max(0, (defenderNewHp / defender.digimon.dp) * 100)
+                      Math.max(0, Math.min(100, (defenderNewHp / defenderMaxHp) * 100))
                     )}
                     %
                   </span>

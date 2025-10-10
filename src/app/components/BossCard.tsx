@@ -30,11 +30,11 @@ export default function BossCard({
 
   return (
     <div className="relative w-full">
-      {/* Card do Boss */}
+      {/* Card do Boss no formato de Digimon */}
       <div
         className={`
           relative bg-gradient-to-br from-purple-900 via-red-900 to-black
-          rounded-xl p-3 sm:p-4 shadow-2xl border-2 sm:border-4 border-red-500
+          rounded-lg p-2 sm:p-3 shadow-2xl border-2 border-red-500
           transition-all duration-300
           ${isAttacking ? "scale-95 opacity-75" : "scale-100"}
           ${canAttack && !isAttacking ? "hover:scale-105 cursor-pointer" : ""}
@@ -45,133 +45,103 @@ export default function BossCard({
           }
         }}
       >
-        {/* Badge "BOSS" */}
-        <div className="absolute -top-2 -right-2 bg-red-600 text-white font-bold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm shadow-lg border-2 border-white animate-pulse z-10">
-          👹 BOSS
+        {/* Badges no topo direito */}
+        <div className="absolute top-1 right-1 sm:top-2 sm:right-2 flex flex-col gap-1 z-10">
+          {/* Badge "BOSS" */}
+          <div 
+            className="bg-red-600 text-white font-bold px-1.5 sm:px-2 py-0.5 rounded text-[10px] sm:text-xs shadow-lg border border-white animate-pulse cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowDetails(!showDetails);
+            }}
+            title="Clique para ver detalhes"
+          >
+            👹 BOSS
+          </div>
+          
+          {/* Badge de Turno */}
+          <div className="bg-yellow-500 text-black font-bold px-1.5 sm:px-2 py-0.5 rounded text-[10px] sm:text-xs shadow-lg border border-white">
+            T{boss.spawnedAtTurn}
+          </div>
         </div>
 
-        {/* Contador de Turno */}
-        <div className="absolute -top-2 -left-2 bg-yellow-500 text-black font-bold px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs shadow-lg border-2 border-white z-10">
-          T{boss.spawnedAtTurn}
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center">
+        <div className="flex items-center gap-2">
           {/* Imagem do Boss */}
-          <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0">
-            <div className="absolute inset-0 bg-red-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
-            <div className="relative w-full h-full rounded-full overflow-hidden border-2 sm:border-4 border-red-400 shadow-2xl">
+          <div className="relative flex-shrink-0">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded overflow-hidden border border-red-400 shadow-lg">
               <Image
                 src={boss.image}
                 alt={boss.name}
-                fill
-                className="object-cover"
+                width={56}
+                height={56}
+                className="w-full h-full object-cover"
                 unoptimized
               />
             </div>
+            {/* Efeito de brilho */}
+            <div className="absolute inset-0 bg-red-500 rounded opacity-20 animate-pulse"></div>
           </div>
 
           {/* Informações do Boss */}
-          <div className="flex-1 space-y-2 sm:space-y-3 w-full">
-            {/* Nome e Descrição */}
-            <div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 drop-shadow-lg">
-                {boss.name}
-              </h2>
-              <p className="text-gray-300 text-xs sm:text-sm line-clamp-2">
-                {boss.description}
-              </p>
-            </div>
+          <div className="flex-1 min-w-0">
+            {/* Nome */}
+            <p className="text-xs sm:text-sm font-bold text-white truncate">
+              {boss.name}
+            </p>
 
-            {/* Stats e Barra de HP */}
-            <div className="flex gap-2 items-center">
-              {/* DP */}
-              <div className="bg-black/40 rounded-lg p-1.5 sm:p-2 border border-red-500/30">
-                <div className="text-gray-400 text-[9px] sm:text-[10px]">
-                  DP
-                </div>
-                <div className="text-white text-sm sm:text-lg font-bold">
-                  {boss.calculatedDp >= 1000
-                    ? `${Math.floor(boss.calculatedDp / 1000)}k`
-                    : boss.calculatedDp.toLocaleString()}
-                </div>
+            {/* Tipo e DP */}
+            <div className="flex gap-1 mt-0.5">
+              <div className="bg-purple-600 text-white text-[9px] sm:text-[10px] px-1 py-0.5 rounded">
+                {boss.typeId === 1
+                  ? "Data"
+                  : boss.typeId === 2
+                  ? "Vaccine"
+                  : "Virus"}
               </div>
-
-              {/* Barra de HP */}
-              <div className="flex-1 space-y-0.5">
-                <div className="flex justify-between text-[10px] sm:text-xs text-gray-400">
-                  <span>
-                    HP: {boss.currentHp.toLocaleString()} /{" "}
-                    {boss.maxHp.toLocaleString()}
-                  </span>
-                  <span>{hpPercentage.toFixed(0)}%</span>
-                </div>
-                <div className="w-full h-4 sm:h-5 bg-gray-800 rounded-full overflow-hidden border border-gray-700">
-                  <div
-                    className={`h-full ${getHpBarColor()} transition-all duration-500 ease-out relative`}
-                    style={{ width: `${hpPercentage}%` }}
-                  >
-                    <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
-                  </div>
-                </div>
+              <div className="bg-purple-600 text-white text-[9px] sm:text-[10px] px-1 py-0.5 rounded">
+                {boss.calculatedDp >= 1000
+                  ? `${Math.floor(boss.calculatedDp / 1000)}k DP`
+                  : `${boss.calculatedDp} DP`}
               </div>
             </div>
 
-            {/* Botões de Ação */}
-            <div className="flex gap-1.5 sm:gap-2">
-              {canAttack && !isAttacking && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onAttack?.();
-                  }}
-                  className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-1.5 sm:py-2 px-3 sm:px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-red-500/50 border border-red-400 text-xs sm:text-sm"
+            {/* Barra de HP */}
+            <div className="flex items-center gap-1 mt-0.5 sm:mt-1">
+              <div className="flex-1 bg-gray-700 rounded-full h-1 sm:h-1.5">
+                <div
+                  className={`h-1 sm:h-1.5 rounded-full transition-all relative ${getHpBarColor()}`}
+                  style={{ width: `${hpPercentage}%` }}
                 >
-                  ⚔️ Atacar
-                </button>
-              )}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowDetails(!showDetails);
-                }}
-                className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg transition-all duration-200 text-xs sm:text-sm"
-              >
-                {showDetails ? "📖" : "📖"}
-              </button>
-            </div>
-
-            {/* Detalhes Expandidos */}
-            {showDetails && (
-              <div className="bg-black/60 rounded-lg p-2 sm:p-3 border border-purple-500/30 space-y-1 sm:space-y-1.5 animate-fadeIn">
-                <div className="text-xs sm:text-sm">
-                  <span className="text-gray-400">Tipo:</span>{" "}
-                  <span className="text-white font-semibold">
-                    {boss.typeId === 1
-                      ? "🌊 Data"
-                      : boss.typeId === 2
-                      ? "💉 Vaccine"
-                      : "🦠 Virus"}
-                  </span>
-                </div>
-                <div className="text-xs sm:text-sm">
-                  <span className="text-gray-400">Efeito:</span>{" "}
-                  <span className="text-purple-300 font-semibold">
-                    {boss.effectId ? `Effect ID: ${boss.effectId}` : "Nenhum"}
-                  </span>
-                </div>
-                <div className="text-xs sm:text-sm text-yellow-300 font-semibold">
-                  ⚠️ Turno do Mundo: 50% DP dividido entre Digimons vivos
+                  <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
                 </div>
               </div>
-            )}
+              <span className="text-[9px] sm:text-[10px] text-white font-bold">
+                {Math.round(hpPercentage)}%
+              </span>
+            </div>
           </div>
         </div>
+
+        {/* Detalhes Expandidos */}
+        {showDetails && (
+          <div className="mt-2 bg-black/60 rounded p-2 border border-purple-500/30 space-y-1 animate-fadeIn">
+            <div className="text-[10px] sm:text-xs">
+              <span className="text-gray-400">Efeito:</span>{" "}
+              <span className="text-purple-300 font-semibold">
+                {boss.effectId ? `Effect ID: ${boss.effectId}` : "Nenhum"}
+              </span>
+            </div>
+            <div className="text-[10px] sm:text-xs text-yellow-300 font-semibold">
+              ⚠️ Turno do Mundo: 50% DP dividido entre Digimons vivos
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Indicador de Ataque */}
       {isAttacking && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-2xl">
-          <div className="text-white text-2xl font-bold animate-pulse">
+        <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg">
+          <div className="text-white text-lg font-bold animate-pulse">
             ⚔️ Atacando...
           </div>
         </div>

@@ -47,7 +47,7 @@ export default function BossCountdown({ turnsRemaining }: BossCountdownProps) {
           </div>
 
           {/* Aviso */}
-          <div className="bg-yellow-500/10 border-2 border-yellow-500/50 rounded-lg p-4 max-w-md">
+          {/*  <div className="bg-yellow-500/10 border-2 border-yellow-500/50 rounded-lg p-4 max-w-md">
             <div className="flex items-start gap-3">
               <div className="text-2xl">⚠️</div>
               <div className="text-sm text-yellow-200">
@@ -58,7 +58,7 @@ export default function BossCountdown({ turnsRemaining }: BossCountdownProps) {
                 </p>
               </div>
             </div>
-          </div>
+          </div>*/}
 
           {/* Animação de partículas */}
           <div className="absolute inset-0 pointer-events-none">
