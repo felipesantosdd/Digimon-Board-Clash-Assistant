@@ -233,13 +233,16 @@ export function generateBossStats(level: number): { hp: number; dp: number } {
  * Armor escala com o nível mais alto (incluindo boss)
  * @param highestLevel - Nível mais alto em jogo (Digimons + Boss)
  * @returns Objeto com HP e DP aleatórios baseados no range do nível mais alto
- * 
+ *
  * Exemplos:
  * - Todos Level 1, sem boss → Armor usa range Level 1 (1.600-2.400)
  * - Todos Level 2, Boss Level 3 → Armor usa range Level 3 (6.400-9.600)
  * - Mix de níveis, Boss Level 5 → Armor usa range Level 5 (15.000-18.000)
  */
-export function generateArmorStats(highestLevel: number): { hp: number; dp: number } {
+export function generateArmorStats(highestLevel: number): {
+  hp: number;
+  dp: number;
+} {
   // Usar o range do nível mais alto em jogo
   const range =
     LEVEL_STATS_RANGES[highestLevel as keyof typeof LEVEL_STATS_RANGES] ||
@@ -250,7 +253,9 @@ export function generateArmorStats(highestLevel: number): { hp: number; dp: numb
 
   const roundedValue = Math.round(randomValue / 100) * 100;
 
-  console.log(`🛡️ [ARMOR] Nível mais alto: ${highestLevel}, Stats gerados: ${roundedValue}`);
+  console.log(
+    `🛡️ [ARMOR] Nível mais alto: ${highestLevel}, Stats gerados: ${roundedValue}`
+  );
 
   return { hp: roundedValue, dp: roundedValue };
 }

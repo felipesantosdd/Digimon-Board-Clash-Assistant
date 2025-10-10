@@ -194,16 +194,6 @@ export default function EvolutionModal({
           if (uploadResponse.ok) {
             const { path } = await uploadResponse.json();
             imagePath = path;
-
-            // Se o Digimon estava inativo e recebeu uma imagem, ativá-lo automaticamente
-            if (!editData.active && path) {
-              enqueueSnackbar(
-                "Digimon ativado automaticamente ao adicionar imagem!",
-                {
-                  variant: "info",
-                }
-              );
-            }
           } else {
             throw new Error("Erro ao fazer upload da imagem");
           }

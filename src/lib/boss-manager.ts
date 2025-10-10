@@ -10,7 +10,9 @@ export class BossManager {
   /**
    * Conta Digimons por nível e retorna o nível mais comum
    */
-  static countDigimonsByLevel(players: GamePlayer[]): { [level: number]: number } {
+  static countDigimonsByLevel(players: GamePlayer[]): {
+    [level: number]: number;
+  } {
     const levelCount: { [level: number]: number } = {};
 
     for (const player of players) {
@@ -29,12 +31,15 @@ export class BossManager {
    */
   static findMostCommonLevel(players: GamePlayer[]): number {
     const levelCount = this.countDigimonsByLevel(players);
-    
+
     if (Object.keys(levelCount).length === 0) return 1; // Fallback
 
-    const mostCommonLevel = Object.entries(levelCount).reduce((max, [level, count]) => {
-      return count > max.count ? { level: parseInt(level), count } : max;
-    }, { level: 1, count: 0 });
+    const mostCommonLevel = Object.entries(levelCount).reduce(
+      (max, [level, count]) => {
+        return count > max.count ? { level: parseInt(level), count } : max;
+      },
+      { level: 1, count: 0 }
+    );
 
     return mostCommonLevel.level;
   }
@@ -59,29 +64,31 @@ export class BossManager {
       if (!response.ok) return null;
 
       const allDigimons: Digimon[] = await response.json();
-      
+
       // Filtrar apenas Digimons marcados como boss
-      const bossDigimons = allDigimons.filter(d => d.boss === true);
+      const bossDigimons = allDigimons.filter((d) => d.boss === true);
       if (bossDigimons.length === 0) return null;
 
       // Boss será do nível mais comum + 1
       const bossLevel = mostCommonLevel + 1;
-      
+
       // Filtrar bosses do nível desejado
-      const candidates = bossDigimons.filter(d => d.level === bossLevel);
-      
+      const candidates = bossDigimons.filter((d) => d.level === bossLevel);
+
       console.log("🎲 [BOSS] Seleção:", {
         nivelMaisComum: mostCommonLevel,
         nivelBoss: bossLevel,
-        candidatos: candidates.map(d => `${d.name} (Level ${d.level})`),
+        candidatos: candidates.map((d) => `${d.name} (Level ${d.level})`),
       });
 
       if (candidates.length === 0) {
         // Fallback: pegar qualquer boss disponível
         const randomIndex = Math.floor(Math.random() * bossDigimons.length);
         const selectedBoss = bossDigimons[randomIndex];
-        
-        console.log(`⚠️ [BOSS] Nenhum boss Level ${bossLevel}, usando fallback: ${selectedBoss.name}`);
+
+        console.log(
+          `⚠️ [BOSS] Nenhum boss Level ${bossLevel}, usando fallback: ${selectedBoss.name}`
+        );
         return selectedBoss;
       }
 
@@ -89,7 +96,9 @@ export class BossManager {
       const randomIndex = Math.floor(Math.random() * candidates.length);
       const selectedBoss = candidates[randomIndex];
 
-      console.log(`✅ [BOSS] Selecionado: ${selectedBoss.name} (Level ${selectedBoss.level})`);
+      console.log(
+        `✅ [BOSS] Selecionado: ${selectedBoss.name} (Level ${selectedBoss.level})`
+      );
 
       return selectedBoss;
     } catch (error) {
@@ -110,10 +119,7 @@ export class BossManager {
    * - HP Máximo = 6.000 × 3 = 18.000 HP
    * - DP de Combate = 6.000 (usado para atacar/defender)
    */
-  static createGameBoss(
-    bossDigimon: Digimon,
-    currentTurn: number
-  ): GameBoss {
+  static createGameBoss(bossDigimon: Digimon, currentTurn: number): GameBoss {
     // Gerar stats máximos para o nível do boss
     const { hp, dp } = generateBossStats(bossDigimon.level);
 
@@ -265,4 +271,3 @@ export class BossManager {
     }
   }
 }
-

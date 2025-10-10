@@ -678,32 +678,32 @@ export default function GamePage() {
             if (d.id === digimon.id) {
               // Para Armor (nível 0), usar stats dinâmicos baseados no nível mais alto em jogo
               let hp: number, dp: number;
-              
+
               if (evolution.level === 0) {
                 // Encontrar o nível mais alto entre Digimons e Boss
                 let highestLevel = 1;
-                
+
                 // Verificar Digimons de todos os jogadores
-                gameState.players.forEach(p => {
-                  p.digimons.forEach(dig => {
+                gameState.players.forEach((p) => {
+                  p.digimons.forEach((dig) => {
                     if (dig.level > highestLevel) {
                       highestLevel = dig.level;
                     }
                   });
                 });
-                
+
                 // Verificar Boss se existir
                 if (gameState.activeBoss && !gameState.activeBoss.isDefeated) {
                   if (gameState.activeBoss.level > highestLevel) {
                     highestLevel = gameState.activeBoss.level;
                   }
                 }
-                
+
                 // Gerar stats de Armor baseados no nível mais alto
                 const armorStats = generateArmorStats(highestLevel);
                 hp = armorStats.hp;
                 dp = armorStats.dp;
-                
+
                 console.log(
                   `🛡️ [ARMOR] Nível mais alto em jogo: ${highestLevel}, Stats gerados - HP: ${hp}, DP: ${dp}`
                 );
@@ -712,7 +712,7 @@ export default function GamePage() {
                 const stats = generateRandomStats(evolution.level);
                 hp = stats.hp;
                 dp = stats.dp;
-                
+
                 console.log(
                   `🎲 [EVOLVE] Stats aleatórios gerados - HP: ${hp}, DP: ${dp}`
                 );
