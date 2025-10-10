@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSnackbar } from "notistack";
 import { GameBoss } from "@/types/game";
 
 interface DefeatScreenProps {
@@ -23,7 +22,6 @@ export default function DefeatScreen({
   defeatedPlayers,
 }: DefeatScreenProps) {
   const router = useRouter();
-  const { enqueueSnackbar } = useSnackbar();
   const [isClosing, setIsClosing] = useState(false);
 
   const handleReturnToMenu = () => {
@@ -204,8 +202,8 @@ export default function DefeatScreen({
           {/* Mensagem motivacional */}
           <div className="mt-3 sm:mt-6 text-center">
             <p className="text-gray-400 text-xs sm:text-sm italic">
-              "A derrota é apenas uma oportunidade para evoluir e ficar mais
-              forte!"
+              &quot;A derrota é apenas uma oportunidade para evoluir e ficar mais
+              forte!&quot;
             </p>
           </div>
         </div>
