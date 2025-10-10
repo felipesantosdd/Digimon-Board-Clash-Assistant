@@ -4,48 +4,55 @@
     "name": "Poção de Vida",
     "description": "Restaura 1000 HP de um Digimon",
     "image": "/images/items/potion.png",
-    "effect": "heal_1000"
+    "effect": "heal_1000",
+    "dropChance": 30
   },
   {
     "id": 2,
     "name": "Super Poção",
     "description": "Restaura 2000 HP de um Digimon",
     "image": "/images/items/super-potion.png",
-    "effect": "heal_2000"
+    "effect": "heal_2000",
+    "dropChance": 20
   },
   {
     "id": 3,
     "name": "Poção Completa",
     "description": "Restaura completamente o HP de um Digimon",
     "image": "/images/items/full-potion.png",
-    "effect": "heal_full"
+    "effect": "heal_full",
+    "dropChance": 10
   },
   {
     "id": 4,
     "name": "Reviver",
     "description": "Revive um Digimon derrotado com metade do HP",
     "image": "/images/items/revive.png",
-    "effect": "revive_half"
+    "effect": "revive_half",
+    "dropChance": 15
   },
   {
     "id": 5,
     "name": "Chip de Força",
     "description": "Aumenta permanentemente o DP em 500",
     "image": "/images/items/1759949520582_image.webp",
-    "effect": "boost_dp_500"
+    "effect": "boost_dp_500",
+    "dropChance": 25
   },
   {
     "id": 6,
     "name": "Escudo Digital",
     "description": "Protege de um ataque neste turno",
     "image": "/images/items/shield.png",
-    "effect": "shield_turn"
+    "effect": "shield_turn",
+    "dropChance": 20
   },
   {
     "id": 9,
     "name": "Poção de Vida P",
     "description": "Restaura 2000 Pontos de Vida",
     "image": "/images/items/1759941795057_8586614.webp",
-    "effect": "heal_2000"
+    "effect": "heal_2000",
+    "dropChance": 0
   }
 ]

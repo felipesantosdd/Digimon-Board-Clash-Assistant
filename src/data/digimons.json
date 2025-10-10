@@ -155,7 +155,7 @@
   {
     "id": 18,
     "name": "lopmon",
-    "image": "/images/digimons/18.webp",
+    "image": "/images/digimons/1760032747593_image.webp",
     "level": 1,
     "dp": 2000,
     "evolution": "[147]",
@@ -317,7 +317,7 @@
   {
     "id": 36,
     "name": "wargreymon",
-    "image": "/images/digimons/36.webp",
+    "image": "/images/digimons/1760029034402_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[49]",
@@ -398,7 +398,7 @@
   {
     "id": 47,
     "name": "gaioumon itto mode",
-    "image": "/images/digimons/47.png",
+    "image": "/images/digimons/1760029116862_image.webp",
     "level": 5,
     "dp": 18000,
     "evolution": "[]",
@@ -416,7 +416,7 @@
   {
     "id": 49,
     "name": "omegamon",
-    "image": "/images/digimons/49.png",
+    "image": "/images/digimons/1760029486652_image.webp",
     "level": 5,
     "dp": 18000,
     "evolution": "[58,59]",
@@ -434,7 +434,7 @@
   {
     "id": 51,
     "name": "ulforcev-dramon",
-    "image": "/images/digimons/51.png",
+    "image": "/images/digimons/1760028935531_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[61]",
@@ -452,7 +452,7 @@
   {
     "id": 53,
     "name": "huanglongmon",
-    "image": "/images/digimons/53.png",
+    "image": "/images/digimons/1760029374142_image.webp",
     "level": 5,
     "dp": 18000,
     "evolution": "[]",
@@ -461,7 +461,7 @@
   {
     "id": 54,
     "name": "moonmillenniumon",
-    "image": "/images/digimons/54.png",
+    "image": "/images/digimons/1760029459831_image.webp",
     "level": 5,
     "dp": 18000,
     "evolution": "[68]",
@@ -470,7 +470,7 @@
   {
     "id": 55,
     "name": "millenniumon",
-    "image": "/images/digimons/55.png",
+    "image": "/images/digimons/1760029422323_image.webp",
     "level": 5,
     "dp": 18000,
     "evolution": "[68]",
@@ -479,7 +479,7 @@
   {
     "id": 56,
     "name": "omegamon alter b",
-    "image": "/images/digimons/56.png",
+    "image": "/images/digimons/1760031337750_image.webp",
     "level": 6,
     "dp": 20000,
     "evolution": "[]",
@@ -488,16 +488,7 @@
   {
     "id": 57,
     "name": "omegamon zwart defeat",
-    "image": "/images/digimons/57.png",
-    "level": 5,
-    "dp": 18000,
-    "evolution": "[]",
-    "typeId": 4
-  },
-  {
-    "id": 58,
-    "name": "omegamon zwart",
-    "image": "/images/digimons/58.png",
+    "image": "/images/digimons/1760029579930_image.webp",
     "level": 6,
     "dp": 20000,
     "evolution": "[]",
@@ -506,34 +497,16 @@
   {
     "id": 59,
     "name": "omegamon merciful mode",
-    "image": "/images/digimons/59.png",
+    "image": "/images/digimons/1760031479592_image.webp",
     "level": 6,
     "dp": 20000,
     "evolution": "[]",
     "typeId": 4
   },
   {
-    "id": 60,
-    "name": "goddramon",
-    "image": "/images/digimons/60.png",
-    "level": 5,
-    "dp": 18000,
-    "evolution": "[]",
-    "typeId": 2
-  },
-  {
-    "id": 61,
-    "name": "ulforcev-dramon future mode",
-    "image": "/images/digimons/61.png",
-    "level": 5,
-    "dp": 18000,
-    "evolution": "[]",
-    "typeId": 2
-  },
-  {
     "id": 62,
     "name": "susanoomon",
-    "image": "/images/digimons/62.png",
+    "image": "/images/digimons/1760029708516_image.webp",
     "level": 5,
     "dp": 18000,
     "evolution": "[]",
@@ -542,7 +515,7 @@
   {
     "id": 68,
     "name": "zeedmillenniumon",
-    "image": "/images/digimons/68.png",
+    "image": "/images/digimons/1760031964404_image.webp",
     "level": 6,
     "dp": 20000,
     "evolution": "[]",
@@ -550,7 +523,7 @@
   },
   {
     "id": 70,
-    "name": "godramon",
+    "name": "goddramon",
     "image": "/images/digimons/1760026705003_image.webp",
     "level": 4,
     "dp": 12000,
@@ -581,7 +554,7 @@
     "image": "/images/digimons/1760027808099_image.webp",
     "level": 5,
     "dp": 18000,
-    "evolution": "[68]",
+    "evolution": "[56]",
     "typeId": 3
   },
   {
@@ -743,7 +716,7 @@
     "image": "/images/digimons/1760027580822_image.webp",
     "level": 4,
     "dp": 12000,
-    "evolution": "[]",
+    "evolution": "[164]",
     "typeId": 3
   },
   {
@@ -830,7 +803,7 @@
   {
     "id": 102,
     "name": "skullmammothmon",
-    "image": "/images/digimons/29.webp",
+    "image": "/images/digimons/1760028762938_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -857,7 +830,7 @@
   {
     "id": 105,
     "name": "slashangemon",
-    "image": "/images/digimons/09.webp",
+    "image": "/images/digimons/1760028815666_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -866,7 +839,7 @@
   {
     "id": 106,
     "name": "seraphimon",
-    "image": "/images/digimons/40.webp",
+    "image": "/images/digimons/1760028657895_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -875,7 +848,7 @@
   {
     "id": 107,
     "name": "vikemon",
-    "image": "/images/digimons/59.png",
+    "image": "/images/digimons/1760028982211_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -920,11 +893,11 @@
   {
     "id": 112,
     "name": "ophanimon falldown mode",
-    "image": "/images/digimons/39.webp",
+    "image": "/images/digimons/1760028532913_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[114]",
-    "typeId": 1
+    "typeId": 2
   },
   {
     "id": 113,
@@ -938,7 +911,7 @@
   {
     "id": 114,
     "name": "ordinemon",
-    "image": "/images/digimons/90.png",
+    "image": "/images/digimons/1760029669404_image.webp",
     "level": 5,
     "dp": 18000,
     "evolution": "[]",
@@ -1046,7 +1019,7 @@
   {
     "id": 126,
     "name": "spinomon",
-    "image": "/images/digimons/26.webp",
+    "image": "/images/digimons/1760028864124_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -1073,7 +1046,7 @@
   {
     "id": 129,
     "name": "regalecusmon",
-    "image": "/images/digimons/15.webp",
+    "image": "/images/digimons/1760028635082_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -1091,7 +1064,7 @@
   {
     "id": 131,
     "name": "pukumon",
-    "image": "/images/digimons/91.png",
+    "image": "/images/digimons/1760028585679_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -1190,7 +1163,7 @@
   {
     "id": 142,
     "name": "shadowseraphimon",
-    "image": "/images/digimons/26.webp",
+    "image": "/images/digimons/1760028721311_image.webp",
     "level": 4,
     "dp": 12000,
     "evolution": "[]",
@@ -1375,5 +1348,23 @@
     "dp": 13000,
     "evolution": "[]",
     "typeId": 1
+  },
+  {
+    "id": 163,
+    "name": "ouryumon",
+    "image": "/images/digimons/1760029331598_image.webp",
+    "level": 4,
+    "dp": 12000,
+    "evolution": "[]",
+    "typeId": 2
+  },
+  {
+    "id": 164,
+    "name": "omegamon zwart",
+    "image": "/images/digimons/1760031909670_image.webp",
+    "level": 5,
+    "dp": 18000,
+    "evolution": "[57]",
+    "typeId": 4
   }
 ]

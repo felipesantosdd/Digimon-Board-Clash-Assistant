@@ -16,6 +16,7 @@ import AttackDialog from "@/app/components/AttackDialog";
 import ReviveDialog from "@/app/components/ReviveDialog";
 import EvolutionAnimation from "@/app/components/EvolutionAnimation";
 import type { GameDigimon, DigimonStatus } from "@/types/game";
+import type { BattleResult } from "@/lib/battle-manager";
 
 export default function GamePage() {
   const router = useRouter();
@@ -47,7 +48,14 @@ export default function GamePage() {
   } | null>(null);
   const [evolvingDigimon, setEvolvingDigimon] = useState<{
     digimon: GameDigimon;
-    evolution?: any;
+    evolution?: {
+      id: number;
+      name: string;
+      image: string;
+      level: number;
+      dp: number;
+      typeId: number;
+    };
     evolutionType?: string;
     allOptions?: Array<{ id: number; name: string; image: string }>;
   } | null>(null);
@@ -217,7 +225,7 @@ export default function GamePage() {
               );
               return {
                 ...withoutExpiredStatuses,
-                hasActedThisTurn: false,
+              hasActedThisTurn: false,
                 defending: null, // Resetar defesa
                 // provokedBy: NÃO resetar - mantém até o próximo turno do provocado
               };
@@ -321,7 +329,7 @@ export default function GamePage() {
     targetDigimon: GameDigimon,
     attackerDamage: number,
     defenderDamage: number,
-    battleResult: any // TODO: Tipar corretamente com BattleResult
+    battleResult: BattleResult
   ) => {
     console.log("⚔️ [ATTACK] Iniciando confirmação de ataque...");
     console.log("⚔️ [ATTACK] Atacante:", attackerDigimon?.digimon.name);
@@ -352,8 +360,8 @@ export default function GamePage() {
 
     // Processar status baseados em críticos
     console.log("🎲 [STATUS] Verificando críticos...");
-    console.log("🎲 [STATUS] Atacante roll:", battleResult.attackerDiceRoll);
-    console.log("🎲 [STATUS] Defensor roll:", battleResult.defenderDiceRoll);
+    console.log("🎲 [STATUS] Atacante ataque:", battleResult.attackerAttackRoll);
+    console.log("🎲 [STATUS] Defensor ataque:", battleResult.defenderAttackRoll);
 
     // Atualizar o gameState com os danos aplicados, status e marcar como agiu
     const updatedState = {
@@ -517,7 +525,7 @@ export default function GamePage() {
       console.log("✨ [EVOLVE] Evolução final:", finalEvolution);
       console.log(
         "🖼️ [EVOLVE] Imagens das opções:",
-        animationOptions?.map((o: any) => o.image)
+        animationOptions?.map((o: { image: string }) => o.image)
       );
 
       // Mostrar animação de evolução com opções variadas e a evolução final
@@ -658,14 +666,14 @@ export default function GamePage() {
     if (!gameState || !reviveTarget) return;
 
     // Marcar que tentou reviver neste turno (independente do sucesso)
-    const updatedState = {
-      ...gameState,
+      const updatedState = {
+        ...gameState,
       reviveAttemptThisTurn: true, // Marcar tentativa
       players: success
         ? gameState.players.map((player) => ({
-            ...player,
-            digimons: player.digimons.map((d) => {
-              if (d.id === reviveTarget.digimon.id) {
+          ...player,
+          digimons: player.digimons.map((d) => {
+            if (d.id === reviveTarget.digimon.id) {
                 const revivedHp = Math.max(1, Math.floor(d.dp * 0.15)); // 15% da vida, mínimo 1
                 return {
                   ...d,
@@ -674,14 +682,14 @@ export default function GamePage() {
                   hasActedThisTurn: true, // Sem pontos de ação
                   actionPoints: 0, // Garantir que não tem pontos de ação
                 };
-              }
-              return d;
-            }),
+            }
+            return d;
+          }),
           }))
         : gameState.players, // Se falhou, não modifica os players
-    };
+      };
 
-    saveGameState(updatedState);
+      saveGameState(updatedState);
 
     if (success) {
       enqueueSnackbar(
@@ -777,7 +785,7 @@ export default function GamePage() {
 
       // Filtrar itens com dropChance > 0
       const availableItems = allItems.filter(
-        (item: any) => (item.dropChance || 0) > 0
+        (item: { dropChance?: number }) => (item.dropChance || 0) > 0
       );
 
       if (availableItems.length === 0) {
@@ -827,13 +835,13 @@ export default function GamePage() {
         );
 
         // Marcar como agiu mesmo sem encontrar nada
-        const updatedState = {
-          ...gameState,
+    const updatedState = {
+      ...gameState,
           players: gameState.players.map((player, playerIndex) => {
             if (playerIndex === gameState.currentTurnPlayerIndex) {
-              return {
-                ...player,
-                digimons: player.digimons.map((d) => {
+          return {
+            ...player,
+            digimons: player.digimons.map((d) => {
                   if (d.id === digimon.id) {
                     return {
                       ...d,
@@ -851,7 +859,8 @@ export default function GamePage() {
       } else {
         // Calcular qual item foi encontrado baseado nas probabilidades
         const totalChance = availableItems.reduce(
-          (sum: number, item: any) => sum + (item.dropChance || 0),
+          (sum: number, item: { dropChance?: number }) =>
+            sum + (item.dropChance || 0),
           0
         );
         let randomValue = Math.random() * totalChance;
@@ -879,7 +888,7 @@ export default function GamePage() {
                     if (d.id === digimon.id) {
                       const newBag = d.bag || [];
                       const existingItemIndex = newBag.findIndex(
-                        (bagItem: any) => bagItem.id === foundItem.id
+                        (bagItem) => bagItem.id === foundItem.id
                       );
 
                       if (existingItemIndex !== -1) {
@@ -896,21 +905,21 @@ export default function GamePage() {
                         });
                       }
 
-                      return {
-                        ...d,
+                return {
+                  ...d,
                         bag: newBag,
-                        hasActedThisTurn: true,
-                      };
-                    }
-                    return d;
-                  }),
+                  hasActedThisTurn: true,
                 };
               }
-              return player;
+              return d;
             }),
           };
+        }
+        return player;
+      }),
+    };
 
-          saveGameState(updatedState);
+    saveGameState(updatedState);
 
           // Mensagem mais detalhada sobre o item encontrado
           const itemRarity =
@@ -920,12 +929,12 @@ export default function GamePage() {
               ? "⭐"
               : "";
 
-          enqueueSnackbar(
+    enqueueSnackbar(
             `💰 ${capitalize(digimon.name)} encontrou ${itemRarity} ${
               foundItem.name
             }! ${itemRarity ? "Sorte!" : ""}`,
-            { variant: "success" }
-          );
+      { variant: "success" }
+    );
         }
       }
     } catch (error) {
@@ -1280,7 +1289,7 @@ export default function GamePage() {
 
     // Verificar se pode defender (mesmo nível ou inferior)
     if (targetDigimon.level > digimon.level) {
-      enqueueSnackbar(
+    enqueueSnackbar(
         "Você só pode defender Digimons de nível igual ou inferior!",
         { variant: "warning" }
       );
@@ -1814,7 +1823,7 @@ export default function GamePage() {
                                     <div className="absolute bottom-1 right-1 bg-cyan-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-cyan-400 flex items-center gap-1">
                                       <span>🛡️</span>
                                       <span>{capitalize(defender.name)}</span>
-                                    </div>
+                                  </div>
                                   )
                                 );
                               })()}
