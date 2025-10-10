@@ -18,28 +18,28 @@ export default function PlayerWithDigimons({
   const aliveDigimons = player.digimons.filter((d) => d.currentHp > 0).length;
 
   return (
-    <div className="bg-gray-700 rounded-lg p-4 border-2 border-gray-600">
+    <div className="bg-gray-700 rounded-lg p-2 sm:p-4 border-2 border-gray-600">
       {/* Header do Tamer */}
-      <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-600">
+      <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-4 pb-2 sm:pb-3 border-b border-gray-600">
         {player.avatar && (
           <img
             src={player.avatar}
             alt={player.name}
-            className="w-12 h-12 rounded-full object-cover border-2 border-red-500"
+            className="w-8 h-8 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-red-500"
           />
         )}
         <div>
-          <p className="font-bold text-lg text-white">
+          <p className="font-bold text-sm sm:text-lg text-white">
             {capitalize(player.name)}
           </p>
-          <p className="text-sm text-gray-400">
+          <p className="text-xs sm:text-sm text-gray-400">
             {aliveDigimons} Digimons vivos
           </p>
         </div>
       </div>
 
       {/* Digimons do Tamer */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
         {player.digimons.map((digimon) => {
           const advantage = showTypeAdvantages?.get(digimon.id);
 

@@ -52,12 +52,18 @@ export default function BattleView({
         ⚔️ Campo de Batalha
       </h4>
 
-      <div className="grid grid-cols-2 gap-2 sm:gap-4">
+      <div className="grid grid-cols-2 gap-1 sm:gap-4">
         {/* Atacante */}
-        <div className="bg-gray-700 rounded-lg p-2 sm:p-4 border-2 border-blue-500">
-          <h5 className="font-bold text-blue-400 mb-2 sm:mb-3 text-center text-xs sm:text-base">
-            ⚔️ <span className="hidden sm:inline">{capitalize(attacker.digimon.name)}</span>
-            <span className="sm:hidden">{capitalize(attacker.digimon.name).substring(0, 12)}{capitalize(attacker.digimon.name).length > 12 ? '...' : ''}</span>
+        <div className="bg-gray-700 rounded-lg p-1.5 sm:p-4 border-2 border-blue-500">
+          <h5 className="font-bold text-blue-400 mb-1 sm:mb-3 text-center text-[10px] sm:text-base">
+            ⚔️{" "}
+            <span className="hidden sm:inline">
+              {capitalize(attacker.digimon.name)}
+            </span>
+            <span className="sm:hidden">
+              {capitalize(attacker.digimon.name).substring(0, 12)}
+              {capitalize(attacker.digimon.name).length > 12 ? "..." : ""}
+            </span>
             <div className="text-[10px] sm:text-xs text-gray-300 mt-1">
               <span className="hidden sm:inline">
                 {
@@ -67,22 +73,26 @@ export default function BattleView({
                 }
               </span>
               {attacker.typeAdvantage === 1 && (
-                <span className="text-green-400 ml-1 sm:ml-2">⬆️ <span className="hidden sm:inline">Vantagem</span></span>
+                <span className="text-green-400 ml-1 sm:ml-2">
+                  ⬆️ <span className="hidden sm:inline">Vantagem</span>
+                </span>
               )}
               {attacker.typeAdvantage === -1 && (
-                <span className="text-red-400 ml-1 sm:ml-2">⬇️ <span className="hidden sm:inline">Desvantagem</span></span>
+                <span className="text-red-400 ml-1 sm:ml-2">
+                  ⬇️ <span className="hidden sm:inline">Desvantagem</span>
+                </span>
               )}
             </div>
           </h5>
 
-          <div className="space-y-2 sm:space-y-3">
+          <div className="space-y-1.5 sm:space-y-3">
             {/* Imagem */}
             <div className="relative h-32 sm:h-64 md:h-80 lg:h-96 bg-gradient-to-br from-gray-600 to-gray-800 rounded-lg overflow-hidden">
               {attacker.digimon.image ? (
                 <img
                   src={attacker.digimon.image}
                   alt={attacker.digimon.name}
-                  className={`w-full h-full object-contain transition-all duration-500 ${
+                  className={`w-full h-full object-cover transition-all duration-500 ${
                     battleComplete && attackerDead
                       ? "grayscale brightness-50"
                       : ""
@@ -98,14 +108,17 @@ export default function BattleView({
                 <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
                   <div className="text-center">
                     <div className="text-2xl sm:text-4xl mb-1 sm:mb-2">💀</div>
-                    <p className="text-red-400 font-bold text-[10px] sm:text-sm">ELIMINADO</p>
+                    <p className="text-red-400 font-bold text-[10px] sm:text-sm">
+                      ELIMINADO
+                    </p>
                   </div>
                 </div>
               )}
 
               <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-purple-600 text-white text-[10px] sm:text-xs font-bold px-1 py-0.5 sm:px-2 sm:py-1 rounded">
-                <span className="hidden sm:inline">{attacker.digimon.dp.toLocaleString()} DP</span>
-                <span className="sm:hidden">{Math.floor(attacker.digimon.dp / 1000)}k</span>
+                {attacker.digimon.dp >= 1000
+                  ? `${Math.floor(attacker.digimon.dp / 1000)}k`
+                  : attacker.digimon.dp.toLocaleString()}{" "}
               </div>
 
               {attacker.typeAdvantage !== 0 && (
@@ -116,21 +129,24 @@ export default function BattleView({
                       : "bg-red-600 text-white"
                   }`}
                 >
-                  {attacker.typeAdvantage === 1 ? "⬆️" : "⬇️"} <span className="hidden sm:inline">{attacker.typeAdvantage === 1 ? "+35%" : "-35%"}</span>
+                  {attacker.typeAdvantage === 1 ? "⬆️" : "⬇️"}{" "}
+                  <span className="hidden sm:inline">
+                    {attacker.typeAdvantage === 1 ? "+35%" : "-35%"}
+                  </span>
                 </div>
               )}
             </div>
 
             {/* HP Bar */}
             <div className="space-y-1">
-              <div className="flex justify-between items-center text-[10px] sm:text-xs">
+              <div className="flex justify-between items-center text-[9px] sm:text-xs">
                 <span className="text-gray-400 font-semibold">HP</span>
                 <span className="text-green-400 font-bold">
-                  <span className="hidden sm:inline">{attackerNewHp.toLocaleString()} / {attacker.digimon.dp.toLocaleString()}</span>
-                  <span className="sm:hidden">{Math.floor(attackerNewHp / 1000)}k / {Math.floor(attacker.digimon.dp / 1000)}k</span>
+                  {attackerNewHp.toLocaleString()} /{" "}
+                  {attacker.digimon.dp.toLocaleString()}
                 </span>
               </div>
-              <div className="w-full bg-gray-600 rounded-full h-3 sm:h-4 overflow-hidden border border-gray-500">
+              <div className="w-full bg-gray-600 rounded-full h-2.5 sm:h-4 overflow-hidden border border-gray-500">
                 <div
                   className="h-full bg-gradient-to-r from-green-500 to-green-400 transition-all duration-500 ease-out flex items-center justify-center"
                   style={{
@@ -140,7 +156,7 @@ export default function BattleView({
                     )}%`,
                   }}
                 >
-                  <span className="text-[10px] sm:text-xs font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                  <span className="text-[9px] sm:text-xs font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                     {Math.round(
                       Math.max(0, (attackerNewHp / attacker.digimon.dp) * 100)
                     )}
@@ -151,8 +167,8 @@ export default function BattleView({
             </div>
 
             {/* D20 de Ataque e Defesa */}
-            <div className="flex gap-2 sm:gap-4 justify-center">
-              <div className="flex flex-col items-center gap-1">
+            <div className="flex gap-1 sm:gap-4 justify-center">
+              <div className="flex-1 flex flex-col items-center gap-1">
                 <D20Display
                   value={attacker.attackDice}
                   isRolling={isRolling}
@@ -160,7 +176,7 @@ export default function BattleView({
                   damageDealt={battleComplete ? attacker.damage : undefined}
                 />
               </div>
-              <div className="flex flex-col items-center gap-1">
+              <div className="flex-1 flex flex-col items-center gap-1">
                 <D20Display
                   value={attacker.defenseDice}
                   isRolling={isRolling}
@@ -172,10 +188,16 @@ export default function BattleView({
         </div>
 
         {/* Defensor */}
-        <div className="bg-gray-700 rounded-lg p-2 sm:p-4 border-2 border-orange-500">
-          <h5 className="font-bold text-orange-400 mb-2 sm:mb-3 text-center text-xs sm:text-base">
-            🛡️ <span className="hidden sm:inline">{capitalize(defender.digimon.name)}</span>
-            <span className="sm:hidden">{capitalize(defender.digimon.name).substring(0, 12)}{capitalize(defender.digimon.name).length > 12 ? '...' : ''}</span>
+        <div className="bg-gray-700 rounded-lg p-1.5 sm:p-4 border-2 border-orange-500">
+          <h5 className="font-bold text-orange-400 mb-1 sm:mb-3 text-center text-[10px] sm:text-base">
+            🛡️{" "}
+            <span className="hidden sm:inline">
+              {capitalize(defender.digimon.name)}
+            </span>
+            <span className="sm:hidden">
+              {capitalize(defender.digimon.name).substring(0, 12)}
+              {capitalize(defender.digimon.name).length > 12 ? "..." : ""}
+            </span>
             <div className="text-[10px] sm:text-xs text-gray-300 mt-1">
               <span className="hidden sm:inline">
                 {
@@ -185,22 +207,26 @@ export default function BattleView({
                 }
               </span>
               {defender.typeAdvantage === 1 && (
-                <span className="text-green-400 ml-1 sm:ml-2">⬆️ <span className="hidden sm:inline">Vantagem</span></span>
+                <span className="text-green-400 ml-1 sm:ml-2">
+                  ⬆️ <span className="hidden sm:inline">Vantagem</span>
+                </span>
               )}
               {defender.typeAdvantage === -1 && (
-                <span className="text-red-400 ml-1 sm:ml-2">⬇️ <span className="hidden sm:inline">Desvantagem</span></span>
+                <span className="text-red-400 ml-1 sm:ml-2">
+                  ⬇️ <span className="hidden sm:inline">Desvantagem</span>
+                </span>
               )}
             </div>
           </h5>
 
-          <div className="space-y-2 sm:space-y-3">
+          <div className="space-y-1.5 sm:space-y-3">
             {/* Imagem */}
             <div className="relative h-32 sm:h-64 md:h-80 lg:h-96 bg-gradient-to-br from-gray-600 to-gray-800 rounded-lg overflow-hidden">
               {defender.digimon.image ? (
                 <img
                   src={defender.digimon.image}
                   alt={defender.digimon.name}
-                  className={`w-full h-full object-contain transition-all duration-500 ${
+                  className={`w-full h-full object-cover transition-all duration-500 ${
                     battleComplete && defenderDead
                       ? "grayscale brightness-50"
                       : ""
@@ -216,14 +242,17 @@ export default function BattleView({
                 <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
                   <div className="text-center">
                     <div className="text-2xl sm:text-4xl mb-1 sm:mb-2">💀</div>
-                    <p className="text-red-400 font-bold text-[10px] sm:text-sm">ELIMINADO</p>
+                    <p className="text-red-400 font-bold text-[10px] sm:text-sm">
+                      ELIMINADO
+                    </p>
                   </div>
                 </div>
               )}
 
               <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-purple-600 text-white text-[10px] sm:text-xs font-bold px-1 py-0.5 sm:px-2 sm:py-1 rounded">
-                <span className="hidden sm:inline">{defender.digimon.dp.toLocaleString()} DP</span>
-                <span className="sm:hidden">{Math.floor(defender.digimon.dp / 1000)}k</span>
+                {defender.digimon.dp >= 1000
+                  ? `${Math.floor(defender.digimon.dp / 1000)}k`
+                  : defender.digimon.dp.toLocaleString()}{" "}
               </div>
 
               {defender.typeAdvantage !== 0 && (
@@ -234,21 +263,24 @@ export default function BattleView({
                       : "bg-red-600 text-white"
                   }`}
                 >
-                  {defender.typeAdvantage === 1 ? "⬆️" : "⬇️"} <span className="hidden sm:inline">{defender.typeAdvantage === 1 ? "+35%" : "-35%"}</span>
+                  {defender.typeAdvantage === 1 ? "⬆️" : "⬇️"}{" "}
+                  <span className="hidden sm:inline">
+                    {defender.typeAdvantage === 1 ? "+35%" : "-35%"}
+                  </span>
                 </div>
               )}
             </div>
 
             {/* HP Bar */}
             <div className="space-y-1">
-              <div className="flex justify-between items-center text-[10px] sm:text-xs">
+              <div className="flex justify-between items-center text-[9px] sm:text-xs">
                 <span className="text-gray-400 font-semibold">HP</span>
                 <span className="text-green-400 font-bold">
-                  <span className="hidden sm:inline">{defenderNewHp.toLocaleString()} / {defender.digimon.dp.toLocaleString()}</span>
-                  <span className="sm:hidden">{Math.floor(defenderNewHp / 1000)}k / {Math.floor(defender.digimon.dp / 1000)}k</span>
+                  {defenderNewHp.toLocaleString()} /{" "}
+                  {defender.digimon.dp.toLocaleString()}
                 </span>
               </div>
-              <div className="w-full bg-gray-600 rounded-full h-3 sm:h-4 overflow-hidden border border-gray-500">
+              <div className="w-full bg-gray-600 rounded-full h-2.5 sm:h-4 overflow-hidden border border-gray-500">
                 <div
                   className="h-full bg-gradient-to-r from-green-500 to-green-400 transition-all duration-500 ease-out flex items-center justify-center"
                   style={{
@@ -258,7 +290,7 @@ export default function BattleView({
                     )}%`,
                   }}
                 >
-                  <span className="text-[10px] sm:text-xs font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                  <span className="text-[9px] sm:text-xs font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                     {Math.round(
                       Math.max(0, (defenderNewHp / defender.digimon.dp) * 100)
                     )}
@@ -269,8 +301,8 @@ export default function BattleView({
             </div>
 
             {/* D20 de Ataque e Defesa */}
-            <div className="flex gap-2 sm:gap-4 justify-center">
-              <div className="flex flex-col items-center gap-1">
+            <div className="flex gap-1 sm:gap-4 justify-center">
+              <div className="flex-1 flex flex-col items-center gap-1">
                 <D20Display
                   value={defender.attackDice}
                   isRolling={isRolling}
@@ -278,7 +310,7 @@ export default function BattleView({
                   damageDealt={battleComplete ? defender.damage : undefined}
                 />
               </div>
-              <div className="flex flex-col items-center gap-1">
+              <div className="flex-1 flex flex-col items-center gap-1">
                 <D20Display
                   value={defender.defenseDice}
                   isRolling={isRolling}
@@ -315,7 +347,10 @@ export default function BattleView({
               onClick={() => onEvolve(attacker.digimon)}
               className="px-3 sm:px-6 py-1.5 sm:py-2 text-xs sm:text-base bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold rounded-lg hover:from-yellow-600 hover:to-orange-600 transition-all transform hover:scale-105 shadow-lg"
             >
-              ✨ Evoluir <span className="hidden sm:inline">{capitalize(attacker.digimon.name)}</span>
+              ✨ Evoluir{" "}
+              <span className="hidden sm:inline">
+                {capitalize(attacker.digimon.name)}
+              </span>
             </button>
           )}
           {defender.digimon.canEvolve && defenderNewHp > 0 && (
@@ -323,7 +358,10 @@ export default function BattleView({
               onClick={() => onEvolve(defender.digimon)}
               className="px-3 sm:px-6 py-1.5 sm:py-2 text-xs sm:text-base bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold rounded-lg hover:from-yellow-600 hover:to-orange-600 transition-all transform hover:scale-105 shadow-lg"
             >
-              ✨ Evoluir <span className="hidden sm:inline">{capitalize(defender.digimon.name)}</span>
+              ✨ Evoluir{" "}
+              <span className="hidden sm:inline">
+                {capitalize(defender.digimon.name)}
+              </span>
             </button>
           )}
         </div>

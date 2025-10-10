@@ -120,32 +120,32 @@ export default function DigimonDetailsModal({
       onClick={onClose}
     >
       <div
-        className="bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl max-h-[95vh] overflow-y-auto border-2 border-gray-700"
+        className="bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl max-h-[98vh] sm:max-h-[95vh] overflow-y-auto border-2 border-gray-700"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-4 rounded-t-lg relative">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-t-lg relative">
           <button
             onClick={onClose}
-            className="absolute top-2 right-2 text-white hover:text-gray-200 text-3xl font-bold leading-none"
+            className="absolute top-2 right-2 text-white hover:text-gray-200 text-2xl sm:text-3xl font-bold leading-none"
           >
             ×
           </button>
-          <h2 className="text-2xl font-bold">{capitalize(digimon.name)}</h2>
-          <p className="text-sm text-blue-100 mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold pr-8">{capitalize(digimon.name)}</h2>
+          <p className="text-xs sm:text-sm text-blue-100 mt-0.5 sm:mt-1">
             Parceiro de {capitalize(playerName)}
           </p>
         </div>
 
         {/* Imagem do Digimon */}
-        <div className="relative h-72 sm:h-96 lg:h-[32rem] bg-gradient-to-br from-gray-700 to-gray-900 overflow-hidden">
+        <div className="relative h-48 sm:h-72 md:h-96 lg:h-[32rem] bg-gradient-to-br from-gray-700 to-gray-900 overflow-hidden">
           {/* Overlay de Morte */}
           {isDead && (
             <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center z-10">
               <div className="text-center">
-                <div className="text-7xl mb-3">💀</div>
-                <p className="text-red-400 font-bold text-xl">MORTO</p>
-                <p className="text-gray-300 text-sm mt-2">
+                <div className="text-5xl sm:text-7xl mb-2 sm:mb-3">💀</div>
+                <p className="text-red-400 font-bold text-lg sm:text-xl">MORTO</p>
+                <p className="text-gray-300 text-xs sm:text-sm mt-1 sm:mt-2">
                   Este Digimon foi derrotado
                 </p>
               </div>
@@ -165,40 +165,40 @@ export default function DigimonDetailsModal({
               }
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-8xl">
+            <div className="w-full h-full flex items-center justify-center text-6xl sm:text-8xl">
               ❓
             </div>
           )}
           {/* Badges */}
-          <div className="absolute top-3 left-3 bg-blue-600 text-white text-sm font-bold px-3 py-1.5 rounded-lg shadow-lg">
+          <div className="absolute top-2 left-2 sm:top-3 sm:left-3 bg-blue-600 text-white text-xs sm:text-sm font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg shadow-lg">
             {getLevelName(digimon.level)}
           </div>
-          <div className="absolute top-3 right-3 bg-purple-600 text-white text-sm font-bold px-3 py-1.5 rounded-lg shadow-lg">
-            {digimon.dp.toLocaleString()} DP
+          <div className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-purple-600 text-white text-xs sm:text-sm font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg shadow-lg">
+            {digimon.dp >= 1000 ? `${Math.floor(digimon.dp / 1000)}k` : digimon.dp.toLocaleString()} DP
           </div>
         </div>
 
         {/* Informações */}
-        <div className="p-6 space-y-4">
+        <div className="p-3 sm:p-6 space-y-3 sm:space-y-4">
           {/* Barra de HP */}
           <div>
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-gray-300 font-semibold text-sm">
+            <div className="flex justify-between items-center mb-1 sm:mb-2">
+              <span className="text-gray-300 font-semibold text-xs sm:text-sm">
                 💚 Pontos de Vida
               </span>
-              <span className="text-green-400 font-bold text-lg">
+              <span className="text-green-400 font-bold text-sm sm:text-lg">
                 {digimon.currentHp.toLocaleString()} /{" "}
                 {digimon.dp.toLocaleString()}
               </span>
             </div>
-            <div className="w-full bg-gray-700 rounded-full h-6 overflow-hidden border-2 border-gray-600 shadow-inner">
+            <div className="w-full bg-gray-700 rounded-full h-4 sm:h-6 overflow-hidden border-2 border-gray-600 shadow-inner">
               <div
                 className="h-full bg-gradient-to-r from-green-500 to-green-400 transition-all duration-500 ease-out flex items-center justify-center"
                 style={{
                   width: `${hpPercentage}%`,
                 }}
               >
-                <span className="text-sm font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+                <span className="text-xs sm:text-sm font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
                   {Math.round(hpPercentage)}%
                 </span>
               </div>
@@ -234,48 +234,48 @@ export default function DigimonDetailsModal({
           )} */}
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-3 pt-2">
-            <div className="bg-gray-700 rounded-lg p-3 border border-gray-600">
-              <div className="text-xs text-gray-400 mb-1">Level</div>
-              <div className="text-2xl font-bold text-blue-400">
+          <div className="grid grid-cols-2 gap-2 sm:gap-3 pt-1 sm:pt-2">
+            <div className="bg-gray-700 rounded-lg p-2 sm:p-3 border border-gray-600">
+              <div className="text-[10px] sm:text-xs text-gray-400 mb-0.5 sm:mb-1">Level</div>
+              <div className="text-lg sm:text-2xl font-bold text-blue-400">
                 {digimon.level}
               </div>
             </div>
-            <div className="bg-gray-700 rounded-lg p-3 border border-gray-600">
-              <div className="text-xs text-gray-400 mb-1">DP</div>
-              <div className="text-2xl font-bold text-purple-400">
-                {digimon.dp.toLocaleString()}
+            <div className="bg-gray-700 rounded-lg p-2 sm:p-3 border border-gray-600">
+              <div className="text-[10px] sm:text-xs text-gray-400 mb-0.5 sm:mb-1">DP</div>
+              <div className="text-lg sm:text-2xl font-bold text-purple-400">
+                {digimon.dp >= 1000 ? `${Math.floor(digimon.dp / 1000)}k` : digimon.dp.toLocaleString()}
               </div>
             </div>
           </div>
 
           {/* Status */}
-          <div className="bg-gray-700 rounded-lg p-3 border border-gray-600">
-            <div className="text-xs text-gray-400 mb-1">Status</div>
+          <div className="bg-gray-700 rounded-lg p-2 sm:p-3 border border-gray-600">
+            <div className="text-[10px] sm:text-xs text-gray-400 mb-0.5 sm:mb-1">Status</div>
             <div className="flex items-center gap-2">
               {hpPercentage > 75 ? (
                 <>
-                  <span className="text-2xl">💪</span>
-                  <span className="text-green-400 font-bold">
+                  <span className="text-lg sm:text-2xl">💪</span>
+                  <span className="text-green-400 font-bold text-sm sm:text-base">
                     Excelente condição
                   </span>
                 </>
               ) : hpPercentage > 50 ? (
                 <>
-                  <span className="text-2xl">👍</span>
-                  <span className="text-yellow-400 font-bold">Bom estado</span>
+                  <span className="text-lg sm:text-2xl">👍</span>
+                  <span className="text-yellow-400 font-bold text-sm sm:text-base">Bom estado</span>
                 </>
               ) : hpPercentage > 25 ? (
                 <>
-                  <span className="text-2xl">⚠️</span>
-                  <span className="text-orange-400 font-bold">
+                  <span className="text-lg sm:text-2xl">⚠️</span>
+                  <span className="text-orange-400 font-bold text-sm sm:text-base">
                     Enfraquecido
                   </span>
                 </>
               ) : (
                 <>
-                  <span className="text-2xl">🆘</span>
-                  <span className="text-red-400 font-bold">Crítico!</span>
+                  <span className="text-lg sm:text-2xl">🆘</span>
+                  <span className="text-red-400 font-bold text-sm sm:text-base">Crítico!</span>
                 </>
               )}
             </div>
@@ -283,33 +283,33 @@ export default function DigimonDetailsModal({
         </div>
 
         {/* Footer com Botões */}
-        <div className="bg-gray-900 px-6 py-4 rounded-b-lg border-t border-gray-700">
+        <div className="bg-gray-900 px-3 sm:px-6 py-3 sm:py-4 rounded-b-lg border-t border-gray-700">
           {!isDead ? (
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {/* Botões de Ação (apenas se for turno do jogador) */}
               {isCurrentPlayerTurn && !digimon.hasActedThisTurn && (
-                <div className="space-y-2">
+                <div className="space-y-1 sm:space-y-2">
                   {/* Linha 1 - Botões Ativos */}
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-3 gap-1 sm:gap-2">
                     <button
                       onClick={() => {
                         onAttack(digimon);
                         onClose();
                       }}
-                      className="px-4 py-2 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
+                      className="px-2 sm:px-4 py-2 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-0.5 sm:gap-1"
                     >
-                      <span className="text-2xl">⚔️</span>
-                      <span className="text-xs">Atacar</span>
+                      <span className="text-lg sm:text-2xl">⚔️</span>
+                      <span className="text-[10px] sm:text-xs">Atacar</span>
                     </button>
                     <button
                       onClick={() => {
                         onRest(digimon);
                         onClose();
                       }}
-                      className="px-4 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
+                      className="px-2 sm:px-4 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-0.5 sm:gap-1"
                     >
-                      <span className="text-2xl">😴</span>
-                      <span className="text-xs">Descansar</span>
+                      <span className="text-lg sm:text-2xl">😴</span>
+                      <span className="text-[10px] sm:text-xs">Descansar</span>
                     </button>
 
                     <button
@@ -317,33 +317,33 @@ export default function DigimonDetailsModal({
                         onLoot(digimon);
                         onClose();
                       }}
-                      className="px-4 py-2 bg-yellow-600 text-white font-bold rounded-lg hover:bg-yellow-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
+                      className="px-2 sm:px-4 py-2 bg-yellow-600 text-white font-bold rounded-lg hover:bg-yellow-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-0.5 sm:gap-1"
                     >
-                      <span className="text-2xl">💰</span>
-                      <span className="text-xs">Explorar</span>
+                      <span className="text-lg sm:text-2xl">💰</span>
+                      <span className="text-[10px] sm:text-xs">Explorar</span>
                     </button>
                   </div>
 
                   {/* Linha 2 - Botões (Bag, Defender e Provocar) */}
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-3 gap-1 sm:gap-2">
                     <button
                       onClick={() => setShowBag(true)}
-                      className="px-4 py-2 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
+                      className="px-2 sm:px-4 py-2 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-0.5 sm:gap-1"
                     >
-                      <span className="text-2xl">🎒</span>
-                      <span className="text-xs">Bag</span>
+                      <span className="text-lg sm:text-2xl">🎒</span>
+                      <span className="text-[10px] sm:text-xs">Bag</span>
                     </button>
                     <button
                       onClick={() => setShowDefendDialog(true)}
-                      className="px-4 py-2 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-1"
+                      className="px-2 sm:px-4 py-2 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-0.5 sm:gap-1"
                     >
-                      <span className="text-2xl">🛡️</span>
-                      <span className="text-xs">Defender</span>
+                      <span className="text-lg sm:text-2xl">🛡️</span>
+                      <span className="text-[10px] sm:text-xs">Defender</span>
                     </button>
                     <button
                       onClick={() => setShowProvokeDialog(true)}
                       disabled={!canProvoke()}
-                      className={`px-4 py-2 font-bold rounded-lg transition-all transform shadow-lg flex flex-col items-center justify-center gap-1 ${
+                      className={`px-2 sm:px-4 py-2 font-bold rounded-lg transition-all transform shadow-lg flex flex-col items-center justify-center gap-0.5 sm:gap-1 ${
                         canProvoke()
                           ? "bg-orange-600 text-white hover:bg-orange-700 hover:scale-105"
                           : "bg-gray-600 text-gray-400 cursor-not-allowed opacity-50"
@@ -356,8 +356,8 @@ export default function DigimonDetailsModal({
                           : "Provocar inimigo"
                       }
                     >
-                      <span className="text-2xl">💢</span>
-                      <span className="text-xs">
+                      <span className="text-lg sm:text-2xl">💢</span>
+                      <span className="text-[10px] sm:text-xs">
                         {canProvoke() ? "Provocar" : `${getProvokeCooldown()}T`}
                       </span>
                     </button>
@@ -368,7 +368,7 @@ export default function DigimonDetailsModal({
               {/* Aviso se já agiu */}
               {isCurrentPlayerTurn && digimon.hasActedThisTurn && (
                 <div className="text-center py-2 bg-gray-800 rounded-lg border border-gray-600">
-                  <p className="text-gray-400 font-semibold text-sm">
+                  <p className="text-gray-400 font-semibold text-xs sm:text-sm">
                     ⏸️ Já realizou uma ação neste turno
                   </p>
                 </div>
@@ -377,7 +377,7 @@ export default function DigimonDetailsModal({
               {/* Aviso se não é turno do jogador */}
               {!isCurrentPlayerTurn && (
                 <div className="text-center py-2 bg-gray-800 rounded-lg border border-gray-600">
-                  <p className="text-gray-400 font-semibold text-sm">
+                  <p className="text-gray-400 font-semibold text-xs sm:text-sm">
                     ⏳ Aguarde seu turno para agir
                   </p>
                 </div>
@@ -390,7 +390,7 @@ export default function DigimonDetailsModal({
                   // Não fecha o modal - mantém aberto
                 }}
                 disabled={!digimon.canEvolve}
-                className={`w-full px-6 py-3 font-bold rounded-lg transition-all shadow-lg flex items-center justify-center gap-2 relative overflow-hidden ${
+                className={`w-full px-3 sm:px-6 py-2 sm:py-3 font-bold rounded-lg transition-all shadow-lg flex items-center justify-center gap-1 sm:gap-2 relative overflow-hidden ${
                   digimon.canEvolve
                     ? "bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 text-white transform hover:scale-105 animate-pulse"
                     : "bg-gray-600 text-gray-400 cursor-not-allowed opacity-50"
@@ -405,17 +405,17 @@ export default function DigimonDetailsModal({
                     : undefined
                 }
               >
-                <span className="text-xl relative z-10">
+                <span className="text-lg sm:text-xl relative z-10">
                   {digimon.canEvolve ? "✨" : "🔒"}
                 </span>
-                <span className="relative z-10">
+                <span className="relative z-10 text-sm sm:text-base">
                   {digimon.canEvolve ? "Evolução" : "Bloqueado"}
                 </span>
               </button>
             </div>
           ) : (
             <div className="text-center py-2">
-              <p className="text-red-400 font-bold text-lg mb-2">
+              <p className="text-red-400 font-bold text-sm sm:text-lg mb-1 sm:mb-2">
                 💀 Digimon Derrotado
               </p>
             </div>
@@ -433,18 +433,18 @@ export default function DigimonDetailsModal({
           }}
         >
           <div
-            className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-lg max-h-[80vh] overflow-y-auto border-2 border-purple-500 m-4"
+            className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-lg max-h-[85vh] sm:max-h-[80vh] overflow-y-auto border-2 border-purple-500 m-2 sm:m-4"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-4 rounded-t-lg sticky top-0 z-10">
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-t-lg sticky top-0 z-10">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl font-bold flex items-center gap-2">
-                    <span className="text-2xl">🎒</span>
+                  <h3 className="text-lg sm:text-xl font-bold flex items-center gap-2">
+                    <span className="text-xl sm:text-2xl">🎒</span>
                     Inventário
                   </h3>
-                  <p className="text-sm text-purple-100 mt-1">
+                  <p className="text-xs sm:text-sm text-purple-100 mt-0.5 sm:mt-1">
                     {capitalize(digimon.name)}
                   </p>
                 </div>

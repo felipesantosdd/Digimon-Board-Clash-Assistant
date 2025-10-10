@@ -24,7 +24,7 @@ export default function D20Display({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const size = 100;
+    const size = window.innerWidth < 640 ? 60 : 100;
     canvas.width = size;
     canvas.height = size;
 
@@ -44,8 +44,20 @@ export default function D20Display({
     ctx.shadowOffsetX = 2;
     ctx.shadowOffsetY = 2;
 
+    // Constantes responsivas
+    const radius = size * 0.35;
+    const fontSize = size * 0.32;
+    const rollFontSize = size * 0.2;
+    const lineWidth = size * 0.02;
+
     // Gradiente do dado
-    const gradient = ctx.createLinearGradient(-30, -30, 30, 30);
+    const gradientSize = radius * 0.86; // ~30 para 100px, ~18 para 60px
+    const gradient = ctx.createLinearGradient(
+      -gradientSize,
+      -gradientSize,
+      gradientSize,
+      gradientSize
+    );
     gradient.addColorStop(0, "#ffffff");
     gradient.addColorStop(1, "#e0e0e0");
     ctx.fillStyle = gradient;
@@ -54,8 +66,8 @@ export default function D20Display({
     ctx.beginPath();
     for (let i = 0; i < 5; i++) {
       const angle = (i * 2 * Math.PI) / 5;
-      const x = Math.cos(angle) * 35;
-      const y = Math.sin(angle) * 35;
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
       if (i === 0) {
         ctx.moveTo(x, y);
       } else {
@@ -65,7 +77,7 @@ export default function D20Display({
     ctx.closePath();
     ctx.fill();
     ctx.strokeStyle = "#333";
-    ctx.lineWidth = 2;
+    ctx.lineWidth = lineWidth;
     ctx.stroke();
 
     // Desenhar número
@@ -74,14 +86,14 @@ export default function D20Display({
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
 
-      ctx.font = "bold 32px Arial";
+      ctx.font = `bold ${fontSize}px Arial`;
       ctx.fillStyle =
         value === 20 ? "#FFD700" : value === 1 ? "#FF0000" : "#333";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText(value.toString(), 0, 0);
     } else if (isRolling) {
-      ctx.font = "bold 20px Arial";
+      ctx.font = `bold ${rollFontSize}px Arial`;
       ctx.fillStyle = "#666";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
@@ -92,24 +104,31 @@ export default function D20Display({
   }, [value, isRolling]);
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      {label && <p className="text-sm text-gray-400 font-semibold">{label}</p>}
+    <div className="flex flex-col items-center">
+      {label && (
+        <p className="text-xs sm:text-sm text-gray-400 font-semibold">
+          {label}
+        </p>
+      )}
 
       <canvas
         ref={canvasRef}
-        className={`transition-transform ${isRolling ? "animate-spin" : ""}`}
-        style={{ width: "100px", height: "100px" }}
+        className={`w-[60px] h-[60px] sm:w-[100px] sm:h-[100px] transition-transform ${
+          isRolling ? "animate-spin" : ""
+        }`}
       />
 
       {!isRolling && value === 0 && (
-        <p className="text-gray-400 text-sm">Aguardando...</p>
+        <p className="text-gray-400 text-xs sm:text-sm">Aguardando...</p>
       )}
 
       {!isRolling && value > 0 && damageDealt !== undefined && (
-        <div className="bg-gray-600 rounded p-2 text-center w-full">
-          <p className="text-xs text-gray-400">Dano Causado</p>
-          <p className="text-xl font-bold text-blue-400">
-            {damageDealt.toLocaleString()}
+        <div className="bg-gray-600 rounded p-1.5 sm:p-2 text-center w-full">
+          <p className="text-[10px] sm:text-xs text-gray-400">Dano</p>
+          <p className="text-sm sm:text-xl font-bold text-blue-400">
+            {damageDealt >= 1000
+              ? `${Math.floor(damageDealt / 1000)}k`
+              : damageDealt.toLocaleString()}
           </p>
         </div>
       )}

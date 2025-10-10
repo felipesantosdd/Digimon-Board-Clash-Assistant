@@ -150,7 +150,7 @@ export default function AttackDialog({
         // Calcular modificadores de status
         const attackerModifier = getStatusModifier(attacker.digimon);
         const defenderModifier = getStatusModifier(selectedDigimon);
-        
+
         console.log("💪 [BATTLE] Modificadores de status:", {
           atacante: attackerModifier,
           defensor: defenderModifier,
@@ -208,29 +208,29 @@ export default function AttackDialog({
       onClick={step === "select-digimon" ? handleClose : undefined}
     >
       <div
-        className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-7xl max-h-[95vh] overflow-y-auto border-2 border-red-500"
+        className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-7xl max-h-[96vh] sm:max-h-[95vh] overflow-y-auto border-2 border-red-500"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-4 rounded-t-lg">
-          <h3 className="text-xl font-bold flex items-center gap-2">
-            <span className="text-2xl">⚔️</span>
+        <div className="bg-gradient-to-r from-red-600 to-red-700 text-white px-3 sm:px-6 py-2 sm:py-4 rounded-t-lg sticky top-0 z-10">
+          <h3 className="text-base sm:text-xl font-bold flex items-center gap-2">
+            <span className="text-lg sm:text-2xl">⚔️</span>
             Sistema de Ataque
           </h3>
-          <p className="text-sm text-red-100 mt-1">
+          <p className="text-xs sm:text-sm text-red-100 mt-0.5 sm:mt-1">
             {capitalize(attacker.digimon.name)} ({attacker.playerName})
           </p>
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-4">
+        <div className="p-2 sm:p-6 space-y-2 sm:space-y-4">
           {/* Etapa: Selecionar Digimon */}
           {step === "select-digimon" && (
             <div>
-              <h4 className="text-lg font-bold text-white mb-4">
+              <h4 className="text-sm sm:text-lg font-bold text-white mb-2 sm:mb-4">
                 Selecione o Digimon alvo
               </h4>
-              <div className="space-y-6">
+              <div className="space-y-2 sm:space-y-6">
                 {players
                   .filter((p) => p.id !== currentPlayerId)
                   .map((player) => (
