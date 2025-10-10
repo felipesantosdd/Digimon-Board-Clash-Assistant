@@ -15,7 +15,7 @@ import DigimonDetailsModal from "@/app/components/DigimonDetailsModal";
 import AttackDialog from "@/app/components/AttackDialog";
 import ReviveDialog from "@/app/components/ReviveDialog";
 import EvolutionAnimation from "@/app/components/EvolutionAnimation";
-import { GameDigimon } from "@/types/game";
+import type { GameDigimon, DigimonStatus } from "@/types/game";
 
 export default function GamePage() {
   const router = useRouter();
@@ -89,6 +89,78 @@ export default function GamePage() {
     router.push("/");
   };
 
+  // ============= FUNÇÕES DE GESTÃO DE STATUS =============
+
+  /**
+   * Adiciona ou renova um status para um Digimon
+   */
+  const addOrRenewStatus = (
+    digimon: GameDigimon,
+    statusType: "animado" | "medo",
+    currentTurn: number
+  ): GameDigimon => {
+    const statuses = digimon.statuses || [];
+    const existingStatus = statuses.find((s) => s.type === statusType);
+
+    if (existingStatus) {
+      // Renovar duração
+      return {
+        ...digimon,
+        statuses: statuses.map((s) =>
+          s.type === statusType ? { ...s, endsAtTurn: currentTurn + 3 } : s
+        ),
+      };
+    } else {
+      // Adicionar novo status
+      return {
+        ...digimon,
+        statuses: [
+          ...statuses,
+          { type: statusType, endsAtTurn: currentTurn + 3 },
+        ],
+      };
+    }
+  };
+
+  /**
+   * Remove status expirados baseado no turno atual
+   */
+  const removeExpiredStatuses = (
+    digimon: GameDigimon,
+    currentTurn: number
+  ): GameDigimon => {
+    if (!digimon.statuses || digimon.statuses.length === 0) return digimon;
+
+    const activeStatuses = digimon.statuses.filter(
+      (s) => s.endsAtTurn > currentTurn
+    );
+
+    return {
+      ...digimon,
+      statuses: activeStatuses,
+    };
+  };
+
+  /**
+   * Calcula o modificador de dano baseado nos status ativos
+   */
+  const getStatusDamageModifier = (digimon: GameDigimon): number => {
+    if (!digimon.statuses || digimon.statuses.length === 0) return 0;
+
+    let modifier = 0;
+    for (const status of digimon.statuses) {
+      if (status.type === "animado") {
+        modifier += 20; // +20 de dano
+      } else if (status.type === "medo") {
+        modifier -= 20; // -20 de dano
+      }
+    }
+
+    return modifier;
+  };
+
+  // ============= FIM DAS FUNÇÕES DE STATUS =============
+
   const handleNextTurn = () => {
     if (!gameState) return;
 
@@ -130,16 +202,26 @@ export default function GamePage() {
       reviveAttemptThisTurn: false, // Resetar tentativa de reviver
       players: gameState.players.map((player, idx) => {
         if (idx === nextPlayerIndex) {
-          // Resetar ações e defesas dos Digimons do próximo jogador
+          // Resetar ações, defesas e remover status expirados dos Digimons do próximo jogador
           // MANTÉM provocação - ela só expira quando o provocado atacar
+          const newTurnCount = isNewRound
+            ? gameState.turnCount + 1
+            : gameState.turnCount;
           return {
             ...player,
-            digimons: player.digimons.map((d) => ({
-              ...d,
-              hasActedThisTurn: false,
-              defending: null, // Resetar defesa
-              // provokedBy: NÃO resetar - mantém até o próximo turno do provocado
-            })),
+            digimons: player.digimons.map((d) => {
+              // Remover status expirados
+              const withoutExpiredStatuses = removeExpiredStatuses(
+                d,
+                newTurnCount
+              );
+              return {
+                ...withoutExpiredStatuses,
+                hasActedThisTurn: false,
+                defending: null, // Resetar defesa
+                // provokedBy: NÃO resetar - mantém até o próximo turno do provocado
+              };
+            }),
           };
         }
         return player;
@@ -238,7 +320,8 @@ export default function GamePage() {
   const handleAttackConfirm = (
     targetDigimon: GameDigimon,
     attackerDamage: number,
-    defenderDamage: number
+    defenderDamage: number,
+    battleResult: any // TODO: Tipar corretamente com BattleResult
   ) => {
     console.log("⚔️ [ATTACK] Iniciando confirmação de ataque...");
     console.log("⚔️ [ATTACK] Atacante:", attackerDigimon?.digimon.name);
@@ -267,17 +350,22 @@ export default function GamePage() {
     );
     console.log("⚔️ [ATTACK] Resultado atacante:", attackerResult);
 
-    // Atualizar o gameState com os danos aplicados E marcar como agiu
+    // Processar status baseados em críticos
+    console.log("🎲 [STATUS] Verificando críticos...");
+    console.log("🎲 [STATUS] Atacante roll:", battleResult.attackerDiceRoll);
+    console.log("🎲 [STATUS] Defensor roll:", battleResult.defenderDiceRoll);
+
+    // Atualizar o gameState com os danos aplicados, status e marcar como agiu
     const updatedState = {
       ...gameState,
       players: gameState.players.map((player) => ({
         ...player,
         digimons: player.digimons.map((d) => {
-          // Atualizar alvo
+          // Atualizar alvo (defensor)
           if (d.id === targetDigimon.id) {
             console.log("🎯 [ATTACK] Atualizando alvo:", d.name);
             const newHp = defenderResult.newHp;
-            return {
+            let updatedDigimon: GameDigimon = {
               ...d,
               currentHp: newHp,
               evolutionProgress: defenderResult.newProgress,
@@ -288,6 +376,39 @@ export default function GamePage() {
               // Se morreu, remove provocações feitas por ele
               provokedBy: newHp <= 0 ? null : d.provokedBy,
             };
+
+            // Aplicar status baseado nos resultados dos dados do DEFENSOR
+            if (newHp > 0) {
+              // Defensor tirou 20 → ganha Animado
+              if (battleResult.defenderCriticalSuccess) {
+                console.log("💪 [STATUS] Defensor tirou 20! Ganha Animado");
+                updatedDigimon = addOrRenewStatus(
+                  updatedDigimon,
+                  "animado",
+                  gameState.turnCount
+                );
+              }
+              // Defensor tirou 1 → ganha Medo
+              if (battleResult.defenderCriticalFail) {
+                console.log("😰 [STATUS] Defensor tirou 1! Ganha Medo");
+                updatedDigimon = addOrRenewStatus(
+                  updatedDigimon,
+                  "medo",
+                  gameState.turnCount
+                );
+              }
+              // Defensor levou crítico (atacante tirou 20) → ganha Medo
+              if (battleResult.attackerCriticalSuccess) {
+                console.log("😰 [STATUS] Defensor levou crítico! Ganha Medo");
+                updatedDigimon = addOrRenewStatus(
+                  updatedDigimon,
+                  "medo",
+                  gameState.turnCount
+                );
+              }
+            }
+
+            return updatedDigimon;
           }
           // Atualizar atacante E marcar como já agiu
           if (d.id === attackerDigimon.digimon.id) {
@@ -296,7 +417,7 @@ export default function GamePage() {
               d.name
             );
             const newHp = attackerResult.newHp;
-            return {
+            let updatedDigimon: GameDigimon = {
               ...d,
               currentHp: newHp,
               evolutionProgress: attackerResult.newProgress,
@@ -307,6 +428,39 @@ export default function GamePage() {
               // Remove provocação após atacar OU se morreu
               provokedBy: null, // Sempre remove após atacar
             };
+
+            // Aplicar status baseado nos resultados dos dados do ATACANTE
+            if (newHp > 0) {
+              // Atacante tirou 20 → ganha Animado
+              if (battleResult.attackerCriticalSuccess) {
+                console.log("💪 [STATUS] Atacante tirou 20! Ganha Animado");
+                updatedDigimon = addOrRenewStatus(
+                  updatedDigimon,
+                  "animado",
+                  gameState.turnCount
+                );
+              }
+              // Atacante tirou 1 → ganha Medo
+              if (battleResult.attackerCriticalFail) {
+                console.log("😰 [STATUS] Atacante tirou 1! Ganha Medo");
+                updatedDigimon = addOrRenewStatus(
+                  updatedDigimon,
+                  "medo",
+                  gameState.turnCount
+                );
+              }
+              // Atacante levou crítico (defensor tirou 20) → ganha Medo
+              if (battleResult.defenderCriticalSuccess) {
+                console.log("😰 [STATUS] Atacante levou crítico! Ganha Medo");
+                updatedDigimon = addOrRenewStatus(
+                  updatedDigimon,
+                  "medo",
+                  gameState.turnCount
+                );
+              }
+            }
+
+            return updatedDigimon;
           }
           // Liberar provocações se o provocador morreu
           if (d.provokedBy === targetDigimon.id && defenderResult.newHp <= 0) {
@@ -361,6 +515,7 @@ export default function GamePage() {
 
       console.log("🔄 [EVOLVE] Opções para animação:", animationOptions);
       console.log("✨ [EVOLVE] Evolução final:", finalEvolution);
+      console.log("🖼️ [EVOLVE] Imagens das opções:", animationOptions?.map((o: any) => o.image));
 
       // Mostrar animação de evolução com opções variadas e a evolução final
       setEvolvingDigimon({
@@ -410,7 +565,20 @@ export default function GamePage() {
                 `💪 [EVOLVE] Mantendo buffs - Base: ${newBaseDp}, Bônus: ${dpBonus}, Total: ${newTotalDp}`
               );
 
-              // Evoluir o Digimon mantendo buffs
+              // Limpar TODOS os status e adicionar novo Animado
+              // Evoluir renova completamente, não acumula buffs antigos
+              const newStatuses = [
+                {
+                  type: "animado" as const,
+                  endsAtTurn: gameState.turnCount + 3,
+                },
+              ];
+
+              console.log(
+                `✨ [EVOLVE] Limpando todos os status e adicionando Animado único (dura 3 turnos)`
+              );
+
+              // Evoluir o Digimon mantendo buffs de DP e ganhando Animado
               return {
                 ...d,
                 id: evolution.id,
@@ -425,6 +593,7 @@ export default function GamePage() {
                 canEvolve: false, // Reset da flag de evolução
                 evolutionProgress: 0, // Resetar XP de evolução
                 originalId: d.originalId || digimon.id, // Guardar ID original
+                statuses: newStatuses, // Remove debuffs, mantém buffs, adiciona Animado
               };
             }
             // Resetar defesa se estava defendendo o Digimon que evoluiu
@@ -444,6 +613,14 @@ export default function GamePage() {
       // Toast removido - animação já mostra a evolução
       console.log(
         `✅ [EVOLVE] ${digimon.name} evoluiu para ${evolution.name}! (${evolvingDigimon.evolutionType})`
+      );
+
+      // Notificar que ganhou Animado
+      enqueueSnackbar(
+        `💪 ${capitalize(
+          evolution.name
+        )} está Animado! (+20 de dano por 3 turnos)`,
+        { variant: "success" }
       );
 
       // Resetar estado de evolução
@@ -1561,24 +1738,60 @@ export default function GamePage() {
                                 {getLevelName(digimon.level)}
                               </div>
 
-                              {/* Ícone de Provocação - Na imagem do Digimon */}
-                              {(() => {
-                                const provoker = gameState.players
-                                  .flatMap((p) => p.digimons)
-                                  .find(
-                                    (d) =>
-                                      d.id === digimon.provokedBy &&
-                                      d.currentHp > 0
-                                  );
-                                return (
-                                  provoker &&
-                                  !isDead && (
-                                    <div className="absolute top-1 right-1 text-orange-400 text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                                      💢
-                                    </div>
-                                  )
-                                );
-                              })()}
+                              {/* Ícones de Status e Provocação - Na imagem do Digimon */}
+                              {!isDead && (
+                                <div className="absolute top-1 right-1 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                                  {/* Status: Animado e Medo */}
+                                  {digimon.statuses &&
+                                    digimon.statuses.map((status, idx) => (
+                                      <div
+                                        key={`${status.type}-${idx}`}
+                                        className="relative group/status"
+                                        title={
+                                          status.type === "animado"
+                                            ? `💪 Animado: +20 de dano (Expira no turno ${status.endsAtTurn})`
+                                            : `😰 Medo: -20 de dano (Expira no turno ${status.endsAtTurn})`
+                                        }
+                                      >
+                                        <div
+                                          className={`text-xl ${
+                                            status.type === "animado"
+                                              ? "text-green-400 drop-shadow-[0_0_4px_rgba(34,197,94,0.8)]"
+                                              : "text-red-400 drop-shadow-[0_0_4px_rgba(239,68,68,0.8)]"
+                                          }`}
+                                        >
+                                          {status.type === "animado"
+                                            ? "💪"
+                                            : "😰"}
+                                        </div>
+                                      </div>
+                                    ))}
+
+                                  {/* Provocação */}
+                                  {(() => {
+                                    const provoker = gameState.players
+                                      .flatMap((p) => p.digimons)
+                                      .find(
+                                        (d) =>
+                                          d.id === digimon.provokedBy &&
+                                          d.currentHp > 0
+                                      );
+                                    return (
+                                      provoker && (
+                                        <div
+                                          className="text-orange-400 text-xl drop-shadow-[0_0_4px_rgba(251,146,60,0.8)]"
+                                          title={`💢 Provocado por ${capitalize(
+                                            provoker.name
+                                          )}`}
+                                        >
+                                          💢
+                                        </div>
+                                      )
+                                    );
+                                  })()}
+                                </div>
+                              )}
+
                               {/* Badge de Evolução Liberada */}
                               {digimon.canEvolve && !isDead && (
                                 <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded-full animate-pulse shadow-lg">
@@ -1833,6 +2046,7 @@ export default function GamePage() {
         currentPlayerId={
           gameState?.players[gameState.currentTurnPlayerIndex]?.id || 0
         }
+        getStatusModifier={getStatusDamageModifier}
       />
 
       {/* Dialog de Reviver */}

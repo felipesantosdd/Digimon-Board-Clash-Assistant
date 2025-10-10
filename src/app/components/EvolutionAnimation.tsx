@@ -26,6 +26,7 @@ export default function EvolutionAnimation({
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [canClose, setCanClose] = useState(false);
   const [rotations, setRotations] = useState(0);
+  const [imageError, setImageError] = useState(false);
 
   // Lista de imagens apenas das evoluções possíveis (sem o original)
   const evolutionImages =
@@ -43,8 +44,12 @@ export default function EvolutionAnimation({
       setCurrentImageIndex(0);
       setCanClose(false);
       setRotations(0);
+      setImageError(false);
       return;
     }
+    
+    // Resetar erro ao abrir
+    setImageError(false);
 
     // Sequência de animação
     const timers: NodeJS.Timeout[] = [];
@@ -81,13 +86,20 @@ export default function EvolutionAnimation({
         sequence.push(Math.floor(Math.random() * evolutionImages.length));
       }
 
-      // Aplicar sequência
+      // Aplicar sequência - trocar a imagem no meio da rotação (180°)
       sequence.forEach((index, i) => {
+        // Inicia a rotação
         timers.push(
           setTimeout(() => {
             setRotations(i + 1);
+          }, 3000 + i * 500)
+        );
+
+        // Troca a imagem no meio da rotação (quando está a 180°)
+        timers.push(
+          setTimeout(() => {
             setCurrentImageIndex(index);
-          }, 3000 + (i + 1) * 500)
+          }, 3000 + i * 500 + 250) // 250ms = metade da rotação (180°)
         );
       });
     }
@@ -133,7 +145,7 @@ export default function EvolutionAnimation({
       {/* Container central para Digimon e efeitos */}
       <div className="flex-1 flex items-center justify-center relative w-full">
         <div className="relative">
-          {/* Círculos de luz pulsante */}
+          {/* Círculos de luz pulsante - FUNDO */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div
               className={`w-96 h-96 rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 opacity-30 blur-3xl animate-pulse ${
@@ -146,9 +158,7 @@ export default function EvolutionAnimation({
           <div className="relative z-10 flex flex-col items-center gap-6">
             <div
               className={`relative w-64 h-64 transition-all ${
-                stage >= 2 && stage < 3
-                  ? "scale-110 brightness-200"
-                  : "scale-100"
+                stage >= 2 && stage < 3 ? "scale-110" : "scale-100"
               }`}
               style={{
                 transformStyle: "preserve-3d",
@@ -189,25 +199,50 @@ export default function EvolutionAnimation({
                     : digimonName
                 }
                 onClick={handleClose}
+                onError={() => {
+                  console.error("❌ [EVOLVE] Erro ao carregar imagem:", {
+                    stage,
+                    currentImageIndex,
+                    image: evolutionImages[currentImageIndex],
+                  });
+                  setImageError(true);
+                }}
                 className={`w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.8)] ${
                   canClose ? "cursor-pointer" : "cursor-default"
                 }`}
-                style={{
-                  filter:
-                    stage >= 2 && stage < 3
-                      ? "brightness(1.3) contrast(1.1) saturate(1.2)" // Contraste reduzido
-                      : "brightness(1) contrast(1) saturate(1)",
-                }}
               />
+              
+              {/* Fallback se houver erro de imagem */}
+              {imageError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 rounded-lg">
+                  <div className="text-center">
+                    <div className="text-6xl mb-2">❓</div>
+                    <p className="text-white text-sm">Imagem não encontrada</p>
+                  </div>
+                </div>
+              )}
 
-              {/* Partículas de luz */}
+              {/* Estrelas que somem e aparecem */}
               {stage >= 1 && (
                 <>
-                  <div className="absolute top-0 left-1/4 w-2 h-2 bg-yellow-400 rounded-full animate-ping" />
-                  <div className="absolute top-1/4 right-1/4 w-3 h-3 bg-orange-400 rounded-full animate-ping animation-delay-200" />
-                  <div className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-pink-400 rounded-full animate-ping animation-delay-400" />
-                  <div className="absolute top-1/2 right-1/3 w-3 h-3 bg-yellow-300 rounded-full animate-ping animation-delay-600" />
-                  <div className="absolute bottom-1/3 right-1/4 w-2 h-2 bg-orange-300 rounded-full animate-ping animation-delay-800" />
+                  <div className="absolute top-0 left-1/4 text-yellow-400 text-xl animate-ping">
+                    ✨
+                  </div>
+                  <div className="absolute top-1/4 right-1/4 text-yellow-300 text-2xl animate-ping animation-delay-200">
+                    ⭐
+                  </div>
+                  <div className="absolute bottom-1/4 left-1/3 text-orange-400 text-xl animate-ping animation-delay-400">
+                    ✨
+                  </div>
+                  <div className="absolute top-1/2 right-1/3 text-yellow-400 text-2xl animate-ping animation-delay-600">
+                    ⭐
+                  </div>
+                  <div className="absolute bottom-1/3 right-1/4 text-orange-300 text-xl animate-ping animation-delay-800">
+                    ✨
+                  </div>
+                  <div className="absolute top-1/3 left-1/4 text-yellow-200 text-2xl animate-ping animation-delay-1000">
+                    ⭐
+                  </div>
                 </>
               )}
             </div>

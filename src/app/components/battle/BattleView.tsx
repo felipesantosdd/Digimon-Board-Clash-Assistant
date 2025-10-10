@@ -8,13 +8,15 @@ interface BattleViewProps {
   attacker: {
     digimon: GameDigimon;
     playerName: string;
-    diceValue: number;
+    attackDice: number;
+    defenseDice: number;
     damage: number;
     typeAdvantage: number;
   };
   defender: {
     digimon: GameDigimon;
-    diceValue: number;
+    attackDice: number;
+    defenseDice: number;
     damage: number;
     typeAdvantage: number;
   };
@@ -144,12 +146,24 @@ export default function BattleView({
               </div>
             </div>
 
-            {/* D20 */}
-            <D20Display
-              value={attacker.diceValue}
-              isRolling={isRolling}
-              damageDealt={battleComplete ? attacker.damage : undefined}
-            />
+            {/* D20 de Ataque e Defesa */}
+            <div className="flex gap-4 justify-center">
+              <div className="flex flex-col items-center gap-1">
+                <D20Display
+                  value={attacker.attackDice}
+                  isRolling={isRolling}
+                  label="⚔️ ATK"
+                  damageDealt={battleComplete ? attacker.damage : undefined}
+                />
+              </div>
+              <div className="flex flex-col items-center gap-1">
+                <D20Display
+                  value={attacker.defenseDice}
+                  isRolling={isRolling}
+                  label="🛡️ DEF"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -246,12 +260,24 @@ export default function BattleView({
               </div>
             </div>
 
-            {/* D20 */}
-            <D20Display
-              value={defender.diceValue}
-              isRolling={isRolling}
-              damageDealt={battleComplete ? defender.damage : undefined}
-            />
+            {/* D20 de Ataque e Defesa */}
+            <div className="flex gap-4 justify-center">
+              <div className="flex flex-col items-center gap-1">
+                <D20Display
+                  value={defender.attackDice}
+                  isRolling={isRolling}
+                  label="⚔️ ATK"
+                  damageDealt={battleComplete ? defender.damage : undefined}
+                />
+              </div>
+              <div className="flex flex-col items-center gap-1">
+                <D20Display
+                  value={defender.defenseDice}
+                  isRolling={isRolling}
+                  label="🛡️ DEF"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

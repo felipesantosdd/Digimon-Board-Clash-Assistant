@@ -1,5 +1,11 @@
 import { GameItem } from "./item";
 
+// Status de combate
+export interface DigimonStatus {
+  type: "animado" | "medo"; // Tipo do status
+  endsAtTurn: number; // Turno global em que o status expira
+}
+
 // Tipos para o estado do jogo
 export interface GameDigimon {
   id: number;
@@ -19,6 +25,7 @@ export interface GameDigimon {
   evolutionProgress?: number; // Progresso de evolução em % (0-100)
   provokedBy?: number | null; // ID do Digimon que provocou este
   lastProvokeTurn?: number | null; // Último turno global que este Digimon provocou
+  statuses?: DigimonStatus[]; // Status ativos (animado, medo, etc)
 }
 
 export interface GamePlayer {

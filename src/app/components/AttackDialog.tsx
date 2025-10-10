@@ -14,7 +14,8 @@ interface AttackDialogProps {
   onConfirm: (
     targetDigimon: GameDigimon,
     attackerDamage: number,
-    defenderDamage: number
+    defenderDamage: number,
+    battleResult: BattleResult
   ) => void;
   onEvolve?: (digimon: GameDigimon) => void;
   attacker: {
@@ -23,6 +24,7 @@ interface AttackDialogProps {
   } | null;
   players: GamePlayer[];
   currentPlayerId: number;
+  getStatusModifier?: (digimon: GameDigimon) => number;
 }
 
 export default function AttackDialog({
@@ -33,6 +35,7 @@ export default function AttackDialog({
   attacker,
   players,
   currentPlayerId,
+  getStatusModifier = () => 0,
 }: AttackDialogProps) {
   const { enqueueSnackbar } = useSnackbar();
   const [selectedDigimon, setSelectedDigimon] = useState<GameDigimon | null>(
@@ -46,8 +49,10 @@ export default function AttackDialog({
   const [battleResult, setBattleResult] = useState<BattleResult | null>(null);
   const [isRolling, setIsRolling] = useState(false);
   const [battleComplete, setBattleComplete] = useState(false);
-  const [attackerDiceValue, setAttackerDiceValue] = useState(0);
-  const [defenderDiceValue, setDefenderDiceValue] = useState(0);
+  const [attackerAttackDice, setAttackerAttackDice] = useState(0);
+  const [attackerDefenseDice, setAttackerDefenseDice] = useState(0);
+  const [defenderAttackDice, setDefenderAttackDice] = useState(0);
+  const [defenderDefenseDice, setDefenderDefenseDice] = useState(0);
 
   // Resetar ao abrir
   useEffect(() => {
@@ -55,8 +60,10 @@ export default function AttackDialog({
       setSelectedDigimon(null);
       setStep("select-digimon");
       setBattleResult(null);
-      setAttackerDiceValue(0);
-      setDefenderDiceValue(0);
+      setAttackerAttackDice(0);
+      setAttackerDefenseDice(0);
+      setDefenderAttackDice(0);
+      setDefenderDefenseDice(0);
       setIsRolling(false);
       setBattleComplete(false);
     }
@@ -114,8 +121,10 @@ export default function AttackDialog({
 
     setSelectedDigimon(targetDigimon);
     setBattleResult(null);
-    setAttackerDiceValue(0);
-    setDefenderDiceValue(0);
+    setAttackerAttackDice(0);
+    setAttackerDefenseDice(0);
+    setDefenderAttackDice(0);
+    setDefenderDefenseDice(0);
     setIsRolling(false);
     setBattleComplete(false);
     setStep("battle");
@@ -126,34 +135,50 @@ export default function AttackDialog({
 
     setIsRolling(true);
 
-    // Simular animação de rolagem de dados
+    // Simular animação de rolagem de dados (agora são 4 dados)
     let count = 0;
     const rollInterval = setInterval(() => {
-      setAttackerDiceValue(Math.floor(Math.random() * 20) + 1);
-      setDefenderDiceValue(Math.floor(Math.random() * 20) + 1);
+      setAttackerAttackDice(Math.floor(Math.random() * 20) + 1);
+      setAttackerDefenseDice(Math.floor(Math.random() * 20) + 1);
+      setDefenderAttackDice(Math.floor(Math.random() * 20) + 1);
+      setDefenderDefenseDice(Math.floor(Math.random() * 20) + 1);
       count++;
 
       if (count >= 15) {
         clearInterval(rollInterval);
 
+        // Calcular modificadores de status
+        const attackerModifier = getStatusModifier(attacker.digimon);
+        const defenderModifier = getStatusModifier(selectedDigimon);
+        
+        console.log("💪 [BATTLE] Modificadores de status:", {
+          atacante: attackerModifier,
+          defensor: defenderModifier,
+        });
+
         // Executar batalha usando o BattleManager
         const battleManager = new BattleManager(
           attacker.digimon,
-          selectedDigimon
+          selectedDigimon,
+          attackerModifier,
+          defenderModifier
         );
         const result = battleManager.executeBattle();
 
-        // Atualizar estados com resultado
-        setAttackerDiceValue(result.attackerDiceRoll);
-        setDefenderDiceValue(result.defenderDiceRoll);
+        // Atualizar estados com resultado (4 dados)
+        setAttackerAttackDice(result.attackerAttackRoll);
+        setAttackerDefenseDice(result.attackerDefenseRoll);
+        setDefenderAttackDice(result.defenderAttackRoll);
+        setDefenderDefenseDice(result.defenderDefenseRoll);
         setBattleResult(result);
         setIsRolling(false);
 
-        // Aplicar dano imediatamente
+        // Aplicar dano imediatamente e passar resultado completo
         onConfirm(
           selectedDigimon,
           result.attackerDamage,
-          result.defenderDamage
+          result.defenderDamage,
+          result // Passar resultado completo com informações de críticos
         );
         setBattleComplete(true);
 
@@ -166,8 +191,10 @@ export default function AttackDialog({
     setSelectedDigimon(null);
     setStep("select-digimon");
     setBattleResult(null);
-    setAttackerDiceValue(0);
-    setDefenderDiceValue(0);
+    setAttackerAttackDice(0);
+    setAttackerDefenseDice(0);
+    setDefenderAttackDice(0);
+    setDefenderDefenseDice(0);
     setIsRolling(false);
     setBattleComplete(false);
     onClose();
@@ -223,13 +250,15 @@ export default function AttackDialog({
               attacker={{
                 digimon: attacker.digimon,
                 playerName: attacker.playerName,
-                diceValue: attackerDiceValue,
+                attackDice: attackerAttackDice,
+                defenseDice: attackerDefenseDice,
                 damage: battleResult.attackerDamage,
                 typeAdvantage: battleResult.attackerTypeAdvantage,
               }}
               defender={{
                 digimon: selectedDigimon,
-                diceValue: defenderDiceValue,
+                attackDice: defenderAttackDice,
+                defenseDice: defenderDefenseDice,
                 damage: battleResult.defenderDamage,
                 typeAdvantage: battleResult.defenderTypeAdvantage,
               }}
@@ -246,7 +275,8 @@ export default function AttackDialog({
               attacker={{
                 digimon: attacker.digimon,
                 playerName: attacker.playerName,
-                diceValue: 0,
+                attackDice: 0,
+                defenseDice: 0,
                 damage: 0,
                 typeAdvantage: new BattleManager(
                   attacker.digimon,
@@ -255,7 +285,8 @@ export default function AttackDialog({
               }}
               defender={{
                 digimon: selectedDigimon,
-                diceValue: 0,
+                attackDice: 0,
+                defenseDice: 0,
                 damage: 0,
                 typeAdvantage: new BattleManager(
                   attacker.digimon,

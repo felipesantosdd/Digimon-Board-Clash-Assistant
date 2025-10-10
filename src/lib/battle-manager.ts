@@ -4,12 +4,18 @@ import { calculateTypeAdvantage } from "./utils";
 export interface BattleResult {
   attackerDamage: number;
   defenderDamage: number;
-  attackerDiceRoll: number;
-  defenderDiceRoll: number;
+  attackerAttackRoll: number; // D20 de ataque do atacante
+  attackerDefenseRoll: number; // D20 de defesa do atacante
+  defenderAttackRoll: number; // D20 de ataque do defensor
+  defenderDefenseRoll: number; // D20 de defesa do defensor
   attackerNewHp: number;
   defenderNewHp: number;
   attackerTypeAdvantage: number;
   defenderTypeAdvantage: number;
+  attackerCriticalSuccess: boolean; // D20 de ataque = 20
+  attackerCriticalFail: boolean; // D20 de ataque = 1
+  defenderCriticalSuccess: boolean; // D20 de ataque = 20
+  defenderCriticalFail: boolean; // D20 de ataque = 1
 }
 
 export class BattleManager {
@@ -17,10 +23,19 @@ export class BattleManager {
   private defender: GameDigimon;
   private attackerTypeAdvantage: number;
   private defenderTypeAdvantage: number;
+  private attackerStatusModifier: number;
+  private defenderStatusModifier: number;
 
-  constructor(attacker: GameDigimon, defender: GameDigimon) {
+  constructor(
+    attacker: GameDigimon,
+    defender: GameDigimon,
+    attackerStatusModifier: number = 0,
+    defenderStatusModifier: number = 0
+  ) {
     this.attacker = attacker;
     this.defender = defender;
+    this.attackerStatusModifier = attackerStatusModifier;
+    this.defenderStatusModifier = defenderStatusModifier;
 
     // Calcular vantagens de tipo
     this.attackerTypeAdvantage = calculateTypeAdvantage(
@@ -41,10 +56,20 @@ export class BattleManager {
   }
 
   /**
-   * Calcula o dano base baseado no DP e no valor do dado
+   * Calcula o dano bruto baseado no DP e no D20 de ataque
+   * Fórmula: DP × (D20_Ataque × 0.05)
    */
-  private calculateBaseDamage(dp: number, diceRoll: number): number {
-    const multiplier = diceRoll * 0.05; // 5% por ponto do dado
+  private calculateRawDamage(dp: number, attackRoll: number): number {
+    const multiplier = attackRoll * 0.05; // 5% por ponto do dado
+    return Math.round(dp * multiplier);
+  }
+
+  /**
+   * Calcula a redução de dano baseada no DP e no D20 de defesa
+   * Fórmula: DP × (D20_Defesa × 0.05)
+   */
+  private calculateDefenseReduction(dp: number, defenseRoll: number): number {
+    const multiplier = defenseRoll * 0.05; // 5% por ponto do dado
     return Math.round(dp * multiplier);
   }
 
@@ -61,52 +86,118 @@ export class BattleManager {
   }
 
   /**
-   * Executa o combate completo
+   * Executa o combate completo com sistema de 2 dados por Digimon
+   * Cada Digimon rola 1 D20 de ataque e 1 D20 de defesa
    */
   public executeBattle(): BattleResult {
-    // Rolar dados
-    const attackerRoll = this.rollD20();
-    const defenderRoll = this.rollD20();
+    // Rolar 4 dados (2 para cada Digimon)
+    const attackerAttackRoll = this.rollD20(); // Ataque do atacante
+    const attackerDefenseRoll = this.rollD20(); // Defesa do atacante
+    const defenderAttackRoll = this.rollD20(); // Ataque do defensor
+    const defenderDefenseRoll = this.rollD20(); // Defesa do defensor
 
-    // Calcular danos base
-    const attackerBaseDamage = this.calculateBaseDamage(
+    console.log("🎲 [BATTLE] Dados rolados:", {
+      atacante: { ataque: attackerAttackRoll, defesa: attackerDefenseRoll },
+      defensor: { ataque: defenderAttackRoll, defesa: defenderDefenseRoll },
+    });
+
+    // Detectar críticos (apenas nos dados de ATAQUE)
+    const attackerCriticalSuccess = attackerAttackRoll === 20;
+    const attackerCriticalFail = attackerAttackRoll === 1;
+    const defenderCriticalSuccess = defenderAttackRoll === 20;
+    const defenderCriticalFail = defenderAttackRoll === 1;
+
+    // ATACANTE: Calcular dano bruto e defesa do oponente
+    const attackerRawDamage = this.calculateRawDamage(
       this.attacker.dp,
-      attackerRoll
+      attackerAttackRoll
     );
-    const defenderBaseDamage = this.calculateBaseDamage(
+    const defenderDefenseReduction = this.calculateDefenseReduction(
       this.defender.dp,
-      defenderRoll
+      defenderDefenseRoll
+    );
+
+    // DEFENSOR: Calcular dano bruto e defesa do oponente
+    const defenderRawDamage = this.calculateRawDamage(
+      this.defender.dp,
+      defenderAttackRoll
+    );
+    const attackerDefenseReduction = this.calculateDefenseReduction(
+      this.attacker.dp,
+      attackerDefenseRoll
+    );
+
+    console.log("⚔️ [BATTLE] Cálculos:", {
+      atacante: {
+        dano_bruto: attackerRawDamage,
+        defesa_oponente: defenderDefenseReduction,
+      },
+      defensor: {
+        dano_bruto: defenderRawDamage,
+        defesa_oponente: attackerDefenseReduction,
+      },
+    });
+
+    // Calcular dano líquido (Dano - Defesa)
+    let attackerNetDamage = Math.max(
+      0,
+      attackerRawDamage - defenderDefenseReduction
+    );
+    let defenderNetDamage = Math.max(
+      0,
+      defenderRawDamage - attackerDefenseReduction
     );
 
     // Aplicar vantagens de tipo
-    const attackerFinalDamage = this.applyTypeAdvantage(
-      attackerBaseDamage,
+    attackerNetDamage = this.applyTypeAdvantage(
+      attackerNetDamage,
       this.attackerTypeAdvantage
     );
-    const defenderFinalDamage = this.applyTypeAdvantage(
-      defenderBaseDamage,
+    defenderNetDamage = this.applyTypeAdvantage(
+      defenderNetDamage,
       this.defenderTypeAdvantage
     );
+
+    // Aplicar modificadores de status (+20 ou -20)
+    attackerNetDamage = Math.max(
+      0,
+      attackerNetDamage + this.attackerStatusModifier
+    );
+    defenderNetDamage = Math.max(
+      0,
+      defenderNetDamage + this.defenderStatusModifier
+    );
+
+    console.log("💥 [BATTLE] Dano final:", {
+      atacante_causa: attackerNetDamage,
+      defensor_causa: defenderNetDamage,
+    });
 
     // Calcular novos HPs
     const attackerNewHp = Math.max(
       0,
-      this.attacker.currentHp - defenderFinalDamage
+      this.attacker.currentHp - defenderNetDamage
     );
     const defenderNewHp = Math.max(
       0,
-      this.defender.currentHp - attackerFinalDamage
+      this.defender.currentHp - attackerNetDamage
     );
 
     return {
-      attackerDamage: attackerFinalDamage,
-      defenderDamage: defenderFinalDamage,
-      attackerDiceRoll: attackerRoll,
-      defenderDiceRoll: defenderRoll,
+      attackerDamage: attackerNetDamage,
+      defenderDamage: defenderNetDamage,
+      attackerAttackRoll,
+      attackerDefenseRoll,
+      defenderAttackRoll,
+      defenderDefenseRoll,
       attackerNewHp,
       defenderNewHp,
       attackerTypeAdvantage: this.attackerTypeAdvantage,
       defenderTypeAdvantage: this.defenderTypeAdvantage,
+      attackerCriticalSuccess,
+      attackerCriticalFail,
+      defenderCriticalSuccess,
+      defenderCriticalFail,
     };
   }
 
