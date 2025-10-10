@@ -160,7 +160,7 @@ export default function BossCard({
                   </span>
                 </div>
                 <div className="text-xs sm:text-sm text-yellow-300 font-semibold">
-                  ⚠️ Turno do Mundo: 10% DP dividido entre Digimons vivos
+                  ⚠️ Turno do Mundo: 50% DP dividido entre Digimons vivos
                 </div>
               </div>
             )}

@@ -90,28 +90,35 @@ export class BossManager {
     currentTurn: number
   ): Promise<GameBoss | null> {
     const averageDp = this.calculateAverageDp(players);
-    
+
     // Contar total de Digimons vivos
     let totalAliveDigimons = 0;
     for (const player of players) {
-      totalAliveDigimons += player.digimons.filter(d => d.currentHp > 0).length;
+      totalAliveDigimons += player.digimons.filter(
+        (d) => d.currentHp > 0
+      ).length;
     }
-    
+
     // Boss DP = média * total de Digimons vivos * 1.5
     // Exemplo: 6 Digimons com 2000 DP médio = 2000 * 6 * 1.5 = 18000 DP
     const bossMultiplier = Math.max(totalAliveDigimons * 1.5, 3); // Mínimo 3x
     const calculatedBossDp = averageDp * bossMultiplier;
-    
+
     const boss = await this.selectBoss(calculatedBossDp);
 
     if (!boss) return null;
 
-    return this.createGameBoss(boss, calculatedBossDp, currentTurn, totalAliveDigimons);
+    return this.createGameBoss(
+      boss,
+      calculatedBossDp,
+      currentTurn,
+      totalAliveDigimons
+    );
   }
 
   /**
    * Calcula dano do "Turno do Mundo" (boss ataca todos)
-   * 10% do DP do boss dividido entre todos os Digimons vivos
+   * 50% do DP do boss dividido entre todos os Digimons vivos
    */
   static calculateWorldTurnDamage(
     boss: GameBoss,
@@ -119,7 +126,7 @@ export class BossManager {
   ): number {
     if (aliveDigimonsCount === 0) return 0;
 
-    const totalDamage = boss.calculatedDp * 0.1;
+    const totalDamage = boss.calculatedDp * 0.5;
     return Math.floor(totalDamage / aliveDigimonsCount);
   }
 
@@ -202,4 +209,3 @@ export class BossManager {
     }
   }
 }
-
