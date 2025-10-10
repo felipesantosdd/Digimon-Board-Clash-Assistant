@@ -34,7 +34,7 @@ export default function BossCard({
       <div
         className={`
           relative bg-gradient-to-br from-purple-900 via-red-900 to-black
-          rounded-lg p-2 sm:p-3 shadow-2xl border-2 border-red-500
+          rounded-lg p-3 sm:p-4 shadow-2xl border-2 border-red-500
           transition-all duration-300
           ${isAttacking ? "scale-95 opacity-75" : "scale-100"}
           ${canAttack && !isAttacking ? "hover:scale-105 cursor-pointer" : ""}
@@ -65,15 +65,15 @@ export default function BossCard({
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3 sm:gap-4">
           {/* Imagem do Boss */}
           <div className="relative flex-shrink-0">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded overflow-hidden border border-red-400 shadow-lg">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded overflow-hidden border-2 border-red-400 shadow-lg">
               <Image
                 src={boss.image}
                 alt={boss.name}
-                width={56}
-                height={56}
+                width={80}
+                height={80}
                 className="w-full h-full object-cover"
                 unoptimized
               />
@@ -85,20 +85,20 @@ export default function BossCard({
           {/* Informações do Boss */}
           <div className="flex-1 min-w-0">
             {/* Nome */}
-            <p className="text-xs sm:text-sm font-bold text-white truncate">
+            <p className="text-sm sm:text-base font-bold text-white truncate">
               {boss.name}
             </p>
 
             {/* Tipo e DP */}
-            <div className="flex gap-1 mt-0.5">
-              <div className="bg-purple-600 text-white text-[9px] sm:text-[10px] px-1 py-0.5 rounded">
+            <div className="flex gap-1.5 mt-1 sm:mt-1.5">
+              <div className="bg-purple-600 text-white text-[10px] sm:text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 rounded">
                 {boss.typeId === 1
                   ? "Data"
                   : boss.typeId === 2
                   ? "Vaccine"
                   : "Virus"}
               </div>
-              <div className="bg-purple-600 text-white text-[9px] sm:text-[10px] px-1 py-0.5 rounded">
+              <div className="bg-purple-600 text-white text-[10px] sm:text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 rounded">
                 {boss.calculatedDp >= 1000
                   ? `${Math.floor(boss.calculatedDp / 1000)}k DP`
                   : `${boss.calculatedDp} DP`}
@@ -106,16 +106,16 @@ export default function BossCard({
             </div>
 
             {/* Barra de HP */}
-            <div className="flex items-center gap-1 mt-0.5 sm:mt-1">
-              <div className="flex-1 bg-gray-700 rounded-full h-1 sm:h-1.5">
+            <div className="flex items-center gap-1.5 mt-1 sm:mt-1.5">
+              <div className="flex-1 bg-gray-700 rounded-full h-1.5 sm:h-2">
                 <div
-                  className={`h-1 sm:h-1.5 rounded-full transition-all relative ${getHpBarColor()}`}
+                  className={`h-1.5 sm:h-2 rounded-full transition-all relative ${getHpBarColor()}`}
                   style={{ width: `${hpPercentage}%` }}
                 >
                   <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
                 </div>
               </div>
-              <span className="text-[9px] sm:text-[10px] text-white font-bold">
+              <span className="text-[10px] sm:text-xs text-white font-bold">
                 {Math.round(hpPercentage)}%
               </span>
             </div>
