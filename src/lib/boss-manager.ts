@@ -64,11 +64,13 @@ export class BossManager {
    */
   static createGameBoss(
     boss: Boss,
-    averageDp: number,
-    currentTurn: number
+    calculatedDp: number,
+    currentTurn: number,
+    totalAliveDigimons: number
   ): GameBoss {
-    const calculatedDp = averageDp;
-    const maxHp = averageDp * 3;
+    // HP do boss = DP * número de Digimons vivos * 0.5
+    // Exemplo: Boss 18000 DP, 6 Digimons = 18000 * 6 * 0.5 = 54000 HP
+    const maxHp = calculatedDp * totalAliveDigimons * 0.5;
 
     return {
       ...boss,
@@ -88,11 +90,23 @@ export class BossManager {
     currentTurn: number
   ): Promise<GameBoss | null> {
     const averageDp = this.calculateAverageDp(players);
-    const boss = await this.selectBoss(averageDp);
+    
+    // Contar total de Digimons vivos
+    let totalAliveDigimons = 0;
+    for (const player of players) {
+      totalAliveDigimons += player.digimons.filter(d => d.currentHp > 0).length;
+    }
+    
+    // Boss DP = média * total de Digimons vivos * 1.5
+    // Exemplo: 6 Digimons com 2000 DP médio = 2000 * 6 * 1.5 = 18000 DP
+    const bossMultiplier = Math.max(totalAliveDigimons * 1.5, 3); // Mínimo 3x
+    const calculatedBossDp = averageDp * bossMultiplier;
+    
+    const boss = await this.selectBoss(calculatedBossDp);
 
     if (!boss) return null;
 
-    return this.createGameBoss(boss, averageDp, currentTurn);
+    return this.createGameBoss(boss, calculatedBossDp, currentTurn, totalAliveDigimons);
   }
 
   /**

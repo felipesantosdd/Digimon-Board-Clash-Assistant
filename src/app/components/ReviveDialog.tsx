@@ -180,7 +180,9 @@ export default function ReviveDialog({
             <span className="text-lg sm:text-2xl">✨</span>
             Reviver Digimon
           </h3>
-          <p className="text-xs sm:text-sm text-yellow-100 mt-0.5 sm:mt-1">{digimonName}</p>
+          <p className="text-xs sm:text-sm text-yellow-100 mt-0.5 sm:mt-1">
+            {digimonName}
+          </p>
         </div>
 
         {/* Content */}
@@ -276,9 +278,9 @@ export default function ReviveDialog({
                 className={`transition-transform duration-100 ${
                   isRolling ? "animate-spin" : ""
                 }`}
-                style={{ 
-                  width: window.innerWidth < 640 ? "100px" : "140px", 
-                  height: window.innerWidth < 640 ? "100px" : "140px" 
+                style={{
+                  width: window.innerWidth < 640 ? "100px" : "140px",
+                  height: window.innerWidth < 640 ? "100px" : "140px",
                 }}
               />
               {isRolling && (
