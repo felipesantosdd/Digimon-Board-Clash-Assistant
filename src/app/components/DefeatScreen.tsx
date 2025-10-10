@@ -87,16 +87,14 @@ export default function DefeatScreen({
           <div className="bg-gradient-to-r from-red-900 to-red-800 rounded-xl p-6 sm:p-8 mb-6 border-2 border-red-500">
             <div className="text-center">
               {/* Imagem grande do boss vitorioso */}
-              <div className="relative mx-auto mb-4">
-                <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-red-400 shadow-2xl mx-auto">
+              <div className="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-4">
+                <div className="w-full h-full rounded-full overflow-hidden border-4 border-red-400 shadow-2xl">
                   <img
                     src={boss.image}
                     alt={boss.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                {/* Efeito de brilho vermelho */}
-                <div className="absolute inset-0 bg-red-500 rounded-full opacity-30 animate-pulse"></div>
                 {/* Coroa de vencedor */}
                 <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 text-4xl sm:text-5xl animate-bounce">
                   👑
