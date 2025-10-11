@@ -5,6 +5,7 @@ import EvolutionModal from "../EvolutionModal";
 import EvolutionLineModal from "../EvolutionLineModal";
 import AddDigimonModal from "../AddDigimonModal";
 import TypeIcon from "../TypeIcons";
+import ImageCropper from "../ImageCropper";
 import { Digimon } from "../../database/database_type";
 import { useSnackbar } from "notistack";
 import { capitalize, getLevelName } from "@/lib/utils";
@@ -36,6 +37,9 @@ export default function DigimonsTab({
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+  const [imageToCrop, setImageToCrop] = useState<string>("");
+  const [showCropper, setShowCropper] = useState(false);
+  const [croppedImageFile, setCroppedImageFile] = useState<File | null>(null);
 
   // Carregar Digimons da API
   useEffect(() => {
@@ -148,35 +152,71 @@ export default function DigimonsTab({
   const handleOpenUploadModal = (digimon: Digimon) => {
     setUploadingDigimon(digimon);
     setImagePreviewUrl(digimon.image || null);
+    setCroppedImageFile(null);
     setIsUploadModalOpen(true);
   };
 
   const handleCloseUploadModal = () => {
     setUploadingDigimon(null);
     setImagePreviewUrl(null);
+    setCroppedImageFile(null);
+    setImageToCrop("");
+    setShowCropper(false);
     setIsUploadModalOpen(false);
   };
 
   const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      // Validar tipo
+      if (!file.type.startsWith("image/")) {
+        enqueueSnackbar("Por favor, selecione uma imagem válida", {
+          variant: "warning",
+        });
+        return;
+      }
+
+      // Abrir cropper
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreviewUrl(reader.result as string);
+        setImageToCrop(reader.result as string);
+        setShowCropper(true);
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleCropComplete = (croppedBlob: Blob) => {
+    // Converter blob para File
+    const extension = croppedBlob.type === "image/webp" ? "webp" : "jpg";
+    const croppedFile = new File([croppedBlob], `cropped-image.${extension}`, {
+      type: croppedBlob.type,
+    });
+    setCroppedImageFile(croppedFile);
+
+    // Criar preview da imagem recortada
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreviewUrl(reader.result as string);
+    };
+    reader.readAsDataURL(croppedBlob);
+
+    setShowCropper(false);
+  };
+
+  const handleCropCancel = () => {
+    setShowCropper(false);
+    setImageToCrop("");
   };
 
   const handleUploadImage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!uploadingDigimon) return;
 
-    const formData = new FormData(e.currentTarget);
-    const file = formData.get("image") as File;
-
-    if (!file || file.size === 0) {
-      enqueueSnackbar("Selecione uma imagem", { variant: "warning" });
+    if (!croppedImageFile) {
+      enqueueSnackbar("Selecione e corte uma imagem primeiro", {
+        variant: "warning",
+      });
       return;
     }
 
@@ -185,9 +225,9 @@ export default function DigimonsTab({
     try {
       console.log("📤 Iniciando upload da imagem...");
 
-      // Upload da imagem
+      // Upload da imagem cortada
       const uploadFormData = new FormData();
-      uploadFormData.append("file", file);
+      uploadFormData.append("file", croppedImageFile);
       uploadFormData.append("type", "digimon");
 
       const uploadResponse = await fetch("/api/upload", {
@@ -709,6 +749,19 @@ export default function DigimonsTab({
         allDigimons={digimons}
       />
 
+      {/* Image Cropper - Temporário para DEV */}
+      {showCropper && imageToCrop && (
+        <ImageCropper
+          image={imageToCrop}
+          onCropComplete={handleCropComplete}
+          onCancel={handleCropCancel}
+          aspectRatio={1}
+          cropShape="rect"
+          outputSize={512}
+          quality={0.92}
+        />
+      )}
+
       {/* Modal de Upload Rápido de Imagem - Temporário para DEV */}
       {isUploadModalOpen && uploadingDigimon && (
         <div
@@ -766,15 +819,17 @@ export default function DigimonsTab({
               {/* Input de Arquivo */}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-200 mb-2">
-                  Selecionar Nova Imagem
+                  Selecionar e Cortar Imagem
                 </label>
                 <input
                   type="file"
-                  name="image"
                   accept="image/*"
                   onChange={handleImageFileChange}
                   className="w-full px-3 py-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"
                 />
+                <p className="text-xs text-gray-400 mt-2">
+                  ✂️ A imagem será cortada automaticamente após seleção
+                </p>
               </div>
 
               {/* Botões */}
