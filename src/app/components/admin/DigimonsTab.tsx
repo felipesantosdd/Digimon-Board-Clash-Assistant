@@ -184,11 +184,11 @@ export default function DigimonsTab({
 
     try {
       console.log("📤 Iniciando upload da imagem...");
-      
+
       // Upload da imagem
       const uploadFormData = new FormData();
       uploadFormData.append("file", file);
-      uploadFormData.append("type", "digimons");
+      uploadFormData.append("type", "digimon");
 
       const uploadResponse = await fetch("/api/upload", {
         method: "POST",
@@ -201,7 +201,7 @@ export default function DigimonsTab({
         throw new Error(errorData.error || "Erro ao fazer upload da imagem");
       }
 
-      const { url } = await uploadResponse.json();
+      const { path: url } = await uploadResponse.json();
       console.log("✅ Upload concluído:", url);
 
       // Atualizar o Digimon com a nova imagem
@@ -245,11 +245,14 @@ export default function DigimonsTab({
         )
       );
 
-      enqueueSnackbar(`Imagem de ${capitalize(uploadingDigimon.name)} atualizada!`, {
-        variant: "success",
-      });
+      enqueueSnackbar(
+        `Imagem de ${capitalize(uploadingDigimon.name)} atualizada!`,
+        {
+          variant: "success",
+        }
+      );
       handleCloseUploadModal();
-      
+
       // Recarregar os Digimons para garantir sincronização
       await fetchDigimons();
     } catch (error) {
