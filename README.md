@@ -4,6 +4,18 @@
 
 Sistema de gerenciamento e assistente para partidas de Digimon Board Clash, um jogo estratégico para **2 a 6 jogadores** onde cada jogador controla Digimons, evolui durante o jogo, coleta itens e enfrenta bosses e eventos globais, enquanto tenta **aniquilar** todos os Digimons adversários.
 
+## 📊 Estatísticas do Sistema
+
+- 🎮 **482 Digimons** cadastrados (7 níveis: Armor a Super Mega)
+- 🖼️ **333 Digimons com imagem** (69% de cobertura)
+- 👑 **93 Bosses** configurados (antagonistas das séries)
+- 💎 **7 Itens** com **16 Efeitos** diferentes
+- 🎯 **Sistema de combate** baseado em D20
+- 🧬 **Sistema de evolução** com XP oculto
+- 🎒 **Bag compartilhada** por equipe
+- 🛡️ **Sistema de defesa** e **💢 provocação**
+- 📚 **Painel administrativo** completo para gerenciamento
+
 ---
 
 ## 🏗️ Overview do Sistema
@@ -59,10 +71,11 @@ O **Digimon Board Clash** é uma aplicação web **full-stack** construída com 
 │  └─────────────────────┘  └─────────────────────┘          │
 │                                                              │
 │  📊 Dados:                                                   │
-│  • 503 Digimons (153 ativos, 350 inativos)                 │
+│  • 482 Digimons (333 com imagens = 69%, 149 sem = 31%)     │
+│  • 93 Bosses configurados (19.96% dos Digimons)            │
 │  • Sistema de HP/DP aleatório por nível                     │
-│  • Itens e Efeitos                                          │
-│  • Bosses e Drops                                           │
+│  • 7 Itens com 16 Efeitos                                   │
+│  • Sistema de Drops de Bosses                               │
 │  • Tamers (Avatares)                                        │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -295,6 +308,38 @@ Para evoluir para um sistema multiplayer:
 - Quando um jogador fica com **0 Digimons ativos**, ele é eliminado do jogo
 - O último jogador com Digimons vivos vence
 
+## 🌟 Destaques do Sistema
+
+### ✅ Mecânicas Implementadas
+
+- ⚔️ **Sistema de Combate Tático**: D20 com modificadores de tipo, defesa e contra-ataque
+- 🧬 **Evolução Misteriosa**: Sistema de XP oculto com surpresa ao evoluir
+- 🎒 **Bag Compartilhada**: Inventário unificado por equipe para melhor colaboração
+- 🛡️ **Defesa Estratégica**: Proteja aliados redirecionando ataques
+- 💢 **Provocação**: Force inimigos a atacar alvos específicos (Level 2+, cooldown 3 turnos)
+- 👑 **93 Bosses**: Antagonistas icônicos das séries marcados para desafios épicos
+- 💰 **Sistema de Exploração**: Ganhe itens rolando D20
+- 😴 **Descanso**: Recupere 20% de HP sem usar itens
+- ⏸️ **Controle de Ações**: Um Digimon, uma ação por turno
+
+### 🎨 Interface Visual
+
+- Cards interativos com informações em tempo real
+- Animações de evolução épicas
+- Badges visuais para status (Defendendo, Provocado, BOSS, etc)
+- Preview de linha evolutiva completa
+- Sistema de cores por tipo de Digimon
+- Interface responsiva (mobile-first)
+
+### 🔧 Sistema Administrativo
+
+- Painel completo de gerenciamento (/biblioteca)
+- Upload e crop de imagens em tempo real
+- Filtros e busca avançada
+- Modo visualização em produção
+- Organização automática por níveis
+- Visual feedback para itens inativos/bosses
+
 ---
 
 ## 💻 Sistema Implementado
@@ -328,14 +373,14 @@ Este projeto é um **assistente digital** para o jogo de tabuleiro físico que:
    - Visualização de linha evolutiva completa
    - XP resetada para 0% após evoluir
 
-4. **Sistema de Inventário (Bag)**
+4. **Sistema de Inventário (Bag Compartilhada)**
 
-   - Cada Digimon possui uma mochila (bag) individual
-   - **Usar Item**: Aplica efeitos de cura (gasta ação)
-   - **Dar Item**: Transfere para aliado (gasta ação)
-   - **Descartar Item**: Remove do inventário (não gasta ação)
+   - **Bag Compartilhada** entre todos os Digimons da equipe
+   - **Usar Item**: Qualquer Digimon pode usar itens da bag (gasta ação)
+   - **Descartar Item**: Remove do inventário compartilhado (não gasta ação)
    - Sistema de stackable items (quantidade)
-   - Modal visual mostrando todos os itens
+   - Modal visual mostrando todos os itens da equipe
+   - Itens obtidos por exploração ou drops de bosses
 
 5. **Sistema de Defesa**
 
@@ -345,7 +390,15 @@ Este projeto é um **assistente digital** para o jogo de tabuleiro físico que:
    - Badge visual mostra quem está protegendo quem
    - Apenas um defensor por Digimon
 
-6. **Painel Administrativo (/biblioteca)**
+6. **Sistema de Provocar**
+
+   - Digimons **Level 2+** podem provocar inimigos (gasta ação)
+   - **Cooldown**: 3 turnos entre provocações
+   - **Efeito**: Inimigo provocado só pode atacar o provocador no próximo turno dele
+   - Badge visual indica tempo de cooldown restante
+   - Estratégico para proteger aliados fracos
+
+7. **Painel Administrativo (/biblioteca)**
 
    - **Gerenciamento de Digimons** (CRUD completo em dev)
      - Switch de status Ativo/Inativo
@@ -358,15 +411,17 @@ Este projeto é um **assistente digital** para o jogo de tabuleiro físico que:
    - **Modo Produção**: Apenas visualização (sem edição)
 
 7. **Banco de Dados**
-   - **503 Digimons cadastrados** (níveis 1 a 6)
-     - 153 ativos (com imagem)
-     - 350 inativos (sem imagem)
+   - **482 Digimons cadastrados** (níveis 0 a 6)
+     - 333 ativos (com imagem = 69% de cobertura)
+     - 149 inativos (sem imagem = 31%)
+     - 93 Digimons marcados como **Bosses** (19.96%)
+     - Badge 👑 BOSS nos cards da biblioteca
    - **Sistema de HP/DP Aleatório**
      - Stats gerados dinamicamente por nível
      - Intervalos configurados por nível
    - **Sistema de tipos e evoluções** completo
-   - **Itens com efeitos** variados
-   - **Bosses com sistema de drops**
+   - **7 Itens com 16 Efeitos** configurados
+   - **Bosses com sistema de drops** por probabilidade
 
 ### 🚧 Funcionalidades em Desenvolvimento
 
@@ -437,12 +492,17 @@ Dano Real = DP × (D20 × 5%) × Modificador de Tipo
 
 #### Escala de Poder por Nível (Intervalos):
 
-- **Nível 1 (Rookie)**: 1.600 - 2.400 HP/DP
-- **Nível 2 (Champion)**: 4.000 - 6.000 HP/DP
-- **Nível 3 (Ultimate)**: 6.400 - 9.600 HP/DP
-- **Nível 4 (Mega)**: 10.000 - 14.000 HP/DP
-- **Nível 5 (Ultra)**: 15.000 - 18.000 HP/DP
-- **Nível 6 (Super Mega)**: 19.000 - 24.000 HP/DP
+| Nível | Nome | HP/DP Mínimo | HP/DP Máximo | Qtd. Digimons | Qtd. Bosses |
+|-------|------|--------------|--------------|---------------|-------------|
+| **0** | 🛡️ Armor | - | - | 2 | 0 |
+| **1** | 🥚 Rookie | 1.600 | 2.400 | 65 | 1 (1.5%) |
+| **2** | 💪 Champion | 4.000 | 6.000 | 110 | 5 (4.6%) |
+| **3** | ⚡ Ultimate | 6.400 | 9.600 | 125 | 35 (28.7%) |
+| **4** | 👑 Mega | 10.000 | 14.000 | 145 | 37 (28.0%) |
+| **5** | 🌟 Ultra | 15.000 | 18.000 | 31 | 12 (40.0%) |
+| **6** | 💎 Super Mega | 19.000 | 24.000 | 4 | 3 (60.0%) |
+
+**Total: 482 Digimons | 93 Bosses (19.96%)**
 
 ### ⚔️ Sistema de Combate
 
@@ -517,14 +577,15 @@ Este jogo utiliza **stats aleatórios dinâmicos** onde HP = DP, mas os valores 
 
 #### Intervalos Completos:
 
-| Nível | HP Mínimo | HP Máximo | DP Mínimo | DP Máximo |
-| ----- | --------- | --------- | --------- | --------- |
-| 1     | 1,600     | 2,400     | 1,600     | 2,400     |
-| 2     | 4,000     | 6,000     | 4,000     | 6,000     |
-| 3     | 6,400     | 9,600     | 6,400     | 9,600     |
-| 4     | 10,000    | 14,000    | 10,000    | 14,000    |
-| 5     | 15,000    | 18,000    | 15,000    | 18,000    |
-| 6     | 19,000    | 24,000    | 19,000    | 24,000    |
+| Nível | Nome | HP Mínimo | HP Máximo | DP Mínimo | DP Máximo |
+| ----- | ----------- | --------- | --------- | --------- | --------- |
+| 0     | Armor       | -         | -         | -         | -         |
+| 1     | Rookie      | 1,600     | 2,400     | 1,600     | 2,400     |
+| 2     | Champion    | 4,000     | 6,000     | 4,000     | 6,000     |
+| 3     | Ultimate    | 6,400     | 9,600     | 6,400     | 9,600     |
+| 4     | Mega        | 10,000    | 14,000    | 10,000    | 14,000    |
+| 5     | Ultra       | 15,000    | 18,000    | 15,000    | 18,000    |
+| 6     | Super Mega  | 19,000    | 24,000    | 19,000    | 24,000    |
 
 #### Vantagens do Sistema:
 
@@ -543,16 +604,30 @@ Este jogo utiliza **stats aleatórios dinâmicos** onde HP = DP, mas os valores 
 
 ### 🟢 Sistema de Status Ativo/Inativo
 
+#### Distribuição de Imagens por Nível:
+
+| Nível | Nome | Com Imagem | Total | Cobertura |
+|-------|------|------------|-------|-----------|
+| **0** | Armor | 2 | 2 | 100% ✅ |
+| **1** | Rookie | 65 | 65 | 100% ✅ |
+| **2** | Champion | 110 | 110 | 100% ✅ |
+| **3** | Ultimate | 100 | 125 | 80% ⚠️ |
+| **4** | Mega | 43 | 145 | 29.7% ❌ |
+| **5** | Ultra | 9 | 31 | 29% ❌ |
+| **6** | Super Mega | 4 | 4 | 100% ✅ |
+
+**Total: 333/482 com imagem (69.09%)**
+
 #### Digimons Ativos:
 
-- ✅ **153 Digimons** com imagens
+- ✅ **333 Digimons** com imagens (69%)
 - ✅ Disponíveis para novos jogos
 - ✅ Aparecem nas opções de evolução
 - ✅ Exibidos normalmente na biblioteca
 
 #### Digimons Inativos:
 
-- ⚠️ **350 Digimons** sem imagens
+- ⚠️ **149 Digimons** sem imagens (31%)
 - ❌ **Não aparecem** em novos jogos
 - ❌ **Não são opções** de evolução
 - 🎨 Exibidos em **cinza** na biblioteca
@@ -566,6 +641,7 @@ No painel administrativo em desenvolvimento:
 - Estados visuais claros (verde = ativo, cinza = inativo)
 - Permite ativar Digimons ao adicionar imagens
 - Previne uso acidental de Digimons sem arte
+- **Badge 👑 BOSS** identifica Digimons que podem ser bosses
 
 ### 🧬 Sistema de Evolução (Refatorado - XP Oculto)
 
@@ -621,7 +697,7 @@ No painel administrativo em desenvolvimento:
 - **Special**: Efeitos únicos (evolução, revive, etc)
 - **Boss**: Efeitos especiais de bosses
 
-#### Itens Disponíveis:
+#### Itens Disponíveis (7 itens):
 
 - 💚 **Potion**: Cura 1000 HP
 - 💙 **Mega Potion**: Cura 2000 HP
@@ -629,39 +705,36 @@ No painel administrativo em desenvolvimento:
 - 🔄 **Revive**: Revive com 50% do HP
 - ⬆️ **Power Boost**: +500 DP permanente
 - 🧬 **Instant Evolution**: Evolui imediatamente
+- 🛡️ **Shield Turn**: Proteção temporária (a implementar)
 
-#### Sistema de Inventário (Bag):
+#### Sistema de Inventário (Bag Compartilhada):
 
-- Cada Digimon possui uma **mochila (bag)** individual
+- **Bag Compartilhada** entre toda a equipe do jogador
 - Itens são **stackable** (mesmos itens acumulam quantidade)
 - **Acesso**: Clique no Digimon → Botão 🎒 **Bag**
+- Qualquer Digimon da equipe pode usar qualquer item
 
 #### Ações com Itens:
 
 1. **✓ Usar Item:**
 
-   - Aplica o efeito no próprio Digimon
-   - Remove 1 unidade do item
+   - Aplica o efeito no Digimon que abriu a bag
+   - Remove 1 unidade do item da bag compartilhada
    - **Gasta a ação do turno**
-   - Efeitos disponíveis: cura de HP
+   - Efeitos disponíveis: cura de HP, buffs, etc
 
-2. **🎁 Dar Item:**
-
-   - Transfere 1 unidade para outro Digimon aliado vivo
-   - Se o aliado já tem o item, incrementa a quantidade
-   - **Gasta a ação do turno**
-
-3. **🗑️ Descartar Item:**
-   - Remove o item completamente do inventário
+2. **🗑️ Descartar Item:**
+   - Remove o item completamente da bag compartilhada
    - **NÃO gasta ação**
    - Útil para liberar espaço
 
 #### Regras de Itens:
 
-- ✅ Só pode usar/dar itens no **seu turno**
-- ✅ Só pode usar/dar se o Digimon **ainda não agiu**
+- ✅ Só pode usar itens no **seu turno**
+- ✅ Só pode usar se o Digimon **ainda não agiu**
 - ✅ Usar poção **não reduz XP de evolução**
-- ✅ Itens podem ser obtidos via exploração ou drops de bosses
+- ✅ Itens podem ser obtidos via exploração (💰 Explorar) ou drops de bosses
+- ✅ Todos os Digimons da equipe compartilham a mesma bag
 
 ### 🛡️ Sistema de Defesa
 
@@ -697,20 +770,72 @@ No painel administrativo em desenvolvimento:
 - Digimons fortes podem defender múltiplos aliados em turnos consecutivos
 - Cuidado: defender gasta sua ação, impedindo ataque/exploração
 
+### 💢 Sistema de Provocar
+
+#### Mecânica de Provocar:
+
+- **Ação**: Digimon provoca um inimigo, forçando-o a atacar apenas o provocador
+- **Requisito**: Apenas **Level 2+** pode provocar
+- **Cooldown**: **3 turnos** entre provocações do mesmo Digimon
+- **Custo**: **Gasta a ação do turno**
+
+#### Como Funciona:
+
+1. **Provocar**: Jogador seleciona um Digimon Level 2+ e clica em 💢 **Provocar**
+2. **Escolha**: Seleciona um inimigo vivo
+3. **Efeito**: Inimigo provocado só pode atacar o provocador no **próximo turno dele**
+4. **Marcação**: Badge aparece indicando quem foi provocado
+5. **Duração**: Efeito dura apenas o próximo turno do inimigo provocado
+6. **Cooldown**: Provocador não pode provocar novamente por 3 turnos
+
+#### Regras de Provocação:
+
+- ✅ Apenas **Level 2+** pode provocar
+- ✅ Cooldown de **3 turnos globais** por Digimon
+- ✅ Badge indica turnos restantes no botão (ex: "2T")
+- ✅ Botão desabilitado durante cooldown
+- ✅ Inimigo provocado **deve atacar** o provocador no próximo turno
+- ✅ Se provocador morrer, efeito é cancelado
+
+#### Estratégia:
+
+- Use para controlar o foco de inimigos poderosos
+- Proteja aliados fracos forçando inimigos a atacar seu tanque
+- Coordene com o sistema de defesa para máxima proteção
+- Cuidado: provocar gasta ação e tem cooldown longo
+
 ### 👹 Sistema de Bosses
 
-#### Características dos Bosses:
+#### Distribuição de Bosses por Nível:
 
-- **DP Alto**: Geralmente 2-3x maior que Digimons do mesmo nível
-- **Efeito Especial**: Cada boss possui um efeito único
-- **Sistema de Drops**: Ao derrotar, chance de dropar itens
+| Nível | Nome | Bosses | Total | Percentual |
+|-------|------|--------|-------|------------|
+| 1 | Rookie | 1 | 65 | 1.5% |
+| 2 | Champion | 5 | 110 | 4.6% |
+| 3 | Ultimate | 35 | 125 | 28.7% |
+| 4 | Mega | 37 | 145 | 28.0% |
+| 5 | Ultra | 12 | 31 | 40.0% |
+| 6 | Super Mega | 3 | 4 | 60.0% |
+
+**Total: 93 Bosses (19.96% dos Digimons)**
+
+#### Antagonistas das Séries:
+
+Bosses incluem antagonistas principais de todas as séries de Digimon:
+
+- **Adventure**: Devimon, Etemon, Vamdemon, Dark Masters, Apocalymon
+- **Adventure 02**: Archnemon, Mummymon, Kimeramon, Daemon, Belial Vamdemon
+- **Tamers**: Beelzemon, Megidramon, Vikaralamon (Deva)
+- **Frontier**: Cherubimon, Mercurymon, Lucemon
+- **Data Squad**: Belphemon, Craniummon, Sleipmon
 
 #### Sistema de Drops:
 
 - Cada boss pode ter múltiplos drops configurados
 - Cada drop tem **chance individual** (1-100%)
 - Drops são itens especiais ou raros
-- Sistema é gerenciado pelo painel admin
+- Sistema é gerenciado pelo painel admin (/biblioteca → Boss Drops)
+- Ao derrotar um boss, sistema rola chance para cada drop configurado
 
 ### ⏱️ Fluxo de Turno (Implementado)
 
@@ -722,28 +847,30 @@ No painel administrativo em desenvolvimento:
 
    - ⚔️ **Atacar**: Escolhe alvo inimigo e realiza combate (sem volta!)
    - 🛡️ **Defender**: Protege um aliado de nível igual ou inferior
-   - 💰 **Explorar**: Rola D20 para ganhar itens/loot (a implementar)
+   - 💢 **Provocar**: Força inimigo a atacar apenas você (Level 2+, cooldown 3 turnos)
+   - 💰 **Explorar**: Rola D20 para ganhar itens/loot
    - 😴 **Descansar**: Recupera 20% do HP máximo
-   - ✓ **Usar Item**: Aplica efeito de item do inventário
-   - 🎁 **Dar Item**: Transfere item para outro Digimon aliado
+   - 🎒 **Usar Item**: Aplica efeito de item da bag compartilhada
 
    **Ações que NÃO gastam o turno:**
 
    - ✨ **Evoluir**: Se tiver XP 100% (badge dourado aparece)
-   - 🎒 **Bag**: Abrir inventário (pode descartar itens)
-   - 🗑️ **Descartar Item**: Remove item do inventário
+   - 🎒 **Bag**: Abrir inventário compartilhado (pode descartar itens)
+   - 🗑️ **Descartar Item**: Remove item da bag compartilhada
 
 4. **Múltiplas Ações**: Jogador age com cada Digimon (1 ação cada)
 5. **Fim do Turno**: Clica em "Finalizar Turno"
-6. **Reset**: Defesas expiram, ações resetam
+6. **Reset**: Defesas expiram, ações resetam, cooldowns reduzem
 7. **Próximo Jogador**: Sistema passa automaticamente
 
 #### Regras de Ação:
 
 - ✅ Cada Digimon age **1 vez por turno**
 - ✅ Badge ⏸️ indica que Digimon já agiu
-- ✅ Não pode usar/dar itens ou defender após agir
+- ✅ Não pode usar itens, defender ou provocar após agir
 - ✅ **Atacar não tem volta** - pense bem antes de selecionar o alvo!
+- ✅ Provocar tem **cooldown de 3 turnos** e só funciona Level 2+
+- ✅ Bag é **compartilhada** entre todos os Digimons da equipe
 
 ### 🗺️ Tabuleiro (Planejado)
 
@@ -920,10 +1047,11 @@ Abra [http://localhost:3000](http://localhost:3000) no navegador.
 digimon-board-clash/
 ├── public/
 │   └── images/
-│       ├── digimons/      # 145+ imagens de Digimons
+│       ├── digimons/      # 333 imagens de Digimons (WebP otimizado)
 │       ├── tamers/        # Avatares dos jogadores
 │       ├── items/         # Ícones de itens
-│       └── bosses/        # Imagens de bosses
+│       ├── bosses/        # Imagens de bosses
+│       └── icons/         # Ícones de tipos (Data, Vaccine, Virus, etc)
 ├── src/
 │   ├── app/
 │   │   ├── api/           # API Routes (REST)
@@ -961,9 +1089,12 @@ digimon-board-clash/
 │       ├── bosses.json
 │       └── effects.json
 ├── scripts/               # Scripts de manutenção
-│   ├── seed-*.ts         # Scripts de população
-│   ├── export-db-to-json.ts
-│   └── convert-images-to-webp.ts
+│   ├── seed-*.ts         # Scripts de população do banco
+│   ├── export-db-to-json.ts        # Exporta SQLite → JSON
+│   ├── convert-images-to-webp.ts   # Converte PNG/JPG → WebP
+│   ├── cleanup-unused-images.ts    # Remove imagens não referenciadas
+│   ├── mark-antagonists-as-bosses.ts  # Marca antagonistas como bosses
+│   └── migrate-add-digimon-columns.ts # Migração de schema
 ├── database.sqlite        # DB local (gitignored)
 └── package.json
 ```
@@ -980,20 +1111,27 @@ Acesse a biblioteca completa para visualizar e gerenciar (em dev):
 
 #### 🐉 Digimons Tab
 
-- **Visualizar todos os Digimons** (503 total)
-  - 153 ativos (com imagem)
-  - 350 inativos (sem imagem, exibidos em cinza)
-- **Adicionar novos Digimons**
+- **Visualizar todos os Digimons** (482 total)
+  - 333 ativos (com imagem = 69%)
+  - 149 inativos (sem imagem = 31%, exibidos em cinza)
+  - 93 marcados como **Bosses** (badge 👑 BOSS)
+- **Adicionar novos Digimons** (apenas dev)
   - Switch Ativo/Inativo
+  - Switch Boss/Normal
   - Configuração de evoluções
-- **Editar Digimons existentes**
-  - Nome, DP, tipo, nível
+- **Editar Digimons existentes** (apenas dev)
+  - Nome, tipo, nível
   - Status ativo/inativo
-  - Upload e crop de imagem
+  - Status boss
+  - Upload e crop de imagem (512x512, WebP 92%)
 - **Deletar Digimons** (apenas em dev)
 - **Visualizar linha evolutiva completa**
   - Linhas coloridas conectando evoluções
   - Ícones de tipo personalizados
+  - Sistema de árvore evolutiva visual
+- **Filtros**: Por nome, por nível
+- **Organização**: Agrupados automaticamente por nível
+- **Badges visuais**: INATIVO, BOSS
 - **Modo Produção**: Apenas visualização (botões de edição ocultos)
 
 #### 💎 Items Tab
