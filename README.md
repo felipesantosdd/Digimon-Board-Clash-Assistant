@@ -6,8 +6,9 @@ Sistema de gerenciamento e assistente para partidas de Digimon Board Clash, um j
 
 ## 📊 Estatísticas do Sistema
 
-- 🎮 **482 Digimons** cadastrados (7 níveis: Armor a Super Mega)
-- 🖼️ **333 Digimons com imagem** (69% de cobertura)
+- 🎮 **466 Digimons** cadastrados (7 níveis: Armor a Super Mega)
+- 🖼️ **465 Digimons com imagem** (99.79% de cobertura!) ✨
+- ❌ **Apenas 1 Digimon sem imagem** (Aegiochusmon: Holy)
 - 👑 **93 Bosses** configurados (antagonistas das séries)
 - 💎 **7 Itens** com **16 Efeitos** diferentes
 - 🎯 **Sistema de combate** baseado em D20
@@ -71,7 +72,7 @@ O **Digimon Board Clash** é uma aplicação web **full-stack** construída com 
 │  └─────────────────────┘  └─────────────────────┘          │
 │                                                              │
 │  📊 Dados:                                                   │
-│  • 482 Digimons (333 com imagens = 69%, 149 sem = 31%)     │
+│  • 466 Digimons (465 com imagens = 99.79%!) ✨             │
 │  • 93 Bosses configurados (19.96% dos Digimons)            │
 │  • Sistema de HP/DP aleatório por nível                     │
 │  • 7 Itens com 16 Efeitos                                   │
@@ -410,10 +411,10 @@ Este projeto é um **assistente digital** para o jogo de tabuleiro físico que:
    - **Gerenciamento de Efeitos** do jogo
    - **Modo Produção**: Apenas visualização (sem edição)
 
-7. **Banco de Dados**
-   - **482 Digimons cadastrados** (níveis 0 a 6)
-     - 333 ativos (com imagem = 69% de cobertura)
-     - 149 inativos (sem imagem = 31%)
+8. **Banco de Dados**
+   - **466 Digimons cadastrados** (níveis 0 a 6)
+     - 465 ativos (com imagem = 99.79% de cobertura!) ✨
+     - Apenas 1 inativo (Aegiochusmon: Holy)
      - 93 Digimons marcados como **Bosses** (19.96%)
      - Badge 👑 BOSS nos cards da biblioteca
    - **Sistema de HP/DP Aleatório**
@@ -492,17 +493,17 @@ Dano Real = DP × (D20 × 5%) × Modificador de Tipo
 
 #### Escala de Poder por Nível (Intervalos):
 
-| Nível | Nome | HP/DP Mínimo | HP/DP Máximo | Qtd. Digimons | Qtd. Bosses |
-|-------|------|--------------|--------------|---------------|-------------|
-| **0** | 🛡️ Armor | - | - | 2 | 0 |
-| **1** | 🥚 Rookie | 1.600 | 2.400 | 65 | 1 (1.5%) |
-| **2** | 💪 Champion | 4.000 | 6.000 | 110 | 5 (4.6%) |
-| **3** | ⚡ Ultimate | 6.400 | 9.600 | 125 | 35 (28.7%) |
-| **4** | 👑 Mega | 10.000 | 14.000 | 145 | 37 (28.0%) |
-| **5** | 🌟 Ultra | 15.000 | 18.000 | 31 | 12 (40.0%) |
-| **6** | 💎 Super Mega | 19.000 | 24.000 | 4 | 3 (60.0%) |
+| Nível | Nome          | HP/DP Mínimo | HP/DP Máximo | Qtd. Digimons | Qtd. Bosses |
+| ----- | ------------- | ------------ | ------------ | ------------- | ----------- |
+| **0** | 🛡️ Armor      | -            | -            | 5             | 0           |
+| **1** | 🥚 Rookie     | 1.600        | 2.400        | 64            | 1 (1.6%)    |
+| **2** | 💪 Champion   | 4.000        | 6.000        | 108           | 5 (4.6%)    |
+| **3** | ⚡ Ultimate   | 6.400        | 9.600        | 122           | 35 (28.7%)  |
+| **4** | 👑 Mega       | 10.000       | 14.000       | 132           | 37 (28.0%)  |
+| **5** | 🌟 Ultra      | 15.000       | 18.000       | 30            | 12 (40.0%)  |
+| **6** | 💎 Super Mega | 19.000       | 24.000       | 5             | 3 (60.0%)   |
 
-**Total: 482 Digimons | 93 Bosses (19.96%)**
+**Total: 466 Digimons | 93 Bosses (19.96%)**
 
 ### ⚔️ Sistema de Combate
 
@@ -577,15 +578,15 @@ Este jogo utiliza **stats aleatórios dinâmicos** onde HP = DP, mas os valores 
 
 #### Intervalos Completos:
 
-| Nível | Nome | HP Mínimo | HP Máximo | DP Mínimo | DP Máximo |
-| ----- | ----------- | --------- | --------- | --------- | --------- |
-| 0     | Armor       | -         | -         | -         | -         |
-| 1     | Rookie      | 1,600     | 2,400     | 1,600     | 2,400     |
-| 2     | Champion    | 4,000     | 6,000     | 4,000     | 6,000     |
-| 3     | Ultimate    | 6,400     | 9,600     | 6,400     | 9,600     |
-| 4     | Mega        | 10,000    | 14,000    | 10,000    | 14,000    |
-| 5     | Ultra       | 15,000    | 18,000    | 15,000    | 18,000    |
-| 6     | Super Mega  | 19,000    | 24,000    | 19,000    | 24,000    |
+| Nível | Nome       | HP Mínimo | HP Máximo | DP Mínimo | DP Máximo |
+| ----- | ---------- | --------- | --------- | --------- | --------- |
+| 0     | Armor      | -         | -         | -         | -         |
+| 1     | Rookie     | 1,600     | 2,400     | 1,600     | 2,400     |
+| 2     | Champion   | 4,000     | 6,000     | 4,000     | 6,000     |
+| 3     | Ultimate   | 6,400     | 9,600     | 6,400     | 9,600     |
+| 4     | Mega       | 10,000    | 14,000    | 10,000    | 14,000    |
+| 5     | Ultra      | 15,000    | 18,000    | 15,000    | 18,000    |
+| 6     | Super Mega | 19,000    | 24,000    | 19,000    | 24,000    |
 
 #### Vantagens do Sistema:
 
@@ -606,31 +607,35 @@ Este jogo utiliza **stats aleatórios dinâmicos** onde HP = DP, mas os valores 
 
 #### Distribuição de Imagens por Nível:
 
-| Nível | Nome | Com Imagem | Total | Cobertura |
-|-------|------|------------|-------|-----------|
-| **0** | Armor | 2 | 2 | 100% ✅ |
-| **1** | Rookie | 65 | 65 | 100% ✅ |
-| **2** | Champion | 110 | 110 | 100% ✅ |
-| **3** | Ultimate | 100 | 125 | 80% ⚠️ |
-| **4** | Mega | 43 | 145 | 29.7% ❌ |
-| **5** | Ultra | 9 | 31 | 29% ❌ |
-| **6** | Super Mega | 4 | 4 | 100% ✅ |
+| Nível | Nome       | Com Imagem | Total | Cobertura |
+| ----- | ---------- | ---------- | ----- | --------- |
+| **0** | Armor      | 5          | 5     | 100% ✅   |
+| **1** | Rookie     | 64         | 64    | 100% ✅   |
+| **2** | Champion   | 108        | 108   | 100% ✅   |
+| **3** | Ultimate   | 121        | 122   | 99.2% ✨  |
+| **4** | Mega       | 132        | 132   | 100% ✅   |
+| **5** | Ultra      | 30         | 30    | 100% ✅   |
+| **6** | Super Mega | 5          | 5     | 100% ✅   |
 
-**Total: 333/482 com imagem (69.09%)**
+**Total: 465/466 com imagem (99.79%)** 🎉
+
+#### Único Digimon Sem Imagem:
+
+- ❌ **Aegiochusmon: Holy** (ID: 289, Level 3)
 
 #### Digimons Ativos:
 
-- ✅ **333 Digimons** com imagens (69%)
+- ✅ **465 Digimons** com imagens (99.79%!) 🎉
 - ✅ Disponíveis para novos jogos
 - ✅ Aparecem nas opções de evolução
 - ✅ Exibidos normalmente na biblioteca
 
 #### Digimons Inativos:
 
-- ⚠️ **149 Digimons** sem imagens (31%)
-- ❌ **Não aparecem** em novos jogos
-- ❌ **Não são opções** de evolução
-- 🎨 Exibidos em **cinza** na biblioteca
+- ⚠️ **1 Digimon** sem imagem (0.21%)
+- ❌ **Não aparece** em novos jogos
+- ❌ **Não é opção** de evolução
+- 🎨 Exibido em **cinza** na biblioteca
 - 🔧 Badge "⚠️ INATIVO" para identificação
 
 #### Gerenciamento (Modo Dev):
@@ -808,14 +813,14 @@ No painel administrativo em desenvolvimento:
 
 #### Distribuição de Bosses por Nível:
 
-| Nível | Nome | Bosses | Total | Percentual |
-|-------|------|--------|-------|------------|
-| 1 | Rookie | 1 | 65 | 1.5% |
-| 2 | Champion | 5 | 110 | 4.6% |
-| 3 | Ultimate | 35 | 125 | 28.7% |
-| 4 | Mega | 37 | 145 | 28.0% |
-| 5 | Ultra | 12 | 31 | 40.0% |
-| 6 | Super Mega | 3 | 4 | 60.0% |
+| Nível | Nome       | Bosses | Total | Percentual |
+| ----- | ---------- | ------ | ----- | ---------- |
+| 1     | Rookie     | 1      | 65    | 1.5%       |
+| 2     | Champion   | 5      | 110   | 4.6%       |
+| 3     | Ultimate   | 35     | 125   | 28.7%      |
+| 4     | Mega       | 37     | 145   | 28.0%      |
+| 5     | Ultra      | 12     | 31    | 40.0%      |
+| 6     | Super Mega | 3      | 4     | 60.0%      |
 
 **Total: 93 Bosses (19.96% dos Digimons)**
 
@@ -1047,7 +1052,7 @@ Abra [http://localhost:3000](http://localhost:3000) no navegador.
 digimon-board-clash/
 ├── public/
 │   └── images/
-│       ├── digimons/      # 333 imagens de Digimons (WebP otimizado)
+│       ├── digimons/      # 465 imagens de Digimons (99.79% - WebP otimizado)
 │       ├── tamers/        # Avatares dos jogadores
 │       ├── items/         # Ícones de itens
 │       ├── bosses/        # Imagens de bosses
@@ -1111,9 +1116,9 @@ Acesse a biblioteca completa para visualizar e gerenciar (em dev):
 
 #### 🐉 Digimons Tab
 
-- **Visualizar todos os Digimons** (482 total)
-  - 333 ativos (com imagem = 69%)
-  - 149 inativos (sem imagem = 31%, exibidos em cinza)
+- **Visualizar todos os Digimons** (466 total)
+  - 465 ativos (com imagem = 99.79%!) 🎉
+  - Apenas 1 inativo (Aegiochusmon: Holy, exibido em cinza)
   - 93 marcados como **Bosses** (badge 👑 BOSS)
 - **Adicionar novos Digimons** (apenas dev)
   - Switch Ativo/Inativo
