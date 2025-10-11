@@ -80,15 +80,6 @@ export default function GamePage() {
     drops: Item[];
   } | null>(null);
 
-  // Estados para evolução especial (via item)
-  const [showSpecialEvolutionModal, setShowSpecialEvolutionModal] =
-    useState(false);
-  const [specialEvolutionData, setSpecialEvolutionData] = useState<{
-    digimon: GameDigimon;
-    item: Item;
-    targetDigimons: number[];
-  } | null>(null);
-
   useEffect(() => {
     // Se não há estado de jogo e não está carregando, redirecionar para home
     if (!isLoading && !gameState) {
@@ -398,15 +389,20 @@ export default function GamePage() {
     // Calcular % de HP perdido NESTA BATALHA
     const hpLostPercentage = (damageAmount / digimon.dp) * 100;
 
-    // Ganho de XP: 0.5% para cada 1% de HP perdido
-    const xpGained = hpLostPercentage * 1;
+    // Verificar se Digimon pode ganhar XP (apenas se tem evoluções disponíveis)
+    const hasEvolutions = digimon.evolution && digimon.evolution.length > 0;
+    
+    // Ganho de XP: 0.5% para cada 1% de HP perdido (APENAS se tem evoluções disponíveis)
+    const xpGained = hasEvolutions ? hpLostPercentage * 1 : 0;
 
     // Calcular novo progresso de evolução
     const currentProgress = digimon.evolutionProgress || 0;
-    const newProgress = Math.min(100, currentProgress + xpGained);
+    const newProgress = hasEvolutions
+      ? Math.min(100, currentProgress + xpGained)
+      : 0;
 
     // Rolar D100 para verificar evolução (apenas se ganhou XP e ainda não pode evoluir)
-    if (!digimon.canEvolve && xpGained > 0 && newHp > 0) {
+    if (!digimon.canEvolve && xpGained > 0 && newHp > 0 && hasEvolutions) {
       const roll = Math.floor(Math.random() * 100) + 1;
 
       if (roll <= newProgress) {
@@ -1392,23 +1388,28 @@ export default function GamePage() {
         const effectResponse = await fetch(`/api/effects/${item.effectId}`);
         if (effectResponse.ok) {
           const effect = await effectResponse.json();
-          
-          // Se é evolução especial, abrir modal de seleção
+
+          // Se é evolução especial, escolher aleatoriamente
           if (effect.type === "evolution") {
             if (!item.targetDigimons || item.targetDigimons.length === 0) {
-              enqueueSnackbar("Este item de evolução não tem Digimons configurados!", {
-                variant: "error",
-              });
+              enqueueSnackbar(
+                "Este item de evolução não tem Digimons configurados!",
+                {
+                  variant: "error",
+                }
+              );
               return;
             }
-            
-            setSpecialEvolutionData({
-              digimon,
-              item,
-              targetDigimons: item.targetDigimons,
-            });
-            setShowSpecialEvolutionModal(true);
-            return; // Não continua - aguarda seleção no modal
+
+            // Escolher aleatoriamente um dos Digimons disponíveis
+            const randomIndex = Math.floor(
+              Math.random() * item.targetDigimons.length
+            );
+            const targetDigimonId = item.targetDigimons[randomIndex];
+
+            // Aplicar a evolução especial
+            await handleApplySpecialEvolution(digimon, item, targetDigimonId);
+            return; // Não continua - evolução já foi aplicada
           }
         }
       } catch (error) {
@@ -1546,19 +1547,11 @@ export default function GamePage() {
   };
 
   const handleApplySpecialEvolution = async (
+    digimon: GameDigimon,
+    item: Item,
     targetDigimonId: number
   ) => {
-    if (!specialEvolutionData || !gameState || !selectedDigimon) return;
-
-    const { digimon, item, targetDigimons } = specialEvolutionData;
-
-    // Verificar se o Digimon selecionado está na lista
-    if (!targetDigimons.includes(targetDigimonId)) {
-      enqueueSnackbar("Digimon inválido para este item!", {
-        variant: "error",
-      });
-      return;
-    }
+    if (!gameState || !selectedDigimon) return;
 
     try {
       // Buscar dados do Digimon de destino
@@ -1607,7 +1600,9 @@ export default function GamePage() {
             return {
               ...player,
               digimons: player.digimons.map((d) => {
-                if ((d.originalId || d.id) === (digimon.originalId || digimon.id)) {
+                if (
+                  (d.originalId || d.id) === (digimon.originalId || digimon.id)
+                ) {
                   return {
                     ...d,
                     ...evolution,
@@ -1639,12 +1634,12 @@ export default function GamePage() {
         evolutionType: "special",
       });
 
-      setShowSpecialEvolutionModal(false);
-      setSpecialEvolutionData(null);
       setSelectedDigimon(null);
 
       enqueueSnackbar(
-        `🧬 ${capitalize(digimon.name)} evoluiu para ${capitalize(evolution.name)} usando ${item.name}!`,
+        `🧬 ${capitalize(digimon.name)} evoluiu para ${capitalize(
+          evolution.name
+        )} usando ${item.name}!`,
         { variant: "success" }
       );
     } catch (error) {
@@ -2692,209 +2687,6 @@ export default function GamePage() {
         />
       )}
 
-      {/* Modal de Evolução Especial (via item) */}
-      {showSpecialEvolutionModal && specialEvolutionData && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[100]"
-          onClick={() => {
-            setShowSpecialEvolutionModal(false);
-            setSpecialEvolutionData(null);
-          }}
-        >
-          <div
-            className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto border-2 border-cyan-500 m-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header */}
-            <div className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-4 rounded-t-lg sticky top-0 z-10">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-2xl font-bold flex items-center gap-2">
-                    <span className="text-3xl">🧬</span>
-                    Evolução Especial
-                  </h3>
-                  <p className="text-sm text-cyan-100 mt-1">
-                    {specialEvolutionData.item.name} - Escolha sua evolução
-                  </p>
-                </div>
-                <button
-                  onClick={() => {
-                    setShowSpecialEvolutionModal(false);
-                    setSpecialEvolutionData(null);
-                  }}
-                  className="text-white hover:text-gray-200 text-3xl font-bold leading-none"
-                >
-                  ×
-                </button>
-              </div>
-            </div>
-
-            {/* Digimon Atual */}
-            <div className="p-6 bg-gray-900">
-              <div className="flex items-center gap-4 bg-gray-800 rounded-lg p-4 border-2 border-gray-700">
-                <div className="w-20 h-20 bg-gray-700 rounded-lg overflow-hidden flex-shrink-0">
-                  {specialEvolutionData.digimon.image ? (
-                    <img
-                      src={specialEvolutionData.digimon.image}
-                      alt={specialEvolutionData.digimon.name}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gray-600"></div>
-                  )}
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-white font-bold text-lg">
-                    {capitalize(specialEvolutionData.digimon.name)}
-                  </h4>
-                  <p className="text-gray-400 text-sm">
-                    Level {specialEvolutionData.digimon.level} →{" "}
-                    <span className="text-cyan-400 font-semibold">
-                      Evolução Especial
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Grid de Opções de Evolução */}
-            <div className="p-6 pt-0">
-              <h4 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                <span>✨</span>
-                Selecione sua Evolução:
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {specialEvolutionData.targetDigimons.map((digimonId) => {
-                  // Buscar Digimon da lista (precisa ser feito via API)
-                  return (
-                    <SpecialEvolutionCard
-                      key={digimonId}
-                      digimonId={digimonId}
-                      onSelect={() => handleApplySpecialEvolution(digimonId)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Footer */}
-            <div className="bg-gray-900 px-6 py-4 rounded-b-lg border-t border-gray-700 sticky bottom-0">
-              <button
-                onClick={() => {
-                  setShowSpecialEvolutionModal(false);
-                  setSpecialEvolutionData(null);
-                }}
-                className="w-full px-4 py-2 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-all"
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
-  );
-}
-
-// Componente auxiliar para card de evolução especial
-function SpecialEvolutionCard({
-  digimonId,
-  onSelect,
-}: {
-  digimonId: number;
-  onSelect: () => void;
-}) {
-  const [digimon, setDigimon] = useState<{
-    id: number;
-    name: string;
-    image: string;
-    level: number;
-    typeId: number;
-    evolution: number[];
-  } | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchDigimon = async () => {
-      try {
-        const response = await fetch(`/api/digimons/${digimonId}`);
-        if (response.ok) {
-          const data = await response.json();
-          setDigimon(data);
-        }
-      } catch (error) {
-        console.error("Erro ao buscar Digimon:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchDigimon();
-  }, [digimonId]);
-
-  if (loading) {
-    return (
-      <div className="bg-gray-700 rounded-lg p-6 animate-pulse">
-        <div className="w-full h-48 bg-gray-600 rounded mb-4"></div>
-        <div className="h-6 bg-gray-600 rounded mb-2"></div>
-        <div className="h-4 bg-gray-600 rounded w-3/4"></div>
-      </div>
-    );
-  }
-
-  if (!digimon) {
-    return (
-      <div className="bg-gray-700 rounded-lg p-6">
-        <p className="text-red-400">Erro ao carregar Digimon</p>
-      </div>
-    );
-  }
-
-  return (
-    <button
-      onClick={onSelect}
-      className="bg-gray-700 hover:bg-gray-600 border-2 border-transparent hover:border-cyan-500 rounded-lg overflow-hidden transition-all transform hover:scale-105 text-left"
-    >
-      {/* Imagem */}
-      <div className="relative h-56 bg-gradient-to-br from-orange-100 to-blue-100 overflow-hidden">
-        {digimon.image ? (
-          <img
-            src={digimon.image}
-            alt={digimon.name}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="w-full h-full bg-gray-600 flex items-center justify-center text-6xl">
-            🤖
-          </div>
-        )}
-        <div className="absolute top-2 left-2 bg-cyan-600 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg">
-          {getLevelName(digimon.level)}
-        </div>
-      </div>
-
-      {/* Info */}
-      <div className="p-4 bg-gray-700">
-        <h4 className="text-white font-bold text-lg mb-1 capitalize">
-          {digimon.name}
-        </h4>
-        <p className="text-gray-300 text-sm mb-2">
-          Level {digimon.level}
-        </p>
-        <div className="flex items-center justify-between">
-          <TypeIcon typeId={digimon.typeId} size={16} className="text-white" />
-          <span className="text-cyan-400 text-xs font-semibold">
-            {digimon.evolution && digimon.evolution.length > 0
-              ? `${digimon.evolution.length} evolução(ões)`
-              : "Evolução final"}
-          </span>
-        </div>
-        <div className="mt-3 text-center">
-          <span className="text-cyan-400 font-bold text-sm">
-            Clique para selecionar →
-          </span>
-        </div>
-      </div>
-    </button>
   );
 }
