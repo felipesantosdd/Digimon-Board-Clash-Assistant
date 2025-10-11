@@ -182,7 +182,21 @@ export function updateDigimon(
 }
 
 export function deleteDigimon(id: number): void {
+  // 1. Remover este ID de todas as evoluções de outros Digimons
+  const allDigimons = getAllDigimons();
+  
+  for (const digimon of allDigimons) {
+    if (digimon.evolution && digimon.evolution.includes(id)) {
+      const updatedEvolutions = digimon.evolution.filter(evoId => evoId !== id);
+      updateDigimonEvolutions(digimon.id, updatedEvolutions);
+      console.log(`🔗 Removido ID ${id} das evoluções de ${digimon.name}`);
+    }
+  }
+  
+  // 2. Deletar o Digimon
   db.prepare("DELETE FROM digimons WHERE id = ?").run(id);
+  
+  console.log(`✅ Digimon ID ${id} excluído do banco de dados`);
 }
 
 // Seed inicial

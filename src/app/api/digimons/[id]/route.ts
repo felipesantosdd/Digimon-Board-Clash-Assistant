@@ -104,6 +104,29 @@ export async function DELETE(
       );
     }
 
+    // Deletar imagem se for customizada (tem timestamp)
+    if (digimon.image && digimon.image.startsWith("/images/")) {
+      const fileName = digimon.image.split("/").pop();
+      if (fileName && fileName.match(/^\d+_/)) {
+        try {
+          const fs = await import("fs/promises");
+          const path = await import("path");
+          const imagePath = path.join(
+            process.cwd(),
+            "public",
+            digimon.image.substring(1)
+          );
+          
+          await fs.unlink(imagePath);
+          console.log(`🗑️ Imagem removida: ${digimon.image}`);
+        } catch (error) {
+          console.error(`⚠️ Erro ao remover imagem: ${digimon.image}`, error);
+          // Não falhar a exclusão se a imagem não puder ser removida
+        }
+      }
+    }
+
+    // Deletar Digimon (e remover de todas as evoluções)
     deleteDigimon(digimonId);
 
     return NextResponse.json({
