@@ -5,7 +5,6 @@ import EvolutionModal from "../EvolutionModal";
 import EvolutionLineModal from "../EvolutionLineModal";
 import AddDigimonModal from "../AddDigimonModal";
 import TypeIcon from "../TypeIcons";
-import ImageCropper from "../ImageCropper";
 import { Digimon } from "../../database/database_type";
 import { useSnackbar } from "notistack";
 import { capitalize, getLevelName } from "@/lib/utils";
@@ -29,17 +28,6 @@ export default function DigimonsTab({
   // Estados para visualização de linha evolutiva
   const [viewingDigimon, setViewingDigimon] = useState<Digimon | null>(null);
   const [isEvolutionLineOpen, setIsEvolutionLineOpen] = useState(false);
-
-  // Estados para modal de upload rápido de imagem (temporário para desenvolvimento)
-  const [uploadingDigimon, setUploadingDigimon] = useState<Digimon | null>(
-    null
-  );
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
-  const [uploadingImage, setUploadingImage] = useState(false);
-  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
-  const [imageToCrop, setImageToCrop] = useState<string>("");
-  const [showCropper, setShowCropper] = useState(false);
-  const [croppedImageFile, setCroppedImageFile] = useState<File | null>(null);
 
   // Carregar Digimons da API
   useEffect(() => {
@@ -147,163 +135,6 @@ export default function DigimonsTab({
 
   const handleAddDigimonSuccess = async () => {
     fetchDigimons();
-  };
-
-  const handleOpenUploadModal = (digimon: Digimon) => {
-    setUploadingDigimon(digimon);
-    setImagePreviewUrl(digimon.image || null);
-    setCroppedImageFile(null);
-    setIsUploadModalOpen(true);
-  };
-
-  const handleCloseUploadModal = () => {
-    setUploadingDigimon(null);
-    setImagePreviewUrl(null);
-    setCroppedImageFile(null);
-    setImageToCrop("");
-    setShowCropper(false);
-    setIsUploadModalOpen(false);
-  };
-
-  const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      // Validar tipo
-      if (!file.type.startsWith("image/")) {
-        enqueueSnackbar("Por favor, selecione uma imagem válida", {
-          variant: "warning",
-        });
-        return;
-      }
-
-      // Abrir cropper
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageToCrop(reader.result as string);
-        setShowCropper(true);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleCropComplete = (croppedBlob: Blob) => {
-    // Converter blob para File
-    const extension = croppedBlob.type === "image/webp" ? "webp" : "jpg";
-    const croppedFile = new File([croppedBlob], `cropped-image.${extension}`, {
-      type: croppedBlob.type,
-    });
-    setCroppedImageFile(croppedFile);
-
-    // Criar preview da imagem recortada
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImagePreviewUrl(reader.result as string);
-    };
-    reader.readAsDataURL(croppedBlob);
-
-    setShowCropper(false);
-  };
-
-  const handleCropCancel = () => {
-    setShowCropper(false);
-    setImageToCrop("");
-  };
-
-  const handleUploadImage = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!uploadingDigimon) return;
-
-    if (!croppedImageFile) {
-      enqueueSnackbar("Selecione e corte uma imagem primeiro", {
-        variant: "warning",
-      });
-      return;
-    }
-
-    setUploadingImage(true);
-
-    try {
-      console.log("📤 Iniciando upload da imagem...");
-
-      // Upload da imagem cortada
-      const uploadFormData = new FormData();
-      uploadFormData.append("file", croppedImageFile);
-      uploadFormData.append("type", "digimon");
-
-      const uploadResponse = await fetch("/api/upload", {
-        method: "POST",
-        body: uploadFormData,
-      });
-
-      if (!uploadResponse.ok) {
-        const errorData = await uploadResponse.json();
-        console.error("❌ Erro no upload:", errorData);
-        throw new Error(errorData.error || "Erro ao fazer upload da imagem");
-      }
-
-      const { path: url } = await uploadResponse.json();
-      console.log("✅ Upload concluído:", url);
-
-      // Atualizar o Digimon com a nova imagem
-      console.log("🔄 Atualizando Digimon:", {
-        id: uploadingDigimon.id,
-        name: uploadingDigimon.name,
-        level: uploadingDigimon.level,
-        typeId: uploadingDigimon.typeId,
-        image: url,
-      });
-
-      const updateResponse = await fetch(
-        `/api/digimons/${uploadingDigimon.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: uploadingDigimon.name,
-            level: uploadingDigimon.level,
-            typeId: uploadingDigimon.typeId,
-            image: url,
-          }),
-        }
-      );
-
-      if (!updateResponse.ok) {
-        const errorData = await updateResponse.json();
-        console.error("❌ Erro ao atualizar:", errorData);
-        throw new Error(errorData.error || "Erro ao atualizar Digimon");
-      }
-
-      const updatedDigimon = await updateResponse.json();
-      console.log("✅ Digimon atualizado:", updatedDigimon);
-
-      // Atualizar a lista local
-      setDigimons((prev) =>
-        prev.map((d) =>
-          d.id === uploadingDigimon.id ? { ...d, image: url } : d
-        )
-      );
-
-      enqueueSnackbar(
-        `Imagem de ${capitalize(uploadingDigimon.name)} atualizada!`,
-        {
-          variant: "success",
-        }
-      );
-      handleCloseUploadModal();
-
-      // Recarregar os Digimons para garantir sincronização
-      await fetchDigimons();
-    } catch (error) {
-      console.error("❌ Erro no processo:", error);
-      enqueueSnackbar(
-        error instanceof Error ? error.message : "Erro ao atualizar imagem",
-        { variant: "error" }
-      );
-    } finally {
-      setUploadingImage(false);
-    }
   };
 
   const handleDeleteDigimon = async (
@@ -471,18 +302,12 @@ export default function DigimonsTab({
                           target.src = "/images/digimons/fallback1.jpg";
                         }}
                       />
-                      {/* Botão de Upload Rápido - Temporário para DEV */}
-                      {process.env.NODE_ENV === "development" && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleOpenUploadModal(digimon);
-                          }}
-                          className="absolute top-2 left-2 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow-lg transition-all hover:scale-110"
-                          title="Upload rápido de imagem"
-                        >
-                          📷
-                        </button>
+                      {/* Badge de Boss */}
+                      {digimon.boss && (
+                        <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1">
+                          <span>👑</span>
+                          <span>BOSS</span>
+                        </div>
                       )}
                     </div>
 
@@ -612,18 +437,12 @@ export default function DigimonsTab({
                                   target.src = "/images/digimons/fallback1.jpg";
                                 }}
                               />
-                              {/* Botão de Upload Rápido - Temporário para DEV */}
-                              {process.env.NODE_ENV === "development" && (
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleOpenUploadModal(digimon);
-                                  }}
-                                  className="absolute top-2 left-2 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow-lg transition-all hover:scale-110 z-10"
-                                  title="Upload rápido de imagem"
-                                >
-                                  📷
-                                </button>
+                              {/* Badge de Boss */}
+                              {digimon.boss && (
+                                <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1 z-10">
+                                  <span>👑</span>
+                                  <span>BOSS</span>
+                                </div>
                               )}
                               {digimon.active === false && (
                                 <div className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
@@ -749,111 +568,6 @@ export default function DigimonsTab({
         allDigimons={digimons}
       />
 
-      {/* Image Cropper - Temporário para DEV */}
-      {showCropper && imageToCrop && (
-        <ImageCropper
-          image={imageToCrop}
-          onCropComplete={handleCropComplete}
-          onCancel={handleCropCancel}
-          aspectRatio={1}
-          cropShape="rect"
-          outputSize={512}
-          quality={0.92}
-        />
-      )}
-
-      {/* Modal de Upload Rápido de Imagem - Temporário para DEV */}
-      {isUploadModalOpen && uploadingDigimon && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[100]"
-          onClick={handleCloseUploadModal}
-        >
-          <div
-            className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-md border-2 border-blue-500 m-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-4 rounded-t-lg">
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-bold flex items-center gap-2">
-                  <span className="text-2xl">📷</span>
-                  Upload Rápido - {capitalize(uploadingDigimon.name)}
-                </h3>
-                <button
-                  onClick={handleCloseUploadModal}
-                  className="text-white hover:text-gray-200 text-3xl font-bold leading-none"
-                >
-                  ×
-                </button>
-              </div>
-              <p className="text-sm text-blue-100 mt-1">
-                Ferramenta temporária para desenvolvimento
-              </p>
-            </div>
-
-            {/* Form */}
-            <form onSubmit={handleUploadImage} className="p-6">
-              {/* Preview da Imagem */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-200 mb-3">
-                  Preview da Imagem
-                </label>
-                <div className="w-full h-64 bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg overflow-hidden border-2 border-gray-600">
-                  {imagePreviewUrl ? (
-                    <img
-                      src={imagePreviewUrl}
-                      alt="Preview"
-                      className="w-full h-full object-contain"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-400">
-                      <div className="text-center">
-                        <div className="text-6xl mb-2">🖼️</div>
-                        <p className="text-sm">Nenhuma imagem selecionada</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Input de Arquivo */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-200 mb-2">
-                  Selecionar e Cortar Imagem
-                </label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageFileChange}
-                  className="w-full px-3 py-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"
-                />
-                <p className="text-xs text-gray-400 mt-2">
-                  ✂️ A imagem será cortada automaticamente após seleção
-                </p>
-              </div>
-
-              {/* Botões */}
-              <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={handleCloseUploadModal}
-                  className="flex-1 px-4 py-2 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-all"
-                  disabled={uploadingImage}
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="submit"
-                  className="flex-1 px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={uploadingImage}
-                >
-                  {uploadingImage ? "Enviando..." : "Salvar Imagem"}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </>
   );
 }
