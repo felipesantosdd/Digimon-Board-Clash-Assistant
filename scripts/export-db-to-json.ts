@@ -32,9 +32,24 @@ try {
 }
 
 // Exportar items (se a tabela existir)
-let items = [];
+let items: unknown[] = [];
 try {
-  items = db.prepare("SELECT * FROM items").all();
+  const rawItems = db.prepare("SELECT * FROM items").all() as Array<{
+    id: number;
+    name: string;
+    description: string;
+    image: string;
+    effect: string;
+    dropChance: number;
+    targetDigimons?: string;
+    effectId?: number;
+  }>;
+  
+  // Processar items para parsear targetDigimons
+  items = rawItems.map(item => ({
+    ...item,
+    targetDigimons: item.targetDigimons ? JSON.parse(item.targetDigimons) : [],
+  }));
 } catch (error) {
   console.log("⚠️  Tabela 'items' não encontrada, pulando");
   items = [

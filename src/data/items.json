@@ -6,7 +6,8 @@
     "image": "/images/items/potion.png",
     "effect": "heal_1000",
     "dropChance": 30,
-    "targetDigimons": "[]"
+    "targetDigimons": [],
+    "effectId": 1
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "image": "/images/items/super-potion.png",
     "effect": "heal_2000",
     "dropChance": 20,
-    "targetDigimons": "[]"
+    "targetDigimons": [],
+    "effectId": 2
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "image": "/images/items/full-potion.png",
     "effect": "heal_full",
     "dropChance": 10,
-    "targetDigimons": "[]"
+    "targetDigimons": [],
+    "effectId": 8
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "image": "/images/items/revive.png",
     "effect": "revive_half",
     "dropChance": 15,
-    "targetDigimons": "[]"
+    "targetDigimons": [],
+    "effectId": 9
   },
   {
     "id": 5,
@@ -42,7 +46,8 @@
     "image": "/images/items/1759949520582_image.webp",
     "effect": "boost_dp_500",
     "dropChance": 25,
-    "targetDigimons": "[]"
+    "targetDigimons": [],
+    "effectId": 6
   },
   {
     "id": 6,
@@ -51,7 +56,8 @@
     "image": "/images/items/shield.png",
     "effect": "shield_turn",
     "dropChance": 20,
-    "targetDigimons": "[]"
+    "targetDigimons": [],
+    "effectId": 11
   },
   {
     "id": 9,
@@ -60,7 +66,8 @@
     "image": "/images/items/1759941795057_8586614.webp",
     "effect": "heal_2000",
     "dropChance": 0,
-    "targetDigimons": "[]"
+    "targetDigimons": [],
+    "effectId": 2
   },
   {
     "id": 10,
@@ -69,6 +76,10 @@
     "image": "/images/items/1760225081593_image.webp",
     "effect": "",
     "dropChance": 10,
-    "targetDigimons": "[]"
+    "targetDigimons": [
+      523,
+      527
+    ],
+    "effectId": 17
   }
 ]

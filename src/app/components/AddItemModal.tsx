@@ -123,7 +123,10 @@ export default function AddItemModal({
     setImagePreview("");
     setTargetDigimons([]);
     setSearchDigimon("");
-    console.log("🔄 [MODAL] Formulário resetado para effectId:", effects.length > 0 ? effects[0].id : 1);
+    console.log(
+      "🔄 [MODAL] Formulário resetado para effectId:",
+      effects.length > 0 ? effects[0].id : 1
+    );
   }, [effects]);
 
   useEffect(() => {
@@ -140,7 +143,10 @@ export default function AddItemModal({
         setImagePreview(editingItem.image);
         setTargetDigimons(editingItem.targetDigimons || []);
         console.log("📝 [MODAL] effectId carregado:", editingItem.effectId);
-        console.log("📝 [MODAL] targetDigimons carregado:", editingItem.targetDigimons);
+        console.log(
+          "📝 [MODAL] targetDigimons carregado:",
+          editingItem.targetDigimons
+        );
       } else {
         console.log("📝 [MODAL] Modo criação - resetando form");
         resetForm();
