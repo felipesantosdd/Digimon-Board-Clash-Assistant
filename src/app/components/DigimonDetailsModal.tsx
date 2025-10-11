@@ -19,7 +19,13 @@ interface DigimonDetailsModalProps {
   isCurrentPlayerTurn: boolean;
   onUseItem?: (digimon: GameDigimon, itemId: number) => void;
   onDiscardItem?: (digimon: GameDigimon, itemId: number) => void;
-  sharedBag?: any[]; // Bag compartilhada entre toda a equipe
+  sharedBag?: {
+    id: number;
+    name: string;
+    quantity: number;
+    image?: string;
+    description?: string;
+  }[]; // Bag compartilhada entre toda a equipe
   playerDigimons?: GameDigimon[]; // Lista de digimons do jogador para transferência
   allPlayers?: GameDigimon[][]; // Todos os jogadores com seus Digimons (para provocar)
   currentTurnCount?: number; // Turno global atual
@@ -45,7 +51,6 @@ export default function DigimonDetailsModal({
   currentTurnCount = 0,
 }: DigimonDetailsModalProps) {
   const [showBag, setShowBag] = useState(false);
-  const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
   const [showDefendDialog, setShowDefendDialog] = useState(false);
   const [showProvokeDialog, setShowProvokeDialog] = useState(false);
 
@@ -546,141 +551,6 @@ export default function DigimonDetailsModal({
       )}
 
       {/* Modal de Dar Item removido - bag agora é compartilhada */}
-      {false && (
-        <div>
-            {/* Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-4 rounded-t-lg">
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-bold flex items-center gap-2">
-                  <span className="text-2xl">🎁</span>
-                  Dar Item
-                </h3>
-                <button
-                  onClick={() => {
-                    setShowGiveDialog(false);
-                    setSelectedItemId(null);
-                  }}
-                  className="text-white hover:text-gray-200 text-3xl font-bold leading-none"
-                >
-                  ×
-                </button>
-              </div>
-              <p className="text-sm text-blue-100 mt-1">
-                Selecione o Digimon que vai receber o item
-              </p>
-            </div>
-
-            {/* Item Selecionado */}
-            {(() => {
-              const selectedItem = digimon?.bag?.find(
-                (i) => i.id === selectedItemId
-              );
-              return selectedItem ? (
-                <div className="bg-gray-700 border-b-2 border-blue-500 p-4">
-                  <div className="flex items-center gap-3">
-                    {/* Imagem do Item */}
-                    <div className="w-12 h-12 bg-gray-800 rounded-lg overflow-hidden border-2 border-blue-500 flex-shrink-0">
-                      {selectedItem.image ? (
-                        <img
-                          src={selectedItem.image}
-                          alt={selectedItem.name}
-                          className="w-full h-full object-contain"
-                        />
-                      ) : (
-                        <span className="text-2xl flex items-center justify-center h-full">
-                          📦
-                        </span>
-                      )}
-                    </div>
-                    {/* Info do Item */}
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-white font-bold text-sm">
-                        {selectedItem.name}
-                      </h4>
-                      <p className="text-gray-300 text-xs mt-0.5 line-clamp-1">
-                        {selectedItem.description}
-                      </p>
-                    </div>
-                    {/* Quantidade */}
-                    <div className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full">
-                      x1
-                    </div>
-                  </div>
-                </div>
-              ) : null;
-            })()}
-
-            {/* Lista de Digimons */}
-            <div className="p-4 max-h-96 overflow-y-auto">
-              <div className="space-y-2">
-                {playerDigimons
-                  .filter((d) => d.id !== digimon?.id && d.currentHp > 0)
-                  .map((targetDigimon) => (
-                    <button
-                      key={targetDigimon.id}
-                      onClick={() => handleGiveItem(targetDigimon.id)}
-                      className="w-full bg-gray-700 hover:bg-gray-600 border border-gray-600 hover:border-blue-500 rounded-lg p-3 transition-all text-left"
-                    >
-                      <div className="flex items-center gap-3">
-                        {/* Imagem */}
-                        <div className="w-12 h-12 bg-gray-800 rounded-lg overflow-hidden border-2 border-gray-600 flex-shrink-0">
-                          {targetDigimon.image ? (
-                            <img
-                              src={targetDigimon.image}
-                              alt={targetDigimon.name}
-                              className="w-full h-full object-contain"
-                            />
-                          ) : (
-                            <div className="w-full h-full bg-gray-600"></div>
-                          )}
-                        </div>
-
-                        {/* Info */}
-                        <div className="flex-1 min-w-0">
-                          <h4 className="text-white font-bold text-sm truncate">
-                            {capitalize(targetDigimon.name)}
-                          </h4>
-                          <div className="flex items-center gap-2 mt-1">
-                            <span className="text-xs text-gray-400">
-                              HP: {targetDigimon.currentHp.toLocaleString()} /{" "}
-                              {targetDigimon.dp.toLocaleString()}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Ícone */}
-                        <div className="text-2xl">→</div>
-                      </div>
-                    </button>
-                  ))}
-
-                {playerDigimons.filter(
-                  (d) => d.id !== digimon?.id && d.currentHp > 0
-                ).length === 0 && (
-                  <div className="text-center py-8">
-                    <p className="text-gray-400 text-sm">
-                      Nenhum outro Digimon vivo disponível
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Footer */}
-            <div className="bg-gray-900 px-6 py-4 rounded-b-lg border-t border-gray-700">
-              <button
-                onClick={() => {
-                  setShowGiveDialog(false);
-                  setSelectedItemId(null);
-                }}
-                className="w-full px-4 py-2 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-all"
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Modal de Selecionar Digimon para Defender */}
       {showDefendDialog && (
