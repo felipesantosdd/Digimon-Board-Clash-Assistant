@@ -5602,5 +5602,29 @@
     "boss": 0,
     "effectId": 1,
     "description": ""
+  },
+  {
+    "id": 523,
+    "name": "flamedramon",
+    "image": "/images/digimons/1760224911297_image.webp",
+    "level": 0,
+    "typeId": 4,
+    "evolution": "[]",
+    "active": 1,
+    "boss": 0,
+    "effectId": 1,
+    "description": ""
+  },
+  {
+    "id": 524,
+    "name": "raidramon",
+    "image": "/images/digimons/1760225207254_image.webp",
+    "level": 0,
+    "typeId": 4,
+    "evolution": "[]",
+    "active": 1,
+    "boss": 0,
+    "effectId": 1,
+    "description": ""
   }
 ]

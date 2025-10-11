@@ -126,5 +126,29 @@
     "code": "boss_regeneration",
     "type": "boss",
     "value": 5
+  },
+  {
+    "id": 17,
+    "name": "Evolução Armor",
+    "description": "Permite evolução para um Digimon Armor aleatório",
+    "code": "evolution_armor",
+    "type": "evolution",
+    "value": 0
+  },
+  {
+    "id": 18,
+    "name": "Evolução Especial",
+    "description": "Permite evolução para um Digimon especial configurado",
+    "code": "evolution_special",
+    "type": "evolution",
+    "value": 0
+  },
+  {
+    "id": 19,
+    "name": "Digi-Egg",
+    "description": "Ovo de evolução que transforma em Armor Digimon",
+    "code": "evolution_digiegg",
+    "type": "evolution",
+    "value": 0
   }
 ]

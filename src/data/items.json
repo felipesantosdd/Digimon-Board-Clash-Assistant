@@ -61,5 +61,14 @@
     "effect": "heal_2000",
     "dropChance": 0,
     "targetDigimons": "[]"
+  },
+  {
+    "id": 10,
+    "name": "Digi-Egg of Courage",
+    "description": "evolução para flamedramon",
+    "image": "/images/items/1760225081593_image.webp",
+    "effect": "",
+    "dropChance": 10,
+    "targetDigimons": "[]"
   }
 ]

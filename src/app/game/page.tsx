@@ -391,7 +391,7 @@ export default function GamePage() {
 
     // Verificar se Digimon pode ganhar XP (apenas se tem evoluções disponíveis)
     const hasEvolutions = digimon.evolution && digimon.evolution.length > 0;
-    
+
     // Ganho de XP: 0.5% para cada 1% de HP perdido (APENAS se tem evoluções disponíveis)
     const xpGained = hasEvolutions ? hpLostPercentage * 1 : 0;
 
@@ -2686,7 +2686,6 @@ export default function GamePage() {
           drops={bossDropData.drops}
         />
       )}
-
     </div>
   );
 }
