@@ -72,4 +72,3 @@ try {
 } finally {
   db.close();
 }
-

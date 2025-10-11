@@ -439,6 +439,19 @@ export default function AddItemModal({
                   Selecione os Digimons que podem ser obtidos ao usar este item
                 </p>
 
+                {/* Mensagem de filtro para Armor */}
+                {effects.find((e) => e.id === Number(formData.effectId))
+                  ?.code === "evolution_armor" && (
+                  <div className="bg-cyan-900/50 border border-cyan-600 rounded px-3 py-2 mb-3">
+                    <p className="text-xs text-cyan-200 flex items-center gap-2">
+                      <span>🛡️</span>
+                      <span>
+                        Mostrando apenas Digimons <strong>Armor (Level 0)</strong>
+                      </span>
+                    </p>
+                  </div>
+                )}
+
                 {/* Campo de busca */}
                 <input
                   type="text"
@@ -485,9 +498,25 @@ export default function AddItemModal({
                 {/* Grade de Digimons disponíveis */}
                 <div className="max-h-64 overflow-y-auto bg-gray-800 rounded-lg p-3 space-y-2">
                   {digimons
-                    .filter((d) =>
-                      d.name.toLowerCase().includes(searchDigimon.toLowerCase())
-                    )
+                    .filter((d) => {
+                      // Filtro por nome
+                      const matchesSearch = d.name
+                        .toLowerCase()
+                        .includes(searchDigimon.toLowerCase());
+
+                      // Filtro por tipo de evolução
+                      const selectedEffect = effects.find(
+                        (e) => e.id === Number(formData.effectId)
+                      );
+
+                      // Se é evolução armor, mostrar apenas Level 0 (Armor)
+                      if (selectedEffect?.code === "evolution_armor") {
+                        return matchesSearch && d.level === 0;
+                      }
+
+                      // Para outros tipos de evolução, mostrar todos
+                      return matchesSearch;
+                    })
                     .slice(0, 50)
                     .map((digimon) => {
                       const isSelected = targetDigimons.includes(digimon.id);

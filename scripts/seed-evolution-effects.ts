@@ -68,4 +68,3 @@ console.log("═".repeat(60) + "\n");
 
 db.close();
 console.log("✅ Processo concluído!");
-
