@@ -14,10 +14,10 @@
   {
     "id": 2,
     "name": "gabumon",
-    "image": "/images/digimons/02.webp",
+    "image": "/images/digimons/1760152850665_image.webp",
     "level": 1,
     "typeId": 1,
-    "evolution": "[76,209,244,233,260,516,118]",
+    "evolution": "[76,209,244,233,260,516,118,120]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
@@ -185,7 +185,7 @@
     "image": "/images/digimons/20.webp",
     "level": 1,
     "typeId": 2,
-    "evolution": "[222,209,223,271,251,118]",
+    "evolution": "[222,209,223,271,251,118,120]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
@@ -242,7 +242,7 @@
   {
     "id": 25,
     "name": "greymon",
-    "image": "/images/digimons/1760133702600_image.webp",
+    "image": "/images/digimons/1760146544379_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[313,34,366,325]",
@@ -794,7 +794,7 @@
   {
     "id": 85,
     "name": "burninggreymon",
-    "image": "/images/digimons/1759963421533_image.webp",
+    "image": "/images/digimons/1760151353999_image.webp",
     "level": 3,
     "typeId": 5,
     "evolution": "[52,48,404]",
@@ -854,7 +854,7 @@
   {
     "id": 90,
     "name": "cerberumon",
-    "image": "/images/digimons/1759963487708_image.webp",
+    "image": "/images/digimons/1760151589662_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[473,299,429]",
@@ -1154,7 +1154,7 @@
   {
     "id": 116,
     "name": "seadramon",
-    "image": "/images/digimons/1760136441155_image.webp",
+    "image": "/images/digimons/1760150544925_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[310,348,386,307,363,368]",
@@ -1394,7 +1394,7 @@
   {
     "id": 138,
     "name": "brachiomon",
-    "image": "/images/digimons/1759963262900_image.webp",
+    "image": "/images/digimons/1760151456808_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[163,486,421]",
@@ -1502,7 +1502,7 @@
   {
     "id": 149,
     "name": "birdramon",
-    "image": "/images/digimons/1760130938612_image.webp",
+    "image": "/images/digimons/1760149649829_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[309,295,334,305]",
@@ -1538,7 +1538,7 @@
   {
     "id": 152,
     "name": "leomon",
-    "image": "/images/digimons/1760135186918_image.webp",
+    "image": "/images/digimons/1760150146342_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[309,296,306,318]",
@@ -1550,7 +1550,7 @@
   {
     "id": 153,
     "name": "agnimon",
-    "image": "/images/digimons/1760130536908_image.webp",
+    "image": "/images/digimons/1760150861775_image.webp",
     "level": 2,
     "typeId": 4,
     "evolution": "[85,38,84]",
@@ -1670,7 +1670,7 @@
   {
     "id": 165,
     "name": "coredramon (green)",
-    "image": "/images/digimons/1760107241405_image.webp",
+    "image": "/images/digimons/1760149951301_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[381,362,366]",
@@ -1802,7 +1802,7 @@
   {
     "id": 176,
     "name": "bearmon",
-    "image": "/images/digimons/1760120855393_image.webp",
+    "image": "/images/digimons/1760150901359_image.webp",
     "level": 1,
     "typeId": 2,
     "evolution": "[211,230,222,152]",
@@ -2021,7 +2021,7 @@
     "image": "/images/digimons/1760125751223_image.webp",
     "level": 1,
     "typeId": 3,
-    "evolution": "[116,269,259,257,274]",
+    "evolution": "[116,118,120,269,259,274]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
@@ -2162,7 +2162,7 @@
   {
     "id": 208,
     "name": "aegiomon",
-    "image": "/images/digimons/1760130749269_image.webp",
+    "image": "/images/digimons/1760149575265_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[285,287,289,288,286]",
@@ -2174,7 +2174,7 @@
   {
     "id": 209,
     "name": "ikkakumon",
-    "image": "/images/digimons/1760134657983_image.webp",
+    "image": "/images/digimons/1760149493851_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[310,348,302,368]",
@@ -2186,7 +2186,7 @@
   {
     "id": 210,
     "name": "ginryumon",
-    "image": "/images/digimons/1760133547367_image.webp",
+    "image": "/images/digimons/1760146625938_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[307,366,308]",
@@ -2198,7 +2198,7 @@
   {
     "id": 211,
     "name": "gryzmon",
-    "image": "/images/digimons/1760134024509_image.webp",
+    "image": "/images/digimons/1760149413985_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[319,296,298]",
@@ -2210,7 +2210,7 @@
   {
     "id": 212,
     "name": "coredramon (blue)",
-    "image": "/images/digimons/1760131838391_image.webp",
+    "image": "/images/digimons/1760149875630_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[292,293,360]",
@@ -2222,7 +2222,7 @@
   {
     "id": 213,
     "name": "geo greymon",
-    "image": "/images/digimons/1760133384469_image.webp",
+    "image": "/images/digimons/1760150332275_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[316,382,300]",
@@ -2234,7 +2234,7 @@
   {
     "id": 214,
     "name": "strikedramon",
-    "image": "/images/digimons/1760136613597_image.webp",
+    "image": "/images/digimons/1760151021495_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[300,330,352,194,20]",
@@ -2246,7 +2246,7 @@
   {
     "id": 215,
     "name": "snimon",
-    "image": "/images/digimons/1760136520591_image.webp",
+    "image": "/images/digimons/1760150569324_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[357,374,354,301]",
@@ -2270,7 +2270,7 @@
   {
     "id": 217,
     "name": "sorcerimon",
-    "image": "/images/digimons/1760134495251_image.webp",
+    "image": "/images/digimons/1760150586225_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[311,342,385]",
@@ -2282,7 +2282,7 @@
   {
     "id": 218,
     "name": "tailmon",
-    "image": "/images/digimons/1760133017182_image.webp",
+    "image": "/images/digimons/1760150620622_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[109,387]",
@@ -2294,7 +2294,7 @@
   {
     "id": 219,
     "name": "firamon",
-    "image": "/images/digimons/1760132557435_image.webp",
+    "image": "/images/digimons/1760149254909_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[309,330,380]",
@@ -2306,7 +2306,7 @@
   {
     "id": 220,
     "name": "buraimon",
-    "image": "/images/digimons/1760131331878_image.webp",
+    "image": "/images/digimons/1760149742661_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[308,304,295]",
@@ -2318,7 +2318,7 @@
   {
     "id": 221,
     "name": "peckmon",
-    "image": "/images/digimons/1760136091186_image.webp",
+    "image": "/images/digimons/1760150460212_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[303,355,315]",
@@ -2330,7 +2330,7 @@
   {
     "id": 222,
     "name": "mojyamon",
-    "image": "/images/digimons/1760135742037_image.webp",
+    "image": "/images/digimons/1760151001292_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[302,342,380,312]",
@@ -2342,7 +2342,7 @@
   {
     "id": 223,
     "name": "yukidarumon",
-    "image": "/images/digimons/1760137874598_image.webp",
+    "image": "/images/digimons/1760150722790_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[327,109,306,323,312]",
@@ -2354,7 +2354,7 @@
   {
     "id": 224,
     "name": "raptordramon",
-    "image": "/images/digimons/1760136177092_image.webp",
+    "image": "/images/digimons/1760150482857_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[297,360,371]",
@@ -2366,7 +2366,7 @@
   {
     "id": 225,
     "name": "revolmon",
-    "image": "/images/digimons/1760136308233_image.webp",
+    "image": "/images/digimons/1760150511133_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[339,328,385]",
@@ -2378,7 +2378,7 @@
   {
     "id": 226,
     "name": "reppamon",
-    "image": "/images/digimons/1760136276477_image.webp",
+    "image": "/images/digimons/1760150501480_image.webp",
     "level": 2,
     "typeId": 2,
     "evolution": "[303,348,109,336]",
@@ -2414,7 +2414,7 @@
   {
     "id": 229,
     "name": "witchmon",
-    "image": "/images/digimons/1760137409239_image.webp",
+    "image": "/images/digimons/1760150693777_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[384,109,351]",
@@ -2450,7 +2450,7 @@
   {
     "id": 232,
     "name": "kiwimon",
-    "image": "/images/digimons/1760134886597_image.webp",
+    "image": "/images/digimons/1760150113386_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[350,331,335,365]",
@@ -2462,7 +2462,7 @@
   {
     "id": 233,
     "name": "kyubimon",
-    "image": "/images/digimons/1760135048747_image.webp",
+    "image": "/images/digimons/1760150135802_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[376,90,332,321]",
@@ -2486,7 +2486,7 @@
   {
     "id": 235,
     "name": "centalmon",
-    "image": "/images/digimons/1760131480054_image.webp",
+    "image": "/images/digimons/1760149793183_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[291,373,317]",
@@ -2498,7 +2498,7 @@
   {
     "id": 236,
     "name": "sunflowmon",
-    "image": "/images/digimons/1760136658195_image.webp",
+    "image": "/images/digimons/1760150610053_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[350,351,335,340]",
@@ -2510,7 +2510,7 @@
   {
     "id": 237,
     "name": "coelamon",
-    "image": "/images/digimons/1760131750643_image.webp",
+    "image": "/images/digimons/1760149844629_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[386,382,320,338,368]",
@@ -2522,7 +2522,7 @@
   {
     "id": 238,
     "name": "shellmon",
-    "image": "/images/digimons/1760136478571_image.webp",
+    "image": "/images/digimons/1760150559267_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[310,342,320]",
@@ -2534,7 +2534,7 @@
   {
     "id": 239,
     "name": "starmon",
-    "image": "/images/digimons/1760136571925_image.webp",
+    "image": "/images/digimons/1760150597458_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[344,328,369,347]",
@@ -2546,7 +2546,7 @@
   {
     "id": 240,
     "name": "tankmon",
-    "image": "/images/digimons/1760136697527_image.webp",
+    "image": "/images/digimons/1760150629252_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[341,352,371]",
@@ -2558,7 +2558,7 @@
   {
     "id": 242,
     "name": "dinohumon",
-    "image": "/images/digimons/1760132327251_image.webp",
+    "image": "/images/digimons/1760149939103_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[364,297,337]",
@@ -2570,7 +2570,7 @@
   {
     "id": 243,
     "name": "togemon",
-    "image": "/images/digimons/1760136950168_image.webp",
+    "image": "/images/digimons/1760151031557_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[351,365,340]",
@@ -2594,7 +2594,7 @@
   {
     "id": 245,
     "name": "dorugamon",
-    "image": "/images/digimons/1760132423236_image.webp",
+    "image": "/images/digimons/1760149324311_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[316,336,298]",
@@ -2618,7 +2618,7 @@
   {
     "id": 247,
     "name": "blimpmon",
-    "image": "/images/digimons/1760131034865_image.webp",
+    "image": "/images/digimons/1760149727612_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[352,349,345]",
@@ -2630,7 +2630,7 @@
   {
     "id": 248,
     "name": "meramon",
-    "image": "/images/digimons/1760135397121_image.webp",
+    "image": "/images/digimons/1760150287144_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[341,376,334]",
@@ -2642,7 +2642,7 @@
   {
     "id": 249,
     "name": "monochromon",
-    "image": "/images/digimons/1760135781647_image.webp",
+    "image": "/images/digimons/1760150431469_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[31,90,312]",
@@ -2654,7 +2654,7 @@
   {
     "id": 250,
     "name": "lekismon",
-    "image": "/images/digimons/1760135135989_image.webp",
+    "image": "/images/digimons/1760146660405_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[327,319,296]",
@@ -2666,7 +2666,7 @@
   {
     "id": 251,
     "name": "ice devimon",
-    "image": "/images/digimons/1760134381164_image.webp",
+    "image": "/images/digimons/1760150916280_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[327,384,306,321]",
@@ -2678,7 +2678,7 @@
   {
     "id": 252,
     "name": "wendimon",
-    "image": "/images/digimons/1760137348920_image.webp",
+    "image": "/images/digimons/1760150665245_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[354,334,322]",
@@ -2690,7 +2690,7 @@
   {
     "id": 253,
     "name": "woodmon",
-    "image": "/images/digimons/1760137518848_image.webp",
+    "image": "/images/digimons/1760150711364_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[365,332,340]",
@@ -2702,7 +2702,7 @@
   {
     "id": 254,
     "name": "orgemon",
-    "image": "/images/digimons/1760136045463_image.webp",
+    "image": "/images/digimons/1760149143497_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[367,379,333]",
@@ -2726,7 +2726,7 @@
   {
     "id": 256,
     "name": "guardromon",
-    "image": "/images/digimons/1760134189183_image.webp",
+    "image": "/images/digimons/1760149451217_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[326,352,291]",
@@ -2750,7 +2750,7 @@
   {
     "id": 259,
     "name": "gekomon",
-    "image": "/images/digimons/1760133321572_image.webp",
+    "image": "/images/digimons/1760149303658_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[331,372,338]",
@@ -2762,7 +2762,7 @@
   {
     "id": 260,
     "name": "geremon",
-    "image": "/images/digimons/1760133453328_image.webp",
+    "image": "/images/digimons/1760149347971_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[326,328,314]",
@@ -2774,7 +2774,7 @@
   {
     "id": 261,
     "name": "gold numemon",
-    "image": "/images/digimons/1760133608355_image.webp",
+    "image": "/images/digimons/1760149363371_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[386,377,375]",
@@ -2786,7 +2786,7 @@
   {
     "id": 262,
     "name": "golemon",
-    "image": "/images/digimons/1760133661283_image.webp",
+    "image": "/images/digimons/1760149401457_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[344,312,323]",
@@ -2798,7 +2798,7 @@
   {
     "id": 263,
     "name": "cyclomon",
-    "image": "/images/digimons/1760131872655_image.webp",
+    "image": "/images/digimons/1760149923762_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[297,300,138]",
@@ -2810,7 +2810,7 @@
   {
     "id": 264,
     "name": "sangloupmon",
-    "image": "/images/digimons/1760136362976_image.webp",
+    "image": "/images/digimons/1760150520087_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[378,355,353]",
@@ -2822,7 +2822,7 @@
   {
     "id": 265,
     "name": "scumon",
-    "image": "/images/digimons/1760136400705_image.webp",
+    "image": "/images/digimons/1760150530058_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[314,356,359,347]",
@@ -2834,7 +2834,7 @@
   {
     "id": 266,
     "name": "deltamon",
-    "image": "/images/digimons/1760132250906_image.webp",
+    "image": "/images/digimons/1760146605892_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[358,325,329,313,363]",
@@ -2846,7 +2846,7 @@
   {
     "id": 267,
     "name": "dokugumon",
-    "image": "/images/digimons/1760132382140_image.webp",
+    "image": "/images/digimons/1760150024197_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[354,379,290,390]",
@@ -2858,7 +2858,7 @@
   {
     "id": 268,
     "name": "nanimon",
-    "image": "/images/digimons/1760135885370_image.webp",
+    "image": "/images/digimons/1760150408444_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[344,328,356,347]",
@@ -2882,7 +2882,7 @@
   {
     "id": 270,
     "name": "bakemon",
-    "image": "/images/digimons/1760130829078_image.webp",
+    "image": "/images/digimons/1760149596201_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[355,376,374,321]",
@@ -2894,7 +2894,7 @@
   {
     "id": 271,
     "name": "hyougamon",
-    "image": "/images/digimons/1760134325626_image.webp",
+    "image": "/images/digimons/1760149480848_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[302,374,306]",
@@ -2918,7 +2918,7 @@
   {
     "id": 273,
     "name": "flymon",
-    "image": "/images/digimons/1760132594619_image.webp",
+    "image": "/images/digimons/1760150051659_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[34,290,357,301]",
@@ -2930,7 +2930,7 @@
   {
     "id": 274,
     "name": "platinum scumon",
-    "image": "/images/digimons/1760136145880_image.webp",
+    "image": "/images/digimons/1760150471939_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[377,347,349]",
@@ -2942,7 +2942,7 @@
   {
     "id": 275,
     "name": "black tailmon",
-    "image": "/images/digimons/1760130981688_image.webp",
+    "image": "/images/digimons/1760145675162_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[339,384,329]",
@@ -2954,7 +2954,7 @@
   {
     "id": 276,
     "name": "vegimon",
-    "image": "/images/digimons/1760137201745_image.webp",
+    "image": "/images/digimons/1760150642395_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[372,359,377]",
@@ -2966,7 +2966,7 @@
   {
     "id": 278,
     "name": "musyamon",
-    "image": "/images/digimons/1760135830451_image.webp",
+    "image": "/images/digimons/1760150444446_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[297,308,307]",
@@ -2978,7 +2978,7 @@
   {
     "id": 279,
     "name": "mechanorimon",
-    "image": "/images/digimons/1760135256843_image.webp",
+    "image": "/images/digimons/1760149196379_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[341,34,373]",
@@ -2990,7 +2990,7 @@
   {
     "id": 280,
     "name": "raremon",
-    "image": "/images/digimons/1760136233566_image.webp",
+    "image": "/images/digimons/1760150492175_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[370,375,372,294,329]",
@@ -3002,7 +3002,7 @@
   {
     "id": 281,
     "name": "waspmon",
-    "image": "/images/digimons/1760137253728_image.webp",
+    "image": "/images/digimons/1760150651186_image.webp",
     "level": 2,
     "typeId": 3,
     "evolution": "[317,361,371]",
@@ -3026,7 +3026,7 @@
   {
     "id": 283,
     "name": "guardromon (gold)",
-    "image": "/images/digimons/1760134253807_image.webp",
+    "image": "/images/digimons/1760149443740_image.webp",
     "level": 2,
     "typeId": 4,
     "evolution": "[304,361,345]",
@@ -3038,7 +3038,7 @@
   {
     "id": 284,
     "name": "chrysalimon",
-    "image": "/images/digimons/1760131547067_image.webp",
+    "image": "/images/digimons/1760149816833_image.webp",
     "level": 2,
     "typeId": 6,
     "evolution": "[370,358,354,390]",
@@ -3050,7 +3050,7 @@
   {
     "id": 285,
     "name": "aegiochusmon",
-    "image": "/images/digimons/1760139141242_image.webp",
+    "image": "/images/digimons/1760151088403_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[419]",
@@ -3062,7 +3062,7 @@
   {
     "id": 286,
     "name": "aegiochusmon: green",
-    "image": "/images/digimons/1760139197447_image.webp",
+    "image": "/images/digimons/1760151136619_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[419]",
@@ -3086,7 +3086,7 @@
   {
     "id": 288,
     "name": "aegiochusmon: blue",
-    "image": "/images/digimons/1760139227756_image.webp",
+    "image": "/images/digimons/1760151114081_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[419]",
@@ -3110,7 +3110,7 @@
   {
     "id": 290,
     "name": "atlur kabuterimon",
-    "image": "/images/digimons/1760139923726_image.webp",
+    "image": "/images/digimons/1760151208326_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[463,414]",
@@ -3122,7 +3122,7 @@
   {
     "id": 291,
     "name": "andromon",
-    "image": "/images/digimons/1760139657854_image.webp",
+    "image": "/images/digimons/1760151151237_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[412,441,399]",
@@ -3146,7 +3146,7 @@
   {
     "id": 293,
     "name": "aero v-dramon",
-    "image": "/images/digimons/1760139529143_image.webp",
+    "image": "/images/digimons/1760151124512_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[70,409,393]",
@@ -3157,60 +3157,60 @@
   },
   {
     "id": 294,
-    "name": "Ex-Tyranomon",
-    "image": "",
+    "name": "ex-tyranomon",
+    "image": "/images/digimons/1760152484605_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[486,478,403]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": ""
   },
   {
     "id": 295,
-    "name": "Garudamon",
-    "image": "",
+    "name": "garudamon",
+    "image": "/images/digimons/1760152714371_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[426,415,431]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": ""
   },
   {
     "id": 296,
-    "name": "Grappu Leomon",
-    "image": "",
+    "name": "grappu leomon",
+    "image": "/images/digimons/1760153113162_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[413,418,429,435]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": ""
   },
   {
     "id": 297,
-    "name": "Grademon",
-    "image": "",
+    "name": "grademon",
+    "image": "/images/digimons/1760153022335_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[392,411,434]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": ""
   },
   {
     "id": 298,
-    "name": "Great Gryzmon",
-    "image": "",
+    "name": "great gryzmon",
+    "image": "/images/digimons/1760153260345_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[453,402]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": ""
@@ -3218,7 +3218,7 @@
   {
     "id": 299,
     "name": "cerberumon: werewolf mode",
-    "image": "/images/digimons/1760140718162_image.webp",
+    "image": "/images/digimons/1760151636916_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[473,90,429]",
@@ -3230,7 +3230,7 @@
   {
     "id": 300,
     "name": "cyberdramon",
-    "image": "/images/digimons/1760140984953_image.webp",
+    "image": "/images/digimons/1760151819656_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[393,405]",
@@ -3277,12 +3277,12 @@
   },
   {
     "id": 304,
-    "name": "Duramon",
-    "image": "",
+    "name": "duramon",
+    "image": "/images/digimons/1760152156943_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[396,465,411]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": ""
@@ -3337,12 +3337,12 @@
   },
   {
     "id": 309,
-    "name": "Flaremon",
-    "image": "",
+    "name": "flaremon",
+    "image": "/images/digimons/1760152631608_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[391,106]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": ""
@@ -3470,7 +3470,7 @@
   {
     "id": 320,
     "name": "anomalocarimon",
-    "image": "/images/digimons/1760139748486_image.webp",
+    "image": "/images/digimons/1760151181810_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[422,131]",
@@ -3480,21 +3480,9 @@
     "description": ""
   },
   {
-    "id": 321,
-    "name": "Enbarrmon",
-    "image": "",
-    "level": 3,
-    "typeId": 1,
-    "evolution": "[408,406,496]",
-    "active": 0,
-    "boss": 0,
-    "effectId": 1,
-    "description": ""
-  },
-  {
     "id": 322,
     "name": "andiramon",
-    "image": "/images/digimons/1760139608383_image.webp",
+    "image": "/images/digimons/1760145738655_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[433,403,402]",
@@ -3542,7 +3530,7 @@
   {
     "id": 326,
     "name": "catch mamemon",
-    "image": "/images/digimons/1760140667416_image.webp",
+    "image": "/images/digimons/1760151649336_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[472,439]",
@@ -3554,7 +3542,7 @@
   {
     "id": 327,
     "name": "crescemon",
-    "image": "/images/digimons/1760140949862_image.webp",
+    "image": "/images/digimons/1760151770673_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[433,403,489]",
@@ -3626,7 +3614,7 @@
   {
     "id": 333,
     "name": "digitamamon",
-    "image": "/images/digimons/1760141372849_image.webp",
+    "image": "/images/digimons/1760151841480_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[466,462]",
@@ -3638,7 +3626,7 @@
   {
     "id": 334,
     "name": "death meramon",
-    "image": "/images/digimons/1760141252344_image.webp",
+    "image": "/images/digimons/1760151804122_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[477,441,448]",
@@ -3650,7 +3638,7 @@
   {
     "id": 335,
     "name": "delumon",
-    "image": "/images/digimons/1760141298032_image.webp",
+    "image": "/images/digimons/1760151832873_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[394,427,472]",
@@ -3661,12 +3649,12 @@
   },
   {
     "id": 336,
-    "name": "Doruguremon",
-    "image": "",
+    "name": "doruguremon",
+    "image": "/images/digimons/1760151958208_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[437,392]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": ""
@@ -3878,7 +3866,7 @@
   {
     "id": 354,
     "name": "archnemon",
-    "image": "/images/digimons/1760139783764_image.webp",
+    "image": "/images/digimons/1760151190876_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[488,463,447]",
@@ -3901,12 +3889,12 @@
   },
   {
     "id": 356,
-    "name": "Etemon",
-    "image": "",
+    "name": "etemon",
+    "image": "/images/digimons/1760152397486_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[438,455,482]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": ""
@@ -3937,24 +3925,24 @@
   },
   {
     "id": 359,
-    "name": "Gerbemon",
-    "image": "",
+    "name": "gerbemon",
+    "image": "/images/digimons/1760152809503_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[432,482]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": ""
   },
   {
     "id": 360,
-    "name": "Gigadramon",
-    "image": "",
+    "name": "gigadramon",
+    "image": "/images/digimons/1760152961487_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[454,72]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": ""
@@ -3962,7 +3950,7 @@
   {
     "id": 361,
     "name": "cannonbeemon",
-    "image": "/images/digimons/1760140633026_image.webp",
+    "image": "/images/digimons/1760151476018_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[410,461]",
@@ -3973,12 +3961,12 @@
   },
   {
     "id": 362,
-    "name": "Groundramon",
-    "image": "",
+    "name": "groundramon",
+    "image": "/images/digimons/1760153316843_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[481,474]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": ""
@@ -4117,20 +4105,20 @@
   },
   {
     "id": 374,
-    "name": "Fantomon",
-    "image": "",
+    "name": "fantomon",
+    "image": "/images/digimons/1760152575430_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[430,469,478,420]",
-    "active": 0,
-    "boss": 0,
+    "active": 1,
+    "boss": 1,
     "effectId": 1,
     "description": ""
   },
   {
     "id": 375,
     "name": "black king numemon",
-    "image": "/images/digimons/1760140301241_image.webp",
+    "image": "/images/digimons/1760151223636_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[472,482]",
@@ -4142,7 +4130,7 @@
   {
     "id": 376,
     "name": "blue meramon",
-    "image": "/images/digimons/1760140349348_image.webp",
+    "image": "/images/digimons/1760151233123_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[418,471]",
@@ -4286,7 +4274,7 @@
   {
     "id": 388,
     "name": "dinobeemon",
-    "image": "/images/digimons/1760141477811_image.webp",
+    "image": "/images/digimons/1760145757441_image.webp",
     "level": 3,
     "typeId": 4,
     "evolution": "[493,461]",
@@ -4790,7 +4778,7 @@
   {
     "id": 430,
     "name": "sakuyamon",
-    "image": "/images/digimons/1760135073090_image.webp",
+    "image": "/images/digimons/1760150942017_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -5834,10 +5822,22 @@
   {
     "id": 517,
     "name": "agumon virus",
-    "image": "/images/digimons/1760133886034_image.webp",
+    "image": "/images/digimons/1760145654402_image.webp",
     "level": 1,
     "typeId": 3,
     "evolution": "[213,143,26]",
+    "active": 1,
+    "boss": 0,
+    "effectId": 1,
+    "description": ""
+  },
+  {
+    "id": 518,
+    "name": "magnamon",
+    "image": "/images/digimons/1760153464989_image.webp",
+    "level": 1,
+    "typeId": 4,
+    "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
