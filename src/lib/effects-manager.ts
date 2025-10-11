@@ -88,6 +88,13 @@ export class EffectsManager {
         message = `Efeito de boss ${effect.name} ativado!`;
         break;
 
+      case "evolution":
+        // Evolução especial - será tratado no componente que usa
+        // Este efeito retorna o Digimon sem alterações
+        // O componente deve mostrar modal de seleção
+        message = `Preparando evolução especial...`;
+        break;
+
       default:
         message = `Efeito ${effect.name} aplicado!`;
     }
@@ -165,6 +172,8 @@ export class EffectsManager {
         return "✨";
       case "boss":
         return "👹";
+      case "evolution":
+        return "🧬";
       default:
         return "❓";
     }
@@ -187,6 +196,8 @@ export class EffectsManager {
         return "text-purple-400";
       case "boss":
         return "text-pink-400";
+      case "evolution":
+        return "text-cyan-400";
       default:
         return "text-gray-400";
     }

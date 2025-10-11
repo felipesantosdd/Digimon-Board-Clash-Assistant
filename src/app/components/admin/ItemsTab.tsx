@@ -5,7 +5,7 @@ import { useSnackbar } from "notistack";
 import AddItemModal from "../AddItemModal";
 import { Item } from "@/types/item";
 
-type EffectType = "heal" | "damage" | "buff" | "debuff" | "special" | "boss";
+type EffectType = "heal" | "damage" | "buff" | "debuff" | "special" | "boss" | "evolution";
 
 interface Effect {
   id: number;
@@ -23,6 +23,7 @@ const effectTypeIcons: Record<EffectType, string> = {
   debuff: "⬇️",
   special: "✨",
   boss: "👹",
+  evolution: "🧬",
 };
 
 interface ItemsTabProps {

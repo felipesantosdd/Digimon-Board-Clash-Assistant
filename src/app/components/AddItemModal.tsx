@@ -12,7 +12,7 @@ interface AddItemModalProps {
   editingItem?: Item | null;
 }
 
-type EffectType = "heal" | "damage" | "buff" | "debuff" | "special" | "boss";
+type EffectType = "heal" | "damage" | "buff" | "debuff" | "special" | "boss" | "evolution";
 
 interface Effect {
   id: number;
@@ -23,6 +23,14 @@ interface Effect {
   value: number;
 }
 
+interface Digimon {
+  id: number;
+  name: string;
+  level: number;
+  image: string;
+  typeId: number;
+}
+
 const effectTypeIcons: Record<EffectType, string> = {
   heal: "💚",
   damage: "💥",
@@ -30,6 +38,7 @@ const effectTypeIcons: Record<EffectType, string> = {
   debuff: "⬇️",
   special: "✨",
   boss: "👹",
+  evolution: "🧬",
 };
 
 export default function AddItemModal({
@@ -55,6 +64,9 @@ export default function AddItemModal({
   const [showCropper, setShowCropper] = useState(false);
   const [loading, setLoading] = useState(false);
   const [effects, setEffects] = useState<Effect[]>([]);
+  const [digimons, setDigimons] = useState<Digimon[]>([]);
+  const [targetDigimons, setTargetDigimons] = useState<number[]>([]);
+  const [searchDigimon, setSearchDigimon] = useState("");
 
   // Buscar efeitos da API
   useEffect(() => {
@@ -72,8 +84,21 @@ export default function AddItemModal({
       }
     };
 
+    const fetchDigimons = async () => {
+      try {
+        const response = await fetch("/api/digimons");
+        if (response.ok) {
+          const data = await response.json();
+          setDigimons(data);
+        }
+      } catch (error) {
+        console.error("Erro ao carregar Digimons:", error);
+      }
+    };
+
     if (isOpen) {
       fetchEffects();
+      fetchDigimons();
     }
   }, [isOpen]);
 
@@ -87,6 +112,7 @@ export default function AddItemModal({
         dropChance: editingItem.dropChance || 0,
       });
       setImagePreview(editingItem.image);
+      setTargetDigimons(editingItem.targetDigimons || []);
     } else {
       resetForm();
     }
@@ -102,6 +128,8 @@ export default function AddItemModal({
     });
     setImageFile(null);
     setImagePreview("");
+    setTargetDigimons([]);
+    setSearchDigimon("");
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -194,6 +222,7 @@ export default function AddItemModal({
       const itemData = {
         ...formData,
         image: imagePath,
+        targetDigimons: targetDigimons.length > 0 ? targetDigimons : undefined,
       };
 
       // Se está editando
@@ -397,6 +426,118 @@ export default function AddItemModal({
                 </p>
               )}
             </div>
+
+            {/* Seleção de Digimons (apenas para efeito tipo 'evolution') */}
+            {effects.find((e) => e.id === Number(formData.effectId))?.type ===
+              "evolution" && (
+              <div className="bg-blue-900/30 border border-blue-600 rounded-lg p-4">
+                <label className="text-sm font-medium text-blue-200 mb-3 flex items-center gap-2">
+                  <span className="text-xl">🧬</span>
+                  Digimons de Evolução Especial *
+                </label>
+                <p className="text-xs text-blue-300 mb-3">
+                  Selecione os Digimons que podem ser obtidos ao usar este item
+                </p>
+
+                {/* Campo de busca */}
+                <input
+                  type="text"
+                  value={searchDigimon}
+                  onChange={(e) => setSearchDigimon(e.target.value)}
+                  placeholder="Buscar Digimon..."
+                  className="w-full px-3 py-2 mb-3 text-white bg-gray-800 border border-blue-600 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+
+                {/* Lista de Digimons selecionados */}
+                {targetDigimons.length > 0 && (
+                  <div className="mb-3 space-y-2">
+                    <p className="text-xs text-blue-300 font-semibold">
+                      Selecionados ({targetDigimons.length}):
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {targetDigimons.map((digimonId) => {
+                        const digimon = digimons.find((d) => d.id === digimonId);
+                        if (!digimon) return null;
+                        return (
+                          <div
+                            key={digimonId}
+                            className="bg-blue-700 text-white text-xs px-3 py-1 rounded-full flex items-center gap-2"
+                          >
+                            <span className="capitalize">{digimon.name}</span>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setTargetDigimons((prev) =>
+                                  prev.filter((id) => id !== digimonId)
+                                )
+                              }
+                              className="text-blue-200 hover:text-white font-bold"
+                            >
+                              ×
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Grade de Digimons disponíveis */}
+                <div className="max-h-64 overflow-y-auto bg-gray-800 rounded-lg p-3 space-y-2">
+                  {digimons
+                    .filter((d) =>
+                      d.name.toLowerCase().includes(searchDigimon.toLowerCase())
+                    )
+                    .slice(0, 50)
+                    .map((digimon) => {
+                      const isSelected = targetDigimons.includes(digimon.id);
+                      return (
+                        <button
+                          key={digimon.id}
+                          type="button"
+                          onClick={() => {
+                            if (isSelected) {
+                              setTargetDigimons((prev) =>
+                                prev.filter((id) => id !== digimon.id)
+                              );
+                            } else {
+                              setTargetDigimons((prev) => [...prev, digimon.id]);
+                            }
+                          }}
+                          className={`w-full flex items-center gap-3 p-2 rounded-lg transition-all ${
+                            isSelected
+                              ? "bg-blue-600 border-2 border-blue-400"
+                              : "bg-gray-700 hover:bg-gray-600 border-2 border-transparent"
+                          }`}
+                        >
+                          <div className="w-10 h-10 bg-gray-600 rounded flex items-center justify-center overflow-hidden flex-shrink-0">
+                            {digimon.image ? (
+                              <img
+                                src={digimon.image}
+                                alt={digimon.name}
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <span className="text-xl">🤖</span>
+                            )}
+                          </div>
+                          <div className="flex-1 text-left">
+                            <p className="text-white text-sm font-semibold capitalize">
+                              {digimon.name}
+                            </p>
+                            <p className="text-gray-400 text-xs">
+                              Level {digimon.level}
+                            </p>
+                          </div>
+                          {isSelected && (
+                            <div className="text-blue-300 text-xl">✓</div>
+                          )}
+                        </button>
+                      );
+                    })}
+                </div>
+              </div>
+            )}
 
             {/* Chance de Drop */}
             <div>

@@ -18,23 +18,39 @@ export function initializeItemsTable() {
 
 // Buscar todos os itens
 export function getAllItems(): Item[] {
-  const items = db.prepare("SELECT * FROM items ORDER BY name").all() as Item[];
-  return items;
+  const items = db.prepare("SELECT * FROM items ORDER BY name").all() as Array<
+    Omit<Item, "targetDigimons"> & { targetDigimons: string }
+  >;
+  
+  return items.map((item) => ({
+    ...item,
+    targetDigimons: item.targetDigimons
+      ? JSON.parse(item.targetDigimons)
+      : undefined,
+  }));
 }
 
 // Buscar item por ID
 export function getItemById(id: number): Item | undefined {
   const item = db.prepare("SELECT * FROM items WHERE id = ?").get(id) as
-    | Item
+    | (Omit<Item, "targetDigimons"> & { targetDigimons: string })
     | undefined;
-  return item;
+  
+  if (!item) return undefined;
+  
+  return {
+    ...item,
+    targetDigimons: item.targetDigimons
+      ? JSON.parse(item.targetDigimons)
+      : undefined,
+  };
 }
 
 // Criar novo item
 export function createItem(item: Omit<Item, "id">): Item {
   const stmt = db.prepare(`
-    INSERT INTO items (name, description, image, effect, dropChance)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO items (name, description, image, effect, dropChance, targetDigimons)
+    VALUES (?, ?, ?, ?, ?, ?)
   `);
 
   const result = stmt.run(
@@ -42,7 +58,8 @@ export function createItem(item: Omit<Item, "id">): Item {
     item.description,
     item.image,
     item.effect,
-    item.dropChance || 0
+    item.dropChance || 0,
+    JSON.stringify(item.targetDigimons || [])
   );
 
   return {
@@ -75,6 +92,10 @@ export function updateItem(id: number, item: Partial<Omit<Item, "id">>): void {
   if (item.dropChance !== undefined) {
     fields.push("dropChance = ?");
     values.push(item.dropChance);
+  }
+  if (item.targetDigimons !== undefined) {
+    fields.push("targetDigimons = ?");
+    values.push(JSON.stringify(item.targetDigimons));
   }
 
   if (fields.length === 0) return;

@@ -6,6 +6,7 @@ export interface Item {
   effect: string; // Deprecated - use effectId
   effectId?: number; // ID do efeito na tabela effects
   dropChance?: number; // Chance de 0-100% de encontrar o item explorando
+  targetDigimons?: number[]; // IDs dos Digimons para evolução especial (usado quando efeito é 'evolution')
 }
 
 export interface GameItem extends Item {

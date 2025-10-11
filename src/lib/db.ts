@@ -50,7 +50,7 @@ if (isProduction) {
       name TEXT NOT NULL,
       description TEXT NOT NULL,
       code TEXT NOT NULL UNIQUE,
-      type TEXT NOT NULL CHECK(type IN ('heal', 'damage', 'buff', 'debuff', 'special', 'boss')),
+      type TEXT NOT NULL CHECK(type IN ('heal', 'damage', 'buff', 'debuff', 'special', 'boss', 'evolution')),
       value INTEGER DEFAULT 0
     );
 
@@ -61,6 +61,7 @@ if (isProduction) {
       image TEXT NOT NULL,
       effectId INTEGER,
       dropChance INTEGER DEFAULT 0 CHECK(dropChance >= 0 AND dropChance <= 100),
+      targetDigimons TEXT DEFAULT '[]',
       FOREIGN KEY (effectId) REFERENCES effects(id)
     );
 

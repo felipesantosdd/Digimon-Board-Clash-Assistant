@@ -3270,7 +3270,7 @@
     "level": 0,
     "typeId": 2,
     "evolution": "[]",
-    "active": 1,
+    "active": 0,
     "boss": 0,
     "effectId": 1,
     "description": ""
@@ -4178,7 +4178,7 @@
   {
     "id": 396,
     "name": "war greymon",
-    "image": "/images/digimons/1760212423144_image.webp",
+    "image": "/images/digimons/1760217446002_image.webp",
     "level": 4,
     "typeId": 2,
     "evolution": "[49,47]",
@@ -5155,7 +5155,7 @@
     "typeId": 3,
     "evolution": "[]",
     "active": 1,
-    "boss": 1,
+    "boss": 0,
     "effectId": 1,
     "description": ""
   },
@@ -5550,7 +5550,7 @@
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
-    "active": 1,
+    "active": 0,
     "boss": 0,
     "effectId": 1,
     "description": ""
@@ -5588,6 +5588,18 @@
     "evolution": "[]",
     "active": 1,
     "boss": 1,
+    "effectId": 1,
+    "description": ""
+  },
+  {
+    "id": 522,
+    "name": "sagittarimon",
+    "image": "/images/digimons/1760224007393_image.webp",
+    "level": 0,
+    "typeId": 4,
+    "evolution": "[]",
+    "active": 1,
+    "boss": 0,
     "effectId": 1,
     "description": ""
   }

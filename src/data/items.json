@@ -5,7 +5,8 @@
     "description": "Restaura 1000 HP de um Digimon",
     "image": "/images/items/potion.png",
     "effect": "heal_1000",
-    "dropChance": 30
+    "dropChance": 30,
+    "targetDigimons": "[]"
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "description": "Restaura 2000 HP de um Digimon",
     "image": "/images/items/super-potion.png",
     "effect": "heal_2000",
-    "dropChance": 20
+    "dropChance": 20,
+    "targetDigimons": "[]"
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "description": "Restaura completamente o HP de um Digimon",
     "image": "/images/items/full-potion.png",
     "effect": "heal_full",
-    "dropChance": 10
+    "dropChance": 10,
+    "targetDigimons": "[]"
   },
   {
     "id": 4,
@@ -29,7 +32,8 @@
     "description": "Revive um Digimon derrotado com metade do HP",
     "image": "/images/items/revive.png",
     "effect": "revive_half",
-    "dropChance": 15
+    "dropChance": 15,
+    "targetDigimons": "[]"
   },
   {
     "id": 5,
@@ -37,7 +41,8 @@
     "description": "Aumenta permanentemente o DP em 500",
     "image": "/images/items/1759949520582_image.webp",
     "effect": "boost_dp_500",
-    "dropChance": 25
+    "dropChance": 25,
+    "targetDigimons": "[]"
   },
   {
     "id": 6,
@@ -45,7 +50,8 @@
     "description": "Protege de um ataque neste turno",
     "image": "/images/items/shield.png",
     "effect": "shield_turn",
-    "dropChance": 20
+    "dropChance": 20,
+    "targetDigimons": "[]"
   },
   {
     "id": 9,
@@ -53,6 +59,7 @@
     "description": "Restaura 2000 Pontos de Vida",
     "image": "/images/items/1759941795057_8586614.webp",
     "effect": "heal_2000",
-    "dropChance": 0
+    "dropChance": 0,
+    "targetDigimons": "[]"
   }
 ]
