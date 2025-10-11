@@ -194,6 +194,7 @@ export default function GameSetupModal({
         players: shuffledPlayers,
         currentTurnPlayerIndex: 0, // Primeiro jogador começa
         turnCount: 1, // Contador de turnos inicia em 1
+        sharedBag: [], // Bag compartilhada entre toda a equipe
       };
 
       // Salvar no localStorage

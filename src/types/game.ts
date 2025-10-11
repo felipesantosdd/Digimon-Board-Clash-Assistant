@@ -56,4 +56,5 @@ export interface GameState {
   activeBoss?: GameBoss | null; // Boss ativo no jogo
   lastBossDefeatedTurn?: number; // Último turno que um boss foi derrotado
   bossesDefeated?: number; // Quantidade de bosses derrotados
+  sharedBag?: GameItem[]; // Bag compartilhada entre toda a equipe
 }

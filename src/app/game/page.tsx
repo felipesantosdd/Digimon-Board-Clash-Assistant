@@ -859,7 +859,7 @@ export default function GamePage() {
     console.log("⚔️ [BOSS] Resultado atacante:", attackerResult);
 
     // Atualizar HP do Digimon atacante e progresso de evolução
-    const updatedPlayers = gameState.players.map((player) => ({
+    let updatedPlayers = gameState.players.map((player) => ({
       ...player,
       digimons: player.digimons.map((d) => {
         if (d.id === attackerDigimon.digimon.id) {
@@ -891,6 +891,21 @@ export default function GamePage() {
         { variant: "success" }
       );
 
+      // Habilitar evolução imediata para o Digimon que derrotou o boss
+      updatedPlayers = updatedPlayers.map((player) => ({
+        ...player,
+        digimons: player.digimons.map((d) => {
+          if (d.id === attackerDigimon.digimon.id) {
+            enqueueSnackbar(
+              `✨ ${d.name} pode evoluir imediatamente por derrotar o boss!`,
+              { variant: "info" }
+            );
+            return { ...d, canEvolve: true };
+          }
+          return d;
+        }),
+      }));
+
       // Dar recompensas ao jogador que deu o golpe final
       const killerPlayerIndex = updatedPlayers.findIndex(
         (p) => p.id === gameState.players[gameState.currentTurnPlayerIndex].id
@@ -902,6 +917,22 @@ export default function GamePage() {
           fetch(`/api/items/${itemId}`).then((res) => res.json())
         );
         const items = await Promise.all(itemsPromises);
+
+        // Adicionar itens à bag compartilhada
+        const currentSharedBag = gameState.sharedBag || [];
+        const updatedSharedBag = [...currentSharedBag];
+        
+        items.forEach((item) => {
+          const existingIndex = updatedSharedBag.findIndex((bagItem) => bagItem.id === item.id);
+          if (existingIndex !== -1) {
+            updatedSharedBag[existingIndex] = {
+              ...updatedSharedBag[existingIndex],
+              quantity: updatedSharedBag[existingIndex].quantity + 1,
+            };
+          } else {
+            updatedSharedBag.push({ ...item, quantity: 1 });
+          }
+        });
 
         // Mostrar modal de drop do boss
         setBossDropData({
@@ -915,11 +946,21 @@ export default function GamePage() {
         setShowBossDropModal(true);
 
         enqueueSnackbar(
-          `🎁 ${attackerDigimon.playerName} ganhou ${rewards.length} item(ns)!`,
+          `🎁 A equipe ganhou ${rewards.length} item(ns) na bag compartilhada!`,
           { variant: "success" }
         );
 
-        console.log("🎁 [BOSS] Recompensas:", items);
+        console.log("🎁 [BOSS] Recompensas adicionadas à bag compartilhada:", items);
+        
+        // Atualizar estado com boss derrotado e bag compartilhada atualizada
+        saveGameState({
+          ...gameState,
+          sharedBag: updatedSharedBag,
+          activeBoss: updatedBoss,
+          players: updatedPlayers,
+          lastBossDefeatedTurn: gameState.turnCount,
+          bossesDefeated: (gameState.bossesDefeated || 0) + 1,
+        });
       } else if (killerPlayerIndex >= 0) {
         // Boss derrotado mas sem drops
         setBossDropData({
@@ -931,16 +972,25 @@ export default function GamePage() {
           drops: [],
         });
         setShowBossDropModal(true);
+        
+        // Atualizar estado com boss derrotado
+        saveGameState({
+          ...gameState,
+          activeBoss: updatedBoss,
+          players: updatedPlayers,
+          lastBossDefeatedTurn: gameState.turnCount,
+          bossesDefeated: (gameState.bossesDefeated || 0) + 1,
+        });
+      } else {
+        // Caso sem killer player definido
+        saveGameState({
+          ...gameState,
+          activeBoss: updatedBoss,
+          players: updatedPlayers,
+          lastBossDefeatedTurn: gameState.turnCount,
+          bossesDefeated: (gameState.bossesDefeated || 0) + 1,
+        });
       }
-
-      // Atualizar estado com boss derrotado
-      saveGameState({
-        ...gameState,
-        activeBoss: updatedBoss,
-        players: updatedPlayers,
-        lastBossDefeatedTurn: gameState.turnCount,
-        bossesDefeated: (gameState.bossesDefeated || 0) + 1,
-      });
     } else {
       // Boss ainda vivo, apenas atualizar HP
       saveGameState({
@@ -1187,37 +1237,43 @@ export default function GamePage() {
         if (foundItem) {
           console.log("💰 [LOOT] Item encontrado:", foundItem.name);
 
-          // Adicionar item à bag do Digimon
+          // Adicionar item à bag compartilhada
+          const sharedBag = gameState.sharedBag || [];
+          const existingItemIndex = sharedBag.findIndex(
+            (bagItem) => bagItem.id === foundItem.id
+          );
+
+          let updatedSharedBag;
+          if (existingItemIndex !== -1) {
+            // Item já existe, incrementar quantidade
+            updatedSharedBag = sharedBag.map((item, index) =>
+              index === existingItemIndex
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            );
+          } else {
+            // Novo item, adicionar à bag compartilhada
+            updatedSharedBag = [
+              ...sharedBag,
+              {
+                ...foundItem,
+                quantity: 1,
+              },
+            ];
+          }
+
+          // Atualizar estado com bag compartilhada e marcar Digimon como agiu
           const updatedState = {
             ...gameState,
+            sharedBag: updatedSharedBag,
             players: gameState.players.map((player, playerIndex) => {
               if (playerIndex === gameState.currentTurnPlayerIndex) {
                 return {
                   ...player,
                   digimons: player.digimons.map((d) => {
                     if (d.id === digimon.id) {
-                      const newBag = d.bag || [];
-                      const existingItemIndex = newBag.findIndex(
-                        (bagItem) => bagItem.id === foundItem.id
-                      );
-
-                      if (existingItemIndex !== -1) {
-                        // Item já existe, incrementar quantidade
-                        newBag[existingItemIndex] = {
-                          ...newBag[existingItemIndex],
-                          quantity: newBag[existingItemIndex].quantity + 1,
-                        };
-                      } else {
-                        // Novo item, adicionar à bag
-                        newBag.push({
-                          ...foundItem,
-                          quantity: 1,
-                        });
-                      }
-
                       return {
                         ...d,
-                        bag: newBag,
                         hasActedThisTurn: true,
                       };
                     }
@@ -1308,9 +1364,9 @@ export default function GamePage() {
       return;
     }
 
-    const item = digimon.bag?.find((i) => i.id === itemId);
+    const item = gameState.sharedBag?.find((i) => i.id === itemId);
     if (!item) {
-      enqueueSnackbar("Item não encontrado!", { variant: "error" });
+      enqueueSnackbar("Item não encontrado na bag compartilhada!", { variant: "error" });
       return;
     }
 
@@ -1396,34 +1452,34 @@ export default function GamePage() {
     console.log("💊 [ITEM] DP:", digimon.dp, "→", newDp);
     console.log("💊 [ITEM] HP:", digimon.currentHp, "→", newHp);
 
+    // Remover ou decrementar item da bag compartilhada
+    const updatedSharedBag = (gameState.sharedBag || [])
+      .map((bagItem) => {
+        if (bagItem.id === itemId) {
+          return bagItem.quantity > 1
+            ? { ...bagItem, quantity: bagItem.quantity - 1 }
+            : null;
+        }
+        return bagItem;
+      })
+      .filter((i) => i !== null) as typeof gameState.sharedBag;
+
     // Atualizar estado
     const updatedState = {
       ...gameState,
+      sharedBag: updatedSharedBag,
       players: gameState.players.map((player) => {
         if (player.id === selectedDigimon.playerId) {
           return {
             ...player,
             digimons: player.digimons.map((d) => {
               if ((d.originalId || d.id) === selectedDigimon.originalId) {
-                // Remover ou decrementar item
-                const updatedBag = (d.bag || [])
-                  .map((bagItem) => {
-                    if (bagItem.id === itemId) {
-                      return bagItem.quantity > 1
-                        ? { ...bagItem, quantity: bagItem.quantity - 1 }
-                        : null;
-                    }
-                    return bagItem;
-                  })
-                  .filter((i) => i !== null);
-
                 return {
                   ...d,
                   baseDp: d.baseDp || d.dp, // Inicializar baseDp se não existir
                   dp: newDp,
                   dpBonus: newDpBonus,
                   currentHp: newHp,
-                  bag: updatedBag,
                   hasActedThisTurn: true,
                 };
               }
@@ -1452,56 +1508,40 @@ export default function GamePage() {
       return;
     }
 
-    const item = digimon.bag?.find((i) => i.id === itemId);
+    const item = gameState.sharedBag?.find((i) => i.id === itemId);
     if (!item) {
-      enqueueSnackbar("Item não encontrado!", { variant: "error" });
+      enqueueSnackbar("Item não encontrado na bag compartilhada!", { variant: "error" });
       return;
     }
+
+    // Remover item completamente da bag compartilhada
+    const updatedSharedBag = (gameState.sharedBag || []).filter((i) => i.id !== itemId);
 
     // Atualizar estado
     const updatedState = {
       ...gameState,
-      players: gameState.players.map((player) => {
-        if (player.id === selectedDigimon.playerId) {
-          return {
-            ...player,
-            digimons: player.digimons.map((d) => {
-              if ((d.originalId || d.id) === selectedDigimon.originalId) {
-                // Remover item completamente
-                const updatedBag = (d.bag || []).filter((i) => i.id !== itemId);
-
-                return {
-                  ...d,
-                  bag: updatedBag,
-                };
-              }
-              return d;
-            }),
-          };
-        }
-        return player;
-      }),
+      sharedBag: updatedSharedBag,
     };
 
     saveGameState(updatedState);
-    // Toast removido - menos invasivo
+    enqueueSnackbar(`🗑️ ${item.name} descartado da bag compartilhada`, { variant: "info" });
   };
 
+  // Função removida - bag agora é compartilhada
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleGiveItem = (
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     fromDigimon: GameDigimon,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     toDigimonId: number,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     itemId: number
   ) => {
-    console.log("🎁 [ITEM] Dando item...");
-    console.log(
-      "🎁 [ITEM] De:",
-      fromDigimon.name,
-      "| Para:",
-      toDigimonId,
-      "| Item ID:",
-      itemId
-    );
-
+    console.log("🎁 [ITEM] Função handleGiveItem desativada - bag é compartilhada");
+    enqueueSnackbar("A bag agora é compartilhada por toda a equipe!", { variant: "info" });
+    return;
+    
+    /* CÓDIGO ANTIGO DESATIVADO
     if (!gameState || !selectedDigimon) {
       console.log("❌ [ITEM] Validação falhou");
       return;
@@ -1572,6 +1612,7 @@ export default function GamePage() {
 
     saveGameState(updatedState);
     // Toast removido - menos invasivo
+    */
   };
 
   const handleDefend = (digimon: GameDigimon, targetDigimonId: number) => {
@@ -2376,7 +2417,7 @@ export default function GamePage() {
         onProvoke={handleProvoke}
         onUseItem={handleUseItem}
         onDiscardItem={handleDiscardItem}
-        onGiveItem={handleGiveItem}
+        sharedBag={gameState?.sharedBag || []}
         playerDigimons={
           selectedDigimon
             ? gameState?.players.find((p) => p.id === selectedDigimon.playerId)

@@ -19,11 +19,7 @@ interface DigimonDetailsModalProps {
   isCurrentPlayerTurn: boolean;
   onUseItem?: (digimon: GameDigimon, itemId: number) => void;
   onDiscardItem?: (digimon: GameDigimon, itemId: number) => void;
-  onGiveItem?: (
-    fromDigimon: GameDigimon,
-    toDigimonId: number,
-    itemId: number
-  ) => void;
+  sharedBag?: any[]; // Bag compartilhada entre toda a equipe
   playerDigimons?: GameDigimon[]; // Lista de digimons do jogador para transferência
   allPlayers?: GameDigimon[][]; // Todos os jogadores com seus Digimons (para provocar)
   currentTurnCount?: number; // Turno global atual
@@ -43,14 +39,13 @@ export default function DigimonDetailsModal({
   isCurrentPlayerTurn,
   onUseItem,
   onDiscardItem,
-  onGiveItem,
+  sharedBag = [],
   playerDigimons = [],
   allPlayers = [],
   currentTurnCount = 0,
 }: DigimonDetailsModalProps) {
   const [showBag, setShowBag] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
-  const [showGiveDialog, setShowGiveDialog] = useState(false);
   const [showDefendDialog, setShowDefendDialog] = useState(false);
   const [showProvokeDialog, setShowProvokeDialog] = useState(false);
 
@@ -72,19 +67,7 @@ export default function DigimonDetailsModal({
     }
   };
 
-  const handleOpenGiveDialog = (itemId: number) => {
-    setSelectedItemId(itemId);
-    setShowGiveDialog(true);
-  };
-
-  const handleGiveItem = (toDigimonId: number) => {
-    if (onGiveItem && digimon && selectedItemId !== null) {
-      onGiveItem(digimon, toDigimonId, selectedItemId);
-      setShowGiveDialog(false);
-      setSelectedItemId(null);
-      setShowBag(false);
-    }
-  };
+  // Funções removidas - bag agora é compartilhada
 
   const handleDefend = (targetDigimonId: number) => {
     if (onDefend && digimon) {
@@ -455,10 +438,10 @@ export default function DigimonDetailsModal({
                 <div>
                   <h3 className="text-lg sm:text-xl font-bold flex items-center gap-2">
                     <span className="text-xl sm:text-2xl">🎒</span>
-                    Inventário
+                    Bag Compartilhada
                   </h3>
                   <p className="text-xs sm:text-sm text-purple-100 mt-0.5 sm:mt-1">
-                    {capitalize(digimon.name)}
+                    Itens de toda a equipe
                   </p>
                 </div>
                 <button
@@ -472,19 +455,19 @@ export default function DigimonDetailsModal({
 
             {/* Lista de Itens */}
             <div className="p-4">
-              {!digimon.bag || digimon.bag.length === 0 ? (
+              {!sharedBag || sharedBag.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="text-6xl mb-4">🎒</div>
                   <p className="text-gray-400 font-semibold text-lg">
-                    Inventário vazio
+                    Bag Compartilhada Vazia
                   </p>
                   <p className="text-gray-500 text-sm mt-2">
-                    Este Digimon não possui itens
+                    A equipe não possui itens
                   </p>
                 </div>
               ) : (
                 <div className="space-y-3">
-                  {digimon.bag.map((item, index) => (
+                  {sharedBag.map((item, index) => (
                     <div
                       key={`${item.id}-${index}`}
                       className="bg-gray-700 rounded-lg p-4 border border-gray-600 hover:border-purple-500 transition-all"
@@ -534,12 +517,6 @@ export default function DigimonDetailsModal({
                                 ✓ Usar
                               </button>
                               <button
-                                onClick={() => handleOpenGiveDialog(item.id)}
-                                className="flex-1 px-3 py-1.5 bg-blue-600 text-white text-xs font-bold rounded hover:bg-blue-700 transition-all"
-                              >
-                                🎁 Dar
-                              </button>
-                              <button
                                 onClick={() => handleDiscardItem(item.id)}
                                 className="flex-1 px-3 py-1.5 bg-red-600 text-white text-xs font-bold rounded hover:bg-red-700 transition-all"
                               >
@@ -568,20 +545,9 @@ export default function DigimonDetailsModal({
         </div>
       )}
 
-      {/* Modal de Selecionar Digimon para Dar Item */}
-      {showGiveDialog && selectedItemId !== null && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[70]"
-          onClick={(e) => {
-            e.stopPropagation();
-            setShowGiveDialog(false);
-            setSelectedItemId(null);
-          }}
-        >
-          <div
-            className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-md border-2 border-blue-500 m-4"
-            onClick={(e) => e.stopPropagation()}
-          >
+      {/* Modal de Dar Item removido - bag agora é compartilhada */}
+      {false && (
+        <div>
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-4 rounded-t-lg">
               <div className="flex items-center justify-between">

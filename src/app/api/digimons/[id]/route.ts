@@ -116,7 +116,7 @@ export async function DELETE(
             "public",
             digimon.image.substring(1)
           );
-          
+
           await fs.unlink(imagePath);
           console.log(`🗑️ Imagem removida: ${digimon.image}`);
         } catch (error) {
