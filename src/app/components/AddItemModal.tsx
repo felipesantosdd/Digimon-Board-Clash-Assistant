@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useSnackbar } from "notistack";
 import { Item } from "@/types/item";
 import ImageCropper from "./ImageCropper";
@@ -12,7 +12,14 @@ interface AddItemModalProps {
   editingItem?: Item | null;
 }
 
-type EffectType = "heal" | "damage" | "buff" | "debuff" | "special" | "boss" | "evolution";
+type EffectType =
+  | "heal"
+  | "damage"
+  | "buff"
+  | "debuff"
+  | "special"
+  | "boss"
+  | "evolution";
 
 interface Effect {
   id: number;
@@ -102,23 +109,9 @@ export default function AddItemModal({
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    if (editingItem) {
-      setFormData({
-        name: editingItem.name,
-        description: editingItem.description,
-        effectId: editingItem.effectId || 1,
-        image: editingItem.image,
-        dropChance: editingItem.dropChance || 0,
-      });
-      setImagePreview(editingItem.image);
-      setTargetDigimons(editingItem.targetDigimons || []);
-    } else {
-      resetForm();
-    }
-  }, [editingItem, isOpen]);
-
-  const resetForm = () => {
+  const resetForm = useCallback(() => {
+    console.log("🔄 [MODAL] Resetando formulário...");
+    console.log("🔄 [MODAL] Effects disponíveis:", effects.length);
     setFormData({
       name: "",
       description: "",
@@ -130,7 +123,34 @@ export default function AddItemModal({
     setImagePreview("");
     setTargetDigimons([]);
     setSearchDigimon("");
-  };
+    console.log("🔄 [MODAL] Formulário resetado para effectId:", effects.length > 0 ? effects[0].id : 1);
+  }, [effects]);
+
+  useEffect(() => {
+    if (isOpen) {
+      if (editingItem) {
+        console.log("📝 [MODAL] Carregando item para edição:", editingItem);
+        setFormData({
+          name: editingItem.name,
+          description: editingItem.description,
+          effectId: editingItem.effectId || 1,
+          image: editingItem.image,
+          dropChance: editingItem.dropChance || 0,
+        });
+        setImagePreview(editingItem.image);
+        setTargetDigimons(editingItem.targetDigimons || []);
+        console.log("📝 [MODAL] effectId carregado:", editingItem.effectId);
+        console.log("📝 [MODAL] targetDigimons carregado:", editingItem.targetDigimons);
+      } else {
+        console.log("📝 [MODAL] Modo criação - resetando form");
+        resetForm();
+      }
+    } else {
+      // Quando modal fecha, limpar tudo
+      console.log("📝 [MODAL] Modal fechado - limpando estados");
+      resetForm();
+    }
+  }, [editingItem, isOpen, resetForm]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -239,6 +259,7 @@ export default function AddItemModal({
           enqueueSnackbar("Item atualizado com sucesso!", {
             variant: "success",
           });
+          resetForm();
           onSuccess();
           onClose();
         } else {
@@ -446,7 +467,8 @@ export default function AddItemModal({
                     <p className="text-xs text-cyan-200 flex items-center gap-2">
                       <span>🛡️</span>
                       <span>
-                        Mostrando apenas Digimons <strong>Armor (Level 0)</strong>
+                        Mostrando apenas Digimons{" "}
+                        <strong>Armor (Level 0)</strong>
                       </span>
                     </p>
                   </div>
@@ -469,7 +491,9 @@ export default function AddItemModal({
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {targetDigimons.map((digimonId) => {
-                        const digimon = digimons.find((d) => d.id === digimonId);
+                        const digimon = digimons.find(
+                          (d) => d.id === digimonId
+                        );
                         if (!digimon) return null;
                         return (
                           <div
@@ -530,7 +554,10 @@ export default function AddItemModal({
                                 prev.filter((id) => id !== digimon.id)
                               );
                             } else {
-                              setTargetDigimons((prev) => [...prev, digimon.id]);
+                              setTargetDigimons((prev) => [
+                                ...prev,
+                                digimon.id,
+                              ]);
                             }
                           }}
                           className={`w-full flex items-center gap-3 p-2 rounded-lg transition-all ${

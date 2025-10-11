@@ -19,7 +19,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, description, image, effect, effectId, dropChance } = body;
+    const { name, description, image, effect, effectId, dropChance, targetDigimons } = body;
 
     if (!name || !description || (!effect && !effectId)) {
       return NextResponse.json(
@@ -43,6 +43,7 @@ export async function POST(request: NextRequest) {
       effect: effect || "", // Para compatibilidade
       effectId: effectId || undefined,
       dropChance: dropChance || 0,
+      targetDigimons: targetDigimons || undefined,
     });
 
     return NextResponse.json(newItem, { status: 201 });
