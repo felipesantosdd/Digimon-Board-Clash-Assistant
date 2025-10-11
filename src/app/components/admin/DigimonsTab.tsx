@@ -29,6 +29,12 @@ export default function DigimonsTab({
   const [viewingDigimon, setViewingDigimon] = useState<Digimon | null>(null);
   const [isEvolutionLineOpen, setIsEvolutionLineOpen] = useState(false);
 
+  // Estados para modal de upload rápido de imagem (temporário para desenvolvimento)
+  const [uploadingDigimon, setUploadingDigimon] = useState<Digimon | null>(null);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+
   // Carregar Digimons da API
   useEffect(() => {
     fetchDigimons();
@@ -135,6 +141,94 @@ export default function DigimonsTab({
 
   const handleAddDigimonSuccess = async () => {
     fetchDigimons();
+  };
+
+  const handleOpenUploadModal = (digimon: Digimon) => {
+    setUploadingDigimon(digimon);
+    setImagePreviewUrl(digimon.image || null);
+    setIsUploadModalOpen(true);
+  };
+
+  const handleCloseUploadModal = () => {
+    setUploadingDigimon(null);
+    setImagePreviewUrl(null);
+    setIsUploadModalOpen(false);
+  };
+
+  const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreviewUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleUploadImage = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!uploadingDigimon) return;
+
+    const formData = new FormData(e.currentTarget);
+    const file = formData.get("image") as File;
+
+    if (!file || file.size === 0) {
+      enqueueSnackbar("Selecione uma imagem", { variant: "warning" });
+      return;
+    }
+
+    setUploadingImage(true);
+
+    try {
+      // Upload da imagem
+      const uploadFormData = new FormData();
+      uploadFormData.append("file", file);
+      uploadFormData.append("type", "digimons");
+
+      const uploadResponse = await fetch("/api/upload", {
+        method: "POST",
+        body: uploadFormData,
+      });
+
+      if (!uploadResponse.ok) {
+        throw new Error("Erro ao fazer upload da imagem");
+      }
+
+      const { url } = await uploadResponse.json();
+
+      // Atualizar o Digimon com a nova imagem
+      const updateResponse = await fetch(`/api/digimons/${uploadingDigimon.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: uploadingDigimon.name,
+          level: uploadingDigimon.level,
+          typeId: uploadingDigimon.typeId,
+          image: url,
+        }),
+      });
+
+      if (!updateResponse.ok) {
+        throw new Error("Erro ao atualizar Digimon");
+      }
+
+      // Atualizar a lista local
+      setDigimons((prev) =>
+        prev.map((d) =>
+          d.id === uploadingDigimon.id ? { ...d, image: url } : d
+        )
+      );
+
+      enqueueSnackbar("Imagem atualizada com sucesso!", { variant: "success" });
+      handleCloseUploadModal();
+    } catch (error) {
+      enqueueSnackbar("Erro ao atualizar imagem", { variant: "error" });
+    } finally {
+      setUploadingImage(false);
+    }
   };
 
   const handleDeleteDigimon = async (
@@ -302,6 +396,19 @@ export default function DigimonsTab({
                           target.src = "/images/digimons/fallback1.jpg";
                         }}
                       />
+                      {/* Botão de Upload Rápido - Temporário para DEV */}
+                      {process.env.NODE_ENV === "development" && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenUploadModal(digimon);
+                          }}
+                          className="absolute top-2 left-2 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow-lg transition-all hover:scale-110"
+                          title="Upload rápido de imagem"
+                        >
+                          📷
+                        </button>
+                      )}
                     </div>
 
                     <div className="p-4">
@@ -430,6 +537,19 @@ export default function DigimonsTab({
                                   target.src = "/images/digimons/fallback1.jpg";
                                 }}
                               />
+                              {/* Botão de Upload Rápido - Temporário para DEV */}
+                              {process.env.NODE_ENV === "development" && (
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleOpenUploadModal(digimon);
+                                  }}
+                                  className="absolute top-2 left-2 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow-lg transition-all hover:scale-110 z-10"
+                                  title="Upload rápido de imagem"
+                                >
+                                  📷
+                                </button>
+                              )}
                               {digimon.active === false && (
                                 <div className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
                                   ⚠️ INATIVO
@@ -553,6 +673,97 @@ export default function DigimonsTab({
         digimon={viewingDigimon}
         allDigimons={digimons}
       />
+
+      {/* Modal de Upload Rápido de Imagem - Temporário para DEV */}
+      {isUploadModalOpen && uploadingDigimon && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[100]"
+          onClick={handleCloseUploadModal}
+        >
+          <div
+            className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-md border-2 border-blue-500 m-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-4 rounded-t-lg">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-bold flex items-center gap-2">
+                  <span className="text-2xl">📷</span>
+                  Upload Rápido - {capitalize(uploadingDigimon.name)}
+                </h3>
+                <button
+                  onClick={handleCloseUploadModal}
+                  className="text-white hover:text-gray-200 text-3xl font-bold leading-none"
+                >
+                  ×
+                </button>
+              </div>
+              <p className="text-sm text-blue-100 mt-1">
+                Ferramenta temporária para desenvolvimento
+              </p>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleUploadImage} className="p-6">
+              {/* Preview da Imagem */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-200 mb-3">
+                  Preview da Imagem
+                </label>
+                <div className="w-full h-64 bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg overflow-hidden border-2 border-gray-600">
+                  {imagePreviewUrl ? (
+                    <img
+                      src={imagePreviewUrl}
+                      alt="Preview"
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                      <div className="text-center">
+                        <div className="text-6xl mb-2">🖼️</div>
+                        <p className="text-sm">Nenhuma imagem selecionada</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Input de Arquivo */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-200 mb-2">
+                  Selecionar Nova Imagem
+                </label>
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleImageFileChange}
+                  className="w-full px-3 py-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"
+                />
+              </div>
+
+              {/* Botões */}
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={handleCloseUploadModal}
+                  className="flex-1 px-4 py-2 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-all"
+                  disabled={uploadingImage}
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={uploadingImage}
+                >
+                  {uploadingImage ? "Enviando..." : "Salvar Imagem"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 }
