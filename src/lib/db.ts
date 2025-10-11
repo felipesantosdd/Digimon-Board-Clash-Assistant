@@ -32,6 +32,10 @@ if (isProduction) {
       dp INTEGER NOT NULL,
       typeId INTEGER NOT NULL,
       evolution TEXT DEFAULT '[]',
+      active INTEGER DEFAULT 1,
+      boss INTEGER DEFAULT 0,
+      effectId INTEGER,
+      description TEXT DEFAULT '',
       FOREIGN KEY (typeId) REFERENCES digimon_types(id)
     );
 

@@ -30,7 +30,9 @@ export default function DigimonsTab({
   const [isEvolutionLineOpen, setIsEvolutionLineOpen] = useState(false);
 
   // Estados para modal de upload rápido de imagem (temporário para desenvolvimento)
-  const [uploadingDigimon, setUploadingDigimon] = useState<Digimon | null>(null);
+  const [uploadingDigimon, setUploadingDigimon] = useState<Digimon | null>(
+    null
+  );
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
@@ -181,6 +183,8 @@ export default function DigimonsTab({
     setUploadingImage(true);
 
     try {
+      console.log("📤 Iniciando upload da imagem...");
+      
       // Upload da imagem
       const uploadFormData = new FormData();
       uploadFormData.append("file", file);
@@ -192,28 +196,47 @@ export default function DigimonsTab({
       });
 
       if (!uploadResponse.ok) {
-        throw new Error("Erro ao fazer upload da imagem");
+        const errorData = await uploadResponse.json();
+        console.error("❌ Erro no upload:", errorData);
+        throw new Error(errorData.error || "Erro ao fazer upload da imagem");
       }
 
       const { url } = await uploadResponse.json();
+      console.log("✅ Upload concluído:", url);
 
       // Atualizar o Digimon com a nova imagem
-      const updateResponse = await fetch(`/api/digimons/${uploadingDigimon.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: uploadingDigimon.name,
-          level: uploadingDigimon.level,
-          typeId: uploadingDigimon.typeId,
-          image: url,
-        }),
+      console.log("🔄 Atualizando Digimon:", {
+        id: uploadingDigimon.id,
+        name: uploadingDigimon.name,
+        level: uploadingDigimon.level,
+        typeId: uploadingDigimon.typeId,
+        image: url,
       });
 
+      const updateResponse = await fetch(
+        `/api/digimons/${uploadingDigimon.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: uploadingDigimon.name,
+            level: uploadingDigimon.level,
+            typeId: uploadingDigimon.typeId,
+            image: url,
+          }),
+        }
+      );
+
       if (!updateResponse.ok) {
-        throw new Error("Erro ao atualizar Digimon");
+        const errorData = await updateResponse.json();
+        console.error("❌ Erro ao atualizar:", errorData);
+        throw new Error(errorData.error || "Erro ao atualizar Digimon");
       }
+
+      const updatedDigimon = await updateResponse.json();
+      console.log("✅ Digimon atualizado:", updatedDigimon);
 
       // Atualizar a lista local
       setDigimons((prev) =>
@@ -222,10 +245,19 @@ export default function DigimonsTab({
         )
       );
 
-      enqueueSnackbar("Imagem atualizada com sucesso!", { variant: "success" });
+      enqueueSnackbar(`Imagem de ${capitalize(uploadingDigimon.name)} atualizada!`, {
+        variant: "success",
+      });
       handleCloseUploadModal();
+      
+      // Recarregar os Digimons para garantir sincronização
+      await fetchDigimons();
     } catch (error) {
-      enqueueSnackbar("Erro ao atualizar imagem", { variant: "error" });
+      console.error("❌ Erro no processo:", error);
+      enqueueSnackbar(
+        error instanceof Error ? error.message : "Erro ao atualizar imagem",
+        { variant: "error" }
+      );
     } finally {
       setUploadingImage(false);
     }
