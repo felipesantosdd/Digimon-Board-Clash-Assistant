@@ -25,6 +25,7 @@ interface DigimonDetailsModalProps {
     quantity: number;
     image?: string;
     description?: string;
+    effect?: string;
   }[]; // Bag compartilhada entre toda a equipe
   playerDigimons?: GameDigimon[]; // Lista de digimons do jogador para transferência
   allPlayers?: GameDigimon[][]; // Todos os jogadores com seus Digimons (para provocar)
