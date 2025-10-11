@@ -25,7 +25,7 @@ export async function PUT(
       boss,
     });
 
-    if (!name || !level || !typeId) {
+    if (!name || level === undefined || level === null || !typeId) {
       return NextResponse.json(
         { error: "Campos obrigatórios: name, level, typeId" },
         { status: 400 }

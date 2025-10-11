@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       boss = false,
     } = body;
 
-    if (!name || !image || !level || !typeId) {
+    if (!name || !image || level === undefined || level === null || !typeId) {
       return NextResponse.json(
         { error: "Campos obrigatórios: name, image, level, typeId" },
         { status: 400 }
