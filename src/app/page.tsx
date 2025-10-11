@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import GameSetupModal from "./components/GameSetupModal";
-import { capitalize } from "@/lib/utils";
+import { capitalize, generateRandomStats } from "@/lib/utils";
 import { getTamerImagePath } from "@/lib/image-utils";
 
 interface Tamer {
@@ -13,6 +14,7 @@ interface Tamer {
 }
 
 export default function Home() {
+  const router = useRouter();
   const [tamers, setTamers] = useState<Tamer[]>([]);
   const [loading, setLoading] = useState(true);
   const [isGameModalOpen, setIsGameModalOpen] = useState(false);
@@ -79,6 +81,87 @@ export default function Home() {
     }
   };
 
+  const createTestGame = async () => {
+    try {
+      // Buscar todos os Digimons e itens
+      const [digimonsRes, itemsRes] = await Promise.all([
+        fetch("/api/digimons"),
+        fetch("/api/items"),
+      ]);
+
+      if (!digimonsRes.ok || !itemsRes.ok) {
+        throw new Error("Erro ao carregar dados");
+      }
+
+      const allDigimons = await digimonsRes.json();
+      const allItems = await itemsRes.json();
+
+      // Filtrar apenas Digimons ativos
+      const activeDigimons = allDigimons.filter(
+        (d: { active?: boolean }) => d.active !== false
+      );
+
+      // Escolher 6 digimons aleatórios
+      const shuffled = [...activeDigimons].sort(() => Math.random() - 0.5);
+      const selectedDigimons = shuffled.slice(0, 6);
+
+      // Escolher 2 tamers aleatórios
+      const shuffledTamers = [...tamers].sort(() => Math.random() - 0.5);
+      const selectedTamers = shuffledTamers.slice(0, 2);
+
+      // Preparar bag compartilhada com TODOS os itens (quantidade 5 cada)
+      const sharedBag = allItems.map((item: typeof allItems[0]) => ({
+        ...item,
+        quantity: 5,
+      }));
+
+      // Criar jogadores
+      const players = selectedTamers.map((tamer, index) => ({
+        id: index + 1,
+        name: `Jogador ${index + 1}`,
+        avatar: tamer.image,
+        digimons: selectedDigimons
+          .slice(index * 3, (index + 1) * 3)
+          .map((digimon: typeof selectedDigimons[0]) => {
+            const stats = generateRandomStats(digimon.level);
+            return {
+              id: digimon.id,
+              name: digimon.name,
+              image: digimon.image,
+              level: digimon.level,
+              typeId: digimon.typeId,
+              dp: stats.dp,
+              currentHp: stats.hp,
+              evolution: digimon.evolution || [],
+              canEvolve: true, // XP cheio = pode evoluir
+              evolutionProgress: 100, // Barra de XP cheia
+              hasActedThisTurn: false,
+              originalId: digimon.id,
+            };
+          }),
+      }));
+
+      // Criar estado do jogo
+      const gameState = {
+        gameId: `test-${Date.now()}`,
+        createdAt: new Date().toISOString(),
+        players,
+        currentTurnPlayerIndex: 0,
+        turnCount: 1,
+        sharedBag, // Bag compartilhada com todos os itens
+      };
+
+      // Salvar no localStorage
+      localStorage.setItem("digimon_game_state", JSON.stringify(gameState));
+
+      // Redirecionar para o jogo
+      router.push("/game");
+    } catch (error) {
+      console.error("Erro ao criar jogo de teste:", error);
+      alert("Erro ao criar jogo de teste");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
       {/* Header */}
@@ -100,6 +183,15 @@ export default function Home() {
               >
                 <span>▶️</span> <span className="hidden sm:inline">Play</span>
               </button>
+              {process.env.NODE_ENV === "development" && (
+                <button
+                  onClick={createTestGame}
+                  className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-purple-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-purple-700 transition-colors duration-200 shadow-sm hover:shadow-md flex items-center gap-1 sm:gap-2"
+                  title="Inicia jogo de teste com 6 Digimons aleatórios, XP cheio e todos os itens"
+                >
+                  <span>🧪</span> <span className="hidden sm:inline">Teste</span>
+                </button>
+              )}
               <Link href="/biblioteca">
                 <button className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-orange-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-orange-700 transition-colors duration-200 shadow-sm hover:shadow-md">
                   <span className="hidden sm:inline">Biblioteca</span>
