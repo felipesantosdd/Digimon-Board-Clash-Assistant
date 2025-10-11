@@ -921,9 +921,11 @@ export default function GamePage() {
         // Adicionar itens à bag compartilhada
         const currentSharedBag = gameState.sharedBag || [];
         const updatedSharedBag = [...currentSharedBag];
-        
+
         items.forEach((item) => {
-          const existingIndex = updatedSharedBag.findIndex((bagItem) => bagItem.id === item.id);
+          const existingIndex = updatedSharedBag.findIndex(
+            (bagItem) => bagItem.id === item.id
+          );
           if (existingIndex !== -1) {
             updatedSharedBag[existingIndex] = {
               ...updatedSharedBag[existingIndex],
@@ -950,8 +952,11 @@ export default function GamePage() {
           { variant: "success" }
         );
 
-        console.log("🎁 [BOSS] Recompensas adicionadas à bag compartilhada:", items);
-        
+        console.log(
+          "🎁 [BOSS] Recompensas adicionadas à bag compartilhada:",
+          items
+        );
+
         // Atualizar estado com boss derrotado e bag compartilhada atualizada
         saveGameState({
           ...gameState,
@@ -972,7 +977,7 @@ export default function GamePage() {
           drops: [],
         });
         setShowBossDropModal(true);
-        
+
         // Atualizar estado com boss derrotado
         saveGameState({
           ...gameState,
@@ -1366,7 +1371,9 @@ export default function GamePage() {
 
     const item = gameState.sharedBag?.find((i) => i.id === itemId);
     if (!item) {
-      enqueueSnackbar("Item não encontrado na bag compartilhada!", { variant: "error" });
+      enqueueSnackbar("Item não encontrado na bag compartilhada!", {
+        variant: "error",
+      });
       return;
     }
 
@@ -1510,12 +1517,16 @@ export default function GamePage() {
 
     const item = gameState.sharedBag?.find((i) => i.id === itemId);
     if (!item) {
-      enqueueSnackbar("Item não encontrado na bag compartilhada!", { variant: "error" });
+      enqueueSnackbar("Item não encontrado na bag compartilhada!", {
+        variant: "error",
+      });
       return;
     }
 
     // Remover item completamente da bag compartilhada
-    const updatedSharedBag = (gameState.sharedBag || []).filter((i) => i.id !== itemId);
+    const updatedSharedBag = (gameState.sharedBag || []).filter(
+      (i) => i.id !== itemId
+    );
 
     // Atualizar estado
     const updatedState = {
@@ -1524,7 +1535,9 @@ export default function GamePage() {
     };
 
     saveGameState(updatedState);
-    enqueueSnackbar(`🗑️ ${item.name} descartado da bag compartilhada`, { variant: "info" });
+    enqueueSnackbar(`🗑️ ${item.name} descartado da bag compartilhada`, {
+      variant: "info",
+    });
   };
 
   // Função removida - bag agora é compartilhada
@@ -1537,10 +1550,14 @@ export default function GamePage() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     itemId: number
   ) => {
-    console.log("🎁 [ITEM] Função handleGiveItem desativada - bag é compartilhada");
-    enqueueSnackbar("A bag agora é compartilhada por toda a equipe!", { variant: "info" });
+    console.log(
+      "🎁 [ITEM] Função handleGiveItem desativada - bag é compartilhada"
+    );
+    enqueueSnackbar("A bag agora é compartilhada por toda a equipe!", {
+      variant: "info",
+    });
     return;
-    
+
     /* CÓDIGO ANTIGO DESATIVADO
     if (!gameState || !selectedDigimon) {
       console.log("❌ [ITEM] Validação falhou");
