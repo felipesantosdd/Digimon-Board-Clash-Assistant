@@ -354,10 +354,10 @@ export default function AddDigimonModal({
                     { value: 1, label: "Rookie" },
                     { value: 2, label: "Champion" },
                     { value: 3, label: "Ultimate" },
-                    { value: 4, label: "Mega 1" },
-                    { value: 5, label: "Mega 2" },
-                    { value: 6, label: "Mega 3" },
-                    { value: 7, label: "Mega 4" },
+                    { value: 4, label: "Mega" },
+                    { value: 5, label: "Ultra" },
+                    { value: 6, label: "Super Mega" },
+                    { value: 7, label: "???" },
                   ].map((level) => (
                     <button
                       key={level.value}

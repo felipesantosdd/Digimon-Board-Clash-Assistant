@@ -254,10 +254,10 @@ export default function DigimonsTab({
               <option value="1">Rookie</option>
               <option value="2">Champion</option>
               <option value="3">Ultimate</option>
-              <option value="4">Mega 1</option>
-              <option value="5">Mega 2</option>
-              <option value="6">Mega 3</option>
-              <option value="7">Mega 4</option>
+              <option value="4">Mega</option>
+              <option value="5">Ultra</option>
+              <option value="6">Super Mega</option>
+              <option value="7">???</option>
             </select>
           </div>
         </div>
@@ -567,7 +567,6 @@ export default function DigimonsTab({
         digimon={viewingDigimon}
         allDigimons={digimons}
       />
-
     </>
   );
 }

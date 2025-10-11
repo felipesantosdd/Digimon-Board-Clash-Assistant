@@ -4,7 +4,9 @@ import path from "path";
 const dbPath = path.join(process.cwd(), "database.sqlite");
 const db = new Database(dbPath);
 
-console.log("🔄 Migrando banco de dados: adicionando colunas active, boss, effectId e description...\n");
+console.log(
+  "🔄 Migrando banco de dados: adicionando colunas active, boss, effectId e description...\n"
+);
 
 try {
   // Verificar se as colunas já existem
@@ -54,4 +56,3 @@ try {
 } finally {
   db.close();
 }
-

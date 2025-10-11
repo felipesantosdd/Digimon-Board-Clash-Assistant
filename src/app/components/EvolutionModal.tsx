@@ -482,10 +482,10 @@ export default function EvolutionModal({
                       { value: 1, label: "Rookie" },
                       { value: 2, label: "Champion" },
                       { value: 3, label: "Ultimate" },
-                      { value: 4, label: "Mega 1" },
-                      { value: 5, label: "Mega 2" },
-                      { value: 6, label: "Mega 3" },
-                      { value: 7, label: "Mega 4" },
+                      { value: 4, label: "Mega" },
+                      { value: 5, label: "Ultra" },
+                      { value: 6, label: "Super Mega" },
+                      { value: 7, label: "???" },
                     ].map((level) => (
                       <button
                         key={level.value}
@@ -683,9 +683,9 @@ export default function EvolutionModal({
                     { value: 1, label: "Rookie" },
                     { value: 2, label: "Champion" },
                     { value: 3, label: "Ultimate" },
-                    { value: 4, label: "Mega 1" },
-                    { value: 5, label: "Mega 2" },
-                    { value: 6, label: "Mega 3" },
+                    { value: 4, label: "Mega" },
+                    { value: 5, label: "Ultra" },
+                    { value: 6, label: "Super Mega" },
                     { value: 7, label: "Mega 4" },
                   ].map((level) => (
                     <button
@@ -716,10 +716,10 @@ export default function EvolutionModal({
                       "Rookie",
                       "Champion",
                       "Ultimate",
-                      "Mega 1",
-                      "Mega 2",
-                      "Mega 3",
-                      "Mega 4",
+                      "Mega",
+                      "Ultra",
+                      "Super Mega",
+                      "???",
                     ][selectedLevelTab]
                   } para evolução...`}
                   className="w-full px-3 text-white py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"

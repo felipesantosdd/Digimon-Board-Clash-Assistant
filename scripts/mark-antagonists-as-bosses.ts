@@ -26,7 +26,7 @@ const antagonists = [
   "piemon",
   "apocalymon",
   "dark masters",
-  
+
   // Digimon Adventure 02
   "daemon",
   "archnemon",
@@ -42,7 +42,7 @@ const antagonists = [
   "diaboromon",
   "infermon",
   "keramon",
-  
+
   // Digimon Tamers (Devas e outros)
   "beelzemon",
   "megidramon",
@@ -58,7 +58,7 @@ const antagonists = [
   "majiramon",
   "antylamon",
   "zhuqiaomon",
-  
+
   // Digimon Frontier
   "cherubimon",
   "grumblemon",
@@ -74,7 +74,7 @@ const antagonists = [
   "lucemon satan mode",
   "lucemon: falldown mode",
   "lucemon: satan mode",
-  
+
   // Digimon Data Squad/Savers
   "belphemon",
   "belphemon sleep mode",
@@ -83,7 +83,7 @@ const antagonists = [
   "belphemon: rage mode",
   "craniummon",
   "sleipmon",
-  
+
   // Outros antagonistas famosos
   "skullgreymon",
   "skull greymon",
@@ -127,9 +127,10 @@ let skipped = 0;
 
 // Marcar antagonistas como bosses (apenas Champion em diante)
 allDigimons.forEach((digimon) => {
-  const isAntagonist = antagonists.some((ant) =>
-    digimon.name.toLowerCase().includes(ant.toLowerCase()) ||
-    ant.toLowerCase().includes(digimon.name.toLowerCase())
+  const isAntagonist = antagonists.some(
+    (ant) =>
+      digimon.name.toLowerCase().includes(ant.toLowerCase()) ||
+      ant.toLowerCase().includes(digimon.name.toLowerCase())
   );
 
   if (isAntagonist && digimon.level >= 2 && !digimon.boss) {
@@ -164,4 +165,3 @@ console.log(`👑 Total de BOSSES no banco: ${bosses.count}`);
 
 db.close();
 console.log("\n✅ Processo concluído!");
-
