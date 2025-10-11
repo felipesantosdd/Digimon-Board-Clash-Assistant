@@ -23,8 +23,8 @@ export function capitalizeWords(str: string): string {
 
 /**
  * Converte o nível numérico para o nome do estágio
- * @param level - Nível do Digimon (1-7)
- * @returns Nome do estágio (Rookie, Champion, Ultimate, Mega)
+ * @param level - Nível do Digimon (0-7)
+ * @returns Nome do estágio (Armor, Rookie, Champion, Ultimate, Mega, Ultra, Super Mega)
  */
 export function getLevelName(level: number): string {
   switch (level) {
@@ -37,10 +37,13 @@ export function getLevelName(level: number): string {
     case 3:
       return "Ultimate";
     case 4:
-    case 5:
-    case 6:
-    case 7:
       return "Mega";
+    case 5:
+      return "Ultra";
+    case 6:
+      return "Super Mega";
+    case 7:
+      return "Mega"; // Raramente usado
     default:
       return `Level ${level}`;
   }
