@@ -33,7 +33,7 @@
       132,
       528
     ],
-    "effectId": null
+    "effectId": 17
   },
   {
     "id": 12,
@@ -46,7 +46,7 @@
       539,
       518
     ],
-    "effectId": null
+    "effectId": 17
   },
   {
     "id": 13,
@@ -58,7 +58,7 @@
     "targetDigimons": [
       151
     ],
-    "effectId": null
+    "effectId": 17
   },
   {
     "id": 14,
@@ -71,6 +71,88 @@
       535,
       525
     ],
-    "effectId": null
+    "effectId": 17
+  },
+  {
+    "id": 16,
+    "name": "Ovo da Amizade",
+    "description": "Fortalece laços e trabalho em equipe entre parceiros.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [
+      524,
+      522,
+      531
+    ],
+    "effectId": 17
+  },
+  {
+    "id": 17,
+    "name": "Ovo da Confiabilidade",
+    "description": "Amplifica a determinação e lealdade inabalável.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [
+      538,
+      530
+    ],
+    "effectId": 17
+  },
+  {
+    "id": 18,
+    "name": "Ovo da Esperança",
+    "description": "Ilumina caminhos com otimismo e renovação.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [
+      98,
+      540
+    ],
+    "effectId": 17
+  },
+  {
+    "id": 19,
+    "name": "Ovo da Luz",
+    "description": "Dissipa trevas com poder radiante e puro.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [
+      526,
+      533
+    ],
+    "effectId": 17
+  },
+  {
+    "id": 20,
+    "name": "Ovo da Gentileza",
+    "description": "Promove compaixão e empatia em batalhas.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [
+      537,
+      534
+    ],
+    "effectId": 17
+  },
+  {
+    "id": 21,
+    "name": "Ovo do Destino",
+    "description": "Desbloqueia potencial oculto e destino único.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 10,
+    "targetDigimons": [
+      529,
+      536,
+      541,
+      532,
+      317
+    ],
+    "effectId": 17
   }
 ]

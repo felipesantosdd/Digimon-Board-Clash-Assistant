@@ -21,7 +21,7 @@ export function getAllItems(): Item[] {
   const items = db.prepare("SELECT * FROM items ORDER BY name").all() as Array<
     Omit<Item, "targetDigimons"> & { targetDigimons: string }
   >;
-  
+
   return items.map((item) => ({
     ...item,
     targetDigimons: item.targetDigimons
@@ -35,9 +35,9 @@ export function getItemById(id: number): Item | undefined {
   const item = db.prepare("SELECT * FROM items WHERE id = ?").get(id) as
     | (Omit<Item, "targetDigimons"> & { targetDigimons: string })
     | undefined;
-  
+
   if (!item) return undefined;
-  
+
   return {
     ...item,
     targetDigimons: item.targetDigimons
