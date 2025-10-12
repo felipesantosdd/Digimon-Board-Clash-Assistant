@@ -258,6 +258,7 @@ export default function DigimonsTab({
               <option value="5">Ultra</option>
               <option value="6">Super Mega</option>
               <option value="7">???</option>
+              <option value="8">Spirits</option>
             </select>
           </div>
         </div>
@@ -377,7 +378,7 @@ export default function DigimonsTab({
           ) : (
             /* Seções por Nível - quando não há filtros */
             <div className="space-y-8">
-              {[0, 1, 2, 3, 4, 5, 6, 7].map((level) => {
+              {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((level) => {
                 const digimonsInLevel = digimons
                   .filter((d) => d.level === level)
                   .sort((a, b) => a.name.localeCompare(b.name));

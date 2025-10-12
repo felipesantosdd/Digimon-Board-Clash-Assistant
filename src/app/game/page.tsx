@@ -389,15 +389,17 @@ export default function GamePage() {
     // Calcular % de HP perdido NESTA BATALHA
     const hpLostPercentage = (damageAmount / digimon.dp) * 100;
 
-    // Verificar se Digimon pode ganhar XP (apenas se tem evoluções disponíveis)
+    // Verificar se Digimon pode ganhar XP (apenas se tem evoluções disponíveis E não está bloqueado)
     const hasEvolutions = digimon.evolution && digimon.evolution.length > 0;
+    const isEvolutionLocked = digimon.evolutionLocked || false;
+    const canGainXp = hasEvolutions && !isEvolutionLocked;
 
-    // Ganho de XP: 0.5% para cada 1% de HP perdido (APENAS se tem evoluções disponíveis)
-    const xpGained = hasEvolutions ? hpLostPercentage * 1 : 0;
+    // Ganho de XP: 0.5% para cada 1% de HP perdido (APENAS se pode ganhar XP)
+    const xpGained = canGainXp ? hpLostPercentage * 1 : 0;
 
     // Calcular novo progresso de evolução
     const currentProgress = digimon.evolutionProgress || 0;
-    const newProgress = hasEvolutions
+    const newProgress = canGainXp
       ? Math.min(100, currentProgress + xpGained)
       : 0;
 
@@ -1589,13 +1591,24 @@ export default function GamePage() {
         `✨ [EVOLUTION] Evoluindo ${digimon.name} → ${targetDigimonData.name}`
       );
 
-      // Evolução Armor: poder atual + 6000
+      // Evolução especial: poder atual + 6000
       const newDp = digimon.dp + 6000;
       const newHp = Math.min(digimon.currentHp + 6000, newDp); // HP aumenta proporcionalmente, mas não passa do max
 
       console.log(
         `📊 [EVOLUTION] Stats: DP ${digimon.dp} → ${newDp} | HP ${digimon.currentHp} → ${newHp}`
       );
+
+      // Verificar se o item é um espírito ou emblema (effectId 20 ou 21)
+      const isSpirit = item.effectId === 20; // Espíritos Lendários
+      const isCrest = item.effectId === 21; // Emblemas
+      const shouldLockEvolution = isSpirit || isCrest;
+
+      if (shouldLockEvolution) {
+        console.log(
+          `🔒 [EVOLUTION] Bloqueando evoluções futuras (${isSpirit ? "Espírito" : "Emblema"})`
+        );
+      }
 
       // Criar evolução
       const evolution = {
@@ -1607,8 +1620,8 @@ export default function GamePage() {
         dp: newDp,
         currentHp: newHp,
         evolutionProgress: 0,
-        canEvolve:
-          targetDigimonData.evolution && targetDigimonData.evolution.length > 0,
+        canEvolve: false, // Sempre false para evoluções especiais
+        evolutionLocked: shouldLockEvolution, // Bloquear evoluções se for espírito/emblema
         evolution: targetDigimonData.evolution || [],
       };
 

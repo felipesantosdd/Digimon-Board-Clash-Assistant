@@ -20,6 +20,7 @@ export interface GameDigimon {
   currentHp: number; // HP atual do Digimon (inicia igual ao DP)
   canEvolve?: boolean; // Se o Digimon pode evoluir
   evolution?: number[]; // IDs dos Digimons que este pode evoluir
+  evolutionLocked?: boolean; // Se as evoluções estão bloqueadas (espíritos/emblemas)
   originalId?: number; // ID original do Digimon (antes das evoluções)
   hasActedThisTurn?: boolean; // Se já realizou uma ação neste turno
   bag?: GameItem[]; // Inventário de itens do Digimon
