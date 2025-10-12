@@ -110,7 +110,7 @@ export default function Home() {
       const selectedTamers = shuffledTamers.slice(0, 2);
 
       // Preparar bag compartilhada com TODOS os itens (quantidade 5 cada)
-      const sharedBag = allItems.map((item: typeof allItems[0]) => ({
+      const sharedBag = allItems.map((item: (typeof allItems)[0]) => ({
         ...item,
         quantity: 5,
       }));
@@ -122,7 +122,7 @@ export default function Home() {
         avatar: tamer.image,
         digimons: selectedDigimons
           .slice(index * 3, (index + 1) * 3)
-          .map((digimon: typeof selectedDigimons[0]) => {
+          .map((digimon: (typeof selectedDigimons)[0]) => {
             const stats = generateRandomStats(digimon.level);
             return {
               id: digimon.id,
@@ -131,12 +131,19 @@ export default function Home() {
               level: digimon.level,
               typeId: digimon.typeId,
               dp: stats.dp,
+              baseDp: stats.dp, // DP base
+              dpBonus: 0, // Sem bônus inicial
               currentHp: stats.hp,
               evolution: digimon.evolution || [],
               canEvolve: true, // XP cheio = pode evoluir
               evolutionProgress: 100, // Barra de XP cheia
               hasActedThisTurn: false,
               originalId: digimon.id,
+              bag: [], // Bag individual vazia (usamos sharedBag)
+              defending: null,
+              provokedBy: null,
+              lastProvokeTurn: null,
+              statuses: [], // Sem status inicialmente
             };
           }),
       }));
@@ -148,11 +155,15 @@ export default function Home() {
         players,
         currentTurnPlayerIndex: 0,
         turnCount: 1,
+        reviveAttemptThisTurn: false,
+        activeBoss: null,
+        lastBossDefeatedTurn: undefined,
+        bossesDefeated: 0,
         sharedBag, // Bag compartilhada com todos os itens
       };
 
-      // Salvar no localStorage
-      localStorage.setItem("digimon_game_state", JSON.stringify(gameState));
+      // Salvar no localStorage (mesma chave que useGameState usa)
+      localStorage.setItem("digimon_board_clash_game_state", JSON.stringify(gameState));
 
       // Redirecionar para o jogo
       router.push("/game");
@@ -189,7 +200,8 @@ export default function Home() {
                   className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-purple-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-purple-700 transition-colors duration-200 shadow-sm hover:shadow-md flex items-center gap-1 sm:gap-2"
                   title="Inicia jogo de teste com 6 Digimons aleatórios, XP cheio e todos os itens"
                 >
-                  <span>🧪</span> <span className="hidden sm:inline">Teste</span>
+                  <span>🧪</span>{" "}
+                  <span className="hidden sm:inline">Teste</span>
                 </button>
               )}
               <Link href="/biblioteca">
