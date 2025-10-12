@@ -158,5 +158,13 @@
     "code": "evolution_spirit",
     "type": "evolution",
     "value": 0
+  },
+  {
+    "id": 21,
+    "name": "Evolução por Emblema",
+    "description": "Permite evolução usando um Emblema lendário da série Adventure",
+    "code": "evolution_crest",
+    "type": "evolution",
+    "value": 0
   }
 ]

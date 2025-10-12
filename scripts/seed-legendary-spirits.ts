@@ -77,8 +77,7 @@ try {
     },
     {
       name: "Espírito Bestial do Gelo",
-      description:
-        "O espírito bestial do Gelo. Transforma em Korikakumon.",
+      description: "O espírito bestial do Gelo. Transforma em Korikakumon.",
       dropChance: 5,
       targetDigimons: [], // Korikakumon não está no banco
     },
@@ -91,8 +90,7 @@ try {
     },
     {
       name: "Espírito Bestial do Vento",
-      description:
-        "O espírito bestial do Vento. Transforma em Zephyrmon.",
+      description: "O espírito bestial do Vento. Transforma em Zephyrmon.",
       dropChance: 5,
       targetDigimons: [], // Zephyrmon não está no banco
     },
@@ -146,7 +144,11 @@ try {
     console.log(`✅ ${spirit.name} (ID: ${result.lastInsertRowid})`);
     console.log(`   Drop Chance: ${spirit.dropChance}%`);
     console.log(
-      `   Evoluções: ${spirit.targetDigimons.length > 0 ? spirit.targetDigimons.length + " Digimon(s)" : "Aguardando cadastro"}`
+      `   Evoluções: ${
+        spirit.targetDigimons.length > 0
+          ? spirit.targetDigimons.length + " Digimon(s)"
+          : "Aguardando cadastro"
+      }`
     );
     console.log("");
   });
@@ -162,4 +164,3 @@ try {
 }
 
 console.log("✅ Processo concluído!");
-

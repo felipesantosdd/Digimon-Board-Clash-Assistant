@@ -37,7 +37,7 @@
     "id": 24,
     "name": "Ovo do Amor",
     "description": "O ovo da compaixão e cuidado. Gatomon usa para se tornar Nefertimon.",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760234967456_image.webp",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
@@ -49,7 +49,7 @@
     "id": 25,
     "name": "Ovo da Pureza",
     "description": "O ovo da inocência e sinceridade. Gatomon usa para se tornar Pegasusmon em algumas versões.",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760235052713_image.webp",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
@@ -61,7 +61,7 @@
     "id": 26,
     "name": "Ovo do Conhecimento",
     "description": "O ovo da sabedoria e estratégia. Armadillomon usa para se tornar Digmon.",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760234980389_image.webp",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
@@ -73,7 +73,7 @@
     "id": 27,
     "name": "Ovo da Confiabilidade",
     "description": "O ovo da lealdade inabalável. Armadillomon usa para se tornar Submarimon.",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760235022637_image.webp",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
@@ -124,7 +124,7 @@
     "id": 31,
     "name": "Ovo dos Milagres",
     "description": "O ovo lendário e raro. Veemon usa para se tornar Magnamon.",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760235004362_image.webp",
     "effect": "",
     "dropChance": 10,
     "targetDigimons": [
@@ -137,7 +137,7 @@
     "id": 32,
     "name": "Ovo do Destino",
     "description": "O ovo do potencial oculto. Usado por diversos Digimons para formas únicas.",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760234992662_image.webp",
     "effect": "",
     "dropChance": 10,
     "targetDigimons": [
@@ -280,5 +280,100 @@
     "dropChance": 5,
     "targetDigimons": [],
     "effectId": 20
+  },
+  {
+    "id": 45,
+    "name": "Emblema da Coragem",
+    "description": "O emblema de Tai Kamiya. Permite evolução para formas supremas do fogo e dragão.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [],
+    "effectId": 21
+  },
+  {
+    "id": 46,
+    "name": "Emblema da Amizade",
+    "description": "O emblema de Matt Ishida. Permite evolução para lobos supremos de gelo.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [],
+    "effectId": 21
+  },
+  {
+    "id": 47,
+    "name": "Emblema do Amor",
+    "description": "O emblema de Sora Takenouchi. Permite evolução para aves supremas.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [
+      295
+    ],
+    "effectId": 21
+  },
+  {
+    "id": 48,
+    "name": "Emblema do Conhecimento",
+    "description": "O emblema de Izzy Izumi. Permite evolução para insetos supremos.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [],
+    "effectId": 21
+  },
+  {
+    "id": 49,
+    "name": "Emblema da Sinceridade",
+    "description": "O emblema de Mimi Tachikawa. Permite evolução para formas supremas da natureza.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [
+      446,
+      506
+    ],
+    "effectId": 21
+  },
+  {
+    "id": 50,
+    "name": "Emblema da Confiabilidade",
+    "description": "O emblema de Joe Kido. Permite evolução para guerreiros supremos do mar.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [
+      302,
+      107
+    ],
+    "effectId": 21
+  },
+  {
+    "id": 51,
+    "name": "Emblema da Esperança",
+    "description": "O emblema de T.K. Takaishi. Permite evolução para anjos supremos.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [
+      106,
+      142
+    ],
+    "effectId": 21
+  },
+  {
+    "id": 52,
+    "name": "Emblema da Luz",
+    "description": "O emblema de Kari Kamiya. Permite evolução para seres divinos da luz.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [
+      109,
+      111,
+      112
+    ],
+    "effectId": 21
   }
 ]
