@@ -1554,24 +1554,48 @@ export default function GamePage() {
     if (!gameState || !selectedDigimon) return;
 
     try {
-      // Buscar dados do Digimon de destino
-      const response = await fetch(`/api/digimons/${targetDigimonId}`);
-      if (!response.ok) {
-        console.error(`❌ [EVOLUTION] Erro ao buscar Digimon ${targetDigimonId}:`, response.status);
-        enqueueSnackbar(`Erro ao buscar dados do Digimon (ID: ${targetDigimonId})`, {
-          variant: "error",
-        });
+      // Buscar TODOS os Digimons possíveis (para mostrar na animação)
+      const allPossibleDigimons = await Promise.all(
+        (item.targetDigimons || []).map(async (id) => {
+          const res = await fetch(`/api/digimons/${id}`);
+          if (res.ok) {
+            return await res.json();
+          }
+          return null;
+        })
+      );
+
+      const validDigimons = allPossibleDigimons.filter((d) => d !== null);
+
+      // Buscar dados do Digimon de destino específico
+      const targetDigimonData = validDigimons.find(
+        (d) => d.id === targetDigimonId
+      );
+
+      if (!targetDigimonData) {
+        console.error(
+          `❌ [EVOLUTION] Digimon ${targetDigimonId} não encontrado`
+        );
+        enqueueSnackbar(
+          `Erro ao buscar dados do Digimon (ID: ${targetDigimonId})`,
+          {
+            variant: "error",
+          }
+        );
         return;
       }
 
-      const targetDigimonData = await response.json();
-      console.log(`✨ [EVOLUTION] Evoluindo ${digimon.name} → ${targetDigimonData.name}`);
+      console.log(
+        `✨ [EVOLUTION] Evoluindo ${digimon.name} → ${targetDigimonData.name}`
+      );
 
       // Evolução Armor: poder atual + 6000
       const newDp = digimon.dp + 6000;
       const newHp = Math.min(digimon.currentHp + 6000, newDp); // HP aumenta proporcionalmente, mas não passa do max
 
-      console.log(`📊 [EVOLUTION] Stats: DP ${digimon.dp} → ${newDp} | HP ${digimon.currentHp} → ${newHp}`);
+      console.log(
+        `📊 [EVOLUTION] Stats: DP ${digimon.dp} → ${newDp} | HP ${digimon.currentHp} → ${newHp}`
+      );
 
       // Criar evolução
       const evolution = {
@@ -1583,7 +1607,8 @@ export default function GamePage() {
         dp: newDp,
         currentHp: newHp,
         evolutionProgress: 0,
-        canEvolve: targetDigimonData.evolution && targetDigimonData.evolution.length > 0,
+        canEvolve:
+          targetDigimonData.evolution && targetDigimonData.evolution.length > 0,
         evolution: targetDigimonData.evolution || [],
       };
 
@@ -1647,6 +1672,11 @@ export default function GamePage() {
           typeId: evolution.typeId,
         },
         evolutionType: "special",
+        allOptions: validDigimons.map((d) => ({
+          id: d.id,
+          name: d.name,
+          image: d.image,
+        })),
       });
 
       setSelectedDigimon(null);
