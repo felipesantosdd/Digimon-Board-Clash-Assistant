@@ -6,6 +6,32 @@ import {
   getAllDigimons,
 } from "@/lib/digimon-db";
 
+// GET - Buscar um Digimon por ID
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params;
+    const digimon = getDigimonById(Number(id));
+
+    if (!digimon) {
+      return NextResponse.json(
+        { error: "Digimon não encontrado" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(digimon);
+  } catch (error) {
+    console.error("Erro ao buscar Digimon:", error);
+    return NextResponse.json(
+      { error: "Erro interno do servidor" },
+      { status: 500 }
+    );
+  }
+}
+
 // PUT - Atualizar dados do Digimon (nome, level, dp, tipo)
 export async function PUT(
   request: NextRequest,
