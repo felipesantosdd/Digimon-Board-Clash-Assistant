@@ -103,7 +103,9 @@ try {
     insertedIds.push(insertedId);
 
     console.log(
-      `✅ ${warrior.name.toUpperCase()} (ID: ${insertedId}, Level ${warrior.level})`
+      `✅ ${warrior.name.toUpperCase()} (ID: ${insertedId}, Level ${
+        warrior.level
+      })`
     );
   });
 
@@ -120,4 +122,3 @@ try {
 }
 
 console.log("\n✅ Processo concluído!");
-

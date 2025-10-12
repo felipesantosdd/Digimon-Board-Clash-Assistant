@@ -44,4 +44,3 @@ try {
 }
 
 console.log("✅ Processo concluído!");
-

@@ -23,7 +23,9 @@ try {
     if (digimon) {
       stmt.run(id);
       console.log(
-        `✅ ${digimon.name.toUpperCase()} (ID: ${id}): Level ${digimon.level} → Level 8 (Spirits)`
+        `✅ ${digimon.name.toUpperCase()} (ID: ${id}): Level ${
+          digimon.level
+        } → Level 8 (Spirits)`
       );
     }
   });
@@ -39,4 +41,3 @@ try {
 }
 
 console.log("✅ Processo concluído!");
-
