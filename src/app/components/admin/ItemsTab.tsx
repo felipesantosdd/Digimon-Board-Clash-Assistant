@@ -5,7 +5,14 @@ import { useSnackbar } from "notistack";
 import AddItemModal from "../AddItemModal";
 import { Item } from "@/types/item";
 
-type EffectType = "heal" | "damage" | "buff" | "debuff" | "special" | "boss" | "evolution";
+type EffectType =
+  | "heal"
+  | "damage"
+  | "buff"
+  | "debuff"
+  | "special"
+  | "boss"
+  | "evolution";
 
 interface Effect {
   id: number;

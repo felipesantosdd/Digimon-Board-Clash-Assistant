@@ -49,8 +49,8 @@ export function getItemById(id: number): Item | undefined {
 // Criar novo item
 export function createItem(item: Omit<Item, "id">): Item {
   const stmt = db.prepare(`
-    INSERT INTO items (name, description, image, effect, dropChance, targetDigimons)
-    VALUES (?, ?, ?, ?, ?, ?)
+    INSERT INTO items (name, description, image, effect, effectId, dropChance, targetDigimons)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
   `);
 
   const result = stmt.run(
@@ -58,6 +58,7 @@ export function createItem(item: Omit<Item, "id">): Item {
     item.description,
     item.image,
     item.effect,
+    item.effectId || null,
     item.dropChance || 0,
     JSON.stringify(item.targetDigimons || [])
   );
@@ -71,7 +72,7 @@ export function createItem(item: Omit<Item, "id">): Item {
 // Atualizar item
 export function updateItem(id: number, item: Partial<Omit<Item, "id">>): void {
   const fields: string[] = [];
-  const values: (string | number)[] = [];
+  const values: (string | number | null)[] = [];
 
   if (item.name !== undefined) {
     fields.push("name = ?");
@@ -88,6 +89,10 @@ export function updateItem(id: number, item: Partial<Omit<Item, "id">>): void {
   if (item.effect !== undefined) {
     fields.push("effect = ?");
     values.push(item.effect);
+  }
+  if (item.effectId !== undefined) {
+    fields.push("effectId = ?");
+    values.push(item.effectId || null);
   }
   if (item.dropChance !== undefined) {
     fields.push("dropChance = ?");

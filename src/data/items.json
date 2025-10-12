@@ -1,65 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Poção de Vida",
-    "description": "Restaura 1000 HP de um Digimon",
-    "image": "/images/items/potion.png",
-    "effect": "heal_1000",
-    "dropChance": 30,
-    "targetDigimons": [],
-    "effectId": 1
-  },
-  {
-    "id": 2,
-    "name": "Super Poção",
-    "description": "Restaura 2000 HP de um Digimon",
-    "image": "/images/items/super-potion.png",
-    "effect": "heal_2000",
-    "dropChance": 20,
-    "targetDigimons": [],
-    "effectId": 2
-  },
-  {
-    "id": 3,
-    "name": "Poção Completa",
-    "description": "Restaura completamente o HP de um Digimon",
-    "image": "/images/items/full-potion.png",
-    "effect": "heal_full",
-    "dropChance": 10,
-    "targetDigimons": [],
-    "effectId": 8
-  },
-  {
-    "id": 4,
-    "name": "Reviver",
-    "description": "Revive um Digimon derrotado com metade do HP",
-    "image": "/images/items/revive.png",
-    "effect": "revive_half",
-    "dropChance": 15,
-    "targetDigimons": [],
-    "effectId": 9
-  },
-  {
-    "id": 5,
-    "name": "Chip de Força",
-    "description": "Aumenta permanentemente o DP em 500",
-    "image": "/images/items/1759949520582_image.webp",
-    "effect": "boost_dp_500",
-    "dropChance": 25,
-    "targetDigimons": [],
-    "effectId": 6
-  },
-  {
-    "id": 6,
-    "name": "Escudo Digital",
-    "description": "Protege de um ataque neste turno",
-    "image": "/images/items/shield.png",
-    "effect": "shield_turn",
-    "dropChance": 20,
-    "targetDigimons": [],
-    "effectId": 11
-  },
-  {
     "id": 9,
     "name": "Poção de Vida P",
     "description": "Restaura 2000 Pontos de Vida",
@@ -71,15 +11,66 @@
   },
   {
     "id": 10,
-    "name": "Digi-Egg of Courage",
-    "description": "evolução para flamedramon",
+    "name": "Ovo da Coragem",
+    "description": "Fortalece Digimons que agem com bravura e determinação.",
     "image": "/images/items/1760225081593_image.webp",
     "effect": "",
-    "dropChance": 10,
+    "dropChance": 15,
     "targetDigimons": [
       523,
       527
     ],
     "effectId": 17
+  },
+  {
+    "id": 11,
+    "name": "Ovo do Conhecimento",
+    "description": "Permite evoluções baseadas na sabedoria e estratégia.",
+    "image": "/images/items/1760231264030_image.webp",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [
+      132,
+      528
+    ],
+    "effectId": null
+  },
+  {
+    "id": 12,
+    "name": "Ovo dos Milagres",
+    "description": "Concede habilidades únicas e raras, ligadas à fortuna.",
+    "image": "/images/items/1760231369019_image.webp",
+    "effect": "",
+    "dropChance": 10,
+    "targetDigimons": [
+      539,
+      518
+    ],
+    "effectId": null
+  },
+  {
+    "id": 13,
+    "name": "Ovo do Amor",
+    "description": "Foca em Digimons que protegem e cuidam com carinho.",
+    "image": "/images/items/1760231422658_image.webp",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [
+      151
+    ],
+    "effectId": null
+  },
+  {
+    "id": 14,
+    "name": "Ovo da Pureza",
+    "description": "Amplifica Digimons puros de coração e intenções.",
+    "image": "/images/items/1760231472968_image.webp",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [
+      535,
+      525
+    ],
+    "effectId": null
   }
 ]
