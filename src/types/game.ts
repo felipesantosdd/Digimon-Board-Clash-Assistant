@@ -21,6 +21,7 @@ export interface GameDigimon {
   canEvolve?: boolean; // Se o Digimon pode evoluir
   evolution?: number[]; // IDs dos Digimons que este pode evoluir
   evolutionLocked?: boolean; // Se as evoluções estão bloqueadas (espíritos/emblemas)
+  hasDigivice?: boolean; // Se o Digimon encontrou um Digivice (XP dobrado)
   originalId?: number; // ID original do Digimon (antes das evoluções)
   hasActedThisTurn?: boolean; // Se já realizou uma ação neste turno
   bag?: GameItem[]; // Inventário de itens do Digimon

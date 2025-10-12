@@ -46,6 +46,7 @@ export function useGameState() {
               currentHp: digimon.currentHp ?? digimon.dp, // Se não existir, usa o DP
               canEvolve: digimon.canEvolve ?? false, // Adicionar canEvolve se não existir
               evolutionLocked: digimon.evolutionLocked ?? false, // Adicionar evolutionLocked se não existir
+              hasDigivice: digimon.hasDigivice ?? false, // Adicionar hasDigivice se não existir
               originalId: digimon.originalId ?? digimon.id, // Adicionar originalId se não existir
               hasActedThisTurn: digimon.hasActedThisTurn ?? false, // Adicionar hasActedThisTurn se não existir
               bag: digimon.bag ?? [], // Adicionar bag vazia se não existir

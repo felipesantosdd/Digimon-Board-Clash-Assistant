@@ -166,5 +166,37 @@
     "code": "evolution_crest",
     "type": "evolution",
     "value": 0
+  },
+  {
+    "id": 22,
+    "name": "Digivice",
+    "description": "Dobra o ganho de XP do Digimon que o encontrou",
+    "code": "digivice",
+    "type": "special",
+    "value": 0
+  },
+  {
+    "id": 23,
+    "name": "Aumento de Movimento",
+    "description": "Permite mover casas adicionais no tabuleiro",
+    "code": "movement_boost",
+    "type": "special",
+    "value": 0
+  },
+  {
+    "id": 24,
+    "name": "Bônus de Ataque",
+    "description": "Adiciona bônus permanente nos dados de ataque",
+    "code": "dice_attack_boost",
+    "type": "buff",
+    "value": 0
+  },
+  {
+    "id": 25,
+    "name": "Bônus de Defesa",
+    "description": "Adiciona bônus permanente nos dados de defesa",
+    "code": "dice_defense_boost",
+    "type": "buff",
+    "value": 0
   }
 ]

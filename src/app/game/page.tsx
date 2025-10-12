@@ -394,8 +394,10 @@ export default function GamePage() {
     const isEvolutionLocked = digimon.evolutionLocked || false;
     const canGainXp = hasEvolutions && !isEvolutionLocked;
 
-    // Ganho de XP: 0.5% para cada 1% de HP perdido (APENAS se pode ganhar XP)
-    const xpGained = canGainXp ? hpLostPercentage * 1 : 0;
+    // Ganho de XP: 1% para cada 1% de HP perdido (APENAS se pode ganhar XP)
+    // Se o Digimon tem Digivice, XP é DOBRADO!
+    const baseXpGain = canGainXp ? hpLostPercentage * 1 : 0;
+    const xpGained = digimon.hasDigivice ? baseXpGain * 2 : baseXpGain;
 
     // Calcular novo progresso de evolução
     const currentProgress = digimon.evolutionProgress || 0;
@@ -1249,6 +1251,44 @@ export default function GamePage() {
         if (foundItem) {
           console.log("💰 [LOOT] Item encontrado:", foundItem.name);
 
+          // Verificar se é um Digivice
+          const isDigivice = foundItem.name === "Digivice";
+
+          // Se for Digivice, verificar se o Digimon já tem um
+          if (isDigivice && digimon.hasDigivice) {
+            console.log("📱 [LOOT] Digimon já possui um Digivice!");
+            enqueueSnackbar(
+              `📱 ${capitalize(
+                digimon.name
+              )} encontrou um Digivice, mas já possui um! O item foi descartado.`,
+              { variant: "info" }
+            );
+
+            // Marcar como agiu mas não adicionar o item
+            const updatedState = {
+              ...gameState,
+              players: gameState.players.map((player, playerIndex) => {
+                if (playerIndex === gameState.currentTurnPlayerIndex) {
+                  return {
+                    ...player,
+                    digimons: player.digimons.map((d) => {
+                      if (d.id === digimon.id) {
+                        return {
+                          ...d,
+                          hasActedThisTurn: true,
+                        };
+                      }
+                      return d;
+                    }),
+                  };
+                }
+                return player;
+              }),
+            };
+            saveGameState(updatedState);
+            return;
+          }
+
           // Adicionar item à bag compartilhada
           const sharedBag = gameState.sharedBag || [];
           const existingItemIndex = sharedBag.findIndex(
@@ -1256,8 +1296,8 @@ export default function GamePage() {
           );
 
           let updatedSharedBag;
-          if (existingItemIndex !== -1) {
-            // Item já existe, incrementar quantidade
+          if (existingItemIndex !== -1 && !isDigivice) {
+            // Item já existe, incrementar quantidade (exceto Digivice)
             updatedSharedBag = sharedBag.map((item, index) =>
               index === existingItemIndex
                 ? { ...item, quantity: item.quantity + 1 }
@@ -1275,6 +1315,7 @@ export default function GamePage() {
           }
 
           // Atualizar estado com bag compartilhada e marcar Digimon como agiu
+          // Se for Digivice, marcar hasDigivice = true no Digimon
           const updatedState = {
             ...gameState,
             sharedBag: updatedSharedBag,
@@ -1287,6 +1328,7 @@ export default function GamePage() {
                       return {
                         ...d,
                         hasActedThisTurn: true,
+                        hasDigivice: isDigivice ? true : d.hasDigivice, // Marcar se encontrou Digivice
                       };
                     }
                     return d;
@@ -1300,19 +1342,28 @@ export default function GamePage() {
           saveGameState(updatedState);
 
           // Mensagem mais detalhada sobre o item encontrado
-          const itemRarity =
-            (foundItem.dropChance || 0) <= 10
-              ? "✨ RARO"
-              : (foundItem.dropChance || 0) <= 25
-              ? "⭐"
-              : "";
+          if (isDigivice) {
+            enqueueSnackbar(
+              `📱 ${capitalize(
+                digimon.name
+              )} encontrou um DIGIVICE! XP dobrado permanentemente! 🚀`,
+              { variant: "success" }
+            );
+          } else {
+            const itemRarity =
+              (foundItem.dropChance || 0) <= 10
+                ? "✨ RARO"
+                : (foundItem.dropChance || 0) <= 25
+                ? "⭐"
+                : "";
 
-          enqueueSnackbar(
-            `💰 ${capitalize(digimon.name)} encontrou ${itemRarity} ${
-              foundItem.name
-            }! ${itemRarity ? "Sorte!" : ""}`,
-            { variant: "success" }
-          );
+            enqueueSnackbar(
+              `💰 ${capitalize(digimon.name)} encontrou ${itemRarity} ${
+                foundItem.name
+              }! ${itemRarity ? "Sorte!" : ""}`,
+              { variant: "success" }
+            );
+          }
         }
       }
     } catch (error) {
@@ -1401,6 +1452,34 @@ export default function GamePage() {
                 }
               );
               return;
+            }
+
+            // Verificar se é um Emblema (effectId 21)
+            const isCrest = item.effectId === 21;
+
+            // Se for emblema, validar requisitos
+            if (isCrest) {
+              // Apenas Digimons Level 3 (Ultimate) podem usar emblemas
+              if (digimon.level !== 3) {
+                enqueueSnackbar(
+                  `${capitalize(
+                    digimon.name
+                  )} precisa ser Ultimate (Level 3) para usar ${item.name}!`,
+                  { variant: "warning" }
+                );
+                return;
+              }
+
+              // Digimons com evolutionLocked (Armor/Spirits) não podem usar emblemas
+              if (digimon.evolutionLocked) {
+                enqueueSnackbar(
+                  `${capitalize(
+                    digimon.name
+                  )} não pode usar emblemas (evoluiu com Armor/Espírito)!`,
+                  { variant: "warning" }
+                );
+                return;
+              }
             }
 
             // Escolher aleatoriamente um dos Digimons disponíveis
@@ -1529,7 +1608,7 @@ export default function GamePage() {
                   dp: newDp,
                   dpBonus: newDpBonus,
                   currentHp: newHp,
-                  hasActedThisTurn: true,
+                  // Usar item NÃO custa mais ação!
                 };
               }
               return d;
@@ -1591,22 +1670,43 @@ export default function GamePage() {
         `✨ [EVOLUTION] Evoluindo ${digimon.name} → ${targetDigimonData.name}`
       );
 
-      // Evolução especial: poder atual + 6000
-      const newDp = digimon.dp + 6000;
-      const newHp = Math.min(digimon.currentHp + 6000, newDp); // HP aumenta proporcionalmente, mas não passa do max
-
-      console.log(
-        `📊 [EVOLUTION] Stats: DP ${digimon.dp} → ${newDp} | HP ${digimon.currentHp} → ${newHp}`
-      );
-
-      // Verificar se o item é um espírito ou emblema (effectId 20 ou 21)
+      // Verificar se o item é um espírito, armor ou emblema
       const isSpirit = item.effectId === 20; // Espíritos Lendários
       const isCrest = item.effectId === 21; // Emblemas
-      const shouldLockEvolution = isSpirit || isCrest;
+      const isArmor = item.effectId === 17; // Armor Eggs
+
+      let newDp: number;
+      let newHp: number;
+      let shouldLockEvolution: boolean;
+
+      if (isCrest) {
+        // EMBLEMA: Stats baseados no nível Mega (level 4)
+        const megaStats = generateRandomStats(4); // Level 4 = Mega
+        newDp = megaStats.dp;
+        newHp = megaStats.hp;
+        shouldLockEvolution = false; // Emblemas NÃO bloqueiam evolução
+        console.log(
+          `📿 [CREST] Stats Mega: DP ${newDp} | HP ${newHp} (calculado para Level 4)`
+        );
+      } else {
+        // ARMOR/SPIRIT: Poder atual + 6000
+        newDp = digimon.dp + 6000;
+        newHp = Math.min(digimon.currentHp + 6000, newDp);
+        shouldLockEvolution = true; // Armor/Spirits bloqueiam evolução
+        console.log(
+          `📊 [EVOLUTION] Stats: DP ${digimon.dp} → ${newDp} | HP ${digimon.currentHp} → ${newHp}`
+        );
+      }
 
       if (shouldLockEvolution) {
         console.log(
-          `🔒 [EVOLUTION] Bloqueando evoluções futuras (${isSpirit ? "Espírito" : "Emblema"})`
+          `🔒 [EVOLUTION] Bloqueando evoluções futuras (${
+            isSpirit ? "Espírito" : "Armor"
+          })`
+        );
+      } else {
+        console.log(
+          `✨ [EVOLUTION] Evoluções desbloqueadas (Emblema) - pode continuar evoluindo!`
         );
       }
 
@@ -1620,8 +1720,11 @@ export default function GamePage() {
         dp: newDp,
         currentHp: newHp,
         evolutionProgress: 0,
-        canEvolve: false, // Sempre false para evoluções especiais
-        evolutionLocked: shouldLockEvolution, // Bloquear evoluções se for espírito/emblema
+        canEvolve:
+          targetDigimonData.evolution && targetDigimonData.evolution.length > 0
+            ? false
+            : false, // Sempre false inicialmente, ganha XP e pode evoluir depois
+        evolutionLocked: shouldLockEvolution, // Bloquear apenas para Armor/Spirits
         evolution: targetDigimonData.evolution || [],
       };
 
@@ -1655,12 +1758,13 @@ export default function GamePage() {
                     originalId: d.originalId || d.id, // Preservar ID original
                     baseDp: newDp, // Atualizar baseDp
                     dpBonus: d.dpBonus || 0, // Preservar dpBonus
+                    hasDigivice: d.hasDigivice, // Preservar Digivice
                     bag: d.bag || [], // Preservar bag individual
                     defending: d.defending, // Preservar defending
                     provokedBy: d.provokedBy, // Preservar provokedBy
                     lastProvokeTurn: d.lastProvokeTurn, // Preservar lastProvokeTurn
                     statuses: d.statuses || [], // Preservar statuses
-                    hasActedThisTurn: true, // Marcar que já agiu
+                    // Usar item NÃO custa mais ação!
                   };
                 }
                 return d;
@@ -2364,6 +2468,16 @@ export default function GamePage() {
                               {/* Ícones de Status e Provocação - Na imagem do Digimon */}
                               {!isDead && (
                                 <div className="absolute top-1 right-1 flex flex-col gap-1 pointer-events-none">
+                                  {/* Digivice - SEMPRE NO TOPO */}
+                                  {digimon.hasDigivice && (
+                                    <div
+                                      className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1 animate-pulse"
+                                      title="📱 Digivice Equipado - XP Dobrado!"
+                                    >
+                                      <span className="text-sm">📱</span>
+                                    </div>
+                                  )}
+
                                   {/* Status: Animado e Medo */}
                                   {digimon.statuses &&
                                     digimon.statuses.map((status, idx) => (
