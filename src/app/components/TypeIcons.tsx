@@ -62,8 +62,11 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
       return (
         <img
           src={"/images/icons/free-icon.png"}
-          alt="Data"
+          alt="Free"
           className="w-[25px] h-[25px] object-cover"
+          style={{
+            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+          }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = "/images/icons/free-icon.png";

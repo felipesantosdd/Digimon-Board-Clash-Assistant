@@ -163,7 +163,10 @@ export default function Home() {
       };
 
       // Salvar no localStorage (mesma chave que useGameState usa)
-      localStorage.setItem("digimon_board_clash_game_state", JSON.stringify(gameState));
+      localStorage.setItem(
+        "digimon_board_clash_game_state",
+        JSON.stringify(gameState)
+      );
 
       // Redirecionar para o jogo
       router.push("/game");
