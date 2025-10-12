@@ -8,7 +8,11 @@ console.log("🔧 Corrigindo duplicações nos Armor Eggs...\n");
 
 try {
   // Buscar todos os ovos
-  const items = db.prepare("SELECT * FROM items WHERE name LIKE '%Ovo%' OR name LIKE '%Egg%' ORDER BY id").all() as Array<{
+  const items = db
+    .prepare(
+      "SELECT * FROM items WHERE name LIKE '%Ovo%' OR name LIKE '%Egg%' ORDER BY id"
+    )
+    .all() as Array<{
     id: number;
     name: string;
     description: string;
@@ -16,41 +20,48 @@ try {
   }>;
 
   console.log("📋 Ovos encontrados:\n");
-  items.forEach(item => {
+  items.forEach((item) => {
     console.log(`[ID: ${item.id}] ${item.name}`);
     console.log(`   Descrição: ${item.description}`);
     console.log(`   Target: ${item.targetDigimons}`);
-    console.log('');
+    console.log("");
   });
 
   // Remover o primeiro "Ovo da Amizade" que tem apenas 2 evoluções
-  const firstAmizade = items.find(item => 
-    item.name === "Ovo da Amizade" && 
-    item.description === "Fortalece os laços entre Digimons e aliados."
+  const firstAmizade = items.find(
+    (item) =>
+      item.name === "Ovo da Amizade" &&
+      item.description === "Fortalece os laços entre Digimons e aliados."
   );
 
   if (firstAmizade) {
-    console.log(`\n❌ Removendo Ovo da Amizade duplicado (ID: ${firstAmizade.id})...`);
+    console.log(
+      `\n❌ Removendo Ovo da Amizade duplicado (ID: ${firstAmizade.id})...`
+    );
     db.prepare("DELETE FROM items WHERE id = ?").run(firstAmizade.id);
     console.log("✅ Ovo duplicado removido!");
   }
 
   // Atualizar o Ovo da Amizade correto para remover Thunderbirmon
-  const correctAmizade = items.find(item => 
-    item.name === "Ovo da Amizade" && 
-    item.description === "Fortalece laços e trabalho em equipe entre parceiros."
+  const correctAmizade = items.find(
+    (item) =>
+      item.name === "Ovo da Amizade" &&
+      item.description ===
+        "Fortalece laços e trabalho em equipe entre parceiros."
   );
 
   if (correctAmizade) {
     // Thunderbirmon (541) deve estar apenas no Destino
     const targetDigimons = JSON.parse(correctAmizade.targetDigimons);
     const filtered = targetDigimons.filter((id: number) => id !== 541);
-    
+
     db.prepare("UPDATE items SET targetDigimons = ? WHERE id = ?").run(
       JSON.stringify(filtered),
       correctAmizade.id
     );
-    console.log(`\n✅ Removido Thunderbirmon do Ovo da Amizade (ID: ${correctAmizade.id})`);
+    console.log(
+      `\n✅ Removido Thunderbirmon do Ovo da Amizade (ID: ${correctAmizade.id})`
+    );
     console.log(`   Evoluções atualizadas: ${filtered}`);
   }
 
@@ -63,4 +74,3 @@ try {
 } finally {
   db.close();
 }
-

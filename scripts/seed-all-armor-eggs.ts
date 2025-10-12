@@ -17,18 +17,22 @@ try {
     process.exit(1);
   }
 
-  console.log(`✨ Efeito encontrado: ${evolutionEffect.name} (ID: ${evolutionEffect.id})\n`);
+  console.log(
+    `✨ Efeito encontrado: ${evolutionEffect.name} (ID: ${evolutionEffect.id})\n`
+  );
 
   // Atualizar os ovos existentes com effectId correto
   const existingEggs = [10, 11, 12, 13, 14]; // IDs dos ovos existentes
-  
-  existingEggs.forEach(id => {
+
+  existingEggs.forEach((id) => {
     db.prepare("UPDATE items SET effectId = ? WHERE id = ?").run(
       evolutionEffect.id,
       id
     );
   });
-  console.log(`✅ Atualizados ${existingEggs.length} ovos existentes com effectId correto\n`);
+  console.log(
+    `✅ Atualizados ${existingEggs.length} ovos existentes com effectId correto\n`
+  );
 
   // Definir os novos ovos (os 6 faltantes)
   const newEggs = [
@@ -81,7 +85,7 @@ try {
     VALUES (?, ?, ?, ?, ?, ?, ?)
   `);
 
-  newEggs.forEach(egg => {
+  newEggs.forEach((egg) => {
     const result = stmt.run(
       egg.name,
       egg.description,
@@ -107,4 +111,3 @@ try {
 }
 
 console.log("✅ Processo concluído!");
-

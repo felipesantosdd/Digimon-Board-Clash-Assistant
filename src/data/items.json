@@ -10,147 +10,147 @@
     "effectId": 2
   },
   {
-    "id": 10,
+    "id": 22,
     "name": "Ovo da Coragem",
-    "description": "Fortalece Digimons que agem com bravura e determinação.",
-    "image": "/images/items/1760225081593_image.webp",
+    "description": "O ovo do valor e bravura. Veemon usa para se tornar Flamedramon.",
+    "image": "/images/items/fallback.svg",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
-      523,
-      527
+      523
     ],
     "effectId": 17
   },
   {
-    "id": 11,
-    "name": "Ovo do Conhecimento",
-    "description": "Permite evoluções baseadas na sabedoria e estratégia.",
-    "image": "/images/items/1760231264030_image.webp",
-    "effect": "",
-    "dropChance": 15,
-    "targetDigimons": [
-      132,
-      528
-    ],
-    "effectId": 17
-  },
-  {
-    "id": 12,
-    "name": "Ovo dos Milagres",
-    "description": "Concede habilidades únicas e raras, ligadas à fortuna.",
-    "image": "/images/items/1760231369019_image.webp",
-    "effect": "",
-    "dropChance": 10,
-    "targetDigimons": [
-      539,
-      518
-    ],
-    "effectId": 17
-  },
-  {
-    "id": 13,
-    "name": "Ovo do Amor",
-    "description": "Foca em Digimons que protegem e cuidam com carinho.",
-    "image": "/images/items/1760231422658_image.webp",
-    "effect": "",
-    "dropChance": 15,
-    "targetDigimons": [
-      151
-    ],
-    "effectId": 17
-  },
-  {
-    "id": 14,
-    "name": "Ovo da Pureza",
-    "description": "Amplifica Digimons puros de coração e intenções.",
-    "image": "/images/items/1760231472968_image.webp",
-    "effect": "",
-    "dropChance": 15,
-    "targetDigimons": [
-      535,
-      525
-    ],
-    "effectId": 17
-  },
-  {
-    "id": 16,
+    "id": 23,
     "name": "Ovo da Amizade",
-    "description": "Fortalece laços e trabalho em equipe entre parceiros.",
+    "description": "O ovo dos laços eternos. Veemon usa para se tornar Raidramon.",
     "image": "/images/items/fallback.svg",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
-      524,
-      522,
-      531
+      524
     ],
     "effectId": 17
   },
   {
-    "id": 17,
+    "id": 24,
+    "name": "Ovo do Amor",
+    "description": "O ovo da compaixão e cuidado. Gatomon usa para se tornar Nefertimon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [
+      526
+    ],
+    "effectId": 17
+  },
+  {
+    "id": 25,
+    "name": "Ovo da Pureza",
+    "description": "O ovo da inocência e sinceridade. Gatomon usa para se tornar Pegasusmon em algumas versões.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [
+      535
+    ],
+    "effectId": 17
+  },
+  {
+    "id": 26,
+    "name": "Ovo do Conhecimento",
+    "description": "O ovo da sabedoria e estratégia. Armadillomon usa para se tornar Digmon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [
+      132
+    ],
+    "effectId": 17
+  },
+  {
+    "id": 27,
     "name": "Ovo da Confiabilidade",
-    "description": "Amplifica a determinação e lealdade inabalável.",
+    "description": "O ovo da lealdade inabalável. Armadillomon usa para se tornar Submarimon.",
     "image": "/images/items/fallback.svg",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
-      538,
-      530
+      538
     ],
     "effectId": 17
   },
   {
-    "id": 18,
+    "id": 28,
     "name": "Ovo da Esperança",
-    "description": "Ilumina caminhos com otimismo e renovação.",
+    "description": "O ovo da luz e renovação. Patamon usa para se tornar Pegasusmon.",
     "image": "/images/items/fallback.svg",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
-      98,
-      540
+      98
     ],
     "effectId": 17
   },
   {
-    "id": 19,
+    "id": 29,
     "name": "Ovo da Luz",
-    "description": "Dissipa trevas com poder radiante e puro.",
+    "description": "O ovo que dissipa as trevas. Usado por diversos Digimons.",
     "image": "/images/items/fallback.svg",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
-      526,
+      151,
       533
     ],
     "effectId": 17
   },
   {
-    "id": 20,
+    "id": 30,
     "name": "Ovo da Gentileza",
-    "description": "Promove compaixão e empatia em batalhas.",
+    "description": "O ovo da bondade e empatia. Wormmon usa para se tornar Shurimon.",
     "image": "/images/items/fallback.svg",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
-      537,
-      534
+      525,
+      534,
+      537
     ],
     "effectId": 17
   },
   {
-    "id": 21,
-    "name": "Ovo do Destino",
-    "description": "Desbloqueia potencial oculto e destino único.",
+    "id": 31,
+    "name": "Ovo dos Milagres",
+    "description": "O ovo lendário e raro. Veemon usa para se tornar Magnamon.",
     "image": "/images/items/fallback.svg",
     "effect": "",
     "dropChance": 10,
     "targetDigimons": [
+      518,
+      539
+    ],
+    "effectId": 17
+  },
+  {
+    "id": 32,
+    "name": "Ovo do Destino",
+    "description": "O ovo do potencial oculto. Usado por diversos Digimons para formas únicas.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 10,
+    "targetDigimons": [
+      527,
+      528,
       529,
-      536,
-      541,
+      530,
+      531,
       532,
+      536,
+      540,
+      541,
+      522,
       317
     ],
     "effectId": 17
