@@ -8,7 +8,9 @@ console.log("🔄 Atualizando mapeamento correto dos Armor Eggs...\n");
 
 try {
   // Buscar todos os Digimons para verificar IDs
-  const allDigimons = db.prepare("SELECT id, name, level FROM digimons").all() as Array<{
+  const allDigimons = db
+    .prepare("SELECT id, name, level FROM digimons")
+    .all() as Array<{
     id: number;
     name: string;
     level: number;
@@ -59,11 +61,7 @@ try {
     },
     {
       name: "Ovo da Luz",
-      targetDigimons: findDigimonIds([
-        "harpymon",
-        "nefertimon",
-        "quetzalmon",
-      ]),
+      targetDigimons: findDigimonIds(["harpymon", "nefertimon", "quetzalmon"]),
     },
     {
       name: "Ovo da Pureza",
@@ -123,4 +121,3 @@ try {
 }
 
 console.log("✅ Processo concluído!");
-

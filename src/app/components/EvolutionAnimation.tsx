@@ -167,7 +167,8 @@ export default function EvolutionAnimation({
               }`}
               style={{
                 transformStyle: "preserve-3d",
-                clipPath: "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
+                clipPath:
+                  "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
                 // Rotação vertical (apenas eixo Y)
                 transform:
                   stage === 1
