@@ -57,6 +57,7 @@ export function useGameState() {
               baseDp: digimon.baseDp ?? digimon.dp, // Inicializar baseDp se não existir
               dpBonus: digimon.dpBonus ?? 0, // Inicializar dpBonus se não existir
               statuses: digimon.statuses ?? [], // Inicializar statuses se não existir
+              attributeId: digimon.attributeId ?? 12, // Adicionar attributeId se não existir (padrão: Unknown)
             })),
           })),
           currentTurnPlayerIndex: parsed.currentTurnPlayerIndex ?? 0, // Padrão: primeiro jogador

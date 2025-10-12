@@ -12,6 +12,7 @@ interface BattleViewProps {
     defenseDice: number;
     damage: number;
     typeAdvantage: number;
+    attributeAdvantage?: number; // Vantagem de atributo elemental
     maxHp?: number; // Para bosses
   };
   defender: {
@@ -20,6 +21,7 @@ interface BattleViewProps {
     defenseDice: number;
     damage: number;
     typeAdvantage: number;
+    attributeAdvantage?: number; // Vantagem de atributo elemental
     maxHp?: number; // Para bosses
   };
   isRolling: boolean;
@@ -130,6 +132,7 @@ export default function BattleView({
                 ⚔️ {attacker.digimon.dp.toLocaleString()}
               </div>
 
+              {/* Badge de Vantagem de TIPO */}
               {attacker.typeAdvantage !== 0 && (
                 <div
                   className={`absolute top-1 left-1 sm:top-2 sm:left-2 px-1 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-bold ${
@@ -144,6 +147,27 @@ export default function BattleView({
                   </span>
                 </div>
               )}
+
+              {/* Badge de Vantagem de ATRIBUTO */}
+              {attacker.attributeAdvantage !== undefined &&
+                attacker.attributeAdvantage !== 0 && (
+                  <div
+                    className={`absolute ${
+                      attacker.typeAdvantage !== 0
+                        ? "top-7 left-1 sm:top-10 sm:left-2"
+                        : "top-1 left-1 sm:top-2 sm:left-2"
+                    } px-1 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-bold ${
+                      attacker.attributeAdvantage === 1
+                        ? "bg-cyan-600 text-white"
+                        : "bg-orange-600 text-white"
+                    }`}
+                  >
+                    {attacker.attributeAdvantage === 1 ? "🔥" : "❄️"}{" "}
+                    <span className="hidden sm:inline">
+                      {attacker.attributeAdvantage === 1 ? "+20%" : "-20%"}
+                    </span>
+                  </div>
+                )}
             </div>
 
             {/* HP Bar */}
@@ -263,6 +287,7 @@ export default function BattleView({
                 ⚔️ {defender.digimon.dp.toLocaleString()}
               </div>
 
+              {/* Badge de Vantagem de TIPO */}
               {defender.typeAdvantage !== 0 && (
                 <div
                   className={`absolute top-1 left-1 sm:top-2 sm:left-2 px-1 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-bold ${
@@ -277,6 +302,27 @@ export default function BattleView({
                   </span>
                 </div>
               )}
+
+              {/* Badge de Vantagem de ATRIBUTO */}
+              {defender.attributeAdvantage !== undefined &&
+                defender.attributeAdvantage !== 0 && (
+                  <div
+                    className={`absolute ${
+                      defender.typeAdvantage !== 0
+                        ? "top-7 left-1 sm:top-10 sm:left-2"
+                        : "top-1 left-1 sm:top-2 sm:left-2"
+                    } px-1 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-bold ${
+                      defender.attributeAdvantage === 1
+                        ? "bg-cyan-600 text-white"
+                        : "bg-orange-600 text-white"
+                    }`}
+                  >
+                    {defender.attributeAdvantage === 1 ? "🔥" : "❄️"}{" "}
+                    <span className="hidden sm:inline">
+                      {defender.attributeAdvantage === 1 ? "+20%" : "-20%"}
+                    </span>
+                  </div>
+                )}
             </div>
 
             {/* HP Bar */}

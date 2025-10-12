@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Neutro",
+    "weakness_id": null
+  },
+  {
+    "id": 2,
+    "name": "Fogo",
+    "weakness_id": 3
+  },
+  {
+    "id": 3,
+    "name": "Água",
+    "weakness_id": 5
+  },
+  {
+    "id": 4,
+    "name": "Gelo",
+    "weakness_id": 2
+  },
+  {
+    "id": 5,
+    "name": "Planta",
+    "weakness_id": 2
+  },
+  {
+    "id": 6,
+    "name": "Vento",
+    "weakness_id": 7
+  },
+  {
+    "id": 7,
+    "name": "Terra",
+    "weakness_id": 3
+  },
+  {
+    "id": 8,
+    "name": "Trovão",
+    "weakness_id": 7
+  },
+  {
+    "id": 9,
+    "name": "Luz",
+    "weakness_id": 10
+  },
+  {
+    "id": 10,
+    "name": "Trevas",
+    "weakness_id": 9
+  },
+  {
+    "id": 11,
+    "name": "Metal",
+    "weakness_id": 8
+  },
+  {
+    "id": 12,
+    "name": "Desconhecido",
+    "weakness_id": null
+  }
+]

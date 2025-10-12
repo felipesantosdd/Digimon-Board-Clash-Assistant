@@ -1,5 +1,5 @@
 import { GameDigimon } from "@/types/game";
-import { calculateTypeAdvantage } from "./utils";
+import { calculateTypeAdvantage, calculateAttributeAdvantage } from "./utils";
 
 export interface BattleResult {
   attackerDamage: number;
@@ -12,6 +12,8 @@ export interface BattleResult {
   defenderNewHp: number;
   attackerTypeAdvantage: number;
   defenderTypeAdvantage: number;
+  attackerAttributeAdvantage: number; // Vantagem de atributo elemental
+  defenderAttributeAdvantage: number; // Vantagem de atributo elemental
   attackerCriticalSuccess: boolean; // D20 de ataque = 20
   attackerCriticalFail: boolean; // D20 de ataque = 1
   defenderCriticalSuccess: boolean; // D20 de ataque = 20
@@ -23,6 +25,8 @@ export class BattleManager {
   private defender: GameDigimon;
   private attackerTypeAdvantage: number;
   private defenderTypeAdvantage: number;
+  private attackerAttributeAdvantage: number;
+  private defenderAttributeAdvantage: number;
   private attackerStatusModifier: number;
   private defenderStatusModifier: number;
 
@@ -45,6 +49,16 @@ export class BattleManager {
     this.defenderTypeAdvantage = calculateTypeAdvantage(
       defender.typeId,
       attacker.typeId
+    );
+
+    // Calcular vantagens de atributo elemental
+    this.attackerAttributeAdvantage = calculateAttributeAdvantage(
+      attacker.attributeId,
+      defender.attributeId
+    );
+    this.defenderAttributeAdvantage = calculateAttributeAdvantage(
+      defender.attributeId,
+      attacker.attributeId
     );
   }
 
@@ -83,15 +97,31 @@ export class BattleManager {
   }
 
   /**
-   * Aplica modificador de vantagem de tipo ao dano
+   * Aplica modificadores de vantagem de tipo E atributo ao dano (ACUMULATIVO)
+   * Tipo: ±35% | Atributo: ±20%
    */
-  private applyTypeAdvantage(baseDamage: number, advantage: number): number {
-    if (advantage === 1) {
-      return this.roundToHundred(baseDamage * 1.35); // +35%
-    } else if (advantage === -1) {
-      return this.roundToHundred(baseDamage * 0.65); // -35%
+  private applyAdvantages(
+    baseDamage: number,
+    typeAdvantage: number,
+    attributeAdvantage: number
+  ): number {
+    let multiplier = 1.0;
+
+    // Aplicar vantagem de TIPO (±35%)
+    if (typeAdvantage === 1) {
+      multiplier += 0.35; // +35%
+    } else if (typeAdvantage === -1) {
+      multiplier -= 0.35; // -35%
     }
-    return baseDamage;
+
+    // Aplicar vantagem de ATRIBUTO (±20%) - ACUMULATIVO!
+    if (attributeAdvantage === 1) {
+      multiplier += 0.2; // +20%
+    } else if (attributeAdvantage === -1) {
+      multiplier -= 0.2; // -20%
+    }
+
+    return this.roundToHundred(baseDamage * multiplier);
   }
 
   /**
@@ -171,14 +201,16 @@ export class BattleManager {
       defenderRawDamage - attackerDefenseReduction
     );
 
-    // Aplicar vantagens de tipo
-    attackerNetDamage = this.applyTypeAdvantage(
+    // Aplicar vantagens de tipo E atributo (ACUMULATIVO)
+    attackerNetDamage = this.applyAdvantages(
       attackerNetDamage,
-      this.attackerTypeAdvantage
+      this.attackerTypeAdvantage,
+      this.attackerAttributeAdvantage
     );
-    defenderNetDamage = this.applyTypeAdvantage(
+    defenderNetDamage = this.applyAdvantages(
       defenderNetDamage,
-      this.defenderTypeAdvantage
+      this.defenderTypeAdvantage,
+      this.defenderAttributeAdvantage
     );
 
     // Aplicar modificadores de status (+20 ou -20) e arredondar para múltiplo de 100
@@ -215,6 +247,8 @@ export class BattleManager {
       defenderNewHp,
       attackerTypeAdvantage: this.attackerTypeAdvantage,
       defenderTypeAdvantage: this.defenderTypeAdvantage,
+      attackerAttributeAdvantage: this.attackerAttributeAdvantage,
+      defenderAttributeAdvantage: this.defenderAttributeAdvantage,
       attackerCriticalSuccess,
       attackerCriticalFail,
       defenderCriticalSuccess,
@@ -256,5 +290,13 @@ export class BattleManager {
 
   public getDefenderTypeAdvantage(): number {
     return this.defenderTypeAdvantage;
+  }
+
+  public getAttackerAttributeAdvantage(): number {
+    return this.attackerAttributeAdvantage;
+  }
+
+  public getDefenderAttributeAdvantage(): number {
+    return this.defenderAttributeAdvantage;
   }
 }

@@ -9,7 +9,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 2,
@@ -21,7 +22,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 3,
@@ -33,7 +35,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 4,
@@ -45,7 +48,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 5,
@@ -57,7 +61,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 6,
@@ -69,7 +74,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 8,
@@ -81,7 +87,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 9,
@@ -93,7 +100,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 11,
@@ -105,7 +113,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 12,
@@ -117,7 +126,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 8
   },
   {
     "id": 14,
@@ -129,7 +139,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 16,
@@ -141,7 +152,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 17,
@@ -153,7 +165,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 18,
@@ -165,7 +178,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 19,
@@ -177,7 +191,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 5
   },
   {
     "id": 20,
@@ -189,7 +204,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 21,
@@ -201,7 +217,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 22,
@@ -213,7 +230,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 6
   },
   {
     "id": 23,
@@ -225,7 +243,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 24,
@@ -237,7 +256,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 25,
@@ -249,7 +269,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 26,
@@ -261,7 +282,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 27,
@@ -273,7 +295,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 28,
@@ -285,7 +308,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 29,
@@ -297,7 +321,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 30,
@@ -309,7 +334,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 31,
@@ -321,7 +347,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 4
   },
   {
     "id": 32,
@@ -333,7 +360,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 34,
@@ -345,7 +373,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 37,
@@ -357,7 +386,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 39,
@@ -369,7 +399,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 40,
@@ -381,7 +412,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 41,
@@ -393,7 +425,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 42,
@@ -405,7 +438,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 11
   },
   {
     "id": 44,
@@ -417,7 +451,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 46,
@@ -429,19 +464,21 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 47,
     "name": "gaioumon itto mode",
-    "image": "/images/digimons/1760214718036_image.webp",
+    "image": "/images/digimons/1760302578058_image.webp",
     "level": 5,
     "typeId": 3,
     "evolution": "[59,57,56]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 48,
@@ -453,7 +490,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 49,
@@ -465,7 +503,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 52,
@@ -477,31 +516,34 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 53,
     "name": "huanglongmon",
-    "image": "/images/digimons/1760029374142_image.webp",
+    "image": "/images/digimons/1760303172849_image.webp",
     "level": 5,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 54,
     "name": "moonmillenniumon",
-    "image": "/images/digimons/1760029459831_image.webp",
+    "image": "/images/digimons/1760303127688_image.webp",
     "level": 5,
     "typeId": 3,
     "evolution": "[68]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 55,
@@ -513,7 +555,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 56,
@@ -525,55 +568,60 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 57,
     "name": "omegamon zwart defeat",
-    "image": "/images/digimons/1760029579930_image.webp",
+    "image": "/images/digimons/1760303296775_image.webp",
     "level": 6,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 59,
     "name": "omegamon merciful mode",
-    "image": "/images/digimons/1760031479592_image.webp",
+    "image": "/images/digimons/1760303319626_image.webp",
     "level": 6,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 62,
     "name": "susanoomon",
-    "image": "/images/digimons/1760029708516_image.webp",
+    "image": "/images/digimons/1760303238306_image.webp",
     "level": 5,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 68,
     "name": "zeedmillenniumon",
-    "image": "/images/digimons/1760031964404_image.webp",
+    "image": "/images/digimons/1760303097546_image.webp",
     "level": 6,
     "typeId": 3,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 70,
@@ -585,7 +633,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 72,
@@ -597,19 +646,21 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 73,
     "name": "omegamon alter s",
-    "image": "/images/digimons/1760027808099_image.webp",
+    "image": "/images/digimons/1760303198986_image.webp",
     "level": 5,
     "typeId": 3,
     "evolution": "[56]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 75,
@@ -621,7 +672,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 9
   },
   {
     "id": 76,
@@ -633,7 +685,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 77,
@@ -645,7 +698,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 78,
@@ -657,7 +711,8 @@
     "active": 0,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 79,
@@ -669,7 +724,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 80,
@@ -681,7 +737,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 81,
@@ -693,7 +750,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 82,
@@ -705,7 +763,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 9
   },
   {
     "id": 83,
@@ -717,7 +776,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 84,
@@ -729,7 +789,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 85,
@@ -741,7 +802,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 86,
@@ -753,7 +815,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 9
   },
   {
     "id": 87,
@@ -765,7 +828,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 88,
@@ -777,7 +841,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 89,
@@ -789,7 +854,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 90,
@@ -801,19 +867,21 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 91,
     "name": "magnagarurumon",
-    "image": "/images/digimons/1760027373618_image.webp",
+    "image": "/images/digimons/1760300859435_image.webp",
     "level": 8,
     "typeId": 5,
     "evolution": "[62]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 9
   },
   {
     "id": 92,
@@ -825,7 +893,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 11
   },
   {
     "id": 94,
@@ -837,7 +906,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 95,
@@ -849,7 +919,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 96,
@@ -861,7 +932,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 97,
@@ -873,7 +945,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 98,
@@ -885,7 +958,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 6
   },
   {
     "id": 99,
@@ -897,7 +971,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 7
   },
   {
     "id": 100,
@@ -909,7 +984,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 101,
@@ -921,7 +997,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 102,
@@ -933,7 +1010,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 7
   },
   {
     "id": 104,
@@ -945,7 +1023,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 105,
@@ -957,7 +1036,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 106,
@@ -969,7 +1049,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 9
   },
   {
     "id": 107,
@@ -981,7 +1062,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 109,
@@ -993,7 +1075,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 111,
@@ -1005,7 +1088,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 9
   },
   {
     "id": 112,
@@ -1017,7 +1101,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 9
   },
   {
     "id": 113,
@@ -1029,19 +1114,21 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 114,
     "name": "ordinemon",
-    "image": "/images/digimons/1760029669404_image.webp",
+    "image": "/images/digimons/1760302945015_image.webp",
     "level": 5,
     "typeId": 3,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 115,
@@ -1053,7 +1140,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 116,
@@ -1065,7 +1153,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 3
   },
   {
     "id": 117,
@@ -1077,7 +1166,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 6
   },
   {
     "id": 118,
@@ -1089,7 +1179,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 119,
@@ -1101,7 +1192,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 120,
@@ -1113,7 +1205,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 123,
@@ -1125,7 +1218,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 125,
@@ -1137,7 +1231,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 3
   },
   {
     "id": 126,
@@ -1149,7 +1244,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 128,
@@ -1161,7 +1257,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 129,
@@ -1173,7 +1270,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 130,
@@ -1185,7 +1283,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 131,
@@ -1197,7 +1296,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 132,
@@ -1209,7 +1309,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 7
   },
   {
     "id": 133,
@@ -1221,7 +1322,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 135,
@@ -1233,7 +1335,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 136,
@@ -1245,7 +1348,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 137,
@@ -1257,7 +1361,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 138,
@@ -1269,7 +1374,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 139,
@@ -1281,7 +1387,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 142,
@@ -1293,7 +1400,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 9
   },
   {
     "id": 143,
@@ -1305,7 +1413,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 144,
@@ -1317,7 +1426,8 @@
     "active": 0,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 145,
@@ -1329,7 +1439,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 147,
@@ -1341,7 +1452,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 148,
@@ -1353,7 +1465,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 149,
@@ -1365,7 +1478,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 6
   },
   {
     "id": 150,
@@ -1377,7 +1491,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 8
   },
   {
     "id": 151,
@@ -1389,7 +1504,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 152,
@@ -1401,7 +1517,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 153,
@@ -1413,7 +1530,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 154,
@@ -1425,7 +1543,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 155,
@@ -1437,7 +1556,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": "Um Digimon Anjo Caído do tipo Vírus. Extremamente perigoso!"
+    "description": "Um Digimon Anjo Caído do tipo Vírus. Extremamente perigoso!",
+    "attributeId": 10
   },
   {
     "id": 156,
@@ -1449,7 +1569,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 158,
@@ -1461,7 +1582,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 159,
@@ -1473,7 +1595,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 6
   },
   {
     "id": 161,
@@ -1485,7 +1608,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 162,
@@ -1497,7 +1621,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 163,
@@ -1509,7 +1634,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 164,
@@ -1521,7 +1647,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 165,
@@ -1533,7 +1660,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 166,
@@ -1545,7 +1673,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 167,
@@ -1557,7 +1686,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 168,
@@ -1569,7 +1699,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 169,
@@ -1581,7 +1712,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 170,
@@ -1593,7 +1725,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 171,
@@ -1605,7 +1738,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 172,
@@ -1617,7 +1751,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 173,
@@ -1629,7 +1764,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 174,
@@ -1641,7 +1777,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 175,
@@ -1653,7 +1790,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 176,
@@ -1665,7 +1803,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 177,
@@ -1677,7 +1816,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 178,
@@ -1689,7 +1829,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 179,
@@ -1701,7 +1842,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 180,
@@ -1713,7 +1855,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 181,
@@ -1725,7 +1868,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 182,
@@ -1737,7 +1881,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 183,
@@ -1749,7 +1894,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 184,
@@ -1761,7 +1907,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 185,
@@ -1773,7 +1920,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 186,
@@ -1785,7 +1933,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 187,
@@ -1797,7 +1946,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 188,
@@ -1809,7 +1959,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 189,
@@ -1821,7 +1972,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 190,
@@ -1833,7 +1985,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 191,
@@ -1845,7 +1998,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 192,
@@ -1857,7 +2011,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 193,
@@ -1869,7 +2024,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 194,
@@ -1881,7 +2037,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 195,
@@ -1893,7 +2050,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 196,
@@ -1905,7 +2063,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 197,
@@ -1917,7 +2076,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 198,
@@ -1929,7 +2089,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 4
   },
   {
     "id": 199,
@@ -1941,7 +2102,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 200,
@@ -1953,7 +2115,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 201,
@@ -1965,7 +2128,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 202,
@@ -1977,7 +2141,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 203,
@@ -1989,7 +2154,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 204,
@@ -2001,7 +2167,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 207,
@@ -2013,7 +2180,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 208,
@@ -2025,7 +2193,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 209,
@@ -2037,7 +2206,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 210,
@@ -2049,7 +2219,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 211,
@@ -2061,7 +2232,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 212,
@@ -2073,7 +2245,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 213,
@@ -2085,7 +2258,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 214,
@@ -2097,7 +2271,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 215,
@@ -2109,7 +2284,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 216,
@@ -2121,7 +2297,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 217,
@@ -2133,7 +2310,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 218,
@@ -2145,7 +2323,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 219,
@@ -2157,7 +2336,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 220,
@@ -2169,7 +2349,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 221,
@@ -2181,7 +2362,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 222,
@@ -2193,7 +2375,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 223,
@@ -2205,7 +2388,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 224,
@@ -2217,7 +2401,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 225,
@@ -2229,7 +2414,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 226,
@@ -2241,7 +2427,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 227,
@@ -2253,7 +2440,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 4
   },
   {
     "id": 228,
@@ -2265,7 +2453,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 229,
@@ -2277,7 +2466,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 230,
@@ -2289,7 +2479,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 231,
@@ -2301,7 +2492,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 232,
@@ -2313,7 +2505,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 233,
@@ -2325,7 +2518,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 234,
@@ -2337,7 +2531,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 235,
@@ -2349,7 +2544,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 236,
@@ -2361,7 +2557,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 237,
@@ -2373,7 +2570,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 238,
@@ -2385,7 +2583,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 239,
@@ -2397,7 +2596,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 240,
@@ -2409,7 +2609,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 242,
@@ -2421,7 +2622,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 243,
@@ -2433,7 +2635,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 5
   },
   {
     "id": 244,
@@ -2445,7 +2648,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 245,
@@ -2457,7 +2661,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 246,
@@ -2469,7 +2674,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 247,
@@ -2481,7 +2687,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 248,
@@ -2493,7 +2700,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 249,
@@ -2505,7 +2713,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 250,
@@ -2517,7 +2726,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 251,
@@ -2529,7 +2739,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 4
   },
   {
     "id": 252,
@@ -2541,7 +2752,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 253,
@@ -2553,7 +2765,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 5
   },
   {
     "id": 254,
@@ -2565,7 +2778,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 255,
@@ -2577,7 +2791,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 256,
@@ -2589,7 +2804,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 258,
@@ -2601,7 +2817,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 259,
@@ -2613,7 +2830,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 260,
@@ -2625,7 +2843,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 261,
@@ -2637,7 +2856,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 262,
@@ -2649,7 +2869,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 263,
@@ -2661,7 +2882,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 264,
@@ -2673,7 +2895,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 265,
@@ -2685,7 +2908,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 266,
@@ -2697,7 +2921,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 267,
@@ -2709,7 +2934,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 268,
@@ -2721,7 +2947,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 269,
@@ -2733,7 +2960,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 270,
@@ -2745,7 +2973,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 271,
@@ -2757,7 +2986,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 272,
@@ -2769,7 +2999,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 273,
@@ -2781,7 +3012,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 274,
@@ -2793,7 +3025,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 275,
@@ -2805,7 +3038,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 276,
@@ -2817,7 +3051,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 278,
@@ -2829,7 +3064,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 279,
@@ -2841,7 +3077,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 11
   },
   {
     "id": 280,
@@ -2853,7 +3090,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 281,
@@ -2865,7 +3103,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 282,
@@ -2877,7 +3116,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 283,
@@ -2889,7 +3129,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 284,
@@ -2901,7 +3142,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 285,
@@ -2913,7 +3155,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 286,
@@ -2925,7 +3168,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 287,
@@ -2937,7 +3181,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 288,
@@ -2949,7 +3194,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 289,
@@ -2961,7 +3207,8 @@
     "active": 0,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 9
   },
   {
     "id": 290,
@@ -2973,7 +3220,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 8
   },
   {
     "id": 291,
@@ -2985,7 +3233,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 292,
@@ -2997,7 +3246,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 293,
@@ -3009,7 +3259,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 294,
@@ -3021,7 +3272,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 295,
@@ -3033,7 +3285,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 6
   },
   {
     "id": 296,
@@ -3045,7 +3298,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 297,
@@ -3057,7 +3311,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 298,
@@ -3069,7 +3324,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 299,
@@ -3081,7 +3337,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 300,
@@ -3093,7 +3350,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 11
   },
   {
     "id": 301,
@@ -3105,7 +3363,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 302,
@@ -3117,7 +3376,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 3
   },
   {
     "id": 303,
@@ -3129,7 +3389,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 304,
@@ -3141,7 +3402,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 305,
@@ -3153,7 +3415,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 306,
@@ -3165,7 +3428,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 307,
@@ -3177,7 +3441,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 11
   },
   {
     "id": 308,
@@ -3189,7 +3454,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 309,
@@ -3201,7 +3467,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 310,
@@ -3213,7 +3480,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 311,
@@ -3225,7 +3493,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 9
   },
   {
     "id": 313,
@@ -3237,7 +3506,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 314,
@@ -3249,7 +3519,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 315,
@@ -3261,7 +3532,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 317,
@@ -3273,7 +3545,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 318,
@@ -3285,7 +3558,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 320,
@@ -3297,7 +3571,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 322,
@@ -3309,7 +3584,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 323,
@@ -3321,7 +3597,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 324,
@@ -3333,7 +3610,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 325,
@@ -3345,7 +3623,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 326,
@@ -3357,7 +3636,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 327,
@@ -3369,7 +3649,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 328,
@@ -3381,7 +3662,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 329,
@@ -3393,7 +3675,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 330,
@@ -3405,7 +3688,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 331,
@@ -3417,7 +3701,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 332,
@@ -3429,7 +3714,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 333,
@@ -3441,7 +3727,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 7
   },
   {
     "id": 334,
@@ -3453,7 +3740,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 335,
@@ -3465,7 +3753,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 336,
@@ -3477,7 +3766,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 337,
@@ -3489,7 +3779,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 338,
@@ -3501,7 +3792,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 339,
@@ -3513,7 +3805,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 340,
@@ -3525,7 +3818,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 341,
@@ -3537,7 +3831,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 343,
@@ -3549,7 +3844,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 344,
@@ -3561,7 +3857,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 345,
@@ -3573,7 +3870,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 346,
@@ -3585,7 +3883,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 347,
@@ -3597,7 +3896,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 348,
@@ -3609,7 +3909,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 3
   },
   {
     "id": 349,
@@ -3621,7 +3922,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 11
   },
   {
     "id": 350,
@@ -3633,7 +3935,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 351,
@@ -3645,7 +3948,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 352,
@@ -3657,7 +3961,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 353,
@@ -3669,7 +3974,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 354,
@@ -3681,7 +3987,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 355,
@@ -3693,7 +4000,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 356,
@@ -3705,7 +4013,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 357,
@@ -3717,7 +4026,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 358,
@@ -3729,7 +4039,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 359,
@@ -3741,7 +4052,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 360,
@@ -3753,7 +4065,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 361,
@@ -3765,7 +4078,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 362,
@@ -3777,7 +4091,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 7
   },
   {
     "id": 363,
@@ -3789,7 +4104,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 364,
@@ -3801,7 +4117,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 365,
@@ -3813,7 +4130,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 366,
@@ -3825,7 +4143,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 367,
@@ -3837,7 +4156,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 368,
@@ -3849,7 +4169,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 3
   },
   {
     "id": 369,
@@ -3861,7 +4182,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 370,
@@ -3873,7 +4195,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 371,
@@ -3885,7 +4208,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 372,
@@ -3897,7 +4221,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 373,
@@ -3909,7 +4234,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 374,
@@ -3921,7 +4247,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 375,
@@ -3933,7 +4260,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 376,
@@ -3945,7 +4273,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 377,
@@ -3957,7 +4286,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 378,
@@ -3969,7 +4299,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 379,
@@ -3981,7 +4312,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 380,
@@ -3993,7 +4325,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 381,
@@ -4005,7 +4338,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 382,
@@ -4017,7 +4351,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 11
   },
   {
     "id": 383,
@@ -4029,7 +4364,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 384,
@@ -4041,7 +4377,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 385,
@@ -4053,7 +4390,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 386,
@@ -4065,7 +4403,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 3
   },
   {
     "id": 387,
@@ -4077,7 +4416,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 6
   },
   {
     "id": 388,
@@ -4089,7 +4429,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 389,
@@ -4101,7 +4442,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 390,
@@ -4113,7 +4455,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 391,
@@ -4125,7 +4468,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 392,
@@ -4137,7 +4481,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 393,
@@ -4149,7 +4494,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 394,
@@ -4161,7 +4507,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 395,
@@ -4173,7 +4520,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 396,
@@ -4185,7 +4533,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 398,
@@ -4197,7 +4546,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 399,
@@ -4209,7 +4559,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 400,
@@ -4221,7 +4572,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 401,
@@ -4233,7 +4585,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 402,
@@ -4245,7 +4598,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 4
   },
   {
     "id": 403,
@@ -4257,7 +4611,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 404,
@@ -4269,7 +4624,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 405,
@@ -4281,7 +4637,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 408,
@@ -4293,7 +4650,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 409,
@@ -4305,7 +4663,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 410,
@@ -4317,7 +4676,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 411,
@@ -4329,19 +4689,21 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 412,
     "name": "hi andromon",
-    "image": "/images/digimons/1760207063300_image.webp",
+    "image": "/images/digimons/1760303505061_image.webp",
     "level": 4,
     "typeId": 2,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 413,
@@ -4353,7 +4715,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 414,
@@ -4365,19 +4728,21 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 8
   },
   {
     "id": 415,
     "name": "hououmon",
-    "image": "/images/digimons/1760207152636_image.webp",
+    "image": "/images/digimons/1760303480425_image.webp",
     "level": 4,
     "typeId": 2,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 416,
@@ -4389,7 +4754,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 9
   },
   {
     "id": 417,
@@ -4401,7 +4767,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 3
   },
   {
     "id": 418,
@@ -4413,7 +4780,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 419,
@@ -4425,7 +4793,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 420,
@@ -4437,7 +4806,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 421,
@@ -4449,7 +4819,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 422,
@@ -4461,7 +4832,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 423,
@@ -4473,7 +4845,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 424,
@@ -4485,7 +4858,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 425,
@@ -4497,7 +4871,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 426,
@@ -4509,7 +4884,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 427,
@@ -4521,7 +4897,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 428,
@@ -4533,7 +4910,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 429,
@@ -4545,7 +4923,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 430,
@@ -4557,7 +4936,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 431,
@@ -4569,7 +4949,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 432,
@@ -4581,7 +4962,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 433,
@@ -4593,7 +4975,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 434,
@@ -4605,19 +4988,21 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 435,
     "name": "duftmon",
-    "image": "/images/digimons/1760206272755_image.webp",
+    "image": "/images/digimons/1760303387152_image.webp",
     "level": 5,
     "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 436,
@@ -4629,7 +5014,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 437,
@@ -4641,7 +5027,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 438,
@@ -4653,7 +5040,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 439,
@@ -4665,7 +5053,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 440,
@@ -4677,7 +5066,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 441,
@@ -4689,7 +5079,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 442,
@@ -4701,7 +5092,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 443,
@@ -4713,7 +5105,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 11
   },
   {
     "id": 444,
@@ -4725,7 +5118,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 3
   },
   {
     "id": 445,
@@ -4737,7 +5131,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 446,
@@ -4749,7 +5144,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 5
   },
   {
     "id": 447,
@@ -4761,7 +5157,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 448,
@@ -4773,7 +5170,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 449,
@@ -4785,7 +5183,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 450,
@@ -4797,7 +5196,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 451,
@@ -4809,7 +5209,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 452,
@@ -4821,7 +5222,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 453,
@@ -4833,7 +5235,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 454,
@@ -4845,7 +5248,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 455,
@@ -4857,7 +5261,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 456,
@@ -4869,7 +5274,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 457,
@@ -4881,7 +5287,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 458,
@@ -4893,7 +5300,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 459,
@@ -4905,7 +5313,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 460,
@@ -4917,7 +5326,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 461,
@@ -4929,7 +5339,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 462,
@@ -4941,7 +5352,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 463,
@@ -4953,7 +5365,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 8
   },
   {
     "id": 464,
@@ -4965,7 +5378,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 465,
@@ -4977,7 +5391,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 466,
@@ -4989,7 +5404,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 468,
@@ -5001,7 +5417,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 469,
@@ -5013,7 +5430,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 470,
@@ -5025,7 +5443,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 471,
@@ -5037,7 +5456,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 472,
@@ -5049,7 +5469,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 473,
@@ -5061,7 +5482,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 474,
@@ -5073,7 +5495,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 475,
@@ -5085,7 +5508,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 476,
@@ -5097,7 +5521,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 477,
@@ -5109,7 +5534,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 478,
@@ -5121,7 +5547,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 479,
@@ -5133,7 +5560,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 9
   },
   {
     "id": 480,
@@ -5145,7 +5573,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 481,
@@ -5157,7 +5586,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 482,
@@ -5169,7 +5599,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 11
   },
   {
     "id": 483,
@@ -5181,7 +5612,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 11
   },
   {
     "id": 484,
@@ -5193,7 +5625,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 487,
@@ -5205,7 +5638,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 488,
@@ -5217,7 +5651,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 489,
@@ -5229,19 +5664,21 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 490,
     "name": "imperialdramon: dragon mode",
-    "image": "/images/digimons/1760207192175_image.webp",
+    "image": "/images/digimons/1760303442378_image.webp",
     "level": 4,
     "typeId": 4,
     "evolution": "[491,497]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 491,
@@ -5253,7 +5690,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 492,
@@ -5265,7 +5703,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 493,
@@ -5277,7 +5716,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 494,
@@ -5289,7 +5729,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 495,
@@ -5301,67 +5742,73 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 497,
     "name": "imperialdramon: paladin mode",
-    "image": "/images/digimons/1760214863016_image.webp",
+    "image": "/images/digimons/1760302616487_image.webp",
     "level": 5,
     "typeId": 2,
     "evolution": "[59]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 498,
     "name": "chaosmon",
-    "image": "/images/digimons/1760214012628_image.webp",
+    "image": "/images/digimons/1760302747800_image.webp",
     "level": 5,
     "typeId": 2,
     "evolution": "[521]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 499,
     "name": "chaosmon: valdur arm",
-    "image": "/images/digimons/1760214239008_image.webp",
+    "image": "/images/digimons/1760303272582_image.webp",
     "level": 5,
     "typeId": 2,
     "evolution": "[521]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 500,
     "name": "grace novamon",
-    "image": "/images/digimons/1760214768987_image.webp",
+    "image": "/images/digimons/1760302600970_image.webp",
     "level": 5,
     "typeId": 2,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 501,
     "name": "shine greymon: burst mode",
-    "image": "/images/digimons/1760215555785_image.webp",
+    "image": "/images/digimons/1760302714623_image.webp",
     "level": 5,
     "typeId": 2,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 503,
@@ -5373,127 +5820,138 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 504,
     "name": "examon",
-    "image": "/images/digimons/1760214403117_image.webp",
+    "image": "/images/digimons/1760302538068_image.webp",
     "level": 5,
     "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 505,
     "name": "mirage gaogamon: burst mode",
-    "image": "/images/digimons/1760215023236_image.webp",
+    "image": "/images/digimons/1760302699136_image.webp",
     "level": 5,
     "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 506,
     "name": "rosemon: burst mode",
-    "image": "/images/digimons/1760215515060_image.webp",
+    "image": "/images/digimons/1760302707484_image.webp",
     "level": 5,
     "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 5
   },
   {
     "id": 507,
     "name": "skull baluchimon titamon",
-    "image": "/images/digimons/1760215621366_image.webp",
+    "image": "/images/digimons/1760302924736_image.webp",
     "level": 5,
     "typeId": 3,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 508,
     "name": "dukemon: crimson mode",
-    "image": "/images/digimons/1760214287943_image.webp",
+    "image": "/images/digimons/1760302983464_image.webp",
     "level": 5,
     "typeId": 3,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 509,
     "name": "beelzebumon: blast mode",
-    "image": "/images/digimons/1760213878036_image.webp",
+    "image": "/images/digimons/1760302520906_image.webp",
     "level": 5,
     "typeId": 3,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 510,
     "name": "belphemon: rage mode",
-    "image": "/images/digimons/1760213948265_image.webp",
+    "image": "/images/digimons/1760302491766_image.webp",
     "level": 5,
     "typeId": 3,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 511,
     "name": "mervamon",
-    "image": "/images/digimons/1760214993388_image.webp",
+    "image": "/images/digimons/1760302665869_image.webp",
     "level": 5,
     "typeId": 3,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 512,
     "name": "lucemon: satan mode",
-    "image": "/images/digimons/1760214945925_image.webp",
+    "image": "/images/digimons/1760302674097_image.webp",
     "level": 5,
     "typeId": 3,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 513,
     "name": "armagemon",
-    "image": "/images/digimons/1760213551914_image.webp",
+    "image": "/images/digimons/1760303034002_image.webp",
     "level": 5,
     "typeId": 6,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 514,
@@ -5505,31 +5963,34 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 515,
     "name": "apocalymon",
-    "image": "/images/digimons/1760213451644_image.webp",
+    "image": "/images/digimons/1760302765630_image.webp",
     "level": 5,
     "typeId": 6,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 516,
     "name": "gabumon -yujo no kizuna-",
-    "image": "/images/digimons/1760214493673_image.webp",
+    "image": "/images/digimons/1760302552520_image.webp",
     "level": 5,
     "typeId": 6,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 517,
@@ -5541,19 +6002,21 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 518,
     "name": "magnamon",
-    "image": "/images/digimons/1760153464989_image.webp",
+    "image": "/images/digimons/1760300920084_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 9
   },
   {
     "id": 519,
@@ -5565,7 +6028,8 @@
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 520,
@@ -5577,235 +6041,255 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 521,
     "name": "ultimate chaosmon",
-    "image": "/images/digimons/1760214126175_image.webp",
+    "image": "/images/digimons/1760302440415_image.webp",
     "level": 6,
     "typeId": 2,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 522,
     "name": "sagittarimon",
-    "image": "/images/digimons/1760224007393_image.webp",
+    "image": "/images/digimons/1760299333229_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 523,
     "name": "flamedramon",
-    "image": "/images/digimons/1760224911297_image.webp",
+    "image": "/images/digimons/1760299404368_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 524,
     "name": "raidramon",
-    "image": "/images/digimons/1760225207254_image.webp",
+    "image": "/images/digimons/1760299315597_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 8
   },
   {
     "id": 525,
     "name": "shurimon",
-    "image": "/images/digimons/1760225316161_image.webp",
+    "image": "/images/digimons/1760299594253_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 526,
     "name": "nefertimon",
-    "image": "/images/digimons/1760225385138_image.webp",
+    "image": "/images/digimons/1760299545777_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 527,
     "name": "shadramon",
-    "image": "/images/digimons/1760225468143_image.webp",
+    "image": "/images/digimons/1760299502757_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 528,
     "name": "quetzalmon",
-    "image": "/images/digimons/1760226522161_image.webp",
+    "image": "/images/digimons/1760299387091_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 529,
     "name": "yasyamon",
-    "image": "/images/digimons/1760226632127_image.webp",
+    "image": "/images/digimons/1760299429472_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 531,
     "name": "lynxmon",
-    "image": "/images/digimons/1760226841075_image.webp",
+    "image": "/images/digimons/1760297958801_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 532,
     "name": "togemogumon",
-    "image": "/images/digimons/1760226883958_image.webp",
+    "image": "/images/digimons/1760297910419_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 533,
     "name": "mantaraymon",
-    "image": "/images/digimons/1760226974294_image.webp",
+    "image": "/images/digimons/1760299371392_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 534,
     "name": "sheepmon",
-    "image": "/images/digimons/1760227019626_image.webp",
+    "image": "/images/digimons/1760297806383_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 535,
     "name": "harpymon",
-    "image": "/images/digimons/1760227054003_image.webp",
+    "image": "/images/digimons/1760299415690_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 536,
     "name": "sethmon",
-    "image": "/images/digimons/1760227269312_image.webp",
+    "image": "/images/digimons/1760297777161_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 537,
     "name": "pipismon",
-    "image": "/images/digimons/1760228219583_image.webp",
+    "image": "/images/digimons/1760297744193_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 538,
     "name": "submarimon",
-    "image": "/images/digimons/1760228329108_image.webp",
+    "image": "/images/digimons/1760297817704_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 3
   },
   {
     "id": 539,
     "name": "goldveedramon",
-    "image": "/images/digimons/1760228469888_image.webp",
+    "image": "/images/digimons/1760297701903_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 540,
     "name": "maildramon",
-    "image": "/images/digimons/1760228531451_image.webp",
+    "image": "/images/digimons/1760297714128_image.webp",
     "level": 0,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 541,
@@ -5817,115 +6301,125 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 8
   },
   {
     "id": 542,
     "name": "agunimon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760300846341_image.webp",
     "level": 8,
     "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   },
   {
     "id": 543,
     "name": "kumamon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760300674661_image.webp",
     "level": 8,
     "typeId": 2,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 4
   },
   {
     "id": 544,
     "name": "korikakumon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760300565614_image.webp",
     "level": 8,
     "typeId": 2,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 4
   },
   {
     "id": 545,
     "name": "kazemon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760300545811_image.webp",
     "level": 8,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 6
   },
   {
     "id": 546,
     "name": "zephyrmon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760301476572_image.webp",
     "level": 8,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 6
   },
   {
     "id": 547,
     "name": "beetlemon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760300133716_image.webp",
     "level": 8,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 8
   },
   {
     "id": 548,
     "name": "metalkabuterimon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760301058014_image.webp",
     "level": 8,
     "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 8
   },
   {
     "id": 549,
     "name": "lowemon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760300691911_image.webp",
     "level": 8,
     "typeId": 5,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 550,
     "name": "jagerlowemon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760300332895_image.webp",
     "level": 8,
     "typeId": 5,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 551,
@@ -5937,7 +6431,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 552,
@@ -5949,7 +6444,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 553,
@@ -5961,7 +6457,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 554,
@@ -5973,7 +6470,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 555,
@@ -5985,7 +6483,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 556,
@@ -5997,7 +6496,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 557,
@@ -6009,7 +6509,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 558,
@@ -6021,7 +6522,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 559,
@@ -6033,7 +6535,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 560,
@@ -6045,7 +6548,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 561,
@@ -6057,7 +6561,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 562,
@@ -6069,7 +6574,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 563,
@@ -6081,7 +6587,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 564,
@@ -6093,7 +6600,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 565,
@@ -6105,7 +6613,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 566,
@@ -6117,7 +6626,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 567,
@@ -6129,7 +6639,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 568,
@@ -6141,7 +6652,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 569,
@@ -6153,7 +6665,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 570,
@@ -6165,7 +6678,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 571,
@@ -6177,7 +6691,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 572,
@@ -6189,7 +6704,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 573,
@@ -6201,7 +6717,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 6
   },
   {
     "id": 574,
@@ -6213,7 +6730,8 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 575,
@@ -6225,126 +6743,137 @@
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 12
   },
   {
     "id": 576,
     "name": "grumblemon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760300325923_image.webp",
     "level": 8,
     "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 7
   },
   {
     "id": 577,
     "name": "gigasmon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760300248910_image.webp",
     "level": 8,
     "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 7
   },
   {
     "id": 578,
     "name": "arbormon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760299947379_image.webp",
     "level": 8,
     "typeId": 2,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 5
   },
   {
     "id": 579,
     "name": "petaldramon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760301095391_image.webp",
     "level": 8,
     "typeId": 2,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 5
   },
   {
     "id": 580,
     "name": "ranamon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760301327099_image.webp",
     "level": 8,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 3
   },
   {
     "id": 581,
     "name": "calmaramon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760300078779_image.webp",
     "level": 8,
     "typeId": 4,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 3
   },
   {
     "id": 582,
     "name": "sephirotmon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760301384355_image.webp",
     "level": 8,
     "typeId": 5,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 11
   },
   {
     "id": 583,
     "name": "duskmon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760300185146_image.webp",
     "level": 8,
     "typeId": 3,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 584,
     "name": "velgemon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760301465229_image.webp",
     "level": 8,
     "typeId": 3,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 10
   },
   {
     "id": 585,
     "name": "kaisergreymon",
-    "image": "/images/digimons/fallback.svg",
+    "image": "/images/digimons/1760300454975_image.webp",
     "level": 8,
     "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
-    "description": ""
+    "description": "",
+    "attributeId": 2
   }
 ]

@@ -410,10 +410,10 @@ export default function EvolutionModal({
         >
           {/* Header fixo */}
           <div className="flex justify-between items-center p-6 pb-4 border-b border-gray-700">
-            <div className="flex items-center gap-4">
-              {/* Imagem do Digimon no header - clicável */}
+            <div className="flex items-center gap-6">
+              {/* Imagem do Digimon no header - MAIOR para melhor visualização */}
               <div
-                className="w-16 h-16 bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg overflow-hidden relative cursor-pointer hover:scale-105 transition-transform"
+                className="w-32 h-32 bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg overflow-hidden relative cursor-pointer hover:scale-105 transition-transform shadow-lg border-2 border-blue-500"
                 onClick={() => fileInputRef.current?.click()}
                 title="Clique para alterar imagem"
               >
@@ -426,10 +426,17 @@ export default function EvolutionModal({
                     target.src = "/images/digimons/fallback1.jpg";
                   }}
                 />
+                {/* Ícone de edição */}
+                <div className="absolute bottom-1 right-1 bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
+                  📷
+                </div>
               </div>
-              <h2 className="text-2xl font-bold text-white">
-                Configurar Evoluções - {capitalize(digimon.name)}
-              </h2>
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-2">
+                  {capitalize(digimon.name)}
+                </h2>
+                <p className="text-gray-400 text-sm">Configurar Evoluções</p>
+              </div>
             </div>
             <button
               onClick={onClose}

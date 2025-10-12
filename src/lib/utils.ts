@@ -165,6 +165,76 @@ export function calculateTypeAdvantage(
 }
 
 /**
+ * Atributos Elementais de Digimon
+ */
+export const DIGIMON_ATTRIBUTES = {
+  NEUTRAL: 1,
+  FIRE: 2,
+  WATER: 3,
+  ICE: 4,
+  PLANT: 5,
+  WIND: 6,
+  EARTH: 7,
+  THUNDER: 8,
+  LIGHT: 9,
+  DARK: 10,
+  METAL: 11,
+  UNKNOWN: 12,
+} as const;
+
+/**
+ * Mapa de fraquezas de atributos (definido manualmente para evitar require/import)
+ * Cada chave é o ID do atributo, o valor é o ID do atributo ao qual ele é fraco
+ */
+const ATTRIBUTE_WEAKNESSES: Record<number, number | null> = {
+  1: null, // Neutro - sem fraqueza
+  2: 3, // Fogo é fraco contra Água
+  3: 5, // Água é fraco contra Planta
+  4: 2, // Gelo é fraco contra Fogo
+  5: 2, // Planta é fraco contra Fogo
+  6: 4, // Vento é fraco contra Gelo
+  7: 6, // Terra é fraco contra Vento
+  8: 7, // Trovão é fraco contra Terra
+  9: 10, // Luz é fraco contra Trevas
+  10: 9, // Trevas é fraco contra Luz
+  11: 8, // Metal é fraco contra Trovão
+  12: null, // Desconhecido - sem fraqueza
+};
+
+/**
+ * Calcula a vantagem de atributo elemental entre dois Digimons
+ * @param attackerAttributeId - ID do atributo do Digimon atacante
+ * @param defenderAttributeId - ID do atributo do Digimon defensor
+ * @returns Vantagem: 1 = vantagem, 0 = neutro, -1 = desvantagem
+ */
+export function calculateAttributeAdvantage(
+  attackerAttributeId: number | undefined,
+  defenderAttributeId: number | undefined
+): number {
+  // Se algum dos atributos não está definido ou é "Unknown", retorna neutro
+  if (
+    !attackerAttributeId ||
+    !defenderAttributeId ||
+    attackerAttributeId === DIGIMON_ATTRIBUTES.UNKNOWN ||
+    defenderAttributeId === DIGIMON_ATTRIBUTES.UNKNOWN
+  ) {
+    return 0;
+  }
+
+  // Se o atacante tem fraqueza ao defensor, atacante está em DESVANTAGEM
+  if (ATTRIBUTE_WEAKNESSES[attackerAttributeId] === defenderAttributeId) {
+    return -1;
+  }
+
+  // Se o defensor tem fraqueza ao atacante, atacante está em VANTAGEM
+  if (ATTRIBUTE_WEAKNESSES[defenderAttributeId] === attackerAttributeId) {
+    return 1;
+  }
+
+  return 0; // Neutro
+}
+
+/**
  * Aplica modificador de dano baseado na vantagem de tipo
  * @param baseDamage - Dano base
  * @param typeAdvantage - Vantagem de tipo (1, 0, ou -1)

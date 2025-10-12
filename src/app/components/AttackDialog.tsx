@@ -314,6 +314,7 @@ export default function AttackDialog({
                 defenseDice: attackerDefenseDice,
                 damage: battleResult.attackerDamage,
                 typeAdvantage: battleResult.attackerTypeAdvantage,
+                attributeAdvantage: battleResult.attackerAttributeAdvantage,
               }}
               defender={{
                 digimon: selectedDigimon,
@@ -321,7 +322,11 @@ export default function AttackDialog({
                 defenseDice: defenderDefenseDice,
                 damage: battleResult.defenderDamage,
                 typeAdvantage: battleResult.defenderTypeAdvantage,
-                maxHp: selectedDigimon.id < 0 && activeBoss ? activeBoss.maxHp : undefined,
+                attributeAdvantage: battleResult.defenderAttributeAdvantage,
+                maxHp:
+                  selectedDigimon.id < 0 && activeBoss
+                    ? activeBoss.maxHp
+                    : undefined,
               }}
               isRolling={isRolling}
               battleComplete={battleComplete}
@@ -343,6 +348,10 @@ export default function AttackDialog({
                   attacker.digimon,
                   selectedDigimon
                 ).getAttackerTypeAdvantage(),
+                attributeAdvantage: new BattleManager(
+                  attacker.digimon,
+                  selectedDigimon
+                ).getAttackerAttributeAdvantage(),
               }}
               defender={{
                 digimon: selectedDigimon,
@@ -353,7 +362,14 @@ export default function AttackDialog({
                   attacker.digimon,
                   selectedDigimon
                 ).getDefenderTypeAdvantage(),
-                maxHp: selectedDigimon.id < 0 && activeBoss ? activeBoss.maxHp : undefined,
+                attributeAdvantage: new BattleManager(
+                  attacker.digimon,
+                  selectedDigimon
+                ).getDefenderAttributeAdvantage(),
+                maxHp:
+                  selectedDigimon.id < 0 && activeBoss
+                    ? activeBoss.maxHp
+                    : undefined,
               }}
               isRolling={isRolling}
               battleComplete={battleComplete}

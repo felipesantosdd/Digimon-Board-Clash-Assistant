@@ -1,0 +1,341 @@
+001	Kuramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Kuramon	Training 1	Neutral	Free	2	0
+002	Pabumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Pabumon	Training 1	Neutral	Free	2	0
+003	Punimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Punimon	Training 1	Neutral	Free	2	0
+004	Botamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Botamon	Training 1	Neutral	Free	2	0
+005	Poyomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Poyomon	Training 1	Neutral	Free	2	0
+006	Arcadiamon In-Tr. digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Arcadiamon In-Tr.	Training 2	Dark	Free	3	0
+007	Koromon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Koromon	Training 2	Fire	Free	3	0
+008	Tanemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Tanemon	Training 2	Plant	Free	3	0
+009	Tsunomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Tsunomon	Training 2	Earth	Free	3	0
+010	Tsumemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Tsumemon	Training 2	Dark	Free	3	0
+011	Tokomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Tokomon	Training 2	Neutral	Free	3	0
+012	Nyaromon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Nyaromon	Training 2	Light	Free	3	0
+013	Pagumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Pagumon	Training 2	Dark	Free	3	0
+014	Yokomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Yokomon	Training 2	Plant	Free	3	0
+015	Bukamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Bukamon	Training 2	Water	Free	3	0
+016	Motimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Motimon	Training 2	Neutral	Free	3	0
+017	Wanyamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Wanyamon	Training 2	Wind	Free	3	0
+018	Agumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Agumon	Rookie	Fire	Vaccine	5	1
+019	Agumon (Blk) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Agumon (Blk)	Rookie	Fire	Virus	5	1
+020	Arcadiamon Rookie digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Arcadiamon Rookie	Rookie	Dark	Virus	5	1
+021	Armadillomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Armadillomon	Rookie	Earth	Free	4	1
+022	Impmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Impmon	Rookie	Dark	Virus	5	1
+023	Elecmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Elecmon	Rookie	Electric	Data	4	1
+024	Otamamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Otamamon	Rookie	Water	Virus	4	1
+025	Gaomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gaomon	Rookie	Neutral	Data	5	1
+026	Gazimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gazimon	Rookie	Dark	Virus	4	1
+027	Gabumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gabumon	Rookie	Fire	Data	5	1
+028	Gabumon (Blk) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gabumon (Blk)	Rookie	Fire	Virus	5	1
+029	Guilmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Guilmon	Rookie	Fire	Virus	5	1
+030	Kudamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Kudamon	Rookie	Light	Vaccine	5	1
+031	Keramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Keramon	Rookie	Dark	Free	5	1
+032	Gotsumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gotsumon	Rookie	Earth	Data	5	1
+033	Goblimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Goblimon	Rookie	Earth	Virus	4	1
+034	Gomamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gomamon	Rookie	Water	Vaccine	5	1
+035	Syakomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Syakomon	Rookie	Water	Virus	4	1
+036	Zubamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Zubamon	Rookie	Neutral	Vaccine	5	1
+037	Solarmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Solarmon	Rookie	Light	Vaccine	4	1
+038	Chuumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Chuumon	Rookie	Earth	Virus	4	1
+039	Terriermon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Terriermon	Rookie	Wind	Vaccine	4	1
+040	Tentomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Tentomon	Rookie	Plant	Vaccine	4	1
+041	ToyAgumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	ToyAgumon	Rookie	Neutral	Vaccine	4	1
+042	Dracmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Dracmon	Rookie	Dark	Virus	5	1
+043	Dracomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Dracomon	Rookie	Fire	Data	5	1
+044	Dorumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Dorumon	Rookie	Neutral	Data	5	1
+045	Hagurumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Hagurumon	Rookie	Electric	Virus	4	1
+046	Patamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Patamon	Rookie	Wind	Data	4	1
+047	Hackmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Hackmon	Rookie	Fire	Data	5	1
+048	Palmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Palmon	Rookie	Plant	Data	5	1
+049	DemiDevimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	DemiDevimon	Rookie	Dark	Virus	4	1
+050	Biyomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Biyomon	Rookie	Wind	Vaccine	4	1
+051	Falcomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Falcomon	Rookie	Wind	Vaccine	5	1
+052	FanBeemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	FanBeemon	Rookie	Plant	Virus	4	1
+053	Veemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Veemon	Rookie	Neutral	Free	5	1
+054	Salamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Salamon	Rookie	Light	Vaccine	4	1
+055	Betamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Betamon	Rookie	Water	Virus	4	1
+056	Hawkmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Hawkmon	Rookie	Wind	Free	5	1
+057	Mushroomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Mushroomon	Rookie	Plant	Virus	4	1
+058	Monodramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Monodramon	Rookie	Neutral	Vaccine	4	1
+059	Lalamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Lalamon	Rookie	Plant	Data	4	1
+060	Lucemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Lucemon	Rookie	Light	Vaccine	14	1
+061	Lunamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Lunamon	Rookie	Water	Data	5	1
+062	Renamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Renamon	Rookie	Plant	Data	5	1
+063	Lopmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Lopmon	Rookie	Earth	Data	4	1
+064	Wormmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Wormmon	Rookie	Plant	Free	4	1
+065	IceDevimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	IceDevimon	Champion	Water	Virus	8	1
+066	Icemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Icemon	Champion	Water	Data	6	2
+067	Aquilamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Aquilamon	Champion	Wind	Free	8	1
+068	Agunimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Agunimon	Champion	Fire	Free	8	1
+069	Arcadiamon Champion digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Arcadiamon Champion	Champion	Dark	Virus	8	1
+070	Ankylomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Ankylomon	Champion	Earth	Free	6	2
+071	Ikkakumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Ikkakumon	Champion	Water	Vaccine	8	1
+072	Wizardmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Wizardmon	Champion	Dark	Data	8	1
+073	Lobomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Lobomon	Champion	Light	Free	8	1
+074	Woodmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Woodmon	Champion	Plant	Virus	6	2
+075	Airdramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Airdramon	Champion	Wind	Vaccine	6	2
+076	ExVeemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	ExVeemon	Champion	Neutral	Free	8	1
+077	Angemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Angemon	Champion	Light	Vaccine	8	1
+078	Ogremon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Ogremon	Champion	Earth	Virus	8	1
+079	Guardromon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Guardromon	Champion	Electric	Virus	6	2
+080	Guardromon (Gold) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Guardromon (Gold)	Champion	Electric	Free	6	2
+081	GaoGamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	GaoGamon	Champion	Wind	Data	8	1
+082	Kabuterimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Kabuterimon	Champion	Plant	Vaccine	6	2
+083	ShellNumemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	ShellNumemon	Champion	Water	Virus	6	2
+084	Gargomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gargomon	Champion	Electric	Vaccine	6	2
+085	Garurumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Garurumon	Champion	Fire	Vaccine	8	1
+086	Garurumon (Blk) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Garurumon (Blk)	Champion	Fire	Virus	8	1
+087	Kyubimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Kyubimon	Champion	Fire	Data	8	1
+088	Growlmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Growlmon	Champion	Fire	Virus	8	1
+089	Kurisarimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Kurisarimon	Champion	Dark	Free	8	1
+090	Greymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Greymon	Champion	Fire	Vaccine	8	1
+091	Greymon (Blue) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Greymon (Blue)	Champion	Fire	Virus	8	1
+092	Clockmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Clockmon	Champion	Electric	Data	6	2
+093	Kuwagamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Kuwagamon	Champion	Plant	Virus	6	2
+094	Gekomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gekomon	Champion	Water	Virus	6	2
+095	Geremon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Geremon	Champion	Electric	Virus	6	2
+096	Coredramon (Blue) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Coredramon (Blue)	Champion	Wind	Vaccine	8	1
+097	Coredramon (Green) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Coredramon (Green)	Champion	Earth	Virus	8	1
+098	GoldNumemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	GoldNumemon	Champion	Light	Virus	6	2
+099	Golemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Golemon	Champion	Earth	Virus	6	2
+100	Cyclonemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Cyclonemon	Champion	Earth	Virus	6	2
+101	Sangloupmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Sangloupmon	Champion	Dark	Virus	6	2
+102	Sunflowmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Sunflowmon	Champion	Plant	Data	6	2
+103	Seadramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Seadramon	Champion	Water	Data	6	2
+104	Coelamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Coelamon	Champion	Water	Data	6	2
+105	GeoGreymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	GeoGreymon	Champion	Fire	Vaccine	8	1
+106	Sukamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Sukamon	Champion	Earth	Virus	6	2
+107	Starmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Starmon	Champion	Neutral	Data	6	2
+108	Stingmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Stingmon	Champion	Plant	Free	8	1
+109	Strikedramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Strikedramon	Champion	Earth	Vaccine	6	2
+110	Zubaeagermon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Zubaeagermon	Champion	Neutral	Vaccine	8	1
+111	Socerimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Socerimon	Champion	Water	Vaccine	8	1
+112	Tankmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Tankmon	Champion	Electric	Data	6	2
+113	MudFrigimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MudFrigimon	Champion	Earth	Data	6	2
+114	Tyrannomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Tyrannomon	Champion	Fire	Data	6	2
+115	Gatomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gatomon	Champion	Light	Vaccine	8	1
+116	Devimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Devimon	Champion	Dark	Virus	8	1
+117	Turuiemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Turuiemon	Champion	Earth	Data	6	2
+118	Togemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Togemon	Champion	Plant	Data	8	1
+119	Dorugamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Dorugamon	Champion	Earth	Data	8	1
+120	Nanimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Nanimon	Champion	Earth	Virus	6	2
+121	Numemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Numemon	Champion	Earth	Virus	6	2
+122	Birdramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Birdramon	Champion	Fire	Vaccine	8	1
+123	BaoHuckmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	BaoHuckmon	Champion	Fire	Data	8	1
+124	Bakemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Bakemon	Champion	Dark	Virus	6	2
+125	Veedramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Veedramon	Champion	Wind	Vaccine	8	1
+126	Hudiemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Hudiemon	Champion	Plant	Free	8	1
+127	PlatinumSukamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	PlatinumSukamon	Champion	Neutral	Virus	6	2
+128	BlackGatomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	BlackGatomon	Champion	Dark	Virus	8	1
+129	Vegiemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Vegiemon	Champion	Plant	Virus	6	2
+130	Peckmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Peckmon	Champion	Wind	Vaccine	8	1
+131	Meramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Meramon	Champion	Fire	Data	6	2
+132	Monochromon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Monochromon	Champion	Earth	Data	6	2
+133	Frigimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Frigimon	Champion	Water	Vaccine	6	2
+134	Unimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Unimon	Champion	Wind	Vaccine	6	2
+135	Raptordramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Raptordramon	Champion	Neutral	Vaccine	6	2
+136	Raremon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Raremon	Champion	Earth	Virus	6	2
+137	Leomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Leomon	Champion	Earth	Vaccine	8	1
+138	Lekismon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Lekismon	Champion	Water	Data	6	2
+139	Reppamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Reppamon	Champion	Light	Vaccine	8	1
+140	Waspmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Waspmon	Champion	Electric	Virus	6	2
+141	MegaKabuterimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MegaKabuterimon	Ultimate	Plant	Vaccine	12	2
+142	Arcadiamon Ultimate digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Arcadiamon Ultimate	Ultimate	Dark	Virus	14	3
+143	Antylamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Antylamon	Ultimate	Neutral	Data	12	3
+144	Andromon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Andromon	Ultimate	Electric	Vaccine	12	3
+145	Meteormon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Meteormon	Ultimate	Earth	Data	12	3
+146	Infermon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Infermon	Ultimate	Dark	Free	14	3
+147	Myotismon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Myotismon	Ultimate	Dark	Virus	14	3
+148	Wingdramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Wingdramon	Ultimate	Wind	Vaccine	14	3
+149	BurningGreymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	BurningGreymon	Ultimate	Fire	Free	14	3
+150	AeroVeedramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	AeroVeedramon	Ultimate	Wind	Vaccine	14	1
+151	Etemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Etemon	Ultimate	Dark	Virus	12	3
+152	Angewomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Angewomon	Ultimate	Light	Vaccine	14	3
+153	Okuwamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Okuwamon	Ultimate	Plant	Virus	12	3
+154	Garudamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Garudamon	Ultimate	Fire	Vaccine	12	3
+155	KendoGarurumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	KendoGarurumon	Ultimate	Light	Free	14	2
+156	Gigadramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gigadramon	Ultimate	Wind	Virus	12	3
+157	CatchMamemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	CatchMamemon	Ultimate	Electric	Data	10	3
+158	CannonBeemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	CannonBeemon	Ultimate	Electric	Virus	12	3
+159	Groundramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Groundramon	Ultimate	Earth	Virus	14	3
+160	GrapLeomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	GrapLeomon	Ultimate	Electric	Vaccine	12	3
+161	Grademon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Grademon	Ultimate	Neutral	Vaccine	12	3
+162	Crescemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Crescemon	Ultimate	Water	Data	12	3
+163	Cyberdramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Cyberdramon	Ultimate	Dark	Vaccine	14	2
+164	Shakkoumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Shakkoumon	Ultimate	Light	Free	14	3
+165	Cherrymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Cherrymon	Ultimate	Plant	Virus	12	3
+166	Silphymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Silphymon	Ultimate	Wind	Free	14	3
+167	SuperStarmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	SuperStarmon	Ultimate	Light	Data	12	3
+168	SkullGreymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	SkullGreymon	Ultimate	Dark	Virus	14	3
+169	SkullSatamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	SkullSatamon	Ultimate	Dark	Virus	12	3
+170	Zudomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Zudomon	Ultimate	Water	Vaccine	12	2
+171	SaviorHuckmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	SaviorHuckmon	Ultimate	Fire	Data	14	3
+172	Taomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Taomon	Ultimate	Dark	Data	12	3
+173	Dragomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Dragomon	Ultimate	Water	Virus	12	3
+174	Chirinmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Chirinmon	Ultimate	Light	Vaccine	14	3
+175	Dinobeemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Dinobeemon	Ultimate	Plant	Free	14	3
+176	Digitamamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Digitamamon	Ultimate	Neutral	Data	12	3
+177	SkullMeramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	SkullMeramon	Ultimate	Fire	Data	12	3
+178	Duramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Duramon	Ultimate	Neutral	Vaccine	14	3
+179	ShogunGekomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	ShogunGekomon	Ultimate	Water	Virus	12	3
+180	Triceramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Triceramon	Ultimate	Earth	Data	12	3
+181	DoruGreymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	DoruGreymon	Ultimate	Fire	Data	14	3
+182	Knightmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Knightmon	Ultimate	Neutral	Data	12	3
+183	Datamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Datamon	Ultimate	Electric	Virus	12	3
+184	Paildramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Paildramon	Ultimate	Neutral	Free	14	3
+185	Panjyamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Panjyamon	Ultimate	Water	Vaccine	12	3
+186	Pandamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Pandamon	Ultimate	Earth	Data	12	3
+187	Pumpkinmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Pumpkinmon	Ultimate	Earth	Data	10	3
+188	Piximon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Piximon	Ultimate	Light	Data	12	3
+189	HippoGryphonmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	HippoGryphonmon	Ultimate	Wind	Data	12	3
+190	Phantomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Phantomon	Ultimate	Dark	Virus	12	3
+191	BlackKingNumemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	BlackKingNumemon	Ultimate	Dark	Virus	10	3
+192	BlueMeramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	BlueMeramon	Ultimate	Fire	Virus	12	3
+193	Vademon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Vademon	Ultimate	Dark	Virus	10	3
+194	Whamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Whamon	Ultimate	Water	Vaccine	12	2
+195	MagnaAngemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MagnaAngemon	Ultimate	Light	Vaccine	14	3
+196	Volcanomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Volcanomon	Ultimate	Fire	Data	12	3
+197	Matadormon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Matadormon	Ultimate	Dark	Virus	12	3
+198	MachGaogamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MachGaogamon	Ultimate	Wind	Data	12	3
+199	Mamemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Mamemon	Ultimate	Earth	Data	10	3
+200	MegaSeadramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MegaSeadramon	Ultimate	Water	Data	12	3
+201	Megadramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Megadramon	Ultimate	Wind	Virus	12	3
+202	WarGrowlmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	WarGrowlmon	Ultimate	Fire	Virus	14	3
+203	MetalGreymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MetalGreymon	Ultimate	Fire	Vaccine	14	2
+204	MetalGreymon (Blue) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MetalGreymon (Blue)	Ultimate	Fire	Virus	14	2
+205	MetalTyrannomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MetalTyrannomon	Ultimate	Electric	Virus	12	3
+206	MetalMamemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MetalMamemon	Ultimate	Electric	Data	10	3
+207	Monzaemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Monzaemon	Ultimate	Neutral	Vaccine	12	2
+208	Crowmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Crowmon	Ultimate	Wind	Vaccine	12	3
+209	RizeGreymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	RizeGreymon	Ultimate	Fire	Vaccine	14	3
+210	Lilamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Lilamon	Ultimate	Plant	Data	12	3
+211	Rapidmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Rapidmon	Ultimate	Electric	Vaccine	12	3
+212	Lillymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Lillymon	Ultimate	Plant	Data	12	3
+213	Lucemon FM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Lucemon FM	Ultimate	Neutral	Virus	22	2
+214	LadyDevimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	LadyDevimon	Ultimate	Dark	Virus	14	3
+215	WereGarurumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	WereGarurumon	Ultimate	Earth	Vaccine	12	3
+216	WereGarurumon (Blk) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	WereGarurumon (Blk)	Ultimate	Earth	Virus	12	3
+217	Wisemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Wisemon	Ultimate	Dark	Virus	12	3
+218	Arcadiamon Mega digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Arcadiamon Mega	Mega	Dark	Virus	20	2
+219	Alphamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Alphamon	Mega	Neutral	Vaccine	22	1
+220	UlforceVeedramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	UlforceVeedramon	Mega	Wind	Vaccine	22	1
+221	Ebemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Ebemon	Mega	Electric	Virus	16	3
+222	Imperialdramon DM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Imperialdramon DM	Mega	Fire	Free	20	2
+223	Imperialdramon FM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Imperialdramon FM	Mega	Neutral	Free	20	2
+224	Vikemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Vikemon	Mega	Water	Free	18	3
+225	Valkyrimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Valkyrimon	Mega	Wind	Free	18	3
+226	Varodurumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Varodurumon	Mega	Light	Vaccine	20	2
+227	VenomMyotismon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	VenomMyotismon	Mega	Dark	Virus	20	3
+228	WarGreymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	WarGreymon	Mega	Fire	Vaccine	20	2
+229	Ophanimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Ophanimon	Mega	Light	Vaccine	20	2
+230	Gaiomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gaiomon	Mega	Fire	Virus	18	3
+231	KaiserGreymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	KaiserGreymon	Mega	Fire	Free	20	2
+232	ChaosGallantmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	ChaosGallantmon	Mega	Dark	Virus	22	1
+233	Chaosdramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Chaosdramon	Mega	Electric	Virus	20	2
+234	Gankoomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gankoomon	Mega	Fire	Data	22	2
+235	KingEtemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	KingEtemon	Mega	Earth	Virus	18	3
+236	Kuzuhamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Kuzuhamon	Mega	Dark	Data	18	3
+237	GranKuwagamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	GranKuwagamon	Mega	Plant	Virus	18	3
+238	GranDracmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	GranDracmon	Mega	Dark	Virus	20	2
+239	GroundLocomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	GroundLocomon	Mega	Electric	Data	18	3
+240	Gryphonmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gryphonmon	Mega	Wind	Data	18	3
+241	Craniamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Craniamon	Mega	Earth	Vaccine	22	1
+242	Kerpymon (Blk) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Kerpymon (Blk)	Mega	Dark	Virus	20	3
+243	Kerpymon (Good) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Kerpymon (Good)	Mega	Light	Vaccine	20	2
+244	Goldramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Goldramon	Mega	Light	Vaccine	20	2
+245	SaberLeomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	SaberLeomon	Mega	Wind	Data	18	3
+246	Sakuyamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Sakuyamon	Mega	Light	Data	18	3
+247	Jesmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Jesmon	Mega	Neutral	Data	22	2
+248	ShineGreymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	ShineGreymon	Mega	Light	Vaccine	20	2
+249	ShineGreymon BM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	ShineGreymon BM	Mega	Fire	Vaccine	22	2
+250	Justimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Justimon	Mega	Light	Vaccine	18	3
+251	Kentaurosmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Kentaurosmon	Mega	Light	Vaccine	22	1
+252	Slayerdramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Slayerdramon	Mega	Wind	Vaccine	20	2
+253	Seraphimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Seraphimon	Mega	Light	Vaccine	20	2
+254	MegaGargomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MegaGargomon	Mega	Electric	Vaccine	18	3
+255	Darkdramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Darkdramon	Mega	Electric	Virus	18	3
+256	TigerVespamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	TigerVespamon	Mega	Electric	Virus	18	3
+257	Titamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Titamon	Mega	Earth	Virus	18	3
+258	TyrantKabuterimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	TyrantKabuterimon	Mega	Plant	Virus	20	2
+259	Dianamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Dianamon	Mega	Water	Data	20	3
+260	Diaboromon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Diaboromon	Mega	Dark	Free	20	2
+261	Creepymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Creepymon	Mega	Dark	Virus	22	2
+262	Gallantmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gallantmon	Mega	Light	Virus	22	1
+263	Dynasmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Dynasmon	Mega	Wind	Data	22	2
+264	Durandamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Durandamon	Mega	Neutral	Vaccine	20	2
+265	Leopardmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Leopardmon	Mega	Light	Data	22	3
+266	Leopardmon LM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Leopardmon LM	Mega	Earth	Data	25	3
+267	Dorugoramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Dorugoramon	Mega	Dark	Data	18	2
+268	Neptunemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Neptunemon	Mega	Water	Vaccine	20	2
+269	HiAndromon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	HiAndromon	Mega	Electric	Vaccine	18	3
+270	PileVolcamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	PileVolcamon	Mega	Fire	Data	18	2
+271	Barbamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Barbamon	Mega	Dark	Virus	22	2
+272	BanchoLeomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	BanchoLeomon	Mega	Earth	Vaccine	18	3
+273	Piedmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Piedmon	Mega	Dark	Virus	18	3
+274	Puppetmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Puppetmon	Mega	Plant	Virus	18	3
+275	PlatinumNumemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	PlatinumNumemon	Mega	Neutral	Virus	16	3
+276	BlackWarGreymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	BlackWarGreymon	Mega	Fire	Virus	20	2
+277	PrinceMamemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	PrinceMamemon	Mega	Neutral	Data	16	3
+278	Brakedramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Brakedramon	Mega	Earth	Virus	20	2
+279	Plesiomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Plesiomon	Mega	Water	Data	18	3
+280	HerculesKabuterimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	HerculesKabuterimon	Mega	Plant	Vaccine	18	3
+281	Beelzemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Beelzemon	Mega	Dark	Virus	22	1
+282	Beelzemon BM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Beelzemon BM	Mega	Dark	Virus	25	2
+283	Belphemon SM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Belphemon SM	Mega	Dark	Virus	22	1
+284	Hououmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Hououmon	Mega	Fire	Vaccine	18	3
+285	Magnadramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Magnadramon	Mega	Light	Vaccine	20	2
+286	Boltmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Boltmon	Mega	Electric	Data	18	3
+287	MagnaGarurumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MagnaGarurumon	Mega	Light	Free	18	3
+288	MagnaGarurumon (SV) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MagnaGarurumon (SV)	Mega	Light	Free	18	3
+289	Mastemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Mastemon	Mega	Neutral	Vaccine	22	1
+290	MarineAngemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MarineAngemon	Mega	Water	Vaccine	18	3
+291	Minervamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Minervamon	Mega	Neutral	Virus	20	3
+292	MirageGaogamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MirageGaogamon	Mega	Wind	Data	18	3
+293	MirageGaogamon BM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MirageGaogamon BM	Mega	Light	Data	20	3
+294	Machinedramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Machinedramon	Mega	Electric	Virus	18	3
+295	Megidramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Megidramon	Mega	Fire	Virus	20	2
+296	MetalEtemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MetalEtemon	Mega	Earth	Virus	18	3
+297	MetalGarurumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MetalGarurumon	Mega	Water	Data	18	3
+298	MetalGarurumon (Blk) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MetalGarurumon (Blk)	Mega	Electric	Virus	18	3
+299	MetalSeadramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	MetalSeadramon	Mega	Water	Data	18	3
+300	Merukimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Merukimon	Mega	Wind	Virus	20	2
+301	RustTyranomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	RustTyranomon	Mega	Electric	Virus	18	3
+302	Leviamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Leviamon	Mega	Water	Virus	22	1
+303	Lilithmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Lilithmon	Mega	Dark	Virus	22	2
+304	Ravemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Ravemon	Mega	Wind	Vaccine	18	3
+305	Ravemon BM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Ravemon BM	Mega	Wind	Vaccine	20	2
+306	Crusadermon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Crusadermon	Mega	Dark	Virus	22	2
+307	Rosemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Rosemon	Mega	Plant	Data	18	3
+308	Rosemon BM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Rosemon BM	Mega	Plant	Data	20	3
+309	Lotosmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Lotosmon	Mega	Plant	Data	18	3
+310	Armageddemon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Armageddemon	Ultra	Dark	Free	25	1
+311	Arcadiamon Ultra digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Arcadiamon Ultra	Ultra	Dark	Virus	25	2
+312	Alphamon Ouryuken digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Alphamon Ouryuken	Ultra	Neutral	Vaccine	25	1
+313	Imperialdramon PM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Imperialdramon PM	Ultra	Light	Vaccine	25	2
+314	Examon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Examon	Ultra	Wind	Data	25	2
+315	Omnimon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Omnimon	Ultra	Light	Vaccine	25	2
+316	Omnimon Zwart digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Omnimon Zwart	Ultra	Dark	Vaccine	25	2
+317	Chaosmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Chaosmon	Ultra	Neutral	Vaccine	25	3
+318	Chaosmon VA digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Chaosmon VA	Ultra	Light	Vaccine	25	3
+319	Susanomon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Susanomon	Ultra	Light	Vaccine	25	1
+320	Gallantmon CM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gallantmon CM	Ultra	Light	Virus	25	2
+321	Belphemon RM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Belphemon RM	Ultra	Dark	Virus	25	2
+322	Lucemon SM digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Lucemon SM	Ultra	Dark	Virus	25	2
+323	Flamedramon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Flamedramon	Armor	Fire	Free	8	3
+324	Magnamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Magnamon	Armor	Earth	Free	22	2
+325	Rapidmon (Armor) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Rapidmon (Armor)	Armor	Light	Vaccine	18	3
+326	Shoutmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Shoutmon	-	Fire	Free	5	1
+327	OmniShoutmon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	OmniShoutmon	-	Fire	Free	20	2
+328	Ryudamon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Ryudamon	Rookie	Neutral	Vaccine	5	1
+329	Ginryumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Ginryumon	Champion	Neutral	Vaccine	8	1
+330	Hisyaryumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Hisyaryumon	Ultimate	Neutral	Vaccine	14	1
+331	Ouryumon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Ouryumon	Mega	Neutral	Vaccine	20	2
+332	Apocalymon digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Apocalymon	Ultra	Neutral	Free	25	1
+333	Sistermon Blanc digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Sistermon Blanc	Rookie	Light	Vaccine	4	1
+334	Sistermon B (Awake.) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Sistermon B (Awake.)	Rookie	Light	Vaccine	18	2
+335	Sistermon Ciel digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Sistermon Ciel	Champion	Light	Virus	6	2
+336	Sistermon C (Awake.) digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Sistermon C (Awake.)	Champion	Light	Virus	18	2
+337	Alphamon NX digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Alphamon NX	Mega	Neutral	Vaccine	6	1
+338	Crusadermon NX digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Crusadermon NX	Mega	Dark	Virus	6	1
+339	Leopardmon NX digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Leopardmon NX	Mega	Light	Data	6	1
+340	Omnimon NX digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Omnimon NX	Mega	Light	Vaccine	6	1
+341	Gallantmon NX digimon story: cyber sleuth hacker's memory & complete edition field guide icon	Gallantmon NX	Mega	Light	Virus	6	1

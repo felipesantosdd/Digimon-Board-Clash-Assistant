@@ -16,6 +16,15 @@ const db = new Database(dbPath);
 // Exportar digimon_types
 const types = db.prepare("SELECT * FROM digimon_types").all();
 
+// Exportar digimon_attributes (se existir)
+let attributes: unknown[] = [];
+try {
+  attributes = db.prepare("SELECT * FROM digimon_attributes").all();
+} catch (error) {
+  console.log("⚠️  Tabela 'digimon_attributes' não encontrada, pulando");
+  attributes = [];
+}
+
 // Exportar digimons
 const digimons = db.prepare("SELECT * FROM digimons").all();
 
@@ -172,8 +181,19 @@ fs.writeFileSync(
   JSON.stringify(bossDrops, null, 2)
 );
 
+// Exportar attributes (se existir)
+if (attributes.length > 0) {
+  fs.writeFileSync(
+    path.join(dataDir, "digimon-attributes.json"),
+    JSON.stringify(attributes, null, 2)
+  );
+}
+
 console.log("✅ Dados exportados com sucesso!");
 console.log(`   - ${types.length} tipos de Digimon`);
+if (attributes.length > 0) {
+  console.log(`   - ${attributes.length} atributos elementais`);
+}
 console.log(`   - ${digimons.length} Digimons`);
 console.log(`   - ${tamers.length} Tamers`);
 console.log(`   - ${effects.length} Efeitos`);

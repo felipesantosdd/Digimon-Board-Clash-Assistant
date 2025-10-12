@@ -17,6 +17,7 @@ export interface GameDigimon {
   baseDp?: number; // DP base do Digimon (sem buffs)
   dpBonus?: number; // Bônus de DP acumulado (de itens, buffs, etc)
   typeId: number;
+  attributeId?: number; // ID do atributo elemental (Fogo, Água, etc)
   currentHp: number; // HP atual do Digimon (inicia igual ao DP)
   canEvolve?: boolean; // Se o Digimon pode evoluir
   evolution?: number[]; // IDs dos Digimons que este pode evoluir
