@@ -130,6 +130,7 @@ export default function ItemsTab({ isProduction = false }: ItemsTabProps) {
       debuff: "bg-orange-500",
       special: "bg-purple-500",
       boss: "bg-pink-500",
+      evolution: "bg-cyan-500",
     };
 
     return {
