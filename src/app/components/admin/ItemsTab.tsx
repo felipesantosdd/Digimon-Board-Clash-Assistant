@@ -202,19 +202,21 @@ export default function ItemsTab({ isProduction = false }: ItemsTabProps) {
             {filteredItems.map((item) => (
               <div
                 key={item.id}
-                className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-700"
               >
                 {/* Imagem do Item */}
-                <div className="relative h-40 bg-gradient-to-br from-purple-900 to-purple-700 overflow-hidden flex items-center justify-center">
+                <div className="relative h-48 bg-gray-900 overflow-hidden">
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-32 h-32 object-contain"
+                    className="w-full h-full object-cover"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src = "/images/items/fallback.svg";
                     }}
                   />
+                  {/* Gradiente sutil no fundo para destacar o item */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent pointer-events-none"></div>
                 </div>
 
                 {/* Informações do Item */}

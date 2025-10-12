@@ -4,7 +4,9 @@ import path from "path";
 const dbPath = path.join(process.cwd(), "database.sqlite");
 const db = new Database(dbPath);
 
-console.log("🔥 Adicionando Guerreiros e Espíritos Adicionais (Safe Mode)...\n");
+console.log(
+  "🔥 Adicionando Guerreiros e Espíritos Adicionais (Safe Mode)...\n"
+);
 
 try {
   // Buscar o efeito de evolução espiritual
@@ -50,11 +52,15 @@ try {
           existing.id
         );
         console.log(
-          `✅ ${warrior.name.toUpperCase()} (ID: ${existing.id}) - Atualizado para Level 8`
+          `✅ ${warrior.name.toUpperCase()} (ID: ${
+            existing.id
+          }) - Atualizado para Level 8`
         );
       } else {
         console.log(
-          `ℹ️  ${warrior.name.toUpperCase()} (ID: ${existing.id}) - Já é Level 8`
+          `ℹ️  ${warrior.name.toUpperCase()} (ID: ${
+            existing.id
+          }) - Já é Level 8`
         );
       }
       warriorIds[warrior.name] = existing.id;
@@ -77,7 +83,9 @@ try {
 
       const insertedId = result.lastInsertRowid as number;
       warriorIds[warrior.name] = insertedId;
-      console.log(`✅ ${warrior.name.toUpperCase()} (ID: ${insertedId}) - NOVO`);
+      console.log(
+        `✅ ${warrior.name.toUpperCase()} (ID: ${insertedId}) - NOVO`
+      );
     }
   });
 
@@ -167,15 +175,13 @@ try {
     // TREVAS CORROMPIDO
     {
       name: "Espírito Humano das Trevas Corrompidas",
-      description:
-        "O espírito corrompido das Trevas. Transforma em Duskmon.",
+      description: "O espírito corrompido das Trevas. Transforma em Duskmon.",
       dropChance: 6,
       targetDigimons: [warriorIds["duskmon"]],
     },
     {
       name: "Espírito Bestial das Trevas Corrompidas",
-      description:
-        "O espírito bestial corrompido. Transforma em Velgemon.",
+      description: "O espírito bestial corrompido. Transforma em Velgemon.",
       dropChance: 4,
       targetDigimons: [warriorIds["velgemon"]],
     },
@@ -232,4 +238,3 @@ try {
 }
 
 console.log("✅ Processo concluído!");
-

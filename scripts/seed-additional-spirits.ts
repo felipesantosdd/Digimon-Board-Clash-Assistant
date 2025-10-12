@@ -153,15 +153,13 @@ try {
     // TREVAS CORROMPIDO
     {
       name: "Espírito Humano das Trevas Corrompidas",
-      description:
-        "O espírito corrompido das Trevas. Transforma em Duskmon.",
+      description: "O espírito corrompido das Trevas. Transforma em Duskmon.",
       dropChance: 6,
       targetDigimons: [warriorIds["duskmon"]],
     },
     {
       name: "Espírito Bestial das Trevas Corrompidas",
-      description:
-        "O espírito bestial corrompido. Transforma em Velgemon.",
+      description: "O espírito bestial corrompido. Transforma em Velgemon.",
       dropChance: 4,
       targetDigimons: [warriorIds["velgemon"]],
     },
@@ -215,4 +213,3 @@ try {
 }
 
 console.log("✅ Processo concluído!");
-
