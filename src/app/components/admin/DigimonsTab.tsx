@@ -378,7 +378,7 @@ export default function DigimonsTab({
           ) : (
             /* Seções por Nível - quando não há filtros */
             <div className="space-y-8">
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((level) => {
+              {[8, 0, 1, 2, 3, 4, 5, 6, 7].map((level) => {
                 const digimonsInLevel = digimons
                   .filter((d) => d.level === level)
                   .sort((a, b) => a.name.localeCompare(b.name));
