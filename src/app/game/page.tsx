@@ -1557,13 +1557,21 @@ export default function GamePage() {
       // Buscar dados do Digimon de destino
       const response = await fetch(`/api/digimons/${targetDigimonId}`);
       if (!response.ok) {
-        throw new Error("Erro ao buscar dados do Digimon");
+        console.error(`❌ [EVOLUTION] Erro ao buscar Digimon ${targetDigimonId}:`, response.status);
+        enqueueSnackbar(`Erro ao buscar dados do Digimon (ID: ${targetDigimonId})`, {
+          variant: "error",
+        });
+        return;
       }
 
       const targetDigimonData = await response.json();
+      console.log(`✨ [EVOLUTION] Evoluindo ${digimon.name} → ${targetDigimonData.name}`);
 
-      // Gerar stats para o novo Digimon
-      const newStats = generateRandomStats(targetDigimonData.level);
+      // Evolução Armor: poder atual + 6000
+      const newDp = digimon.dp + 6000;
+      const newHp = Math.min(digimon.currentHp + 6000, newDp); // HP aumenta proporcionalmente, mas não passa do max
+
+      console.log(`📊 [EVOLUTION] Stats: DP ${digimon.dp} → ${newDp} | HP ${digimon.currentHp} → ${newHp}`);
 
       // Criar evolução
       const evolution = {
@@ -1572,10 +1580,10 @@ export default function GamePage() {
         image: targetDigimonData.image,
         level: targetDigimonData.level,
         typeId: targetDigimonData.typeId,
-        dp: newStats.dp,
-        currentHp: newStats.hp,
+        dp: newDp,
+        currentHp: newHp,
         evolutionProgress: 0,
-        canEvolve: false,
+        canEvolve: targetDigimonData.evolution && targetDigimonData.evolution.length > 0,
         evolution: targetDigimonData.evolution || [],
       };
 
@@ -1607,6 +1615,13 @@ export default function GamePage() {
                     ...d,
                     ...evolution,
                     originalId: d.originalId || d.id, // Preservar ID original
+                    baseDp: newDp, // Atualizar baseDp
+                    dpBonus: d.dpBonus || 0, // Preservar dpBonus
+                    bag: d.bag || [], // Preservar bag individual
+                    defending: d.defending, // Preservar defending
+                    provokedBy: d.provokedBy, // Preservar provokedBy
+                    lastProvokeTurn: d.lastProvokeTurn, // Preservar lastProvokeTurn
+                    statuses: d.statuses || [], // Preservar statuses
                     hasActedThisTurn: true, // Marcar que já agiu
                   };
                 }
