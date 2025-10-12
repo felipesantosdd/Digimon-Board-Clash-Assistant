@@ -17,7 +17,9 @@
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
-      523
+      523,
+      531,
+      527
     ],
     "effectId": 17
   },
@@ -29,7 +31,9 @@
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
-      524
+      524,
+      541,
+      532
     ],
     "effectId": 17
   },
@@ -41,7 +45,9 @@
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
-      526
+      151,
+      537,
+      536
     ],
     "effectId": 17
   },
@@ -53,7 +59,8 @@
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
-      535
+      525,
+      529
     ],
     "effectId": 17
   },
@@ -77,6 +84,7 @@
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
+      533,
       538
     ],
     "effectId": 17
@@ -89,7 +97,9 @@
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
-      98
+      98,
+      534,
+      522
     ],
     "effectId": 17
   },
@@ -101,8 +111,9 @@
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
-      151,
-      533
+      535,
+      526,
+      528
     ],
     "effectId": 17
   },
@@ -114,9 +125,7 @@
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
-      525,
-      534,
-      537
+      573
     ],
     "effectId": 17
   },
@@ -129,7 +138,7 @@
     "dropChance": 10,
     "targetDigimons": [
       518,
-      539
+      540
     ],
     "effectId": 17
   },
@@ -141,17 +150,8 @@
     "effect": "",
     "dropChance": 10,
     "targetDigimons": [
-      527,
-      528,
-      529,
-      530,
-      531,
-      532,
-      536,
-      540,
-      541,
-      522,
-      317
+      317,
+      539
     ],
     "effectId": 17
   },

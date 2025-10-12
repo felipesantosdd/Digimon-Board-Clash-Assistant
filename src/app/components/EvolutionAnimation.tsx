@@ -167,6 +167,7 @@ export default function EvolutionAnimation({
               }`}
               style={{
                 transformStyle: "preserve-3d",
+                clipPath: "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
                 // Rotação vertical (apenas eixo Y)
                 transform:
                   stage === 1
@@ -212,7 +213,7 @@ export default function EvolutionAnimation({
                   });
                   setImageError(true);
                 }}
-                className={`w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.8)] ${
+                className={`w-full h-full object-cover drop-shadow-[0_0_30px_rgba(255,255,255,0.8)] ${
                   canClose ? "cursor-pointer" : "cursor-default"
                 }`}
               />
