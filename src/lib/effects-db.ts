@@ -6,7 +6,8 @@ export type EffectType =
   | "buff"
   | "debuff"
   | "special"
-  | "boss";
+  | "boss"
+  | "evolution";
 
 export interface Effect {
   id: number;

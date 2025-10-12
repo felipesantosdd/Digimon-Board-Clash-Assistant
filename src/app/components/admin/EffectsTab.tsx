@@ -4,7 +4,14 @@ import { useState, useEffect } from "react";
 import { useSnackbar } from "notistack";
 import { capitalize } from "@/lib/utils";
 
-type EffectType = "heal" | "damage" | "buff" | "debuff" | "special" | "boss";
+type EffectType =
+  | "heal"
+  | "damage"
+  | "buff"
+  | "debuff"
+  | "special"
+  | "boss"
+  | "evolution";
 
 interface Effect {
   id: number;

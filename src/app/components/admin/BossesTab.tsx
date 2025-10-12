@@ -17,7 +17,14 @@ interface BossDigimon {
   description?: string; // Descrição do boss
 }
 
-type EffectType = "heal" | "damage" | "buff" | "debuff" | "special" | "boss";
+type EffectType =
+  | "heal"
+  | "damage"
+  | "buff"
+  | "debuff"
+  | "special"
+  | "boss"
+  | "evolution";
 
 interface Effect {
   id: number;
@@ -35,6 +42,7 @@ const effectTypeIcons: Record<EffectType, string> = {
   debuff: "⬇️",
   special: "✨",
   boss: "👹",
+  evolution: "🧬",
 };
 
 const digimonTypes = [
