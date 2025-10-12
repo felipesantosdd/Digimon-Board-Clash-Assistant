@@ -13,7 +13,7 @@
     "id": 22,
     "name": "Ovo da Coragem",
     "description": "O ovo do valor e bravura. Veemon usa para se tornar Flamedramon.",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760234911919_image.webp",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
@@ -25,7 +25,7 @@
     "id": 23,
     "name": "Ovo da Amizade",
     "description": "O ovo dos laços eternos. Veemon usa para se tornar Raidramon.",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760234898811_image.webp",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
@@ -85,7 +85,7 @@
     "id": 28,
     "name": "Ovo da Esperança",
     "description": "O ovo da luz e renovação. Patamon usa para se tornar Pegasusmon.",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760234922839_image.webp",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
@@ -97,7 +97,7 @@
     "id": 29,
     "name": "Ovo da Luz",
     "description": "O ovo que dissipa as trevas. Usado por diversos Digimons.",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760234942355_image.webp",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
@@ -110,7 +110,7 @@
     "id": 30,
     "name": "Ovo da Gentileza",
     "description": "O ovo da bondade e empatia. Wormmon usa para se tornar Shurimon.",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760234933052_image.webp",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
@@ -154,5 +154,131 @@
       317
     ],
     "effectId": 17
+  },
+  {
+    "id": 33,
+    "name": "Espírito Humano do Fogo",
+    "description": "O espírito lendário do elemento Fogo. Permite a transformação em Agunimon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 8,
+    "targetDigimons": [],
+    "effectId": 20
+  },
+  {
+    "id": 34,
+    "name": "Espírito Bestial do Fogo",
+    "description": "O espírito bestial do Fogo. Transforma em BurningGreymon/Vritramon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [
+      85
+    ],
+    "effectId": 20
+  },
+  {
+    "id": 35,
+    "name": "Espírito Humano da Luz",
+    "description": "O espírito lendário da Luz. Permite a transformação em Lobomon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 8,
+    "targetDigimons": [
+      75
+    ],
+    "effectId": 20
+  },
+  {
+    "id": 36,
+    "name": "Espírito Bestial da Luz",
+    "description": "O espírito bestial da Luz. Transforma em KendoGarurumon/Garmmon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [
+      82
+    ],
+    "effectId": 20
+  },
+  {
+    "id": 37,
+    "name": "Espírito Humano do Gelo",
+    "description": "O espírito lendário do Gelo. Permite a transformação em Kumamon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 8,
+    "targetDigimons": [],
+    "effectId": 20
+  },
+  {
+    "id": 38,
+    "name": "Espírito Bestial do Gelo",
+    "description": "O espírito bestial do Gelo. Transforma em Korikakumon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [],
+    "effectId": 20
+  },
+  {
+    "id": 39,
+    "name": "Espírito Humano do Vento",
+    "description": "O espírito lendário do Vento. Permite a transformação em Kazemon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 8,
+    "targetDigimons": [],
+    "effectId": 20
+  },
+  {
+    "id": 40,
+    "name": "Espírito Bestial do Vento",
+    "description": "O espírito bestial do Vento. Transforma em Zephyrmon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [],
+    "effectId": 20
+  },
+  {
+    "id": 41,
+    "name": "Espírito Humano do Trovão",
+    "description": "O espírito lendário do Trovão. Permite a transformação em Beetlemon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 8,
+    "targetDigimons": [],
+    "effectId": 20
+  },
+  {
+    "id": 42,
+    "name": "Espírito Bestial do Trovão",
+    "description": "O espírito bestial do Trovão. Transforma em MetalKabuterimon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [],
+    "effectId": 20
+  },
+  {
+    "id": 43,
+    "name": "Espírito Humano das Trevas",
+    "description": "O espírito lendário das Trevas. Permite a transformação em Lowemon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 8,
+    "targetDigimons": [],
+    "effectId": 20
+  },
+  {
+    "id": 44,
+    "name": "Espírito Bestial das Trevas",
+    "description": "O espírito bestial das Trevas. Transforma em JagerLowemon/KaiserLeomon.",
+    "image": "/images/items/fallback.svg",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [],
+    "effectId": 20
   }
 ]

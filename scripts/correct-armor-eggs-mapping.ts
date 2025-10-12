@@ -19,56 +19,65 @@ try {
 
   // Deletar TODOS os ovos existentes para recomeçar do zero
   console.log("🗑️  Removendo todos os ovos existentes...");
-  db.prepare("DELETE FROM items WHERE name LIKE '%Ovo%' OR name LIKE '%Egg%'").run();
+  db.prepare(
+    "DELETE FROM items WHERE name LIKE '%Ovo%' OR name LIKE '%Egg%'"
+  ).run();
   console.log("✅ Ovos removidos!\n");
 
   // Mapeamento CORRETO baseado na série Digimon Adventure 02
   const correctMapping = [
     {
       name: "Ovo da Coragem",
-      description: "O ovo do valor e bravura. Veemon usa para se tornar Flamedramon.",
+      description:
+        "O ovo do valor e bravura. Veemon usa para se tornar Flamedramon.",
       dropChance: 15,
       // Veemon evoluções com Coragem
       targetDigimons: [523], // Flamedramon (Shadramon é outra linha)
     },
     {
       name: "Ovo da Amizade",
-      description: "O ovo dos laços eternos. Veemon usa para se tornar Raidramon.",
+      description:
+        "O ovo dos laços eternos. Veemon usa para se tornar Raidramon.",
       dropChance: 15,
       // Veemon evoluções com Amizade
       targetDigimons: [524], // Raidramon
     },
     {
       name: "Ovo do Amor",
-      description: "O ovo da compaixão e cuidado. Gatomon usa para se tornar Nefertimon.",
+      description:
+        "O ovo da compaixão e cuidado. Gatomon usa para se tornar Nefertimon.",
       dropChance: 15,
       // Gatomon evoluções com Amor
       targetDigimons: [526], // Nefertimon
     },
     {
       name: "Ovo da Pureza",
-      description: "O ovo da inocência e sinceridade. Gatomon usa para se tornar Pegasusmon em algumas versões.",
+      description:
+        "O ovo da inocência e sinceridade. Gatomon usa para se tornar Pegasusmon em algumas versões.",
       dropChance: 15,
       // Gatomon outras evoluções
       targetDigimons: [535], // Harpymon (Gatomon linha alternativa)
     },
     {
       name: "Ovo do Conhecimento",
-      description: "O ovo da sabedoria e estratégia. Armadillomon usa para se tornar Digmon.",
+      description:
+        "O ovo da sabedoria e estratégia. Armadillomon usa para se tornar Digmon.",
       dropChance: 15,
       // Armadillomon evoluções com Conhecimento
       targetDigimons: [132], // Digmon
     },
     {
       name: "Ovo da Confiabilidade",
-      description: "O ovo da lealdade inabalável. Armadillomon usa para se tornar Submarimon.",
+      description:
+        "O ovo da lealdade inabalável. Armadillomon usa para se tornar Submarimon.",
       dropChance: 15,
       // Armadillomon evoluções com Confiabilidade
       targetDigimons: [538], // Submarimon
     },
     {
       name: "Ovo da Esperança",
-      description: "O ovo da luz e renovação. Patamon usa para se tornar Pegasusmon.",
+      description:
+        "O ovo da luz e renovação. Patamon usa para se tornar Pegasusmon.",
       dropChance: 15,
       // Patamon evoluções com Esperança
       targetDigimons: [98], // Pegasusmon
@@ -82,7 +91,8 @@ try {
     },
     {
       name: "Ovo da Gentileza",
-      description: "O ovo da bondade e empatia. Wormmon usa para se tornar Shurimon.",
+      description:
+        "O ovo da bondade e empatia. Wormmon usa para se tornar Shurimon.",
       dropChance: 15,
       // Wormmon evoluções com Gentileza
       targetDigimons: [525, 534, 537], // Shurimon, Sheepmon, Pipismon
@@ -96,11 +106,12 @@ try {
     },
     {
       name: "Ovo do Destino",
-      description: "O ovo do potencial oculto. Usado por diversos Digimons para formas únicas.",
+      description:
+        "O ovo do potencial oculto. Usado por diversos Digimons para formas únicas.",
       dropChance: 10,
       // Evoluções únicas e especiais (linhas alternativas, formas raras)
-      targetDigimons: [527, 528, 529, 530, 531, 532, 536, 540, 541, 522, 317], 
-      // Shadramon, Quetzalmon, Yasyamon, Opossummon, Lynxmon, Togemogumon, 
+      targetDigimons: [527, 528, 529, 530, 531, 532, 536, 540, 541, 522, 317],
+      // Shadramon, Quetzalmon, Yasyamon, Opossummon, Lynxmon, Togemogumon,
       // Sethmon, Maildramon, Thunderbirmon, Sagittarimon, Rapidmon Perfect
     },
   ];
@@ -140,4 +151,3 @@ try {
 }
 
 console.log("✅ Processo concluído!");
-

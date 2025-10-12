@@ -150,5 +150,13 @@
     "code": "evolution_digiegg",
     "type": "evolution",
     "value": 0
+  },
+  {
+    "id": 20,
+    "name": "Evolução Espiritual",
+    "description": "Permite evolução usando um Espírito Lendário",
+    "code": "evolution_spirit",
+    "type": "evolution",
+    "value": 0
   }
 ]
