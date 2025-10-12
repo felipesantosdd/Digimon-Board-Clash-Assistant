@@ -26,4 +26,3 @@ try {
 } finally {
   db.close();
 }
-

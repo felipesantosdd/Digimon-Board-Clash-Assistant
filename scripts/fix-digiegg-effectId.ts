@@ -61,4 +61,3 @@ try {
 }
 
 console.log("\n✅ Processo concluído!");
-

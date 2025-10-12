@@ -44,9 +44,9 @@ try {
     targetDigimons?: string;
     effectId?: number;
   }>;
-  
+
   // Processar items para parsear targetDigimons
-  items = rawItems.map(item => ({
+  items = rawItems.map((item) => ({
     ...item,
     targetDigimons: item.targetDigimons ? JSON.parse(item.targetDigimons) : [],
   }));

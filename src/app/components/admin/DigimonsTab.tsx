@@ -347,25 +347,27 @@ export default function DigimonsTab({
 
                       <div className="space-y-2">
                         {!isProduction && (
-                          <button
-                            onClick={() => handleConfigureEvolutions(digimon)}
-                            className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-                          >
-                            Editar
-                          </button>
-                        )}
+                          <>
+                            <button
+                              onClick={() => handleConfigureEvolutions(digimon)}
+                              className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                            >
+                              Editar
+                            </button>
 
-                        <button
-                          onClick={() =>
-                            handleDeleteDigimon(
-                              digimon.id,
-                              capitalize(digimon.name)
-                            )
-                          }
-                          className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
-                        >
-                          🗑️ Excluir
-                        </button>
+                            <button
+                              onClick={() =>
+                                handleDeleteDigimon(
+                                  digimon.id,
+                                  capitalize(digimon.name)
+                                )
+                              }
+                              className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
+                            >
+                              🗑️ Excluir
+                            </button>
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -484,27 +486,29 @@ export default function DigimonsTab({
 
                               <div className="space-y-2">
                                 {!isProduction && (
-                                  <button
-                                    onClick={() =>
-                                      handleConfigureEvolutions(digimon)
-                                    }
-                                    className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-                                  >
-                                    Editar
-                                  </button>
-                                )}
+                                  <>
+                                    <button
+                                      onClick={() =>
+                                        handleConfigureEvolutions(digimon)
+                                      }
+                                      className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                                    >
+                                      Editar
+                                    </button>
 
-                                <button
-                                  onClick={() =>
-                                    handleDeleteDigimon(
-                                      digimon.id,
-                                      capitalize(digimon.name)
-                                    )
-                                  }
-                                  className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
-                                >
-                                  🗑️ Excluir
-                                </button>
+                                    <button
+                                      onClick={() =>
+                                        handleDeleteDigimon(
+                                          digimon.id,
+                                          capitalize(digimon.name)
+                                        )
+                                      }
+                                      className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
+                                    >
+                                      🗑️ Excluir
+                                    </button>
+                                  </>
+                                )}
                               </div>
                             </div>
                           </div>

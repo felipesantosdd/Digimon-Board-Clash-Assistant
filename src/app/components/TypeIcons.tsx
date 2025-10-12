@@ -26,7 +26,8 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
           alt="Data"
           className="w-[25px] h-[25px] object-cover"
           style={{
-            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+            filter:
+              "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
           }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
@@ -42,7 +43,8 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
           alt="Vaccine"
           className="w-[25px] h-[25px] object-cover"
           style={{
-            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+            filter:
+              "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
           }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
@@ -58,7 +60,8 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
           alt="Virus"
           className="w-[25px] h-[25px] object-cover"
           style={{
-            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+            filter:
+              "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
           }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
@@ -91,7 +94,8 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
           alt="Variable"
           className="w-[25px] h-[25px] object-cover"
           style={{
-            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+            filter:
+              "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
           }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
@@ -107,7 +111,8 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
           alt="Unknown"
           className="w-[25px] h-[25px] object-cover"
           style={{
-            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+            filter:
+              "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
           }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
@@ -123,7 +128,8 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
           alt="No Data"
           className="w-[25px] h-[25px] object-cover"
           style={{
-            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+            filter:
+              "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
           }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
