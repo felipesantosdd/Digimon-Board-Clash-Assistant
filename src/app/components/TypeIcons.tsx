@@ -25,6 +25,9 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
           src={"/images/icons/data-icon.png"}
           alt="Data"
           className="w-[25px] h-[25px] object-cover"
+          style={{
+            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+          }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = "/images/icons/data-icon.png";
@@ -36,8 +39,11 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
       return (
         <img
           src={"/images/icons/vaccine-icon.png"}
-          alt="Data"
+          alt="Vaccine"
           className="w-[25px] h-[25px] object-cover"
+          style={{
+            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+          }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = "/images/icons/vaccine-icon.png";
@@ -49,8 +55,11 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
       return (
         <img
           src={"/images/icons/virus-icon.png"}
-          alt="Data"
+          alt="Virus"
           className="w-[25px] h-[25px] object-cover"
+          style={{
+            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+          }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = "/images/icons/virus-icon.png";
@@ -65,7 +74,8 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
           alt="Free"
           className="w-[25px] h-[25px] object-cover"
           style={{
-            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+            filter:
+              "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
           }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
@@ -78,8 +88,11 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
       return (
         <img
           src={"/images/icons/variable-icon.png"}
-          alt="Data"
+          alt="Variable"
           className="w-[25px] h-[25px] object-cover"
+          style={{
+            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+          }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = "/images/icons/variable-icon.png";
@@ -91,8 +104,11 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
       return (
         <img
           src={"/images/icons/unknown-icon.png"}
-          alt="Data"
+          alt="Unknown"
           className="w-[25px] h-[25px] object-cover"
+          style={{
+            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+          }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = "/images/icons/unknown-icon.png";
@@ -104,8 +120,11 @@ export const TypeIcon: React.FC<TypeIconProps> = ({
       return (
         <img
           src={"/images/icons/no-data-icon.png"}
-          alt="Data"
+          alt="No Data"
           className="w-[25px] h-[25px] object-cover"
+          style={{
+            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))",
+          }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = "/images/icons/no-data-icon.png";
