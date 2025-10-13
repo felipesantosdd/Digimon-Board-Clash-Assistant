@@ -146,17 +146,27 @@ export default function GamePage() {
     }
 
     // Se apenas um jogador tem Digimons vivos, declarar vencedor
+    // MAS APENAS SE NÃO HOUVER BOSS ATIVO OU O BOSS JÁ FOI DERROTADO
     if (playersWithAliveDigimons.length === 1) {
-      const winnerPlayer = playersWithAliveDigimons[0];
-      const aliveDigimons = winnerPlayer.digimons.filter(
-        (d) => d.currentHp > 0
-      );
+      const hasBossAlive =
+        gameState.activeBoss && !gameState.activeBoss.isDefeated;
 
-      setWinner({
-        playerName: winnerPlayer.name,
-        playerImage: getTamerImagePath(winnerPlayer.avatar),
-        aliveDigimons,
-      });
+      if (!hasBossAlive) {
+        const winnerPlayer = playersWithAliveDigimons[0];
+        const aliveDigimons = winnerPlayer.digimons.filter(
+          (d) => d.currentHp > 0
+        );
+
+        setWinner({
+          playerName: winnerPlayer.name,
+          playerImage: getTamerImagePath(winnerPlayer.avatar),
+          aliveDigimons,
+        });
+      } else {
+        console.log(
+          "⚠️ [VICTORY] Não pode declarar vencedor - Boss ainda está vivo!"
+        );
+      }
     }
   }, [gameState, showAttackDialog]);
 
