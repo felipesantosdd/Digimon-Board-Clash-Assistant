@@ -87,6 +87,11 @@ export default function GamePage() {
     }>
   >([]);
 
+  // Debug: Log quando showTestLogs muda
+  useEffect(() => {
+    console.log("🔍 [DEBUG] showTestLogs mudou para:", showTestLogs);
+  }, [showTestLogs]);
+
   // Função para adicionar log de teste
   const addTestLog = (
     player: string,
@@ -181,6 +186,7 @@ export default function GamePage() {
 
       saveGameState(resetState);
       setTestLogs([]);
+      setShowTestLogs(true); // Mostrar logs após reset
       enqueueSnackbar("🧪 Jogo resetado para modo de teste!", {
         variant: "info",
       });
@@ -458,6 +464,7 @@ export default function GamePage() {
     if (autotestMode === "true" && gameState) {
       console.log("🤖 [AUTO-TEST] Ativando modo automático...");
       setIsAutoTestActive(true);
+      setShowTestLogs(true); // Mostrar logs ao ativar auto-test
       localStorage.removeItem("autotest_mode"); // Remover flag
     }
   }, [gameState]);
@@ -3087,7 +3094,7 @@ export default function GamePage() {
               </button>
               
               {/* Botão Toggle Logs (só aparece se logs foram abertos) */}
-              {showTestLogs && !isAutoTestActive && (
+              {showTestLogs && (
                 <button
                   onClick={() => setShowTestLogs(false)}
                   className="px-3 py-1.5 sm:py-2 bg-gray-600 text-white text-sm font-semibold rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-1"
@@ -3123,7 +3130,7 @@ export default function GamePage() {
       <main className="container mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
         <div className="flex gap-4">
           {/* Área do Jogo */}
-          <div className={isAutoTestActive ? "flex-1" : "w-full"}>
+          <div className={showTestLogs ? "flex-1" : "w-full"}>
             <div className="mb-4 sm:mb-6 md:mb-8">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2">
                 🎮 Jogo em Andamento
@@ -3806,8 +3813,8 @@ export default function GamePage() {
         onComplete={executeEvolution}
       />
 
-      {/* Tela de Derrota */}
-      {gameState?.activeBoss && (
+      {/* Tela de Derrota - NÃO aparece no modo auto-test */}
+      {gameState?.activeBoss && !isAutoTestActive && (
         <DefeatScreen
           isOpen={showDefeatScreen}
           onClose={() => setShowDefeatScreen(false)}
