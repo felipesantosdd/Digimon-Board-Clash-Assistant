@@ -30,14 +30,14 @@ export default function BossCard({
 
   return (
     <div className="relative w-full">
-      {/* Card do Boss no formato de Digimon */}
+      {/* Card do Boss no formato de Digimon - MAIOR QUE CARDS NORMAIS */}
       <div
         className={`
           relative bg-gradient-to-br from-purple-900 via-red-900 to-black
-          rounded-lg p-3 sm:p-4 shadow-2xl border-2 border-red-500
-          transition-all duration-300
-          ${isAttacking ? "scale-95 opacity-75" : "scale-100"}
-          ${canAttack && !isAttacking ? "hover:scale-105 cursor-pointer" : ""}
+          rounded-xl p-4 sm:p-6 shadow-2xl border-4 border-red-500
+          transition-all duration-300 transform
+          ${isAttacking ? "scale-95 opacity-75" : "scale-110"}
+          ${canAttack && !isAttacking ? "hover:scale-115 cursor-pointer" : ""}
         `}
         onClick={() => {
           if (canAttack && !isAttacking && onAttack) {
@@ -46,10 +46,10 @@ export default function BossCard({
         }}
       >
         {/* Badges no topo direito */}
-        <div className="absolute top-1 right-1 sm:top-2 sm:right-2 flex flex-col gap-1 z-10">
+        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 flex flex-col gap-1.5 z-10">
           {/* Badge "BOSS" */}
           <div
-            className="bg-red-600 text-white font-bold px-1.5 sm:px-2 py-0.5 rounded text-[10px] sm:text-xs shadow-lg border border-white animate-pulse cursor-pointer"
+            className="bg-red-600 text-white font-bold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm shadow-lg border-2 border-white animate-pulse cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               setShowDetails(!showDetails);
@@ -60,62 +60,67 @@ export default function BossCard({
           </div>
 
           {/* Badge de Turno */}
-          <div className="bg-yellow-500 text-black font-bold px-1.5 sm:px-2 py-0.5 rounded text-[10px] sm:text-xs shadow-lg border border-white">
+          <div className="bg-yellow-500 text-black font-bold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm shadow-lg border-2 border-white">
             T{boss.spawnedAtTurn}
           </div>
         </div>
 
-        <div className="flex items-center gap-3 sm:gap-4">
-          {/* Imagem do Boss */}
+        <div className="flex items-center gap-4 sm:gap-6">
+          {/* Imagem do Boss - MAIOR */}
           <div className="relative flex-shrink-0">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded overflow-hidden border-2 border-red-400 shadow-lg">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-lg overflow-hidden border-4 border-red-400 shadow-2xl">
               <Image
                 src={boss.image}
                 alt={boss.name}
-                width={80}
-                height={80}
+                width={160}
+                height={160}
                 className="w-full h-full object-cover"
                 unoptimized
               />
             </div>
             {/* Efeito de brilho */}
-            <div className="absolute inset-0 bg-red-500 rounded opacity-20 animate-pulse"></div>
+            <div className="absolute inset-0 bg-red-500 rounded-lg opacity-20 animate-pulse"></div>
           </div>
 
           {/* Informações do Boss */}
           <div className="flex-1 min-w-0">
             {/* Nome */}
-            <p className="text-sm sm:text-base font-bold text-white truncate">
+            <p className="text-base sm:text-lg md:text-xl font-bold text-white truncate mb-2">
               {boss.name}
             </p>
 
             {/* Tipo e DP */}
-            <div className="flex gap-1.5 mt-1 sm:mt-1.5">
-              <div className="bg-purple-600 text-white text-[10px] sm:text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 rounded">
+            <div className="flex gap-2 mt-2">
+              <div className="bg-purple-600 text-white text-xs sm:text-sm px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg font-bold">
                 {boss.typeId === 1
                   ? "Data"
                   : boss.typeId === 2
                   ? "Vaccine"
                   : "Virus"}
               </div>
-              <div className="bg-red-600 text-white text-[10px] sm:text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 rounded">
+              <div className="bg-red-600 text-white text-xs sm:text-sm px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg font-bold">
                 ⚔️ {boss.calculatedDp.toLocaleString()} ATK
               </div>
             </div>
 
             {/* Barra de HP */}
-            <div className="flex items-center gap-1.5 mt-1 sm:mt-1.5">
-              <div className="flex-1 bg-gray-700 rounded-full h-1.5 sm:h-2">
+            <div className="flex items-center gap-2 mt-2 sm:mt-3">
+              <div className="flex-1 bg-gray-700 rounded-full h-3 sm:h-4 border-2 border-gray-600">
                 <div
-                  className={`h-1.5 sm:h-2 rounded-full transition-all relative ${getHpBarColor()}`}
+                  className={`h-full rounded-full transition-all relative ${getHpBarColor()}`}
                   style={{ width: `${hpPercentage}%` }}
                 >
                   <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
                 </div>
               </div>
-              <span className="text-[10px] sm:text-xs text-white font-bold">
+              <span className="text-xs sm:text-sm text-white font-bold min-w-[45px] text-right">
                 {Math.round(hpPercentage)}%
               </span>
+            </div>
+
+            {/* HP Numérico */}
+            <div className="text-xs sm:text-sm text-gray-300 mt-1 font-semibold">
+              💚 {boss.currentHp.toLocaleString()} / {boss.maxHp.toLocaleString()} HP
             </div>
           </div>
         </div>
