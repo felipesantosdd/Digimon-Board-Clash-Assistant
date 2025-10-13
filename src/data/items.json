@@ -360,7 +360,7 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 1,
+    "active": 0,
     "effectValue": 0
   },
   {
@@ -372,7 +372,7 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 1,
+    "active": 0,
     "effectValue": 0
   },
   {
@@ -386,7 +386,7 @@
       295
     ],
     "effectId": 21,
-    "active": 1,
+    "active": 0,
     "effectValue": 0
   },
   {
@@ -398,7 +398,7 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 1,
+    "active": 0,
     "effectValue": 0
   },
   {
@@ -413,7 +413,7 @@
       506
     ],
     "effectId": 21,
-    "active": 1,
+    "active": 0,
     "effectValue": 0
   },
   {
@@ -428,7 +428,7 @@
       107
     ],
     "effectId": 21,
-    "active": 1,
+    "active": 0,
     "effectValue": 0
   },
   {
@@ -443,7 +443,7 @@
       142
     ],
     "effectId": 21,
-    "active": 1,
+    "active": 0,
     "effectValue": 0
   },
   {
@@ -459,7 +459,7 @@
       112
     ],
     "effectId": 21,
-    "active": 1,
+    "active": 0,
     "effectValue": 0
   },
   {
@@ -651,7 +651,7 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 1,
+    "active": 0,
     "effectValue": 0
   },
   {
@@ -663,7 +663,7 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 1,
+    "active": 0,
     "effectValue": 0
   },
   {
@@ -675,7 +675,7 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 1,
+    "active": 0,
     "effectValue": 0
   },
   {
@@ -688,7 +688,7 @@
     "targetDigimons": [],
     "effectId": 23,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 10
   },
   {
     "id": 70,
@@ -700,7 +700,7 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 2000
   },
   {
     "id": 71,
@@ -712,7 +712,7 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 4000
   },
   {
     "id": 72,
@@ -724,7 +724,7 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 6000
   },
   {
     "id": 73,
@@ -736,7 +736,7 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 7000
   },
   {
     "id": 74,
@@ -748,19 +748,19 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 9600
   },
   {
     "id": 75,
     "name": "Chip de Recuperação Super I",
     "description": "Restaura 12.000 HP",
-    "image": "/images/items/1760317556607_image.webp",
+    "image": "/images/items/1760318878233_image.webp",
     "effect": "",
     "dropChance": 12,
     "targetDigimons": [],
     "effectId": 1,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 10000
   },
   {
     "id": 76,
@@ -772,7 +772,7 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 14000
   },
   {
     "id": 77,
@@ -784,7 +784,7 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 18000
   },
   {
     "id": 78,
@@ -796,7 +796,7 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 15000
   },
   {
     "id": 79,
@@ -808,7 +808,7 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 24000
   },
   {
     "id": 80,
@@ -820,19 +820,19 @@
     "targetDigimons": [],
     "effectId": 24,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 5
   },
   {
     "id": 81,
     "name": "Chip de Força M",
     "description": "Bônus permanente: +10 nos dados de ataque",
-    "image": "/images/items/1760318070262_image.webp",
+    "image": "/images/items/1760318858226_image.webp",
     "effect": "",
     "dropChance": 12,
     "targetDigimons": [],
     "effectId": 24,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 10
   },
   {
     "id": 82,
@@ -844,7 +844,7 @@
     "targetDigimons": [],
     "effectId": 24,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 15
   },
   {
     "id": 83,
@@ -856,7 +856,7 @@
     "targetDigimons": [],
     "effectId": 25,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 5
   },
   {
     "id": 84,
@@ -868,7 +868,7 @@
     "targetDigimons": [],
     "effectId": 25,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 10
   },
   {
     "id": 85,
@@ -880,7 +880,7 @@
     "targetDigimons": [],
     "effectId": 25,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 15
   },
   {
     "id": 86,
@@ -892,11 +892,11 @@
     "targetDigimons": [],
     "effectId": 23,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 2
   },
   {
     "id": 87,
-    "name": "Chip de Velocidade I",
+    "name": "Chip de Velocidade III",
     "description": "Permite andar +2 casas adicionais no tabuleiro",
     "image": "/images/items/1760317992697_image.webp",
     "effect": "",
@@ -904,7 +904,7 @@
     "targetDigimons": [],
     "effectId": 23,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 6
   },
   {
     "id": 88,
@@ -916,7 +916,7 @@
     "targetDigimons": [],
     "effectId": 23,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 4
   },
   {
     "id": 89,
@@ -928,7 +928,7 @@
     "targetDigimons": [],
     "effectId": 23,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 8
   },
   {
     "id": 90,
@@ -940,6 +940,6 @@
     "targetDigimons": [],
     "effectId": 23,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 10
   }
 ]

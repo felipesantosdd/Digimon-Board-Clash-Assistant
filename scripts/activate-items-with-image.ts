@@ -61,4 +61,3 @@ if (stats.inativos > 0) {
 console.log("");
 
 db.close();
-
