@@ -191,13 +191,14 @@ export default function Home() {
         allDigimons.length
       );
       console.log(`🧪 [AUTO-TEST] Primeiro Digimon:`, allDigimons[0]);
+      console.log(`🧪 [AUTO-TEST] Níveis disponíveis:`, [
+        ...new Set(allDigimons.map((d: any) => d.level)),
+      ]);
 
-      // Filtrar apenas Rookies (nível 1) ativos
-      // O campo active pode ser boolean true ou número 1
+      // Filtrar apenas Rookies (nível 1)
+      // active já vem como boolean da API (true/false)
       const rookies = allDigimons.filter(
-        (d: any) =>
-          d.level === 1 &&
-          (d.active === true || d.active === 1 || d.active === undefined)
+        (d: any) => d.level === 1 && d.active !== false
       );
 
       console.log(`🧪 [AUTO-TEST] ${rookies.length} Rookies disponíveis`);

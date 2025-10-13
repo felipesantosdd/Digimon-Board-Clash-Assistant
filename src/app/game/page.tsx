@@ -227,13 +227,15 @@ export default function GamePage() {
       // Preparar informação detalhada do resultado
       let actionResult = "⚠️ [MOCK] Ação não executada";
       let actionName = decision.action.toUpperCase();
-      
+
       if (decision.action === "attack" && decision.target) {
         actionName = `ATACAR`;
         actionResult = `⚔️ Alvo: ${decision.target.name} | HP alvo: ${decision.target.currentHp}/${decision.target.dp}`;
       } else if (decision.action === "attack_boss" && gameState.activeBoss) {
         actionName = `ATACAR BOSS`;
-        actionResult = `👹 ${gameState.activeBoss.name} | HP: ${gameState.activeBoss.currentHp.toLocaleString()}/${gameState.activeBoss.maxHp.toLocaleString()}`;
+        actionResult = `👹 ${
+          gameState.activeBoss.name
+        } | HP: ${gameState.activeBoss.currentHp.toLocaleString()}/${gameState.activeBoss.maxHp.toLocaleString()}`;
       } else if (decision.action === "evolve") {
         actionName = `EVOLUIR`;
         actionResult = "✨ Evolução disponível | XP: 100%";
@@ -242,21 +244,111 @@ export default function GamePage() {
         actionResult = "🎒 Procurando itens...";
       } else if (decision.action === "rest") {
         actionName = `DESCANSAR`;
-        actionResult = `😴 HP atual: ${digimonToAct.currentHp}/${digimonToAct.dp} (${((digimonToAct.currentHp / digimonToAct.dp) * 100).toFixed(0)}%)`;
+        actionResult = `😴 HP atual: ${digimonToAct.currentHp}/${
+          digimonToAct.dp
+        } (${((digimonToAct.currentHp / digimonToAct.dp) * 100).toFixed(0)}%)`;
       }
 
-      // Adicionar log com nota que é apenas decisão
+      // Adicionar log
       addTestLog(
         currentPlayer.name,
         `${digimonToAct.name} (${digimonToAct.currentHp}/${digimonToAct.dp} HP)`,
-        `[DECISÃO] ${actionName}`,
-        `${actionResult} | ⚠️ Ação não executada (apenas simulação)`
+        actionName,
+        actionResult
       );
 
-      // IMPORTANTE: Apenas passa turno, NÃO executa a ação
-      // Para execução real, seria necessário chamar as funções de ação
-      setTimeout(() => {
-        handleNextTurn();
+      // Executar ação de verdade
+      setTimeout(async () => {
+        try {
+          if (decision.action === "attack" && decision.target) {
+            // Setar o atacante para que handleAttackConfirm possa usá-lo
+            setAttackerDigimon({
+              digimon: digimonToAct,
+              playerName: currentPlayer.name,
+              playerId: currentPlayer.id,
+              originalId: digimonToAct.originalId || digimonToAct.id,
+            });
+
+            // Executar ataque PvP
+            const attackerModifier = getStatusDamageModifier(digimonToAct);
+            const defenderModifier = getStatusDamageModifier(decision.target);
+
+            const { BattleManager } = await import("@/lib/battle-manager");
+            const battleManager = new BattleManager(
+              digimonToAct,
+              decision.target,
+              attackerModifier,
+              defenderModifier
+            );
+            const result = battleManager.executeBattle();
+
+            // Aguardar um frame para attackerDigimon ser setado
+            await new Promise((resolve) => setTimeout(resolve, 50));
+
+            // Aplicar resultado
+            handleAttackConfirm(
+              decision.target,
+              result.attackerDamage,
+              result.defenderDamage,
+              result
+            );
+          } else if (
+            decision.action === "attack_boss" &&
+            gameState.activeBoss
+          ) {
+            // Setar o atacante
+            setAttackerDigimon({
+              digimon: digimonToAct,
+              playerName: currentPlayer.name,
+              playerId: currentPlayer.id,
+              originalId: digimonToAct.originalId || digimonToAct.id,
+            });
+
+            // Executar ataque ao boss
+            const attackerModifier = getStatusDamageModifier(digimonToAct);
+
+            const bossAsDigimon = {
+              ...gameState.activeBoss,
+              hasActedThisTurn: false,
+              provokedBy: undefined,
+              canEvolve: false,
+            };
+
+            const { BattleManager } = await import("@/lib/battle-manager");
+            const battleManager = new BattleManager(
+              digimonToAct,
+              bossAsDigimon,
+              attackerModifier,
+              0
+            );
+            const result = battleManager.executeBattle();
+
+            // Boss não contra-ataca
+            result.defenderDamage = 0;
+
+            // Aguardar um frame
+            await new Promise((resolve) => setTimeout(resolve, 50));
+
+            // Aplicar resultado
+            handleBossAttackConfirm(bossAsDigimon, result.attackerDamage, 0);
+          } else if (decision.action === "evolve") {
+            // Executar evolução
+            handleEvolutionRequest(digimonToAct);
+          } else if (decision.action === "explore") {
+            // Executar exploração
+            await handleLoot(digimonToAct);
+          } else if (decision.action === "rest") {
+            // Executar descanso
+            handleRest(digimonToAct);
+          }
+        } catch (error) {
+          console.error("❌ [AUTO-TEST] Erro ao executar ação:", error);
+        }
+
+        // Passar turno após executar ação
+        setTimeout(() => {
+          handleNextTurn();
+        }, 300);
       }, 500);
     }, autoTestSpeed);
 
@@ -344,6 +436,25 @@ export default function GamePage() {
       console.log(
         "💀 [DEFEAT] Todos os Digimons foram eliminados e o boss está vivo!"
       );
+
+      // No modo de teste, apenas parar o auto-test
+      if (isAutoTestActive) {
+        setIsAutoTestActive(false);
+        enqueueSnackbar(
+          "🛑 Teste encerrado: Todos os Digimons foram eliminados!",
+          {
+            variant: "error",
+          }
+        );
+        addTestLog(
+          "SISTEMA",
+          "Fim do Teste",
+          "DERROTA",
+          "Todos os Digimons eliminados pelo boss"
+        );
+        return;
+      }
+
       setShowDefeatScreen(true);
       return;
     }
@@ -359,6 +470,21 @@ export default function GamePage() {
         const aliveDigimons = winnerPlayer.digimons.filter(
           (d) => d.currentHp > 0
         );
+
+        // No modo de teste, apenas parar
+        if (isAutoTestActive) {
+          setIsAutoTestActive(false);
+          enqueueSnackbar(`🏆 Teste encerrado: ${winnerPlayer.name} venceu!`, {
+            variant: "success",
+          });
+          addTestLog(
+            "SISTEMA",
+            "Fim do Teste",
+            "VITÓRIA",
+            `${winnerPlayer.name} venceu com ${aliveDigimons.length} Digimon(s)`
+          );
+          return;
+        }
 
         setWinner({
           playerName: winnerPlayer.name,
@@ -3365,21 +3491,21 @@ export default function GamePage() {
                     🗑️ Limpar
                   </button>
                 </div>
-                
+
                 {/* Aviso de Simulação */}
-                <div className="bg-orange-900/50 border border-orange-600 rounded p-2 text-xs text-orange-300">
+                <div className="bg-blue-900/50 border border-blue-600 rounded p-2 text-xs text-blue-300">
                   <div className="flex items-start gap-2">
-                    <span className="text-sm">⚠️</span>
+                    <span className="text-sm">🤖</span>
                     <div>
-                      <p className="font-semibold mb-1">Modo Simulação</p>
-                      <p className="text-[10px] text-orange-400">
-                        A IA apenas decide ações mas não as executa.
-                        Apenas o "Turno do Mundo" (boss) é real.
+                      <p className="font-semibold mb-1">Auto-Test Ativo</p>
+                      <p className="text-[10px] text-blue-400">
+                        IA controlando todos os jogadores. Ações sendo
+                        executadas automaticamente.
                       </p>
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Botão de Reset para Teste */}
                 <button
                   onClick={resetToTestMode}
