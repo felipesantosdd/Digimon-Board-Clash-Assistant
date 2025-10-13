@@ -97,66 +97,6 @@ export default function ItemsTab({ isProduction = false }: ItemsTabProps) {
     setIsAddModalOpen(true);
   };
 
-  const handleDeleteItem = async (itemId: number, itemName: string) => {
-    if (!confirm(`Tem certeza que deseja excluir ${itemName}?`)) {
-      return;
-    }
-
-    try {
-      const response = await fetch(`/api/items/${itemId}`, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        setItems((prev) => prev.filter((item) => item.id !== itemId));
-        enqueueSnackbar(`${itemName} excluído com sucesso!`, {
-          variant: "success",
-        });
-      } else {
-        const error = await response.json();
-        enqueueSnackbar(`Erro: ${error.error}`, { variant: "error" });
-      }
-    } catch (error) {
-      enqueueSnackbar("Erro ao excluir item", { variant: "error" });
-    }
-  };
-
-  const handleToggleActive = async (item: Item) => {
-    const newStatus = !item.active;
-
-    try {
-      const response = await fetch(`/api/items/${item.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...item,
-          active: newStatus,
-        }),
-      });
-
-      if (response.ok) {
-        fetchItems();
-        enqueueSnackbar(
-          `Item "${item.name}" ${
-            newStatus ? "ativado" : "desativado"
-          } com sucesso!`,
-          {
-            variant: "success",
-          }
-        );
-      } else {
-        const error = await response.json();
-        enqueueSnackbar(`Erro: ${error.error}`, { variant: "error" });
-      }
-    } catch (error) {
-      enqueueSnackbar("Erro ao atualizar status do item", {
-        variant: "error",
-      });
-    }
-  };
-
   const filteredItems = items.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );

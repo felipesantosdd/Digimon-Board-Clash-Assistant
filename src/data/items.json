@@ -759,7 +759,7 @@
     "dropChance": 12,
     "targetDigimons": [],
     "effectId": 1,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -826,12 +826,12 @@
     "id": 81,
     "name": "Chip de Força M",
     "description": "Bônus permanente: +10 nos dados de ataque",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760318070262_image.webp",
     "effect": "",
     "dropChance": 12,
     "targetDigimons": [],
     "effectId": 24,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {

@@ -1514,8 +1514,8 @@ export default function GamePage() {
 
     // Variáveis de estado do item
     let newHp = digimon.currentHp;
-    let newDp = digimon.dp;
-    let newDpBonus = digimon.dpBonus || 0;
+    const newDp = digimon.dp;
+    const newDpBonus = digimon.dpBonus || 0;
     let newAttackBonus = digimon.attackBonus || 0;
     let newDefenseBonus = digimon.defenseBonus || 0;
     let newMovementBonus = digimon.movementBonus || 0;
