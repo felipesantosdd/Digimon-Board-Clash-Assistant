@@ -165,6 +165,32 @@ export function calculateTypeAdvantage(
 }
 
 /**
+ * Calcula o poder de ataque base de um Digimon
+ * Poder = DP / 3 arredondado para cima em múltiplos de 100
+ */
+export function calculatePower(dp: number): number {
+  const basePower = dp / 3;
+  return Math.ceil(basePower / 100) * 100;
+}
+
+/**
+ * Calcula o poder de ataque com bônus aplicado
+ * Bônus de ataque = cada ponto aumenta 2% o poder
+ */
+export function calculatePowerWithBonus(dp: number, attackBonus: number = 0): number {
+  const basePower = calculatePower(dp);
+  
+  if (!attackBonus || attackBonus === 0) return basePower;
+  
+  // Cada ponto de bônus = +2% de poder
+  const bonusPercentage = attackBonus * 2;
+  const powerWithBonus = basePower * (1 + bonusPercentage / 100);
+  
+  // Arredondar para múltiplo de 100
+  return Math.round(powerWithBonus / 100) * 100;
+}
+
+/**
  * Atributos Elementais de Digimon
  */
 export const DIGIMON_ATTRIBUTES = {

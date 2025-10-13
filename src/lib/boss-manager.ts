@@ -193,36 +193,84 @@ export class BossManager {
   }
 
   /**
-   * Executa o turno do mundo (boss ataca todos)
+   * Executa o turno do mundo (boss ataca UM Digimon aleatório com poder fixo)
    */
   static executeWorldTurn(
     boss: GameBoss,
     players: GamePlayer[]
   ): {
-    damagePerDigimon: number;
-    affectedDigimons: number;
+    damageDealt: number;
+    targetDigimonName: string;
+    bossPower: number;
+    targetDefense: number;
     updatedPlayers: GamePlayer[];
   } {
-    const damagePerDigimon = this.calculateWorldTurnDamage(
-      boss,
-      players.reduce(
-        (count, player) =>
-          count + player.digimons.filter((d) => d.currentHp > 0).length,
-        0
-      )
-    );
+    // 1. Coletar todos os Digimons vivos
+    const aliveDigimons: Array<{
+      digimon: GameDigimon;
+      playerIndex: number;
+      digimonIndex: number;
+    }> = [];
 
-    let affectedDigimons = 0;
-
-    // Criar nova estrutura de players com dano aplicado
-    const updatedPlayers = players.map((player) => ({
-      ...player,
-      digimons: player.digimons.map((digimon) => {
+    players.forEach((player, playerIndex) => {
+      player.digimons.forEach((digimon, digimonIndex) => {
         if (digimon.currentHp > 0) {
-          affectedDigimons++;
+          aliveDigimons.push({ digimon, playerIndex, digimonIndex });
+        }
+      });
+    });
+
+    if (aliveDigimons.length === 0) {
+      return {
+        damageDealt: 0,
+        targetDigimonName: "",
+        bossPower: 0,
+        targetDefense: 0,
+        updatedPlayers: players,
+      };
+    }
+
+    // 2. Escolher um Digimon aleatório
+    const randomIndex = Math.floor(Math.random() * aliveDigimons.length);
+    const target = aliveDigimons[randomIndex];
+
+    // 3. Calcular poder de ataque do boss (DP / 3)
+    const bossPower = Math.ceil((boss.calculatedDp / 3) / 100) * 100;
+
+    // 4. Calcular poder do Digimon alvo
+    const targetPower = Math.ceil((target.digimon.dp / 3) / 100) * 100;
+
+    // 5. Calcular defesa do Digimon (baseada no próprio poder)
+    const targetDefenseBonus = target.digimon.defenseBonus || 0;
+    const targetDefensePercentage = targetDefenseBonus * 2; // Cada ponto = 2%
+    const targetDefense = Math.round(
+      (targetPower * (targetDefensePercentage / 100)) / 100
+    ) * 100;
+
+    // 6. Calcular dano líquido (Poder boss - Defesa do Digimon)
+    let netDamage = Math.max(0, bossPower - targetDefense);
+
+    // 7. Aplicar dano mínimo de 5
+    if (netDamage > 0 && netDamage < 5) {
+      netDamage = 5;
+    }
+
+    console.log("👹 [BOSS WORLD TURN] Cálculos:", {
+      bossPower,
+      targetName: target.digimon.name,
+      targetPower,
+      targetDefense,
+      danoFinal: netDamage,
+    });
+
+    // 8. Criar nova estrutura de players com dano aplicado
+    const updatedPlayers = players.map((player, pIdx) => ({
+      ...player,
+      digimons: player.digimons.map((digimon, dIdx) => {
+        if (pIdx === target.playerIndex && dIdx === target.digimonIndex) {
           return {
             ...digimon,
-            currentHp: Math.max(0, digimon.currentHp - damagePerDigimon),
+            currentHp: Math.max(0, digimon.currentHp - netDamage),
           };
         }
         return digimon;
@@ -230,8 +278,10 @@ export class BossManager {
     }));
 
     return {
-      damagePerDigimon,
-      affectedDigimons,
+      damageDealt: netDamage,
+      targetDigimonName: target.digimon.name,
+      bossPower,
+      targetDefense,
       updatedPlayers,
     };
   }

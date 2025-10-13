@@ -1,7 +1,7 @@
 "use client";
 
 import { GameDigimon } from "@/types/game";
-import { capitalize, DIGIMON_TYPE_NAMES } from "@/lib/utils";
+import { capitalize, DIGIMON_TYPE_NAMES, calculatePower } from "@/lib/utils";
 import D20Display from "./D20Display";
 
 interface BattleViewProps {
@@ -129,7 +129,7 @@ export default function BattleView({
               )}
 
               <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-1 py-0.5 sm:px-2 sm:py-1 rounded">
-                ⚔️ {attacker.digimon.dp.toLocaleString()}
+                ⚔️ {calculatePower(attacker.digimon.dp).toLocaleString()} ATK
               </div>
 
               {/* Badge de Vantagem de TIPO */}
@@ -232,7 +232,7 @@ export default function BattleView({
             )}
 
             {/* D20 de Ataque e Defesa */}
-            <div className="flex gap-1 sm:gap-4 justify-center">
+            {/* <div className="flex gap-1 sm:gap-4 justify-center">
               <div className="flex-1 flex flex-col items-center gap-1">
                 <D20Display
                   value={attacker.attackDice}
@@ -248,7 +248,7 @@ export default function BattleView({
                   label="🛡️ DEF"
                 />
               </div>
-            </div>
+            </div>*/}
           </div>
         </div>
 
@@ -313,7 +313,7 @@ export default function BattleView({
               )}
 
               <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-1 py-0.5 sm:px-2 sm:py-1 rounded">
-                ⚔️ {defender.digimon.dp.toLocaleString()}
+                ⚔️ {calculatePower(defender.digimon.dp).toLocaleString()} ATK
               </div>
 
               {/* Badge de Vantagem de TIPO */}
@@ -416,26 +416,45 @@ export default function BattleView({
             )}
 
             {/* D20 de Ataque e Defesa */}
-            <div className="flex gap-1 sm:gap-4 justify-center">
-              <div className="flex-1 flex flex-col items-center gap-1">
-                <D20Display
-                  value={defender.attackDice}
-                  isRolling={isRolling}
-                  label="⚔️ ATK"
-                  damageDealt={battleComplete ? defender.damage : undefined}
-                />
-              </div>
-              <div className="flex-1 flex flex-col items-center gap-1">
-                <D20Display
-                  value={defender.defenseDice}
-                  isRolling={isRolling}
-                  label="🛡️ DEF"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </div>
+
+      {/* Resultado do Combate */}
+      {battleComplete && (
+        <div className="mt-4 sm:mt-6 bg-gradient-to-r from-red-900/40 to-purple-900/40 border-2 border-yellow-500 rounded-lg p-3 sm:p-4">
+          <h5 className="text-center text-yellow-400 font-bold text-sm sm:text-base mb-3">
+            ⚔️ RESULTADO DA BATALHA
+          </h5>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            {/* Dano do Atacante */}
+            <div className="bg-blue-900/50 rounded-lg p-2 sm:p-3 border border-blue-500">
+              <p className="text-[10px] sm:text-xs text-gray-300 text-center mb-1">
+                {capitalize(attacker.digimon.name)}
+              </p>
+              <p className="text-center text-red-400 font-bold text-base sm:text-2xl">
+                {attacker.damage.toLocaleString()}
+              </p>
+              <p className="text-[10px] sm:text-xs text-gray-400 text-center">
+                de dano causado
+              </p>
+            </div>
+
+            {/* Dano do Defensor */}
+            <div className="bg-red-900/50 rounded-lg p-2 sm:p-3 border border-red-500">
+              <p className="text-[10px] sm:text-xs text-gray-300 text-center mb-1">
+                {capitalize(defender.digimon.name)}
+              </p>
+              <p className="text-center text-red-400 font-bold text-base sm:text-2xl">
+                {defender.damage.toLocaleString()}
+              </p>
+              <p className="text-[10px] sm:text-xs text-gray-400 text-center">
+                de dano causado
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Botão de Executar Ataque */}
       {!battleComplete && (

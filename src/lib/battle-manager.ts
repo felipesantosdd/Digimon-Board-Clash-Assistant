@@ -70,6 +70,13 @@ export class BattleManager {
   }
 
   /**
+   * Rola um D10
+   */
+  private rollD10(): number {
+    return Math.floor(Math.random() * 10) + 1;
+  }
+
+  /**
    * Arredonda valor para múltiplo de 100
    */
   private roundToHundred(value: number): number {
@@ -87,8 +94,8 @@ export class BattleManager {
   }
 
   /**
-   * Calcula a redução de dano baseada no DP e no D20 de defesa
-   * Fórmula: DP × (D20_Defesa × 0.05) arredondado para múltiplo de 100
+   * Calcula a redução de dano baseada no DP e no D10 de defesa
+   * Fórmula: DP × (D10_Defesa × 0.05) arredondado para múltiplo de 100
    */
   private calculateDefenseReduction(dp: number, defenseRoll: number): number {
     const multiplier = defenseRoll * 0.05; // 5% por ponto do dado
@@ -125,151 +132,166 @@ export class BattleManager {
   }
 
   /**
-   * Executa o combate completo com sistema de 2 dados por Digimon
-   * Cada Digimon rola 2 D20: o maior é ataque, o menor é defesa
+   * Calcula o poder de ataque fixo de um Digimon
+   * Poder = DP / 3 arredondado para cima em múltiplos de 100
+   */
+  private calculateAttackPower(dp: number, attackBonus: number): number {
+    // Poder base = 1/3 do DP
+    const basePower = dp / 3;
+    
+    // Aplicar bônus de ataque como % (cada ponto = 2% de aumento)
+    // Ex: +5 = +10%, +10 = +20%, +15 = +30%
+    const bonusPercentage = (attackBonus || 0) * 2;
+    const powerWithBonus = basePower * (1 + bonusPercentage / 100);
+    
+    // Arredondar para cima em múltiplos de 100
+    return Math.ceil(powerWithBonus / 100) * 100;
+  }
+
+  /**
+   * Calcula a redução de defesa baseada no próprio poder
+   * Defesa = Poder próprio × % do bônus de defesa
+   * Ex: Poder 1000, +10 defesa = 1000 × 20% = 200 de redução
+   */
+  private calculateDefenseFromPower(
+    ownPower: number,
+    defenseBonus: number
+  ): number {
+    if (!defenseBonus || defenseBonus === 0) return 0;
+    
+    // Cada ponto de defesa = 2% do próprio poder
+    const defensePercentage = defenseBonus * 2;
+    const defenseValue = ownPower * (defensePercentage / 100);
+    
+    // Arredondar para múltiplo de 100
+    return this.roundToHundred(defenseValue);
+  }
+
+  /**
+   * Executa o combate com sistema de poder fixo
+   * Poder = DP/3 | Sem dados | Sem defesa
    */
   public executeBattle(): BattleResult {
-    // Rolar 2 dados para cada Digimon
-    const attackerDice1 = this.rollD20();
-    const attackerDice2 = this.rollD20();
-    const defenderDice1 = this.rollD20();
-    const defenderDice2 = this.rollD20();
-
-    // Determinar qual é ataque e qual é defesa (maior = ataque, menor = defesa)
-    // APLICAR BÔNUS PERMANENTES DE ITENS (CAP: 20)
-    const attackerAttackRoll = Math.min(
-      20,
-      Math.max(attackerDice1, attackerDice2) + (this.attacker.attackBonus || 0)
+    // Calcular poder de ataque de cada Digimon
+    const attackerPower = this.calculateAttackPower(
+      this.attacker.dp,
+      this.attacker.attackBonus || 0
     );
-    const attackerDefenseRoll = Math.min(
-      20,
-      Math.min(attackerDice1, attackerDice2) + (this.attacker.defenseBonus || 0)
-    );
-    const defenderAttackRoll = Math.min(
-      20,
-      Math.max(defenderDice1, defenderDice2) + (this.defender.attackBonus || 0)
-    );
-    const defenderDefenseRoll = Math.min(
-      20,
-      Math.min(defenderDice1, defenderDice2) + (this.defender.defenseBonus || 0)
+    const defenderPower = this.calculateAttackPower(
+      this.defender.dp,
+      this.defender.attackBonus || 0
     );
 
-    console.log("🎲 [BATTLE] Dados rolados:", {
+    console.log("⚔️ [BATTLE] Poder de ataque:", {
       atacante: {
-        dados: [attackerDice1, attackerDice2],
-        ataque: attackerAttackRoll,
-        defesa: attackerDefenseRoll,
+        dp: this.attacker.dp,
         bonusAtaque: this.attacker.attackBonus || 0,
-        bonusDefesa: this.attacker.defenseBonus || 0,
+        poderBase: Math.ceil((this.attacker.dp / 3) / 100) * 100,
+        poderFinal: attackerPower,
       },
       defensor: {
-        dados: [defenderDice1, defenderDice2],
-        ataque: defenderAttackRoll,
-        defesa: defenderDefenseRoll,
+        dp: this.defender.dp,
         bonusAtaque: this.defender.attackBonus || 0,
-        bonusDefesa: this.defender.defenseBonus || 0,
+        poderBase: Math.ceil((this.defender.dp / 3) / 100) * 100,
+        poderFinal: defenderPower,
       },
     });
 
-    // Detectar críticos (apenas nos dados de ATAQUE)
-    const attackerCriticalSuccess = attackerAttackRoll === 20;
-    const attackerCriticalFail = attackerAttackRoll === 1;
-    const defenderCriticalSuccess = defenderAttackRoll === 20;
-    const defenderCriticalFail = defenderAttackRoll === 1;
-
-    // ATACANTE: Calcular dano bruto e defesa do oponente
-    const attackerRawDamage = this.calculateRawDamage(
-      this.attacker.dp,
-      attackerAttackRoll
+    // Calcular defesa de cada Digimon (baseada no próprio poder)
+    const attackerDefense = this.calculateDefenseFromPower(
+      attackerPower,
+      this.attacker.defenseBonus || 0
     );
-    const defenderDefenseReduction = this.calculateDefenseReduction(
-      this.defender.dp,
-      defenderDefenseRoll
+    const defenderDefense = this.calculateDefenseFromPower(
+      defenderPower,
+      this.defender.defenseBonus || 0
     );
 
-    // DEFENSOR: Calcular dano bruto e defesa do oponente
-    const defenderRawDamage = this.calculateRawDamage(
-      this.defender.dp,
-      defenderAttackRoll
-    );
-    const attackerDefenseReduction = this.calculateDefenseReduction(
-      this.attacker.dp,
-      attackerDefenseRoll
-    );
-
-    console.log("⚔️ [BATTLE] Cálculos:", {
+    console.log("🛡️ [BATTLE] Defesa calculada:", {
       atacante: {
-        dano_bruto: attackerRawDamage,
-        defesa_oponente: defenderDefenseReduction,
+        poder: attackerPower,
+        bonusDefesa: this.attacker.defenseBonus || 0,
+        defesa: attackerDefense,
       },
       defensor: {
-        dano_bruto: defenderRawDamage,
-        defesa_oponente: attackerDefenseReduction,
+        poder: defenderPower,
+        bonusDefesa: this.defender.defenseBonus || 0,
+        defesa: defenderDefense,
       },
     });
 
-    // Calcular dano líquido (Dano - Defesa)
-    let attackerNetDamage = Math.max(
-      0,
-      attackerRawDamage - defenderDefenseReduction
-    );
-    let defenderNetDamage = Math.max(
-      0,
-      defenderRawDamage - attackerDefenseReduction
-    );
-
-    // Aplicar vantagens de tipo E atributo (ACUMULATIVO)
-    attackerNetDamage = this.applyAdvantages(
-      attackerNetDamage,
+    // Aplicar vantagens de tipo E atributo ao poder (ACUMULATIVO)
+    let attackerPowerWithAdvantages = this.applyAdvantages(
+      attackerPower,
       this.attackerTypeAdvantage,
       this.attackerAttributeAdvantage
     );
-    defenderNetDamage = this.applyAdvantages(
-      defenderNetDamage,
+    let defenderPowerWithAdvantages = this.applyAdvantages(
+      defenderPower,
       this.defenderTypeAdvantage,
       this.defenderAttributeAdvantage
     );
 
-    // Aplicar modificadores de status (+20 ou -20) e arredondar para múltiplo de 100
-    attackerNetDamage = this.roundToHundred(
-      Math.max(0, attackerNetDamage + this.attackerStatusModifier)
+    // Aplicar modificadores de status
+    attackerPowerWithAdvantages = this.roundToHundred(
+      Math.max(0, attackerPowerWithAdvantages + this.attackerStatusModifier)
     );
-    defenderNetDamage = this.roundToHundred(
-      Math.max(0, defenderNetDamage + this.defenderStatusModifier)
+    defenderPowerWithAdvantages = this.roundToHundred(
+      Math.max(0, defenderPowerWithAdvantages + this.defenderStatusModifier)
     );
 
+    // Calcular dano líquido (Poder - Defesa do oponente)
+    let attackerDamage = Math.max(
+      0,
+      attackerPowerWithAdvantages - defenderDefense
+    );
+    let defenderDamage = Math.max(
+      0,
+      defenderPowerWithAdvantages - attackerDefense
+    );
+
+    // DANO MÍNIMO DE 5
+    if (attackerDamage > 0 && attackerDamage < 5) {
+      attackerDamage = 5;
+    }
+    if (defenderDamage > 0 && defenderDamage < 5) {
+      defenderDamage = 5;
+    }
+
     console.log("💥 [BATTLE] Dano final:", {
-      atacante_causa: attackerNetDamage,
-      defensor_causa: defenderNetDamage,
+      atacante_causa: attackerDamage,
+      atacante_defesa_absorvida: defenderDefense,
+      defensor_causa: defenderDamage,
+      defensor_defesa_absorvida: attackerDefense,
     });
 
     // Calcular novos HPs
     const attackerNewHp = Math.max(
       0,
-      this.attacker.currentHp - defenderNetDamage
+      this.attacker.currentHp - defenderDamage
     );
     const defenderNewHp = Math.max(
       0,
-      this.defender.currentHp - attackerNetDamage
+      this.defender.currentHp - attackerDamage
     );
 
     return {
-      attackerDamage: attackerNetDamage,
-      defenderDamage: defenderNetDamage,
-      attackerAttackRoll,
-      attackerDefenseRoll,
-      defenderAttackRoll,
-      defenderDefenseRoll,
+      attackerDamage,
+      defenderDamage,
+      attackerAttackRoll: 0, // Não usa mais dados
+      attackerDefenseRoll: 0, // Não usa mais dados
+      defenderAttackRoll: 0, // Não usa mais dados
+      defenderDefenseRoll: 0, // Não usa mais dados
       attackerNewHp,
       defenderNewHp,
       attackerTypeAdvantage: this.attackerTypeAdvantage,
       defenderTypeAdvantage: this.defenderTypeAdvantage,
       attackerAttributeAdvantage: this.attackerAttributeAdvantage,
       defenderAttributeAdvantage: this.defenderAttributeAdvantage,
-      attackerCriticalSuccess,
-      attackerCriticalFail,
-      defenderCriticalSuccess,
-      defenderCriticalFail,
+      attackerCriticalSuccess: false, // Não tem mais críticos
+      attackerCriticalFail: false,
+      defenderCriticalSuccess: false,
+      defenderCriticalFail: false,
     };
   }
 

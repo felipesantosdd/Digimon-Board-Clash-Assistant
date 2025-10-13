@@ -300,15 +300,20 @@ export default function GamePage() {
       updatedPlayers = result.updatedPlayers;
 
       enqueueSnackbar(
-        `🌍 TURNO DO MUNDO! ${
-          gameState.activeBoss.name
-        } causou ${result.damagePerDigimon.toLocaleString()} de dano em cada Digimon!`,
+        `🌍 TURNO DO MUNDO! ${gameState.activeBoss.name} atacou ${
+          result.targetDigimonName
+        } e causou ${result.damageDealt.toLocaleString()} de dano! (⚔️ Poder: ${
+          result.bossPower
+        } | 🛡️ Defesa: ${result.targetDefense})`,
         { variant: "error" }
       );
 
-      console.log(
-        `💥 [BOSS] Dano por Digimon: ${result.damagePerDigimon} (${result.affectedDigimons} afetados)`
-      );
+      console.log(`💥 [BOSS] Turno do Mundo:`, {
+        alvo: result.targetDigimonName,
+        dano: result.damageDealt,
+        bossPoder: result.bossPower,
+        targetDefesa: result.targetDefense,
+      });
     }
 
     // Resetar hasActedThisTurn, defending, provokedBy e reviveAttempt do próximo jogador
@@ -863,7 +868,7 @@ export default function GamePage() {
   const handleBossAttackConfirm = async (
     targetDigimon: GameDigimon,
     attackerDamage: number,
-    defenderDamage: number
+    _defenderDamage: number // Boss não contra-ataca (não usado)
   ) => {
     if (!gameState || !gameState.activeBoss || !attackerDigimon) return;
 
@@ -872,26 +877,23 @@ export default function GamePage() {
     const updatedBoss = { ...gameState.activeBoss };
     updatedBoss.currentHp = Math.max(0, updatedBoss.currentHp - attackerDamage);
 
-    // Aplicar dano ao Digimon atacante (contra-ataque do boss) COM XP de evolução
-    const attackerResult = applyDamageToDigimon(
-      attackerDigimon.digimon,
-      defenderDamage
-    );
+    // BOSS NÃO CONTRA-ATACA MAIS!
+    // Apenas aplicar XP de evolução baseado no dano causado
+    const attackerResult = applyDamageToDigimon(attackerDigimon.digimon, 0); // 0 dano
 
     console.log("⚔️ [BOSS] Resultado atacante:", attackerResult);
 
     // Atualizar HP do Digimon atacante e progresso de evolução
+    // Boss não causa dano, apenas o Digimon marca ação como realizada
     let updatedPlayers = gameState.players.map((player) => ({
       ...player,
       digimons: player.digimons.map((d) => {
         if (d.id === attackerDigimon.digimon.id) {
           return {
             ...d,
-            currentHp: attackerResult.newHp,
+            // HP não muda (boss não contra-ataca)
             hasActedThisTurn: true,
-            evolutionProgress:
-              attackerResult.newProgress || d.evolutionProgress || 0,
-            canEvolve: attackerResult.evolutionUnlocked || d.canEvolve || false,
+            // Não ganha XP por atacar boss
           };
         }
         return d;

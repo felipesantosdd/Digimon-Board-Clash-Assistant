@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import { GameDigimon } from "@/types/game";
-import { capitalize, getLevelName, getTypeColor } from "@/lib/utils";
+import {
+  capitalize,
+  getLevelName,
+  getTypeColor,
+  calculatePower,
+} from "@/lib/utils";
 import TypeIcon from "./TypeIcons";
 
 interface DigimonDetailsModalProps {
@@ -166,7 +171,7 @@ export default function DigimonDetailsModal({
             {getLevelName(digimon.level)}
           </div>
           <div className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-red-600 text-white text-xs sm:text-sm font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg shadow-lg">
-            ⚔️ {digimon.dp.toLocaleString()} ATK
+            ⚔️ {calculatePower(digimon.dp).toLocaleString()} ATK
           </div>
 
           {/* Badges de Buffs Permanentes */}
@@ -688,7 +693,11 @@ export default function DigimonDetailsModal({
                                 }
                               </span>
                               <span className="text-[10px] bg-red-600 text-white font-bold px-1.5 py-0.5 rounded">
-                                ⚔️ {targetDigimon.dp.toLocaleString()} ATK
+                                ⚔️{" "}
+                                {calculatePower(
+                                  targetDigimon.dp
+                                ).toLocaleString()}{" "}
+                                ATK
                               </span>
                             </div>
 

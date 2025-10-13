@@ -1,7 +1,12 @@
 "use client";
 
 import { GameDigimon } from "@/types/game";
-import { capitalize, getLevelName, DIGIMON_TYPE_NAMES } from "@/lib/utils";
+import {
+  capitalize,
+  getLevelName,
+  DIGIMON_TYPE_NAMES,
+  calculatePower,
+} from "@/lib/utils";
 
 interface DigimonCardProps {
   digimon: GameDigimon;
@@ -81,9 +86,9 @@ export default function DigimonCard({
             {getLevelName(digimon.level)}
           </p>
 
-          {/* ATK */}
+          {/* ATK (Poder = DP/3) */}
           <p className="text-[10px] sm:text-xs text-red-400 font-bold">
-            ⚔️ {digimon.dp.toLocaleString()} ATK
+            ⚔️ {calculatePower(digimon.dp).toLocaleString()} ATK
           </p>
 
           {/* Barra de HP */}
