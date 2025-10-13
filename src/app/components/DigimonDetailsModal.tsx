@@ -168,6 +168,28 @@ export default function DigimonDetailsModal({
           <div className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-red-600 text-white text-xs sm:text-sm font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg shadow-lg">
             ⚔️ {digimon.dp.toLocaleString()} ATK
           </div>
+
+          {/* Badges de Buffs Permanentes */}
+          <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 flex flex-wrap gap-1 sm:gap-2">
+            {digimon.attackBonus && digimon.attackBonus > 0 && (
+              <div className="bg-red-600/90 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1">
+                <span>⚔️</span>
+                <span>+{digimon.attackBonus}</span>
+              </div>
+            )}
+            {digimon.defenseBonus && digimon.defenseBonus > 0 && (
+              <div className="bg-blue-600/90 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1">
+                <span>🛡️</span>
+                <span>+{digimon.defenseBonus}</span>
+              </div>
+            )}
+            {digimon.movementBonus && digimon.movementBonus > 0 && (
+              <div className="bg-purple-600/90 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1">
+                <span>🏃</span>
+                <span>+{digimon.movementBonus}</span>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Informações */}

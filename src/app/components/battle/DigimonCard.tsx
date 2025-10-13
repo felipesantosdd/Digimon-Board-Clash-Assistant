@@ -107,6 +107,30 @@ export default function DigimonCard({
               💀 Morto
             </p>
           )}
+
+          {/* Badges de Buffs Permanentes */}
+          {!isDead && (
+            <div className="flex flex-wrap gap-1 mt-1">
+              {digimon.attackBonus && digimon.attackBonus > 0 && (
+                <div className="bg-red-600/90 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow flex items-center gap-0.5">
+                  <span>⚔️</span>
+                  <span>+{digimon.attackBonus}</span>
+                </div>
+              )}
+              {digimon.defenseBonus && digimon.defenseBonus > 0 && (
+                <div className="bg-blue-600/90 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow flex items-center gap-0.5">
+                  <span>🛡️</span>
+                  <span>+{digimon.defenseBonus}</span>
+                </div>
+              )}
+              {digimon.movementBonus && digimon.movementBonus > 0 && (
+                <div className="bg-purple-600/90 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow flex items-center gap-0.5">
+                  <span>🏃</span>
+                  <span>+{digimon.movementBonus}</span>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </button>

@@ -202,6 +202,35 @@ export default function BattleView({
               </div>
             </div>
 
+            {/* Badges de Buffs Permanentes do Atacante */}
+            {(attacker.digimon.attackBonus ||
+              attacker.digimon.defenseBonus ||
+              attacker.digimon.movementBonus) && (
+              <div className="flex flex-wrap gap-1 justify-center">
+                {attacker.digimon.attackBonus &&
+                  attacker.digimon.attackBonus > 0 && (
+                    <div className="bg-red-600/90 text-white text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shadow-lg flex items-center gap-0.5 sm:gap-1">
+                      <span>⚔️</span>
+                      <span>+{attacker.digimon.attackBonus}</span>
+                    </div>
+                  )}
+                {attacker.digimon.defenseBonus &&
+                  attacker.digimon.defenseBonus > 0 && (
+                    <div className="bg-blue-600/90 text-white text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shadow-lg flex items-center gap-0.5 sm:gap-1">
+                      <span>🛡️</span>
+                      <span>+{attacker.digimon.defenseBonus}</span>
+                    </div>
+                  )}
+                {attacker.digimon.movementBonus &&
+                  attacker.digimon.movementBonus > 0 && (
+                    <div className="bg-purple-600/90 text-white text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shadow-lg flex items-center gap-0.5 sm:gap-1">
+                      <span>🏃</span>
+                      <span>+{attacker.digimon.movementBonus}</span>
+                    </div>
+                  )}
+              </div>
+            )}
+
             {/* D20 de Ataque e Defesa */}
             <div className="flex gap-1 sm:gap-4 justify-center">
               <div className="flex-1 flex flex-col items-center gap-1">
@@ -356,6 +385,35 @@ export default function BattleView({
                 </div>
               </div>
             </div>
+
+            {/* Badges de Buffs Permanentes do Defensor */}
+            {(defender.digimon.attackBonus ||
+              defender.digimon.defenseBonus ||
+              defender.digimon.movementBonus) && (
+              <div className="flex flex-wrap gap-1 justify-center">
+                {defender.digimon.attackBonus &&
+                  defender.digimon.attackBonus > 0 && (
+                    <div className="bg-red-600/90 text-white text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shadow-lg flex items-center gap-0.5 sm:gap-1">
+                      <span>⚔️</span>
+                      <span>+{defender.digimon.attackBonus}</span>
+                    </div>
+                  )}
+                {defender.digimon.defenseBonus &&
+                  defender.digimon.defenseBonus > 0 && (
+                    <div className="bg-blue-600/90 text-white text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shadow-lg flex items-center gap-0.5 sm:gap-1">
+                      <span>🛡️</span>
+                      <span>+{defender.digimon.defenseBonus}</span>
+                    </div>
+                  )}
+                {defender.digimon.movementBonus &&
+                  defender.digimon.movementBonus > 0 && (
+                    <div className="bg-purple-600/90 text-white text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shadow-lg flex items-center gap-0.5 sm:gap-1">
+                      <span>🏃</span>
+                      <span>+{defender.digimon.movementBonus}</span>
+                    </div>
+                  )}
+              </div>
+            )}
 
             {/* D20 de Ataque e Defesa */}
             <div className="flex gap-1 sm:gap-4 justify-center">
