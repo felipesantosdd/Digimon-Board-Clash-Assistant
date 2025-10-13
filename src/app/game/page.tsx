@@ -284,7 +284,7 @@ export default function GamePage() {
     const isNewRound = isLastPlayer;
 
     // Se é o último jogador passando turno E há um boss ativo, executar Turno do Mundo ANTES
-    const updatedPlayers = gameState.players;
+    let updatedPlayers = gameState.players;
     if (
       isLastPlayer &&
       gameState.activeBoss &&
@@ -295,6 +295,9 @@ export default function GamePage() {
         gameState.activeBoss,
         updatedPlayers
       );
+
+      // ATUALIZAR os players com os Digimons feridos
+      updatedPlayers = result.updatedPlayers;
 
       enqueueSnackbar(
         `🌍 TURNO DO MUNDO! ${
