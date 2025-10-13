@@ -11,6 +11,7 @@ import {
   getTypeColor,
   generateRandomStats,
   generateArmorStats,
+  calculatePowerWithBonus,
 } from "@/lib/utils";
 import TypeIcon from "../components/TypeIcons";
 import { getTamerImagePath } from "@/lib/image-utils";
