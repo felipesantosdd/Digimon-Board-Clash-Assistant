@@ -616,8 +616,8 @@ export default function AddItemModal({
             {/* Configurações de Efeito (valor e tipo de status) */}
             {effects.find((e) => e.id === Number(formData.effectId))?.type &&
               !["evolution", "special", "boss"].includes(
-                effects.find((e) => e.id === Number(formData.effectId))
-                  ?.type || ""
+                effects.find((e) => e.id === Number(formData.effectId))?.type ||
+                  ""
               ) && (
                 <div className="bg-purple-900/30 border border-purple-600 rounded-lg p-4 space-y-4">
                   <h4 className="text-sm font-bold text-purple-200 mb-3">
@@ -643,13 +643,16 @@ export default function AddItemModal({
                       {effects.find((e) => e.id === Number(formData.effectId))
                         ?.type === "heal"
                         ? "Quantidade de HP a restaurar"
-                        : effects.find((e) => e.id === Number(formData.effectId))
-                            ?.type === "attack_bonus" ||
-                          effects.find((e) => e.id === Number(formData.effectId))
-                            ?.type === "defense_bonus"
+                        : effects.find(
+                            (e) => e.id === Number(formData.effectId)
+                          )?.type === "attack_bonus" ||
+                          effects.find(
+                            (e) => e.id === Number(formData.effectId)
+                          )?.type === "defense_bonus"
                         ? "Bônus aos dados de ataque/defesa (+1 a +20)"
-                        : effects.find((e) => e.id === Number(formData.effectId))
-                            ?.type === "movement"
+                        : effects.find(
+                            (e) => e.id === Number(formData.effectId)
+                          )?.type === "movement"
                         ? "Casas extras de movimento no tabuleiro"
                         : "Valor do efeito"}
                     </p>
