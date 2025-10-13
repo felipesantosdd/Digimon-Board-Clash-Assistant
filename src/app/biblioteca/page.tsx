@@ -28,6 +28,7 @@ type TabType = "digimons" | "items" | "bosses" | "drops" | "effects" | "tamers";
 
 export default function BibliotecaPage() {
   const [activeTab, setActiveTab] = useState<TabType>("digimons");
+  const [activeDigimonsCount, setActiveDigimonsCount] = useState<number>(0);
 
   // Detectar se está em produção
   const isProduction = process.env.NODE_ENV === "production";
@@ -86,6 +87,11 @@ export default function BibliotecaPage() {
               }`}
             >
               🤖 Digimons
+              {activeDigimonsCount > 0 && (
+                <span className="ml-2 text-xs bg-blue-500 px-2 py-0.5 rounded-full">
+                  {activeDigimonsCount}
+                </span>
+              )}
             </button>
             <button
               onClick={() => setActiveTab("items")}
@@ -142,7 +148,10 @@ export default function BibliotecaPage() {
 
         {/* Tab Content - Passa a prop isProduction para cada tab */}
         {activeTab === "digimons" && (
-          <DigimonsTab isProduction={isProduction} />
+          <DigimonsTab 
+            isProduction={isProduction} 
+            onCountUpdate={setActiveDigimonsCount}
+          />
         )}
         {activeTab === "items" && <ItemsTab isProduction={isProduction} />}
         {activeTab === "effects" && <EffectsTab isProduction={isProduction} />}

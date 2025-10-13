@@ -74,6 +74,7 @@ export default function GamePage() {
 
   // Estados para auto-test
   const [isAutoTestActive, setIsAutoTestActive] = useState(false);
+  const [showTestLogs, setShowTestLogs] = useState(false); // Manter log visível mesmo quando pausado
   const [autoTestSpeed, setAutoTestSpeed] = useState(1000); // ms entre ações
   const [testLogs, setTestLogs] = useState<
     Array<{
@@ -257,19 +258,15 @@ export default function GamePage() {
         actionResult
       );
 
-      // Executar ação de verdade
+      // Executar ação de verdade aplicando dano diretamente
       setTimeout(async () => {
+        if (!gameState) return;
+        
         try {
+          let updatedState = { ...gameState };
+          
           if (decision.action === "attack" && decision.target) {
-            // Setar o atacante para que handleAttackConfirm possa usá-lo
-            setAttackerDigimon({
-              digimon: digimonToAct,
-              playerName: currentPlayer.name,
-              playerId: currentPlayer.id,
-              originalId: digimonToAct.originalId || digimonToAct.id,
-            });
-
-            // Executar ataque PvP
+            // Executar ataque PvP diretamente no estado
             const attackerModifier = getStatusDamageModifier(digimonToAct);
             const defenderModifier = getStatusDamageModifier(decision.target);
 
@@ -282,28 +279,42 @@ export default function GamePage() {
             );
             const result = battleManager.executeBattle();
 
-            // Aguardar um frame para attackerDigimon ser setado
-            await new Promise((resolve) => setTimeout(resolve, 50));
+            // Aplicar dano diretamente aos Digimons
+            const attackerResult = applyDamageToDigimon(digimonToAct, result.defenderDamage, result.attackerDamage);
+            const defenderResult = applyDamageToDigimon(decision.target, result.attackerDamage, result.defenderDamage);
 
-            // Aplicar resultado
-            handleAttackConfirm(
-              decision.target,
-              result.attackerDamage,
-              result.defenderDamage,
-              result
-            );
-          } else if (
-            decision.action === "attack_boss" &&
-            gameState.activeBoss
-          ) {
-            // Setar o atacante
-            setAttackerDigimon({
-              digimon: digimonToAct,
-              playerName: currentPlayer.name,
-              playerId: currentPlayer.id,
-              originalId: digimonToAct.originalId || digimonToAct.id,
-            });
+            updatedState = {
+              ...gameState,
+              players: gameState.players.map((player) => ({
+                ...player,
+                digimons: player.digimons.map((d) => {
+                  if (d.id === digimonToAct.id) {
+                    return {
+                      ...d,
+                      currentHp: attackerResult.newHp,
+                      evolutionProgress: attackerResult.newProgress,
+                      canEvolve: attackerResult.evolutionUnlocked ? true : d.canEvolve,
+                      hasActedThisTurn: true,
+                    };
+                  }
+                  if (d.id === decision.target?.id) {
+                    return {
+                      ...d,
+                      currentHp: defenderResult.newHp,
+                      evolutionProgress: defenderResult.newProgress,
+                      canEvolve: defenderResult.evolutionUnlocked ? true : d.canEvolve,
+                    };
+                  }
+                  return d;
+                }),
+              })),
+            };
 
+            console.log(`⚔️ [AUTO-TEST] Ataque executado: ${digimonToAct.name} → ${decision.target.name}`);
+            console.log(`   Dano: ${result.attackerDamage} / ${result.defenderDamage}`);
+            console.log(`   HP: ${digimonToAct.name} ${attackerResult.newHp}/${digimonToAct.dp}, ${decision.target.name} ${defenderResult.newHp}/${decision.target.dp}`);
+            
+          } else if (decision.action === "attack_boss" && gameState.activeBoss) {
             // Executar ataque ao boss
             const attackerModifier = getStatusDamageModifier(digimonToAct);
 
@@ -323,24 +334,92 @@ export default function GamePage() {
             );
             const result = battleManager.executeBattle();
 
-            // Boss não contra-ataca
-            result.defenderDamage = 0;
+            // Aplicar dano ao Digimon e ao boss
+            const attackerResult = applyDamageToDigimon(digimonToAct, 0, result.attackerDamage);
+            
+            const updatedBoss = { ...gameState.activeBoss };
+            updatedBoss.currentHp = Math.max(0, updatedBoss.currentHp - result.attackerDamage);
 
-            // Aguardar um frame
-            await new Promise((resolve) => setTimeout(resolve, 50));
+            // Rastrear aggro
+            const lastAttackers = updatedBoss.lastAttackers || [];
+            const existingIndex = lastAttackers.findIndex(a => a.digimonId === digimonToAct.id);
+            if (existingIndex >= 0) {
+              lastAttackers[existingIndex].damage += result.attackerDamage;
+            } else {
+              lastAttackers.push({ digimonId: digimonToAct.id, damage: result.attackerDamage });
+            }
+            updatedBoss.lastAttackers = lastAttackers;
 
-            // Aplicar resultado
-            handleBossAttackConfirm(bossAsDigimon, result.attackerDamage, 0);
-          } else if (decision.action === "evolve") {
-            // Executar evolução
-            handleEvolutionRequest(digimonToAct);
+            updatedState = {
+              ...gameState,
+              activeBoss: updatedBoss,
+              players: gameState.players.map((player) => ({
+                ...player,
+                digimons: player.digimons.map((d) => {
+                  if (d.id === digimonToAct.id) {
+                    return {
+                      ...d,
+                      evolutionProgress: attackerResult.newProgress,
+                      canEvolve: attackerResult.evolutionUnlocked ? true : d.canEvolve,
+                      hasActedThisTurn: true,
+                    };
+                  }
+                  return d;
+                }),
+              })),
+            };
+
+            console.log(`👹 [AUTO-TEST] Ataque ao boss: ${digimonToAct.name} → ${gameState.activeBoss.name}`);
+            console.log(`   Dano: ${result.attackerDamage}`);
+            console.log(`   Boss HP: ${updatedBoss.currentHp}/${updatedBoss.maxHp}`);
+            
           } else if (decision.action === "explore") {
-            // Executar exploração
-            await handleLoot(digimonToAct);
+            // Marcar como agiu e ganhar 10% XP
+            updatedState = {
+              ...gameState,
+              players: gameState.players.map((player) => ({
+                ...player,
+                digimons: player.digimons.map((d) => {
+                  if (d.id === digimonToAct.id) {
+                    const newProgress = Math.min(100, (d.evolutionProgress || 0) + 10);
+                    return {
+                      ...d,
+                      evolutionProgress: newProgress,
+                      hasActedThisTurn: true,
+                    };
+                  }
+                  return d;
+                }),
+              })),
+            };
+            
           } else if (decision.action === "rest") {
-            // Executar descanso
-            handleRest(digimonToAct);
+            // Recuperar HP e ganhar 10% XP
+            updatedState = {
+              ...gameState,
+              players: gameState.players.map((player) => ({
+                ...player,
+                digimons: player.digimons.map((d) => {
+                  if (d.id === digimonToAct.id) {
+                    const healAmount = Math.floor(d.dp * 0.2);
+                    const newHp = Math.min(d.dp, d.currentHp + healAmount);
+                    const newProgress = Math.min(100, (d.evolutionProgress || 0) + 10);
+                    return {
+                      ...d,
+                      currentHp: newHp,
+                      evolutionProgress: newProgress,
+                      hasActedThisTurn: true,
+                    };
+                  }
+                  return d;
+                }),
+              })),
+            };
           }
+          
+          // Salvar estado atualizado
+          saveGameState(updatedState);
+          
         } catch (error) {
           console.error("❌ [AUTO-TEST] Erro ao executar ação:", error);
         }
@@ -2989,8 +3068,9 @@ export default function GamePage() {
               <button
                 onClick={() => {
                   if (!isAutoTestActive) {
-                    // Ao ativar, resetar o jogo para modo de teste
+                    // Ao ativar, resetar o jogo para modo de teste e mostrar logs
                     resetToTestMode();
+                    setShowTestLogs(true);
                   }
                   setIsAutoTestActive(!isAutoTestActive);
                 }}
@@ -3005,6 +3085,18 @@ export default function GamePage() {
                   {isAutoTestActive ? "Pausar" : "Auto"}
                 </span>
               </button>
+              
+              {/* Botão Toggle Logs (só aparece se logs foram abertos) */}
+              {showTestLogs && !isAutoTestActive && (
+                <button
+                  onClick={() => setShowTestLogs(false)}
+                  className="px-3 py-1.5 sm:py-2 bg-gray-600 text-white text-sm font-semibold rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-1"
+                  title="Fechar painel de logs"
+                >
+                  <span>📋</span>
+                  <span className="hidden md:inline">Fechar Logs</span>
+                </button>
+              )}
 
               {/* Botão Finalizar Jogo */}
               <button
@@ -3476,7 +3568,7 @@ export default function GamePage() {
           </div>
 
           {/* Painel de Logs do Auto-Test */}
-          {isAutoTestActive && (
+          {showTestLogs && (
             <div className="w-80 bg-gray-800 rounded-lg border border-gray-700 p-4 h-[calc(100vh-12rem)] overflow-hidden flex flex-col">
               <div className="mb-3 border-b border-gray-700 pb-2 space-y-2">
                 <div className="flex items-center justify-between">

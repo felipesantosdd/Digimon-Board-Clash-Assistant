@@ -11,10 +11,12 @@ import { capitalize, getLevelName } from "@/lib/utils";
 
 interface DigimonsTabProps {
   isProduction?: boolean;
+  onCountUpdate?: (count: number) => void;
 }
 
 export default function DigimonsTab({
   isProduction = false,
+  onCountUpdate,
 }: DigimonsTabProps) {
   const { enqueueSnackbar } = useSnackbar();
   const [digimons, setDigimons] = useState<Digimon[]>([]);
@@ -40,6 +42,12 @@ export default function DigimonsTab({
       if (response.ok) {
         const data = await response.json();
         setDigimons(data);
+        
+        // Contar Digimons ativos
+        const activeCount = data.filter((d: Digimon) => d.active !== false).length;
+        if (onCountUpdate) {
+          onCountUpdate(activeCount);
+        }
       } else {
         console.error("Erro ao carregar Digimons");
       }
