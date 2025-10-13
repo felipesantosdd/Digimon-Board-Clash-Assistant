@@ -174,6 +174,15 @@ export function calculatePower(dp: number): number {
 }
 
 /**
+ * Calcula o poder de ataque do Boss
+ * Boss tem poder reduzido: DP / 4
+ */
+export function calculateBossPower(dp: number): number {
+  const basePower = dp / 4;
+  return Math.ceil(basePower / 100) * 100;
+}
+
+/**
  * Calcula o poder de ataque com bônus aplicado
  * Bônus de ataque = cada ponto aumenta 2% o poder
  */

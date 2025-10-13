@@ -3,7 +3,7 @@
 import { GameBoss } from "@/types/game";
 import Image from "next/image";
 import { useState } from "react";
-import { calculatePower } from "@/lib/utils";
+import { calculateBossPower } from "@/lib/utils";
 
 interface BossCardProps {
   boss: GameBoss;
@@ -100,7 +100,7 @@ export default function BossCard({
                   : "Virus"}
               </div>
               <div className="bg-red-600 text-white text-xs sm:text-sm px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg font-bold">
-                ⚔️ {calculatePower(boss.calculatedDp).toLocaleString()} ATK
+                ⚔️ {calculateBossPower(boss.calculatedDp).toLocaleString()} ATK
               </div>
             </div>
 

@@ -234,8 +234,8 @@ export class BossManager {
     const randomIndex = Math.floor(Math.random() * aliveDigimons.length);
     const target = aliveDigimons[randomIndex];
 
-    // 3. Calcular poder de ataque do boss (DP / 3)
-    const bossPower = Math.ceil((boss.calculatedDp / 3) / 100) * 100;
+    // 3. Calcular poder de ataque do boss (DP / 4 - rebalanceado)
+    const bossPower = Math.ceil((boss.calculatedDp / 4) / 100) * 100;
 
     // 4. Calcular poder do Digimon alvo
     const targetPower = Math.ceil((target.digimon.dp / 3) / 100) * 100;

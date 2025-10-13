@@ -5,7 +5,7 @@ import {
   capitalize,
   getLevelName,
   DIGIMON_TYPE_NAMES,
-  calculatePower,
+  calculatePowerWithBonus,
 } from "@/lib/utils";
 
 interface DigimonCardProps {
@@ -86,9 +86,14 @@ export default function DigimonCard({
             {getLevelName(digimon.level)}
           </p>
 
-          {/* ATK (Poder = DP/3) */}
+          {/* ATK (Poder = DP/3 + Bônus) */}
           <p className="text-[10px] sm:text-xs text-red-400 font-bold">
-            ⚔️ {calculatePower(digimon.dp).toLocaleString()} ATK
+            ⚔️{" "}
+            {calculatePowerWithBonus(
+              digimon.dp,
+              digimon.attackBonus || 0
+            ).toLocaleString()}{" "}
+            ATK
           </p>
 
           {/* Barra de HP */}

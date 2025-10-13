@@ -1722,9 +1722,9 @@ export default function GamePage() {
           `📿 [CREST] Stats Mega: DP ${newDp} | HP ${newHp} (calculado para Level 4)`
         );
       } else {
-        // ARMOR/SPIRIT: Poder atual + 6000
-        newDp = digimon.dp + 6000;
-        newHp = Math.min(digimon.currentHp + 6000, newDp);
+        // ARMOR/SPIRIT: Poder atual + 2000 (rebalanceado de 6000)
+        newDp = digimon.dp + 2000;
+        newHp = Math.min(digimon.currentHp + 2000, newDp);
         shouldLockEvolution = true; // Armor/Spirits bloqueiam evolução
         console.log(
           `📊 [EVOLUTION] Stats: DP ${digimon.dp} → ${newDp} | HP ${digimon.currentHp} → ${newHp}`
@@ -2612,7 +2612,12 @@ export default function GamePage() {
                                     }
                                   </div>
                                   <div className="bg-red-600 text-white text-[10px] sm:text-xs font-bold px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded whitespace-nowrap">
-                                    ⚔️ {digimon.dp.toLocaleString()} ATK
+                                    ⚔️{" "}
+                                    {calculatePowerWithBonus(
+                                      digimon.dp,
+                                      digimon.attackBonus || 0
+                                    ).toLocaleString()}{" "}
+                                    ATK
                                   </div>
                                 </div>
 

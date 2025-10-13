@@ -1,7 +1,11 @@
 "use client";
 
 import { GameDigimon } from "@/types/game";
-import { capitalize, DIGIMON_TYPE_NAMES, calculatePower } from "@/lib/utils";
+import {
+  capitalize,
+  DIGIMON_TYPE_NAMES,
+  calculatePowerWithBonus,
+} from "@/lib/utils";
 import D20Display from "./D20Display";
 
 interface BattleViewProps {
@@ -129,7 +133,12 @@ export default function BattleView({
               )}
 
               <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-1 py-0.5 sm:px-2 sm:py-1 rounded">
-                ⚔️ {calculatePower(attacker.digimon.dp).toLocaleString()} ATK
+                ⚔️{" "}
+                {calculatePowerWithBonus(
+                  attacker.digimon.dp,
+                  attacker.digimon.attackBonus || 0
+                ).toLocaleString()}{" "}
+                ATK
               </div>
 
               {/* Badge de Vantagem de TIPO */}
@@ -313,7 +322,12 @@ export default function BattleView({
               )}
 
               <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-1 py-0.5 sm:px-2 sm:py-1 rounded">
-                ⚔️ {calculatePower(defender.digimon.dp).toLocaleString()} ATK
+                ⚔️{" "}
+                {calculatePowerWithBonus(
+                  defender.digimon.dp,
+                  defender.digimon.attackBonus || 0
+                ).toLocaleString()}{" "}
+                ATK
               </div>
 
               {/* Badge de Vantagem de TIPO */}

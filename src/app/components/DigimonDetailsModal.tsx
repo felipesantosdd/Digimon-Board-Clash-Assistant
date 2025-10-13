@@ -6,7 +6,7 @@ import {
   capitalize,
   getLevelName,
   getTypeColor,
-  calculatePower,
+  calculatePowerWithBonus,
 } from "@/lib/utils";
 import TypeIcon from "./TypeIcons";
 
@@ -171,7 +171,12 @@ export default function DigimonDetailsModal({
             {getLevelName(digimon.level)}
           </div>
           <div className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-red-600 text-white text-xs sm:text-sm font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg shadow-lg">
-            ⚔️ {calculatePower(digimon.dp).toLocaleString()} ATK
+            ⚔️{" "}
+            {calculatePowerWithBonus(
+              digimon.dp,
+              digimon.attackBonus || 0
+            ).toLocaleString()}{" "}
+            ATK
           </div>
 
           {/* Badges de Buffs Permanentes */}
@@ -694,8 +699,9 @@ export default function DigimonDetailsModal({
                               </span>
                               <span className="text-[10px] bg-red-600 text-white font-bold px-1.5 py-0.5 rounded">
                                 ⚔️{" "}
-                                {calculatePower(
-                                  targetDigimon.dp
+                                {calculatePowerWithBonus(
+                                  targetDigimon.dp,
+                                  targetDigimon.attackBonus || 0
                                 ).toLocaleString()}{" "}
                                 ATK
                               </span>
@@ -888,8 +894,9 @@ export default function DigimonDetailsModal({
                                     </span>
                                     <span className="text-[10px] bg-red-600 text-white font-bold px-1.5 py-0.5 rounded">
                                       ⚔️{" "}
-                                      {calculatePower(
-                                        targetDigimon.dp
+                                      {calculatePowerWithBonus(
+                                        targetDigimon.dp,
+                                        targetDigimon.attackBonus || 0
                                       ).toLocaleString()}{" "}
                                       ATK
                                     </span>
