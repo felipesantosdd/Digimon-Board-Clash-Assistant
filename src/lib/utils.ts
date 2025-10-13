@@ -186,15 +186,18 @@ export function calculateBossPower(dp: number): number {
  * Calcula o poder de ataque com bônus aplicado
  * Bônus de ataque = cada ponto aumenta 2% o poder
  */
-export function calculatePowerWithBonus(dp: number, attackBonus: number = 0): number {
+export function calculatePowerWithBonus(
+  dp: number,
+  attackBonus: number = 0
+): number {
   const basePower = calculatePower(dp);
-  
+
   if (!attackBonus || attackBonus === 0) return basePower;
-  
+
   // Cada ponto de bônus = +2% de poder
   const bonusPercentage = attackBonus * 2;
   const powerWithBonus = basePower * (1 + bonusPercentage / 100);
-  
+
   // Arredondar para múltiplo de 100
   return Math.round(powerWithBonus / 100) * 100;
 }

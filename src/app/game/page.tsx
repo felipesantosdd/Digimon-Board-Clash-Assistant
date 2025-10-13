@@ -1695,6 +1695,11 @@ export default function GamePage() {
             ...player,
             digimons: player.digimons.map((d) => {
               if ((d.originalId || d.id) === selectedDigimon.originalId) {
+                console.log(`💊 [ITEM] Atualizando Digimon ${d.name}:`, {
+                  attackBonus: `${d.attackBonus || 0} → ${newAttackBonus}`,
+                  defenseBonus: `${d.defenseBonus || 0} → ${newDefenseBonus}`,
+                  movementBonus: `${d.movementBonus || 0} → ${newMovementBonus}`,
+                });
                 return {
                   ...d,
                   baseDp: d.baseDp || d.dp, // Inicializar baseDp se não existir
@@ -1717,10 +1722,29 @@ export default function GamePage() {
 
     saveGameState(updatedState);
 
+    // Fechar modal de detalhes para forçar atualização visual
+    setSelectedDigimon(null);
+
     // Mensagem de feedback
     enqueueSnackbar(`✨ ${capitalize(digimon.name)} ${effectMessage}`, {
       variant: "success",
     });
+
+    // Reabrir modal após um pequeno delay para mostrar as atualizações
+    setTimeout(() => {
+      const updatedDigimon = updatedState.players
+        .find((p) => p.id === selectedDigimon.playerId)
+        ?.digimons.find((d) => (d.originalId || d.id) === selectedDigimon.originalId);
+      
+      if (updatedDigimon) {
+        setSelectedDigimon({
+          digimon: updatedDigimon,
+          playerName: selectedDigimon.playerName,
+          playerId: selectedDigimon.playerId,
+          originalId: updatedDigimon.originalId || updatedDigimon.id,
+        });
+      }
+    }, 100);
   };
 
   const handleApplySpecialEvolution = async (

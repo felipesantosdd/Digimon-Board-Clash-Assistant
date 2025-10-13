@@ -216,6 +216,12 @@ export default function AttackDialog({
         );
         const result = battleManager.executeBattle();
 
+        // Se está atacando o boss (id negativo), boss não contra-ataca
+        const isBoss = selectedDigimon.id === -1;
+        if (isBoss) {
+          result.defenderDamage = 0;
+        }
+
         // Atualizar estados com resultado (4 dados)
         setAttackerAttackDice(result.attackerAttackRoll);
         setAttackerDefenseDice(result.attackerDefenseRoll);
