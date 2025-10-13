@@ -1197,8 +1197,8 @@ export default function GamePage() {
         return;
       }
 
-      // 50% de chance de encontrar algum item
-      const foundSomething = Math.random() < 0.5;
+      // 20% de chance de encontrar algum item
+      const foundSomething = Math.random() < 0.2;
 
       if (!foundSomething) {
         console.log("💰 [LOOT] Nenhum item encontrado");
