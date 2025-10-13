@@ -63,6 +63,7 @@ export default function AddItemModal({
     effectId: 1,
     image: "/images/items/fallback.svg",
     dropChance: 0,
+    active: true,
   });
 
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -118,6 +119,7 @@ export default function AddItemModal({
       effectId: effects.length > 0 ? effects[0].id : 1,
       image: "/images/items/fallback.svg",
       dropChance: 0,
+      active: true,
     });
     setImageFile(null);
     setImagePreview("");
@@ -139,6 +141,7 @@ export default function AddItemModal({
           effectId: editingItem.effectId || 1,
           image: editingItem.image,
           dropChance: editingItem.dropChance || 0,
+          active: editingItem.active !== false,
         });
         setImagePreview(editingItem.image);
         setTargetDigimons(editingItem.targetDigimons || []);
@@ -626,6 +629,33 @@ export default function AddItemModal({
                 Probabilidade de encontrar este item ao explorar o mapa
               </p>
             </div>
+
+            {/* Toggle Ativo/Inativo */}
+            {editingItem && (
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-200 mb-2">
+                  Status do Item
+                </label>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData((prev) => ({ ...prev, active: !prev.active }))
+                  }
+                  className={`w-full px-4 py-3 text-white font-semibold rounded-lg transition-all ${
+                    formData.active
+                      ? "bg-green-600 hover:bg-green-700"
+                      : "bg-gray-600 hover:bg-gray-700"
+                  }`}
+                >
+                  {formData.active ? "✅ ATIVO" : "⏸️ INATIVO"}
+                </button>
+                <p className="text-xs text-gray-400 mt-2">
+                  {formData.active
+                    ? "Este item pode ser encontrado durante a exploração"
+                    : "Este item NÃO aparecerá durante a exploração"}
+                </p>
+              </div>
+            )}
 
             {/* Botões */}
             <div className="flex gap-3 pt-2">

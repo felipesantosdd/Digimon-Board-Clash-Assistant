@@ -68,4 +68,3 @@ updatedCrests.forEach((crest) => {
 console.log("");
 
 db.close();
-

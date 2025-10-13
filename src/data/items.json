@@ -149,7 +149,7 @@
     "description": "O ovo lendário e raro. Veemon usa para se tornar Magnamon.",
     "image": "/images/items/1760294457932_image.webp",
     "effect": "",
-    "dropChance": 10,
+    "dropChance": 15,
     "targetDigimons": [
       518,
       540
@@ -163,7 +163,7 @@
     "description": "O ovo do potencial oculto. Usado por diversos Digimons para formas únicas.",
     "image": "/images/items/1760294588031_image.webp",
     "effect": "",
-    "dropChance": 10,
+    "dropChance": 15,
     "targetDigimons": [
       317,
       539
@@ -177,7 +177,7 @@
     "description": "O espírito lendário do elemento Fogo. Permite a transformação em Agunimon.",
     "image": "/images/items/1760292035442_image.webp",
     "effect": "",
-    "dropChance": 8,
+    "dropChance": 15,
     "targetDigimons": [
       542
     ],
@@ -229,7 +229,7 @@
     "description": "O espírito lendário do Gelo. Permite a transformação em Kumamon.",
     "image": "/images/items/1760291924709_image.webp",
     "effect": "",
-    "dropChance": 8,
+    "dropChance": 15,
     "targetDigimons": [
       543
     ],
@@ -255,7 +255,7 @@
     "description": "O espírito lendário do Vento. Permite a transformação em Kazemon.",
     "image": "/images/items/1760292072721_image.webp",
     "effect": "",
-    "dropChance": 8,
+    "dropChance": 15,
     "targetDigimons": [
       545
     ],
@@ -281,7 +281,7 @@
     "description": "O espírito lendário do Trovão. Permite a transformação em Beetlemon.",
     "image": "/images/items/1760291898544_image.webp",
     "effect": "",
-    "dropChance": 8,
+    "dropChance": 15,
     "targetDigimons": [
       547
     ],
@@ -307,7 +307,7 @@
     "description": "O espírito lendário das Trevas. Permite a transformação em Lowemon.",
     "image": "/images/items/1760291956419_image.webp",
     "effect": "",
-    "dropChance": 8,
+    "dropChance": 15,
     "targetDigimons": [
       549
     ],
@@ -333,7 +333,7 @@
     "description": "O emblema de Tai Kamiya. Permite evolução para formas supremas do fogo e dragão.",
     "image": "/images/items/1760296452838_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
     "active": 0
@@ -344,7 +344,7 @@
     "description": "O emblema de Matt Ishida. Permite evolução para lobos supremos de gelo.",
     "image": "/images/items/1760295381021_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
     "active": 0
@@ -355,7 +355,7 @@
     "description": "O emblema de Sora Takenouchi. Permite evolução para aves supremas.",
     "image": "/images/items/1760295926308_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       295
     ],
@@ -368,7 +368,7 @@
     "description": "O emblema de Izzy Izumi. Permite evolução para insetos supremos.",
     "image": "/images/items/1760296206627_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
     "active": 0
@@ -379,7 +379,7 @@
     "description": "O emblema de Mimi Tachikawa. Permite evolução para formas supremas da natureza.",
     "image": "/images/items/1760295966967_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       446,
       506
@@ -393,7 +393,7 @@
     "description": "O emblema de Joe Kido. Permite evolução para guerreiros supremos do mar.",
     "image": "/images/items/1760295281253_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       302,
       107
@@ -407,7 +407,7 @@
     "description": "O emblema de T.K. Takaishi. Permite evolução para anjos supremos.",
     "image": "/images/items/1760296363338_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       106,
       142
@@ -421,7 +421,7 @@
     "description": "O emblema de Kari Kamiya. Permite evolução para seres divinos da luz.",
     "image": "/images/items/1760295629493_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       109,
       111,
@@ -462,7 +462,7 @@
     "description": "O espírito lendário da Madeira. Transforma em Arbormon.",
     "image": "/images/items/1760292398251_image.webp",
     "effect": "",
-    "dropChance": 12,
+    "dropChance": 15,
     "targetDigimons": [
       578
     ],
@@ -488,7 +488,7 @@
     "description": "O espírito lendário da Água. Transforma em Ranamon.",
     "image": "/images/items/1760294276430_image.webp",
     "effect": "",
-    "dropChance": 8,
+    "dropChance": 15,
     "targetDigimons": [
       580
     ],
@@ -514,7 +514,7 @@
     "description": "O espírito lendário do Aço. Transforma em Mercurymon.",
     "image": "/images/items/1760292481824_image.webp",
     "effect": "",
-    "dropChance": 8,
+    "dropChance": 15,
     "targetDigimons": [
       483
     ],
@@ -540,7 +540,7 @@
     "description": "O espírito corrompido das Trevas. Transforma em Duskmon.",
     "image": "/images/items/1760292307479_image.webp",
     "effect": "",
-    "dropChance": 6,
+    "dropChance": 15,
     "targetDigimons": [
       583
     ],
@@ -566,7 +566,7 @@
     "description": "Fusão dos 5 Espíritos do Fogo. Transforma em KaiserGreymon.",
     "image": "/images/items/1760293795669_image.webp",
     "effect": "",
-    "dropChance": 2,
+    "dropChance": 15,
     "targetDigimons": [
       585
     ],
@@ -579,7 +579,7 @@
     "description": "Fusão dos 5 Espíritos da Luz. Transforma em MagnaGarurumon.",
     "image": "/images/items/1760294349659_image.webp",
     "effect": "",
-    "dropChance": 2,
+    "dropChance": 15,
     "targetDigimons": [
       91
     ],
@@ -603,7 +603,7 @@
     "description": "O emblema dos eventos raros e extraordinários. Permite evolução para formas Mega lendárias.",
     "image": "/images/items/1760296007918_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
     "active": 0
@@ -614,7 +614,7 @@
     "description": "O emblema do potencial oculto. Permite evolução para formas Mega únicas.",
     "image": "/images/items/1760296291367_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
     "active": 0
@@ -625,7 +625,7 @@
     "description": "O emblema da bondade e empatia. Permite evolução para formas Mega compassivas.",
     "image": "/images/items/1760296160176_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
     "active": 0

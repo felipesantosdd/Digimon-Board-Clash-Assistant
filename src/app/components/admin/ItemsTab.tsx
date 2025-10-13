@@ -236,14 +236,18 @@ export default function ItemsTab({ isProduction = false }: ItemsTabProps) {
             {filteredItems.map((item) => (
               <div
                 key={item.id}
-                className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-700"
+                className={`bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-700 ${
+                  !item.active ? "opacity-60" : ""
+                }`}
               >
                 {/* Imagem do Item */}
                 <div className="relative h-48 bg-gray-900 overflow-hidden">
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full object-cover transition-all ${
+                      !item.active ? "grayscale" : ""
+                    }`}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src = "/images/items/fallback.svg";
@@ -299,29 +303,6 @@ export default function ItemsTab({ isProduction = false }: ItemsTabProps) {
                   {/* Botões de ação */}
                   {!isProduction && (
                     <div className="space-y-2">
-                      {/* Status Badge */}
-                      <div
-                        className={`text-center py-2 px-3 rounded-lg font-bold text-sm ${
-                          item.active
-                            ? "bg-green-600/20 text-green-400 border border-green-600"
-                            : "bg-gray-600/20 text-gray-400 border border-gray-600"
-                        }`}
-                      >
-                        {item.active ? "✅ ATIVO" : "⏸️ INATIVO"}
-                      </div>
-
-                      {/* Toggle Active/Inactive */}
-                      <button
-                        onClick={() => handleToggleActive(item)}
-                        className={`w-full px-4 py-2 text-white text-sm font-semibold rounded-lg transition-colors ${
-                          item.active
-                            ? "bg-gray-600 hover:bg-gray-700"
-                            : "bg-green-600 hover:bg-green-700"
-                        }`}
-                      >
-                        {item.active ? "⏸️ Desativar" : "▶️ Ativar"}
-                      </button>
-
                       <button
                         onClick={() => handleEditItem(item)}
                         className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
