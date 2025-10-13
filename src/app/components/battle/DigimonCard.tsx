@@ -111,34 +111,36 @@ export default function DigimonCard({
             </span>
           </div>
 
-          {/* Status de morte */}
+          {/* Status de nocaute */}
           {isDead && (
-            <p className="text-red-400 text-[10px] sm:text-xs mt-0.5 sm:mt-1">
-              💀 Morto
+            <p className="text-orange-400 text-[10px] sm:text-xs mt-0.5 sm:mt-1">
+              😵 Nocauteado
             </p>
           )}
 
           {/* Badges de Buffs Permanentes */}
           {!isDead && (
             <div className="flex flex-wrap gap-1 mt-1">
-              {digimon.attackBonus && digimon.attackBonus > 0 && (
+              {digimon.attackBonus !== undefined && digimon.attackBonus > 0 && (
                 <div className="bg-red-600/90 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow flex items-center gap-0.5">
                   <span>⚔️</span>
                   <span>+{digimon.attackBonus}</span>
                 </div>
               )}
-              {digimon.defenseBonus && digimon.defenseBonus > 0 && (
-                <div className="bg-blue-600/90 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow flex items-center gap-0.5">
-                  <span>🛡️</span>
-                  <span>+{digimon.defenseBonus}</span>
-                </div>
-              )}
-              {digimon.movementBonus && digimon.movementBonus > 0 && (
-                <div className="bg-purple-600/90 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow flex items-center gap-0.5">
-                  <span>🏃</span>
-                  <span>+{digimon.movementBonus}</span>
-                </div>
-              )}
+              {digimon.defenseBonus !== undefined &&
+                digimon.defenseBonus > 0 && (
+                  <div className="bg-blue-600/90 text-white text-[9px] sm:text-xs font-bold px-1.5 py-0.5 rounded-full shadow flex items-center gap-0.5">
+                    <span>🛡️</span>
+                    <span>+{digimon.defenseBonus}</span>
+                  </div>
+                )}
+              {digimon.movementBonus !== undefined &&
+                digimon.movementBonus > 0 && (
+                  <div className="bg-purple-600/90 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow flex items-center gap-0.5">
+                    <span>🏃</span>
+                    <span>+{digimon.movementBonus}</span>
+                  </div>
+                )}
             </div>
           )}
         </div>

@@ -89,7 +89,7 @@ export default function AttackDialog({
     }
 
     if (digimon.currentHp <= 0) {
-      enqueueSnackbar("Não é possível atacar um Digimon morto!", {
+      enqueueSnackbar("Não é possível atacar um Digimon nocauteado!", {
         variant: "warning",
       });
       return;

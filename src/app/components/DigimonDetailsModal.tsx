@@ -136,16 +136,16 @@ export default function DigimonDetailsModal({
 
         {/* Imagem do Digimon */}
         <div className="relative h-48 sm:h-72 md:h-96 lg:h-[32rem] bg-gradient-to-br from-gray-700 to-gray-900 overflow-hidden">
-          {/* Overlay de Morte */}
+          {/* Overlay de Nocaute */}
           {isDead && (
             <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center z-10">
               <div className="text-center">
-                <div className="text-5xl sm:text-7xl mb-2 sm:mb-3">💀</div>
-                <p className="text-red-400 font-bold text-lg sm:text-xl">
-                  MORTO
+                <div className="text-5xl sm:text-7xl mb-2 sm:mb-3">😵‍💫</div>
+                <p className="text-orange-400 font-bold text-lg sm:text-xl">
+                  NOCAUTE
                 </p>
                 <p className="text-gray-300 text-xs sm:text-sm mt-1 sm:mt-2">
-                  Este Digimon foi derrotado
+                  Este Digimon foi nocauteado e precisa ser levantado
                 </p>
               </div>
             </div>
@@ -181,24 +181,25 @@ export default function DigimonDetailsModal({
 
           {/* Badges de Buffs Permanentes */}
           <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 flex flex-wrap gap-1 sm:gap-2">
-            {digimon.attackBonus && digimon.attackBonus > 0 && (
+            {digimon.attackBonus !== undefined && digimon.attackBonus > 0 && (
               <div className="bg-red-600/90 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1">
                 <span>⚔️</span>
                 <span>+{digimon.attackBonus}</span>
               </div>
             )}
-            {digimon.defenseBonus && digimon.defenseBonus > 0 && (
+            {digimon.defenseBonus !== undefined && digimon.defenseBonus > 0 && (
               <div className="bg-blue-600/90 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1">
                 <span>🛡️</span>
                 <span>+{digimon.defenseBonus}</span>
               </div>
             )}
-            {digimon.movementBonus && digimon.movementBonus > 0 && (
-              <div className="bg-purple-600/90 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1">
-                <span>🏃</span>
-                <span>+{digimon.movementBonus}</span>
-              </div>
-            )}
+            {digimon.movementBonus !== undefined &&
+              digimon.movementBonus > 0 && (
+                <div className="bg-purple-600/90 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1">
+                  <span>🏃</span>
+                  <span>+{digimon.movementBonus}</span>
+                </div>
+              )}
           </div>
         </div>
 
@@ -229,16 +230,31 @@ export default function DigimonDetailsModal({
             </div>
           </div>
 
-          {/* Barra de Evolução (XP) - COMENTADO (Mecânica Oculta) */}
-          {/* {!isDead && (
+          {/* Barra de Evolução (XP) */}
+          {!isDead && (
             <div>
               <div className="flex justify-between items-center mb-2">
                 <span className="text-gray-300 font-semibold text-sm">
-                  ⭐ Progresso de Evolução (TESTE)
+                  ⭐ Progresso de Evolução
                 </span>
-                <span className="text-blue-400 font-bold text-lg">
-                  {(digimon.evolutionProgress || 0).toFixed(1)}%
-                </span>
+                <div className="flex items-center gap-2">
+                  {/* Indicador de Cooldown */}
+                  {currentTurnCount !== undefined &&
+                    digimon.lastEvolutionTurn !== undefined && (
+                      <>
+                        {currentTurnCount - digimon.lastEvolutionTurn < 2 && (
+                          <span className="text-orange-400 text-xs font-semibold animate-pulse">
+                            ⏳ Cooldown:{" "}
+                            {2 - (currentTurnCount - digimon.lastEvolutionTurn)}
+                            T
+                          </span>
+                        )}
+                      </>
+                    )}
+                  <span className="text-blue-400 font-bold text-lg">
+                    {(digimon.evolutionProgress || 0).toFixed(1)}%
+                  </span>
+                </div>
               </div>
               <div className="w-full bg-gray-700 rounded-full h-6 overflow-hidden border-2 border-gray-600 shadow-inner">
                 <div
@@ -255,7 +271,7 @@ export default function DigimonDetailsModal({
                 </div>
               </div>
             </div>
-          )} */}
+          )}
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-2 sm:gap-3 pt-1 sm:pt-2">
@@ -345,8 +361,12 @@ export default function DigimonDetailsModal({
                       }}
                       className="px-2 sm:px-4 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg flex flex-col items-center justify-center gap-0.5 sm:gap-1"
                     >
-                      <span className="text-lg sm:text-2xl">😴</span>
-                      <span className="text-[10px] sm:text-xs">Descansar</span>
+                      <span className="text-lg sm:text-2xl">
+                        {isDead ? "🆙" : "😴"}
+                      </span>
+                      <span className="text-[10px] sm:text-xs">
+                        {isDead ? "Levantar" : "Descansar"}
+                      </span>
                     </button>
 
                     <button
@@ -395,7 +415,11 @@ export default function DigimonDetailsModal({
                     >
                       <span className="text-lg sm:text-2xl">💢</span>
                       <span className="text-[10px] sm:text-xs">
-                        {canProvoke() ? "Provocar" : `${getProvokeCooldown()}T`}
+                        {canProvoke()
+                          ? "Provocar"
+                          : getProvokeCooldown() > 0
+                          ? `${getProvokeCooldown()}T`
+                          : "Disponível"}
                       </span>
                     </button>
                   </div>

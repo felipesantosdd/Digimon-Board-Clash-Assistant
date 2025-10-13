@@ -34,6 +34,8 @@ export interface GameDigimon {
   attackBonus?: number; // Bônus permanente de ataque (aos dados)
   defenseBonus?: number; // Bônus permanente de defesa (aos dados)
   movementBonus?: number; // Bônus permanente de movimento (casas extras)
+  reviveAttemptedThisTurn?: boolean; // Se já houve tentativa de levantar neste turno
+  lastEvolutionTurn?: number; // Último turno global em que evoluiu (cooldown de 2 turnos)
 }
 
 export interface GamePlayer {
@@ -51,6 +53,8 @@ export interface GameBoss extends Boss {
   calculatedDp: number; // DP calculado (média dos jogadores vivos)
   spawnedAtTurn: number; // Turno em que o boss nasceu
   isDefeated: boolean; // Se o boss foi derrotado
+  lastAttackers?: { digimonId: number; damage: number }[]; // Rastrear danos por Digimon no turno
+  topAggroDigimonId?: number | null; // ID do Digimon que causou mais dano (alvo prioritário)
 }
 
 export interface GameState {

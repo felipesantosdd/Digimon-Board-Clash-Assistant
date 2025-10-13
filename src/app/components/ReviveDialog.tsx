@@ -132,12 +132,12 @@ export default function ReviveDialog({
         // Feedback
         if (success) {
           enqueueSnackbar(
-            `🌟 SUCESSO! Rolou ${roll}/${totalChance} - ${digimonName} reviveu!`,
+            `🌟 SUCESSO! Rolou ${roll}/${totalChance} - ${digimonName} levantou!`,
             { variant: "success" }
           );
         } else {
           enqueueSnackbar(
-            `💔 FALHOU! Rolou ${roll}/${totalChance} - ${digimonName} não reviveu...`,
+            `💔 FALHOU! Rolou ${roll}/${totalChance} - ${digimonName} não levantou...`,
             { variant: "error" }
           );
         }
@@ -177,8 +177,8 @@ export default function ReviveDialog({
         {/* Header */}
         <div className="bg-gradient-to-r from-yellow-600 to-orange-600 text-white px-3 sm:px-6 py-2 sm:py-4 rounded-t-lg sticky top-0 z-10">
           <h3 className="text-base sm:text-xl font-bold flex items-center gap-2">
-            <span className="text-lg sm:text-2xl">✨</span>
-            Reviver Digimon
+            <span className="text-lg sm:text-2xl">🆙</span>
+            Levantar Digimon
           </h3>
           <p className="text-xs sm:text-sm text-yellow-100 mt-0.5 sm:mt-1">
             {digimonName}
@@ -190,13 +190,13 @@ export default function ReviveDialog({
           {/* Explicação */}
           {/*   <div className="bg-gray-700 rounded-lg p-2 sm:p-4 border border-gray-600">
             <p className="text-gray-300 text-xs sm:text-sm text-center">
-              💀 Este Digimon está morto. Você pode tentar revivê-lo, mas a
+              😵 Este Digimon está nocauteado. Você pode tentar levantá-lo, mas a
               chance base é de apenas{" "}
               <span className="text-yellow-400 font-bold">15%</span>.
             </p>
-            <p className="text-orange-400 text-[10px] sm:text-xs text-center mt-1 sm:mt-2 font-semibold">
-              ⚠️ Apenas UMA tentativa de reviver por turno!
-            </p>
+          <p className="text-green-400 text-[10px] sm:text-xs text-center mt-1 sm:mt-2 font-semibold">
+            ✨ Uma tentativa por Digimon por turno! Recupera 20% do HP ao levantar.
+          </p>
           </div>*/}
 
           {/* Campo de Modificador */}
@@ -310,7 +310,7 @@ export default function ReviveDialog({
                 : "bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:from-yellow-600 hover:to-orange-600 transform hover:scale-105"
             }`}
           >
-            {isRolling ? "⏳ Rolando..." : "✨ Tentar Reviver"}
+            {isRolling ? "⏳ Rolando..." : "🆙 Tentar Levantar"}
           </button>
         </div>
       </div>

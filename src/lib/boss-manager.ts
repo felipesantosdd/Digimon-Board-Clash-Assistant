@@ -193,7 +193,7 @@ export class BossManager {
   }
 
   /**
-   * Executa o turno do mundo (boss ataca UM Digimon aleatório com poder fixo)
+   * Executa o turno do mundo (boss ataca jogador com maior aggro ou aleatório)
    */
   static executeWorldTurn(
     boss: GameBoss,
@@ -210,12 +210,18 @@ export class BossManager {
       digimon: GameDigimon;
       playerIndex: number;
       digimonIndex: number;
+      playerId: number;
     }> = [];
 
     players.forEach((player, playerIndex) => {
       player.digimons.forEach((digimon, digimonIndex) => {
         if (digimon.currentHp > 0) {
-          aliveDigimons.push({ digimon, playerIndex, digimonIndex });
+          aliveDigimons.push({
+            digimon,
+            playerIndex,
+            digimonIndex,
+            playerId: player.id,
+          });
         }
       });
     });
@@ -230,22 +236,52 @@ export class BossManager {
       };
     }
 
-    // 2. Escolher um Digimon aleatório
-    const randomIndex = Math.floor(Math.random() * aliveDigimons.length);
-    const target = aliveDigimons[randomIndex];
+    // 2. Escolher alvo baseado em aggro (Digimon específico)
+    let target;
+
+    if (
+      boss.topAggroDigimonId !== undefined &&
+      boss.topAggroDigimonId !== null
+    ) {
+      // Boss ataca o Digimon específico que causou mais dano
+      const targetDigimon = aliveDigimons.find(
+        (ad) => ad.digimon.id === boss.topAggroDigimonId
+      );
+
+      if (targetDigimon) {
+        // Digimon com aggro ainda está vivo
+        target = targetDigimon;
+        console.log(
+          `🎯 [BOSS AGGRO] Boss atacando ${target.digimon.name} (ID: ${boss.topAggroDigimonId}) - maior dano no turno anterior`
+        );
+      } else {
+        // Digimon com aggro está nocauteado, escolher aleatório
+        const randomIndex = Math.floor(Math.random() * aliveDigimons.length);
+        target = aliveDigimons[randomIndex];
+        console.log(
+          `🎲 [BOSS AGGRO] Digimon com aggro nocauteado, alvo aleatório: ${target.digimon.name}`
+        );
+      }
+    } else {
+      // Ninguém atacou o boss, escolher aleatório
+      const randomIndex = Math.floor(Math.random() * aliveDigimons.length);
+      target = aliveDigimons[randomIndex];
+      console.log(
+        `🎲 [BOSS AGGRO] Ninguém atacou o boss, alvo aleatório: ${target.digimon.name}`
+      );
+    }
 
     // 3. Calcular poder de ataque do boss (DP / 3)
-    const bossPower = Math.ceil((boss.calculatedDp / 3) / 100) * 100;
+    const bossPower = Math.ceil(boss.calculatedDp / 3 / 100) * 100;
 
     // 4. Calcular poder do Digimon alvo
-    const targetPower = Math.ceil((target.digimon.dp / 3) / 100) * 100;
+    const targetPower = Math.ceil(target.digimon.dp / 3 / 100) * 100;
 
     // 5. Calcular defesa do Digimon (baseada no próprio poder)
     const targetDefenseBonus = target.digimon.defenseBonus || 0;
     const targetDefensePercentage = targetDefenseBonus * 2; // Cada ponto = 2%
-    const targetDefense = Math.round(
-      (targetPower * (targetDefensePercentage / 100)) / 100
-    ) * 100;
+    const targetDefense =
+      Math.round((targetPower * (targetDefensePercentage / 100)) / 100) * 100;
 
     // 6. Calcular dano líquido (Poder boss - Defesa do Digimon)
     let netDamage = Math.max(0, bossPower - targetDefense);

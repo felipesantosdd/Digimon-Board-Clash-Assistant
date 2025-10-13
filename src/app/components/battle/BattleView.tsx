@@ -124,9 +124,9 @@ export default function BattleView({
               {battleComplete && attackerDead && (
                 <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-2xl sm:text-4xl mb-1 sm:mb-2">💀</div>
-                    <p className="text-red-400 font-bold text-[10px] sm:text-sm">
-                      ELIMINADO
+                    <div className="text-2xl sm:text-4xl mb-1 sm:mb-2">😵</div>
+                    <p className="text-orange-400 font-bold text-[10px] sm:text-sm">
+                      NOCAUTEADO
                     </p>
                   </div>
                 </div>
@@ -216,21 +216,21 @@ export default function BattleView({
               attacker.digimon.defenseBonus ||
               attacker.digimon.movementBonus) && (
               <div className="flex flex-wrap gap-1 justify-center">
-                {attacker.digimon.attackBonus &&
+                {attacker.digimon.attackBonus !== undefined &&
                   attacker.digimon.attackBonus > 0 && (
                     <div className="bg-red-600/90 text-white text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shadow-lg flex items-center gap-0.5 sm:gap-1">
                       <span>⚔️</span>
                       <span>+{attacker.digimon.attackBonus}</span>
                     </div>
                   )}
-                {attacker.digimon.defenseBonus &&
+                {attacker.digimon.defenseBonus !== undefined &&
                   attacker.digimon.defenseBonus > 0 && (
                     <div className="bg-blue-600/90 text-white text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shadow-lg flex items-center gap-0.5 sm:gap-1">
                       <span>🛡️</span>
                       <span>+{attacker.digimon.defenseBonus}</span>
                     </div>
                   )}
-                {attacker.digimon.movementBonus &&
+                {attacker.digimon.movementBonus !== undefined &&
                   attacker.digimon.movementBonus > 0 && (
                     <div className="bg-purple-600/90 text-white text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shadow-lg flex items-center gap-0.5 sm:gap-1">
                       <span>🏃</span>
@@ -313,9 +313,9 @@ export default function BattleView({
               {battleComplete && defenderDead && (
                 <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-2xl sm:text-4xl mb-1 sm:mb-2">💀</div>
-                    <p className="text-red-400 font-bold text-[10px] sm:text-sm">
-                      ELIMINADO
+                    <div className="text-2xl sm:text-4xl mb-1 sm:mb-2">😵</div>
+                    <p className="text-orange-400 font-bold text-[10px] sm:text-sm">
+                      NOCAUTEADO
                     </p>
                   </div>
                 </div>
@@ -405,21 +405,21 @@ export default function BattleView({
               defender.digimon.defenseBonus ||
               defender.digimon.movementBonus) && (
               <div className="flex flex-wrap gap-1 justify-center">
-                {defender.digimon.attackBonus &&
+                {defender.digimon.attackBonus !== undefined &&
                   defender.digimon.attackBonus > 0 && (
                     <div className="bg-red-600/90 text-white text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shadow-lg flex items-center gap-0.5 sm:gap-1">
                       <span>⚔️</span>
                       <span>+{defender.digimon.attackBonus}</span>
                     </div>
                   )}
-                {defender.digimon.defenseBonus &&
+                {defender.digimon.defenseBonus !== undefined &&
                   defender.digimon.defenseBonus > 0 && (
                     <div className="bg-blue-600/90 text-white text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shadow-lg flex items-center gap-0.5 sm:gap-1">
                       <span>🛡️</span>
                       <span>+{defender.digimon.defenseBonus}</span>
                     </div>
                   )}
-                {defender.digimon.movementBonus &&
+                {defender.digimon.movementBonus !== undefined &&
                   defender.digimon.movementBonus > 0 && (
                     <div className="bg-purple-600/90 text-white text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shadow-lg flex items-center gap-0.5 sm:gap-1">
                       <span>🏃</span>
