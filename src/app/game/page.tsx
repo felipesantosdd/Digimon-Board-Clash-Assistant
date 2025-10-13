@@ -1157,9 +1157,10 @@ export default function GamePage() {
       }
       const allItems = await response.json();
 
-      // Filtrar itens com dropChance > 0
+      // Filtrar itens ATIVOS com dropChance > 0
       const availableItems = allItems.filter(
-        (item: { dropChance?: number }) => (item.dropChance || 0) > 0
+        (item: { dropChance?: number; active?: boolean }) =>
+          (item.dropChance || 0) > 0 && item.active !== false
       );
 
       if (availableItems.length === 0) {

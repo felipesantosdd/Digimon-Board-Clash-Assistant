@@ -57,16 +57,15 @@ for (const line of lines) {
   const attributeId = ATTRIBUTE_MAP[attribute];
 
   if (!attributeId) {
-    console.log(`⚠️  Atributo desconhecido: "${attribute}" para ${digimonName}`);
+    console.log(
+      `⚠️  Atributo desconhecido: "${attribute}" para ${digimonName}`
+    );
     skipped++;
     continue;
   }
 
   // Buscar o Digimon no banco (case-insensitive e tratando caracteres especiais)
-  const searchName = digimonName
-    .replace(/\s+/g, " ")
-    .trim()
-    .toLowerCase();
+  const searchName = digimonName.replace(/\s+/g, " ").trim().toLowerCase();
 
   const digimon = db
     .prepare(
@@ -129,4 +128,5 @@ if (updates.length > 0 && updates.length <= 20) {
 console.log("\n");
 
 db.close();
+
 

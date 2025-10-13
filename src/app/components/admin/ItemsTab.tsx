@@ -121,6 +121,40 @@ export default function ItemsTab({ isProduction = false }: ItemsTabProps) {
     }
   };
 
+  const handleToggleActive = async (item: Item) => {
+    const newStatus = !item.active;
+
+    try {
+      const response = await fetch(`/api/items/${item.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...item,
+          active: newStatus,
+        }),
+      });
+
+      if (response.ok) {
+        fetchItems();
+        enqueueSnackbar(
+          `Item "${item.name}" ${newStatus ? "ativado" : "desativado"} com sucesso!`,
+          {
+            variant: "success",
+          }
+        );
+      } else {
+        const error = await response.json();
+        enqueueSnackbar(`Erro: ${error.error}`, { variant: "error" });
+      }
+    } catch (error) {
+      enqueueSnackbar("Erro ao atualizar status do item", {
+        variant: "error",
+      });
+    }
+  };
+
   const filteredItems = items.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -265,18 +299,34 @@ export default function ItemsTab({ isProduction = false }: ItemsTabProps) {
                   {/* Botões de ação */}
                   {!isProduction && (
                     <div className="space-y-2">
+                      {/* Status Badge */}
+                      <div
+                        className={`text-center py-2 px-3 rounded-lg font-bold text-sm ${
+                          item.active
+                            ? "bg-green-600/20 text-green-400 border border-green-600"
+                            : "bg-gray-600/20 text-gray-400 border border-gray-600"
+                        }`}
+                      >
+                        {item.active ? "✅ ATIVO" : "⏸️ INATIVO"}
+                      </div>
+
+                      {/* Toggle Active/Inactive */}
+                      <button
+                        onClick={() => handleToggleActive(item)}
+                        className={`w-full px-4 py-2 text-white text-sm font-semibold rounded-lg transition-colors ${
+                          item.active
+                            ? "bg-gray-600 hover:bg-gray-700"
+                            : "bg-green-600 hover:bg-green-700"
+                        }`}
+                      >
+                        {item.active ? "⏸️ Desativar" : "▶️ Ativar"}
+                      </button>
+
                       <button
                         onClick={() => handleEditItem(item)}
                         className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
                       >
                         ✏️ Editar
-                      </button>
-
-                      <button
-                        onClick={() => handleDeleteItem(item.id, item.name)}
-                        className="w-full px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors"
-                      >
-                        🗑️ Excluir
                       </button>
                     </div>
                   )}

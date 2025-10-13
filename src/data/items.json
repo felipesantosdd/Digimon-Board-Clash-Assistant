@@ -7,7 +7,8 @@
     "effect": "heal_2000",
     "dropChance": 0,
     "targetDigimons": [],
-    "effectId": 2
+    "effectId": 2,
+    "active": 1
   },
   {
     "id": 22,
@@ -21,7 +22,8 @@
       531,
       527
     ],
-    "effectId": 17
+    "effectId": 17,
+    "active": 1
   },
   {
     "id": 23,
@@ -35,7 +37,8 @@
       541,
       532
     ],
-    "effectId": 17
+    "effectId": 17,
+    "active": 1
   },
   {
     "id": 24,
@@ -49,7 +52,8 @@
       537,
       536
     ],
-    "effectId": 17
+    "effectId": 17,
+    "active": 1
   },
   {
     "id": 25,
@@ -62,7 +66,8 @@
       525,
       529
     ],
-    "effectId": 17
+    "effectId": 17,
+    "active": 1
   },
   {
     "id": 26,
@@ -78,7 +83,8 @@
       566,
       567
     ],
-    "effectId": 17
+    "effectId": 17,
+    "active": 1
   },
   {
     "id": 27,
@@ -91,7 +97,8 @@
       533,
       538
     ],
-    "effectId": 17
+    "effectId": 17,
+    "active": 1
   },
   {
     "id": 28,
@@ -105,7 +112,8 @@
       534,
       522
     ],
-    "effectId": 17
+    "effectId": 17,
+    "active": 1
   },
   {
     "id": 29,
@@ -119,7 +127,8 @@
       526,
       528
     ],
-    "effectId": 17
+    "effectId": 17,
+    "active": 1
   },
   {
     "id": 30,
@@ -131,7 +140,8 @@
     "targetDigimons": [
       573
     ],
-    "effectId": 17
+    "effectId": 17,
+    "active": 1
   },
   {
     "id": 31,
@@ -144,7 +154,8 @@
       518,
       540
     ],
-    "effectId": 17
+    "effectId": 17,
+    "active": 1
   },
   {
     "id": 32,
@@ -157,7 +168,8 @@
       317,
       539
     ],
-    "effectId": 17
+    "effectId": 17,
+    "active": 1
   },
   {
     "id": 33,
@@ -169,7 +181,8 @@
     "targetDigimons": [
       542
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 34,
@@ -177,11 +190,12 @@
     "description": "O espírito bestial do Fogo. Transforma em BurningGreymon/Vritramon.",
     "image": "/images/items/1760291806274_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       85
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 35,
@@ -189,11 +203,12 @@
     "description": "O espírito lendário da Luz. Permite a transformação em Lobomon.",
     "image": "/images/items/1760292003735_image.webp",
     "effect": "",
-    "dropChance": 8,
+    "dropChance": 15,
     "targetDigimons": [
       75
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 36,
@@ -201,11 +216,12 @@
     "description": "O espírito bestial da Luz. Transforma em KendoGarurumon/Garmmon.",
     "image": "/images/items/1760292211696_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       82
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 37,
@@ -217,7 +233,8 @@
     "targetDigimons": [
       543
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 38,
@@ -225,11 +242,12 @@
     "description": "O espírito bestial do Gelo. Transforma em Korikakumon.",
     "image": "/images/items/1760291617305_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       544
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 39,
@@ -241,7 +259,8 @@
     "targetDigimons": [
       545
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 40,
@@ -249,11 +268,12 @@
     "description": "O espírito bestial do Vento. Transforma em Zephyrmon.",
     "image": "/images/items/1760289471314_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       546
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 41,
@@ -265,7 +285,8 @@
     "targetDigimons": [
       547
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 42,
@@ -273,11 +294,12 @@
     "description": "O espírito bestial do Trovão. Transforma em MetalKabuterimon.",
     "image": "/images/items/1760291833284_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       548
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 43,
@@ -289,7 +311,8 @@
     "targetDigimons": [
       549
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 44,
@@ -297,11 +320,12 @@
     "description": "O espírito bestial das Trevas. Transforma em JagerLowemon/KaiserLeomon.",
     "image": "/images/items/1760292158351_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       550
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 45,
@@ -311,7 +335,8 @@
     "effect": "",
     "dropChance": 5,
     "targetDigimons": [],
-    "effectId": 21
+    "effectId": 21,
+    "active": 0
   },
   {
     "id": 46,
@@ -321,7 +346,8 @@
     "effect": "",
     "dropChance": 5,
     "targetDigimons": [],
-    "effectId": 21
+    "effectId": 21,
+    "active": 0
   },
   {
     "id": 47,
@@ -333,7 +359,8 @@
     "targetDigimons": [
       295
     ],
-    "effectId": 21
+    "effectId": 21,
+    "active": 0
   },
   {
     "id": 48,
@@ -343,7 +370,8 @@
     "effect": "",
     "dropChance": 5,
     "targetDigimons": [],
-    "effectId": 21
+    "effectId": 21,
+    "active": 0
   },
   {
     "id": 49,
@@ -356,7 +384,8 @@
       446,
       506
     ],
-    "effectId": 21
+    "effectId": 21,
+    "active": 0
   },
   {
     "id": 50,
@@ -369,7 +398,8 @@
       302,
       107
     ],
-    "effectId": 21
+    "effectId": 21,
+    "active": 0
   },
   {
     "id": 51,
@@ -382,7 +412,8 @@
       106,
       142
     ],
-    "effectId": 21
+    "effectId": 21,
+    "active": 0
   },
   {
     "id": 52,
@@ -396,7 +427,8 @@
       111,
       112
     ],
-    "effectId": 21
+    "effectId": 21,
+    "active": 0
   },
   {
     "id": 53,
@@ -404,11 +436,12 @@
     "description": "O espírito lendário da Terra. Transforma em Grumblemon.",
     "image": "/images/items/1760294262333_image.webp",
     "effect": "",
-    "dropChance": 8,
+    "dropChance": 15,
     "targetDigimons": [
       576
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 54,
@@ -416,11 +449,12 @@
     "description": "O espírito bestial da Terra. Transforma em Gigasmon.",
     "image": "/images/items/1760294214453_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       577
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 55,
@@ -428,11 +462,12 @@
     "description": "O espírito lendário da Madeira. Transforma em Arbormon.",
     "image": "/images/items/1760292398251_image.webp",
     "effect": "",
-    "dropChance": 8,
+    "dropChance": 12,
     "targetDigimons": [
       578
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 56,
@@ -440,11 +475,12 @@
     "description": "O espírito bestial da Madeira. Transforma em Petaldramon.",
     "image": "/images/items/1760294318443_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       579
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 57,
@@ -456,7 +492,8 @@
     "targetDigimons": [
       580
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 58,
@@ -464,11 +501,12 @@
     "description": "O espírito bestial da Água. Transforma em Calmaramon.",
     "image": "/images/items/1760294159831_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       581
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 59,
@@ -480,7 +518,8 @@
     "targetDigimons": [
       483
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 60,
@@ -488,11 +527,12 @@
     "description": "O espírito bestial do Aço. Transforma em Sephirotmon.",
     "image": "/images/items/1760293836705_image.webp",
     "effect": "",
-    "dropChance": 5,
+    "dropChance": 15,
     "targetDigimons": [
       582
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 61,
@@ -504,7 +544,8 @@
     "targetDigimons": [
       583
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 62,
@@ -512,11 +553,12 @@
     "description": "O espírito bestial corrompido. Transforma em Velgemon.",
     "image": "/images/items/1760294123402_image.webp",
     "effect": "",
-    "dropChance": 4,
+    "dropChance": 15,
     "targetDigimons": [
       584
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 63,
@@ -528,7 +570,8 @@
     "targetDigimons": [
       585
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 64,
@@ -540,7 +583,8 @@
     "targetDigimons": [
       91
     ],
-    "effectId": 20
+    "effectId": 20,
+    "active": 1
   },
   {
     "id": 65,
@@ -550,7 +594,8 @@
     "effect": "",
     "dropChance": 10,
     "targetDigimons": [],
-    "effectId": 22
+    "effectId": 22,
+    "active": 1
   },
   {
     "id": 66,
@@ -560,7 +605,8 @@
     "effect": "",
     "dropChance": 5,
     "targetDigimons": [],
-    "effectId": 21
+    "effectId": 21,
+    "active": 0
   },
   {
     "id": 67,
@@ -570,7 +616,8 @@
     "effect": "",
     "dropChance": 5,
     "targetDigimons": [],
-    "effectId": 21
+    "effectId": 21,
+    "active": 0
   },
   {
     "id": 68,
@@ -580,7 +627,8 @@
     "effect": "",
     "dropChance": 5,
     "targetDigimons": [],
-    "effectId": 21
+    "effectId": 21,
+    "active": 0
   },
   {
     "id": 69,
@@ -590,7 +638,8 @@
     "effect": "",
     "dropChance": 10,
     "targetDigimons": [],
-    "effectId": 23
+    "effectId": 23,
+    "active": 1
   },
   {
     "id": 70,
@@ -600,7 +649,8 @@
     "effect": "",
     "dropChance": 30,
     "targetDigimons": [],
-    "effectId": null
+    "effectId": null,
+    "active": 1
   },
   {
     "id": 71,
@@ -610,7 +660,8 @@
     "effect": "",
     "dropChance": 25,
     "targetDigimons": [],
-    "effectId": null
+    "effectId": null,
+    "active": 1
   },
   {
     "id": 72,
@@ -620,7 +671,8 @@
     "effect": "",
     "dropChance": 20,
     "targetDigimons": [],
-    "effectId": null
+    "effectId": null,
+    "active": 1
   },
   {
     "id": 73,
@@ -630,7 +682,8 @@
     "effect": "",
     "dropChance": 18,
     "targetDigimons": [],
-    "effectId": null
+    "effectId": null,
+    "active": 1
   },
   {
     "id": 74,
@@ -640,7 +693,8 @@
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [],
-    "effectId": null
+    "effectId": null,
+    "active": 1
   },
   {
     "id": 75,
@@ -650,7 +704,8 @@
     "effect": "",
     "dropChance": 12,
     "targetDigimons": [],
-    "effectId": null
+    "effectId": null,
+    "active": 1
   },
   {
     "id": 76,
@@ -660,7 +715,8 @@
     "effect": "",
     "dropChance": 10,
     "targetDigimons": [],
-    "effectId": null
+    "effectId": null,
+    "active": 1
   },
   {
     "id": 77,
@@ -670,7 +726,8 @@
     "effect": "",
     "dropChance": 8,
     "targetDigimons": [],
-    "effectId": null
+    "effectId": null,
+    "active": 1
   },
   {
     "id": 78,
@@ -680,7 +737,8 @@
     "effect": "",
     "dropChance": 6,
     "targetDigimons": [],
-    "effectId": null
+    "effectId": null,
+    "active": 1
   },
   {
     "id": 79,
@@ -690,7 +748,8 @@
     "effect": "",
     "dropChance": 4,
     "targetDigimons": [],
-    "effectId": null
+    "effectId": null,
+    "active": 1
   },
   {
     "id": 80,
@@ -700,7 +759,8 @@
     "effect": "",
     "dropChance": 20,
     "targetDigimons": [],
-    "effectId": 24
+    "effectId": 24,
+    "active": 1
   },
   {
     "id": 81,
@@ -710,7 +770,8 @@
     "effect": "",
     "dropChance": 12,
     "targetDigimons": [],
-    "effectId": 24
+    "effectId": 24,
+    "active": 1
   },
   {
     "id": 82,
@@ -720,7 +781,8 @@
     "effect": "",
     "dropChance": 6,
     "targetDigimons": [],
-    "effectId": 24
+    "effectId": 24,
+    "active": 1
   },
   {
     "id": 83,
@@ -730,7 +792,8 @@
     "effect": "",
     "dropChance": 20,
     "targetDigimons": [],
-    "effectId": 25
+    "effectId": 25,
+    "active": 1
   },
   {
     "id": 84,
@@ -740,7 +803,8 @@
     "effect": "",
     "dropChance": 12,
     "targetDigimons": [],
-    "effectId": 25
+    "effectId": 25,
+    "active": 1
   },
   {
     "id": 85,
@@ -750,7 +814,8 @@
     "effect": "",
     "dropChance": 6,
     "targetDigimons": [],
-    "effectId": 25
+    "effectId": 25,
+    "active": 1
   },
   {
     "id": 86,
@@ -760,7 +825,8 @@
     "effect": "",
     "dropChance": 25,
     "targetDigimons": [],
-    "effectId": 23
+    "effectId": 23,
+    "active": 1
   },
   {
     "id": 87,
@@ -770,7 +836,8 @@
     "effect": "",
     "dropChance": 18,
     "targetDigimons": [],
-    "effectId": 23
+    "effectId": 23,
+    "active": 1
   },
   {
     "id": 88,
@@ -780,7 +847,8 @@
     "effect": "",
     "dropChance": 12,
     "targetDigimons": [],
-    "effectId": 23
+    "effectId": 23,
+    "active": 1
   },
   {
     "id": 89,
@@ -790,7 +858,8 @@
     "effect": "",
     "dropChance": 8,
     "targetDigimons": [],
-    "effectId": 23
+    "effectId": 23,
+    "active": 1
   },
   {
     "id": 90,
@@ -800,6 +869,7 @@
     "effect": "",
     "dropChance": 5,
     "targetDigimons": [],
-    "effectId": 23
+    "effectId": 23,
+    "active": 1
   }
 ]

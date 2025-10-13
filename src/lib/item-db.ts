@@ -19,7 +19,10 @@ export function initializeItemsTable() {
 // Buscar todos os itens
 export function getAllItems(): Item[] {
   const items = db.prepare("SELECT * FROM items ORDER BY name").all() as Array<
-    Omit<Item, "targetDigimons"> & { targetDigimons: string }
+    Omit<Item, "targetDigimons" | "active"> & {
+      targetDigimons: string;
+      active: number;
+    }
   >;
 
   return items.map((item) => ({
@@ -27,13 +30,17 @@ export function getAllItems(): Item[] {
     targetDigimons: item.targetDigimons
       ? JSON.parse(item.targetDigimons)
       : undefined,
+    active: item.active === 1,
   }));
 }
 
 // Buscar item por ID
 export function getItemById(id: number): Item | undefined {
   const item = db.prepare("SELECT * FROM items WHERE id = ?").get(id) as
-    | (Omit<Item, "targetDigimons"> & { targetDigimons: string })
+    | (Omit<Item, "targetDigimons" | "active"> & {
+        targetDigimons: string;
+        active: number;
+      })
     | undefined;
 
   if (!item) return undefined;
@@ -43,14 +50,15 @@ export function getItemById(id: number): Item | undefined {
     targetDigimons: item.targetDigimons
       ? JSON.parse(item.targetDigimons)
       : undefined,
+    active: item.active === 1,
   };
 }
 
 // Criar novo item
 export function createItem(item: Omit<Item, "id">): Item {
   const stmt = db.prepare(`
-    INSERT INTO items (name, description, image, effect, effectId, dropChance, targetDigimons)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO items (name, description, image, effect, effectId, dropChance, targetDigimons, active)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
   const result = stmt.run(
@@ -60,7 +68,8 @@ export function createItem(item: Omit<Item, "id">): Item {
     item.effect,
     item.effectId || null,
     item.dropChance || 0,
-    JSON.stringify(item.targetDigimons || [])
+    JSON.stringify(item.targetDigimons || []),
+    item.active !== false ? 1 : 0 // Padrão: ativo
   );
 
   return {
@@ -101,6 +110,10 @@ export function updateItem(id: number, item: Partial<Omit<Item, "id">>): void {
   if (item.targetDigimons !== undefined) {
     fields.push("targetDigimons = ?");
     values.push(JSON.stringify(item.targetDigimons));
+  }
+  if (item.active !== undefined) {
+    fields.push("active = ?");
+    values.push(item.active ? 1 : 0);
   }
 
   if (fields.length === 0) return;
