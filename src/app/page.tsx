@@ -176,6 +176,173 @@ export default function Home() {
     }
   };
 
+  const createAutoTestGame = async () => {
+    try {
+      // Buscar Digimons Rookie (nível 1)
+      const digimonsRes = await fetch("/api/digimons");
+      if (!digimonsRes.ok) {
+        throw new Error("Erro ao carregar Digimons");
+      }
+
+      const allDigimons = await digimonsRes.json();
+
+      console.log(
+        `🧪 [AUTO-TEST] Total de Digimons recebidos:`,
+        allDigimons.length
+      );
+      console.log(`🧪 [AUTO-TEST] Primeiro Digimon:`, allDigimons[0]);
+
+      // Filtrar apenas Rookies (nível 1) ativos
+      // O campo active pode ser boolean true ou número 1
+      const rookies = allDigimons.filter(
+        (d: any) =>
+          d.level === 1 &&
+          (d.active === true || d.active === 1 || d.active === undefined)
+      );
+
+      console.log(`🧪 [AUTO-TEST] ${rookies.length} Rookies disponíveis`);
+      console.log(
+        `🧪 [AUTO-TEST] Primeiros 10 Rookies:`,
+        rookies.slice(0, 10).map((r: any) => r.name)
+      );
+
+      if (rookies.length < 6) {
+        console.error("❌ Rookies filtrados:", rookies);
+        console.error(
+          "❌ Todos os Digimons (primeiros 20):",
+          allDigimons.slice(0, 20)
+        );
+        alert(
+          `Erro: Apenas ${rookies.length} Rookies encontrados. Necessário pelo menos 6.\n\nTotal de Digimons: ${allDigimons.length}\nVerifique o console para detalhes.`
+        );
+        return;
+      }
+
+      // Embaralhar e pegar 6 Rookies
+      const shuffled = [...rookies].sort(() => Math.random() - 0.5);
+      const selectedRookies = shuffled.slice(0, 6);
+
+      console.log(
+        `🧪 [AUTO-TEST] Rookies selecionados:`,
+        selectedRookies.map((r: any) => r.name)
+      );
+
+      // Escolher 2 tamers aleatórios
+      const shuffledTamers = [...tamers].sort(() => Math.random() - 0.5);
+      const selectedTamers = shuffledTamers.slice(0, 2);
+
+      // Criar jogadores com Rookies
+      const players = selectedTamers.map((tamer, pIndex) => ({
+        id: pIndex + 1,
+        name: tamer.name,
+        avatar: tamer.image,
+        bag: [], // Bag vazia
+        digimons: selectedRookies
+          .slice(pIndex * 3, pIndex * 3 + 3)
+          .map((rookie: any, dIndex: number) => {
+            const rookieDp = rookie.dp || 1000;
+            const uniqueId = Date.now() + pIndex * 10000 + dIndex * 100;
+
+            console.log(
+              `🧪 [CREATING] Digimon ${dIndex + 1} para jogador ${pIndex + 1}:`,
+              `${rookie.name}, DP: ${rookieDp}, HP: ${rookieDp}`
+            );
+
+            const digimonData = {
+              id: uniqueId,
+              name: rookie.name,
+              image: rookie.image,
+              level: 1, // Rookie
+              dp: rookieDp,
+              baseDp: rookieDp,
+              dpBonus: 0,
+              currentHp: rookieDp, // HP cheio
+              typeId: rookie.typeId,
+              attributeId: rookie.attributeId,
+              evolution: Array.isArray(rookie.evolution)
+                ? rookie.evolution
+                : typeof rookie.evolution === "string"
+                ? JSON.parse(rookie.evolution)
+                : [],
+              evolutionProgress: 0, // XP zerado ✅
+              canEvolve: false,
+              evolutionLocked: false,
+              hasActedThisTurn: false,
+              hasDigivice: false,
+              bag: [], // Sem itens
+              defending: null,
+              provokedBy: null,
+              lastProvokeTurn: null,
+              statuses: [],
+              attackBonus: 0,
+              defenseBonus: 0,
+              movementBonus: 0,
+              reviveAttemptedThisTurn: false,
+              lastEvolutionTurn: undefined,
+              temporaryEvolution: undefined,
+              originalId: rookie.id,
+            };
+
+            console.log(
+              `✅ [CREATED] ${digimonData.name}: HP ${digimonData.currentHp}/${digimonData.dp}`
+            );
+
+            return digimonData;
+          }),
+      }));
+
+      console.log("🧪 [AUTO-TEST] Jogadores criados:", players);
+
+      // Verificar se todos os Digimons têm HP
+      players.forEach((player, pIndex) => {
+        console.log(`🧪 [AUTO-TEST] Jogador ${pIndex + 1} (${player.name}):`);
+        player.digimons.forEach((d, dIndex) => {
+          console.log(
+            `   ${dIndex + 1}. ${d.name} - HP: ${d.currentHp}/${d.dp}, XP: ${
+              d.evolutionProgress
+            }%, Level: ${d.level}`
+          );
+
+          if (!d.currentHp || d.currentHp <= 0) {
+            console.error(`❌ ERRO: ${d.name} tem HP inválido!`, d);
+          }
+        });
+      });
+
+      // Criar estado do jogo
+      const gameState = {
+        gameId: `autotest-${Date.now()}`,
+        createdAt: new Date().toISOString(),
+        players,
+        currentTurnPlayerIndex: 0,
+        turnCount: 0, // Começar do turno 0 ✅
+        reviveAttemptThisTurn: false,
+        activeBoss: undefined, // Sem boss inicial
+        lastBossDefeatedTurn: undefined,
+        bossesDefeated: 0,
+      };
+
+      console.log("🧪 [AUTO-TEST] Estado do jogo criado:", gameState);
+
+      // Salvar no localStorage
+      localStorage.setItem(
+        "digimon_board_clash_game_state",
+        JSON.stringify(gameState)
+      );
+
+      // Marcar que deve ativar auto-test ao entrar no jogo
+      localStorage.setItem("autotest_mode", "true");
+
+      console.log("🧪 [AUTO-TEST] Estado inicial criado:", gameState);
+
+      // Redirecionar para o jogo
+      router.push("/game");
+    } catch (error) {
+      console.error("❌ Erro ao criar jogo de auto-test:", error);
+      alert("Erro ao criar jogo de auto-test");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
       {/* Header */}
@@ -198,14 +365,24 @@ export default function Home() {
                 <span>▶️</span> <span className="hidden sm:inline">Play</span>
               </button>
               {process.env.NODE_ENV === "development" && (
-                <button
-                  onClick={createTestGame}
-                  className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-purple-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-purple-700 transition-colors duration-200 shadow-sm hover:shadow-md flex items-center gap-1 sm:gap-2"
-                  title="Inicia jogo de teste com 6 Digimons aleatórios, XP cheio e todos os itens"
-                >
-                  <span>🧪</span>{" "}
-                  <span className="hidden sm:inline">Teste</span>
-                </button>
+                <>
+                  <button
+                    onClick={createTestGame}
+                    className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-purple-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-purple-700 transition-colors duration-200 shadow-sm hover:shadow-md flex items-center gap-1 sm:gap-2"
+                    title="Inicia jogo de teste com 6 Digimons aleatórios, XP cheio e todos os itens"
+                  >
+                    <span>🧪</span>{" "}
+                    <span className="hidden sm:inline">Teste</span>
+                  </button>
+                  <button
+                    onClick={createAutoTestGame}
+                    className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-blue-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md flex items-center gap-1 sm:gap-2"
+                    title="Inicia jogo automático com Rookies, XP zerado e IA jogando"
+                  >
+                    <span>🤖</span>{" "}
+                    <span className="hidden sm:inline">Auto-Test</span>
+                  </button>
+                </>
               )}
               <Link href="/biblioteca">
                 <button className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-orange-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-orange-700 transition-colors duration-200 shadow-sm hover:shadow-md">

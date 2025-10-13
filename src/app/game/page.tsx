@@ -27,6 +27,7 @@ import type { GameDigimon, GameBoss } from "@/types/game";
 import type { BattleResult } from "@/lib/battle-manager";
 import type { Item } from "@/types/item";
 import { BossManager } from "@/lib/boss-manager";
+import { AIPlayer } from "@/lib/ai-player";
 
 export default function GamePage() {
   const router = useRouter();
@@ -71,6 +72,197 @@ export default function GamePage() {
   } | null>(null);
   const [isAttackingBoss, setIsAttackingBoss] = useState(false);
 
+  // Estados para auto-test
+  const [isAutoTestActive, setIsAutoTestActive] = useState(false);
+  const [autoTestSpeed, setAutoTestSpeed] = useState(1000); // ms entre ações
+  const [testLogs, setTestLogs] = useState<
+    Array<{
+      turn: number;
+      player: string;
+      digimon: string;
+      action: string;
+      result: string;
+      timestamp: Date;
+    }>
+  >([]);
+
+  // Função para adicionar log de teste
+  const addTestLog = (
+    player: string,
+    digimon: string,
+    action: string,
+    result: string
+  ) => {
+    setTestLogs((prev) => [
+      ...prev.slice(-50), // Manter apenas últimos 50 logs
+      {
+        turn: gameState?.turnCount || 0,
+        player,
+        digimon,
+        action,
+        result,
+        timestamp: new Date(),
+      },
+    ]);
+  };
+
+  // Resetar jogo para modo de teste (Digimons iniciais, XP zerado, sem itens)
+  const resetToTestMode = async () => {
+    if (!gameState) return;
+
+    try {
+      // Buscar Digimons Rookie (nível 1) do banco
+      const response = await fetch("/api/digimons");
+      const allDigimons = await response.json();
+      const rookies = allDigimons.filter(
+        (d: any) => d.level === 1 && d.active === 1
+      );
+
+      // Embaralhar e pegar Digimons aleatórios para cada jogador
+      const shuffled = rookies.sort(() => Math.random() - 0.5);
+
+      const resetState = {
+        ...gameState,
+        turnCount: 0,
+        currentTurnPlayerIndex: 0,
+        activeBoss: undefined,
+        lastBossDefeatedTurn: undefined,
+        bossesDefeated: 0,
+        players: gameState.players.map((player, pIndex) => {
+          // Pegar 3 Digimons únicos para cada jogador
+          const playerDigimons = shuffled.slice(pIndex * 3, pIndex * 3 + 3);
+
+          return {
+            ...player,
+            bag: [], // Limpar bag
+            digimons: playerDigimons.map((rookie: any, dIndex: number) => {
+              const rookieDp = rookie.dp || 1000;
+              const uniqueId = Date.now() + pIndex * 1000 + dIndex; // ID único baseado em timestamp
+
+              return {
+                id: uniqueId,
+                name: rookie.name,
+                image: rookie.image,
+                level: 1,
+                dp: rookieDp,
+                baseDp: rookieDp,
+                dpBonus: 0,
+                currentHp: rookieDp, // HP cheio
+                typeId: rookie.typeId,
+                attributeId: rookie.attributeId,
+                evolution: Array.isArray(rookie.evolution)
+                  ? rookie.evolution
+                  : typeof rookie.evolution === "string"
+                  ? JSON.parse(rookie.evolution)
+                  : [],
+                evolutionProgress: 0, // XP zerado
+                canEvolve: false,
+                evolutionLocked: false,
+                hasActedThisTurn: false,
+                hasDigivice: false,
+                bag: [], // Sem itens
+                defending: null,
+                provokedBy: null,
+                lastProvokeTurn: null,
+                statuses: [],
+                attackBonus: 0,
+                defenseBonus: 0,
+                movementBonus: 0,
+                reviveAttemptedThisTurn: false,
+                lastEvolutionTurn: undefined,
+                temporaryEvolution: undefined,
+                originalId: rookie.id,
+              };
+            }),
+          };
+        }),
+      };
+
+      saveGameState(resetState);
+      setTestLogs([]);
+      enqueueSnackbar("🧪 Jogo resetado para modo de teste!", {
+        variant: "info",
+      });
+    } catch (error) {
+      console.error("❌ Erro ao resetar para teste:", error);
+      enqueueSnackbar("Erro ao resetar jogo para teste", {
+        variant: "error",
+      });
+    }
+  };
+
+  // Auto-test: executa ações automaticamente
+  useEffect(() => {
+    if (!isAutoTestActive || !gameState) return;
+
+    const autoPlayInterval = setInterval(() => {
+      const currentPlayer = gameState.players[gameState.currentTurnPlayerIndex];
+      const enemies = gameState.players.filter(
+        (p) => p.id !== currentPlayer.id
+      );
+
+      // Escolher Digimon para agir
+      const digimonToAct = AIPlayer.chooseDigimonToAct(currentPlayer.digimons);
+
+      if (!digimonToAct) {
+        // Nenhum Digimon disponível, passar turno
+        console.log("🤖 [AUTO-TEST] Passando turno automaticamente");
+        handleNextTurn();
+        return;
+      }
+
+      // Decidir melhor ação
+      const enemyDigimons = enemies.flatMap((p) => p.digimons);
+      const decision = AIPlayer.decideBestAction(
+        digimonToAct,
+        currentPlayer.digimons,
+        enemyDigimons,
+        gameState.activeBoss
+      );
+
+      console.log(
+        `🤖 [AUTO-TEST] ${digimonToAct.name} decidiu: ${decision.action}`
+      );
+
+      // Preparar informação detalhada do resultado
+      let actionResult = "⚠️ [MOCK] Ação não executada";
+      let actionName = decision.action.toUpperCase();
+      
+      if (decision.action === "attack" && decision.target) {
+        actionName = `ATACAR`;
+        actionResult = `⚔️ Alvo: ${decision.target.name} | HP alvo: ${decision.target.currentHp}/${decision.target.dp}`;
+      } else if (decision.action === "attack_boss" && gameState.activeBoss) {
+        actionName = `ATACAR BOSS`;
+        actionResult = `👹 ${gameState.activeBoss.name} | HP: ${gameState.activeBoss.currentHp.toLocaleString()}/${gameState.activeBoss.maxHp.toLocaleString()}`;
+      } else if (decision.action === "evolve") {
+        actionName = `EVOLUIR`;
+        actionResult = "✨ Evolução disponível | XP: 100%";
+      } else if (decision.action === "explore") {
+        actionName = `EXPLORAR`;
+        actionResult = "🎒 Procurando itens...";
+      } else if (decision.action === "rest") {
+        actionName = `DESCANSAR`;
+        actionResult = `😴 HP atual: ${digimonToAct.currentHp}/${digimonToAct.dp} (${((digimonToAct.currentHp / digimonToAct.dp) * 100).toFixed(0)}%)`;
+      }
+
+      // Adicionar log com nota que é apenas decisão
+      addTestLog(
+        currentPlayer.name,
+        `${digimonToAct.name} (${digimonToAct.currentHp}/${digimonToAct.dp} HP)`,
+        `[DECISÃO] ${actionName}`,
+        `${actionResult} | ⚠️ Ação não executada (apenas simulação)`
+      );
+
+      // IMPORTANTE: Apenas passa turno, NÃO executa a ação
+      // Para execução real, seria necessário chamar as funções de ação
+      setTimeout(() => {
+        handleNextTurn();
+      }, 500);
+    }, autoTestSpeed);
+
+    return () => clearInterval(autoPlayInterval);
+  }, [isAutoTestActive, gameState, autoTestSpeed]);
+
   // Estados para derrota e drops
   const [showDefeatScreen, setShowDefeatScreen] = useState(false);
   const [showBossDropModal, setShowBossDropModal] = useState(false);
@@ -88,6 +280,16 @@ export default function GamePage() {
       router.push("/");
     }
   }, [gameState, isLoading, router, enqueueSnackbar]);
+
+  // Ativar auto-test automaticamente se a flag estiver setada
+  useEffect(() => {
+    const autotestMode = localStorage.getItem("autotest_mode");
+    if (autotestMode === "true" && gameState) {
+      console.log("🤖 [AUTO-TEST] Ativando modo automático...");
+      setIsAutoTestActive(true);
+      localStorage.removeItem("autotest_mode"); // Remover flag
+    }
+  }, [gameState]);
 
   // Sistema de Boss: Spawn e Turno do Mundo
   useEffect(() => {
@@ -2645,11 +2847,37 @@ export default function GamePage() {
               {/* Botão Passar Turno */}
               <button
                 onClick={handleNextTurn}
-                className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-green-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-green-700 transition-colors flex items-center gap-1 sm:gap-2 flex-1 sm:flex-initial justify-center"
+                disabled={isAutoTestActive}
+                className={`px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 text-white text-sm sm:text-base font-semibold rounded-lg transition-colors flex items-center gap-1 sm:gap-2 flex-1 sm:flex-initial justify-center ${
+                  isAutoTestActive
+                    ? "bg-gray-600 cursor-not-allowed"
+                    : "bg-green-600 hover:bg-green-700"
+                }`}
               >
                 <span>⏭️</span>
                 <span className="hidden sm:inline">Passar Turno</span>
                 <span className="sm:hidden">Turno</span>
+              </button>
+
+              {/* Botão Auto-Test */}
+              <button
+                onClick={() => {
+                  if (!isAutoTestActive) {
+                    // Ao ativar, resetar o jogo para modo de teste
+                    resetToTestMode();
+                  }
+                  setIsAutoTestActive(!isAutoTestActive);
+                }}
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 text-white text-sm sm:text-base font-semibold rounded-lg transition-colors flex items-center gap-1 sm:gap-2 ${
+                  isAutoTestActive
+                    ? "bg-orange-600 hover:bg-orange-700 animate-pulse"
+                    : "bg-blue-600 hover:bg-blue-700"
+                }`}
+              >
+                <span>{isAutoTestActive ? "⏸️" : "🤖"}</span>
+                <span className="hidden md:inline">
+                  {isAutoTestActive ? "Pausar" : "Auto"}
+                </span>
               </button>
 
               {/* Botão Finalizar Jogo */}
@@ -2675,436 +2903,546 @@ export default function GamePage() {
 
       {/* Conteúdo Principal */}
       <main className="container mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
-        <div className="mb-4 sm:mb-6 md:mb-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2">
-            🎮 Jogo em Andamento
-          </h2>
-          <p className="text-sm sm:text-base text-gray-300">
-            {gameState.players.length} jogador
-            {gameState.players.length > 1 ? "es" : ""} participando
-          </p>
-        </div>
+        <div className="flex gap-4">
+          {/* Área do Jogo */}
+          <div className={isAutoTestActive ? "flex-1" : "w-full"}>
+            <div className="mb-4 sm:mb-6 md:mb-8">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2">
+                🎮 Jogo em Andamento
+              </h2>
+              <p className="text-sm sm:text-base text-gray-300">
+                {gameState.players.length} jogador
+                {gameState.players.length > 1 ? "es" : ""} participando
+              </p>
+            </div>
 
-        {/* Boss Card ou Contagem Regressiva */}
-        <div className="mb-6 sm:mb-8 md:mb-10">
-          {gameState.activeBoss && !gameState.activeBoss.isDefeated ? (
-            <BossCard
-              boss={gameState.activeBoss}
-              onAttack={handleAttackBoss}
-              canAttack={
-                !!selectedDigimon &&
-                selectedDigimon.digimon.currentHp > 0 &&
-                !selectedDigimon.digimon.hasActedThisTurn
-              }
-              isAttacking={isAttackingBoss}
-            />
-          ) : (
-            (() => {
-              // Calcular turnos restantes
-              const turnsUntilBoss = BossManager.shouldSpawnBoss(
-                gameState.turnCount,
-                gameState.lastBossDefeatedTurn,
-                gameState.activeBoss
-              )
-                ? 0
-                : gameState.lastBossDefeatedTurn !== undefined
-                ? gameState.lastBossDefeatedTurn + 2 - gameState.turnCount
-                : 2 - gameState.turnCount;
+            {/* Boss Card ou Contagem Regressiva */}
+            <div className="mb-6 sm:mb-8 md:mb-10">
+              {gameState.activeBoss && !gameState.activeBoss.isDefeated ? (
+                <BossCard
+                  boss={gameState.activeBoss}
+                  onAttack={handleAttackBoss}
+                  canAttack={
+                    !!selectedDigimon &&
+                    selectedDigimon.digimon.currentHp > 0 &&
+                    !selectedDigimon.digimon.hasActedThisTurn
+                  }
+                  isAttacking={isAttackingBoss}
+                />
+              ) : (
+                (() => {
+                  // Calcular turnos restantes
+                  const turnsUntilBoss = BossManager.shouldSpawnBoss(
+                    gameState.turnCount,
+                    gameState.lastBossDefeatedTurn,
+                    gameState.activeBoss
+                  )
+                    ? 0
+                    : gameState.lastBossDefeatedTurn !== undefined
+                    ? gameState.lastBossDefeatedTurn + 2 - gameState.turnCount
+                    : 2 - gameState.turnCount;
 
-              return turnsUntilBoss > 0 ? (
-                <BossCountdown turnsRemaining={turnsUntilBoss} />
-              ) : null;
-            })()
-          )}
-        </div>
+                  return turnsUntilBoss > 0 ? (
+                    <BossCountdown turnsRemaining={turnsUntilBoss} />
+                  ) : null;
+                })()
+              )}
+            </div>
 
-        {/* Lista de Jogadores com seus Digimons */}
-        <div className="space-y-3 sm:space-y-4 md:space-y-6">
-          {gameState.players.map((player, playerIndex) => {
-            const isCurrentTurn =
-              playerIndex === gameState.currentTurnPlayerIndex;
+            {/* Lista de Jogadores com seus Digimons */}
+            <div className="space-y-3 sm:space-y-4 md:space-y-6">
+              {gameState.players.map((player, playerIndex) => {
+                const isCurrentTurn =
+                  playerIndex === gameState.currentTurnPlayerIndex;
 
-            // Verificar se todos os digimons do jogador estão nocauteados
-            const allDigimonsKnockedOut = player.digimons.every(
-              (digimon) => digimon.currentHp <= 0
-            );
+                // Verificar se todos os digimons do jogador estão nocauteados
+                const allDigimonsKnockedOut = player.digimons.every(
+                  (digimon) => digimon.currentHp <= 0
+                );
 
-            return (
-              <div
-                key={player.id}
-                className={`bg-gray-800 rounded-lg shadow-lg p-3 sm:p-4 md:p-6 border-2 transition-all ${
-                  isCurrentTurn
-                    ? "border-yellow-500 ring-2 sm:ring-4 ring-yellow-500/30 shadow-yellow-500/50"
-                    : "border-gray-700"
-                }`}
-              >
-                {/* Informações do Jogador */}
-                <div className="flex items-center gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-4 md:mb-6 pb-3 sm:pb-4 border-b border-gray-700">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex-shrink-0 rounded-full overflow-hidden bg-gray-700 border-2 border-gray-600">
-                    <img
-                      src={getTamerImagePath(player.avatar)}
-                      alt={player.name}
-                      className="w-full h-full object-contain"
-                      onError={(e) => {
-                        // Fallback para emoji se a imagem não existir
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = "none";
-                        const parent = target.parentElement;
-                        if (parent) {
-                          parent.innerHTML = `<div class="w-full h-full bg-gray-700"></div>`;
-                        }
-                      }}
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-xs text-gray-400 font-semibold mb-1">
-                      Jogador {playerIndex + 1}
-                    </div>
-                    <h3 className="text-base sm:text-lg md:text-2xl font-bold text-white flex items-center gap-1 sm:gap-2 truncate">
-                      {capitalize(player.name)}
-                      {isCurrentTurn && (
-                        <span className="text-yellow-400 text-sm sm:text-base md:text-lg animate-pulse flex-shrink-0">
-                          ⭐
-                        </span>
-                      )}
-                    </h3>
-                    {isCurrentTurn && (
-                      <p className="text-yellow-400 font-bold text-xs sm:text-sm mt-1">
-                        🎯 Turno Atual
-                      </p>
-                    )}
-                    {allDigimonsKnockedOut && (
-                      <p className="text-red-400 font-bold text-xs sm:text-sm mt-1 animate-pulse">
-                        💀 TODOS OS DIGIMONS NOCAUTEADOS - JOGADOR MORTO
-                      </p>
-                    )}
-                  </div>
-                  <div className="text-right flex-shrink-0">
-                    <div className="text-xs text-gray-400 mb-1">Parceiros</div>
-                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-blue-400">
-                      {player.digimons.length}
-                    </div>
-                    {allDigimonsKnockedOut && (
-                      <div className="text-xs text-red-400 font-bold mt-1">
-                        💀 MORTO
+                return (
+                  <div
+                    key={player.id}
+                    className={`bg-gray-800 rounded-lg shadow-lg p-3 sm:p-4 md:p-6 border-2 transition-all ${
+                      isCurrentTurn
+                        ? "border-yellow-500 ring-2 sm:ring-4 ring-yellow-500/30 shadow-yellow-500/50"
+                        : "border-gray-700"
+                    }`}
+                  >
+                    {/* Informações do Jogador */}
+                    <div className="flex items-center gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-4 md:mb-6 pb-3 sm:pb-4 border-b border-gray-700">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex-shrink-0 rounded-full overflow-hidden bg-gray-700 border-2 border-gray-600">
+                        <img
+                          src={getTamerImagePath(player.avatar)}
+                          alt={player.name}
+                          className="w-full h-full object-contain"
+                          onError={(e) => {
+                            // Fallback para emoji se a imagem não existir
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = "none";
+                            const parent = target.parentElement;
+                            if (parent) {
+                              parent.innerHTML = `<div class="w-full h-full bg-gray-700"></div>`;
+                            }
+                          }}
+                        />
                       </div>
-                    )}
-                  </div>
-                </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs text-gray-400 font-semibold mb-1">
+                          Jogador {playerIndex + 1}
+                        </div>
+                        <h3 className="text-base sm:text-lg md:text-2xl font-bold text-white flex items-center gap-1 sm:gap-2 truncate">
+                          {capitalize(player.name)}
+                          {isCurrentTurn && (
+                            <span className="text-yellow-400 text-sm sm:text-base md:text-lg animate-pulse flex-shrink-0">
+                              ⭐
+                            </span>
+                          )}
+                        </h3>
+                        {isCurrentTurn && (
+                          <p className="text-yellow-400 font-bold text-xs sm:text-sm mt-1">
+                            🎯 Turno Atual
+                          </p>
+                        )}
+                        {allDigimonsKnockedOut && (
+                          <p className="text-red-400 font-bold text-xs sm:text-sm mt-1 animate-pulse">
+                            💀 TODOS OS DIGIMONS NOCAUTEADOS - JOGADOR MORTO
+                          </p>
+                        )}
+                      </div>
+                      <div className="text-right flex-shrink-0">
+                        <div className="text-xs text-gray-400 mb-1">
+                          Parceiros
+                        </div>
+                        <div className="text-lg sm:text-xl md:text-2xl font-bold text-blue-400">
+                          {player.digimons.length}
+                        </div>
+                        {allDigimonsKnockedOut && (
+                          <div className="text-xs text-red-400 font-bold mt-1">
+                            💀 MORTO
+                          </div>
+                        )}
+                      </div>
+                    </div>
 
-                {/* Digimons do Jogador */}
-                <div>
-                  <h4 className="text-xs sm:text-sm font-semibold text-gray-300 mb-2 sm:mb-3 uppercase tracking-wide">
-                    🎴 Digimons Parceiros
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4">
-                    {player.digimons.map((digimon) => {
-                      const isDead = digimon.currentHp <= 0;
-                      return (
-                        <div
-                          key={`player-${playerIndex}-digimon-${digimon.id}-${
-                            digimon.originalId || digimon.id
-                          }`}
-                          onClick={() =>
-                            handleDigimonClick(digimon, player.name, player.id)
-                          }
-                          className={`bg-gray-700 rounded-lg overflow-hidden border transition-all group cursor-pointer transform hover:scale-105 ${
-                            isDead
-                              ? "border-gray-800 hover:border-yellow-500"
-                              : digimon.canEvolve
-                              ? "border-yellow-500 rainbow-shadow-pulse"
-                              : "border-gray-600 hover:border-blue-400"
-                          }`}
-                        >
-                          {/* Layout Horizontal: Imagem à esquerda, dados à direita */}
-                          <div className="flex h-28 sm:h-32 md:h-40">
-                            {/* Imagem do Digimon - Lado Esquerdo */}
-                            <div className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-gradient-to-br from-gray-600 to-gray-800 overflow-hidden flex-shrink-0">
-                              {isDead && (
-                                <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center z-10">
-                                  <div className="text-center">
-                                    <div className="text-3xl mb-1">😵</div>
-                                    <p className="text-orange-400 font-bold text-xs">
-                                      NOCAUTEADO
-                                    </p>
-                                  </div>
-                                </div>
-                              )}
-                              {digimon.image ? (
-                                <img
-                                  src={digimon.image}
-                                  alt={digimon.name}
-                                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
-                                  style={
-                                    isDead
-                                      ? {
-                                          filter:
-                                            "grayscale(100%) brightness(0.7)",
-                                        }
-                                      : (digimon as { active?: boolean })
+                    {/* Digimons do Jogador */}
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-semibold text-gray-300 mb-2 sm:mb-3 uppercase tracking-wide">
+                        🎴 Digimons Parceiros
+                      </h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4">
+                        {player.digimons.map((digimon) => {
+                          const isDead = digimon.currentHp <= 0;
+                          return (
+                            <div
+                              key={`player-${playerIndex}-digimon-${
+                                digimon.id
+                              }-${digimon.originalId || digimon.id}`}
+                              onClick={() =>
+                                handleDigimonClick(
+                                  digimon,
+                                  player.name,
+                                  player.id
+                                )
+                              }
+                              className={`bg-gray-700 rounded-lg overflow-hidden border transition-all group cursor-pointer transform hover:scale-105 ${
+                                isDead
+                                  ? "border-gray-800 hover:border-yellow-500"
+                                  : digimon.canEvolve
+                                  ? "border-yellow-500 rainbow-shadow-pulse"
+                                  : "border-gray-600 hover:border-blue-400"
+                              }`}
+                            >
+                              {/* Layout Horizontal: Imagem à esquerda, dados à direita */}
+                              <div className="flex h-28 sm:h-32 md:h-40">
+                                {/* Imagem do Digimon - Lado Esquerdo */}
+                                <div className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-gradient-to-br from-gray-600 to-gray-800 overflow-hidden flex-shrink-0">
+                                  {isDead && (
+                                    <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center z-10">
+                                      <div className="text-center">
+                                        <div className="text-3xl mb-1">😵</div>
+                                        <p className="text-orange-400 font-bold text-xs">
+                                          NOCAUTEADO
+                                        </p>
+                                      </div>
+                                    </div>
+                                  )}
+                                  {digimon.image ? (
+                                    <img
+                                      src={digimon.image}
+                                      alt={digimon.name}
+                                      className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                                      style={
+                                        isDead
+                                          ? {
+                                              filter:
+                                                "grayscale(100%) brightness(0.7)",
+                                            }
+                                          : (digimon as { active?: boolean })
+                                              .active === false
+                                          ? {
+                                              filter:
+                                                "grayscale(100%) opacity(0.6)",
+                                            }
+                                          : digimon.hasActedThisTurn &&
+                                            playerIndex ===
+                                              gameState.currentTurnPlayerIndex
+                                          ? {
+                                              filter: "grayscale(100%)",
+                                            }
+                                          : undefined
+                                      }
+                                      title={
+                                        (digimon as { active?: boolean })
                                           .active === false
-                                      ? {
-                                          filter:
-                                            "grayscale(100%) opacity(0.6)",
-                                        }
-                                      : digimon.hasActedThisTurn &&
-                                        playerIndex ===
-                                          gameState.currentTurnPlayerIndex
-                                      ? {
-                                          filter: "grayscale(100%)",
-                                        }
-                                      : undefined
-                                  }
-                                  title={
-                                    (digimon as { active?: boolean }).active ===
-                                    false
-                                      ? `⚠️ ${digimon.name} (Inativo - Não disponível no Time Stranger)`
-                                      : digimon.name
-                                  }
-                                />
-                              ) : (
-                                <div className="w-full h-full bg-gray-600"></div>
-                              )}
-                              {/* Badge de Level */}
-                              <div className="absolute top-1 left-1 bg-blue-600 text-white text-xs font-bold px-1 py-0.5 rounded">
-                                {getLevelName(digimon.level)}
-                              </div>
+                                          ? `⚠️ ${digimon.name} (Inativo - Não disponível no Time Stranger)`
+                                          : digimon.name
+                                      }
+                                    />
+                                  ) : (
+                                    <div className="w-full h-full bg-gray-600"></div>
+                                  )}
+                                  {/* Badge de Level */}
+                                  <div className="absolute top-1 left-1 bg-blue-600 text-white text-xs font-bold px-1 py-0.5 rounded">
+                                    {getLevelName(digimon.level)}
+                                  </div>
 
-                              {/* Ícones de Status e Provocação - Na imagem do Digimon */}
-                              {!isDead && (
-                                <div className="absolute top-1 right-1 flex flex-col gap-1 pointer-events-none">
-                                  {/* Digivice - SEMPRE NO TOPO */}
-                                  {digimon.hasDigivice && (
-                                    <div
-                                      className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1 animate-pulse"
-                                      title="📱 Digivice Equipado - XP Dobrado!"
-                                    >
-                                      <span className="text-sm">📱</span>
+                                  {/* Ícones de Status e Provocação - Na imagem do Digimon */}
+                                  {!isDead && (
+                                    <div className="absolute top-1 right-1 flex flex-col gap-1 pointer-events-none">
+                                      {/* Digivice - SEMPRE NO TOPO */}
+                                      {digimon.hasDigivice && (
+                                        <div
+                                          className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1 animate-pulse"
+                                          title="📱 Digivice Equipado - XP Dobrado!"
+                                        >
+                                          <span className="text-sm">📱</span>
+                                        </div>
+                                      )}
+
+                                      {/* Status: Animado e Medo */}
+                                      {digimon.statuses &&
+                                        digimon.statuses.map((status, idx) => (
+                                          <div
+                                            key={`${status.type}-${idx}`}
+                                            className="relative group/status"
+                                            title={
+                                              status.type === "animado"
+                                                ? `💪 Animado: +20 de dano (Expira no turno ${status.endsAtTurn})`
+                                                : `😰 Medo: -20 de dano (Expira no turno ${status.endsAtTurn})`
+                                            }
+                                          >
+                                            <div
+                                              className={`text-xl animate-pulse ${
+                                                status.type === "animado"
+                                                  ? "text-green-400 drop-shadow-[0_0_6px_rgba(34,197,94,1)]"
+                                                  : "text-red-400 drop-shadow-[0_0_6px_rgba(239,68,68,1)]"
+                                              }`}
+                                            >
+                                              {status.type === "animado"
+                                                ? "💪"
+                                                : "😰"}
+                                            </div>
+                                          </div>
+                                        ))}
+
+                                      {/* Provocação */}
+                                      {(() => {
+                                        const provoker = gameState.players
+                                          .flatMap((p) => p.digimons)
+                                          .find(
+                                            (d) =>
+                                              d.id === digimon.provokedBy &&
+                                              d.currentHp > 0
+                                          );
+                                        return (
+                                          provoker && (
+                                            <div
+                                              className="text-orange-400 text-xl animate-pulse drop-shadow-[0_0_6px_rgba(251,146,60,1)]"
+                                              title={`💢 Provocado por ${capitalize(
+                                                provoker.name
+                                              )}`}
+                                            >
+                                              💢
+                                            </div>
+                                          )
+                                        );
+                                      })()}
                                     </div>
                                   )}
 
-                                  {/* Status: Animado e Medo */}
-                                  {digimon.statuses &&
-                                    digimon.statuses.map((status, idx) => (
-                                      <div
-                                        key={`${status.type}-${idx}`}
-                                        className="relative group/status"
-                                        title={
-                                          status.type === "animado"
-                                            ? `💪 Animado: +20 de dano (Expira no turno ${status.endsAtTurn})`
-                                            : `😰 Medo: -20 de dano (Expira no turno ${status.endsAtTurn})`
-                                        }
-                                      >
-                                        <div
-                                          className={`text-xl animate-pulse ${
-                                            status.type === "animado"
-                                              ? "text-green-400 drop-shadow-[0_0_6px_rgba(34,197,94,1)]"
-                                              : "text-red-400 drop-shadow-[0_0_6px_rgba(239,68,68,1)]"
-                                          }`}
-                                        >
-                                          {status.type === "animado"
-                                            ? "💪"
-                                            : "😰"}
-                                        </div>
-                                      </div>
-                                    ))}
+                                  {/* Badge de Evolução Temporária */}
+                                  {digimon.temporaryEvolution && (
+                                    <div className="absolute top-1 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white text-[9px] sm:text-xs font-bold px-1.5 py-0.5 rounded shadow-lg border border-purple-400 animate-pulse z-10">
+                                      ⏰{" "}
+                                      {Math.max(
+                                        0,
+                                        digimon.temporaryEvolution
+                                          .expiresAtTurn - gameState.turnCount
+                                      )}
+                                      T
+                                    </div>
+                                  )}
 
-                                  {/* Provocação */}
+                                  {/* Badge de Evolução Liberada */}
+                                  {digimon.canEvolve && !isDead && (
+                                    <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded-full animate-pulse shadow-lg">
+                                      ✨
+                                    </div>
+                                  )}
+                                  {/* Badge de Defesa - Mostra no defendido quem o está defendendo */}
                                   {(() => {
-                                    const provoker = gameState.players
-                                      .flatMap((p) => p.digimons)
-                                      .find(
-                                        (d) =>
-                                          d.id === digimon.provokedBy &&
-                                          d.currentHp > 0
-                                      );
+                                    const defender = player.digimons.find(
+                                      (d) =>
+                                        d.defending === digimon.id &&
+                                        d.currentHp > 0
+                                    );
                                     return (
-                                      provoker && (
-                                        <div
-                                          className="text-orange-400 text-xl animate-pulse drop-shadow-[0_0_6px_rgba(251,146,60,1)]"
-                                          title={`💢 Provocado por ${capitalize(
-                                            provoker.name
-                                          )}`}
-                                        >
-                                          💢
+                                      defender &&
+                                      !isDead && (
+                                        <div className="absolute bottom-1 right-1 bg-cyan-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-cyan-400 flex items-center gap-1">
+                                          <span>🛡️</span>
+                                          <span>
+                                            {capitalize(defender.name)}
+                                          </span>
                                         </div>
                                       )
                                     );
                                   })()}
                                 </div>
-                              )}
 
-                              {/* Badge de Evolução Temporária */}
-                              {digimon.temporaryEvolution && (
-                                <div className="absolute top-1 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white text-[9px] sm:text-xs font-bold px-1.5 py-0.5 rounded shadow-lg border border-purple-400 animate-pulse z-10">
-                                  ⏰{" "}
-                                  {Math.max(
-                                    0,
-                                    digimon.temporaryEvolution.expiresAtTurn -
-                                      gameState.turnCount
-                                  )}
-                                  T
-                                </div>
-                              )}
-
-                              {/* Badge de Evolução Liberada */}
-                              {digimon.canEvolve && !isDead && (
-                                <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded-full animate-pulse shadow-lg">
-                                  ✨
-                                </div>
-                              )}
-                              {/* Badge de Defesa - Mostra no defendido quem o está defendendo */}
-                              {(() => {
-                                const defender = player.digimons.find(
-                                  (d) =>
-                                    d.defending === digimon.id &&
-                                    d.currentHp > 0
-                                );
-                                return (
-                                  defender &&
-                                  !isDead && (
-                                    <div className="absolute bottom-1 right-1 bg-cyan-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-cyan-400 flex items-center gap-1">
-                                      <span>🛡️</span>
-                                      <span>{capitalize(defender.name)}</span>
-                                    </div>
-                                  )
-                                );
-                              })()}
-                            </div>
-
-                            {/* Dados do Digimon - Lado Direito */}
-                            <div className="flex-1 p-2 sm:p-2.5 md:p-3 flex flex-col justify-between min-w-0">
-                              {/* Nome, Tipo e DP */}
-                              <div>
-                                <h5 className="font-bold text-white text-xs sm:text-sm mb-0.5 sm:mb-1 truncate">
-                                  {capitalize(digimon.name)}
-                                </h5>
-                                <div className="flex gap-1 sm:gap-1.5 md:gap-2 items-center mb-0.5 sm:mb-1 flex-wrap">
-                                  <div
-                                    className={`${getTypeColor(
-                                      digimon.typeId
-                                    )} text-[10px] sm:text-xs font-bold px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded whitespace-nowrap flex items-center gap-1`}
-                                  >
-                                    <TypeIcon
-                                      typeId={digimon.typeId}
-                                      size={10}
-                                      className="text-white"
-                                    />
-                                    {
-                                      DIGIMON_TYPE_NAMES[
-                                        digimon.typeId as keyof typeof DIGIMON_TYPE_NAMES
-                                      ]
-                                    }
-                                  </div>
-                                  <div className="bg-red-600 text-white text-[10px] sm:text-xs font-bold px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded whitespace-nowrap">
-                                    ⚔️{" "}
-                                    {calculatePowerWithBonus(
-                                      digimon.dp,
-                                      digimon.attackBonus || 0
-                                    ).toLocaleString()}{" "}
-                                    ATK
-                                  </div>
-                                </div>
-
-                                {/* Texto de Provocação - Abaixo do tipo */}
-                                {(() => {
-                                  const provoker = gameState.players
-                                    .flatMap((p) => p.digimons)
-                                    .find(
-                                      (d) =>
-                                        d.id === digimon.provokedBy &&
-                                        d.currentHp > 0
-                                    );
-                                  return (
-                                    provoker &&
-                                    !isDead && (
-                                      <div className="text-orange-400 text-[10px] sm:text-xs font-bold animate-pulse mb-1">
-                                        Provocado por{" "}
-                                        {capitalize(provoker.name)}
+                                {/* Dados do Digimon - Lado Direito */}
+                                <div className="flex-1 p-2 sm:p-2.5 md:p-3 flex flex-col justify-between min-w-0">
+                                  {/* Nome, Tipo e DP */}
+                                  <div>
+                                    <h5 className="font-bold text-white text-xs sm:text-sm mb-0.5 sm:mb-1 truncate">
+                                      {capitalize(digimon.name)}
+                                    </h5>
+                                    <div className="flex gap-1 sm:gap-1.5 md:gap-2 items-center mb-0.5 sm:mb-1 flex-wrap">
+                                      <div
+                                        className={`${getTypeColor(
+                                          digimon.typeId
+                                        )} text-[10px] sm:text-xs font-bold px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded whitespace-nowrap flex items-center gap-1`}
+                                      >
+                                        <TypeIcon
+                                          typeId={digimon.typeId}
+                                          size={10}
+                                          className="text-white"
+                                        />
+                                        {
+                                          DIGIMON_TYPE_NAMES[
+                                            digimon.typeId as keyof typeof DIGIMON_TYPE_NAMES
+                                          ]
+                                        }
                                       </div>
-                                    )
-                                  );
-                                })()}
-                              </div>
+                                      <div className="bg-red-600 text-white text-[10px] sm:text-xs font-bold px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded whitespace-nowrap">
+                                        ⚔️{" "}
+                                        {calculatePowerWithBonus(
+                                          digimon.dp,
+                                          digimon.attackBonus || 0
+                                        ).toLocaleString()}{" "}
+                                        ATK
+                                      </div>
+                                    </div>
 
-                              {/* Barra de Vida (HP) */}
-                              <div className="space-y-0.5 sm:space-y-1">
-                                <div className="flex justify-between items-center text-[10px] sm:text-xs">
-                                  <span className="text-gray-400 font-semibold">
-                                    HP
-                                  </span>
-                                  <span className="text-green-400 font-bold">
-                                    {Math.max(
-                                      0,
-                                      digimon.currentHp
-                                    ).toLocaleString()}{" "}
-                                    / {digimon.dp.toLocaleString()}
-                                  </span>
-                                </div>
-                                <div className="w-full bg-gray-600 rounded-full h-2 sm:h-2.5 md:h-3 overflow-hidden border border-gray-500 shadow-inner">
-                                  <div
-                                    className="h-full bg-gradient-to-r from-green-500 to-green-400 transition-all duration-300 ease-out flex items-center justify-center"
-                                    style={{
-                                      width: `${Math.max(
-                                        0,
-                                        (digimon.currentHp / digimon.dp) * 100
-                                      )}%`,
-                                    }}
-                                  >
-                                    {Math.max(0, digimon.currentHp) /
-                                      digimon.dp >=
-                                      0.3 && (
-                                      <span className="text-[9px] sm:text-[10px] md:text-xs font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                                        {Math.round(
-                                          Math.max(
+                                    {/* Texto de Provocação - Abaixo do tipo */}
+                                    {(() => {
+                                      const provoker = gameState.players
+                                        .flatMap((p) => p.digimons)
+                                        .find(
+                                          (d) =>
+                                            d.id === digimon.provokedBy &&
+                                            d.currentHp > 0
+                                        );
+                                      return (
+                                        provoker &&
+                                        !isDead && (
+                                          <div className="text-orange-400 text-[10px] sm:text-xs font-bold animate-pulse mb-1">
+                                            Provocado por{" "}
+                                            {capitalize(provoker.name)}
+                                          </div>
+                                        )
+                                      );
+                                    })()}
+                                  </div>
+
+                                  {/* Barra de Vida (HP) */}
+                                  <div className="space-y-0.5 sm:space-y-1">
+                                    <div className="flex justify-between items-center text-[10px] sm:text-xs">
+                                      <span className="text-gray-400 font-semibold">
+                                        HP
+                                      </span>
+                                      <span className="text-green-400 font-bold">
+                                        {Math.max(
+                                          0,
+                                          digimon.currentHp
+                                        ).toLocaleString()}{" "}
+                                        / {digimon.dp.toLocaleString()}
+                                      </span>
+                                    </div>
+                                    <div className="w-full bg-gray-600 rounded-full h-2 sm:h-2.5 md:h-3 overflow-hidden border border-gray-500 shadow-inner">
+                                      <div
+                                        className="h-full bg-gradient-to-r from-green-500 to-green-400 transition-all duration-300 ease-out flex items-center justify-center"
+                                        style={{
+                                          width: `${Math.max(
                                             0,
                                             (digimon.currentHp / digimon.dp) *
                                               100
-                                          )
+                                          )}%`,
+                                        }}
+                                      >
+                                        {Math.max(0, digimon.currentHp) /
+                                          digimon.dp >=
+                                          0.3 && (
+                                          <span className="text-[9px] sm:text-[10px] md:text-xs font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                                            {Math.round(
+                                              Math.max(
+                                                0,
+                                                (digimon.currentHp /
+                                                  digimon.dp) *
+                                                  100
+                                              )
+                                            )}
+                                            %
+                                          </span>
                                         )}
-                                        %
-                                      </span>
+                                      </div>
+                                    </div>
+
+                                    {/* Barra de Evolução (XP) */}
+                                    {!isDead && (
+                                      <div className="mt-1 space-y-0.5">
+                                        <div className="flex justify-between items-center text-[10px] sm:text-xs">
+                                          <span className="text-gray-400 font-semibold">
+                                            XP
+                                          </span>
+                                          <span className="text-blue-400 font-bold">
+                                            {(
+                                              digimon.evolutionProgress || 0
+                                            ).toFixed(1)}
+                                            %
+                                          </span>
+                                        </div>
+                                        <div className="w-full bg-gray-600 rounded-full h-1.5 sm:h-2 overflow-hidden border border-gray-500 shadow-inner">
+                                          <div
+                                            className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-300 ease-out"
+                                            style={{
+                                              width: `${
+                                                digimon.evolutionProgress || 0
+                                              }%`,
+                                            }}
+                                          />
+                                        </div>
+                                      </div>
                                     )}
                                   </div>
                                 </div>
-
-                                {/* Barra de Evolução (XP) */}
-                                {!isDead && (
-                                  <div className="mt-1 space-y-0.5">
-                                    <div className="flex justify-between items-center text-[10px] sm:text-xs">
-                                      <span className="text-gray-400 font-semibold">
-                                        XP
-                                      </span>
-                                      <span className="text-blue-400 font-bold">
-                                        {(
-                                          digimon.evolutionProgress || 0
-                                        ).toFixed(1)}
-                                        %
-                                      </span>
-                                    </div>
-                                    <div className="w-full bg-gray-600 rounded-full h-1.5 sm:h-2 overflow-hidden border border-gray-500 shadow-inner">
-                                      <div
-                                        className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-300 ease-out"
-                                        style={{
-                                          width: `${
-                                            digimon.evolutionProgress || 0
-                                          }%`,
-                                        }}
-                                      />
-                                    </div>
-                                  </div>
-                                )}
                               </div>
                             </div>
-                          </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Painel de Logs do Auto-Test */}
+          {isAutoTestActive && (
+            <div className="w-80 bg-gray-800 rounded-lg border border-gray-700 p-4 h-[calc(100vh-12rem)] overflow-hidden flex flex-col">
+              <div className="mb-3 border-b border-gray-700 pb-2 space-y-2">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                    <span>📋</span>
+                    <span>Logs de Teste</span>
+                  </h3>
+                  <button
+                    onClick={() => setTestLogs([])}
+                    className="text-xs text-gray-400 hover:text-white transition-colors"
+                  >
+                    🗑️ Limpar
+                  </button>
+                </div>
+                
+                {/* Aviso de Simulação */}
+                <div className="bg-orange-900/50 border border-orange-600 rounded p-2 text-xs text-orange-300">
+                  <div className="flex items-start gap-2">
+                    <span className="text-sm">⚠️</span>
+                    <div>
+                      <p className="font-semibold mb-1">Modo Simulação</p>
+                      <p className="text-[10px] text-orange-400">
+                        A IA apenas decide ações mas não as executa.
+                        Apenas o "Turno do Mundo" (boss) é real.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Botão de Reset para Teste */}
+                <button
+                  onClick={resetToTestMode}
+                  className="w-full px-3 py-2 bg-purple-600 text-white text-sm font-semibold rounded hover:bg-purple-700 transition-colors"
+                >
+                  🧪 Resetar para Teste
+                </button>
+              </div>
+
+              {/* Lista de Logs */}
+              <div className="flex-1 overflow-y-auto space-y-2">
+                {testLogs.length === 0 ? (
+                  <p className="text-gray-500 text-sm text-center mt-4">
+                    Nenhum log ainda...
+                  </p>
+                ) : (
+                  testLogs
+                    .slice()
+                    .reverse()
+                    .map((log, index) => (
+                      <div
+                        key={index}
+                        className="bg-gray-700 rounded p-2 text-xs border border-gray-600"
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-purple-400 font-bold">
+                            Turno #{log.turn}
+                          </span>
+                          <span className="text-gray-500 text-[10px]">
+                            {log.timestamp.toLocaleTimeString("pt-BR")}
+                          </span>
                         </div>
-                      );
-                    })}
+                        <div className="text-blue-400 font-semibold mb-0.5">
+                          {log.player} → {log.digimon}
+                        </div>
+                        <div className="text-yellow-400">{log.action}</div>
+                        <div className="text-gray-400 text-[10px] mt-0.5">
+                          {log.result}
+                        </div>
+                      </div>
+                    ))
+                )}
+              </div>
+
+              {/* Stats */}
+              <div className="mt-3 pt-3 border-t border-gray-700">
+                <div className="text-xs text-gray-400 space-y-1">
+                  <div className="flex justify-between">
+                    <span>Total de ações:</span>
+                    <span className="text-white font-bold">
+                      {testLogs.length}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Velocidade:</span>
+                    <span className="text-white font-bold">
+                      {autoTestSpeed}ms
+                    </span>
                   </div>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          )}
         </div>
       </main>
 
