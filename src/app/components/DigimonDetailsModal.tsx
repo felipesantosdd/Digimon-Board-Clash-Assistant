@@ -887,7 +887,11 @@ export default function DigimonDetailsModal({
                                       }
                                     </span>
                                     <span className="text-[10px] bg-red-600 text-white font-bold px-1.5 py-0.5 rounded">
-                                      ⚔️ {targetDigimon.dp.toLocaleString()} ATK
+                                      ⚔️{" "}
+                                      {calculatePower(
+                                        targetDigimon.dp
+                                      ).toLocaleString()}{" "}
+                                      ATK
                                     </span>
                                   </div>
 
