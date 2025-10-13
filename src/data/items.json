@@ -8,7 +8,8 @@
     "dropChance": 0,
     "targetDigimons": [],
     "effectId": 2,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 22,
@@ -23,7 +24,8 @@
       527
     ],
     "effectId": 17,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 23,
@@ -38,7 +40,8 @@
       532
     ],
     "effectId": 17,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 24,
@@ -53,7 +56,8 @@
       536
     ],
     "effectId": 17,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 25,
@@ -67,7 +71,8 @@
       529
     ],
     "effectId": 17,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 26,
@@ -84,7 +89,8 @@
       567
     ],
     "effectId": 17,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 27,
@@ -98,7 +104,8 @@
       538
     ],
     "effectId": 17,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 28,
@@ -113,7 +120,8 @@
       522
     ],
     "effectId": 17,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 29,
@@ -128,7 +136,8 @@
       528
     ],
     "effectId": 17,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 30,
@@ -141,7 +150,8 @@
       573
     ],
     "effectId": 17,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 31,
@@ -155,7 +165,8 @@
       540
     ],
     "effectId": 17,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 32,
@@ -169,7 +180,8 @@
       539
     ],
     "effectId": 17,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 33,
@@ -182,7 +194,8 @@
       542
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 34,
@@ -195,7 +208,8 @@
       85
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 35,
@@ -208,7 +222,8 @@
       75
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 36,
@@ -221,7 +236,8 @@
       82
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 37,
@@ -234,7 +250,8 @@
       543
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 38,
@@ -247,7 +264,8 @@
       544
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 39,
@@ -260,20 +278,22 @@
       545
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 40,
     "name": "Espírito Bestial do Vento",
     "description": "O espírito bestial do Vento. Transforma em Zephyrmon.",
-    "image": "/images/items/1760289471314_image.webp",
+    "image": "/images/items/1760316726570_image.webp",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       546
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 41,
@@ -286,7 +306,8 @@
       547
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 42,
@@ -299,7 +320,8 @@
       548
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 43,
@@ -312,7 +334,8 @@
       549
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 44,
@@ -325,7 +348,8 @@
       550
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 45,
@@ -336,7 +360,8 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 46,
@@ -347,7 +372,8 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 47,
@@ -360,7 +386,8 @@
       295
     ],
     "effectId": 21,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 48,
@@ -371,7 +398,8 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 49,
@@ -385,7 +413,8 @@
       506
     ],
     "effectId": 21,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 50,
@@ -399,7 +428,8 @@
       107
     ],
     "effectId": 21,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 51,
@@ -413,7 +443,8 @@
       142
     ],
     "effectId": 21,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 52,
@@ -428,7 +459,8 @@
       112
     ],
     "effectId": 21,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 53,
@@ -441,7 +473,8 @@
       576
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 54,
@@ -454,7 +487,8 @@
       577
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 55,
@@ -467,7 +501,8 @@
       578
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 56,
@@ -480,7 +515,8 @@
       579
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 57,
@@ -493,7 +529,8 @@
       580
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 58,
@@ -506,7 +543,8 @@
       581
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 59,
@@ -519,7 +557,8 @@
       483
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 60,
@@ -532,7 +571,8 @@
       582
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 61,
@@ -545,7 +585,8 @@
       583
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 62,
@@ -558,7 +599,8 @@
       584
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 63,
@@ -571,7 +613,8 @@
       585
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 64,
@@ -584,7 +627,8 @@
       91
     ],
     "effectId": 20,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 65,
@@ -595,7 +639,8 @@
     "dropChance": 10,
     "targetDigimons": [],
     "effectId": 22,
-    "active": 1
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 66,
@@ -606,7 +651,8 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 67,
@@ -617,7 +663,8 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 68,
@@ -628,7 +675,8 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 69,
@@ -639,7 +687,8 @@
     "dropChance": 10,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 70,
@@ -650,7 +699,8 @@
     "dropChance": 30,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 71,
@@ -661,7 +711,8 @@
     "dropChance": 25,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 72,
@@ -672,7 +723,8 @@
     "dropChance": 20,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 73,
@@ -683,7 +735,8 @@
     "dropChance": 18,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 74,
@@ -694,18 +747,20 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 75,
     "name": "Chip de Recuperação Super I",
     "description": "Restaura 12.000 HP",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317556607_image.webp",
     "effect": "",
     "dropChance": 12,
     "targetDigimons": [],
-    "effectId": null,
-    "active": 0
+    "effectId": 1,
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 76,
@@ -716,7 +771,8 @@
     "dropChance": 10,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 77,
@@ -727,7 +783,8 @@
     "dropChance": 8,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 78,
@@ -738,7 +795,8 @@
     "dropChance": 6,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 79,
@@ -749,7 +807,8 @@
     "dropChance": 4,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 80,
@@ -760,7 +819,8 @@
     "dropChance": 20,
     "targetDigimons": [],
     "effectId": 24,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 81,
@@ -771,7 +831,8 @@
     "dropChance": 12,
     "targetDigimons": [],
     "effectId": 24,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 82,
@@ -782,7 +843,8 @@
     "dropChance": 6,
     "targetDigimons": [],
     "effectId": 24,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 83,
@@ -793,7 +855,8 @@
     "dropChance": 20,
     "targetDigimons": [],
     "effectId": 25,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 84,
@@ -804,7 +867,8 @@
     "dropChance": 12,
     "targetDigimons": [],
     "effectId": 25,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 85,
@@ -815,18 +879,20 @@
     "dropChance": 6,
     "targetDigimons": [],
     "effectId": 25,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 86,
-    "name": "Botas Rápidas",
+    "name": "Chip de Velocidade I",
     "description": "Permite andar +1 casa adicional no tabuleiro",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 25,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 0
+    "active": 1,
+    "effectValue": 0
   },
   {
     "id": 87,
@@ -837,7 +903,8 @@
     "dropChance": 18,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 88,
@@ -848,7 +915,8 @@
     "dropChance": 12,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 89,
@@ -859,7 +927,8 @@
     "dropChance": 8,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   },
   {
     "id": 90,
@@ -870,6 +939,7 @@
     "dropChance": 5,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 0
+    "active": 0,
+    "effectValue": 0
   }
 ]

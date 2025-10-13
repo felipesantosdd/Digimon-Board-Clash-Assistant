@@ -31,6 +31,9 @@ export interface GameDigimon {
   provokedBy?: number | null; // ID do Digimon que provocou este
   lastProvokeTurn?: number | null; // Último turno global que este Digimon provocou
   statuses?: DigimonStatus[]; // Status ativos (animado, medo, etc)
+  attackBonus?: number; // Bônus permanente de ataque (aos dados)
+  defenseBonus?: number; // Bônus permanente de defesa (aos dados)
+  movementBonus?: number; // Bônus permanente de movimento (casas extras)
 }
 
 export interface GamePlayer {

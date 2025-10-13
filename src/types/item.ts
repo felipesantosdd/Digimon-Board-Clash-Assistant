@@ -5,6 +5,7 @@ export interface Item {
   image: string;
   effect: string; // Deprecated - use effectId
   effectId?: number; // ID do efeito na tabela effects
+  effectValue?: number; // Valor do efeito (ex: 1000 HP, +5 dados, 10 casas)
   dropChance?: number; // Chance de 0-100% de encontrar o item explorando
   targetDigimons?: number[]; // IDs dos Digimons para evolução especial (usado quando efeito é 'evolution')
   active?: boolean; // Se o item está ativo para ser encontrado

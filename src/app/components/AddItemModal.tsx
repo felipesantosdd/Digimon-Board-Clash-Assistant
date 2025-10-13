@@ -64,6 +64,7 @@ export default function AddItemModal({
     image: "/images/items/fallback.svg",
     dropChance: 0,
     active: true,
+    effectValue: 0,
   });
 
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -120,6 +121,7 @@ export default function AddItemModal({
       image: "/images/items/fallback.svg",
       dropChance: 0,
       active: true,
+      effectValue: 0,
     });
     setImageFile(null);
     setImagePreview("");
@@ -142,6 +144,7 @@ export default function AddItemModal({
           image: editingItem.image,
           dropChance: editingItem.dropChance || 0,
           active: editingItem.active !== false,
+          effectValue: editingItem.effectValue || 0,
         });
         setImagePreview(editingItem.image);
         setTargetDigimons(editingItem.targetDigimons || []);
@@ -603,6 +606,50 @@ export default function AddItemModal({
                 </div>
               </div>
             )}
+
+            {/* Configurações de Efeito (valor e tipo de status) */}
+            {effects.find((e) => e.id === Number(formData.effectId))?.type &&
+              !["evolution", "special", "boss"].includes(
+                effects.find((e) => e.id === Number(formData.effectId))
+                  ?.type || ""
+              ) && (
+                <div className="bg-purple-900/30 border border-purple-600 rounded-lg p-4 space-y-4">
+                  <h4 className="text-sm font-bold text-purple-200 mb-3">
+                    ⚙️ Configurações do Efeito
+                  </h4>
+
+                  {/* Valor do Efeito */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-200 mb-2">
+                      Valor do Efeito *
+                    </label>
+                    <input
+                      type="number"
+                      name="effectValue"
+                      value={formData.effectValue || 0}
+                      onChange={handleChange}
+                      min="0"
+                      required
+                      placeholder="Ex: 1000 (HP), 5 (dados), 10 (casas)"
+                      className="w-full px-3 py-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                    />
+                    <p className="text-xs text-gray-400 mt-1">
+                      {effects.find((e) => e.id === Number(formData.effectId))
+                        ?.type === "heal"
+                        ? "Quantidade de HP a restaurar"
+                        : effects.find((e) => e.id === Number(formData.effectId))
+                            ?.type === "attack_bonus" ||
+                          effects.find((e) => e.id === Number(formData.effectId))
+                            ?.type === "defense_bonus"
+                        ? "Bônus aos dados de ataque/defesa (+1 a +20)"
+                        : effects.find((e) => e.id === Number(formData.effectId))
+                            ?.type === "movement"
+                        ? "Casas extras de movimento no tabuleiro"
+                        : "Valor do efeito"}
+                    </p>
+                  </div>
+                </div>
+              )}
 
             {/* Chance de Drop */}
             <div>

@@ -5,7 +5,8 @@
     "description": "Restaura 1000 HP",
     "code": "heal_1000",
     "type": "heal",
-    "value": 1000
+    "value": 1000,
+    "statusType": null
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "description": "Restaura 2000 HP",
     "code": "heal_2000",
     "type": "heal",
-    "value": 2000
+    "value": 2000,
+    "statusType": null
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "description": "Restaura 5000 HP",
     "code": "heal_5000",
     "type": "heal",
-    "value": 5000
+    "value": 5000,
+    "statusType": null
   },
   {
     "id": 4,
@@ -29,7 +32,8 @@
     "description": "Causa 500 de dano",
     "code": "damage_500",
     "type": "damage",
-    "value": 500
+    "value": 500,
+    "statusType": null
   },
   {
     "id": 5,
@@ -37,7 +41,8 @@
     "description": "Causa 1000 de dano",
     "code": "damage_1000",
     "type": "damage",
-    "value": 1000
+    "value": 1000,
+    "statusType": null
   },
   {
     "id": 6,
@@ -45,7 +50,8 @@
     "description": "Aumenta DP em 500 permanentemente",
     "code": "boost_dp_500",
     "type": "buff",
-    "value": 500
+    "value": 500,
+    "statusType": null
   },
   {
     "id": 7,
@@ -53,7 +59,8 @@
     "description": "Aumenta DP em 1000 permanentemente",
     "code": "boost_dp_1000",
     "type": "buff",
-    "value": 1000
+    "value": 1000,
+    "statusType": null
   },
   {
     "id": 8,
@@ -61,7 +68,8 @@
     "description": "Restaura HP ao máximo",
     "code": "heal_full",
     "type": "special",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 9,
@@ -69,7 +77,8 @@
     "description": "Revive com metade do HP",
     "code": "revive_half",
     "type": "special",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 10,
@@ -77,7 +86,8 @@
     "description": "Libera evolução imediatamente",
     "code": "instant_evolution",
     "type": "special",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 11,
@@ -85,7 +95,8 @@
     "description": "Protege de um ataque neste turno",
     "code": "shield_turn",
     "type": "special",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 12,
@@ -93,7 +104,8 @@
     "description": "Remove todos os debuffs",
     "code": "heal_cleanse",
     "type": "special",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 13,
@@ -101,7 +113,8 @@
     "description": "Aumenta dano causado em 20%",
     "code": "boss_dark_aura",
     "type": "boss",
-    "value": 20
+    "value": 20,
+    "statusType": null
   },
   {
     "id": 14,
@@ -109,7 +122,8 @@
     "description": "Absorve 30% do dano causado como HP",
     "code": "boss_vampire_drain",
     "type": "boss",
-    "value": 30
+    "value": 30,
+    "statusType": null
   },
   {
     "id": 15,
@@ -117,7 +131,8 @@
     "description": "Causa dano em área a todos os inimigos",
     "code": "boss_ocean_fury",
     "type": "boss",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 16,
@@ -125,7 +140,8 @@
     "description": "Recupera 5% do HP máximo a cada turno",
     "code": "boss_regeneration",
     "type": "boss",
-    "value": 5
+    "value": 5,
+    "statusType": null
   },
   {
     "id": 17,
@@ -133,7 +149,8 @@
     "description": "Permite evolução para um Digimon Armor aleatório",
     "code": "evolution_armor",
     "type": "evolution",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 18,
@@ -141,7 +158,8 @@
     "description": "Permite evolução para um Digimon especial configurado",
     "code": "evolution_special",
     "type": "evolution",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 19,
@@ -149,7 +167,8 @@
     "description": "Ovo de evolução que transforma em Armor Digimon",
     "code": "evolution_digiegg",
     "type": "evolution",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 20,
@@ -157,7 +176,8 @@
     "description": "Permite evolução usando um Espírito Lendário",
     "code": "evolution_spirit",
     "type": "evolution",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 21,
@@ -165,7 +185,8 @@
     "description": "Permite evolução usando um Emblema lendário da série Adventure",
     "code": "evolution_crest",
     "type": "evolution",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 22,
@@ -173,7 +194,8 @@
     "description": "Dobra o ganho de XP do Digimon que o encontrou",
     "code": "digivice",
     "type": "special",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 23,
@@ -181,7 +203,8 @@
     "description": "Permite mover casas adicionais no tabuleiro",
     "code": "movement_boost",
     "type": "special",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 24,
@@ -189,7 +212,8 @@
     "description": "Adiciona bônus permanente nos dados de ataque",
     "code": "dice_attack_boost",
     "type": "buff",
-    "value": 0
+    "value": 0,
+    "statusType": null
   },
   {
     "id": 25,
@@ -197,6 +221,43 @@
     "description": "Adiciona bônus permanente nos dados de defesa",
     "code": "dice_defense_boost",
     "type": "buff",
-    "value": 0
+    "value": 0,
+    "statusType": null
+  },
+  {
+    "id": 26,
+    "name": "Cura de HP",
+    "description": "Restaura HP do Digimon",
+    "code": "heal_hp",
+    "type": "heal",
+    "value": 0,
+    "statusType": "hp"
+  },
+  {
+    "id": 27,
+    "name": "Bônus de Ataque Permanente",
+    "description": "Aumenta o bônus de ataque permanentemente",
+    "code": "bonus_attack_permanent",
+    "type": "attack_bonus",
+    "value": 0,
+    "statusType": "attack"
+  },
+  {
+    "id": 28,
+    "name": "Bônus de Defesa Permanente",
+    "description": "Aumenta o bônus de defesa permanentemente",
+    "code": "bonus_defense_permanent",
+    "type": "defense_bonus",
+    "value": 0,
+    "statusType": "defense"
+  },
+  {
+    "id": 29,
+    "name": "Bônus de Movimento Permanente",
+    "description": "Aumenta a velocidade de movimento permanentemente",
+    "code": "bonus_movement_permanent",
+    "type": "movement",
+    "value": 0,
+    "statusType": "movement"
   }
 ]

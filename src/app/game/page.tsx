@@ -1499,82 +1499,90 @@ export default function GamePage() {
       }
     }
 
+    // Buscar o efeito do item
+    let effect = null;
+    if (item.effectId) {
+      try {
+        const effectResponse = await fetch(`/api/effects/${item.effectId}`);
+        if (effectResponse.ok) {
+          effect = await effectResponse.json();
+        }
+      } catch (error) {
+        console.error("Erro ao buscar efeito:", error);
+      }
+    }
+
     // Variáveis de estado do item
     let newHp = digimon.currentHp;
     let newDp = digimon.dp;
     let newDpBonus = digimon.dpBonus || 0;
+    let newAttackBonus = digimon.attackBonus || 0;
+    let newDefenseBonus = digimon.defenseBonus || 0;
+    let newMovementBonus = digimon.movementBonus || 0;
     let effectMessage = "";
 
-    // Funções de efeito genéricas
-    const applyHeal = (amount: number) => {
-      const oldHp = newHp;
-      newHp = Math.min(digimon.dp, digimon.currentHp + amount);
-      const healed = newHp - oldHp;
-      effectMessage = `restaurou ${healed.toLocaleString()} HP`;
-      console.log(`💊 [HEAL] Curou ${healed} HP (${oldHp} → ${newHp})`);
-    };
+    const effectValue = item.effectValue || 0;
 
-    const applyHealFull = () => {
-      const oldHp = newHp;
-      newHp = digimon.dp;
-      const healed = newHp - oldHp;
-      effectMessage = `restaurou HP completamente (+${healed.toLocaleString()} HP)`;
-      console.log(`💊 [HEAL] Cura completa (${oldHp} → ${newHp})`);
-    };
-
-    const applyBoostDp = (amount: number) => {
-      const oldDp = newDp;
-      newDp = digimon.dp + amount;
-      newDpBonus = (digimon.dpBonus || 0) + amount; // Acumular bônus
-      newHp = digimon.currentHp + amount; // Também aumenta o HP atual
-      effectMessage = `aumentou o DP em ${amount.toLocaleString()}! (${oldDp.toLocaleString()} → ${newDp.toLocaleString()})`;
-      console.log(
-        `💊 [BOOST] DP aumentado em ${amount} (${oldDp} → ${newDp}) | Bônus acumulado: ${newDpBonus}`
-      );
-    };
-
-    const applyBoostDamage = (amount: number) => {
-      // TODO: Implementar sistema de boost de dano quando tiver atributos de ataque
-      effectMessage = `aumentou o poder de ataque em ${amount}!`;
-      console.log(`💊 [DAMAGE] Dano aumentado em ${amount}`);
-    };
-
-    // Parsear o efeito do item
-    const [effectType, effectValue] = item.effect.split("_");
-
-    console.log("💊 [ITEM] Parseando efeito:", {
-      effectType,
-      effectValue,
-      full: item.effect,
+    console.log("💊 [ITEM] Aplicando efeito:", {
+      type: effect?.type,
+      value: effectValue,
+      itemName: item.name,
     });
 
-    switch (effectType) {
-      case "heal":
-        if (effectValue === "full") {
-          applyHealFull();
-        } else {
-          const healAmount = parseInt(effectValue, 10);
-          if (!isNaN(healAmount)) {
-            applyHeal(healAmount);
-          }
-        }
-        break;
-      case "boost":
-        if (item.effect.includes("boost_dp")) {
-          const boostAmount = parseInt(item.effect.split("_")[2], 10);
-          if (!isNaN(boostAmount)) {
-            applyBoostDp(boostAmount);
-          }
-        } else if (item.effect.includes("boost_damage")) {
-          const damageAmount = parseInt(item.effect.split("_")[2], 10);
-          if (!isNaN(damageAmount)) {
-            applyBoostDamage(damageAmount);
-          }
-        }
-        break;
-      default:
-        effectMessage = `usou ${item.name}`;
-        console.log("💊 [ITEM] Efeito desconhecido:", item.effect);
+    // Aplicar efeito baseado no tipo
+    if (!effect) {
+      effectMessage = `usou ${item.name}`;
+      console.log("⚠️ [ITEM] Nenhum efeito configurado");
+    } else {
+      switch (effect.type) {
+        case "heal":
+          // Cura de HP
+          const oldHp = newHp;
+          newHp = Math.min(digimon.dp, digimon.currentHp + effectValue);
+          const healed = newHp - oldHp;
+          effectMessage = `restaurou ${healed.toLocaleString()} HP`;
+          console.log(`💊 [HEAL] Curou ${healed} HP (${oldHp} → ${newHp})`);
+          break;
+
+        case "attack_bonus":
+          // Bônus permanente de ataque
+          newAttackBonus += effectValue;
+          effectMessage = `ganhou +${effectValue} de bônus de ataque permanente!`;
+          console.log(
+            `⚔️ [ATTACK] Bônus de ataque: ${digimon.attackBonus || 0} → ${newAttackBonus}`
+          );
+          break;
+
+        case "defense_bonus":
+          // Bônus permanente de defesa
+          newDefenseBonus += effectValue;
+          effectMessage = `ganhou +${effectValue} de bônus de defesa permanente!`;
+          console.log(
+            `🛡️ [DEFENSE] Bônus de defesa: ${digimon.defenseBonus || 0} → ${newDefenseBonus}`
+          );
+          break;
+
+        case "movement":
+          // Bônus permanente de movimento
+          newMovementBonus += effectValue;
+          effectMessage = `ganhou +${effectValue} casas de movimento permanente!`;
+          console.log(
+            `🏃 [MOVEMENT] Bônus de movimento: ${digimon.movementBonus || 0} → ${newMovementBonus}`
+          );
+          break;
+
+        case "buff":
+        case "debuff":
+        case "damage":
+          // Outros efeitos podem ser implementados futuramente
+          effectMessage = `usou ${item.name}`;
+          console.log(`💊 [ITEM] Efeito ${effect.type} aplicado`);
+          break;
+
+        default:
+          effectMessage = `usou ${item.name}`;
+          console.log("💊 [ITEM] Efeito padrão");
+      }
     }
 
     console.log("💊 [ITEM] Efeito aplicado:", effectMessage);
@@ -1609,6 +1617,9 @@ export default function GamePage() {
                   dp: newDp,
                   dpBonus: newDpBonus,
                   currentHp: newHp,
+                  attackBonus: newAttackBonus,
+                  defenseBonus: newDefenseBonus,
+                  movementBonus: newMovementBonus,
                   // Usar item NÃO custa mais ação!
                 };
               }

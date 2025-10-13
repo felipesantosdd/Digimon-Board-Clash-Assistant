@@ -5,7 +5,12 @@ export type EffectType =
   | "debuff"
   | "special"
   | "boss"
-  | "evolution";
+  | "evolution"
+  | "movement"
+  | "attack_bonus"
+  | "defense_bonus";
+
+export type StatusType = "hp" | "attack" | "defense" | "movement";
 
 export interface Effect {
   id: number;
@@ -14,4 +19,5 @@ export interface Effect {
   code: string;
   type: EffectType;
   value: number;
+  statusType?: StatusType | null; // Qual status será afetado (hp, attack, defense, movement)
 }

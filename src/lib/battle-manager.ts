@@ -136,21 +136,32 @@ export class BattleManager {
     const defenderDice2 = this.rollD20();
 
     // Determinar qual é ataque e qual é defesa (maior = ataque, menor = defesa)
-    const attackerAttackRoll = Math.max(attackerDice1, attackerDice2);
-    const attackerDefenseRoll = Math.min(attackerDice1, attackerDice2);
-    const defenderAttackRoll = Math.max(defenderDice1, defenderDice2);
-    const defenderDefenseRoll = Math.min(defenderDice1, defenderDice2);
+    // APLICAR BÔNUS PERMANENTES DE ITENS
+    const attackerAttackRoll =
+      Math.max(attackerDice1, attackerDice2) + (this.attacker.attackBonus || 0);
+    const attackerDefenseRoll =
+      Math.min(attackerDice1, attackerDice2) +
+      (this.attacker.defenseBonus || 0);
+    const defenderAttackRoll =
+      Math.max(defenderDice1, defenderDice2) + (this.defender.attackBonus || 0);
+    const defenderDefenseRoll =
+      Math.min(defenderDice1, defenderDice2) +
+      (this.defender.defenseBonus || 0);
 
     console.log("🎲 [BATTLE] Dados rolados:", {
       atacante: {
         dados: [attackerDice1, attackerDice2],
         ataque: attackerAttackRoll,
         defesa: attackerDefenseRoll,
+        bonusAtaque: this.attacker.attackBonus || 0,
+        bonusDefesa: this.attacker.defenseBonus || 0,
       },
       defensor: {
         dados: [defenderDice1, defenderDice2],
         ataque: defenderAttackRoll,
         defesa: defenderDefenseRoll,
+        bonusAtaque: this.defender.attackBonus || 0,
+        bonusDefesa: this.defender.defenseBonus || 0,
       },
     });
 
