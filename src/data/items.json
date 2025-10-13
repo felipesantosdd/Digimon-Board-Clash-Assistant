@@ -8,7 +8,7 @@
     "dropChance": 0,
     "targetDigimons": [],
     "effectId": 2,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -360,7 +360,7 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -372,7 +372,7 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -386,7 +386,7 @@
       295
     ],
     "effectId": 21,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -398,7 +398,7 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -413,7 +413,7 @@
       506
     ],
     "effectId": 21,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -428,7 +428,7 @@
       107
     ],
     "effectId": 21,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -443,7 +443,7 @@
       142
     ],
     "effectId": 21,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -459,7 +459,7 @@
       112
     ],
     "effectId": 21,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -651,7 +651,7 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -663,7 +663,7 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -675,79 +675,79 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 69,
     "name": "Portão Dimensional",
     "description": "Permite movimento instantâneo. O Digimon pode andar 10 casas a mais no tabuleiro.",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 10,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 70,
     "name": "Chip de Recuperação Pequeno",
     "description": "Restaura 2.000 HP",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 30,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 71,
     "name": "Chip de Recuperação Médio I",
     "description": "Restaura 4.000 HP",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 25,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 72,
     "name": "Chip de Recuperação Médio II",
     "description": "Restaura 6.000 HP",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 20,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 73,
     "name": "Chip de Recuperação Grande I",
     "description": "Restaura 8.000 HP",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 18,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 74,
     "name": "Chip de Recuperação Grande II",
     "description": "Restaura 10.000 HP",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -766,60 +766,60 @@
     "id": 76,
     "name": "Chip de Recuperação Super II",
     "description": "Restaura 14.000 HP",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 10,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 77,
     "name": "Chip de Recuperação Mega",
     "description": "Restaura 16.000 HP",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 8,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 78,
     "name": "Chip de Recuperação Ultra",
     "description": "Restaura 20.000 HP",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 6,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 79,
     "name": "Chip de Recuperação Total",
     "description": "Restaura 24.000 HP (HP máximo do sistema)",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 4,
     "targetDigimons": [],
     "effectId": null,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 80,
     "name": "Chip de Força P",
     "description": "Bônus permanente: +5 nos dados de ataque",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 20,
     "targetDigimons": [],
     "effectId": 24,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -838,48 +838,48 @@
     "id": 82,
     "name": "Chip de Força G",
     "description": "Bônus permanente: +15 nos dados de ataque",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 6,
     "targetDigimons": [],
     "effectId": 24,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 83,
     "name": "Chip de Defesa P",
     "description": "Bônus permanente: +5 nos dados de defesa",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 20,
     "targetDigimons": [],
     "effectId": 25,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 84,
     "name": "Chip de Defesa M",
     "description": "Bônus permanente: +10 nos dados de defesa",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 12,
     "targetDigimons": [],
     "effectId": 25,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 85,
     "name": "Chip de Defesa G",
     "description": "Bônus permanente: +15 nos dados de defesa",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 6,
     "targetDigimons": [],
     "effectId": 25,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
@@ -896,50 +896,50 @@
   },
   {
     "id": 87,
-    "name": "Botas Ágeis",
+    "name": "Chip de Velocidade I",
     "description": "Permite andar +2 casas adicionais no tabuleiro",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 18,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 88,
-    "name": "Botas Velozes",
+    "name": "Chip de Velocidade II",
     "description": "Permite andar +3 casas adicionais no tabuleiro",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 12,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 89,
-    "name": "Botas Supersônicas",
+    "name": "Chip de Velocidade IV",
     "description": "Permite andar +4 casas adicionais no tabuleiro",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 8,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   },
   {
     "id": 90,
-    "name": "Botas da Luz",
+    "name": "Chip de Velocidade V",
     "description": "Permite andar +5 casas adicionais no tabuleiro",
-    "image": "/images/items/fallback.svg",
+    "image": "/images/items/1760317992697_image.webp",
     "effect": "",
     "dropChance": 5,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 0,
+    "active": 1,
     "effectValue": 0
   }
 ]
