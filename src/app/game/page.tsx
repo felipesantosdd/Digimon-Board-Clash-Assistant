@@ -1549,7 +1549,9 @@ export default function GamePage() {
           newAttackBonus += effectValue;
           effectMessage = `ganhou +${effectValue} de bônus de ataque permanente!`;
           console.log(
-            `⚔️ [ATTACK] Bônus de ataque: ${digimon.attackBonus || 0} → ${newAttackBonus}`
+            `⚔️ [ATTACK] Bônus de ataque: ${
+              digimon.attackBonus || 0
+            } → ${newAttackBonus}`
           );
           break;
 
@@ -1558,7 +1560,9 @@ export default function GamePage() {
           newDefenseBonus += effectValue;
           effectMessage = `ganhou +${effectValue} de bônus de defesa permanente!`;
           console.log(
-            `🛡️ [DEFENSE] Bônus de defesa: ${digimon.defenseBonus || 0} → ${newDefenseBonus}`
+            `🛡️ [DEFENSE] Bônus de defesa: ${
+              digimon.defenseBonus || 0
+            } → ${newDefenseBonus}`
           );
           break;
 
@@ -1567,7 +1571,9 @@ export default function GamePage() {
           newMovementBonus += effectValue;
           effectMessage = `ganhou +${effectValue} casas de movimento permanente!`;
           console.log(
-            `🏃 [MOVEMENT] Bônus de movimento: ${digimon.movementBonus || 0} → ${newMovementBonus}`
+            `🏃 [MOVEMENT] Bônus de movimento: ${
+              digimon.movementBonus || 0
+            } → ${newMovementBonus}`
           );
           break;
 

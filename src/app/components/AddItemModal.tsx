@@ -19,7 +19,10 @@ type EffectType =
   | "debuff"
   | "special"
   | "boss"
-  | "evolution";
+  | "evolution"
+  | "movement"
+  | "attack_bonus"
+  | "defense_bonus";
 
 interface Effect {
   id: number;
@@ -46,6 +49,9 @@ const effectTypeIcons: Record<EffectType, string> = {
   special: "✨",
   boss: "👹",
   evolution: "🧬",
+  movement: "🏃",
+  attack_bonus: "⚔️",
+  defense_bonus: "🛡️",
 };
 
 export default function AddItemModal({
