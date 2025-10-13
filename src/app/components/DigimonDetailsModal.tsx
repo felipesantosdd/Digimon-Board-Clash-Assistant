@@ -272,7 +272,10 @@ export default function DigimonDetailsModal({
                 ATK
               </div>
               <div className="text-lg sm:text-2xl font-bold text-red-400">
-                {digimon.dp.toLocaleString()}
+                {calculatePowerWithBonus(
+                  digimon.dp,
+                  digimon.attackBonus || 0
+                ).toLocaleString()}
               </div>
             </div>
           </div>
@@ -476,10 +479,10 @@ export default function DigimonDetailsModal({
                 <div>
                   <h3 className="text-lg sm:text-xl font-bold flex items-center gap-2">
                     <span className="text-xl sm:text-2xl">🎒</span>
-                    Bag Compartilhada
+                    Bag de {playerName}
                   </h3>
                   <p className="text-xs sm:text-sm text-purple-100 mt-0.5 sm:mt-1">
-                    Itens de toda a equipe
+                    Itens pessoais
                   </p>
                 </div>
                 <button
