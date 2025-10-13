@@ -175,10 +175,10 @@ export function calculatePower(dp: number): number {
 
 /**
  * Calcula o poder de ataque do Boss
- * Boss tem poder reduzido: DP / 4
+ * Boss tem mesmo poder que Digimons: DP / 3
  */
 export function calculateBossPower(dp: number): number {
-  const basePower = dp / 4;
+  const basePower = dp / 3;
   return Math.ceil(basePower / 100) * 100;
 }
 

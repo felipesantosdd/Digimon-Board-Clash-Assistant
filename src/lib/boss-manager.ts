@@ -234,8 +234,8 @@ export class BossManager {
     const randomIndex = Math.floor(Math.random() * aliveDigimons.length);
     const target = aliveDigimons[randomIndex];
 
-    // 3. Calcular poder de ataque do boss (DP / 4 - rebalanceado)
-    const bossPower = Math.ceil((boss.calculatedDp / 4) / 100) * 100;
+    // 3. Calcular poder de ataque do boss (DP / 3)
+    const bossPower = Math.ceil((boss.calculatedDp / 3) / 100) * 100;
 
     // 4. Calcular poder do Digimon alvo
     const targetPower = Math.ceil((target.digimon.dp / 3) / 100) * 100;
@@ -250,7 +250,13 @@ export class BossManager {
     // 6. Calcular dano líquido (Poder boss - Defesa do Digimon)
     let netDamage = Math.max(0, bossPower - targetDefense);
 
-    // 7. Aplicar dano mínimo de 5
+    // 7. Limitar dano máximo a 1/3 da vida máxima do Digimon alvo
+    const maxDamage = Math.ceil(target.digimon.dp / 3);
+    if (netDamage > maxDamage) {
+      netDamage = maxDamage;
+    }
+
+    // 8. Aplicar dano mínimo de 5
     if (netDamage > 0 && netDamage < 5) {
       netDamage = 5;
     }

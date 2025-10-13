@@ -171,6 +171,26 @@ export default function GamePage() {
     }
   }, [gameState, showAttackDialog]);
 
+  // Auto-encerrar turno quando não há mais ações disponíveis
+  useEffect(() => {
+    if (!gameState) return;
+
+    const currentPlayer = gameState.players[gameState.currentTurnPlayerIndex];
+    const hasAvailableActions = currentPlayer.digimons.some(
+      (d) => d.currentHp > 0 && !d.hasActedThisTurn
+    );
+
+    if (!hasAvailableActions) {
+      console.log("⏭️ [AUTO-TURN] Nenhuma ação disponível, encerrando turno automaticamente...");
+      // Auto-encerrar turno após 1.5 segundo
+      const timer = setTimeout(() => {
+        handleNextTurn();
+      }, 1500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [gameState?.players, gameState?.currentTurnPlayerIndex]);
+
   const handleEndGame = () => {
     clearGameState();
     enqueueSnackbar("Jogo finalizado!", { variant: "success" });
@@ -2475,7 +2495,9 @@ export default function GamePage() {
                       const isDead = digimon.currentHp <= 0;
                       return (
                         <div
-                          key={`${player.id}-${digimon.id}`}
+                          key={`player-${playerIndex}-digimon-${digimon.id}-${
+                            digimon.originalId || digimon.id
+                          }`}
                           onClick={() =>
                             handleDigimonClick(digimon, player.name, player.id)
                           }
