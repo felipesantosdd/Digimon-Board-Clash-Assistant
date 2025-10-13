@@ -1232,21 +1232,28 @@ export default function GamePage() {
               return {
                 ...player,
                 digimons: player.digimons.map((d) => {
-                  if (d.id === digimon.id) {
-                    return {
-                      ...d,
-                      hasActedThisTurn: true,
-                    };
-                  }
-                  return d;
-                }),
-              };
-            }
-            return player;
-          }),
-        };
-        saveGameState(updatedState);
-      } else {
+                    if (d.id === digimon.id) {
+                      // Ganhar 5% de XP ao explorar
+                      const xpGained = Math.floor(d.dp * 0.05);
+                      const newProgress = Math.min(d.dp, (d.evolutionProgress || 0) + xpGained);
+                      const canEvolve = d.evolution && d.evolution.length > 0 && newProgress >= d.dp && !d.evolutionLocked;
+                      
+                      return {
+                        ...d,
+                        hasActedThisTurn: true,
+                        evolutionProgress: newProgress,
+                        canEvolve: canEvolve || d.canEvolve,
+                      };
+                    }
+                    return d;
+                  }),
+                };
+              }
+              return player;
+            }),
+          };
+          saveGameState(updatedState);
+        } else {
         // Calcular qual item foi encontrado baseado nas probabilidades
         const totalChance = availableItems.reduce(
           (sum: number, item: { dropChance?: number }) =>
@@ -1289,9 +1296,16 @@ export default function GamePage() {
                     ...player,
                     digimons: player.digimons.map((d) => {
                       if (d.id === digimon.id) {
+                        // Ganhar 5% de XP ao explorar (mesmo sem encontrar item válido)
+                        const xpGained = Math.floor(d.dp * 0.05);
+                        const newProgress = Math.min(d.dp, (d.evolutionProgress || 0) + xpGained);
+                        const canEvolve = d.evolution && d.evolution.length > 0 && newProgress >= d.dp && !d.evolutionLocked;
+                        
                         return {
                           ...d,
                           hasActedThisTurn: true,
+                          evolutionProgress: newProgress,
+                          canEvolve: canEvolve || d.canEvolve,
                         };
                       }
                       return d;
@@ -1341,10 +1355,17 @@ export default function GamePage() {
                   ...player,
                   digimons: player.digimons.map((d) => {
                     if (d.id === digimon.id) {
+                      // Ganhar 5% de XP ao explorar
+                      const xpGained = Math.floor(d.dp * 0.05);
+                      const newProgress = Math.min(d.dp, (d.evolutionProgress || 0) + xpGained);
+                      const canEvolve = d.evolution && d.evolution.length > 0 && newProgress >= d.dp && !d.evolutionLocked;
+                      
                       return {
                         ...d,
                         hasActedThisTurn: true,
                         hasDigivice: isDigivice ? true : d.hasDigivice, // Marcar se encontrou Digivice
+                        evolutionProgress: newProgress,
+                        canEvolve: canEvolve || d.canEvolve,
                       };
                     }
                     return d;
