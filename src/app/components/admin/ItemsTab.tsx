@@ -139,7 +139,9 @@ export default function ItemsTab({ isProduction = false }: ItemsTabProps) {
       if (response.ok) {
         fetchItems();
         enqueueSnackbar(
-          `Item "${item.name}" ${newStatus ? "ativado" : "desativado"} com sucesso!`,
+          `Item "${item.name}" ${
+            newStatus ? "ativado" : "desativado"
+          } com sucesso!`,
           {
             variant: "success",
           }

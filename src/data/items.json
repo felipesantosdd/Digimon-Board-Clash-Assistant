@@ -8,7 +8,7 @@
     "dropChance": 0,
     "targetDigimons": [],
     "effectId": 2,
-    "active": 1
+    "active": 0
   },
   {
     "id": 22,
@@ -639,7 +639,7 @@
     "dropChance": 10,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 1
+    "active": 0
   },
   {
     "id": 70,
@@ -650,7 +650,7 @@
     "dropChance": 30,
     "targetDigimons": [],
     "effectId": null,
-    "active": 1
+    "active": 0
   },
   {
     "id": 71,
@@ -661,7 +661,7 @@
     "dropChance": 25,
     "targetDigimons": [],
     "effectId": null,
-    "active": 1
+    "active": 0
   },
   {
     "id": 72,
@@ -672,7 +672,7 @@
     "dropChance": 20,
     "targetDigimons": [],
     "effectId": null,
-    "active": 1
+    "active": 0
   },
   {
     "id": 73,
@@ -683,7 +683,7 @@
     "dropChance": 18,
     "targetDigimons": [],
     "effectId": null,
-    "active": 1
+    "active": 0
   },
   {
     "id": 74,
@@ -694,7 +694,7 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": null,
-    "active": 1
+    "active": 0
   },
   {
     "id": 75,
@@ -705,7 +705,7 @@
     "dropChance": 12,
     "targetDigimons": [],
     "effectId": null,
-    "active": 1
+    "active": 0
   },
   {
     "id": 76,
@@ -716,7 +716,7 @@
     "dropChance": 10,
     "targetDigimons": [],
     "effectId": null,
-    "active": 1
+    "active": 0
   },
   {
     "id": 77,
@@ -727,7 +727,7 @@
     "dropChance": 8,
     "targetDigimons": [],
     "effectId": null,
-    "active": 1
+    "active": 0
   },
   {
     "id": 78,
@@ -738,7 +738,7 @@
     "dropChance": 6,
     "targetDigimons": [],
     "effectId": null,
-    "active": 1
+    "active": 0
   },
   {
     "id": 79,
@@ -749,7 +749,7 @@
     "dropChance": 4,
     "targetDigimons": [],
     "effectId": null,
-    "active": 1
+    "active": 0
   },
   {
     "id": 80,
@@ -760,7 +760,7 @@
     "dropChance": 20,
     "targetDigimons": [],
     "effectId": 24,
-    "active": 1
+    "active": 0
   },
   {
     "id": 81,
@@ -771,7 +771,7 @@
     "dropChance": 12,
     "targetDigimons": [],
     "effectId": 24,
-    "active": 1
+    "active": 0
   },
   {
     "id": 82,
@@ -782,7 +782,7 @@
     "dropChance": 6,
     "targetDigimons": [],
     "effectId": 24,
-    "active": 1
+    "active": 0
   },
   {
     "id": 83,
@@ -793,7 +793,7 @@
     "dropChance": 20,
     "targetDigimons": [],
     "effectId": 25,
-    "active": 1
+    "active": 0
   },
   {
     "id": 84,
@@ -804,7 +804,7 @@
     "dropChance": 12,
     "targetDigimons": [],
     "effectId": 25,
-    "active": 1
+    "active": 0
   },
   {
     "id": 85,
@@ -815,7 +815,7 @@
     "dropChance": 6,
     "targetDigimons": [],
     "effectId": 25,
-    "active": 1
+    "active": 0
   },
   {
     "id": 86,
@@ -826,7 +826,7 @@
     "dropChance": 25,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 1
+    "active": 0
   },
   {
     "id": 87,
@@ -837,7 +837,7 @@
     "dropChance": 18,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 1
+    "active": 0
   },
   {
     "id": 88,
@@ -848,7 +848,7 @@
     "dropChance": 12,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 1
+    "active": 0
   },
   {
     "id": 89,
@@ -859,7 +859,7 @@
     "dropChance": 8,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 1
+    "active": 0
   },
   {
     "id": 90,
@@ -870,6 +870,6 @@
     "dropChance": 5,
     "targetDigimons": [],
     "effectId": 23,
-    "active": 1
+    "active": 0
   }
 ]

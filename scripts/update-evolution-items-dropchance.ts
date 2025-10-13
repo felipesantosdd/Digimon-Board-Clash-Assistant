@@ -75,4 +75,3 @@ updatedItems.forEach((item) => {
 console.log("");
 
 db.close();
-
