@@ -6,7 +6,6 @@ import {
   DIGIMON_TYPE_NAMES,
   calculatePowerWithBonus,
 } from "@/lib/utils";
-import D20Display from "./D20Display";
 
 interface BattleViewProps {
   attacker: {
@@ -30,16 +29,13 @@ interface BattleViewProps {
   };
   isRolling: boolean;
   battleComplete: boolean;
-  onExecuteAttack: () => void;
   onEvolve?: (digimon: GameDigimon) => void;
 }
 
 export default function BattleView({
   attacker,
   defender,
-  isRolling,
   battleComplete,
-  onExecuteAttack,
   onEvolve,
 }: BattleViewProps) {
   const attackerNewHp = Math.max(
@@ -470,22 +466,7 @@ export default function BattleView({
         </div>
       )}
 
-      {/* Botão de Executar Ataque */}
-      {!battleComplete && (
-        <div className="mt-4 sm:mt-6 flex justify-center">
-          <button
-            onClick={onExecuteAttack}
-            disabled={isRolling}
-            className={`px-4 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold rounded-lg transition-all ${
-              !isRolling
-                ? "bg-red-600 text-white hover:bg-red-700 transform hover:scale-105"
-                : "bg-gray-700 text-gray-500 cursor-not-allowed"
-            }`}
-          >
-            {isRolling ? "⚔️ Executando..." : "⚔️ Executar Ataque"}
-          </button>
-        </div>
-      )}
+      {/* Ataque executado automaticamente ao selecionar alvo */}
 
       {/* Botões de Evolução */}
       {battleComplete && onEvolve && (

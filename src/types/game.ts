@@ -36,6 +36,21 @@ export interface GameDigimon {
   movementBonus?: number; // Bônus permanente de movimento (casas extras)
   reviveAttemptedThisTurn?: boolean; // Se já houve tentativa de levantar neste turno
   lastEvolutionTurn?: number; // Último turno global em que evoluiu (cooldown de 2 turnos)
+  temporaryEvolution?: {
+    // Dados da evolução temporária (Spirit/Armor)
+    expiresAtTurn: number; // Turno em que a evolução temporária expira
+    previousForm: {
+      // Forma anterior para reverter
+      id: number;
+      name: string;
+      image: string;
+      level: number;
+      dp: number;
+      currentHp: number;
+      typeId: number;
+      evolutionProgress: number;
+    };
+  };
 }
 
 export interface GamePlayer {
@@ -43,6 +58,7 @@ export interface GamePlayer {
   name: string;
   avatar: string;
   digimons: GameDigimon[];
+  bag?: GameItem[]; // Bag individual do jogador
 }
 
 // Boss ativo no jogo

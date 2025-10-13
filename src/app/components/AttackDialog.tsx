@@ -139,6 +139,11 @@ export default function AttackDialog({
     setIsRolling(false);
     setBattleComplete(false);
     setStep("battle");
+
+    // Executar ataque automaticamente após selecionar o alvo
+    setTimeout(() => {
+      executeAttackWithTarget(targetDigimon);
+    }, 100);
   };
 
   const handleBossSelect = () => {
@@ -179,10 +184,15 @@ export default function AttackDialog({
     setIsRolling(false);
     setBattleComplete(false);
     setStep("battle");
+
+    // Executar ataque automaticamente após selecionar o boss
+    setTimeout(() => {
+      executeAttackWithTarget(bossAsDigimon);
+    }, 100);
   };
 
-  const executeAttack = () => {
-    if (!attacker || !selectedDigimon) return;
+  const executeAttackWithTarget = (target: GameDigimon) => {
+    if (!attacker) return;
 
     setIsRolling(true);
 
@@ -200,7 +210,7 @@ export default function AttackDialog({
 
         // Calcular modificadores de status
         const attackerModifier = getStatusModifier(attacker.digimon);
-        const defenderModifier = getStatusModifier(selectedDigimon);
+        const defenderModifier = getStatusModifier(target);
 
         console.log("💪 [BATTLE] Modificadores de status:", {
           atacante: attackerModifier,
@@ -210,14 +220,14 @@ export default function AttackDialog({
         // Executar batalha usando o BattleManager
         const battleManager = new BattleManager(
           attacker.digimon,
-          selectedDigimon,
+          target,
           attackerModifier,
           defenderModifier
         );
         const result = battleManager.executeBattle();
 
         // Se está atacando o boss (id negativo), boss não contra-ataca
-        const isBoss = selectedDigimon.id === -1;
+        const isBoss = target.id === -1;
         if (isBoss) {
           result.defenderDamage = 0;
         }
@@ -232,7 +242,7 @@ export default function AttackDialog({
 
         // Aplicar dano imediatamente e passar resultado completo
         onConfirm(
-          selectedDigimon,
+          target,
           result.attackerDamage,
           result.defenderDamage,
           result // Passar resultado completo com informações de críticos
@@ -336,53 +346,12 @@ export default function AttackDialog({
               }}
               isRolling={isRolling}
               battleComplete={battleComplete}
-              onExecuteAttack={executeAttack}
               onEvolve={onEvolve}
             />
           )}
 
-          {/* Etapa: Batalha (antes de executar) */}
-          {step === "battle" && selectedDigimon && battleResult === null && (
-            <BattleView
-              attacker={{
-                digimon: attacker.digimon,
-                playerName: attacker.playerName,
-                attackDice: 0,
-                defenseDice: 0,
-                damage: 0,
-                typeAdvantage: new BattleManager(
-                  attacker.digimon,
-                  selectedDigimon
-                ).getAttackerTypeAdvantage(),
-                attributeAdvantage: new BattleManager(
-                  attacker.digimon,
-                  selectedDigimon
-                ).getAttackerAttributeAdvantage(),
-              }}
-              defender={{
-                digimon: selectedDigimon,
-                attackDice: 0,
-                defenseDice: 0,
-                damage: 0,
-                typeAdvantage: new BattleManager(
-                  attacker.digimon,
-                  selectedDigimon
-                ).getDefenderTypeAdvantage(),
-                attributeAdvantage: new BattleManager(
-                  attacker.digimon,
-                  selectedDigimon
-                ).getDefenderAttributeAdvantage(),
-                maxHp:
-                  selectedDigimon.id < 0 && activeBoss
-                    ? activeBoss.maxHp
-                    : undefined,
-              }}
-              isRolling={isRolling}
-              battleComplete={battleComplete}
-              onExecuteAttack={executeAttack}
-              onEvolve={onEvolve}
-            />
-          )}
+          {/* Etapa: Batalha - Ataque executado automaticamente ao selecionar alvo */}
+          {/* Visualização removida - ataque já está em andamento */}
         </div>
 
         {/* Footer */}

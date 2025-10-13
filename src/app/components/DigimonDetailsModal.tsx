@@ -150,6 +150,19 @@ export default function DigimonDetailsModal({
               </div>
             </div>
           )}
+
+          {/* Badge de Evolução Temporária */}
+          {digimon.temporaryEvolution && currentTurnCount !== undefined && (
+            <div className="absolute top-2 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold shadow-lg border-2 border-purple-400 animate-pulse z-20">
+              ⏰ Expira em{" "}
+              {Math.max(
+                0,
+                digimon.temporaryEvolution.expiresAtTurn - currentTurnCount
+              )}{" "}
+              turno(s)
+            </div>
+          )}
+
           {digimon.image ? (
             <img
               src={digimon.image}

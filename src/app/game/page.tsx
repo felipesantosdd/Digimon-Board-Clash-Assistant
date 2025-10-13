@@ -252,6 +252,61 @@ export default function GamePage() {
   };
 
   /**
+   * Reverte evolução temporária se expirou (Spirits/Armor)
+   */
+  const revertTemporaryEvolution = (
+    digimon: GameDigimon,
+    currentTurn: number
+  ): GameDigimon => {
+    // Verificar se tem evolução temporária e se expirou
+    if (!digimon.temporaryEvolution) return digimon;
+
+    if (currentTurn >= digimon.temporaryEvolution.expiresAtTurn) {
+      const previousFormName = digimon.temporaryEvolution.previousForm.name;
+
+      console.log(
+        `⏰ [TEMP EVOLUTION] ${digimon.name} voltou para ${previousFormName}! (Evolução temporária expirou)`
+      );
+
+      enqueueSnackbar(
+        `⏰ ${capitalize(digimon.name)} voltou para ${capitalize(
+          previousFormName
+        )}! (Evolução temporária expirou)`,
+        { variant: "info" }
+      );
+
+      // Reverter para a forma anterior
+      const previousForm = digimon.temporaryEvolution.previousForm;
+
+      // Calcular HP proporcional ao reverter
+      const currentHpPercentage =
+        digimon.dp > 0 ? digimon.currentHp / digimon.dp : 0;
+      const revertedHp = Math.min(
+        previousForm.dp,
+        Math.floor(previousForm.dp * currentHpPercentage)
+      );
+
+      return {
+        ...digimon,
+        id: previousForm.id,
+        name: previousForm.name,
+        image: previousForm.image,
+        level: previousForm.level,
+        dp: previousForm.dp,
+        baseDp: previousForm.dp,
+        currentHp: Math.max(1, revertedHp), // Mínimo 1 HP
+        typeId: previousForm.typeId,
+        evolutionProgress: previousForm.evolutionProgress,
+        temporaryEvolution: undefined, // Remover dados de evolução temporária
+        evolutionLocked: false, // Desbloquear evoluções normais
+        canEvolve: false, // Resetar flag
+      };
+    }
+
+    return digimon;
+  };
+
+  /**
    * Calcula o modificador de dano baseado nos status ativos
    */
   const getStatusDamageModifier = (digimon: GameDigimon): number => {
@@ -395,8 +450,15 @@ export default function GamePage() {
                 d,
                 newTurnCount
               );
+
+              // Reverter evoluções temporárias expiradas (Spirit/Armor)
+              const withoutExpiredEvolution = revertTemporaryEvolution(
+                withoutExpiredStatuses,
+                newTurnCount
+              );
+
               return {
-                ...withoutExpiredStatuses,
+                ...withoutExpiredEvolution,
                 hasActedThisTurn: false,
                 defending: null, // Resetar defesa
                 reviveAttemptedThisTurn: false, // Resetar tentativa de levantar
@@ -472,19 +534,21 @@ export default function GamePage() {
     const newHp = Math.max(0, digimon.currentHp - damageAmount);
 
     // Calcular % de HP perdido NESTA BATALHA (recebeu dano)
+    // 1% de XP para cada 1% de HP perdido
     const hpLostPercentage = (damageAmount / digimon.dp) * 100;
 
-    // Calcular % de dano causado (atacou)
-    const damageDealtPercentage = (damageDealt / digimon.dp) * 100;
+    // Calcular XP por dano causado (baseado no próprio DP para balanceamento)
+    // Dano igual ao DP = 10% de XP
+    const damageDealtXp = (damageDealt / digimon.dp) * 10;
 
     // Verificar se Digimon pode ganhar XP (apenas se tem evoluções disponíveis E não está bloqueado)
     const hasEvolutions = digimon.evolution && digimon.evolution.length > 0;
     const isEvolutionLocked = digimon.evolutionLocked || false;
     const canGainXp = hasEvolutions && !isEvolutionLocked;
 
-    // Ganho de XP: 1% para cada 1% de HP perdido + 1% para cada 1% de dano causado
+    // Ganho de XP: HP perdido (1:1) + Dano causado (10:1)
     // Se o Digimon tem Digivice, XP é DOBRADO!
-    const baseXpGain = canGainXp ? hpLostPercentage + damageDealtPercentage : 0;
+    const baseXpGain = canGainXp ? hpLostPercentage + damageDealtXp : 0;
     const xpGained = digimon.hasDigivice ? baseXpGain * 2 : baseXpGain;
 
     // Calcular novo progresso de evolução
@@ -799,6 +863,10 @@ export default function GamePage() {
           ...player,
           digimons: player.digimons.map((d) => {
             if (d.id === digimon.id) {
+              // Verificar se é evolução temporária (Spirit nível 8 ou Armor nível 0)
+              const isTemporaryEvolution =
+                evolution.level === 0 || evolution.level === 8;
+
               // Para Armor (nível 0), usar stats dinâmicos baseados no nível mais alto em jogo
               let hp: number, dp: number;
 
@@ -869,6 +937,31 @@ export default function GamePage() {
                 )}%) -> New: ${newCurrentHp}/${hp} (Proporcional: ${proportionalHp} + Bônus 30%: ${bonusHp})`
               );
 
+              // Preparar dados de evolução temporária se for Spirit/Armor
+              const temporaryEvolutionData = isTemporaryEvolution
+                ? {
+                    expiresAtTurn: gameState.turnCount + 3, // Expira em 3 turnos
+                    previousForm: {
+                      id: d.id,
+                      name: d.name,
+                      image: d.image,
+                      level: d.level,
+                      dp: d.dp,
+                      currentHp: d.currentHp,
+                      typeId: d.typeId,
+                      evolutionProgress: d.evolutionProgress || 0,
+                    },
+                  }
+                : undefined;
+
+              console.log(
+                isTemporaryEvolution
+                  ? `⏰ [TEMP EVOLUTION] Evolução temporária! Expira no turno ${
+                      gameState.turnCount + 3
+                    }`
+                  : `✨ [EVOLUTION] Evolução permanente!`
+              );
+
               // Evoluir o Digimon com novos stats aleatórios
               return {
                 ...d,
@@ -886,6 +979,7 @@ export default function GamePage() {
                 originalId: d.originalId || digimon.id, // Guardar ID original
                 statuses: newStatuses, // Remove debuffs, mantém buffs, adiciona Animado
                 lastEvolutionTurn: gameState.turnCount, // Marcar turno da evolução
+                temporaryEvolution: temporaryEvolutionData, // Dados de reversão se temporário
               };
             }
             // Resetar defesa se estava defendendo o Digimon que evoluiu
@@ -1090,23 +1184,30 @@ export default function GamePage() {
         );
         const items = await Promise.all(itemsPromises);
 
-        // Adicionar itens à bag compartilhada
-        const currentSharedBag = gameState.sharedBag || [];
-        const updatedSharedBag = [...currentSharedBag];
+        // Adicionar itens à bag do jogador que derrotou o boss
+        const killerPlayer = updatedPlayers[killerPlayerIndex];
+        const currentPlayerBag = killerPlayer.bag || [];
+        const updatedPlayerBag = [...currentPlayerBag];
 
         items.forEach((item) => {
-          const existingIndex = updatedSharedBag.findIndex(
+          const existingIndex = updatedPlayerBag.findIndex(
             (bagItem) => bagItem.id === item.id
           );
           if (existingIndex !== -1) {
-            updatedSharedBag[existingIndex] = {
-              ...updatedSharedBag[existingIndex],
-              quantity: updatedSharedBag[existingIndex].quantity + 1,
+            updatedPlayerBag[existingIndex] = {
+              ...updatedPlayerBag[existingIndex],
+              quantity: updatedPlayerBag[existingIndex].quantity + 1,
             };
           } else {
-            updatedSharedBag.push({ ...item, quantity: 1 });
+            updatedPlayerBag.push({ ...item, quantity: 1 });
           }
         });
+
+        // Atualizar a bag do jogador
+        updatedPlayers[killerPlayerIndex] = {
+          ...updatedPlayers[killerPlayerIndex],
+          bag: updatedPlayerBag,
+        };
 
         // Mostrar modal de drop do boss
         setBossDropData({
@@ -1120,19 +1221,18 @@ export default function GamePage() {
         setShowBossDropModal(true);
 
         enqueueSnackbar(
-          `🎁 A equipe ganhou ${rewards.length} item(ns) na bag compartilhada!`,
+          `🎁 ${attackerDigimon.playerName} ganhou ${rewards.length} item(ns)!`,
           { variant: "success" }
         );
 
         console.log(
-          "🎁 [BOSS] Recompensas adicionadas à bag compartilhada:",
+          `🎁 [BOSS] Recompensas adicionadas à bag de ${attackerDigimon.playerName}:`,
           items
         );
 
-        // Atualizar estado com boss derrotado e bag compartilhada atualizada
+        // Atualizar estado com boss derrotado e players atualizados
         saveGameState({
           ...gameState,
-          sharedBag: updatedSharedBag,
           activeBoss: updatedBoss,
           players: updatedPlayers,
           lastBossDefeatedTurn: gameState.turnCount,
@@ -1326,10 +1426,39 @@ export default function GamePage() {
       }
       const allItems = await response.json();
 
+      // Coletar todos os itens únicos já obtidos por TODOS os jogadores
+      const obtainedUniqueItems = new Set<number>();
+      gameState.players.forEach((player) => {
+        const playerBag = player.bag || [];
+        playerBag.forEach((bagItem) => {
+          // Buscar item original para verificar se é único
+          const originalItem = allItems.find(
+            (i: { id: number }) => i.id === bagItem.id
+          );
+          if (originalItem?.unique_item === 1) {
+            obtainedUniqueItems.add(bagItem.id);
+          }
+        });
+      });
+
+      console.log(
+        `🔒 [LOOT] Itens únicos já obtidos: ${
+          Array.from(obtainedUniqueItems).join(", ") || "nenhum"
+        }`
+      );
+
       // Filtrar itens ATIVOS com dropChance > 0
+      // E excluir itens únicos já obtidos
       const availableItems = allItems.filter(
-        (item: { dropChance?: number; active?: boolean }) =>
-          (item.dropChance || 0) > 0 && item.active !== false
+        (item: {
+          id: number;
+          dropChance?: number;
+          active?: boolean;
+          unique_item?: number;
+        }) =>
+          (item.dropChance || 0) > 0 &&
+          item.active !== false &&
+          !(item.unique_item === 1 && obtainedUniqueItems.has(item.id))
       );
 
       if (availableItems.length === 0) {
@@ -1387,8 +1516,8 @@ export default function GamePage() {
                 ...player,
                 digimons: player.digimons.map((d) => {
                   if (d.id === digimon.id) {
-                    // Ganhar 5% de XP ao explorar
-                    const xpGainedPercentage = 5; // 5% de XP
+                    // Ganhar 10% de XP ao explorar (DOBRADO)
+                    const xpGainedPercentage = 10; // 10% de XP
                     const newProgress = Math.min(
                       100,
                       (d.evolutionProgress || 0) + xpGainedPercentage
@@ -1457,8 +1586,8 @@ export default function GamePage() {
                     ...player,
                     digimons: player.digimons.map((d) => {
                       if (d.id === digimon.id) {
-                        // Ganhar 5% de XP ao explorar (mesmo sem encontrar item válido)
-                        const xpGainedPercentage = 5; // 5% de XP
+                        // Ganhar 10% de XP ao explorar (mesmo sem encontrar item válido) (DOBRADO)
+                        const xpGainedPercentage = 10; // 10% de XP
                         const newProgress = Math.min(
                           100,
                           (d.evolutionProgress || 0) + xpGainedPercentage
@@ -1487,24 +1616,26 @@ export default function GamePage() {
             return;
           }
 
-          // Adicionar item à bag compartilhada
-          const sharedBag = gameState.sharedBag || [];
-          const existingItemIndex = sharedBag.findIndex(
+          // Adicionar item à bag do jogador atual
+          const currentPlayer =
+            gameState.players[gameState.currentTurnPlayerIndex];
+          const playerBag = currentPlayer.bag || [];
+          const existingItemIndex = playerBag.findIndex(
             (bagItem) => bagItem.id === foundItem.id
           );
 
-          let updatedSharedBag;
+          let updatedPlayerBag;
           if (existingItemIndex !== -1 && !isDigivice) {
             // Item já existe, incrementar quantidade (exceto Digivice)
-            updatedSharedBag = sharedBag.map((item, index) =>
+            updatedPlayerBag = playerBag.map((item, index) =>
               index === existingItemIndex
                 ? { ...item, quantity: item.quantity + 1 }
                 : item
             );
           } else {
-            // Novo item, adicionar à bag compartilhada
-            updatedSharedBag = [
-              ...sharedBag,
+            // Novo item, adicionar à bag do jogador
+            updatedPlayerBag = [
+              ...playerBag,
               {
                 ...foundItem,
                 quantity: 1,
@@ -1512,19 +1643,19 @@ export default function GamePage() {
             ];
           }
 
-          // Atualizar estado com bag compartilhada e marcar Digimon como agiu
+          // Atualizar estado com bag do jogador e marcar Digimon como agiu
           // Se for Digivice, marcar hasDigivice = true no Digimon
           const updatedState = {
             ...gameState,
-            sharedBag: updatedSharedBag,
             players: gameState.players.map((player, playerIndex) => {
               if (playerIndex === gameState.currentTurnPlayerIndex) {
                 return {
                   ...player,
+                  bag: updatedPlayerBag, // Atualizar bag do jogador
                   digimons: player.digimons.map((d) => {
                     if (d.id === digimon.id) {
-                      // Ganhar 5% de XP ao explorar
-                      const xpGainedPercentage = 5; // 5% de XP
+                      // Ganhar 10% de XP ao explorar (DOBRADO)
+                      const xpGainedPercentage = 10; // 10% de XP
                       const newProgress = Math.min(
                         100,
                         (d.evolutionProgress || 0) + xpGainedPercentage
@@ -2800,6 +2931,19 @@ export default function GamePage() {
                                       )
                                     );
                                   })()}
+                                </div>
+                              )}
+
+                              {/* Badge de Evolução Temporária */}
+                              {digimon.temporaryEvolution && (
+                                <div className="absolute top-1 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white text-[9px] sm:text-xs font-bold px-1.5 py-0.5 rounded shadow-lg border border-purple-400 animate-pulse z-10">
+                                  ⏰{" "}
+                                  {Math.max(
+                                    0,
+                                    digimon.temporaryEvolution.expiresAtTurn -
+                                      gameState.turnCount
+                                  )}
+                                  T
                                 </div>
                               )}
 
