@@ -120,7 +120,8 @@ export default function BossCard({
 
             {/* HP Numérico */}
             <div className="text-xs sm:text-sm text-gray-300 mt-1 font-semibold">
-              💚 {boss.currentHp.toLocaleString()} / {boss.maxHp.toLocaleString()} HP
+              💚 {boss.currentHp.toLocaleString()} /{" "}
+              {boss.maxHp.toLocaleString()} HP
             </div>
           </div>
         </div>

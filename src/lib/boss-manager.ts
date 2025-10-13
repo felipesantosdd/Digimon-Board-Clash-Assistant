@@ -198,30 +198,41 @@ export class BossManager {
   static executeWorldTurn(
     boss: GameBoss,
     players: GamePlayer[]
-  ): { damagePerDigimon: number; affectedDigimons: number } {
-    const aliveDigimons: GameDigimon[] = [];
-
-    for (const player of players) {
-      for (const digimon of player.digimons) {
-        if (digimon.currentHp > 0) {
-          aliveDigimons.push(digimon);
-        }
-      }
-    }
-
+  ): {
+    damagePerDigimon: number;
+    affectedDigimons: number;
+    updatedPlayers: GamePlayer[];
+  } {
     const damagePerDigimon = this.calculateWorldTurnDamage(
       boss,
-      aliveDigimons.length
+      players.reduce(
+        (count, player) =>
+          count + player.digimons.filter((d) => d.currentHp > 0).length,
+        0
+      )
     );
 
-    // Aplicar dano a todos
-    for (const digimon of aliveDigimons) {
-      digimon.currentHp = Math.max(0, digimon.currentHp - damagePerDigimon);
-    }
+    let affectedDigimons = 0;
+
+    // Criar nova estrutura de players com dano aplicado
+    const updatedPlayers = players.map((player) => ({
+      ...player,
+      digimons: player.digimons.map((digimon) => {
+        if (digimon.currentHp > 0) {
+          affectedDigimons++;
+          return {
+            ...digimon,
+            currentHp: Math.max(0, digimon.currentHp - damagePerDigimon),
+          };
+        }
+        return digimon;
+      }),
+    }));
 
     return {
       damagePerDigimon,
-      affectedDigimons: aliveDigimons.length,
+      affectedDigimons,
+      updatedPlayers,
     };
   }
 
