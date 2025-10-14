@@ -5,6 +5,7 @@ import EvolutionModal from "../EvolutionModal";
 import EvolutionLineModal from "../EvolutionLineModal";
 import AddDigimonModal from "../AddDigimonModal";
 import TypeIcon from "../TypeIcons";
+import Image from "next/image";
 import { Digimon } from "../../database/database_type";
 import { useSnackbar } from "notistack";
 import { capitalize, getLevelName } from "@/lib/utils";
@@ -29,12 +30,54 @@ export default function DigimonsTab({
 
   // Estados para visualização de linha evolutiva
   const [viewingDigimon, setViewingDigimon] = useState<Digimon | null>(null);
+  const [attributesById, setAttributesById] = useState<
+    Record<number, { id: number; name: string; image: string }>
+  >({});
   const [isEvolutionLineOpen, setIsEvolutionLineOpen] = useState(false);
 
   // Carregar Digimons da API
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchDigimons();
+    fetch("/api/attributes")
+      .then((r) => (r.ok ? r.json() : []))
+      .then((arr: Array<{ id: number; name: string; image: string }>) => {
+        const map: Record<number, { id: number; name: string; image: string }> =
+          {};
+        for (const a of arr) map[a.id] = a;
+        setAttributesById(map);
+      })
+      .catch(() => {});
   }, []);
+
+  const getAttributeIcon = (attributeId?: number) => {
+    switch (attributeId) {
+      case 1:
+        return "/images/icons/fire-icon.png";
+      case 2:
+        return "/images/icons/water-icon.png";
+      case 3:
+        return "/images/icons/plant-icon.png";
+      case 4:
+        return "/images/icons/ice-icon.png";
+      case 5:
+        return "/images/icons/electricity-icon.png";
+      case 6:
+        return "/images/icons/earth-icon.png";
+      case 7:
+        return "/images/icons/steel-icon.png";
+      case 8:
+        return "/images/icons/wind-icon.png";
+      case 9:
+        return "/images/icons/light-icon.png";
+      case 10:
+        return "/images/icons/dark-icon.png";
+      case 11:
+        return "/images/icons/null-icon.png";
+      default:
+        return "";
+    }
+  };
 
   const fetchDigimons = async () => {
     try {
@@ -42,9 +85,11 @@ export default function DigimonsTab({
       if (response.ok) {
         const data = await response.json();
         setDigimons(data);
-        
+
         // Contar Digimons ativos
-        const activeCount = data.filter((d: Digimon) => d.active !== false).length;
+        const activeCount = data.filter(
+          (d: Digimon) => d.active !== false
+        ).length;
         if (onCountUpdate) {
           onCountUpdate(activeCount);
         }
@@ -108,6 +153,7 @@ export default function DigimonsTab({
       image?: string;
       active?: boolean;
       boss?: boolean;
+      attribute_id?: number | null;
     }
   ) => {
     try {
@@ -341,13 +387,71 @@ export default function DigimonsTab({
                           </span>
                         </div>
 
-                        <div className="flex justify-between text-sm text-gray-300">
+                        <div className="flex justify-between items-center text-sm text-gray-300">
                           <span className="font-semibold">
                             <span className="text-blue-400">
                               {getLevelName(digimon.level)}
                             </span>
                           </span>
+                          {(() => {
+                            const attrId = (
+                              digimon as unknown as {
+                                attribute_id?: number;
+                              }
+                            ).attribute_id;
+                            const attr = attrId
+                              ? attributesById[attrId]
+                              : undefined;
+                            const icon = attr?.image || undefined;
+                            if (!icon) return null;
+                            return (
+                              <span className="flex items-center gap-2">
+                                <Image
+                                  src={icon}
+                                  alt="Atributo"
+                                  width={20}
+                                  height={20}
+                                />
+                              </span>
+                            );
+                          })()}
                         </div>
+
+                        {/* HP / ATK / DEF */}
+                        {(() => {
+                          const dx = digimon as unknown as {
+                            hp?: number;
+                            atk?: number;
+                            def?: number;
+                          };
+                          const hp = dx.hp ?? 0;
+                          const atk = dx.atk ?? 0;
+                          const def = dx.def ?? 0;
+                          return (
+                            <div className="flex justify-between text-xs text-gray-300">
+                              <span>
+                                HP:{" "}
+                                <span className="text-green-400 font-semibold">
+                                  {hp.toLocaleString()}
+                                </span>
+                              </span>
+                              <div className="flex gap-3">
+                                <span>
+                                  ATK:{" "}
+                                  <span className="text-red-400 font-semibold">
+                                    {atk.toLocaleString()}
+                                  </span>
+                                </span>
+                                <span>
+                                  DEF:{" "}
+                                  <span className="text-blue-300 font-semibold">
+                                    {def.toLocaleString()}
+                                  </span>
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })()}
 
                         <div className="text-xs text-gray-400">
                           {digimon.evolution?.length || 0} evolução(ões)
@@ -483,14 +587,57 @@ export default function DigimonsTab({
                                   </span>
                                 </div>
 
-                                <div className="flex justify-between text-sm text-gray-300">
+                                <div className="flex justify-between items-center text-sm text-gray-300">
                                   <span>
                                     Evoluções:{" "}
                                     <span className="font-bold text-purple-400">
                                       {digimon.evolution?.length || 0}
                                     </span>
                                   </span>
+                                  {(digimon as any).attribute_id && (
+                                    <span className="flex items-center gap-2">
+                                      <Image
+                                        src={getAttributeIcon(
+                                          (digimon as any).attribute_id
+                                        )}
+                                        alt="Atributo"
+                                        width={20}
+                                        height={20}
+                                      />
+                                    </span>
+                                  )}
                                 </div>
+
+                                {/* HP / ATK / DEF */}
+                                {(() => {
+                                  const hp = (digimon as any).hp ?? 0;
+                                  const atk = (digimon as any).atk ?? 0;
+                                  const def = (digimon as any).def ?? 0;
+                                  return (
+                                    <div className="flex justify-between text-xs text-gray-300">
+                                      <span>
+                                        HP:{" "}
+                                        <span className="text-green-400 font-semibold">
+                                          {hp.toLocaleString()}
+                                        </span>
+                                      </span>
+                                      <div className="flex gap-3">
+                                        <span>
+                                          ATK:{" "}
+                                          <span className="text-red-400 font-semibold">
+                                            {atk.toLocaleString()}
+                                          </span>
+                                        </span>
+                                        <span>
+                                          DEF:{" "}
+                                          <span className="text-blue-300 font-semibold">
+                                            {def.toLocaleString()}
+                                          </span>
+                                        </span>
+                                      </div>
+                                    </div>
+                                  );
+                                })()}
                               </div>
 
                               <div className="space-y-2">
