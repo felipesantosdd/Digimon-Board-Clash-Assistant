@@ -2,15 +2,25 @@ import { NextRequest, NextResponse } from "next/server";
 import db from "@/lib/db";
 
 // GET - Listar todos os drops
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     if (process.env.NODE_ENV === "production") {
       return NextResponse.json([]);
     }
 
-    const drops = db
-      .prepare("SELECT * FROM boss_drops ORDER BY bossId, id")
-      .all();
+    // Filtrar por bossId (ex: /api/bosses/drops?bossId=4)
+    const { searchParams } = new URL(request.url);
+    const bossIdParam = searchParams.get("bossId");
+
+    let drops;
+    if (bossIdParam) {
+      const bossId = parseInt(bossIdParam);
+      drops = db
+        .prepare("SELECT * FROM boss_drops WHERE bossId = ? ORDER BY id")
+        .all(bossId);
+    } else {
+      drops = db.prepare("SELECT * FROM boss_drops ORDER BY bossId, id").all();
+    }
     return NextResponse.json(drops);
   } catch (error) {
     console.error("Erro ao buscar drops:", error);

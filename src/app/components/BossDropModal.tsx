@@ -159,7 +159,7 @@ export default function BossDropModal({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {drops.map((item, index) => (
                     <div
-                      key={item.id}
+                      key={`${item.id}-${index}`}
                       className={`bg-gradient-to-r from-yellow-800 to-yellow-700 rounded-lg p-4 border-2 border-yellow-500 transition-all duration-500 ${
                         index === currentItemIndex
                           ? "scale-105 shadow-lg"

@@ -58,7 +58,6 @@ export async function POST(request: NextRequest) {
         name: randomEvolution.name,
         image: randomEvolution.image,
         level: randomEvolution.level,
-        dp: randomEvolution.dp,
         typeId: randomEvolution.typeId,
       },
       wasInEvolutionLine:

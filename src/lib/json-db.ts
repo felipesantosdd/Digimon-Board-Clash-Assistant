@@ -1,6 +1,7 @@
 // Adaptador para ler dados do JSON em produção
 import digimonTypesData from "@/data/digimon-types.json";
 import digimonsData from "@/data/digimons.json";
+import attributesData from "@/data/digimon-attributes.json";
 import tamersData from "@/data/tamers.json";
 import itemsData from "@/data/items.json";
 
@@ -61,6 +62,9 @@ export const jsonDb = {
             ...d,
             dp: 0,
           }));
+        }
+        if (query.includes("attributes")) {
+          return attributesData as Array<Record<string, unknown>>;
         }
         return [];
       },

@@ -11,12 +11,15 @@ export interface Digimon {
   name: string;
   image: string;
   level: number;
-  dp: number; // Calculado dinamicamente, não armazenado no banco
   typeId: number;
   evolution: number[];
   active?: boolean; // Indica se o Digimon está ativo (presente no CSV oficial)
   boss?: boolean; // Indica se pode ser usado como boss
   type?: DigimonType;
+  hp?: number;
+  atk?: number;
+  def?: number;
+  attribute_id?: number;
 }
 
 // Tipos de Digimon
@@ -56,7 +59,6 @@ export function getAllDigimons(): Digimon[] {
 
   return digimons.map((d) => ({
     ...d,
-    dp: 0, // DP será calculado dinamicamente baseado no nível
     evolution: JSON.parse(d.evolution || "[]"),
     active: d.active === undefined ? true : d.active === 1, // Converter INTEGER para boolean
     boss: d.boss === 1, // Converter INTEGER para boolean
@@ -77,7 +79,6 @@ export function getDigimonById(id: number): Digimon | undefined {
 
   return {
     ...digimon,
-    dp: 0, // DP será calculado dinamicamente
     evolution: JSON.parse(digimon.evolution || "[]"),
     active: digimon.active === undefined ? true : digimon.active === 1,
     boss: digimon.boss === 1,
@@ -98,7 +99,6 @@ export function getDigimonsByLevel(level: number): Digimon[] {
 
   return digimons.map((d) => ({
     ...d,
-    dp: 0, // DP será calculado dinamicamente
     evolution: JSON.parse(d.evolution || "[]"),
     active: d.active === undefined ? true : d.active === 1,
     boss: d.boss === 1,
@@ -108,8 +108,8 @@ export function getDigimonsByLevel(level: number): Digimon[] {
 
 export function createDigimon(digimon: Omit<Digimon, "id">): Digimon {
   const stmt = db.prepare(`
-    INSERT INTO digimons (name, image, level, typeId, evolution, active, boss)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO digimons (name, image, level, typeId, evolution, active, boss, hp, atk, attribute_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
   const result = stmt.run(
@@ -119,7 +119,10 @@ export function createDigimon(digimon: Omit<Digimon, "id">): Digimon {
     digimon.typeId,
     JSON.stringify(digimon.evolution || []),
     digimon.active !== false ? 1 : 0,
-    digimon.boss === true ? 1 : 0
+    digimon.boss === true ? 1 : 0,
+    digimon.hp ?? 0,
+    digimon.atk ?? 0,
+    digimon.attribute_id ?? null
   );
 
   return getDigimonById(Number(result.lastInsertRowid))!;
@@ -144,6 +147,7 @@ export function updateDigimon(
     image?: string;
     active?: boolean;
     boss?: boolean;
+    attribute_id?: number | null;
   }
 ): Digimon | null {
   // Construir query dinamicamente
@@ -166,6 +170,15 @@ export function updateDigimon(
   if (data.boss !== undefined) {
     fields.push("boss = ?");
     values.push(data.boss ? 1 : 0);
+  }
+
+  if (data.attribute_id !== undefined) {
+    fields.push("attribute_id = ?");
+    values.push(
+      (data.attribute_id === null
+        ? null
+        : Number(data.attribute_id)) as unknown as number
+    );
   }
 
   values.push(id);
@@ -204,6 +217,10 @@ export function deleteDigimon(id: number): void {
 // Seed inicial
 export function seedDatabase() {
   // Limpar dados existentes
+  // Desabilitar FKs temporariamente para evitar falhas de ordem
+  // (útil em dev quando há outras tabelas referenciando types)
+  (db as any).exec?.("PRAGMA foreign_keys = OFF");
+
   db.prepare("DELETE FROM digimons").run();
   db.prepare("DELETE FROM digimon_types").run();
 
@@ -804,4 +821,7 @@ export function seedDatabase() {
   }
 
   console.log("✅ Banco de dados populado com sucesso!");
+
+  // Reabilitar FKs
+  (db as any).exec?.("PRAGMA foreign_keys = ON");
 }

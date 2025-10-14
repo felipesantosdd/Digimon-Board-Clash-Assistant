@@ -41,7 +41,7 @@ export async function PUT(
     const { id } = await params;
     const body = await request.json();
     console.log("🔍 API PUT recebeu:", { id, body });
-    const { name, level, typeId, image, active, boss } = body;
+    const { name, level, typeId, image, active, boss, attribute_id } = body;
     console.log("📋 Campos extraídos:", {
       name,
       level,
@@ -49,6 +49,7 @@ export async function PUT(
       image,
       active,
       boss,
+      attribute_id,
     });
 
     if (!name || level === undefined || level === null || !typeId) {
@@ -91,6 +92,7 @@ export async function PUT(
       ...(image && { image }),
       ...(active !== undefined && { active }),
       ...(boss !== undefined && { boss }),
+      ...(attribute_id !== undefined && { attribute_id }),
     });
 
     console.log("✅ Digimon atualizado:", updatedDigimon);

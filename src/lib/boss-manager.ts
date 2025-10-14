@@ -358,16 +358,25 @@ export class BossManager {
       if (!response.ok) return [];
 
       const drops = await response.json();
-      const rewards: number[] = [];
+      if (!Array.isArray(drops) || drops.length === 0) return [];
 
-      for (const drop of drops) {
-        const roll = Math.floor(Math.random() * 100) + 1;
-        if (roll <= drop.dropChance) {
-          rewards.push(drop.itemId);
+      // Sortear apenas 1 item com probabilidade proporcional ao dropChance
+      const totalWeight = drops.reduce(
+        (sum: number, d: { dropChance: number }) => sum + (d.dropChance || 0),
+        0
+      );
+      if (totalWeight <= 0) return [];
+
+      let r = Math.random() * totalWeight;
+      for (const d of drops) {
+        r -= d.dropChance || 0;
+        if (r <= 0) {
+          return [d.itemId];
         }
       }
 
-      return rewards;
+      // Fallback (devido a ponto flutuante): retorna o último
+      return [drops[drops.length - 1].itemId];
     } catch (error) {
       console.error("❌ Erro ao calcular drops do boss:", error);
       return [];

@@ -67,7 +67,11 @@ export default function EvolutionModal({
     typeId: 1,
     active: true,
     boss: false,
+    attribute_id: null as number | null,
   });
+  const [attributes, setAttributes] = useState<
+    Array<{ id: number; name: string; image: string }>
+  >([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
   const [imageToCrop, setImageToCrop] = useState<string>("");
@@ -86,11 +90,20 @@ export default function EvolutionModal({
         typeId: digimon.typeId,
         active: digimon.active !== false,
         boss: digimon.boss || false,
+        attribute_id:
+          (digimon as unknown as { attribute_id?: number }).attribute_id ??
+          null,
       });
     }
   };
 
   useEffect(() => {
+    // carregar atributos
+    fetch("/api/attributes")
+      .then((r) => (r.ok ? r.json() : []))
+      .then((arr) => setAttributes(arr))
+      .catch(() => {});
+
     if (digimon) {
       setSelectedEvolutions(digimon.evolution || []);
 
@@ -106,6 +119,9 @@ export default function EvolutionModal({
         typeId: digimon.typeId,
         active: digimon.active !== false,
         boss: digimon.boss || false,
+        attribute_id:
+          (digimon as unknown as { attribute_id?: number }).attribute_id ??
+          null,
       });
       setSearchTerm("");
       // Inicializar aba com nível +1 do Digimon para evoluções futuras
@@ -555,6 +571,40 @@ export default function EvolutionModal({
                           }`}
                         >
                           {type.name}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Atributo Elementar */}
+                <div>
+                  <label className="block text-xs font-medium text-white mb-2">
+                    Atributo (elemento)
+                  </label>
+                  <div className="grid grid-cols-6 gap-1">
+                    {attributes.map((a) => (
+                      <button
+                        key={a.id}
+                        type="button"
+                        onClick={() =>
+                          setEditData((p) => ({ ...p, attribute_id: a.id }))
+                        }
+                        className={`p-2 rounded border-2 transition-all flex flex-col items-center gap-1 ${
+                          editData.attribute_id === a.id
+                            ? "border-blue-500 bg-blue-50"
+                            : "border-gray-600 hover:border-gray-500"
+                        }`}
+                      >
+                        <img src={a.image} alt={a.name} className="w-4 h-4" />
+                        <span
+                          className={`text-[10px] ${
+                            editData.attribute_id === a.id
+                              ? "text-blue-700"
+                              : "text-white"
+                          }`}
+                        >
+                          {a.name}
                         </span>
                       </button>
                     ))}

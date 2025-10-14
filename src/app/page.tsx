@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import GameSetupModal from "./components/GameSetupModal";
 import { capitalize, generateRandomStats } from "@/lib/utils";
 import { getTamerImagePath } from "@/lib/image-utils";
+import AttributeConfigModal from "./components/AttributeConfigModal";
 
 interface Tamer {
   id: number;
@@ -21,6 +22,7 @@ export default function Home() {
   const [tamerScores, setTamerScores] = useState<{ [tamerId: number]: number }>(
     {}
   );
+  const [isAttrModalOpen, setIsAttrModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchTamers = async () => {
@@ -336,8 +338,8 @@ export default function Home() {
 
       console.log("🧪 [AUTO-TEST] Estado inicial criado:", gameState);
 
-      // Redirecionar para o jogo
-      router.push("/game");
+      // Redirecionar para o jogo de auto-test
+      router.push("/game-auto-test");
     } catch (error) {
       console.error("❌ Erro ao criar jogo de auto-test:", error);
       alert("Erro ao criar jogo de auto-test");
@@ -382,6 +384,14 @@ export default function Home() {
                   >
                     <span>🤖</span>{" "}
                     <span className="hidden sm:inline">Auto-Test</span>
+                  </button>
+                  <button
+                    onClick={() => setIsAttrModalOpen(true)}
+                    className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-purple-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-purple-700 transition-colors duration-200 shadow-sm hover:shadow-md flex items-center gap-1 sm:gap-2"
+                    title="Configurar atributos rapidamente"
+                  >
+                    <span>🧩</span>{" "}
+                    <span className="hidden sm:inline">Attribute Config</span>
                   </button>
                 </>
               )}
@@ -492,6 +502,10 @@ export default function Home() {
       <GameSetupModal
         isOpen={isGameModalOpen}
         onClose={() => setIsGameModalOpen(false)}
+      />
+      <AttributeConfigModal
+        isOpen={isAttrModalOpen}
+        onClose={() => setIsAttrModalOpen(false)}
       />
     </div>
   );

@@ -29,13 +29,16 @@ if (isProduction) {
       name TEXT NOT NULL,
       image TEXT NOT NULL,
       level INTEGER NOT NULL,
-      dp INTEGER NOT NULL,
       typeId INTEGER NOT NULL,
       evolution TEXT DEFAULT '[]',
       active INTEGER DEFAULT 1,
       boss INTEGER DEFAULT 0,
       effectId INTEGER,
       description TEXT DEFAULT '',
+      hp INTEGER DEFAULT 0,
+      atk INTEGER DEFAULT 0,
+      def INTEGER DEFAULT 0,
+      attribute_id INTEGER,
       FOREIGN KEY (typeId) REFERENCES digimon_types(id)
     );
 

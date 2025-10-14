@@ -36,7 +36,6 @@ export async function GET(request: Request) {
       name: d.name,
       image: d.image,
       level: d.level,
-      dp: d.dp,
       typeId: d.typeId,
     }));
 

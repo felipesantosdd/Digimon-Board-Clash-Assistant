@@ -31,6 +31,9 @@ export default function AddDigimonModal({
   allDigimons,
 }: AddDigimonModalProps) {
   const { enqueueSnackbar } = useSnackbar();
+  const [attributes, setAttributes] = useState<
+    Array<{ id: number; name: string; image: string }>
+  >([]);
   const digimonTypes: DigimonType[] = [
     { id: 1, name: "Data" },
     { id: 2, name: "Vaccine" },
@@ -48,6 +51,7 @@ export default function AddDigimonModal({
     typeId: 1,
     active: true,
     boss: false,
+    attribute_id: null as number | null,
   });
   const [selectedPreEvolutions, setSelectedPreEvolutions] = useState<number[]>(
     []
@@ -68,6 +72,7 @@ export default function AddDigimonModal({
       typeId: 1,
       active: true,
       boss: false,
+      attribute_id: null,
     });
     setSelectedPreEvolutions([]);
     setSearchTerm("");
@@ -80,6 +85,13 @@ export default function AddDigimonModal({
       resetForm();
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    fetch("/api/attributes")
+      .then((r) => (r.ok ? r.json() : []))
+      .then((arr) => setAttributes(arr))
+      .catch(() => {});
+  }, []);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -276,9 +288,7 @@ export default function AddDigimonModal({
           <div className="bg-green-600 text-white px-6 py-4 flex-shrink-0">
             <h2 className="text-2xl font-bold">➕ Adicionar Novo Digimon</h2>
             {process.env.NODE_ENV === "development" && (
-              <p className="text-green-100 text-sm mt-1">
-                🛠️ Modo Desenvolvimento
-              </p>
+              <p className="text-green-100 text-sm mt-1">🛠️ Modo Desenvolvimento</p>
             )}
           </div>
 
@@ -320,9 +330,7 @@ export default function AddDigimonModal({
                     >
                       📁 Selecionar Imagem
                     </button>
-                    <p className="text-xs text-gray-400 mt-2">
-                      PNG, JPG ou SVG (máx 5MB)
-                    </p>
+                    <p className="text-xs text-gray-400 mt-2">PNG, JPG ou SVG (máx 5MB)</p>
                   </div>
                 </div>
               </div>
@@ -423,6 +431,38 @@ export default function AddDigimonModal({
                 </div>
               </div>
 
+              {/* Atributo Elementar */}
+              <div>
+                <label className="block text-sm font-medium text-gray-200 mb-2">
+                  Atributo (elemento)
+                </label>
+                <div className="grid grid-cols-5 gap-2">
+                  {attributes.map((a) => (
+                    <button
+                      key={a.id}
+                      type="button"
+                      onClick={() => setFormData((p) => ({ ...p, attribute_id: a.id }))}
+                      className={`p-2 rounded-lg border-2 flex flex-col items-center gap-2 transition-all ${
+                        formData.attribute_id === a.id
+                          ? "border-green-500 bg-green-50"
+                          : "border-gray-600 hover:border-gray-500"
+                      }`}
+                    >
+                      <img src={a.image} alt={a.name} className="w-6 h-6" />
+                      <span
+                        className={`text-xs ${
+                          formData.attribute_id === a.id
+                            ? "text-green-700"
+                            : "text-gray-200"
+                        }`}
+                      >
+                        {a.name}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {/* Status Ativo/Inativo */}
               <div>
                 <label className="block text-sm font-medium text-gray-200 mb-3">
@@ -488,9 +528,7 @@ export default function AddDigimonModal({
                           formData.boss ? "text-red-400" : "text-gray-400"
                         }`}
                       >
-                        {formData.boss
-                          ? "👹 Pode ser Boss"
-                          : "🐉 Digimon Normal"}
+                        {formData.boss ? "👹 Pode ser Boss" : "🐉 Digimon Normal"}
                       </span>
                     </div>
                     <p className="text-xs text-gray-400 ml-auto">
@@ -507,8 +545,7 @@ export default function AddDigimonModal({
                 <div>
                   <div className="flex justify-between items-center mb-2">
                     <label className="block text-sm font-medium text-gray-200">
-                      Pré-Evoluções (Level {formData.level - 1}) -{" "}
-                      {selectedPreEvolutions.length} selecionadas
+                      Pré-Evoluções (Level {formData.level - 1}) - {selectedPreEvolutions.length} selecionadas
                     </label>
                   </div>
 
@@ -546,9 +583,7 @@ export default function AddDigimonModal({
                             <p className="font-semibold text-sm truncate text-white">
                               {capitalize(preEvo.name)}
                             </p>
-                            <p className="text-xs text-gray-200">
-                              Level {preEvo.level}
-                            </p>
+                            <p className="text-xs text-gray-200">Level {preEvo.level}</p>
                           </div>
                         </div>
                       ))
@@ -564,8 +599,7 @@ export default function AddDigimonModal({
                   </div>
 
                   <p className="text-xs text-gray-300 mt-2">
-                    💡 Estes Digimons evoluirão para{" "}
-                    {formData.name || "este novo Digimon"}
+                    💡 Estes Digimons evoluirão para {formData.name || "este novo Digimon"}
                   </p>
                 </div>
               )}

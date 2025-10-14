@@ -27,6 +27,7 @@ export async function POST(request: NextRequest) {
       evolution = [],
       active = true,
       boss = false,
+      attribute_id = null,
     } = body;
 
     if (!name || !image || level === undefined || level === null || !typeId) {
@@ -56,11 +57,11 @@ export async function POST(request: NextRequest) {
       name: lowerName,
       image,
       level,
-      dp: 0, // DP será calculado dinamicamente
       typeId,
       evolution,
       active,
       boss,
+      attribute_id,
     });
 
     return NextResponse.json(savedDigimon, { status: 201 });

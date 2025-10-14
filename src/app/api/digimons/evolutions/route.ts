@@ -91,7 +91,6 @@ export async function POST(request: NextRequest) {
         name: finalEvolution.name,
         image: finalEvolution.image,
         level: finalEvolution.level,
-        dp: finalEvolution.dp,
         typeId: finalEvolution.typeId,
       },
       wasInEvolutionLine:
