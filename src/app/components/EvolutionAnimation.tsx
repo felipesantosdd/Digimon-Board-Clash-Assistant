@@ -207,11 +207,6 @@ export default function EvolutionAnimation({
                 }
                 onClick={handleClose}
                 onError={() => {
-                  console.error("❌ [EVOLVE] Erro ao carregar imagem:", {
-                    stage,
-                    currentImageIndex,
-                    image: allImages[currentImageIndex],
-                  });
                   setImageError(true);
                 }}
                 className={`w-full h-full object-cover drop-shadow-[0_0_30px_rgba(255,255,255,0.8)] ${

@@ -11,7 +11,6 @@ export function getAllTamers(): Tamer[] {
   const tamers = db
     .prepare("SELECT * FROM tamers ORDER BY id")
     .all() as Tamer[];
-  console.log("📊 getAllTamers retornando:", tamers);
   return tamers;
 }
 

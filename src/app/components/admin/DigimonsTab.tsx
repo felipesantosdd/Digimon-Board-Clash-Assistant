@@ -94,10 +94,8 @@ export default function DigimonsTab({
           onCountUpdate(activeCount);
         }
       } else {
-        console.error("Erro ao carregar Digimons");
       }
     } catch (error) {
-      console.error("Erro ao carregar Digimons:", error);
     } finally {
       setLoading(false);
     }

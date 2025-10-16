@@ -9,7 +9,6 @@ let db: Database.Database | typeof jsonDb;
 
 if (isProduction) {
   // Produção: usa dados do JSON
-  console.log("🚀 Usando JSON database (produção)");
   db = jsonDb;
 } else {
   // Desenvolvimento: usa SQLite

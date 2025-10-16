@@ -58,10 +58,8 @@ export default function ItemsTab({ isProduction = false }: ItemsTabProps) {
         const data = await response.json();
         setItems(data);
       } else {
-        console.error("Erro ao carregar itens");
       }
     } catch (error) {
-      console.error("Erro ao carregar itens:", error);
     } finally {
       setLoading(false);
     }
@@ -75,7 +73,6 @@ export default function ItemsTab({ isProduction = false }: ItemsTabProps) {
         setEffects(data);
       }
     } catch (error) {
-      console.error("Erro ao carregar efeitos:", error);
     }
   };
 

@@ -111,11 +111,6 @@ export class AIPlayer {
     // Ordenar por score (maior primeiro)
     scores.sort((a, b) => b.score - a.score);
 
-    console.log(
-      `🤖 [AI] Scores de alvos para ${myDigimon.name}:`,
-      scores.map((s) => ({ nome: s.enemy.name, score: s.score }))
-    );
-
     return scores[0].enemy;
   }
 
@@ -133,56 +128,58 @@ export class AIPlayer {
   } {
     // Se pode evoluir, evoluir!
     if (myDigimon.canEvolve && myDigimon.currentHp > 0) {
-      console.log(`🤖 [AI] ${myDigimon.name} pode evoluir!`);
       return { action: "evolve" };
     }
 
     // Se está nocauteado, não pode agir
     if (myDigimon.currentHp <= 0) {
-      console.log(`🤖 [AI] ${myDigimon.name} está nocauteado`);
       return { action: "rest" }; // Vai tentar levantar
     }
 
-    // Se HP < 30%, considerar descansar
-    const hpPercentage = (myDigimon.currentHp / myDigimon.dp) * 100;
-    if (hpPercentage < 30 && Math.random() < 0.3) {
+    // Filtrar apenas inimigos vivos
+    const aliveEnemies = enemies.filter((e) => e.currentHp > 0);
+
+    // PRIORIDADE: Se não há inimigos vivos mas há boss, atacar boss!
+    if (
+      aliveEnemies.length === 0 &&
+      boss &&
+      !boss.isDefeated &&
+      boss.currentHp > 0
+    ) {
       console.log(
-        `🤖 [AI] ${
-          myDigimon.name
-        } vai descansar (HP baixo: ${hpPercentage.toFixed(1)}%)`
+        `🤖 [AI] ${myDigimon.name} vai atacar o boss (sem inimigos vivos)!`
       );
+      return { action: "attack_boss" };
+    }
+
+    // Se HP < 30%, considerar descansar (mas não se for o único alive e tem boss)
+    const hpPercentage = (myDigimon.currentHp / myDigimon.dp) * 100;
+    if (hpPercentage < 30 && Math.random() < 0.3 && aliveEnemies.length > 0) {
       return { action: "rest" };
     }
 
     // Decidir entre atacar boss ou inimigo
-    if (this.shouldAttackBoss(myDigimon, enemies, boss)) {
-      console.log(`🤖 [AI] ${myDigimon.name} vai atacar o boss!`);
+    if (this.shouldAttackBoss(myDigimon, aliveEnemies, boss)) {
       return { action: "attack_boss" };
     }
 
     // Escolher melhor alvo inimigo
-    const bestTarget = this.chooseBestTarget(myDigimon, enemies);
+    const bestTarget = this.chooseBestTarget(myDigimon, aliveEnemies);
     if (bestTarget) {
-      console.log(`🤖 [AI] ${myDigimon.name} vai atacar ${bestTarget.name}!`);
       return { action: "attack", target: bestTarget };
     }
 
     // Se não há inimigos mas há boss, atacar boss
     if (boss && !boss.isDefeated && boss.currentHp > 0) {
-      console.log(
-        `🤖 [AI] ${myDigimon.name} vai atacar o boss (sem inimigos disponíveis)!`
-      );
       return { action: "attack_boss" };
     }
 
     // Explorar como fallback (20% de chance)
     if (Math.random() < 0.2) {
-      console.log(`🤖 [AI] ${myDigimon.name} vai explorar!`);
       return { action: "explore" };
     }
 
     // Default: descansar
-    console.log(`🤖 [AI] ${myDigimon.name} vai descansar (sem ações melhores)`);
     return { action: "rest" };
   }
 

@@ -40,7 +40,6 @@ export async function PUT(
 
     return NextResponse.json(updated);
   } catch (error) {
-    console.error("Erro ao atualizar drop:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -65,7 +64,6 @@ export async function DELETE(
     db.prepare("DELETE FROM boss_drops WHERE id = ?").run(parseInt(id));
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Erro ao deletar drop:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

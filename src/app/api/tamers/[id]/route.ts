@@ -24,7 +24,6 @@ export async function GET(
 
     return NextResponse.json(tamer);
   } catch (error) {
-    console.error("Erro ao buscar Tamer:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -78,7 +77,6 @@ export async function PUT(
 
     return NextResponse.json(updatedTamer);
   } catch (error) {
-    console.error("Erro ao atualizar Tamer:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -118,7 +116,6 @@ export async function DELETE(
       message: `Tamer ${tamer.name} excluído com sucesso`,
     });
   } catch (error) {
-    console.error("Erro ao excluir Tamer:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

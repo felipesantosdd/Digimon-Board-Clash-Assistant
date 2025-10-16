@@ -6,28 +6,33 @@ O sistema de Boss foi **refatorado** para ser **desafiador mas não letal**, sep
 
 ---
 
-## ⚖️ Novo Sistema de Balanceamento
+## ⚖️ Sistema de Balanceamento Atualizado
 
 ### **Fórmulas Principais:**
 
 ```typescript
-HP do Boss = DP base × 3
-DP de Combate = DP base (original)
+HP do Boss = HP original do Digimon (banco de dados)
+ATK do Boss = ATK original do Digimon (banco de dados)
+DP de Combate = ATK original
 ```
 
-### **Exemplo: Devimon (5.000 DP)**
+### **Exemplo: Devimon (Level 2)**
 
 ```json
 {
   "name": "Devimon",
-  "dp": 5000
+  "level": 2,
+  "hp": 695,
+  "atk": 375,
+  "def": 200
 }
 ```
 
 **Quando spawna:**
 
-- ✅ **HP Máximo:** 5.000 × 3 = **15.000 HP** (tanque)
-- ✅ **DP de Combate:** **5.000 DP** (para atacar/defender)
+- ✅ **HP Máximo:** **695 HP** (valor original do banco)
+- ✅ **ATK de Combate:** **375** (valor original do banco)
+- ✅ **DEF:** **200** (valor original do banco)
 
 ---
 
@@ -64,20 +69,22 @@ const difference = Math.abs(boss.dp - averageDp);
 ### **2. Criação do Boss**
 
 ```typescript
-const maxHp = boss.dp * 3; // HP = triplicado
-const calculatedDp = boss.dp; // DP = original
+const maxHp = bossDigimon.hp; // HP = valor original do banco
+const atk = bossDigimon.atk; // ATK = valor original do banco
+const calculatedDp = atk; // DP de combate = ATK
 ```
 
 **Devimon spawna com:**
 
-- HP: 15.000
-- DP de Combate: 5.000
+- HP: 695 (valor original)
+- ATK/DP de Combate: 375 (valor original)
+- DEF: 200 (valor original)
 
 ### **3. Combate (Sistema D20)**
 
 #### **Jogador Ataca Boss:**
 
-**Exemplo: Agumon (2.000 DP, Level 2) vs Devimon (5.000 DP)**
+**Exemplo: Agumon (2.000 DP, Level 2) vs Devimon (375 ATK, 200 DEF)**
 
 **Cenário:**
 
@@ -89,34 +96,33 @@ const calculatedDp = boss.dp; // DP = original
 ```
 AGUMON ATACA:
 - Dano Bruto = 2.000 × (16 × 0.05) = 2.000 × 0.80 = 1.600
-- Defesa Devimon = 5.000 × (5 × 0.05) = 5.000 × 0.25 = 1.250
-- Dano Líquido = max(0, 1.600 - 1.250) = 350
-- Com vantagem de tipo (+35%): 350 × 1.35 = 473 dano
-✅ Devimon perde 473 HP (14.527 / 15.000)
+- Defesa Devimon = 375 × (5 × 0.05) + 200 = ~293
+- Dano Líquido = max(0, 1.600 - 293) = 1.307
+- Com vantagem de tipo (+35%): 1.307 × 1.35 = 1.764 dano
+✅ Devimon perde 1.764 HP (ainda forte!)
 
 DEVIMON CONTRA-ATACA:
-- Dano Bruto = 5.000 × (10 × 0.05) = 5.000 × 0.50 = 2.500
+- Dano Bruto = 375 × (10 × 0.05) = 375 × 0.50 = 187.5
 - Defesa Agumon = 2.000 × (8 × 0.05) = 2.000 × 0.40 = 800
-- Dano Líquido = max(0, 2.500 - 800) = 1.700
-- Com desvantagem de tipo (-35%): 1.700 × 0.65 = 1.105 dano
-💥 Agumon recebe 1.105 de dano (ainda vivo!)
+- Dano Líquido = max(0, 187.5 - 800) = 0 (bloqueado!)
+✅ Agumon bloqueou completamente o ataque (defesa alta!)
 ```
 
 ### **4. Turno do Mundo (Boss AoE)**
 
 ```typescript
-const totalDamage = boss.dp * 0.5;
+const totalDamage = boss.atk * 0.5;
 const damagePerDigimon = totalDamage / aliveDigimonsCount;
 ```
 
-**Devimon (5.000 DP) vs 6 Digimons:**
+**Devimon (375 ATK) vs 6 Digimons:**
 
 ```
-Dano Total = 5.000 × 0.5 = 2.500
-Por Digimon = 2.500 / 6 = 417 dano cada
+Dano Total = 375 × 0.5 = 187.5
+Por Digimon = 187.5 / 6 = 31 dano cada
 ```
 
-💀 **Todos recebem ~417 de dano** (recuperável, não letal)
+✅ **Todos recebem ~31 de dano** (dano controlado, não letal)
 
 ---
 
@@ -130,9 +136,9 @@ Por Digimon = 2.500 / 6 = 417 dano cada
 
 ### **Sistema Novo (BALANCEADO):**
 
-| Boss    | DP Combate | HP     | Dano Médio | Resultado     |
-| ------- | ---------- | ------ | ---------- | ------------- |
-| Devimon | 5.000      | 15.000 | ~1.500     | ✅ Desafiador |
+| Boss    | ATK/DP Combate | HP  | Dano Médio | Resultado     |
+| ------- | -------------- | --- | ---------- | ------------- |
+| Devimon | 375            | 695 | ~150-300   | ✅ Balanceado |
 
 ---
 
@@ -156,38 +162,47 @@ Por Digimon = 2.500 / 6 = 417 dano cada
    - **D20 = 1** = Critical Fail = dano mínimo
 
 4. **Gerenciamento de HP**
-   - Boss causa **~1.000-2.000 de dano** por ataque
+   - Boss causa dano baseado em seu ATK original (varia por boss)
    - Aguardar momento certo para evoluir
 
 ---
 
 ## 🔧 Balanceamento de Bosses
 
-### **Recomendações de DP Base:**
+### **Recomendações de Stats:**
 
-| Nível do Grupo      | DP Médio | Boss Ideal (DP) | HP do Boss |
-| ------------------- | -------- | --------------- | ---------- |
-| Early Game (Lv 2-3) | 2.000    | 2.500           | 7.500      |
-| Mid Game (Lv 4-5)   | 6.000    | 7.500           | 22.500     |
-| Late Game (Lv 6-7)  | 15.000   | 20.000          | 60.000     |
+| Nível do Grupo      | DP Médio | Boss Ideal (Level) | HP Boss | ATK Boss |
+| ------------------- | -------- | ------------------ | ------- | -------- |
+| Early Game (Lv 1-2) | 2.000    | Level 2            | 695-895 | 375-425  |
+| Mid Game (Lv 3-4)   | 6.000    | Level 3-4          | 1k-2k   | 500-1k   |
+| Late Game (Lv 5-6)  | 15.000   | Level 5-6          | 2k-3k   | 1k-2k    |
 
-### **Ajustes Sugeridos:**
+### **Exemplos de Bosses (valores do banco):**
 
 ```json
 [
   {
     "name": "Devimon",
-    "dp": 2500, // Ajustado de 5.000 para early game
+    "level": 2,
+    "hp": 695,
+    "atk": 375,
+    "def": 200,
     "typeId": 3
   },
   {
-    "name": "Myotismon",
-    "dp": 8000, // Mid game boss
-    "typeId": 3
+    "name": "Greymon",
+    "level": 2,
+    "hp": 895,
+    "atk": 425,
+    "def": 300,
+    "typeId": 2
   },
   {
-    "name": "MetalSeadramon",
-    "dp": 20000, // Late game boss
+    "name": "Metal Seadramon",
+    "level": 4,
+    "hp": 1650,
+    "atk": 785,
+    "def": 795,
     "typeId": 1
   }
 ]
@@ -200,12 +215,12 @@ Por Digimon = 2.500 / 6 = 417 dano cada
 ### **1. Previsibilidade**
 
 ✅ Boss não mata instantaneamente
-✅ Dano é consistente com o DP base
+✅ Dano é consistente com ATK original do Digimon
 
 ### **2. Escalabilidade**
 
-✅ Boss cresce apenas 3x em HP
-✅ Dano permanece proporcional ao DP
+✅ Boss usa stats originais balanceados individualmente
+✅ Valores de HP e ATK são definidos por level no banco de dados
 
 ### **3. Estratégia**
 
@@ -223,32 +238,26 @@ Por Digimon = 2.500 / 6 = 417 dano cada
 
 ## 💡 Exemplo de Combate Completo
 
-### **Time: 3 Digimons Level 2 (2.000 DP cada) vs Devimon (5.000 DP, 15.000 HP)**
+### **Time: 3 Digimons Level 2 (2.000 DP cada) vs Devimon (375 ATK, 695 HP)**
 
 **Turno 1:**
 
-- Agumon ataca: **473 de dano** ✅
-- Devimon HP: 14.527 / 15.000
-- Agumon recebe: **1.105 de dano** (sobrevive)
+- Agumon ataca: **~300-500 de dano** ✅
+- Devimon HP: ~195-395 / 695
+- Agumon recebe: **~50-150 de dano** (sobrevive facilmente)
 
 **Turno 2:**
 
-- Gabumon ataca: **520 de dano** ✅
-- Devimon HP: 14.007 / 15.000
-- Gabumon recebe: **1.200 de dano** (sobrevive)
+- Gabumon ataca: **~250-450 de dano** ✅
+- Devimon HP: derrotado! 💀
+- Boss drops: Itens especiais
 
-**Turno 3:**
+**Turno de Mundo (se ainda vivo):**
 
-- Patamon ataca: **380 de dano** ✅
-- Devimon HP: 13.627 / 15.000
-- Patamon recebe: **900 de dano** (sobrevive)
+- Devimon ataca todos: **~31 cada** 💥
+- Todos sofrem dano mínimo
 
-**Turno 4 (Mundo):**
-
-- Devimon ataca todos: **417 cada** 💥
-- Todos sofrem, mas sobrevivem
-
-**Resultado:** Combate longo e estratégico! ✅
+**Resultado:** Boss balanceado, combate desafiador mas justo! ✅
 
 ---
 

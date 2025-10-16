@@ -14,6 +14,8 @@ export interface GameDigimon {
   image: string;
   level: number;
   dp: number;
+  atk?: number; // Ataque base (novo sistema de combate)
+  def?: number; // Defesa base (novo sistema de combate)
   baseDp?: number; // DP base do Digimon (sem buffs)
   dpBonus?: number; // Bônus de DP acumulado (de itens, buffs, etc)
   typeId: number;

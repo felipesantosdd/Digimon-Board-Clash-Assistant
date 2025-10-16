@@ -30,18 +30,22 @@ export async function GET(request: Request) {
     const shuffled = [...level1Digimons].sort(() => Math.random() - 0.5);
     const selected = shuffled.slice(0, Math.min(count, level1Digimons.length));
 
-    // Retornar apenas os dados necessários
+    // Retornar todos os dados necessários incluindo stats
     const result = selected.map((d) => ({
       id: d.id,
       name: d.name,
       image: d.image,
       level: d.level,
       typeId: d.typeId,
+      hp: d.hp,
+      atk: d.atk,
+      def: d.def,
+      attribute_id: d.attribute_id,
+      evolution: d.evolution,
     }));
 
     return NextResponse.json(result);
   } catch (error) {
-    console.error("Erro ao sortear Digimons:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

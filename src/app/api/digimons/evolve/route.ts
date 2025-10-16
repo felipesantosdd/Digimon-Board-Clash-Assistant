@@ -23,29 +23,41 @@ export async function POST(request: NextRequest) {
     }
 
     const allDigimons = getAllDigimons();
-    const nextLevel = currentDigimon.level + 1;
 
-    // Buscar Digimons do próximo level
-    const nextLevelDigimons = allDigimons.filter((d) => d.level === nextLevel);
+    // Verificar se há Digimons na linha evolutiva definida
+    let evolutionOptions: typeof allDigimons = [];
 
-    if (nextLevelDigimons.length === 0) {
+    if (currentDigimon.evolution && currentDigimon.evolution.length > 0) {
+      // Buscar evoluções definidas que sejam ativas
+      const evolutionsInLine = allDigimons.filter(
+        (d) => currentDigimon.evolution.includes(d.id) && d.active !== false
+      );
+
+      if (evolutionsInLine.length > 0) {
+        evolutionOptions = evolutionsInLine;
+      }
+    }
+
+    // Se não houver na linha evolutiva, buscar no próximo nível disponível
+    if (evolutionOptions.length === 0) {
+      // Buscar a partir do nível seguinte até encontrar Digimons ativos
+      for (let level = currentDigimon.level + 1; level <= 7; level++) {
+        const availableDigimons = allDigimons.filter(
+          (d) => d.level === level && d.active !== false
+        );
+
+        if (availableDigimons.length > 0) {
+          evolutionOptions = availableDigimons;
+          break;
+        }
+      }
+    }
+
+    if (evolutionOptions.length === 0) {
       return NextResponse.json(
-        { error: "Não há Digimons do próximo level disponíveis" },
+        { error: "Não há evoluções disponíveis" },
         { status: 404 }
       );
-    }
-
-    // Verificar se há Digimons na linha evolutiva (evolution array)
-    let evolutionOptions: typeof nextLevelDigimons = [];
-    if (currentDigimon.evolution && currentDigimon.evolution.length > 0) {
-      evolutionOptions = nextLevelDigimons.filter((d) =>
-        currentDigimon.evolution.includes(d.id)
-      );
-    }
-
-    // Se não houver na linha evolutiva, usar todos do próximo level
-    if (evolutionOptions.length === 0) {
-      evolutionOptions = nextLevelDigimons;
     }
 
     // Escolher um aleatório
@@ -59,12 +71,15 @@ export async function POST(request: NextRequest) {
         image: randomEvolution.image,
         level: randomEvolution.level,
         typeId: randomEvolution.typeId,
+        hp: randomEvolution.hp,
+        atk: randomEvolution.atk,
+        def: randomEvolution.def,
+        attribute_id: randomEvolution.attribute_id,
       },
       wasInEvolutionLine:
         currentDigimon.evolution?.includes(randomEvolution.id) || false,
     });
   } catch (error) {
-    console.error("Erro ao buscar evolução:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

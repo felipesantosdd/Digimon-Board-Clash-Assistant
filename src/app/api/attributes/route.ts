@@ -6,7 +6,6 @@ export async function GET() {
     const rows = db.prepare("SELECT * FROM attributes ORDER BY id").all();
     return NextResponse.json(rows);
   } catch (err) {
-    console.error("Erro ao listar attributes:", err);
     return NextResponse.json({ error: "Erro interno" }, { status: 500 });
   }
 }

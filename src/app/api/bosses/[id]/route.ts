@@ -19,7 +19,6 @@ export async function GET(
 
     return NextResponse.json(boss);
   } catch (error) {
-    console.error("Erro ao buscar boss:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -47,7 +46,6 @@ export async function PUT(
 
     return NextResponse.json(updatedBoss);
   } catch (error) {
-    console.error("Erro ao atualizar boss:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -65,7 +63,6 @@ export async function DELETE(
     deleteBoss(parseInt(id));
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Erro ao deletar boss:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

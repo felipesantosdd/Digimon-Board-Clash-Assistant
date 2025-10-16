@@ -81,7 +81,6 @@ export default function BossDropsTab({
         setItems(itemsData);
       }
     } catch (error) {
-      console.error("Erro ao carregar dados:", error);
     } finally {
       setLoading(false);
     }

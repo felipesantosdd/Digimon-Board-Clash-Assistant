@@ -110,7 +110,6 @@ export default function BossesTab({ isProduction = false }: BossesTabProps) {
         setBossDigimons(bosses);
       }
     } catch (error) {
-      console.error("Erro ao carregar bosses:", error);
     } finally {
       setLoading(false);
     }
@@ -128,7 +127,6 @@ export default function BossesTab({ isProduction = false }: BossesTabProps) {
         setEffects(bossEffects);
       }
     } catch (error) {
-      console.error("Erro ao carregar efeitos:", error);
     }
   };
 

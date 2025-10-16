@@ -51,6 +51,18 @@ body {
   box-shadow: 0 0 20px rgba(255, 0, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3) !important;
 }
 
+/* Animação de fade-in subindo gradualmente */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Animation delays para partículas de evolução */
 .animation-delay-200 {
   animation-delay: 200ms;

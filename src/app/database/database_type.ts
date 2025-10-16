@@ -14,6 +14,10 @@ export type Digimon = {
   type?: DigimonType;
   active?: boolean;
   boss?: boolean;
+  hp?: number;
+  atk?: number;
+  def?: number;
+  attribute_id?: number;
 };
 
 export type DigimonType = {

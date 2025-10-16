@@ -11,30 +11,11 @@ export function useGameState() {
 
   // Carregar estado do localStorage ao montar
   useEffect(() => {
-    console.log("🟢 [LOAD] Iniciando carregamento do estado...");
     try {
       const stored = localStorage.getItem(GAME_STATE_KEY);
-      console.log(
-        "📂 [LOAD] Dados do localStorage:",
-        stored ? `${stored.length} caracteres` : "null"
-      );
 
       if (stored) {
         const parsed = JSON.parse(stored) as GameState;
-        console.log("📊 [LOAD] Estado parseado:", parsed);
-        console.log(
-          "🎮 [LOAD] Players carregados:",
-          parsed.players.map((p) => ({
-            name: p.name,
-            digimons: p.digimons.map((d) => ({
-              name: d.name,
-              currentHp: d.currentHp,
-              hasActedThisTurn: d.hasActedThisTurn,
-              canEvolve: d.canEvolve,
-              bag: d.bag?.length || 0,
-            })),
-          }))
-        );
 
         // Migração: adicionar campos novos se não existirem
         const migratedState: GameState = {
@@ -43,7 +24,10 @@ export function useGameState() {
             ...player,
             digimons: player.digimons.map((digimon) => ({
               ...digimon,
-              currentHp: digimon.currentHp ?? digimon.dp, // Se não existir, usa o DP
+              // Inicializar HP/ATK/DEF do novo sistema, com fallback para dp
+              currentHp: digimon.currentHp ?? (digimon as any).hp ?? digimon.dp,
+              atk: (digimon as any).atk ?? undefined,
+              def: (digimon as any).def ?? undefined,
               canEvolve: digimon.canEvolve ?? false, // Adicionar canEvolve se não existir
               evolutionLocked: digimon.evolutionLocked ?? false, // Adicionar evolutionLocked se não existir
               hasDigivice: digimon.hasDigivice ?? false, // Adicionar hasDigivice se não existir
@@ -54,10 +38,11 @@ export function useGameState() {
               evolutionProgress: digimon.evolutionProgress ?? 0, // Adicionar XP de evolução se não existir
               provokedBy: digimon.provokedBy ?? null, // Adicionar provocação se não existir
               lastProvokeTurn: digimon.lastProvokeTurn ?? null, // Adicionar cooldown de provocação se não existir
-              baseDp: digimon.baseDp ?? digimon.dp, // Inicializar baseDp se não existir
+              baseDp: digimon.baseDp ?? (digimon as any).hp ?? digimon.dp, // usar hp como base
               dpBonus: digimon.dpBonus ?? 0, // Inicializar dpBonus se não existir
               statuses: digimon.statuses ?? [], // Inicializar statuses se não existir
-              attributeId: digimon.attributeId ?? 12, // Adicionar attributeId se não existir (padrão: Unknown)
+              attributeId:
+                digimon.attributeId ?? (digimon as any).attribute_id ?? 12,
               attackBonus: digimon.attackBonus ?? 0, // Adicionar attackBonus se não existir
               defenseBonus: digimon.defenseBonus ?? 0, // Adicionar defenseBonus se não existir
               movementBonus: digimon.movementBonus ?? 0, // Adicionar movementBonus se não existir
@@ -66,60 +51,39 @@ export function useGameState() {
           currentTurnPlayerIndex: parsed.currentTurnPlayerIndex ?? 0, // Padrão: primeiro jogador
           turnCount: parsed.turnCount ?? 1, // Padrão: turno 1
           reviveAttemptThisTurn: parsed.reviveAttemptThisTurn ?? false, // Padrão: não tentou reviver
-          activeBoss: parsed.activeBoss ?? null, // Boss ativo
+          // Migração de Boss: Limpar bosses criados com sistema antigo (HP > 10k = sistema antigo)
+          activeBoss:
+            parsed.activeBoss && parsed.activeBoss.maxHp > 10000
+              ? (() => {
+                  return null; // Remover boss antigo
+                })()
+              : parsed.activeBoss ?? null,
           lastBossDefeatedTurn: parsed.lastBossDefeatedTurn ?? undefined, // Último turno que derrotou boss
           bossesDefeated: parsed.bossesDefeated ?? 0, // Quantidade de bosses derrotados
         };
 
-        console.log("🔄 [LOAD] Estado após migração:", migratedState);
         setGameState(migratedState);
-        console.log("✅ [LOAD] Estado carregado no React");
 
         // Salvar estado migrado no localStorage
         if (JSON.stringify(parsed) !== JSON.stringify(migratedState)) {
-          console.log("🔧 [LOAD] Salvando estado migrado...");
           localStorage.setItem(GAME_STATE_KEY, JSON.stringify(migratedState));
         }
       } else {
-        console.log("⚠️ [LOAD] Nenhum estado encontrado no localStorage");
       }
     } catch (error) {
-      console.error("❌ [LOAD] Erro ao carregar estado do jogo:", error);
     } finally {
       setIsLoading(false);
-      console.log("🏁 [LOAD] Carregamento finalizado");
     }
   }, []);
 
   // Salvar estado no localStorage
   const saveGameState = (newState: GameState) => {
     try {
-      console.log("🔵 [SAVE] Salvando estado do jogo...");
-      console.log("📊 [SAVE] Estado completo:", newState);
-      console.log(
-        "🎮 [SAVE] Players:",
-        newState.players.map((p) => ({
-          name: p.name,
-          digimons: p.digimons.map((d) => ({
-            name: d.name,
-            currentHp: d.currentHp,
-            hasActedThisTurn: d.hasActedThisTurn,
-            canEvolve: d.canEvolve,
-            bag: d.bag?.length || 0,
-          })),
-        }))
-      );
-
       const jsonString = JSON.stringify(newState);
       localStorage.setItem(GAME_STATE_KEY, jsonString);
-      console.log("✅ [SAVE] Estado salvo no localStorage");
-      console.log("💾 [SAVE] Tamanho:", jsonString.length, "caracteres");
 
       setGameState(newState);
-      console.log("✅ [SAVE] Estado atualizado no React");
-    } catch (error) {
-      console.error("❌ [SAVE] Erro ao salvar estado do jogo:", error);
-    }
+    } catch (error) {}
   };
 
   // Limpar estado do jogo
@@ -127,9 +91,7 @@ export function useGameState() {
     try {
       localStorage.removeItem(GAME_STATE_KEY);
       setGameState(null);
-    } catch (error) {
-      console.error("Erro ao limpar estado do jogo:", error);
-    }
+    } catch (error) {}
   };
 
   return {

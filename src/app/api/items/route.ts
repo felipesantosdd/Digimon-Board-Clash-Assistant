@@ -7,7 +7,6 @@ export async function GET() {
     const items = getAllItems();
     return NextResponse.json(items);
   } catch (error) {
-    console.error("Erro ao buscar itens:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -56,7 +55,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(newItem, { status: 201 });
   } catch (error) {
-    console.error("Erro ao criar item:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

@@ -24,7 +24,6 @@ export async function GET(
 
     return NextResponse.json(digimon);
   } catch (error) {
-    console.error("Erro ao buscar Digimon:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -40,17 +39,7 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    console.log("🔍 API PUT recebeu:", { id, body });
     const { name, level, typeId, image, active, boss, attribute_id } = body;
-    console.log("📋 Campos extraídos:", {
-      name,
-      level,
-      typeId,
-      image,
-      active,
-      boss,
-      attribute_id,
-    });
 
     if (!name || level === undefined || level === null || !typeId) {
       return NextResponse.json(
@@ -75,15 +64,6 @@ export async function PUT(
       );
     }
 
-    console.log("💾 Executando UPDATE:", {
-      name: lowerName,
-      level,
-      typeId,
-      image,
-      active,
-      boss,
-      id: Number(id),
-    });
 
     const updatedDigimon = updateDigimon(Number(id), {
       name: lowerName,
@@ -95,7 +75,6 @@ export async function PUT(
       ...(attribute_id !== undefined && { attribute_id }),
     });
 
-    console.log("✅ Digimon atualizado:", updatedDigimon);
 
     if (!updatedDigimon) {
       return NextResponse.json(
@@ -106,7 +85,6 @@ export async function PUT(
 
     return NextResponse.json(updatedDigimon);
   } catch (error) {
-    console.error("Erro ao atualizar Digimon:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -146,9 +124,7 @@ export async function DELETE(
           );
 
           await fs.unlink(imagePath);
-          console.log(`🗑️ Imagem removida: ${digimon.image}`);
         } catch (error) {
-          console.error(`⚠️ Erro ao remover imagem: ${digimon.image}`, error);
           // Não falhar a exclusão se a imagem não puder ser removida
         }
       }
@@ -162,7 +138,6 @@ export async function DELETE(
       message: `Digimon ${digimon.name} excluído com sucesso`,
     });
   } catch (error) {
-    console.error("Erro ao excluir Digimon:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

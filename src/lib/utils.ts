@@ -174,12 +174,13 @@ export function calculatePower(dp: number): number {
 }
 
 /**
- * Calcula o poder de ataque do Boss
- * Boss tem mesmo poder que Digimons: DP / 3
+ * Calcula o poder de ataque do boss para exibição
+ * ATUALIZADO: calculatedDp já é o ATK original do banco de dados
+ * Apenas arredonda para múltiplo de 100 para exibição limpa
  */
 export function calculateBossPower(dp: number): number {
-  const basePower = dp / 3;
-  return Math.ceil(basePower / 100) * 100;
+  // Retorna o valor direto (já é o ATK original do boss)
+  return Math.ceil(dp / 100) * 100;
 }
 
 /**
@@ -366,9 +367,6 @@ export function generateArmorStats(highestLevel: number): {
 
   const roundedValue = Math.round(randomValue / 100) * 100;
 
-  console.log(
-    `🛡️ [ARMOR] Nível mais alto: ${highestLevel}, Stats gerados: ${roundedValue}`
-  );
 
   return { hp: roundedValue, dp: roundedValue };
 }

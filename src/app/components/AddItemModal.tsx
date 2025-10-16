@@ -95,7 +95,6 @@ export default function AddItemModal({
           setEffects(itemEffects);
         }
       } catch (error) {
-        console.error("Erro ao carregar efeitos:", error);
       }
     };
 
@@ -107,7 +106,6 @@ export default function AddItemModal({
           setDigimons(data);
         }
       } catch (error) {
-        console.error("Erro ao carregar Digimons:", error);
       }
     };
 
@@ -118,8 +116,6 @@ export default function AddItemModal({
   }, [isOpen]);
 
   const resetForm = useCallback(() => {
-    console.log("🔄 [MODAL] Resetando formulário...");
-    console.log("🔄 [MODAL] Effects disponíveis:", effects.length);
     setFormData({
       name: "",
       description: "",
@@ -133,16 +129,11 @@ export default function AddItemModal({
     setImagePreview("");
     setTargetDigimons([]);
     setSearchDigimon("");
-    console.log(
-      "🔄 [MODAL] Formulário resetado para effectId:",
-      effects.length > 0 ? effects[0].id : 1
-    );
   }, [effects]);
 
   useEffect(() => {
     if (isOpen) {
       if (editingItem) {
-        console.log("📝 [MODAL] Carregando item para edição:", editingItem);
         setFormData({
           name: editingItem.name,
           description: editingItem.description,
@@ -154,18 +145,11 @@ export default function AddItemModal({
         });
         setImagePreview(editingItem.image);
         setTargetDigimons(editingItem.targetDigimons || []);
-        console.log("📝 [MODAL] effectId carregado:", editingItem.effectId);
-        console.log(
-          "📝 [MODAL] targetDigimons carregado:",
-          editingItem.targetDigimons
-        );
       } else {
-        console.log("📝 [MODAL] Modo criação - resetando form");
         resetForm();
       }
     } else {
       // Quando modal fecha, limpar tudo
-      console.log("📝 [MODAL] Modal fechado - limpando estados");
       resetForm();
     }
   }, [editingItem, isOpen, resetForm]);
@@ -305,7 +289,6 @@ export default function AddItemModal({
         }
       }
     } catch (error) {
-      console.error("Erro:", error);
       enqueueSnackbar(
         editingItem ? "Erro ao atualizar item" : "Erro ao adicionar item",
         { variant: "error" }

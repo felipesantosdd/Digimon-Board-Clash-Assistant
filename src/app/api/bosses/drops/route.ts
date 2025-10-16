@@ -23,7 +23,6 @@ export async function GET(request: NextRequest) {
     }
     return NextResponse.json(drops);
   } catch (error) {
-    console.error("Erro ao buscar drops:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -76,7 +75,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(newDrop, { status: 201 });
   } catch (error) {
-    console.error("Erro ao criar drop:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

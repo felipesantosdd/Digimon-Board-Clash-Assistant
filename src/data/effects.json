@@ -204,7 +204,7 @@
     "code": "movement_boost",
     "type": "movement",
     "value": 0,
-    "statusType": "movement"
+    "statusType": null
   },
   {
     "id": 24,
@@ -213,7 +213,7 @@
     "code": "dice_attack_boost",
     "type": "attack_bonus",
     "value": 0,
-    "statusType": "attack"
+    "statusType": null
   },
   {
     "id": 25,
@@ -222,7 +222,7 @@
     "code": "dice_defense_boost",
     "type": "defense_bonus",
     "value": 0,
-    "statusType": "defense"
+    "statusType": null
   },
   {
     "id": 26,
@@ -231,7 +231,7 @@
     "code": "heal_hp",
     "type": "heal",
     "value": 0,
-    "statusType": "hp"
+    "statusType": null
   },
   {
     "id": 27,
@@ -240,7 +240,7 @@
     "code": "bonus_attack_permanent",
     "type": "attack_bonus",
     "value": 0,
-    "statusType": "attack"
+    "statusType": null
   },
   {
     "id": 28,
@@ -249,7 +249,7 @@
     "code": "bonus_defense_permanent",
     "type": "defense_bonus",
     "value": 0,
-    "statusType": "defense"
+    "statusType": null
   },
   {
     "id": 29,
@@ -258,6 +258,6 @@
     "code": "bonus_movement_permanent",
     "type": "movement",
     "value": 0,
-    "statusType": "movement"
+    "statusType": null
   }
 ]

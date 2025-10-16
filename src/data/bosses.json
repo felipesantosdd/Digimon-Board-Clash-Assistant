@@ -6,6 +6,7 @@
     "description": "Um Digimon Anjo Caído do tipo Vírus. Extremamente perigoso!",
     "effect": "boss_dark_aura",
     "dp": 5000,
-    "typeId": 3
+    "typeId": 3,
+    "effectId": null
   }
 ]

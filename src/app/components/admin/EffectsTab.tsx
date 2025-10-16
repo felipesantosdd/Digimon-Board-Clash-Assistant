@@ -63,7 +63,6 @@ export default function EffectsTab({ isProduction = false }: EffectsTabProps) {
         setEffects(data);
       }
     } catch (error) {
-      console.error("Erro ao carregar efeitos:", error);
     } finally {
       setLoading(false);
     }

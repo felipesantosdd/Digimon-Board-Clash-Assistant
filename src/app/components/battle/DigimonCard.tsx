@@ -89,10 +89,10 @@ export default function DigimonCard({
           {/* ATK (Poder = DP/3 + Bônus) */}
           <p className="text-[10px] sm:text-xs text-red-400 font-bold">
             ⚔️{" "}
-            {calculatePowerWithBonus(
+            {((digimon as any).atk || calculatePowerWithBonus(
               digimon.dp,
               digimon.attackBonus || 0
-            ).toLocaleString()}{" "}
+            )).toLocaleString()}{" "}
             ATK
           </p>
 

@@ -30,13 +30,10 @@ export default function Home() {
         const response = await fetch("/api/tamers");
         if (response.ok) {
           const data = await response.json();
-          console.log("📊 Tamers carregados da API:", data);
           setTamers(data);
         } else {
-          console.error("Erro ao carregar Tamers");
         }
       } catch (error) {
-        console.error("Erro ao carregar Tamers:", error);
       } finally {
         setLoading(false);
       }
@@ -54,7 +51,6 @@ export default function Home() {
         setTamerScores(scores);
       }
     } catch (error) {
-      console.error("Erro ao carregar pontuações:", error);
     }
   }, []);
 
@@ -125,17 +121,40 @@ export default function Home() {
         digimons: selectedDigimons
           .slice(index * 3, (index + 1) * 3)
           .map((digimon: (typeof selectedDigimons)[0]) => {
-            const stats = generateRandomStats(digimon.level);
+            // Usar dados do banco quando disponíveis, fallback para aleatórios
+            const hasBankStats = digimon.hp && digimon.atk && digimon.def;
+
+            let dp, currentHp, atk, def;
+
+            if (hasBankStats) {
+              // Usar dados do banco
+              dp = digimon.hp || 0;
+              currentHp = digimon.hp || 0;
+              atk = digimon.atk || 0;
+              def = digimon.def || 0;
+
+            } else {
+              // Fallback para stats aleatórios
+              const stats = generateRandomStats(digimon.level);
+              dp = stats.dp;
+              currentHp = stats.hp;
+              atk = Math.floor(stats.dp / 3); // ATK = DP/3 como fallback
+              def = Math.floor(stats.dp / 4); // DEF = DP/4 como fallback
+
+            }
+
             return {
               id: digimon.id,
               name: digimon.name,
               image: digimon.image,
               level: digimon.level,
               typeId: digimon.typeId,
-              dp: stats.dp,
-              baseDp: stats.dp, // DP base
+              dp: dp,
+              baseDp: dp, // DP base
               dpBonus: 0, // Sem bônus inicial
-              currentHp: stats.hp,
+              currentHp: currentHp,
+              atk: atk, // ATK do banco ou calculado
+              def: def, // DEF do banco ou calculado
               evolution: digimon.evolution || [],
               canEvolve: true, // XP cheio = pode evoluir
               evolutionProgress: 100, // Barra de XP cheia
@@ -173,7 +192,6 @@ export default function Home() {
       // Redirecionar para o jogo
       router.push("/game");
     } catch (error) {
-      console.error("Erro ao criar jogo de teste:", error);
       alert("Erro ao criar jogo de teste");
     }
   };
@@ -188,14 +206,6 @@ export default function Home() {
 
       const allDigimons = await digimonsRes.json();
 
-      console.log(
-        `🧪 [AUTO-TEST] Total de Digimons recebidos:`,
-        allDigimons.length
-      );
-      console.log(`🧪 [AUTO-TEST] Primeiro Digimon:`, allDigimons[0]);
-      console.log(`🧪 [AUTO-TEST] Níveis disponíveis:`, [
-        ...new Set(allDigimons.map((d: any) => d.level)),
-      ]);
 
       // Filtrar apenas Rookies (nível 1)
       // active já vem como boolean da API (true/false)
@@ -203,18 +213,8 @@ export default function Home() {
         (d: any) => d.level === 1 && d.active !== false
       );
 
-      console.log(`🧪 [AUTO-TEST] ${rookies.length} Rookies disponíveis`);
-      console.log(
-        `🧪 [AUTO-TEST] Primeiros 10 Rookies:`,
-        rookies.slice(0, 10).map((r: any) => r.name)
-      );
 
       if (rookies.length < 6) {
-        console.error("❌ Rookies filtrados:", rookies);
-        console.error(
-          "❌ Todos os Digimons (primeiros 20):",
-          allDigimons.slice(0, 20)
-        );
         alert(
           `Erro: Apenas ${rookies.length} Rookies encontrados. Necessário pelo menos 6.\n\nTotal de Digimons: ${allDigimons.length}\nVerifique o console para detalhes.`
         );
@@ -225,10 +225,6 @@ export default function Home() {
       const shuffled = [...rookies].sort(() => Math.random() - 0.5);
       const selectedRookies = shuffled.slice(0, 6);
 
-      console.log(
-        `🧪 [AUTO-TEST] Rookies selecionados:`,
-        selectedRookies.map((r: any) => r.name)
-      );
 
       // Escolher 2 tamers aleatórios
       const shuffledTamers = [...tamers].sort(() => Math.random() - 0.5);
@@ -243,25 +239,26 @@ export default function Home() {
         digimons: selectedRookies
           .slice(pIndex * 3, pIndex * 3 + 3)
           .map((rookie: any, dIndex: number) => {
-            const rookieDp = rookie.dp || 1000;
+            const baseHp = rookie.hp ?? 1000;
+            const baseAtk = rookie.atk ?? 0;
+            const baseDef = rookie.def ?? 0;
             const uniqueId = Date.now() + pIndex * 10000 + dIndex * 100;
 
-            console.log(
-              `🧪 [CREATING] Digimon ${dIndex + 1} para jogador ${pIndex + 1}:`,
-              `${rookie.name}, DP: ${rookieDp}, HP: ${rookieDp}`
-            );
 
             const digimonData = {
               id: uniqueId,
               name: rookie.name,
               image: rookie.image,
               level: 1, // Rookie
-              dp: rookieDp,
-              baseDp: rookieDp,
+              // Mapear novo sistema (hp/atk/def) mantendo compat com DP
+              dp: baseHp,
+              baseDp: baseHp,
               dpBonus: 0,
-              currentHp: rookieDp, // HP cheio
+              currentHp: baseHp, // HP cheio = hp do banco
+              atk: baseAtk,
+              def: baseDef,
               typeId: rookie.typeId,
-              attributeId: rookie.attributeId,
+              attributeId: rookie.attribute_id ?? rookie.attributeId,
               evolution: Array.isArray(rookie.evolution)
                 ? rookie.evolution
                 : typeof rookie.evolution === "string"
@@ -286,28 +283,17 @@ export default function Home() {
               originalId: rookie.id,
             };
 
-            console.log(
-              `✅ [CREATED] ${digimonData.name}: HP ${digimonData.currentHp}/${digimonData.dp}`
-            );
 
             return digimonData;
           }),
       }));
 
-      console.log("🧪 [AUTO-TEST] Jogadores criados:", players);
 
       // Verificar se todos os Digimons têm HP
       players.forEach((player, pIndex) => {
-        console.log(`🧪 [AUTO-TEST] Jogador ${pIndex + 1} (${player.name}):`);
         player.digimons.forEach((d, dIndex) => {
-          console.log(
-            `   ${dIndex + 1}. ${d.name} - HP: ${d.currentHp}/${d.dp}, XP: ${
-              d.evolutionProgress
-            }%, Level: ${d.level}`
-          );
 
           if (!d.currentHp || d.currentHp <= 0) {
-            console.error(`❌ ERRO: ${d.name} tem HP inválido!`, d);
           }
         });
       });
@@ -325,7 +311,6 @@ export default function Home() {
         bossesDefeated: 0,
       };
 
-      console.log("🧪 [AUTO-TEST] Estado do jogo criado:", gameState);
 
       // Salvar no localStorage
       localStorage.setItem(
@@ -336,12 +321,10 @@ export default function Home() {
       // Marcar que deve ativar auto-test ao entrar no jogo
       localStorage.setItem("autotest_mode", "true");
 
-      console.log("🧪 [AUTO-TEST] Estado inicial criado:", gameState);
 
       // Redirecionar para o jogo de auto-test
       router.push("/game-auto-test");
     } catch (error) {
-      console.error("❌ Erro ao criar jogo de auto-test:", error);
       alert("Erro ao criar jogo de auto-test");
     }
   };

@@ -24,7 +24,6 @@ export async function GET(
 
     return NextResponse.json(item);
   } catch (error) {
-    console.error("Erro ao buscar item:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -50,7 +49,6 @@ export async function PUT(
     const updatedItem = getItemById(id);
     return NextResponse.json(updatedItem);
   } catch (error) {
-    console.error("Erro ao atualizar item:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -73,7 +71,6 @@ export async function DELETE(
     deleteItem(id);
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Erro ao deletar item:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

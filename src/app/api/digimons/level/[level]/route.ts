@@ -20,7 +20,6 @@ export async function GET(
 
     return NextResponse.json(digimons);
   } catch (error) {
-    console.error("Erro ao buscar Digimons por nível:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

@@ -165,7 +165,6 @@ export default function GamePage() {
         variant: "info",
       });
     } catch (error) {
-      console.error("❌ Erro ao resetar para teste:", error);
       enqueueSnackbar("Erro ao resetar jogo para teste", {
         variant: "error",
       });
@@ -203,14 +202,12 @@ export default function GamePage() {
       );
 
       if (shouldSpawn) {
-        console.log("👹 [BOSS] Spawnando novo boss...");
         const newBoss = await BossManager.spawnBoss(
           gameState.players,
           gameState.turnCount
         );
 
         if (newBoss) {
-          console.log("✅ [BOSS] Boss spawnado:", newBoss.name);
           saveGameState({
             ...gameState,
             activeBoss: newBoss,
@@ -245,7 +242,6 @@ export default function GamePage() {
       const digimonToAct = AIPlayer.chooseDigimonToAct(currentPlayer.digimons);
 
       if (!digimonToAct) {
-        console.log("🤖 [AUTO-TEST] Passando turno automaticamente");
         handleNextTurn();
         return;
       }
@@ -298,14 +294,7 @@ export default function GamePage() {
         const latestState = gameStateRef.current;
         if (!latestState) return;
 
-        console.log("🔍 [DEBUG] Estado antes da ação:");
-        console.log(
-          `   Atacante: ${digimonToAct.name} - HP: ${digimonToAct.currentHp}`
-        );
         if (decision.target) {
-          console.log(
-            `   Defensor: ${decision.target.name} - HP: ${decision.target.currentHp}`
-          );
         }
 
         let updatedState = { ...latestState };
@@ -334,72 +323,89 @@ export default function GamePage() {
             if (latestState.activeBoss)
               existingIds.add(latestState.activeBoss.id);
 
-            // Escolher primeira opção que não existe em campo
-            const chosenId = (currentNow.evolution || []).find(
-              (evId) => !existingIds.has(evId)
-            );
+            // Buscar evolução completa da API com todos os stats
+            try {
+              const evoResponse = await fetch("/api/digimons/evolutions", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ digimonId: currentNow.id }),
+              });
 
-            if (!chosenId) {
-              console.log(
-                `⚠️ [EVOLVE] Nenhuma forma disponível sem duplicar em campo. Evolução adiada para ${currentNow.name}.`
-              );
-              // Não evoluir agora; segue o fluxo normal
-            } else {
-              const next = latestState.players
-                .flatMap((p) => p.digimons)
-                .concat(
-                  latestState.activeBoss
-                    ? ([latestState.activeBoss] as any)
-                    : []
-                )
-                .find((d: any) => d.id === chosenId) as any;
-              if (!next) {
-                console.log(
-                  `⚠️ [EVOLVE] Próxima forma não encontrada no catálogo. Evolução adiada para ${currentNow.name}.`
-                );
-              } else {
-                // Sem DP fixo: manter HP atual
-                const evolvedHp = Math.max(1, currentNow.currentHp);
+              if (evoResponse.ok) {
+                const evoData = await evoResponse.json();
+                const fullEvolution = evoData.finalEvolution;
 
-                updatedState = {
-                  ...latestState,
-                  players: latestState.players.map((player) => ({
-                    ...player,
-                    digimons: player.digimons.map((d) => {
-                      if (d.id === currentNow.id) {
-                        return {
-                          ...d,
-                          id: next.id,
-                          name: next.name,
-                          image: next.image,
-                          level: next.level,
-                          dp: 0,
-                          baseDp: 0,
-                          currentHp: evolvedHp,
-                          typeId: next.typeId,
-                          evolutionProgress: 0,
-                          canEvolve: false,
-                          lastEvolutionTurn: latestState.turnCount,
-                          temporaryEvolution: undefined,
-                          evolutionLocked: false,
-                        };
-                      }
-                      return d;
-                    }),
-                  })),
-                };
+                // Verificar se essa evolução já existe em campo (evitar duplicatas)
+                if (existingIds.has(fullEvolution.id)) {
+                  // Evolução duplicada, não evoluir
+                } else {
+                  // Calcular HP proporcional mantendo % de HP atual
+                  const currentHpPercentage =
+                    currentNow.dp > 0
+                      ? Math.min(1, currentNow.currentHp / currentNow.dp)
+                      : 0;
+                  const evolutionHp = fullEvolution.hp ?? 1000;
+                  const evolutionAtk =
+                    fullEvolution.atk ?? Math.floor(evolutionHp / 3);
+                  const evolutionDef =
+                    fullEvolution.def ?? Math.floor(evolutionHp / 4);
 
-                console.log(
-                  `✨ [EVOLVE] ${currentNow.name} evoluiu para ${next.name} (HP ${evolvedHp})`
-                );
+                  const proportionalHp = Math.floor(
+                    evolutionHp * currentHpPercentage
+                  );
+                  const bonusHp = Math.floor(evolutionHp * 0.3);
+                  const evolvedHp = Math.max(
+                    1,
+                    Math.min(evolutionHp, proportionalHp + bonusHp)
+                  );
 
-                // Salvar e avançar turno
-                saveGameStateAndUpdateRef(updatedState);
-                setTimeout(() => {
-                  handleNextTurn();
-                }, 300);
-                return;
+                  console.log(
+                    `✨ [AUTO-TEST EVOLVE] ${currentNow.name} → ${fullEvolution.name}: HP ${currentNow.currentHp}/${currentNow.dp} → ${evolvedHp}/${evolutionHp}, ATK ${evolutionAtk}, DEF ${evolutionDef}`
+                  );
+
+                  updatedState = {
+                    ...latestState,
+                    players: latestState.players.map((player) => ({
+                      ...player,
+                      digimons: player.digimons.map((d) => {
+                        if (d.id === currentNow.id) {
+                          return {
+                            ...d,
+                            id: fullEvolution.id,
+                            name: fullEvolution.name,
+                            image: fullEvolution.image,
+                            level: fullEvolution.level,
+                            dp: evolutionHp,
+                            baseDp: evolutionHp,
+                            atk: evolutionAtk,
+                            def: evolutionDef,
+                            currentHp: evolvedHp,
+                            typeId: fullEvolution.typeId,
+                            attributeId: fullEvolution.attribute_id,
+                            evolution: fullEvolution.evolution || [],
+                            evolutionProgress: 0,
+                            canEvolve: false,
+                            lastEvolutionTurn: latestState.turnCount,
+                            temporaryEvolution: undefined,
+                            evolutionLocked: false,
+                            originalId: d.originalId || currentNow.id,
+                          };
+                        }
+                        return d;
+                      }),
+                    })),
+                  };
+
+                  // Salvar e avançar turno
+                  saveGameStateAndUpdateRef(updatedState);
+                  setTimeout(() => {
+                    handleNextTurn();
+                  }, 300);
+                  return;
+                }
               }
+            } catch (error) {
+              // Erro na API, não evoluir
             }
           }
         }
@@ -414,19 +420,8 @@ export default function GamePage() {
           const currentDefender = allDigimons.find((d) => d.id === targetId);
 
           if (!currentAttacker || !currentDefender) {
-            console.error(
-              "❌ [AUTO-TEST] Digimon não encontrado no estado atual"
-            );
             return;
           }
-
-          console.log("🔍 [DEBUG] Digimons encontrados no latestState:");
-          console.log(
-            `   Atacante: ${currentAttacker.name} - HP: ${currentAttacker.currentHp}/${currentAttacker.dp}`
-          );
-          console.log(
-            `   Defensor: ${currentDefender.name} - HP: ${currentDefender.currentHp}/${currentDefender.dp}`
-          );
 
           // Executar ataque PvP diretamente no estado
           const attackerModifier = getStatusDamageModifier(currentAttacker);
@@ -441,10 +436,6 @@ export default function GamePage() {
           );
           const result = battleManager.executeBattle();
 
-          console.log(
-            `⚔️ [DEBUG] Resultado da batalha: ${result.attackerDamage} / ${result.defenderDamage}`
-          );
-
           // Aplicar dano diretamente aos Digimons
           const attackerResult = applyDamageToDigimon(
             currentAttacker,
@@ -455,14 +446,6 @@ export default function GamePage() {
             currentDefender,
             result.attackerDamage,
             result.defenderDamage
-          );
-
-          console.log(`🔍 [DEBUG] Resultado do dano aplicado:`);
-          console.log(
-            `   Atacante: HP ${attackerResult.newHp}, XP ${attackerResult.newProgress}%`
-          );
-          console.log(
-            `   Defensor: HP ${defenderResult.newHp}, XP ${defenderResult.newProgress}%`
           );
 
           updatedState = {
@@ -495,29 +478,17 @@ export default function GamePage() {
               }),
             })),
           };
-
-          console.log(
-            `⚔️ [AUTO-TEST] Ataque executado: ${currentAttacker.name} → ${currentDefender.name}`
-          );
-          console.log(
-            `   Dano: ${result.attackerDamage} / ${result.defenderDamage}`
-          );
-          console.log(
-            `   HP: ${currentAttacker.name} ${attackerResult.newHp}/${currentAttacker.dp}, ${currentDefender.name} ${defenderResult.newHp}/${currentDefender.dp}`
-          );
         } else if (decision.action === "evolve") {
           // Evoluir automaticamente (auto-test): escolher a primeira opção disponível
           const allDigimons = latestState.players.flatMap((p) => p.digimons);
           const current = allDigimons.find((d) => d.id === digimonToAct.id);
 
           if (!current) {
-            console.error("❌ [AUTO-TEST] Digimon não encontrado para evoluir");
             return;
           }
 
           const options = current.evolution || [];
           if (options.length === 0) {
-            console.log("⚠️ [EVOLVE] Nenhuma evolução disponível");
             return;
           }
           // Evitar duplicatas em campo: coletar IDs já presentes (inclui boss)
@@ -534,11 +505,16 @@ export default function GamePage() {
             ? allDigimons.find((d) => d.id === chosenId2)
             : undefined;
           if (!chosen) {
-            console.log(
-              `⚠️ [EVOLVE] Nenhuma forma disponível sem duplicar em campo. Evolução adiada para ${current.name}.`
-            );
           } else {
             const evolvedHp = Math.max(1, current.currentHp);
+            const chosenData = chosen as unknown as {
+              hp?: number;
+              atk?: number;
+              def?: number;
+            };
+            const evolutionHp = chosenData.hp ?? 1000;
+            const evolutionAtk = chosenData.atk ?? Math.floor(evolutionHp / 3);
+            const evolutionDef = chosenData.def ?? Math.floor(evolutionHp / 4);
 
             updatedState = {
               ...latestState,
@@ -552,8 +528,10 @@ export default function GamePage() {
                       name: chosen.name,
                       image: chosen.image,
                       level: chosen.level,
-                      dp: 0,
-                      baseDp: 0,
+                      dp: evolutionHp,
+                      baseDp: evolutionHp,
+                      atk: evolutionAtk,
+                      def: evolutionDef,
                       currentHp: evolvedHp,
                       typeId: chosen.typeId,
                       evolutionProgress: 0,
@@ -567,10 +545,6 @@ export default function GamePage() {
                 }),
               })),
             };
-
-            console.log(
-              `✨ [EVOLVE] ${current.name} evoluiu para ${chosen.name} (HP ${evolvedHp})`
-            );
           }
         } else if (
           decision.action === "attack_boss" &&
@@ -583,9 +557,6 @@ export default function GamePage() {
           );
 
           if (!currentAttacker) {
-            console.error(
-              "❌ [AUTO-TEST] Digimon atacante não encontrado no estado atual"
-            );
             return;
           }
 
@@ -657,14 +628,6 @@ export default function GamePage() {
               }),
             })),
           };
-
-          console.log(
-            `👹 [AUTO-TEST] Ataque ao boss: ${currentAttacker.name} → ${latestState.activeBoss.name}`
-          );
-          console.log(`   Dano: ${result.attackerDamage}`);
-          console.log(
-            `   Boss HP: ${updatedBoss.currentHp}/${updatedBoss.maxHp}`
-          );
         } else if (decision.action === "explore") {
           // Buscar o digimon atualizado do estado atual
           const allDigimons = latestState.players.flatMap((p) => p.digimons);
@@ -673,9 +636,6 @@ export default function GamePage() {
           );
 
           if (!currentDigimon) {
-            console.error(
-              "❌ [AUTO-TEST] Digimon não encontrado no estado atual"
-            );
             return;
           }
 
@@ -708,9 +668,6 @@ export default function GamePage() {
           );
 
           if (!currentDigimon) {
-            console.error(
-              "❌ [AUTO-TEST] Digimon não encontrado no estado atual"
-            );
             return;
           }
 
@@ -743,7 +700,6 @@ export default function GamePage() {
         // Salvar estado atualizado e atualizar ref
         saveGameStateAndUpdateRef(updatedState);
 
-        console.log("💾 [DEBUG] Estado salvo. Verificando ref atualizado...");
         setTimeout(() => {
           const refState = gameStateRef.current;
           if (refState) {
@@ -754,22 +710,13 @@ export default function GamePage() {
               refState.players
                 .flatMap((p) => p.digimons)
                 .find((d) => d.id === (decision.target?.id ?? -1)) || null;
-            console.log("🔍 [DEBUG] Estado do ref após salvar:");
             if (refAttacker) {
-              console.log(
-                `   Atacante: ${refAttacker.name} - HP: ${refAttacker.currentHp}`
-              );
             }
             if (refDefender) {
-              console.log(
-                `   Defensor: ${refDefender.name} - HP: ${refDefender.currentHp}`
-              );
             }
           }
         }, 100);
-      } catch (error) {
-        console.error("❌ [AUTO-TEST] Erro ao executar ação:", error);
-      }
+      } catch (error) {}
 
       // Passar turno após executar ação
       setTimeout(() => {
@@ -829,9 +776,6 @@ export default function GamePage() {
           );
         }
       } else {
-        console.log(
-          "⚠️ [VICTORY] Não pode declarar vencedor - Boss ainda está vivo!"
-        );
       }
     }
   }, [gameState, showAttackDialog, isAutoTestActive, enqueueSnackbar]);
@@ -846,9 +790,6 @@ export default function GamePage() {
     );
 
     if (!hasAvailableActions) {
-      console.log(
-        "⏭️ [AUTO-TURN] Nenhuma ação disponível, encerrando turno automaticamente..."
-      );
       // Auto-encerrar turno após 1.5 segundo
       const timer = setTimeout(() => {
         handleNextTurn();
@@ -929,10 +870,6 @@ export default function GamePage() {
     if (currentTurn >= digimon.temporaryEvolution.expiresAtTurn) {
       const previousFormName = digimon.temporaryEvolution.previousForm.name;
 
-      console.log(
-        `⏰ [TEMP EVOLUTION] ${digimon.name} voltou para ${previousFormName}! (Evolução temporária expirou)`
-      );
-
       enqueueSnackbar(
         `⏰ ${capitalize(digimon.name)} voltou para ${capitalize(
           previousFormName
@@ -995,8 +932,6 @@ export default function GamePage() {
     const state = gameStateRef.current;
     if (!state) return;
 
-    console.log("⏭️ [TURN] Passando turno...");
-
     // Encontrar próximo jogador com Digimons vivos
     let nextPlayerIndex =
       (state.currentTurnPlayerIndex + 1) % state.players.length;
@@ -1010,18 +945,10 @@ export default function GamePage() {
 
       if (hasAliveDigimons) {
         // Encontrou um jogador com Digimons vivos!
-        console.log(
-          "✅ [TURN] Próximo jogador com Digimons vivos:",
-          nextPlayer.name
-        );
         break;
       }
 
       // Jogador morto (todos os digimons nocauteados), pular para o próximo
-      console.log(
-        "⏭️ [TURN] Pulando jogador morto (todos nocauteados):",
-        nextPlayer.name
-      );
       nextPlayerIndex = (nextPlayerIndex + 1) % state.players.length;
       attempts++;
     }
@@ -1035,8 +962,6 @@ export default function GamePage() {
     let updatedBoss = state.activeBoss;
 
     if (isLastPlayer && state.activeBoss && !state.activeBoss.isDefeated) {
-      console.log("🌍 [BOSS] Executando Turno do Mundo (fim da rodada)...");
-
       // Atualizar aggro do boss antes do ataque
       updatedBoss = { ...state.activeBoss };
       if (updatedBoss.lastAttackers && updatedBoss.lastAttackers.length > 0) {
@@ -1054,15 +979,8 @@ export default function GamePage() {
           );
           if (digimon) topDigimonName = digimon.name;
         });
-
-        console.log(
-          `🎯 [BOSS AGGRO] ${topDigimonName} (ID: ${topAttacker.digimonId}) tem maior aggro com ${topAttacker.damage} de dano total`
-        );
       } else {
         updatedBoss.topAggroDigimonId = null;
-        console.log(
-          `🎯 [BOSS AGGRO] Ninguém atacou nesta rodada, alvo será aleatório`
-        );
       }
 
       const result = BossManager.executeWorldTurn(updatedBoss, updatedPlayers);
@@ -1081,13 +999,6 @@ export default function GamePage() {
         } | 🛡️ Defesa: ${result.targetDefense})`,
         { variant: "error" }
       );
-
-      console.log(`💥 [BOSS] Turno do Mundo:`, {
-        alvo: result.targetDigimonName,
-        dano: result.damageDealt,
-        bossPoder: result.bossPower,
-        targetDefesa: result.targetDefense,
-      });
     }
 
     // Resetar hasActedThisTurn, defending, provokedBy e reviveAttempt do próximo jogador
@@ -1251,23 +1162,11 @@ export default function GamePage() {
             );
           } else {
             // Falhou, mas tem XP acumulado
-            console.log(
-              `📊 [XP] ${
-                digimon.name
-              } não evoluiu (D100: ${roll} > ${newProgress.toFixed(0)}%)`
-            );
           }
         }
       } else {
         // Em cooldown de evolução
         const turnsRemaining = evolutionCooldown - turnosSinceEvolution;
-        console.log(
-          `⏳ [EVOLUÇÃO] ${
-            digimon.name
-          } em cooldown. ${turnsRemaining} turno(s) restante(s). XP acumulado: ${newProgress.toFixed(
-            1
-          )}%`
-        );
       }
     }
 
@@ -1303,34 +1202,24 @@ export default function GamePage() {
     console.log("✅ [ATTACK] Validação passou! Processando ataque...");
     console.log("🎯 [ATTACK] Alvo:", targetDigimon.name);
 
-    // Aplicar dano ao alvo (já foi redirecionado no AttackDialog se necessário)
-    // Defensor recebe dano do atacante E causa dano de contra-ataque
+    // Aplicar dano ao alvo (apenas o defensor recebe dano)
     const defenderResult = applyDamageToDigimon(
       targetDigimon,
-      attackerDamage, // Dano recebido
-      defenderDamage // Dano causado (contra-ataque)
+      attackerDamage,
+      0
     );
     console.log("🛡️ [ATTACK] Resultado alvo:", defenderResult);
 
-    // Aplicar dano ao atacante (contra-ataque)
-    // Atacante recebe contra-ataque E causou dano inicial
+    // Atacante não recebe dano. Apenas ganha XP proporcional ao dano que causou
     const attackerResult = applyDamageToDigimon(
       attackerDigimon.digimon,
-      defenderDamage, // Dano recebido (contra-ataque)
-      attackerDamage // Dano causado (ataque inicial)
+      0,
+      attackerDamage
     );
     console.log("⚔️ [ATTACK] Resultado atacante:", attackerResult);
 
     // Processar status baseados em críticos
     console.log("🎲 [STATUS] Verificando críticos...");
-    console.log(
-      "🎲 [STATUS] Atacante ataque:",
-      battleResult.attackerAttackRoll
-    );
-    console.log(
-      "🎲 [STATUS] Defensor ataque:",
-      battleResult.defenderAttackRoll
-    );
 
     // Atualizar o gameState com os danos aplicados, status e marcar como agiu
     const updatedState = {
@@ -1389,10 +1278,6 @@ export default function GamePage() {
           }
           // Atualizar atacante E marcar como já agiu
           if (d.id === attackerDigimon.digimon.id) {
-            console.log(
-              "🎯 [ATTACK] Atualizando atacante e marcando como agiu:",
-              d.name
-            );
             const newHp = attackerResult.newHp;
             let updatedDigimon: GameDigimon = {
               ...d,
@@ -1490,13 +1375,6 @@ export default function GamePage() {
       const data = await response.json();
       const { animationOptions, finalEvolution } = data;
 
-      console.log("🔄 [EVOLVE] Opções para animação:", animationOptions);
-      console.log("✨ [EVOLVE] Evolução final:", finalEvolution);
-      console.log(
-        "🖼️ [EVOLVE] Imagens das opções:",
-        animationOptions?.map((o: { image: string }) => o.image)
-      );
-
       // Mostrar animação de evolução com opções variadas e a evolução final
       setEvolvingDigimon({
         digimon,
@@ -1507,7 +1385,6 @@ export default function GamePage() {
           : "evolução aleatória",
       });
     } catch (error) {
-      console.error("Erro ao buscar evolução:", error);
       enqueueSnackbar("Erro ao processar evolução", { variant: "error" });
     }
   };
@@ -1567,19 +1444,24 @@ export default function GamePage() {
                 const armorStats = generateArmorStats(highestLevel);
                 hp = armorStats.hp;
                 dp = armorStats.dp;
-
-                console.log(
-                  `🛡️ [ARMOR] Nível mais alto em jogo: ${highestLevel}, Stats gerados - HP: ${hp}, DP: ${dp}`
-                );
               } else {
-                // Evoluções normais usam stats aleatórios do nível
-                const stats = generateRandomStats(evolution.level);
-                hp = stats.hp;
-                dp = stats.dp;
+                // Evoluções normais: priorizar stats do banco, fallback para gerados
+                const evolutionData = evolution as unknown as {
+                  hp?: number;
+                  atk?: number;
+                  def?: number;
+                };
 
-                console.log(
-                  `🎲 [EVOLVE] Stats aleatórios gerados - HP: ${hp}, DP: ${dp}`
-                );
+                if (evolutionData.hp && evolutionData.atk) {
+                  // Usar stats do banco
+                  hp = evolutionData.hp;
+                  dp = evolutionData.hp;
+                } else {
+                  // Fallback para stats gerados
+                  const stats = generateRandomStats(evolution.level);
+                  hp = stats.hp;
+                  dp = stats.dp;
+                }
               }
 
               // Limpar TODOS os status e adicionar novo Animado
@@ -1591,24 +1473,16 @@ export default function GamePage() {
                 },
               ];
 
-              console.log(
-                `✨ [EVOLVE] Limpando todos os status e adicionando Animado único (dura 3 turnos)`
-              );
-
               // Calcular HP proporcional + 30%
-              // Se tinha 100 HP de 1000 (10%), no novo DP de 3000 terá 300 (10%) + 30% = 1200
-              const currentHpPercentage = d.dp > 0 ? d.currentHp / d.dp : 0;
+              // Se tinha 100 HP de 1000 (10%), no novo HP de 3000 terá 300 (10%) + 30% = 390
+              const currentHpPercentage =
+                d.dp > 0 ? Math.min(1, d.currentHp / d.dp) : 0; // Limitar a 100%
               const proportionalHp = Math.floor(hp * currentHpPercentage);
               const bonusHp = Math.floor(hp * 0.3); // 30% do novo HP máximo
-              const newCurrentHp = Math.min(hp, proportionalHp + bonusHp); // Não pode passar do máximo
+              let newCurrentHp = proportionalHp + bonusHp;
 
-              console.log(
-                `💚 [EVOLVE] HP Calculation - Old: ${d.currentHp}/${d.dp} (${(
-                  currentHpPercentage * 100
-                ).toFixed(
-                  1
-                )}%) -> New: ${newCurrentHp}/${hp} (Proporcional: ${proportionalHp} + Bônus 30%: ${bonusHp})`
-              );
+              // GARANTIR que NUNCA ultrapasse o HP máximo
+              newCurrentHp = Math.max(1, Math.min(hp, newCurrentHp));
 
               // Preparar dados de evolução temporária se for Spirit/Armor
               const temporaryEvolutionData = isTemporaryEvolution
@@ -1627,15 +1501,16 @@ export default function GamePage() {
                   }
                 : undefined;
 
-              console.log(
-                isTemporaryEvolution
-                  ? `⏰ [TEMP EVOLUTION] Evolução temporária! Expira no turno ${
-                      gameState.turnCount + 3
-                    }`
-                  : `✨ [EVOLUTION] Evolução permanente!`
-              );
+              // Evoluir o Digimon com stats do banco ou gerados
+              const evolutionData = evolution as unknown as {
+                hp?: number;
+                atk?: number;
+                def?: number;
+                attribute_id?: number;
+              };
+              const evolutionAtk = evolutionData.atk ?? Math.floor(dp / 3);
+              const evolutionDef = evolutionData.def ?? Math.floor(dp / 4);
 
-              // Evoluir o Digimon com novos stats aleatórios
               return {
                 ...d,
                 id: evolution.id,
@@ -1645,7 +1520,10 @@ export default function GamePage() {
                 baseDp: dp, // DP aleatório base
                 dpBonus: 0, // Resetar bônus na evolução
                 dp: dp, // DP total = novo DP aleatório
+                atk: evolutionAtk, // ATK do banco ou gerado
+                def: evolutionDef, // DEF do banco ou gerado
                 typeId: evolution.typeId,
+                attributeId: evolutionData.attribute_id ?? d.attributeId,
                 currentHp: newCurrentHp, // HP proporcional + 30% de bônus
                 canEvolve: false, // Reset da flag de evolução
                 evolutionProgress: 0, // Resetar XP de evolução
@@ -1670,9 +1548,6 @@ export default function GamePage() {
       saveGameState(updatedState);
 
       // Toast removido - animação já mostra a evolução
-      console.log(
-        `✅ [EVOLVE] ${digimon.name} evoluiu para ${evolution.name}! (${evolvingDigimon.evolutionType})`
-      );
 
       // Notificar que ganhou Animado
       enqueueSnackbar(
@@ -1688,7 +1563,6 @@ export default function GamePage() {
       // Não fecha o modal - mantém aberto com dados atualizados
       // O modal já atualiza automaticamente pois busca do gameState
     } catch (error) {
-      console.error("Erro ao evoluir:", error);
       enqueueSnackbar("Erro ao processar evolução", { variant: "error" });
       setEvolvingDigimon(null);
     }
@@ -1727,8 +1601,10 @@ export default function GamePage() {
       id: -1, // ID negativo para identificar como boss
       name: gameState.activeBoss.name,
       image: gameState.activeBoss.image,
-      level: 7, // Boss sempre level max
+      level: gameState.activeBoss.level, // Usar level real do boss
       dp: gameState.activeBoss.calculatedDp,
+      atk: gameState.activeBoss.calculatedDp, // ATK = calculatedDp
+      def: 0, // Boss não tem defesa (recebe dano direto)
       typeId: gameState.activeBoss.typeId,
       currentHp: gameState.activeBoss.currentHp,
     };
@@ -1750,8 +1626,6 @@ export default function GamePage() {
     _defenderDamage: number // Boss não contra-ataca (não usado)
   ) => {
     if (!gameState || !gameState.activeBoss || !attackerDigimon) return;
-
-    console.log("👹 [BOSS] Processando ataque ao boss...");
 
     const updatedBoss = { ...gameState.activeBoss };
     updatedBoss.currentHp = Math.max(0, updatedBoss.currentHp - attackerDamage);
@@ -1776,14 +1650,6 @@ export default function GamePage() {
 
     updatedBoss.lastAttackers = lastAttackers;
 
-    console.log(
-      `🎯 [BOSS AGGRO] ${
-        attackerDigimon.digimon.name
-      } (ID: ${attackingDigimonId}) causou ${attackerDamage} de dano. Total: ${
-        lastAttackers.find((a) => a.digimonId === attackingDigimonId)?.damage
-      }`
-    );
-
     // BOSS NÃO CONTRA-ATACA MAIS!
     // Aplicar XP de evolução baseado no dano causado ao boss
     const attackerResult = applyDamageToDigimon(
@@ -1791,8 +1657,6 @@ export default function GamePage() {
       0, // Boss não contra-ataca (0 dano recebido)
       attackerDamage // Dano causado ao boss
     );
-
-    console.log("⚔️ [BOSS] Resultado atacante:", attackerResult);
 
     // Atualizar HP do Digimon atacante e progresso de evolução
     // Boss não causa dano, mas Digimon ganha XP por atacar
@@ -1817,7 +1681,6 @@ export default function GamePage() {
 
     // Verificar se o boss foi derrotado
     if (updatedBoss.currentHp <= 0) {
-      console.log("💀 [BOSS] Boss derrotado!");
       updatedBoss.isDefeated = true;
 
       // Calcular recompensas
@@ -1898,11 +1761,6 @@ export default function GamePage() {
           { variant: "success" }
         );
 
-        console.log(
-          `🎁 [BOSS] Recompensas adicionadas à bag de ${attackerDigimon.playerName}:`,
-          items
-        );
-
         // Atualizar estado com boss derrotado e players atualizados
         saveGameState({
           ...gameState,
@@ -1964,12 +1822,7 @@ export default function GamePage() {
       scores[tamerId] = (scores[tamerId] || 0) + points;
 
       localStorage.setItem("digimon_tamer_scores", JSON.stringify(scores));
-      console.log(
-        `⭐ Pontuação atualizada - Tamer ${tamerId}: +${points} pts (Total: ${scores[tamerId]})`
-      );
-    } catch (error) {
-      console.error("Erro ao atualizar pontuação:", error);
-    }
+    } catch (error) {}
   };
 
   const handleRevive = (success: boolean) => {
@@ -2021,26 +1874,12 @@ export default function GamePage() {
   };
 
   const handleLoot = async (digimon: GameDigimon) => {
-    console.log("💰 [LOOT] Iniciando exploração...");
-    console.log("💰 [LOOT] Digimon:", digimon.name);
-
     if (!gameState) return;
 
     // Verificar se é o turno do jogador e se o Digimon ainda não agiu
     const currentPlayer = gameState.players[gameState.currentTurnPlayerIndex];
-    console.log(
-      "🔍 [DEBUG] Current player index:",
-      gameState.currentTurnPlayerIndex
-    );
-    console.log("🔍 [DEBUG] Current player:", currentPlayer?.name);
-    console.log("🔍 [DEBUG] Digimon ID:", digimon.id);
-    console.log(
-      "🔍 [DEBUG] Player digimons:",
-      currentPlayer?.digimons?.map((d) => ({ id: d.id, name: d.name }))
-    );
 
     if (!currentPlayer) {
-      console.log("❌ [LOOT] Current player não encontrado");
       enqueueSnackbar("Erro: Jogador atual não encontrado", {
         variant: "error",
       });
@@ -2048,7 +1887,6 @@ export default function GamePage() {
     }
 
     if (!currentPlayer.digimons) {
-      console.log("❌ [LOOT] Digimons do jogador não encontrados");
       enqueueSnackbar("Erro: Digimons do jogador não encontrados", {
         variant: "error",
       });
@@ -2059,12 +1897,6 @@ export default function GamePage() {
       (d) => d.id === digimon.id
     );
     if (!belongsToPlayer) {
-      console.log("❌ [LOOT] Digimon não pertence ao jogador atual");
-      console.log("❌ [LOOT] Digimon buscado:", digimon.id, digimon.name);
-      console.log(
-        "❌ [LOOT] Digimons do jogador:",
-        currentPlayer.digimons.map((d) => d.id)
-      );
       enqueueSnackbar("Erro: Digimon não pertence ao jogador atual", {
         variant: "error",
       });
@@ -2073,7 +1905,6 @@ export default function GamePage() {
 
     // Verificar se o Digimon está nocauteado
     if (digimon.currentHp <= 0) {
-      console.log("❌ [LOOT] Digimon está nocauteado");
       enqueueSnackbar(
         `${capitalize(digimon.name)} está nocauteado e não pode explorar!`,
         {
@@ -2084,7 +1915,6 @@ export default function GamePage() {
     }
 
     if (digimon.hasActedThisTurn) {
-      console.log("❌ [LOOT] Digimon já agiu neste turno");
       enqueueSnackbar(`${capitalize(digimon.name)} já agiu neste turno!`, {
         variant: "warning",
       });
@@ -2114,12 +1944,6 @@ export default function GamePage() {
         });
       });
 
-      console.log(
-        `🔒 [LOOT] Itens únicos já obtidos: ${
-          Array.from(obtainedUniqueItems).join(", ") || "nenhum"
-        }`
-      );
-
       // Filtrar itens ATIVOS com dropChance > 0
       // E excluir itens únicos já obtidos
       const availableItems = allItems.filter(
@@ -2135,7 +1959,6 @@ export default function GamePage() {
       );
 
       if (availableItems.length === 0) {
-        console.log("💰 [LOOT] Nenhum item disponível para drop");
         enqueueSnackbar(
           `🔍 ${capitalize(
             digimon.name
@@ -2172,7 +1995,6 @@ export default function GamePage() {
       const foundSomething = Math.random() < 0.2;
 
       if (!foundSomething) {
-        console.log("💰 [LOOT] Nenhum item encontrado");
         enqueueSnackbar(
           `🔍 ${capitalize(
             digimon.name
@@ -2235,14 +2057,11 @@ export default function GamePage() {
         }
 
         if (foundItem) {
-          console.log("💰 [LOOT] Item encontrado:", foundItem.name);
-
           // Verificar se é um Digivice
           const isDigivice = foundItem.name === "Digivice";
 
           // Se for Digivice, verificar se o Digimon já tem um
           if (isDigivice && digimon.hasDigivice) {
-            console.log("📱 [LOOT] Digimon já possui um Digivice!");
             enqueueSnackbar(
               `📱 ${capitalize(
                 digimon.name
@@ -2383,20 +2202,12 @@ export default function GamePage() {
         }
       }
     } catch (error) {
-      console.error("❌ [LOOT] Erro:", error);
       enqueueSnackbar("Erro ao explorar", { variant: "error" });
     }
   };
 
   const handleRest = (digimon: GameDigimon) => {
-    console.log("💤 [REST] Iniciando descanso...");
-    console.log("💤 [REST] Digimon:", digimon.name);
-
     if (!gameState || !selectedDigimon) {
-      console.log("❌ [REST] Validação falhou:", {
-        gameState: !!gameState,
-        selectedDigimon: !!selectedDigimon,
-      });
       return;
     }
 
@@ -2404,7 +2215,6 @@ export default function GamePage() {
     const healAmount = Math.floor(digimon.dp * 0.2); // 20% do HP máximo
     const newHp = Math.min(digimon.dp, digimon.currentHp + healAmount);
     const actualHeal = newHp - digimon.currentHp;
-    console.log("💚 [REST] Cura:", { healAmount, newHp, actualHeal });
 
     const updatedState = {
       ...gameState,
@@ -2414,7 +2224,6 @@ export default function GamePage() {
             ...player,
             digimons: player.digimons.map((d) => {
               if ((d.originalId || d.id) === selectedDigimon.originalId) {
-                console.log("🎯 [REST] Curando e marcando como agiu:", d.name);
                 return {
                   ...d,
                   currentHp: newHp,
@@ -2429,17 +2238,12 @@ export default function GamePage() {
       }),
     };
 
-    console.log("💾 [REST] Chamando saveGameState...");
     saveGameState(updatedState);
     // Toast removido - menos invasivo
   };
 
   const handleUseItem = async (digimon: GameDigimon, itemId: number) => {
-    console.log("💊 [ITEM] Usando item...");
-    console.log("💊 [ITEM] Digimon:", digimon.name, "| Item ID:", itemId);
-
     if (!gameState || !selectedDigimon) {
-      console.log("❌ [ITEM] Validação falhou");
       return;
     }
 
@@ -2509,9 +2313,7 @@ export default function GamePage() {
             return; // Não continua - evolução já foi aplicada
           }
         }
-      } catch (error) {
-        console.error("Erro ao buscar efeito do item:", error);
-      }
+      } catch (error) {}
     }
 
     // Buscar o efeito do item
@@ -2522,9 +2324,7 @@ export default function GamePage() {
         if (effectResponse.ok) {
           effect = await effectResponse.json();
         }
-      } catch (error) {
-        console.error("Erro ao buscar efeito:", error);
-      }
+      } catch (error) {}
     }
 
     // Variáveis de estado do item
@@ -2538,16 +2338,9 @@ export default function GamePage() {
 
     const effectValue = item.effectValue || 0;
 
-    console.log("💊 [ITEM] Aplicando efeito:", {
-      type: effect?.type,
-      value: effectValue,
-      itemName: item.name,
-    });
-
     // Aplicar efeito baseado no tipo
     if (!effect) {
       effectMessage = `usou ${item.name}`;
-      console.log("⚠️ [ITEM] Nenhum efeito configurado");
     } else {
       switch (effect.type) {
         case "heal":
@@ -2556,40 +2349,24 @@ export default function GamePage() {
           newHp = Math.min(digimon.dp, digimon.currentHp + effectValue);
           const healed = newHp - oldHp;
           effectMessage = `restaurou ${healed.toLocaleString()} HP`;
-          console.log(`💊 [HEAL] Curou ${healed} HP (${oldHp} → ${newHp})`);
           break;
 
         case "attack_bonus":
           // Bônus permanente de ataque
           newAttackBonus += effectValue;
           effectMessage = `ganhou +${effectValue} de bônus de ataque permanente!`;
-          console.log(
-            `⚔️ [ATTACK] Bônus de ataque: ${
-              digimon.attackBonus || 0
-            } → ${newAttackBonus}`
-          );
           break;
 
         case "defense_bonus":
           // Bônus permanente de defesa
           newDefenseBonus += effectValue;
           effectMessage = `ganhou +${effectValue} de bônus de defesa permanente!`;
-          console.log(
-            `🛡️ [DEFENSE] Bônus de defesa: ${
-              digimon.defenseBonus || 0
-            } → ${newDefenseBonus}`
-          );
           break;
 
         case "movement":
           // Bônus permanente de movimento
           newMovementBonus += effectValue;
           effectMessage = `ganhou +${effectValue} casas de movimento permanente!`;
-          console.log(
-            `🏃 [MOVEMENT] Bônus de movimento: ${
-              digimon.movementBonus || 0
-            } → ${newMovementBonus}`
-          );
           break;
 
         case "buff":
@@ -2597,18 +2374,12 @@ export default function GamePage() {
         case "damage":
           // Outros efeitos podem ser implementados futuramente
           effectMessage = `usou ${item.name}`;
-          console.log(`💊 [ITEM] Efeito ${effect.type} aplicado`);
           break;
 
         default:
           effectMessage = `usou ${item.name}`;
-          console.log("💊 [ITEM] Efeito padrão");
       }
     }
-
-    console.log("💊 [ITEM] Efeito aplicado:", effectMessage);
-    console.log("💊 [ITEM] DP:", digimon.dp, "→", newDp);
-    console.log("💊 [ITEM] HP:", digimon.currentHp, "→", newHp);
 
     // Remover ou decrementar item da bag compartilhada
     const updatedSharedBag = (gameState.sharedBag || [])
@@ -2632,13 +2403,6 @@ export default function GamePage() {
             ...player,
             digimons: player.digimons.map((d) => {
               if ((d.originalId || d.id) === selectedDigimon.originalId) {
-                console.log(`💊 [ITEM] Atualizando Digimon ${d.name}:`, {
-                  attackBonus: `${d.attackBonus || 0} → ${newAttackBonus}`,
-                  defenseBonus: `${d.defenseBonus || 0} → ${newDefenseBonus}`,
-                  movementBonus: `${
-                    d.movementBonus || 0
-                  } → ${newMovementBonus}`,
-                });
                 return {
                   ...d,
                   baseDp: d.baseDp || d.dp, // Inicializar baseDp se não existir
@@ -2715,9 +2479,6 @@ export default function GamePage() {
       );
 
       if (!targetDigimonData) {
-        console.error(
-          `❌ [EVOLUTION] Digimon ${targetDigimonId} não encontrado`
-        );
         enqueueSnackbar(
           `Erro ao buscar dados do Digimon (ID: ${targetDigimonId})`,
           {
@@ -2726,10 +2487,6 @@ export default function GamePage() {
         );
         return;
       }
-
-      console.log(
-        `✨ [EVOLUTION] Evoluindo ${digimon.name} → ${targetDigimonData.name}`
-      );
 
       // Verificar se o item é um espírito, armor ou emblema
       const isSpirit = item.effectId === 20; // Espíritos Lendários
@@ -2746,29 +2503,15 @@ export default function GamePage() {
         newDp = megaStats.dp;
         newHp = megaStats.hp;
         shouldLockEvolution = false; // Emblemas NÃO bloqueiam evolução
-        console.log(
-          `📿 [CREST] Stats Mega: DP ${newDp} | HP ${newHp} (calculado para Level 4)`
-        );
       } else {
         // ARMOR/SPIRIT: Poder atual + 2000 (rebalanceado de 6000)
         newDp = digimon.dp + 2000;
         newHp = Math.min(digimon.currentHp + 2000, newDp);
         shouldLockEvolution = true; // Armor/Spirits bloqueiam evolução
-        console.log(
-          `📊 [EVOLUTION] Stats: DP ${digimon.dp} → ${newDp} | HP ${digimon.currentHp} → ${newHp}`
-        );
       }
 
       if (shouldLockEvolution) {
-        console.log(
-          `🔒 [EVOLUTION] Bloqueando evoluções futuras (${
-            isSpirit ? "Espírito" : "Armor"
-          })`
-        );
       } else {
-        console.log(
-          `✨ [EVOLUTION] Evoluções desbloqueadas (Emblema) - pode continuar evoluindo!`
-        );
       }
 
       // Criar evolução
@@ -2866,7 +2609,6 @@ export default function GamePage() {
         { variant: "success" }
       );
     } catch (error) {
-      console.error("Erro ao aplicar evolução especial:", error);
       enqueueSnackbar("Erro ao aplicar evolução especial", {
         variant: "error",
       });
@@ -2874,11 +2616,7 @@ export default function GamePage() {
   };
 
   const handleDiscardItem = (digimon: GameDigimon, itemId: number) => {
-    console.log("🗑️ [ITEM] Descartando item...");
-    console.log("🗑️ [ITEM] Digimon:", digimon.name, "| Item ID:", itemId);
-
     if (!gameState || !selectedDigimon) {
-      console.log("❌ [ITEM] Validação falhou");
       return;
     }
 
@@ -2917,9 +2655,6 @@ export default function GamePage() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     itemId: number
   ) => {
-    console.log(
-      "🎁 [ITEM] Função handleGiveItem desativada - bag é compartilhada"
-    );
     enqueueSnackbar("A bag agora é compartilhada por toda a equipe!", {
       variant: "info",
     });
@@ -2927,7 +2662,6 @@ export default function GamePage() {
 
     /* CÓDIGO ANTIGO DESATIVADO
     if (!gameState || !selectedDigimon) {
-      console.log("❌ [ITEM] Validação falhou");
       return;
     }
 
@@ -3000,16 +2734,7 @@ export default function GamePage() {
   };
 
   const handleDefend = (digimon: GameDigimon, targetDigimonId: number) => {
-    console.log("🛡️ [DEFEND] Iniciando defesa...");
-    console.log(
-      "🛡️ [DEFEND] Defensor:",
-      digimon.name,
-      "| Alvo:",
-      targetDigimonId
-    );
-
     if (!gameState || !selectedDigimon) {
-      console.log("❌ [DEFEND] Validação falhou");
       return;
     }
 
@@ -3060,16 +2785,7 @@ export default function GamePage() {
   };
 
   const handleProvoke = (digimon: GameDigimon, targetDigimonId: number) => {
-    console.log("💢 [PROVOKE] Iniciando provocação...");
-    console.log(
-      "💢 [PROVOKE] Provocador:",
-      digimon.name,
-      "| Alvo:",
-      targetDigimonId
-    );
-
     if (!gameState || !selectedDigimon) {
-      console.log("❌ [PROVOKE] Validação falhou");
       return;
     }
 
@@ -3789,9 +3505,12 @@ export default function GamePage() {
                                   </div>
                                   <div className="bg-red-600 text-white text-[10px] sm:text-xs font-bold px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded whitespace-nowrap">
                                     ⚔️{" "}
-                                    {calculatePowerWithBonus(
-                                      digimon.dp,
-                                      digimon.attackBonus || 0
+                                    {(
+                                      (digimon as any).atk ||
+                                      calculatePowerWithBonus(
+                                        digimon.dp,
+                                        digimon.attackBonus || 0
+                                      )
                                     ).toLocaleString()}{" "}
                                     ATK
                                   </div>

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { GameState, GameDigimon } from "@/types/game";
 import { getTamerImagePath } from "@/lib/image-utils";
-import { generateRandomStats } from "@/lib/utils";
+// Removido uso de generateRandomStats: vamos usar hp/atk/def vindos do banco
 
 interface Tamer {
   id: number;
@@ -44,7 +44,6 @@ export default function GameSetupModal({
         setTamers(data);
       }
     } catch (error) {
-      console.error("Erro ao carregar Tamers:", error);
     } finally {
       setLoading(false);
     }
@@ -99,9 +98,6 @@ export default function GameSetupModal({
         (d) => (d as { active?: boolean }).active !== false
       );
 
-      console.log(
-        `🎮 Digimons Level 1: ${allLevel1Digimons.length} total, ${activeDigimons.length} ativos`
-      );
 
       // Embaralhar Digimons disponíveis
       const shuffled = [...activeDigimons].sort(() => Math.random() - 0.5);
@@ -122,13 +118,13 @@ export default function GameSetupModal({
             usedDigimonIds.add(digimon.id);
             usedTypes.add(digimon.typeId);
 
-            // Gerar HP e DP aleatórios baseados no nível
-            const { hp, dp } = generateRandomStats(digimon.level);
-
             playerDigimons.push({
               ...digimon,
-              dp, // DP aleatório
-              currentHp: hp, // HP aleatório
+              // Usar campos salvos: dp é o HP máximo salvo no banco
+              dp: (digimon as unknown as { hp?: number }).hp ?? 0,
+              currentHp: (digimon as unknown as { hp?: number }).hp ?? 0,
+              atk: (digimon as unknown as { atk?: number }).atk ?? 0,
+              def: (digimon as unknown as { def?: number }).def ?? 0,
               canEvolve: false,
               originalId: digimon.id,
               bag: [], // Inicializar inventário vazio
@@ -149,13 +145,12 @@ export default function GameSetupModal({
               usedDigimonIds.add(digimon.id);
               usedTypes.add(digimon.typeId);
 
-              // Gerar HP e DP aleatórios baseados no nível
-              const { hp, dp } = generateRandomStats(digimon.level);
-
               playerDigimons.push({
                 ...digimon,
-                dp, // DP aleatório
-                currentHp: hp, // HP aleatório
+                dp: (digimon as unknown as { hp?: number }).hp ?? 0,
+                currentHp: (digimon as unknown as { hp?: number }).hp ?? 0,
+                atk: (digimon as unknown as { atk?: number }).atk ?? 0,
+                def: (digimon as unknown as { def?: number }).def ?? 0,
                 canEvolve: false,
                 originalId: digimon.id,
                 bag: [], // Inicializar inventário vazio
@@ -209,7 +204,6 @@ export default function GameSetupModal({
       router.push("/game");
       onClose();
     } catch (error) {
-      console.error("Erro ao iniciar jogo:", error);
       enqueueSnackbar("Erro ao iniciar o jogo. Tente novamente.", {
         variant: "error",
       });

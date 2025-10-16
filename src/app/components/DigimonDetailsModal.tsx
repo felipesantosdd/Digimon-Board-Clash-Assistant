@@ -301,10 +301,10 @@ export default function DigimonDetailsModal({
                 ATK
               </div>
               <div className="text-lg sm:text-2xl font-bold text-red-400">
-                {calculatePowerWithBonus(
+                {((digimon as any).atk || calculatePowerWithBonus(
                   digimon.dp,
                   digimon.attackBonus || 0
-                ).toLocaleString()}
+                )).toLocaleString()}
               </div>
             </div>
           </div>

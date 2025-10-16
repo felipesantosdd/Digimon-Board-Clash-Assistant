@@ -1,11 +1,7 @@
 "use client";
 
 import { GameDigimon } from "@/types/game";
-import {
-  capitalize,
-  DIGIMON_TYPE_NAMES,
-  calculatePowerWithBonus,
-} from "@/lib/utils";
+import { capitalize, DIGIMON_TYPE_NAMES } from "@/lib/utils";
 
 interface BattleViewProps {
   attacker: {
@@ -38,6 +34,12 @@ export default function BattleView({
   battleComplete,
   onEvolve,
 }: BattleViewProps) {
+  // Novo sistema: ATK do atacante e DEF do defensor
+  const baseAttackerAtk =
+    (attacker.digimon as any).atk ??
+    Math.ceil((attacker.digimon.dp || attacker.digimon.currentHp) / 3);
+  const defenderDef = (defender.digimon as any).def ?? 0;
+
   const attackerNewHp = Math.max(
     0,
     attacker.digimon.currentHp - (battleComplete ? defender.damage : 0)
@@ -129,12 +131,7 @@ export default function BattleView({
               )}
 
               <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-1 py-0.5 sm:px-2 sm:py-1 rounded">
-                ⚔️{" "}
-                {calculatePowerWithBonus(
-                  attacker.digimon.dp,
-                  attacker.digimon.attackBonus || 0
-                ).toLocaleString()}{" "}
-                ATK
+                ⚔️ {baseAttackerAtk.toLocaleString()} ATK
               </div>
 
               {/* Badge de Vantagem de TIPO */}
@@ -186,7 +183,7 @@ export default function BattleView({
               </div>
               <div className="w-full bg-gray-600 rounded-full h-2.5 sm:h-4 overflow-hidden border border-gray-500">
                 <div
-                  className="h-full bg-gradient-to-r from-green-500 to-green-400 transition-all duration-500 ease-out flex items-center justify-center"
+                  className="h-full bg-gradient-to-r from-green-500 to-green-400 transition-all duration-[5000ms] ease-out flex items-center justify-center"
                   style={{
                     width: `${Math.max(
                       0,
@@ -317,13 +314,8 @@ export default function BattleView({
                 </div>
               )}
 
-              <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-1 py-0.5 sm:px-2 sm:py-1 rounded">
-                ⚔️{" "}
-                {calculatePowerWithBonus(
-                  defender.digimon.dp,
-                  defender.digimon.attackBonus || 0
-                ).toLocaleString()}{" "}
-                ATK
+              <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-blue-600 text-white text-[10px] sm:text-xs font-bold px-1 py-0.5 sm:px-2 sm:py-1 rounded">
+                🛡️ {defenderDef.toLocaleString()} DEF
               </div>
 
               {/* Badge de Vantagem de TIPO */}
@@ -375,7 +367,7 @@ export default function BattleView({
               </div>
               <div className="w-full bg-gray-600 rounded-full h-2.5 sm:h-4 overflow-hidden border border-gray-500">
                 <div
-                  className="h-full bg-gradient-to-r from-green-500 to-green-400 transition-all duration-500 ease-out flex items-center justify-center"
+                  className="h-full bg-gradient-to-r from-green-500 to-green-400 transition-all duration-[5000ms] ease-out flex items-center justify-center"
                   style={{
                     width: `${Math.max(
                       0,
@@ -442,7 +434,7 @@ export default function BattleView({
               <p className="text-[10px] sm:text-xs text-gray-300 text-center mb-1">
                 {capitalize(attacker.digimon.name)}
               </p>
-              <p className="text-center text-red-400 font-bold text-base sm:text-2xl">
+              <p className="text-center text-red-400 font-bold text-base sm:text-2xl animate-[fadeInUp_2s_ease-out]">
                 {attacker.damage.toLocaleString()}
               </p>
               <p className="text-[10px] sm:text-xs text-gray-400 text-center">
@@ -455,12 +447,30 @@ export default function BattleView({
               <p className="text-[10px] sm:text-xs text-gray-300 text-center mb-1">
                 {capitalize(defender.digimon.name)}
               </p>
-              <p className="text-center text-red-400 font-bold text-base sm:text-2xl">
+              <p className="text-center text-red-400 font-bold text-base sm:text-2xl animate-[fadeInUp_2s_ease-out]">
                 {defender.damage.toLocaleString()}
               </p>
               <p className="text-[10px] sm:text-xs text-gray-400 text-center">
                 de dano causado
               </p>
+            </div>
+          </div>
+          {/* Cálculo do dano com penetração */}
+          <div className="mt-3 sm:mt-4 text-center text-[10px] sm:text-xs text-gray-300">
+            <span className="font-semibold">Cálculo:</span>{" "}
+            <span>
+              ATK × (1 − DEF/(DEF + ATK × 2)) ⇒{" "}
+              {baseAttackerAtk.toLocaleString()} × (1 −{" "}
+              {defenderDef.toLocaleString()}/{defenderDef + baseAttackerAtk * 2}
+              ) = {attacker.damage.toLocaleString()}
+            </span>
+            <div className="mt-1 text-[9px] sm:text-[10px] text-gray-400">
+              Penetração:{" "}
+              {(
+                (1 - defenderDef / (defenderDef + baseAttackerAtk * 2)) *
+                100
+              ).toFixed(1)}
+              % do ATK atravessa a defesa
             </div>
           </div>
         </div>

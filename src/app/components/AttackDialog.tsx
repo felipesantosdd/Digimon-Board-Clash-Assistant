@@ -226,13 +226,10 @@ export default function AttackDialog({
         );
         const result = battleManager.executeBattle();
 
-        // Se está atacando o boss (id negativo), boss não contra-ataca
-        const isBoss = target.id === -1;
-        if (isBoss) {
-          result.defenderDamage = 0;
-        }
+        // Novo sistema: ninguém contra-ataca em ataques normais
+        result.defenderDamage = 0;
 
-        // Atualizar estados com resultado (4 dados)
+        // Atualizar estados com resultado
         setAttackerAttackDice(result.attackerAttackRoll);
         setAttackerDefenseDice(result.attackerDefenseRoll);
         setDefenderAttackDice(result.defenderAttackRoll);

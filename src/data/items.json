@@ -9,7 +9,8 @@
     "targetDigimons": [],
     "effectId": 2,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 22,
@@ -25,7 +26,8 @@
     ],
     "effectId": 17,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 23,
@@ -41,7 +43,8 @@
     ],
     "effectId": 17,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 24,
@@ -57,7 +60,8 @@
     ],
     "effectId": 17,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 25,
@@ -72,7 +76,8 @@
     ],
     "effectId": 17,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 26,
@@ -90,7 +95,8 @@
     ],
     "effectId": 17,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 27,
@@ -105,7 +111,8 @@
     ],
     "effectId": 17,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 28,
@@ -121,7 +128,8 @@
     ],
     "effectId": 17,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 29,
@@ -137,7 +145,8 @@
     ],
     "effectId": 17,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 30,
@@ -151,7 +160,8 @@
     ],
     "effectId": 17,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 31,
@@ -166,7 +176,8 @@
     ],
     "effectId": 17,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 32,
@@ -181,7 +192,8 @@
     ],
     "effectId": 17,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 33,
@@ -195,7 +207,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 34,
@@ -209,7 +222,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 35,
@@ -223,7 +237,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 36,
@@ -237,7 +252,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 37,
@@ -251,7 +267,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 38,
@@ -265,7 +282,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 39,
@@ -279,7 +297,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 40,
@@ -293,7 +312,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 41,
@@ -307,7 +327,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 42,
@@ -321,7 +342,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 43,
@@ -335,7 +357,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 44,
@@ -349,7 +372,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 45,
@@ -360,8 +384,9 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0,
-    "effectValue": 0
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 46,
@@ -372,8 +397,9 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0,
-    "effectValue": 0
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 47,
@@ -386,8 +412,9 @@
       295
     ],
     "effectId": 21,
-    "active": 0,
-    "effectValue": 0
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 48,
@@ -398,8 +425,9 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0,
-    "effectValue": 0
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 49,
@@ -413,8 +441,9 @@
       506
     ],
     "effectId": 21,
-    "active": 0,
-    "effectValue": 0
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 50,
@@ -428,8 +457,9 @@
       107
     ],
     "effectId": 21,
-    "active": 0,
-    "effectValue": 0
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 51,
@@ -443,8 +473,9 @@
       142
     ],
     "effectId": 21,
-    "active": 0,
-    "effectValue": 0
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 52,
@@ -459,8 +490,9 @@
       112
     ],
     "effectId": 21,
-    "active": 0,
-    "effectValue": 0
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 53,
@@ -474,7 +506,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 54,
@@ -488,7 +521,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 55,
@@ -502,7 +536,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 56,
@@ -516,7 +551,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 57,
@@ -530,7 +566,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 58,
@@ -544,7 +581,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 59,
@@ -558,7 +596,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 60,
@@ -572,7 +611,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 61,
@@ -586,7 +626,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 62,
@@ -600,7 +641,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 63,
@@ -614,7 +656,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 64,
@@ -628,7 +671,8 @@
     ],
     "effectId": 20,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 65,
@@ -640,7 +684,8 @@
     "targetDigimons": [],
     "effectId": 22,
     "active": 1,
-    "effectValue": 0
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 66,
@@ -651,8 +696,9 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0,
-    "effectValue": 0
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 67,
@@ -663,8 +709,9 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0,
-    "effectValue": 0
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 68,
@@ -675,8 +722,9 @@
     "dropChance": 15,
     "targetDigimons": [],
     "effectId": 21,
-    "active": 0,
-    "effectValue": 0
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 69,
@@ -688,7 +736,8 @@
     "targetDigimons": [],
     "effectId": 23,
     "active": 1,
-    "effectValue": 10
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 70,
@@ -700,7 +749,8 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 2000
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 71,
@@ -712,7 +762,8 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 4000
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 72,
@@ -724,7 +775,8 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 6000
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 73,
@@ -736,7 +788,8 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 7000
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 74,
@@ -748,7 +801,8 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 9600
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 75,
@@ -760,7 +814,8 @@
     "targetDigimons": [],
     "effectId": 1,
     "active": 1,
-    "effectValue": 10000
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 76,
@@ -772,7 +827,8 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 14000
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 77,
@@ -784,7 +840,8 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 18000
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 78,
@@ -796,7 +853,8 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 15000
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 79,
@@ -808,7 +866,8 @@
     "targetDigimons": [],
     "effectId": null,
     "active": 1,
-    "effectValue": 24000
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 80,
@@ -820,7 +879,8 @@
     "targetDigimons": [],
     "effectId": 24,
     "active": 1,
-    "effectValue": 5
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 81,
@@ -832,7 +892,8 @@
     "targetDigimons": [],
     "effectId": 24,
     "active": 1,
-    "effectValue": 10
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 82,
@@ -844,7 +905,8 @@
     "targetDigimons": [],
     "effectId": 24,
     "active": 1,
-    "effectValue": 15
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 83,
@@ -856,7 +918,8 @@
     "targetDigimons": [],
     "effectId": 25,
     "active": 1,
-    "effectValue": 5
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 84,
@@ -868,7 +931,8 @@
     "targetDigimons": [],
     "effectId": 25,
     "active": 1,
-    "effectValue": 10
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 85,
@@ -880,7 +944,8 @@
     "targetDigimons": [],
     "effectId": 25,
     "active": 1,
-    "effectValue": 15
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 86,
@@ -892,7 +957,8 @@
     "targetDigimons": [],
     "effectId": 23,
     "active": 1,
-    "effectValue": 2
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 87,
@@ -904,7 +970,8 @@
     "targetDigimons": [],
     "effectId": 23,
     "active": 1,
-    "effectValue": 6
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 88,
@@ -916,7 +983,8 @@
     "targetDigimons": [],
     "effectId": 23,
     "active": 1,
-    "effectValue": 4
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 89,
@@ -928,7 +996,8 @@
     "targetDigimons": [],
     "effectId": 23,
     "active": 1,
-    "effectValue": 8
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 90,
@@ -940,6 +1009,7 @@
     "targetDigimons": [],
     "effectId": 23,
     "active": 1,
-    "effectValue": 10
+    "effectValue": 0,
+    "unique_item": 0
   }
 ]

@@ -5,10 +5,8 @@ import { getAllTamers, createTamer } from "@/lib/tamer-db";
 export async function GET() {
   try {
     const tamers = getAllTamers();
-    console.log("📊 API /tamers retornando:", tamers);
     return NextResponse.json(tamers);
   } catch (error) {
-    console.error("Erro ao buscar Tamers:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -49,7 +47,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(savedTamer, { status: 201 });
   } catch (error) {
-    console.error("Erro ao criar Tamer:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

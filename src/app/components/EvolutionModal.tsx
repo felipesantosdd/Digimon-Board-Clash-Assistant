@@ -210,10 +210,6 @@ export default function EvolutionModal({
   };
 
   const handleSaveDigimonData = async () => {
-    console.log("💾 Salvando dados do Digimon:", {
-      digimonId: digimon.id,
-      editData,
-    });
     if (onSaveDigimon) {
       try {
         let imagePath: string | undefined = undefined;
@@ -255,7 +251,6 @@ export default function EvolutionModal({
           variant: "success",
         });
       } catch (error) {
-        console.error("Erro ao salvar Digimon:", error);
         enqueueSnackbar("Erro ao salvar dados do Digimon", {
           variant: "error",
         });
@@ -303,7 +298,6 @@ export default function EvolutionModal({
           }
         }
       } catch (error) {
-        console.error("Erro ao salvar pré-evoluções:", error);
       }
     }
 
@@ -347,7 +341,6 @@ export default function EvolutionModal({
           variant: "success",
         });
       } catch (error) {
-        console.error("Erro ao salvar Digimon:", error);
         enqueueSnackbar("Erro ao salvar dados do Digimon", {
           variant: "error",
         });
@@ -368,14 +361,12 @@ export default function EvolutionModal({
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    console.log("🔄 handleEditChange:", { name, value, type: typeof value });
 
     setEditData((prev) => {
       const newData = {
         ...prev,
         [name]: ["typeId", "level"].includes(name) ? Number(value) : value,
       };
-      console.log("📝 editData atualizado:", newData);
       return newData;
     });
   };

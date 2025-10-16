@@ -225,7 +225,6 @@ export default function AddDigimonModal({
         });
       }
     } catch (error) {
-      console.error("Erro ao adicionar Digimon:", error);
       enqueueSnackbar("Erro ao adicionar Digimon", { variant: "error" });
     } finally {
       setLoading(false);

@@ -204,14 +204,12 @@ export function deleteDigimon(id: number): void {
         (evoId) => evoId !== id
       );
       updateDigimonEvolutions(digimon.id, updatedEvolutions);
-      console.log(`🔗 Removido ID ${id} das evoluções de ${digimon.name}`);
     }
   }
 
   // 2. Deletar o Digimon
   db.prepare("DELETE FROM digimons WHERE id = ?").run(id);
 
-  console.log(`✅ Digimon ID ${id} excluído do banco de dados`);
 }
 
 // Seed inicial
@@ -820,7 +818,6 @@ export function seedDatabase() {
     );
   }
 
-  console.log("✅ Banco de dados populado com sucesso!");
 
   // Reabilitar FKs
   (db as any).exec?.("PRAGMA foreign_keys = ON");

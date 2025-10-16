@@ -43,7 +43,6 @@ export async function PUT(
 
     return NextResponse.json(updatedDigimon);
   } catch (error) {
-    console.error("Erro ao atualizar evoluções:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

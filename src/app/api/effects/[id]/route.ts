@@ -19,7 +19,6 @@ export async function GET(
 
     return NextResponse.json(effect);
   } catch (error) {
-    console.error("Erro ao buscar efeito:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -47,7 +46,6 @@ export async function PUT(
 
     return NextResponse.json(updatedEffect);
   } catch (error) {
-    console.error("Erro ao atualizar efeito:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -65,7 +63,6 @@ export async function DELETE(
     deleteEffect(parseInt(id));
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Erro ao deletar efeito:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

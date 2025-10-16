@@ -75,20 +75,12 @@ export class BossManager {
       // Filtrar bosses do nível desejado
       const candidates = bossDigimons.filter((d) => d.level === bossLevel);
 
-      console.log("🎲 [BOSS] Seleção:", {
-        nivelMaisComum: mostCommonLevel,
-        nivelBoss: bossLevel,
-        candidatos: candidates.map((d) => `${d.name} (Level ${d.level})`),
-      });
 
       if (candidates.length === 0) {
         // Fallback: pegar qualquer boss disponível
         const randomIndex = Math.floor(Math.random() * bossDigimons.length);
         const selectedBoss = bossDigimons[randomIndex];
 
-        console.log(
-          `⚠️ [BOSS] Nenhum boss Level ${bossLevel}, usando fallback: ${selectedBoss.name}`
-        );
         return selectedBoss;
       }
 
@@ -96,13 +88,9 @@ export class BossManager {
       const randomIndex = Math.floor(Math.random() * candidates.length);
       const selectedBoss = candidates[randomIndex];
 
-      console.log(
-        `✅ [BOSS] Selecionado: ${selectedBoss.name} (Level ${selectedBoss.level})`
-      );
 
       return selectedBoss;
     } catch (error) {
-      console.error("❌ Erro ao buscar bosses:", error);
       return null;
     }
   }
@@ -110,18 +98,32 @@ export class BossManager {
   /**
    * Cria um GameBoss a partir de um Digimon
    *
-   * NOVO SISTEMA DE BALANCEAMENTO:
-   * - HP do Boss = valor máximo do nível × 3
-   * - DP de Combate = valor máximo do nível (para dano/defesa equilibrados)
+   * SISTEMA ATUALIZADO:
+   * - HP do Boss = HP original do Digimon × 3 (triplicado para maior desafio)
+   * - ATK do Boss = ATK original do Digimon salvo no banco (mantém o mesmo)
+   * - Se não houver valores no banco, usa fallback com valores gerados
    *
-   * Exemplo: Devimon Level 2
-   * - DP máximo Level 2 = 6.000
-   * - HP Máximo = 6.000 × 3 = 18.000 HP
-   * - DP de Combate = 6.000 (usado para atacar/defender)
+   * Exemplo: Devimon (HP: 695, ATK: 375)
+   * - HP Máximo = 2.085 (695 × 3)
+   * - ATK de Combate = 375
    */
   static createGameBoss(bossDigimon: Digimon, currentTurn: number): GameBoss {
-    // Gerar stats máximos para o nível do boss
-    const { hp, dp } = generateBossStats(bossDigimon.level);
+    // Usar HP e ATK originais do banco, ou fallback para valores gerados
+    let hp = bossDigimon.hp || 0;
+    let atk = bossDigimon.atk || 0;
+
+    // Fallback: se não houver HP/ATK no banco, usar sistema antigo
+    if (hp === 0 || atk === 0) {
+      const generated = generateBossStats(bossDigimon.level);
+      hp = hp || generated.hp;
+      atk = atk || generated.dp;
+    }
+
+    // TRIPLICAR o HP do boss para maior desafio
+    const maxHp = hp * 3;
+
+    // DP calculado = ATK do boss (usado para combate)
+    const calculatedDp = atk;
 
     return {
       id: bossDigimon.id,
@@ -129,12 +131,12 @@ export class BossManager {
       image: bossDigimon.image,
       description: "",
       effectId: 1,
-      dp: dp, // DP base (não usado mais no cálculo)
+      dp: atk, // DP base = ATK original
       typeId: bossDigimon.typeId,
       level: bossDigimon.level, // Adicionar nível do boss para cálculos de Armor
-      currentHp: hp,
-      maxHp: hp,
-      calculatedDp: dp, // DP de combate = valor máximo do nível
+      currentHp: maxHp,
+      maxHp: maxHp,
+      calculatedDp: calculatedDp, // DP de combate = ATK original
       spawnedAtTurn: currentTurn,
       isDefeated: false,
     };
@@ -143,10 +145,10 @@ export class BossManager {
   /**
    * Spawna um novo boss no jogo
    *
-   * NOVO SISTEMA:
+   * SISTEMA ATUALIZADO:
    * - Boss é selecionado baseado no nível mais comum dos jogadores + 1
-   * - Boss terá HP = valor máximo do nível × 3
-   * - Boss usará valor máximo do nível para combate
+   * - Boss usará HP e ATK originais salvos no banco de dados
+   * - Valores são balanceados individualmente para cada boss
    */
   static async spawnBoss(
     players: GamePlayer[],
@@ -155,10 +157,6 @@ export class BossManager {
     // Encontrar o nível mais comum entre os Digimons vivos
     const mostCommonLevel = this.findMostCommonLevel(players);
 
-    console.log("🎲 [BOSS] Análise de níveis:", {
-      contagemPorNivel: this.countDigimonsByLevel(players),
-      nivelMaisComum: mostCommonLevel,
-    });
 
     // Selecionar boss do nível mais comum + 1
     const bossDigimon = await this.selectBoss(mostCommonLevel);
@@ -251,24 +249,15 @@ export class BossManager {
       if (targetDigimon) {
         // Digimon com aggro ainda está vivo
         target = targetDigimon;
-        console.log(
-          `🎯 [BOSS AGGRO] Boss atacando ${target.digimon.name} (ID: ${boss.topAggroDigimonId}) - maior dano no turno anterior`
-        );
       } else {
         // Digimon com aggro está nocauteado, escolher aleatório
         const randomIndex = Math.floor(Math.random() * aliveDigimons.length);
         target = aliveDigimons[randomIndex];
-        console.log(
-          `🎲 [BOSS AGGRO] Digimon com aggro nocauteado, alvo aleatório: ${target.digimon.name}`
-        );
       }
     } else {
       // Ninguém atacou o boss, escolher aleatório
       const randomIndex = Math.floor(Math.random() * aliveDigimons.length);
       target = aliveDigimons[randomIndex];
-      console.log(
-        `🎲 [BOSS AGGRO] Ninguém atacou o boss, alvo aleatório: ${target.digimon.name}`
-      );
     }
 
     // 3. Calcular poder de ataque do boss (DP / 3)
@@ -297,13 +286,6 @@ export class BossManager {
       netDamage = 5;
     }
 
-    console.log("👹 [BOSS WORLD TURN] Cálculos:", {
-      bossPower,
-      targetName: target.digimon.name,
-      targetPower,
-      targetDefense,
-      danoFinal: netDamage,
-    });
 
     // 8. Criar nova estrutura de players com dano aplicado
     const updatedPlayers = players.map((player, pIdx) => ({
@@ -378,7 +360,6 @@ export class BossManager {
       // Fallback (devido a ponto flutuante): retorna o último
       return [drops[drops.length - 1].itemId];
     } catch (error) {
-      console.error("❌ Erro ao calcular drops do boss:", error);
       return [];
     }
   }

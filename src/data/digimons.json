@@ -10,12 +10,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 595,
+    "atk": 375,
+    "def": 250,
+    "attribute_id": 1
   },
   {
     "id": 2,
     "name": "gabumon",
-    "image": "/images/digimons/1760152850665_image.webp",
+    "image": "/images/digimons/1760462457283_image.webp",
     "level": 1,
     "typeId": 1,
     "evolution": "[76,209,244,233,260,516,118,120]",
@@ -23,7 +26,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 595,
+    "atk": 250,
+    "def": 175,
+    "attribute_id": 1
   },
   {
     "id": 3,
@@ -36,7 +42,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 610,
+    "atk": 370,
+    "def": 165,
+    "attribute_id": 11
   },
   {
     "id": 4,
@@ -49,7 +58,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 475,
+    "atk": 195,
+    "def": 145,
+    "attribute_id": 8
   },
   {
     "id": 5,
@@ -62,7 +74,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 625,
+    "atk": 385,
+    "def": 165,
+    "attribute_id": 1
   },
   {
     "id": 6,
@@ -75,7 +90,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 495,
+    "atk": 165,
+    "def": 140,
+    "attribute_id": 8
   },
   {
     "id": 8,
@@ -88,7 +106,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 455,
+    "atk": 180,
+    "def": 260,
+    "attribute_id": 3
   },
   {
     "id": 9,
@@ -101,7 +122,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 560,
+    "atk": 220,
+    "def": 140,
+    "attribute_id": 3
   },
   {
     "id": 11,
@@ -114,7 +138,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 520,
+    "atk": 120,
+    "def": 150,
+    "attribute_id": 2
   },
   {
     "id": 12,
@@ -127,7 +154,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 560,
+    "atk": 180,
+    "def": 165,
+    "attribute_id": 5
   },
   {
     "id": 14,
@@ -140,20 +170,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 545,
+    "atk": 330,
+    "def": 110,
+    "attribute_id": 10
   },
   {
     "id": 16,
     "name": "flamemon",
     "image": "/images/digimons/16.webp",
     "level": 1,
-    "typeId": 5,
+    "typeId": 1,
     "evolution": "[153]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 1100,
+    "atk": 365,
+    "def": 295,
+    "attribute_id": null
   },
   {
     "id": 17,
@@ -166,7 +202,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 580,
+    "atk": 360,
+    "def": 195,
+    "attribute_id": 11
   },
   {
     "id": 18,
@@ -179,7 +218,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 475,
+    "atk": 250,
+    "def": 135,
+    "attribute_id": 6
   },
   {
     "id": 19,
@@ -192,7 +234,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 610,
+    "atk": 275,
+    "def": 205,
+    "attribute_id": 3
   },
   {
     "id": 20,
@@ -205,7 +250,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 635,
+    "atk": 220,
+    "def": 220,
+    "attribute_id": 2
   },
   {
     "id": 21,
@@ -218,7 +266,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 635,
+    "atk": 125,
+    "def": 265,
+    "attribute_id": 6
   },
   {
     "id": 22,
@@ -231,20 +282,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 440,
+    "atk": 275,
+    "def": 165,
+    "attribute_id": 8
   },
   {
     "id": 23,
     "name": "meicoomon",
     "image": "/images/digimons/23.webp",
     "level": 2,
-    "typeId": 6,
+    "typeId": 1,
     "evolution": "[158]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1225,
+    "atk": 505,
+    "def": 525,
+    "attribute_id": null
   },
   {
     "id": 24,
@@ -257,7 +314,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 1110,
+    "atk": 370,
+    "def": 295,
+    "attribute_id": 1
   },
   {
     "id": 25,
@@ -270,46 +330,58 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 895,
+    "atk": 425,
+    "def": 300,
+    "attribute_id": 1
   },
   {
     "id": 26,
     "name": "dark tyranomon",
     "image": "/images/digimons/26.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[37,300,30,382]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 955,
+    "atk": 370,
+    "def": 400,
+    "attribute_id": null
   },
   {
     "id": 27,
     "name": "tuskmon",
     "image": "/images/digimons/27.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[31,362,333]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 900,
+    "atk": 430,
+    "def": 365,
+    "attribute_id": null
   },
   {
     "id": 28,
     "name": "tyranomon",
     "image": "/images/digimons/28.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[294,362,313,382,30]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 435,
+    "atk": 110,
+    "def": 160,
+    "attribute_id": null
   },
   {
     "id": 29,
@@ -322,20 +394,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 615,
+    "atk": 200,
+    "def": 240,
+    "attribute_id": null
   },
   {
     "id": 30,
     "name": "mastertyranomon",
     "image": "/images/digimons/30.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[44,139,72,40,42,41]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1940,
+    "atk": 2040,
+    "def": 1325,
+    "attribute_id": null
   },
   {
     "id": 31,
@@ -348,20 +426,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1030,
+    "atk": 750,
+    "def": 970,
+    "attribute_id": 6
   },
   {
     "id": 32,
     "name": "mametyramon",
     "image": "/images/digimons/32.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[40]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1050,
+    "atk": 575,
+    "def": 545,
+    "attribute_id": null
   },
   {
     "id": 34,
@@ -374,46 +458,58 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 1455,
+    "atk": 840,
+    "def": 795,
+    "attribute_id": 8
   },
   {
     "id": 37,
     "name": "metalgreymon virus",
     "image": "/images/digimons/1760027238680_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[44,46,42,52]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 1200,
+    "atk": 825,
+    "def": 675,
+    "attribute_id": null
   },
   {
     "id": 39,
     "name": "qinglongmon",
     "image": "/images/digimons/39.webp",
     "level": 4,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[53]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2235,
+    "atk": 1225,
+    "def": 1195,
+    "attribute_id": null
   },
   {
     "id": 40,
     "name": "dinorexmon",
     "image": "/images/digimons/40.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[53]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2310,
+    "atk": 1275,
+    "def": 1245,
+    "attribute_id": null
   },
   {
     "id": 41,
@@ -426,215 +522,266 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1270,
+    "atk": 505,
+    "def": 535,
+    "attribute_id": 5
   },
   {
     "id": 42,
     "name": "mugendramon",
     "image": "/images/digimons/42.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[515]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 11
+    "hp": 1405,
+    "atk": 605,
+    "def": 630,
+    "attribute_id": null
   },
   {
     "id": 44,
     "name": "blitzgreymon",
     "image": "/images/digimons/44.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[73]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 2705,
+    "atk": 1575,
+    "def": 1520,
+    "attribute_id": null
   },
   {
     "id": 46,
     "name": "gaioumon",
     "image": "/images/digimons/46.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[47]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2385,
+    "atk": 1330,
+    "def": 1295,
+    "attribute_id": null
   },
   {
     "id": 47,
     "name": "gaioumon itto mode",
     "image": "/images/digimons/1760302578058_image.webp",
     "level": 5,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[59,57,56]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2400,
+    "atk": 1805,
+    "def": 910,
+    "attribute_id": null
   },
   {
     "id": 48,
     "name": "victorygreymon",
     "image": "/images/digimons/48.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[47]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 2490,
+    "atk": 1410,
+    "def": 1370,
+    "attribute_id": null
   },
   {
     "id": 49,
     "name": "omegamon",
     "image": "/images/digimons/1760029486652_image.webp",
     "level": 5,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[164,57]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1670,
+    "atk": 950,
+    "def": 595,
+    "attribute_id": null
   },
   {
     "id": 52,
     "name": "ancientgreymon",
     "image": "/images/digimons/52.webp",
     "level": 4,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[62,47]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 2410,
+    "atk": 1350,
+    "def": 1315,
+    "attribute_id": null
   },
   {
     "id": 53,
     "name": "huanglongmon",
     "image": "/images/digimons/1760303172849_image.webp",
     "level": 5,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2615,
+    "atk": 2050,
+    "def": 1000,
+    "attribute_id": null
   },
   {
     "id": 54,
     "name": "moonmillenniumon",
     "image": "/images/digimons/1760303127688_image.webp",
     "level": 5,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[68]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1730,
+    "atk": 1025,
+    "def": 625,
+    "attribute_id": null
   },
   {
     "id": 55,
     "name": "millenniumon",
     "image": "/images/digimons/1760029422323_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[54]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2185,
+    "atk": 1185,
+    "def": 1160,
+    "attribute_id": null
   },
   {
     "id": 56,
     "name": "omegamon alter b",
     "image": "/images/digimons/1760031337750_image.webp",
     "level": 6,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "attribute_id": null
   },
   {
     "id": 57,
     "name": "omegamon zwart defeat",
     "image": "/images/digimons/1760303296775_image.webp",
     "level": 6,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "attribute_id": null
   },
   {
     "id": 59,
     "name": "omegamon merciful mode",
     "image": "/images/digimons/1760303319626_image.webp",
     "level": 6,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "attribute_id": null
   },
   {
     "id": 62,
     "name": "susanoomon",
     "image": "/images/digimons/1760303238306_image.webp",
     "level": 5,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1350,
+    "atk": 580,
+    "def": 460,
+    "attribute_id": null
   },
   {
     "id": 68,
     "name": "zeedmillenniumon",
     "image": "/images/digimons/1760303097546_image.webp",
     "level": 6,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "attribute_id": null
   },
   {
     "id": 70,
     "name": "goddramon",
     "image": "/images/digimons/1760026705003_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1075,
+    "atk": 355,
+    "def": 400,
+    "attribute_id": null
   },
   {
     "id": 72,
@@ -647,20 +794,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1915,
+    "atk": 1205,
+    "def": 990,
+    "attribute_id": 5
   },
   {
     "id": 73,
     "name": "omegamon alter s",
     "image": "/images/digimons/1760303198986_image.webp",
     "level": 5,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[56]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2650,
+    "atk": 2095,
+    "def": 1020,
+    "attribute_id": null
   },
   {
     "id": 75,
@@ -673,7 +826,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 915,
+    "atk": 480,
+    "def": 285,
+    "attribute_id": 9
   },
   {
     "id": 76,
@@ -686,72 +842,90 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 625,
+    "atk": 250,
+    "def": 225,
+    "attribute_id": 1
   },
   {
     "id": 77,
     "name": "garurumon virus",
     "image": "/images/digimons/1759959719415_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[86,90,88,89,82]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 585,
+    "atk": 185,
+    "def": 230,
+    "attribute_id": null
   },
   {
     "id": 78,
     "name": "dorulumon",
     "image": "/images/digimons/1760026017107_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 0,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1140,
+    "atk": 465,
+    "def": 485,
+    "attribute_id": null
   },
   {
     "id": 79,
     "name": "dobermon",
     "image": "/images/digimons/1759959547340_image.webp",
     "level": 2,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[378,369,90,379]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 625,
+    "atk": 425,
+    "def": 235,
+    "attribute_id": null
   },
   {
     "id": 80,
     "name": "gabumon virus",
     "image": "/images/digimons/1759949500289_image.webp",
     "level": 1,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[77,75,79,260,233,209,26]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1130,
+    "atk": 380,
+    "def": 300,
+    "attribute_id": null
   },
   {
     "id": 81,
     "name": "strabimon",
     "image": "/images/digimons/1759958447847_image.webp",
     "level": 1,
-    "typeId": 5,
+    "typeId": 1,
     "evolution": "[76,77,75,78,79]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1065,
+    "atk": 350,
+    "def": 285,
+    "attribute_id": null
   },
   {
     "id": 82,
@@ -764,7 +938,10 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 915,
+    "atk": 485,
+    "def": 220,
+    "attribute_id": 9
   },
   {
     "id": 83,
@@ -777,7 +954,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2500,
+    "atk": 1420,
+    "def": 1375,
+    "attribute_id": null
   },
   {
     "id": 84,
@@ -790,7 +970,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 1630,
+    "atk": 1015,
+    "def": 575,
+    "attribute_id": 1
   },
   {
     "id": 85,
@@ -803,20 +986,26 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 970,
+    "atk": 595,
+    "def": 270,
+    "attribute_id": 1
   },
   {
     "id": 86,
     "name": "beowolfmon",
     "image": "/images/digimons/1759963214134_image.webp",
     "level": 8,
-    "typeId": 5,
+    "typeId": 1,
     "evolution": "[91,94,92,83,95,443]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1160,
+    "atk": 955,
+    "def": 555,
+    "attribute_id": null
   },
   {
     "id": 87,
@@ -829,46 +1018,58 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1455,
+    "atk": 1015,
+    "def": 400,
+    "attribute_id": 6
   },
   {
     "id": 88,
     "name": "weregarurumon virus",
     "image": "/images/digimons/1759966165999_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[95,94,92,162]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1940,
+    "atk": 2040,
+    "def": 1325,
+    "attribute_id": null
   },
   {
     "id": 89,
     "name": "yaegerdorulumo",
-    "image": "/images/digimons/1760202152985_image.webp",
+    "image": "/images/digimons/1760463761716_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1190,
+    "atk": 810,
+    "def": 670,
+    "attribute_id": null
   },
   {
     "id": 90,
     "name": "cerberumon",
     "image": "/images/digimons/1760151589662_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[473,299,429,436]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1290,
+    "atk": 975,
+    "def": 755,
+    "attribute_id": null
   },
   {
     "id": 91,
@@ -881,25 +1082,31 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1485,
+    "atk": 1175,
+    "def": 750,
+    "attribute_id": 9
   },
   {
     "id": 92,
     "name": "metal garurumon virus",
     "image": "/images/digimons/1760027580822_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[164]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 11
+    "hp": 2310,
+    "atk": 1275,
+    "def": 1245,
+    "attribute_id": null
   },
   {
     "id": 94,
     "name": "cresgarurumon",
-    "image": "/images/digimons/1760205861815_image.webp",
+    "image": "/images/digimons/1760464320239_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -907,12 +1114,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2445,
+    "atk": 1375,
+    "def": 1340,
+    "attribute_id": null
   },
   {
     "id": 95,
     "name": "merukimon",
-    "image": "/images/digimons/1760209303143_image.webp",
+    "image": "/images/digimons/1760464799763_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[]",
@@ -920,7 +1130,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 1520,
+    "atk": 1080,
+    "def": 645,
+    "attribute_id": 8
   },
   {
     "id": 96,
@@ -933,7 +1146,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 625,
+    "atk": 350,
+    "def": 225,
+    "attribute_id": 9
   },
   {
     "id": 97,
@@ -946,33 +1162,42 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 630,
+    "atk": 225,
+    "def": 175,
+    "attribute_id": 8
   },
   {
     "id": 98,
     "name": "pegasusmon",
     "image": "/images/digimons/1759962595087_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 685,
+    "atk": 245,
+    "def": 285,
+    "attribute_id": null
   },
   {
     "id": 99,
     "name": "mammothmon",
     "image": "/images/digimons/1759965287185_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[102,107,136]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1605,
+    "atk": 725,
+    "def": 685,
+    "attribute_id": null
   },
   {
     "id": 100,
@@ -985,33 +1210,42 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 945,
+    "atk": 485,
+    "def": 485,
+    "attribute_id": 9
   },
   {
     "id": 101,
     "name": "jijimon",
     "image": "/images/digimons/1760026581844_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2570,
+    "atk": 1475,
+    "def": 1425,
+    "attribute_id": null
   },
   {
     "id": 102,
     "name": "skullmammothmon",
     "image": "/images/digimons/1760028762938_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1910,
+    "atk": 1580,
+    "def": 1525,
+    "attribute_id": null
   },
   {
     "id": 104,
@@ -1024,20 +1258,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1545,
+    "atk": 355,
+    "def": 840,
+    "attribute_id": 9
   },
   {
     "id": 105,
     "name": "slashan gemon",
     "image": "/images/digimons/1760028815666_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2590,
+    "atk": 1485,
+    "def": 1440,
+    "attribute_id": null
   },
   {
     "id": 106,
@@ -1050,7 +1290,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1735,
+    "atk": 475,
+    "def": 670,
+    "attribute_id": 9
   },
   {
     "id": 107,
@@ -1063,7 +1306,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 2100,
+    "atk": 905,
+    "def": 775,
+    "attribute_id": 2
   },
   {
     "id": 109,
@@ -1076,7 +1322,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1000,
+    "atk": 265,
+    "def": 440,
+    "attribute_id": 9
   },
   {
     "id": 111,
@@ -1089,20 +1338,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1000,
+    "atk": 560,
+    "def": 1035,
+    "attribute_id": 9
   },
   {
     "id": 112,
     "name": "ophanimon falldown mode",
     "image": "/images/digimons/1760028532913_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[114]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1120,
+    "atk": 390,
+    "def": 435,
+    "attribute_id": null
   },
   {
     "id": 113,
@@ -1115,33 +1370,42 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1555,
+    "atk": 990,
+    "def": 775,
+    "attribute_id": 11
   },
   {
     "id": 114,
     "name": "ordinemon",
     "image": "/images/digimons/1760302945015_image.webp",
     "level": 5,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1485,
+    "atk": 740,
+    "def": 520,
+    "attribute_id": null
   },
   {
     "id": 115,
     "name": "gizamon",
     "image": "/images/digimons/1759958138803_image.webp",
     "level": 1,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[263,273,216,133,260,137]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 495,
+    "atk": 245,
+    "def": 200,
+    "attribute_id": null
   },
   {
     "id": 116,
@@ -1154,7 +1418,10 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 755,
+    "atk": 125,
+    "def": 250,
+    "attribute_id": 2
   },
   {
     "id": 117,
@@ -1167,7 +1434,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 635,
+    "atk": 315,
+    "def": 210,
+    "attribute_id": 8
   },
   {
     "id": 118,
@@ -1180,7 +1450,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 800,
+    "atk": 295,
+    "def": 330,
+    "attribute_id": null
   },
   {
     "id": 119,
@@ -1193,85 +1466,106 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 885,
+    "atk": 335,
+    "def": 370,
+    "attribute_id": null
   },
   {
     "id": 120,
     "name": "gesomon",
     "image": "/images/digimons/1759959840137_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[123,125,348]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 625,
+    "atk": 205,
+    "def": 250,
+    "attribute_id": null
   },
   {
     "id": 123,
     "name": "gusokumon",
     "image": "/images/digimons/1759963672701_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[126,128,130,131]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1755,
+    "atk": 1735,
+    "def": 1160,
+    "attribute_id": null
   },
   {
     "id": 125,
     "name": "marinedevimon",
     "image": "/images/digimons/1759965330552_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[129,130,131,128,444]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 1930,
+    "atk": 2030,
+    "def": 1320,
+    "attribute_id": null
   },
   {
     "id": 126,
     "name": "spinomon",
     "image": "/images/digimons/1760103686970_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1360,
+    "atk": 570,
+    "def": 600,
+    "attribute_id": null
   },
   {
     "id": 128,
     "name": "deathmon",
     "image": "/images/digimons/1760026479076_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1390,
+    "atk": 590,
+    "def": 620,
+    "attribute_id": null
   },
   {
     "id": 129,
     "name": "regalecusmon",
     "image": "/images/digimons/1760028635082_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1150,
+    "atk": 415,
+    "def": 455,
+    "attribute_id": null
   },
   {
     "id": 130,
@@ -1284,33 +1578,42 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 1735,
+    "atk": 1055,
+    "def": 580,
+    "attribute_id": 2
   },
   {
     "id": 131,
     "name": "pukumon",
     "image": "/images/digimons/1760028585679_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1810,
+    "atk": 1180,
+    "def": 1015,
+    "attribute_id": null
   },
   {
     "id": 132,
     "name": "digmon",
     "image": "/images/digimons/1759959449861_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 965,
+    "atk": 335,
+    "def": 380,
+    "attribute_id": null
   },
   {
     "id": 133,
@@ -1323,7 +1626,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 965,
+    "atk": 225,
+    "def": 350,
+    "attribute_id": 6
   },
   {
     "id": 135,
@@ -1336,7 +1642,10 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2545,
+    "atk": 1455,
+    "def": 1410,
+    "attribute_id": null
   },
   {
     "id": 136,
@@ -1349,20 +1658,26 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1865,
+    "atk": 1915,
+    "def": 1260,
+    "attribute_id": null
   },
   {
     "id": 137,
     "name": "tortomon",
     "image": "/images/digimons/1759962940206_image.webp",
     "level": 2,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[138]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 800,
+    "atk": 295,
+    "def": 330,
+    "attribute_id": null
   },
   {
     "id": 138,
@@ -1375,7 +1690,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1715,
+    "atk": 635,
+    "def": 740,
+    "attribute_id": null
   },
   {
     "id": 139,
@@ -1388,33 +1706,42 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2010,
+    "atk": 1050,
+    "def": 1040,
+    "attribute_id": null
   },
   {
     "id": 142,
     "name": "shadowseraphimon",
     "image": "/images/digimons/1760028721311_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 2150,
+    "atk": 1160,
+    "def": 1135,
+    "attribute_id": null
   },
   {
     "id": 143,
     "name": "greymon virus",
     "image": "/images/digimons/1759959883519_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[37,30,366]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 630,
+    "atk": 205,
+    "def": 250,
+    "attribute_id": null
   },
   {
     "id": 144,
@@ -1427,7 +1754,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1115,
+    "atk": 575,
+    "def": 530,
+    "attribute_id": 5
   },
   {
     "id": 145,
@@ -1440,7 +1770,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 435,
+    "atk": 215,
+    "def": 265,
+    "attribute_id": 3
   },
   {
     "id": 147,
@@ -1453,7 +1786,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 770,
+    "atk": 335,
+    "def": 235,
+    "attribute_id": 6
   },
   {
     "id": 148,
@@ -1466,7 +1802,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 695,
+    "atk": 300,
+    "def": 250,
+    "attribute_id": 5
   },
   {
     "id": 149,
@@ -1479,7 +1818,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 695,
+    "atk": 225,
+    "def": 175,
+    "attribute_id": 1
   },
   {
     "id": 150,
@@ -1492,20 +1834,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 555,
+    "atk": 275,
+    "def": 325,
+    "attribute_id": 3
   },
   {
     "id": 151,
     "name": "halsemon",
     "image": "/images/digimons/1759960043187_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 765,
+    "atk": 320,
+    "def": 295,
+    "attribute_id": null
   },
   {
     "id": 152,
@@ -1518,20 +1866,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 825,
+    "atk": 400,
+    "def": 325,
+    "attribute_id": 6
   },
   {
     "id": 153,
     "name": "agnimon",
     "image": "/images/digimons/1760150861775_image.webp",
     "level": 2,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[85,84]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 760,
+    "atk": 275,
+    "def": 310,
+    "attribute_id": null
   },
   {
     "id": 154,
@@ -1544,7 +1898,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 755,
+    "atk": 400,
+    "def": 150,
+    "attribute_id": 3
   },
   {
     "id": 155,
@@ -1557,7 +1914,10 @@
     "boss": 1,
     "effectId": 1,
     "description": "Um Digimon Anjo Caído do tipo Vírus. Extremamente perigoso!",
-    "attributeId": 10
+    "hp": 695,
+    "atk": 375,
+    "def": 200,
+    "attribute_id": 10
   },
   {
     "id": 156,
@@ -1570,20 +1930,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 825,
+    "atk": 450,
+    "def": 275,
+    "attribute_id": 3
   },
   {
     "id": 158,
     "name": "meicrackmon",
     "image": "/images/digimons/1759965409465_image.webp",
     "level": 3,
-    "typeId": 6,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1925,
+    "atk": 2020,
+    "def": 1315,
+    "attribute_id": null
   },
   {
     "id": 159,
@@ -1596,7 +1962,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 555,
+    "atk": 300,
+    "def": 200,
+    "attribute_id": 8
   },
   {
     "id": 161,
@@ -1609,7 +1978,10 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2460,
+    "atk": 1390,
+    "def": 1350,
+    "attribute_id": null
   },
   {
     "id": 162,
@@ -1622,7 +1994,10 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1625,
+    "atk": 765,
+    "def": 775,
+    "attribute_id": null
   },
   {
     "id": 163,
@@ -1635,20 +2010,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1840,
+    "atk": 1365,
+    "def": 1120,
+    "attribute_id": 11
   },
   {
     "id": 164,
     "name": "omegamon zwart",
     "image": "/images/digimons/1760031909670_image.webp",
     "level": 5,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[49,57]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1730,
+    "atk": 1025,
+    "def": 625,
+    "attribute_id": null
   },
   {
     "id": 165,
@@ -1661,7 +2042,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 895,
+    "atk": 440,
+    "def": 275,
+    "attribute_id": 6
   },
   {
     "id": 166,
@@ -1674,20 +2058,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 475,
+    "atk": 75,
+    "def": 165,
+    "attribute_id": 9
   },
   {
     "id": 167,
     "name": "coronamon",
     "image": "/images/digimons/1760120518394_image.webp",
     "level": 1,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[219,248,258,246,149,153]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 590,
+    "atk": 295,
+    "def": 215,
+    "attribute_id": null
   },
   {
     "id": 168,
@@ -1700,7 +2090,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 600,
+    "atk": 350,
+    "def": 295,
+    "attribute_id": 11
   },
   {
     "id": 169,
@@ -1713,7 +2106,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 560,
+    "atk": 140,
+    "def": 250,
+    "attribute_id": 9
   },
   {
     "id": 170,
@@ -1726,46 +2122,58 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 645,
+    "atk": 165,
+    "def": 170,
+    "attribute_id": 11
   },
   {
     "id": 171,
     "name": "bakumon",
     "image": "/images/digimons/1760120798654_image.webp",
     "level": 1,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[248,76,270,97,233,77]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1115,
+    "atk": 375,
+    "def": 300,
+    "attribute_id": null
   },
   {
     "id": 172,
     "name": "hyokomon",
     "image": "/images/digimons/1760122355086_image.webp",
     "level": 1,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[221,149,242,220]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 505,
+    "atk": 280,
+    "def": 200,
+    "attribute_id": null
   },
   {
     "id": 173,
     "name": "piyomon",
     "image": "/images/digimons/1760125585580_image.webp",
     "level": 1,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[159,149,97,228]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 515,
+    "atk": 105,
+    "def": 130,
+    "attribute_id": null
   },
   {
     "id": 174,
@@ -1778,46 +2186,58 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 475,
+    "atk": 250,
+    "def": 165,
+    "attribute_id": 8
   },
   {
     "id": 175,
     "name": "plotmon",
     "image": "/images/digimons/1760124347582_image.webp",
     "level": 1,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[218,264,79,209,29,244,23]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1040,
+    "atk": 340,
+    "def": 275,
+    "attribute_id": null
   },
   {
     "id": 176,
     "name": "bearmon",
     "image": "/images/digimons/1760150901359_image.webp",
     "level": 1,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[211,230,222,152]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 580,
+    "atk": 330,
+    "def": 200,
+    "attribute_id": null
   },
   {
     "id": 177,
     "name": "penmon",
     "image": "/images/digimons/1760128839000_image.webp",
     "level": 1,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[221,220,232,159]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 600,
+    "atk": 200,
+    "def": 180,
+    "attribute_id": null
   },
   {
     "id": 178,
@@ -1830,7 +2250,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 610,
+    "atk": 360,
+    "def": 230,
+    "attribute_id": 11
   },
   {
     "id": 179,
@@ -1843,7 +2266,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 635,
+    "atk": 250,
+    "def": 215,
+    "attribute_id": 11
   },
   {
     "id": 180,
@@ -1856,7 +2282,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1140,
+    "atk": 310,
+    "def": 305,
+    "attribute_id": 9
   },
   {
     "id": 181,
@@ -1869,7 +2298,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 595,
+    "atk": 305,
+    "def": 165,
+    "attribute_id": 11
   },
   {
     "id": 182,
@@ -1882,7 +2314,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 735,
+    "atk": 205,
+    "def": 195,
+    "attribute_id": null
   },
   {
     "id": 183,
@@ -1895,7 +2330,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 580,
+    "atk": 170,
+    "def": 285,
+    "attribute_id": null
   },
   {
     "id": 184,
@@ -1908,7 +2346,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 505,
+    "atk": 240,
+    "def": 205,
+    "attribute_id": null
   },
   {
     "id": 185,
@@ -1921,7 +2362,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 740,
+    "atk": 205,
+    "def": 195,
+    "attribute_id": null
   },
   {
     "id": 186,
@@ -1934,7 +2378,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 505,
+    "atk": 240,
+    "def": 255,
+    "attribute_id": null
   },
   {
     "id": 187,
@@ -1947,7 +2394,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 595,
+    "atk": 360,
+    "def": 240,
+    "attribute_id": 1
   },
   {
     "id": 188,
@@ -1960,7 +2410,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 560,
+    "atk": 380,
+    "def": 170,
+    "attribute_id": 1
   },
   {
     "id": 189,
@@ -1973,7 +2426,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 490,
+    "atk": 210,
+    "def": 160,
+    "attribute_id": null
   },
   {
     "id": 190,
@@ -1986,7 +2442,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 575,
+    "atk": 210,
+    "def": 165,
+    "attribute_id": null
   },
   {
     "id": 191,
@@ -1999,7 +2458,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 625,
+    "atk": 190,
+    "def": 190,
+    "attribute_id": 3
   },
   {
     "id": 192,
@@ -2012,7 +2474,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 490,
+    "atk": 150,
+    "def": 160,
+    "attribute_id": 2
   },
   {
     "id": 193,
@@ -2025,7 +2490,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 470,
+    "atk": 245,
+    "def": 115,
+    "attribute_id": 10
   },
   {
     "id": 194,
@@ -2038,85 +2506,106 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 560,
+    "atk": 70,
+    "def": 145,
+    "attribute_id": 2
   },
   {
     "id": 195,
     "name": "goburimon",
     "image": "/images/digimons/1760128727715_image.webp",
     "level": 1,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[262,252,266,27,254]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1015,
+    "atk": 330,
+    "def": 270,
+    "attribute_id": null
   },
   {
     "id": 196,
     "name": "shamamon",
     "image": "/images/digimons/1760127746213_image.webp",
     "level": 1,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[277,278,272,229]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 490,
+    "atk": 260,
+    "def": 160,
+    "attribute_id": null
   },
   {
     "id": 197,
     "name": "shakomon",
     "image": "/images/digimons/1760128859861_image.webp",
     "level": 1,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[237,238,257,255,280]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 480,
+    "atk": 90,
+    "def": 120,
+    "attribute_id": null
   },
   {
     "id": 198,
     "name": "snow goburimon",
     "image": "/images/digimons/1760125082772_image.webp",
     "level": 1,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[218,249,223,271,251,227]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 4
+    "hp": 1035,
+    "atk": 340,
+    "def": 275,
+    "attribute_id": null
   },
   {
     "id": 199,
     "name": "tyumon",
     "image": "/images/digimons/1760127474078_image.webp",
     "level": 1,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[275,265,218,259,260,274]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 975,
+    "atk": 310,
+    "def": 260,
+    "attribute_id": null
   },
   {
     "id": 200,
     "name": "dracumon",
     "image": "/images/digimons/1760127374673_image.webp",
     "level": 1,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[264,265,228,239]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 865,
+    "atk": 260,
+    "def": 230,
+    "attribute_id": null
   },
   {
     "id": 201,
@@ -2129,46 +2618,58 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 610,
+    "atk": 120,
+    "def": 260,
+    "attribute_id": 5
   },
   {
     "id": 202,
     "name": "pico devimon",
     "image": "/images/digimons/1760125722588_image.webp",
     "level": 1,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[270,251,155,254]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 675,
+    "atk": 175,
+    "def": 175,
+    "attribute_id": null
   },
   {
     "id": 203,
     "name": "funbeemon",
     "image": "/images/digimons/1760127397161_image.webp",
     "level": 1,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[281,273,267,154,261,150]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 450,
+    "atk": 225,
+    "def": 155,
+    "attribute_id": null
   },
   {
     "id": 204,
     "name": "mushmon",
     "image": "/images/digimons/1760128828085_image.webp",
     "level": 1,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[265,268,253,273]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1020,
+    "atk": 330,
+    "def": 270,
+    "attribute_id": null
   },
   {
     "id": 207,
@@ -2181,20 +2682,26 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 595,
+    "atk": 330,
+    "def": 140,
+    "attribute_id": 10
   },
   {
     "id": 208,
     "name": "aegiomon",
     "image": "/images/digimons/1760149575265_image.webp",
     "level": 2,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[285,287,289,288,286]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 730,
+    "atk": 345,
+    "def": 310,
+    "attribute_id": null
   },
   {
     "id": 209,
@@ -2207,7 +2714,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 965,
+    "atk": 325,
+    "def": 245,
+    "attribute_id": 2
   },
   {
     "id": 210,
@@ -2220,20 +2730,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 870,
+    "atk": 395,
+    "def": 320,
+    "attribute_id": 11
   },
   {
     "id": 211,
     "name": "gryzmon",
     "image": "/images/digimons/1760149413985_image.webp",
     "level": 2,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[296,298,87]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1220,
+    "atk": 505,
+    "def": 525,
+    "attribute_id": null
   },
   {
     "id": 212,
@@ -2246,7 +2762,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 895,
+    "atk": 440,
+    "def": 225,
+    "attribute_id": 8
   },
   {
     "id": 213,
@@ -2259,7 +2778,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 960,
+    "atk": 370,
+    "def": 400,
+    "attribute_id": 1
   },
   {
     "id": 214,
@@ -2272,20 +2794,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 785,
+    "atk": 440,
+    "def": 215,
+    "attribute_id": 6
   },
   {
     "id": 215,
     "name": "snimon",
     "image": "/images/digimons/1760150569324_image.webp",
     "level": 2,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[357,374,354,301]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 660,
+    "atk": 390,
+    "def": 315,
+    "attribute_id": null
   },
   {
     "id": 216,
@@ -2298,59 +2826,74 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 800,
+    "atk": 425,
+    "def": 340,
+    "attribute_id": 11
   },
   {
     "id": 217,
     "name": "sorcerimon",
     "image": "/images/digimons/1760150586225_image.webp",
     "level": 2,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[311,385,100]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1150,
+    "atk": 465,
+    "def": 490,
+    "attribute_id": null
   },
   {
     "id": 218,
     "name": "tailmon",
     "image": "/images/digimons/1760150620622_image.webp",
     "level": 2,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[109,387,158]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1145,
+    "atk": 465,
+    "def": 490,
+    "attribute_id": null
   },
   {
     "id": 219,
     "name": "firamon",
     "image": "/images/digimons/1760149254909_image.webp",
     "level": 2,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[309,330,380]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 700,
+    "atk": 385,
+    "def": 340,
+    "attribute_id": null
   },
   {
     "id": 220,
     "name": "buraimon",
     "image": "/images/digimons/1760149742661_image.webp",
     "level": 2,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[308,304,295]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 785,
+    "atk": 375,
+    "def": 260,
+    "attribute_id": null
   },
   {
     "id": 221,
@@ -2363,33 +2906,42 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 645,
+    "atk": 275,
+    "def": 175,
+    "attribute_id": 8
   },
   {
     "id": 222,
     "name": "mojyamon",
     "image": "/images/digimons/1760151001292_image.webp",
     "level": 2,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[302,380,99,100]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1090,
+    "atk": 355,
+    "def": 290,
+    "attribute_id": null
   },
   {
     "id": 223,
     "name": "yukidarumon",
     "image": "/images/digimons/1760150722790_image.webp",
     "level": 2,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[327,109,306,323,99]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1225,
+    "atk": 505,
+    "def": 525,
+    "attribute_id": null
   },
   {
     "id": 224,
@@ -2402,20 +2954,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 825,
+    "atk": 460,
+    "def": 260,
+    "attribute_id": 11
   },
   {
     "id": 225,
     "name": "revolmon",
     "image": "/images/digimons/1760150511133_image.webp",
     "level": 2,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[339,328,385]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 990,
+    "atk": 385,
+    "def": 415,
+    "attribute_id": null
   },
   {
     "id": 226,
@@ -2428,7 +2986,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 480,
+    "atk": 225,
+    "def": 250,
+    "attribute_id": 9
   },
   {
     "id": 227,
@@ -2441,7 +3002,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 625,
+    "atk": 275,
+    "def": 345,
+    "attribute_id": 2
   },
   {
     "id": 228,
@@ -2454,7 +3018,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1125,
+    "atk": 455,
+    "def": 480,
+    "attribute_id": null
   },
   {
     "id": 229,
@@ -2467,7 +3034,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 670,
+    "atk": 155,
+    "def": 180,
+    "attribute_id": null
   },
   {
     "id": 230,
@@ -2480,7 +3050,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 415,
+    "atk": 300,
+    "def": 225,
+    "attribute_id": 8
   },
   {
     "id": 231,
@@ -2493,7 +3066,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 715,
+    "atk": 315,
+    "def": 295,
+    "attribute_id": null
   },
   {
     "id": 232,
@@ -2506,7 +3082,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 735,
+    "atk": 320,
+    "def": 180,
+    "attribute_id": null
   },
   {
     "id": 233,
@@ -2519,7 +3098,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 480,
+    "atk": 100,
+    "def": 200,
+    "attribute_id": 1
   },
   {
     "id": 234,
@@ -2532,7 +3114,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 695,
+    "atk": 125,
+    "def": 260,
+    "attribute_id": 5
   },
   {
     "id": 235,
@@ -2545,7 +3130,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 675,
+    "atk": 230,
+    "def": 270,
+    "attribute_id": null
   },
   {
     "id": 236,
@@ -2558,7 +3146,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 895,
+    "atk": 125,
+    "def": 200,
+    "attribute_id": 3
   },
   {
     "id": 237,
@@ -2571,7 +3162,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 1105,
+    "atk": 275,
+    "def": 305,
+    "attribute_id": 2
   },
   {
     "id": 238,
@@ -2584,7 +3178,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 870,
+    "atk": 195,
+    "def": 445,
+    "attribute_id": null
   },
   {
     "id": 239,
@@ -2597,7 +3194,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 755,
+    "atk": 275,
+    "def": 300,
+    "attribute_id": 11
   },
   {
     "id": 240,
@@ -2610,7 +3210,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 625,
+    "atk": 300,
+    "def": 390,
+    "attribute_id": 5
   },
   {
     "id": 242,
@@ -2623,7 +3226,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 445,
+    "atk": 115,
+    "def": 165,
+    "attribute_id": null
   },
   {
     "id": 243,
@@ -2636,7 +3242,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 965,
+    "atk": 275,
+    "def": 300,
+    "attribute_id": 3
   },
   {
     "id": 244,
@@ -2649,7 +3258,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 755,
+    "atk": 265,
+    "def": 365,
+    "attribute_id": null
   },
   {
     "id": 245,
@@ -2662,7 +3274,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 825,
+    "atk": 375,
+    "def": 225,
+    "attribute_id": 6
   },
   {
     "id": 246,
@@ -2675,7 +3290,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 855,
+    "atk": 320,
+    "def": 355,
+    "attribute_id": null
   },
   {
     "id": 247,
@@ -2688,7 +3306,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1150,
+    "atk": 175,
+    "def": 295,
+    "attribute_id": null
   },
   {
     "id": 248,
@@ -2701,7 +3322,10 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 755,
+    "atk": 375,
+    "def": 275,
+    "attribute_id": 1
   },
   {
     "id": 249,
@@ -2714,7 +3338,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 625,
+    "atk": 360,
+    "def": 350,
+    "attribute_id": 6
   },
   {
     "id": 250,
@@ -2727,7 +3354,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 625,
+    "atk": 225,
+    "def": 175,
+    "attribute_id": 2
   },
   {
     "id": 251,
@@ -2740,20 +3370,26 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 1035,
+    "atk": 410,
+    "def": 435,
+    "attribute_id": 2
   },
   {
     "id": 252,
     "name": "wendimon",
     "image": "/images/digimons/1760150665245_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[354,334,322]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1120,
+    "atk": 455,
+    "def": 480,
+    "attribute_id": null
   },
   {
     "id": 253,
@@ -2766,33 +3402,42 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 1170,
+    "atk": 280,
+    "def": 250,
+    "attribute_id": 3
   },
   {
     "id": 254,
     "name": "orgemon",
     "image": "/images/digimons/1760149143497_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[367,379,333]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1190,
+    "atk": 485,
+    "def": 510,
+    "attribute_id": null
   },
   {
     "id": 255,
     "name": "octmon",
     "image": "/images/digimons/1760136007549_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[370,333,338]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 870,
+    "atk": 325,
+    "def": 360,
+    "attribute_id": null
   },
   {
     "id": 256,
@@ -2805,20 +3450,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 695,
+    "atk": 275,
+    "def": 375,
+    "attribute_id": 5
   },
   {
     "id": 258,
     "name": "growmon",
     "image": "/images/digimons/1760110133318_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[381,362,336]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1110,
+    "atk": 445,
+    "def": 470,
+    "attribute_id": null
   },
   {
     "id": 259,
@@ -2831,7 +3482,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 825,
+    "atk": 145,
+    "def": 200,
+    "attribute_id": 2
   },
   {
     "id": 260,
@@ -2844,7 +3498,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1035,
+    "atk": 300,
+    "def": 325,
+    "attribute_id": 5
   },
   {
     "id": 261,
@@ -2857,7 +3514,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1130,
+    "atk": 455,
+    "def": 480,
+    "attribute_id": 9
   },
   {
     "id": 262,
@@ -2870,20 +3530,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1170,
+    "atk": 290,
+    "def": 370,
+    "attribute_id": 6
   },
   {
     "id": 263,
     "name": "cyclomon",
     "image": "/images/digimons/1760149923762_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[297,300,138]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1060,
+    "atk": 420,
+    "def": 450,
+    "attribute_id": null
   },
   {
     "id": 264,
@@ -2896,46 +3562,58 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 755,
+    "atk": 350,
+    "def": 190,
+    "attribute_id": 10
   },
   {
     "id": 265,
     "name": "scumon",
     "image": "/images/digimons/1760150530058_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[314,356,359,347,32]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1190,
+    "atk": 485,
+    "def": 510,
+    "attribute_id": null
   },
   {
     "id": 266,
     "name": "deltamon",
     "image": "/images/digimons/1760146605892_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[358,325,329,313,363]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1065,
+    "atk": 505,
+    "def": 440,
+    "attribute_id": null
   },
   {
     "id": 267,
     "name": "dokugumon",
     "image": "/images/digimons/1760150024197_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[354,379,290,390]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 700,
+    "atk": 355,
+    "def": 270,
+    "attribute_id": null
   },
   {
     "id": 268,
@@ -2948,7 +3626,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 800,
+    "atk": 275,
+    "def": 350,
+    "attribute_id": 6
   },
   {
     "id": 269,
@@ -2961,7 +3642,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1035,
+    "atk": 200,
+    "def": 375,
+    "attribute_id": 6
   },
   {
     "id": 270,
@@ -2974,111 +3658,138 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 625,
+    "atk": 125,
+    "def": 200,
+    "attribute_id": 10
   },
   {
     "id": 271,
     "name": "hyougamon",
     "image": "/images/digimons/1760149480848_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[302,374,306]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 670,
+    "atk": 225,
+    "def": 265,
+    "attribute_id": null
   },
   {
     "id": 272,
     "name": "fugamon",
     "image": "/images/digimons/1760132679563_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[344,367,295]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 755,
+    "atk": 405,
+    "def": 225,
+    "attribute_id": null
   },
   {
     "id": 273,
     "name": "flymon",
     "image": "/images/digimons/1760150051659_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[34,290,357,301]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 525,
+    "atk": 445,
+    "def": 245,
+    "attribute_id": null
   },
   {
     "id": 274,
     "name": "platinum scumon",
     "image": "/images/digimons/1760150471939_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[377,347,349,32]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 910,
+    "atk": 345,
+    "def": 380,
+    "attribute_id": null
   },
   {
     "id": 275,
     "name": "black tailmon",
     "image": "/images/digimons/1760145675162_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[339,384,329,158]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 785,
+    "atk": 285,
+    "def": 320,
+    "attribute_id": null
   },
   {
     "id": 276,
     "name": "vegimon",
     "image": "/images/digimons/1760150642395_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[372,359,377]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 515,
+    "atk": 150,
+    "def": 195,
+    "attribute_id": null
   },
   {
     "id": 278,
     "name": "musyamon",
     "image": "/images/digimons/1760150444446_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[297,308,307]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 935,
+    "atk": 400,
+    "def": 330,
+    "attribute_id": null
   },
   {
     "id": 279,
     "name": "mechanorimon",
     "image": "/images/digimons/1760149196379_image.webp",
     "level": 2,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[341,34,373]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 11
+    "hp": 1210,
+    "atk": 495,
+    "def": 520,
+    "attribute_id": null
   },
   {
     "id": 280,
@@ -3091,7 +3802,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1225,
+    "atk": 280,
+    "def": 340,
+    "attribute_id": 6
   },
   {
     "id": 281,
@@ -3104,7 +3818,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 825,
+    "atk": 350,
+    "def": 275,
+    "attribute_id": 5
   },
   {
     "id": 282,
@@ -3117,7 +3834,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 695,
+    "atk": 275,
+    "def": 225,
+    "attribute_id": 11
   },
   {
     "id": 283,
@@ -3130,98 +3850,122 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 695,
+    "atk": 275,
+    "def": 525,
+    "attribute_id": 5
   },
   {
     "id": 284,
     "name": "chrysalimon",
     "image": "/images/digimons/1760149816833_image.webp",
     "level": 2,
-    "typeId": 6,
+    "typeId": 1,
     "evolution": "[370,358,354,390]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1000,
+    "atk": 390,
+    "def": 420,
+    "attribute_id": null
   },
   {
     "id": 285,
     "name": "aegiochusmon",
     "image": "/images/digimons/1760151088403_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[419]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1485,
+    "atk": 985,
+    "def": 740,
+    "attribute_id": null
   },
   {
     "id": 286,
     "name": "aegiochusmon: green",
     "image": "/images/digimons/1760151136619_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[419]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1945,
+    "atk": 920,
+    "def": 830,
+    "attribute_id": null
   },
   {
     "id": 287,
     "name": "aegiochusmon: dark",
     "image": "/images/digimons/1760139348986_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[457]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1610,
+    "atk": 2050,
+    "def": 865,
+    "attribute_id": null
   },
   {
     "id": 288,
     "name": "aegiochusmon: blue",
     "image": "/images/digimons/1760151114081_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[419]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1915,
+    "atk": 1415,
+    "def": 1195,
+    "attribute_id": null
   },
   {
     "id": 289,
-    "name": "Aegiochusmon: Holy",
-    "image": "",
+    "name": "aegiochusmon: holy",
+    "image": "/images/digimons/1760468690915_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[419]",
-    "active": 0,
+    "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1840,
+    "atk": 540,
+    "def": 1330,
+    "attribute_id": null
   },
   {
     "id": 290,
     "name": "atlur kabuterimon",
     "image": "/images/digimons/1760151208326_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[463,414,39]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1145,
+    "atk": 730,
+    "def": 630,
+    "attribute_id": null
   },
   {
     "id": 291,
@@ -3234,7 +3978,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 945,
+    "atk": 705,
+    "def": 830,
+    "attribute_id": 5
   },
   {
     "id": 292,
@@ -3247,38 +3994,47 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 1370,
+    "atk": 885,
+    "def": 575,
+    "attribute_id": 8
   },
   {
     "id": 293,
     "name": "aero v-dramon",
     "image": "/images/digimons/1760151124512_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[70,409,393]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1615,
+    "atk": 1505,
+    "def": 1040,
+    "attribute_id": null
   },
   {
     "id": 294,
     "name": "ex-tyranomon",
     "image": "/images/digimons/1760203449088_image.png",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[478,403,41]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1805,
+    "atk": 1820,
+    "def": 1205,
+    "attribute_id": null
   },
   {
     "id": 295,
     "name": "garudamon",
-    "image": "/images/digimons/1760152714371_image.webp",
+    "image": "/images/digimons/1760462520425_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[426,415,431]",
@@ -3286,25 +4042,31 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 1030,
+    "atk": 665,
+    "def": 530,
+    "attribute_id": 1
   },
   {
     "id": 296,
     "name": "grappu leomon",
-    "image": "/images/digimons/1760153113162_image.webp",
+    "image": "/images/digimons/1760462838088_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[413,418,429,436]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1910,
+    "atk": 1990,
+    "def": 1300,
+    "attribute_id": null
   },
   {
     "id": 297,
     "name": "grademon",
-    "image": "/images/digimons/1760153022335_image.webp",
+    "image": "/images/digimons/1760462570830_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[392,411,434]",
@@ -3312,33 +4074,42 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1370,
+    "atk": 1015,
+    "def": 400,
+    "attribute_id": 11
   },
   {
     "id": 298,
     "name": "great gryzmon",
     "image": "/images/digimons/1760153260345_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[453,402]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1785,
+    "atk": 1785,
+    "def": 1190,
+    "attribute_id": null
   },
   {
     "id": 299,
     "name": "cerberumon: werewolf mode",
     "image": "/images/digimons/1760151636916_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[473,90,429]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1565,
+    "atk": 1425,
+    "def": 995,
+    "attribute_id": null
   },
   {
     "id": 300,
@@ -3351,25 +4122,31 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1545,
+    "atk": 970,
+    "def": 750,
+    "attribute_id": 10
   },
   {
     "id": 301,
     "name": "jewelbeemon",
     "image": "/images/digimons/1760154905363_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[414,461]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1630,
+    "atk": 1235,
+    "def": 560,
+    "attribute_id": null
   },
   {
     "id": 302,
     "name": "zudomon",
-    "image": "/images/digimons/1760202241606_image.webp",
+    "image": "/images/digimons/1760463812819_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[107,440]",
@@ -3377,20 +4154,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 1715,
+    "atk": 855,
+    "def": 665,
+    "attribute_id": 2
   },
   {
     "id": 303,
     "name": "tyilinmon",
-    "image": "/images/digimons/1760201601899_image.webp",
+    "image": "/images/digimons/1760463671641_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[408,400,492]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1695,
+    "atk": 1635,
+    "def": 1110,
+    "attribute_id": null
   },
   {
     "id": 304,
@@ -3403,25 +4186,31 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1510,
+    "atk": 990,
+    "def": 775,
+    "attribute_id": 11
   },
   {
     "id": 305,
     "name": "parrotmon",
-    "image": "/images/digimons/1760158059911_image.webp",
+    "image": "/images/digimons/1760463542133_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[400,415]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 845,
+    "atk": 575,
+    "def": 495,
+    "attribute_id": null
   },
   {
     "id": 306,
     "name": "panjyamon",
-    "image": "/images/digimons/1760157973725_image.webp",
+    "image": "/images/digimons/1760463533693_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[442,429]",
@@ -3429,7 +4218,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 1700,
+    "atk": 1645,
+    "def": 1115,
+    "attribute_id": 2
   },
   {
     "id": 307,
@@ -3442,38 +4234,47 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1230,
+    "atk": 985,
+    "def": 905,
+    "attribute_id": 11
   },
   {
     "id": 308,
     "name": "butenmon",
     "image": "/images/digimons/1760140586143_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[401,457,426,46]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1280,
+    "atk": 795,
+    "def": 605,
+    "attribute_id": null
   },
   {
     "id": 309,
     "name": "flaremon",
     "image": "/images/digimons/1760152631608_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[391,106,142]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1385,
+    "atk": 940,
+    "def": 700,
+    "attribute_id": null
   },
   {
     "id": 310,
     "name": "whamon",
-    "image": "/images/digimons/1760201977742_image.webp",
+    "image": "/images/digimons/1760463721065_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[487,130,440,417]",
@@ -3481,20 +4282,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 1800,
+    "atk": 620,
+    "def": 620,
+    "attribute_id": 2
   },
   {
     "id": 311,
     "name": "holy angemon",
-    "image": "/images/digimons/1760154791250_image.webp",
+    "image": "/images/digimons/1760463247674_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[70,106,398,142,105]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1870,
+    "atk": 1930,
+    "def": 1265,
+    "attribute_id": null
   },
   {
     "id": 313,
@@ -3507,12 +4314,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 875,
+    "atk": 285,
+    "def": 390,
+    "attribute_id": 1
   },
   {
     "id": 314,
     "name": "monzaemon",
-    "image": "/images/digimons/1760157058589_image.webp",
+    "image": "/images/digimons/1760463453848_image.webp",
     "level": 3,
     "typeId": 2,
     "evolution": "[455,453]",
@@ -3520,46 +4330,58 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1630,
+    "atk": 665,
+    "def": 575,
+    "attribute_id": 11
   },
   {
     "id": 315,
     "name": "yatagaramon",
     "image": "/images/digimons/1760202188323_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[394,420,424,135]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1040,
+    "atk": 560,
+    "def": 535,
+    "attribute_id": null
   },
   {
     "id": 317,
     "name": "rapidmon perfect",
-    "image": "/images/digimons/1760158303218_image.webp",
+    "image": "/images/digimons/1760459056071_image.webp",
     "level": 0,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1355,
+    "atk": 975,
+    "def": 1230,
+    "attribute_id": null
   },
   {
     "id": 318,
     "name": "loader leomon",
-    "image": "/images/digimons/1760155424355_image.webp",
+    "image": "/images/digimons/1760463307862_image.webp",
     "level": 3,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[413,443,72,436]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1040,
+    "atk": 560,
+    "def": 535,
+    "attribute_id": null
   },
   {
     "id": 320,
@@ -3572,7 +4394,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1830,
+    "atk": 1865,
+    "def": 1230,
+    "attribute_id": null
   },
   {
     "id": 322,
@@ -3585,7 +4410,10 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1825,
+    "atk": 1850,
+    "def": 1225,
+    "attribute_id": null
   },
   {
     "id": 323,
@@ -3598,12 +4426,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1700,
+    "atk": 1645,
+    "def": 1115,
+    "attribute_id": null
   },
   {
     "id": 324,
     "name": "omega shoutmon",
-    "image": "/images/digimons/1760157341268_image.webp",
+    "image": "/images/digimons/1760463498840_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[438,479,411]",
@@ -3611,12 +4442,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1680,
+    "atk": 1615,
+    "def": 1100,
+    "attribute_id": null
   },
   {
     "id": 325,
     "name": "kimeramon",
-    "image": "/images/digimons/1760155076809_image.webp",
+    "image": "/images/digimons/1760463267318_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[456,55,42]",
@@ -3624,7 +4458,10 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1665,
+    "atk": 1130,
+    "def": 820,
+    "attribute_id": null
   },
   {
     "id": 326,
@@ -3637,7 +4474,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1915,
+    "atk": 2000,
+    "def": 1305,
+    "attribute_id": 5
   },
   {
     "id": 327,
@@ -3650,7 +4490,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 945,
+    "atk": 605,
+    "def": 505,
+    "attribute_id": 2
   },
   {
     "id": 328,
@@ -3663,12 +4506,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1320,
+    "atk": 1020,
+    "def": 780,
+    "attribute_id": 9
   },
   {
     "id": 329,
     "name": "skull baluchimon",
-    "image": "/images/digimons/1760200253136_image.webp",
+    "image": "/images/digimons/1760463624109_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[507,102]",
@@ -3676,12 +4522,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1865,
+    "atk": 1920,
+    "def": 1260,
+    "attribute_id": null
   },
   {
     "id": 330,
     "name": "savior hackmon",
-    "image": "/images/digimons/1760199847847_image.webp",
+    "image": "/images/digimons/1760463581485_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[423,461,431]",
@@ -3689,12 +4538,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1290,
+    "atk": 975,
+    "def": 755,
+    "attribute_id": null
   },
   {
     "id": 331,
     "name": "sirenmon",
-    "image": "/images/digimons/1760200215686_image.webp",
+    "image": "/images/digimons/1760463609121_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[417,427]",
@@ -3702,12 +4554,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 925,
+    "atk": 250,
+    "def": 425,
+    "attribute_id": null
   },
   {
     "id": 332,
     "name": "taomon",
-    "image": "/images/digimons/1760201537043_image.webp",
+    "image": "/images/digimons/1760463651420_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[395,430,424,135]",
@@ -3715,7 +4570,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1030,
+    "atk": 265,
+    "def": 530,
+    "attribute_id": 10
   },
   {
     "id": 333,
@@ -3728,7 +4586,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1290,
+    "atk": 665,
+    "def": 840,
+    "attribute_id": 11
   },
   {
     "id": 334,
@@ -3741,7 +4602,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1245,
+    "atk": 900,
+    "def": 715,
+    "attribute_id": null
   },
   {
     "id": 335,
@@ -3754,7 +4618,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1835,
+    "atk": 1870,
+    "def": 1235,
+    "attribute_id": null
   },
   {
     "id": 336,
@@ -3767,12 +4634,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1490,
+    "atk": 1295,
+    "def": 930,
+    "attribute_id": null
   },
   {
     "id": 337,
     "name": "knightmon",
-    "image": "/images/digimons/1760155124936_image.webp",
+    "image": "/images/digimons/1760463275400_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[458,489,105]",
@@ -3780,12 +4650,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1115,
+    "atk": 725,
+    "def": 840,
+    "attribute_id": 11
   },
   {
     "id": 338,
     "name": "hangyomon",
-    "image": "/images/digimons/1760154386082_image.webp",
+    "image": "/images/digimons/1760463223651_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[130,440]",
@@ -3793,12 +4666,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1790,
+    "atk": 1795,
+    "def": 1195,
+    "attribute_id": null
   },
   {
     "id": 339,
     "name": "pandamon",
-    "image": "/images/digimons/1760157931748_image.webp",
+    "image": "/images/digimons/1760463523906_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[483,442,405]",
@@ -3806,12 +4682,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1030,
+    "atk": 725,
+    "def": 795,
+    "attribute_id": 6
   },
   {
     "id": 340,
     "name": "pumpmon",
-    "image": "/images/digimons/1760158223974_image.webp",
+    "image": "/images/digimons/1760463567763_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[446,447]",
@@ -3819,7 +4698,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1695,
+    "atk": 1635,
+    "def": 1110,
+    "attribute_id": null
   },
   {
     "id": 341,
@@ -3832,12 +4714,15 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1000,
+    "atk": 495,
+    "def": 500,
+    "attribute_id": null
   },
   {
     "id": 343,
     "name": "hippogriffomon",
-    "image": "/images/digimons/1760154398469_image.webp",
+    "image": "/images/digimons/1760463232626_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[426,400,434,436]",
@@ -3845,12 +4730,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 955,
+    "atk": 415,
+    "def": 460,
+    "attribute_id": null
   },
   {
     "id": 344,
     "name": "volcamon",
-    "image": "/images/digimons/1760201769745_image.webp",
+    "image": "/images/digimons/1760463701332_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[413,438,423,391]",
@@ -3858,7 +4746,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1730,
+    "atk": 1695,
+    "def": 1140,
+    "attribute_id": null
   },
   {
     "id": 345,
@@ -3871,12 +4762,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1200,
+    "atk": 825,
+    "def": 675,
+    "attribute_id": null
   },
   {
     "id": 346,
     "name": "mach gaogamon",
-    "image": "/images/digimons/1760155584347_image.webp",
+    "image": "/images/digimons/1760463328520_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[442,410]",
@@ -3884,12 +4778,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 1090,
+    "atk": 640,
+    "def": 575,
+    "attribute_id": 8
   },
   {
     "id": 347,
     "name": "mamemon",
-    "image": "/images/digimons/1760155671317_image.webp",
+    "image": "/images/digimons/1760463335741_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[131,439,519]",
@@ -3897,12 +4794,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1455,
+    "atk": 590,
+    "def": 795,
+    "attribute_id": 6
   },
   {
     "id": 348,
     "name": "mega seadramon",
-    "image": "/images/digimons/1760156550565_image.webp",
+    "image": "/images/digimons/1760463361576_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[432,163,444,129]",
@@ -3910,12 +4810,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 1840,
+    "atk": 1875,
+    "def": 1240,
+    "attribute_id": 2
   },
   {
     "id": 349,
     "name": "metal mamemon",
-    "image": "/images/digimons/1760156823180_image.webp",
+    "image": "/images/digimons/1760463380028_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[443,479,519]",
@@ -3923,12 +4826,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1795,
+    "atk": 1800,
+    "def": 1200,
+    "attribute_id": 5
   },
   {
     "id": 350,
     "name": "lilamon",
-    "image": "/images/digimons/1760155256171_image.webp",
+    "image": "/images/digimons/1760463290818_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[488,446,470,161]",
@@ -3936,12 +4842,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 1290,
+    "atk": 265,
+    "def": 485,
+    "attribute_id": 3
   },
   {
     "id": 351,
     "name": "lilimon",
-    "image": "/images/digimons/1760155322642_image.webp",
+    "image": "/images/digimons/1760463299934_image.webp",
     "level": 3,
     "typeId": 1,
     "evolution": "[446,427,161]",
@@ -3949,7 +4858,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1835,
+    "atk": 1870,
+    "def": 1235,
+    "attribute_id": null
   },
   {
     "id": 352,
@@ -3962,46 +4874,58 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 835,
+    "atk": 625,
+    "def": 1025,
+    "attribute_id": null
   },
   {
     "id": 353,
     "name": "astamon",
     "image": "/images/digimons/1760139836468_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[477,473,478,450]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1020,
+    "atk": 875,
+    "def": 555,
+    "attribute_id": null
   },
   {
     "id": 354,
     "name": "archnemon",
     "image": "/images/digimons/1760151190876_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[488,463,447]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 885,
+    "atk": 300,
+    "def": 400,
+    "attribute_id": null
   },
   {
     "id": 355,
     "name": "vamdemon",
-    "image": "/images/digimons/1760201683126_image.webp",
+    "image": "/images/digimons/1760463692255_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[464,475,450]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1355,
+    "atk": 1075,
+    "def": 810,
+    "attribute_id": null
   },
   {
     "id": 356,
@@ -4014,12 +4938,15 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1030,
+    "atk": 485,
+    "def": 620,
+    "attribute_id": 10
   },
   {
     "id": 357,
     "name": "okuwamon",
-    "image": "/images/digimons/1760157250815_image.webp",
+    "image": "/images/digimons/1760463488607_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[463,414,493,39]",
@@ -4027,38 +4954,47 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 1290,
+    "atk": 840,
+    "def": 885,
+    "attribute_id": 3
   },
   {
     "id": 358,
     "name": "orochimon",
-    "image": "/images/digimons/1760157627467_image.webp",
+    "image": "/images/digimons/1760463514003_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[466,454,480]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1545,
+    "atk": 1010,
+    "def": 820,
+    "attribute_id": null
   },
   {
     "id": 359,
     "name": "gerbemon",
     "image": "/images/digimons/1760152809503_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[432,482]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1880,
+    "atk": 1945,
+    "def": 1275,
+    "attribute_id": null
   },
   {
     "id": 360,
     "name": "gigadramon",
-    "image": "/images/digimons/1760152961487_image.webp",
+    "image": "/images/digimons/1760462551974_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[454,72]",
@@ -4066,7 +5002,10 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 1290,
+    "atk": 740,
+    "def": 750,
+    "attribute_id": 8
   },
   {
     "id": 361,
@@ -4079,12 +5018,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 945,
+    "atk": 705,
+    "def": 795,
+    "attribute_id": 5
   },
   {
     "id": 362,
     "name": "groundramon",
-    "image": "/images/digimons/1760153316843_image.webp",
+    "image": "/images/digimons/1760462872470_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[481,474]",
@@ -4092,46 +5034,58 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1455,
+    "atk": 1195,
+    "def": 750,
+    "attribute_id": 6
   },
   {
     "id": 363,
     "name": "sharkmon",
     "image": "/images/digimons/1760199967670_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[130,444]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1325,
+    "atk": 970,
+    "def": 850,
+    "attribute_id": null
   },
   {
     "id": 364,
     "name": "shawujinmon",
-    "image": "/images/digimons/1760200110697_image.webp",
+    "image": "/images/digimons/1760463591808_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[468,432,470]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1090,
+    "atk": 635,
+    "def": 575,
+    "attribute_id": null
   },
   {
     "id": 365,
     "name": "jyureimon",
     "image": "/images/digimons/1760154957099_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[470,446,493]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1890,
+    "atk": 1960,
+    "def": 1280,
+    "attribute_id": null
   },
   {
     "id": 366,
@@ -4144,12 +5098,15 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1855,
+    "atk": 1905,
+    "def": 1250,
+    "attribute_id": 10
   },
   {
     "id": 367,
     "name": "skull satamon",
-    "image": "/images/digimons/1760200432423_image.webp",
+    "image": "/images/digimons/1760463633239_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[468,469,449]",
@@ -4157,33 +5114,42 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1405,
+    "atk": 1160,
+    "def": 855,
+    "attribute_id": 10
   },
   {
     "id": 368,
     "name": "skullseadramon",
     "image": "/images/digimons/1760200463734_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[487,444,129]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 925,
+    "atk": 500,
+    "def": 500,
+    "attribute_id": null
   },
   {
     "id": 369,
     "name": "dark super starmon",
     "image": "/images/digimons/1760141154985_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[476,462,420]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1165,
+    "atk": 765,
+    "def": 645,
+    "attribute_id": null
   },
   {
     "id": 370,
@@ -4196,59 +5162,74 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 1205,
+    "atk": 555,
+    "def": 470,
+    "attribute_id": 2
   },
   {
     "id": 371,
     "name": "tankdramon",
-    "image": "/images/digimons/1760201489596_image.webp",
+    "image": "/images/digimons/1760463641803_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[454,460]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1220,
+    "atk": 995,
+    "def": 730,
+    "attribute_id": null
   },
   {
     "id": 372,
     "name": "tonosama gekomon",
-    "image": "/images/digimons/1760201564805_image.webp",
+    "image": "/images/digimons/1760463663727_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[455,466,131]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1520,
+    "atk": 1350,
+    "def": 955,
+    "attribute_id": null
   },
   {
     "id": 373,
     "name": "nanomon",
-    "image": "/images/digimons/1760157197769_image.webp",
+    "image": "/images/digimons/1760463470799_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[471,494]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1690,
+    "atk": 1625,
+    "def": 1105,
+    "attribute_id": null
   },
   {
     "id": 374,
     "name": "fantomon",
     "image": "/images/digimons/1760152575430_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[430,469,478,420]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1815,
+    "atk": 1835,
+    "def": 1215,
+    "attribute_id": null
   },
   {
     "id": 375,
@@ -4261,7 +5242,10 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1440,
+    "atk": 1215,
+    "def": 885,
+    "attribute_id": 10
   },
   {
     "id": 376,
@@ -4274,7 +5258,10 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 1490,
+    "atk": 1295,
+    "def": 930,
+    "attribute_id": 1
   },
   {
     "id": 377,
@@ -4287,85 +5274,106 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1030,
+    "atk": 220,
+    "def": 400,
+    "attribute_id": 10
   },
   {
     "id": 378,
     "name": "matadrmon",
-    "image": "/images/digimons/1760156389756_image.webp",
+    "image": "/images/digimons/1760463351169_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[456,424,135,105]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1940,
+    "atk": 2040,
+    "def": 1325,
+    "attribute_id": null
   },
   {
     "id": 379,
     "name": "mummymon",
-    "image": "/images/digimons/1760157153360_image.webp",
+    "image": "/images/digimons/1760463461707_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[471,412,448]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1020,
+    "atk": 470,
+    "def": 785,
+    "attribute_id": null
   },
   {
     "id": 380,
     "name": "mistymon",
-    "image": "/images/digimons/1760156991665_image.webp",
+    "image": "/images/digimons/1760463445843_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[452,458,445,434]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 945,
+    "atk": 615,
+    "def": 575,
+    "attribute_id": null
   },
   {
     "id": 381,
     "name": "megalo growmon",
-    "image": "/images/digimons/1760156630737_image.webp",
+    "image": "/images/digimons/1760463371164_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[481,465,452,72]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1670,
+    "atk": 1595,
+    "def": 1085,
+    "attribute_id": null
   },
   {
     "id": 382,
     "name": "metal tyranomon",
-    "image": "/images/digimons/1760156907905_image.webp",
+    "image": "/images/digimons/1760463389289_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[42,421,41]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 11
+    "hp": 1490,
+    "atk": 1295,
+    "def": 930,
+    "attribute_id": null
   },
   {
     "id": 383,
     "name": "lucemon: falldown mode",
-    "image": "/images/digimons/1760155542893_image.webp",
+    "image": "/images/digimons/1760463318718_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[512]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1775,
+    "atk": 1770,
+    "def": 1180,
+    "attribute_id": null
   },
   {
     "id": 384,
@@ -4378,12 +5386,15 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1510,
+    "atk": 1335,
+    "def": 950,
+    "attribute_id": 10
   },
   {
     "id": 385,
     "name": "wisemon",
-    "image": "/images/digimons/1760202081994_image.webp",
+    "image": "/images/digimons/1760463751226_image.webp",
     "level": 3,
     "typeId": 3,
     "evolution": "[464,452,451]",
@@ -4391,25 +5402,31 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 965,
+    "atk": 265,
+    "def": 355,
+    "attribute_id": 10
   },
   {
     "id": 386,
     "name": "waru seadramon",
-    "image": "/images/digimons/1760201809148_image.webp",
+    "image": "/images/digimons/1760463709335_image.webp",
     "level": 3,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[487,481,444,129]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 1300,
+    "atk": 990,
+    "def": 765,
+    "attribute_id": null
   },
   {
     "id": 387,
     "name": "silphymon",
-    "image": "/images/digimons/1760200159139_image.webp",
+    "image": "/images/digimons/1760463600097_image.webp",
     "level": 3,
     "typeId": 4,
     "evolution": "[476,480,492]",
@@ -4417,7 +5434,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 1030,
+    "atk": 620,
+    "def": 620,
+    "attribute_id": 8
   },
   {
     "id": 388,
@@ -4430,7 +5450,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 1290,
+    "atk": 1150,
+    "def": 655,
+    "attribute_id": 3
   },
   {
     "id": 389,
@@ -4443,12 +5466,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1290,
+    "atk": 795,
+    "def": 665,
+    "attribute_id": 11
   },
   {
     "id": 390,
     "name": "infermon",
-    "image": "/images/digimons/1760154621504_image.webp",
+    "image": "/images/digimons/1760463258532_image.webp",
     "level": 3,
     "typeId": 6,
     "evolution": "[475,494,402]",
@@ -4456,20 +5482,26 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1290,
+    "atk": 1195,
+    "def": 400,
+    "attribute_id": 10
   },
   {
     "id": 391,
     "name": "apollomon",
-    "image": "/images/digimons/1760203911098_image.webp",
+    "image": "/images/digimons/1760463939661_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[500]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1960,
+    "atk": 1045,
+    "def": 1005,
+    "attribute_id": null
   },
   {
     "id": 392,
@@ -4482,46 +5514,58 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1645,
+    "atk": 955,
+    "def": 985,
+    "attribute_id": 11
   },
   {
     "id": 393,
     "name": "ulforce v-dramon",
     "image": "/images/digimons/1760211716283_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2710,
+    "atk": 1575,
+    "def": 1520,
+    "attribute_id": null
   },
   {
     "id": 394,
     "name": "valdurmon",
-    "image": "/images/digimons/1760211872307_image.webp",
+    "image": "/images/digimons/1760465152029_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[499]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2080,
+    "atk": 1105,
+    "def": 1090,
+    "attribute_id": null
   },
   {
     "id": 395,
     "name": "venusmon",
-    "image": "/images/digimons/1760211971944_image.webp",
+    "image": "/images/digimons/1760465173053_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1225,
+    "atk": 425,
+    "def": 715,
+    "attribute_id": null
   },
   {
     "id": 396,
@@ -4534,90 +5578,111 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 1045,
+    "atk": 335,
+    "def": 380,
+    "attribute_id": 1
   },
   {
     "id": 398,
     "name": "clavis angemon",
-    "image": "/images/digimons/1760205763751_image.webp",
+    "image": "/images/digimons/1760464305285_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2645,
+    "atk": 1525,
+    "def": 1475,
+    "attribute_id": null
   },
   {
     "id": 399,
     "name": "craniummon",
-    "image": "/images/digimons/1760205816964_image.webp",
+    "image": "/images/digimons/1760464313645_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1495,
+    "atk": 670,
+    "def": 690,
+    "attribute_id": null
   },
   {
     "id": 400,
     "name": "crossmon",
-    "image": "/images/digimons/1760205890361_image.webp",
+    "image": "/images/digimons/1760464341768_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2605,
+    "atk": 1500,
+    "def": 1450,
+    "attribute_id": null
   },
   {
     "id": 401,
     "name": "chronomon",
     "image": "/images/digimons/1760205685815_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2585,
+    "atk": 1480,
+    "def": 1435,
+    "attribute_id": null
   },
   {
     "id": 402,
     "name": "cherubimon (vice)",
-    "image": "/images/digimons/1760205555622_image.webp",
+    "image": "/images/digimons/1760464279455_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 4
+    "hp": 2675,
+    "atk": 1550,
+    "def": 1495,
+    "attribute_id": null
   },
   {
     "id": 403,
     "name": "cherubimon (virtue)",
-    "image": "/images/digimons/1760205608220_image.webp",
+    "image": "/images/digimons/1760464288133_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2715,
+    "atk": 1580,
+    "def": 1525,
+    "attribute_id": null
   },
   {
     "id": 404,
     "name": "shine greymon",
-    "image": "/images/digimons/1760211124694_image.webp",
+    "image": "/images/digimons/1760465009613_image.webp",
     "level": 4,
     "typeId": 2,
     "evolution": "[501]",
@@ -4625,12 +5690,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 2260,
+    "atk": 1240,
+    "def": 1210,
+    "attribute_id": 9
   },
   {
     "id": 405,
     "name": "justimon",
-    "image": "/images/digimons/1760207781036_image.webp",
+    "image": "/images/digimons/1760464711478_image.webp",
     "level": 4,
     "typeId": 2,
     "evolution": "[]",
@@ -4638,25 +5706,31 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1735,
+    "atk": 1120,
+    "def": 860,
+    "attribute_id": 9
   },
   {
     "id": 408,
     "name": "sleipmon",
-    "image": "/images/digimons/1760211367552_image.webp",
+    "image": "/images/digimons/1760465067816_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2205,
+    "atk": 1200,
+    "def": 1175,
+    "attribute_id": null
   },
   {
     "id": 409,
     "name": "slayerdramon",
-    "image": "/images/digimons/1760211337475_image.webp",
+    "image": "/images/digimons/1760465047727_image.webp",
     "level": 4,
     "typeId": 2,
     "evolution": "[504]",
@@ -4664,25 +5738,31 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 1825,
+    "atk": 1035,
+    "def": 690,
+    "attribute_id": 8
   },
   {
     "id": 410,
     "name": "saint galgomon",
-    "image": "/images/digimons/1760211056680_image.webp",
+    "image": "/images/digimons/1760465002882_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[144]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2125,
+    "atk": 1140,
+    "def": 1120,
+    "attribute_id": null
   },
   {
     "id": 411,
     "name": "durandamon",
-    "image": "/images/digimons/1760206588229_image.webp",
+    "image": "/images/digimons/1760464552473_image.webp",
     "level": 4,
     "typeId": 2,
     "evolution": "[]",
@@ -4690,7 +5770,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1975,
+    "atk": 1120,
+    "def": 1010,
+    "attribute_id": 11
   },
   {
     "id": 412,
@@ -4703,12 +5786,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1510,
+    "atk": 680,
+    "def": 700,
+    "attribute_id": 5
   },
   {
     "id": 413,
     "name": "bancho leomon",
-    "image": "/images/digimons/1760204504843_image.webp",
+    "image": "/images/digimons/1760463971971_image.webp",
     "level": 4,
     "typeId": 2,
     "evolution": "[499,498]",
@@ -4716,20 +5802,26 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1635,
+    "atk": 775,
+    "def": 785,
+    "attribute_id": 6
   },
   {
     "id": 414,
     "name": "herakle kabuterimon",
-    "image": "/images/digimons/1760206991703_image.webp",
+    "image": "/images/digimons/1760464643478_image.webp",
     "level": 4,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 2605,
+    "atk": 1500,
+    "def": 1450,
+    "attribute_id": null
   },
   {
     "id": 415,
@@ -4742,77 +5834,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 2375,
+    "atk": 1325,
+    "def": 1290,
+    "attribute_id": 1
   },
   {
     "id": 416,
     "name": "holydramon",
     "image": "/images/digimons/1760207118275_image.webp",
-    "level": 4,
-    "typeId": 2,
-    "evolution": "[]",
-    "active": 1,
-    "boss": 0,
-    "effectId": 1,
-    "description": "",
-    "attributeId": 9
-  },
-  {
-    "id": 417,
-    "name": "marin angemon",
-    "image": "/images/digimons/1760208975268_image.webp",
-    "level": 4,
-    "typeId": 2,
-    "evolution": "[]",
-    "active": 1,
-    "boss": 0,
-    "effectId": 1,
-    "description": "",
-    "attributeId": 3
-  },
-  {
-    "id": 418,
-    "name": "marsmon",
-    "image": "/images/digimons/1760209006646_image.webp",
-    "level": 4,
-    "typeId": 2,
-    "evolution": "[]",
-    "active": 1,
-    "boss": 0,
-    "effectId": 1,
-    "description": "",
-    "attributeId": 12
-  },
-  {
-    "id": 419,
-    "name": "jupitermon",
-    "image": "/images/digimons/1760207704828_image.webp",
-    "level": 4,
-    "typeId": 2,
-    "evolution": "[]",
-    "active": 1,
-    "boss": 0,
-    "effectId": 1,
-    "description": "",
-    "attributeId": 12
-  },
-  {
-    "id": 420,
-    "name": "ravmon",
-    "image": "/images/digimons/1760210745810_image.webp",
-    "level": 4,
-    "typeId": 2,
-    "evolution": "[503]",
-    "active": 1,
-    "boss": 0,
-    "effectId": 1,
-    "description": "",
-    "attributeId": 12
-  },
-  {
-    "id": 421,
-    "name": "ultimate brachiomon",
-    "image": "/images/digimons/1760211803394_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -4820,7 +5850,90 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2565,
+    "atk": 1470,
+    "def": 1425,
+    "attribute_id": null
+  },
+  {
+    "id": 417,
+    "name": "marin angemon",
+    "image": "/images/digimons/1760464771807_image.webp",
+    "level": 4,
+    "typeId": 1,
+    "evolution": "[]",
+    "active": 1,
+    "boss": 0,
+    "effectId": 1,
+    "description": "",
+    "hp": 2525,
+    "atk": 1440,
+    "def": 1395,
+    "attribute_id": null
+  },
+  {
+    "id": 418,
+    "name": "marsmon",
+    "image": "/images/digimons/1760464778246_image.webp",
+    "level": 4,
+    "typeId": 1,
+    "evolution": "[]",
+    "active": 1,
+    "boss": 0,
+    "effectId": 1,
+    "description": "",
+    "hp": 1685,
+    "atk": 1190,
+    "def": 800,
+    "attribute_id": null
+  },
+  {
+    "id": 419,
+    "name": "jupitermon",
+    "image": "/images/digimons/1760207704828_image.webp",
+    "level": 4,
+    "typeId": 1,
+    "evolution": "[]",
+    "active": 1,
+    "boss": 0,
+    "effectId": 1,
+    "description": "",
+    "hp": 1650,
+    "atk": 1095,
+    "def": 760,
+    "attribute_id": null
+  },
+  {
+    "id": 420,
+    "name": "ravmon",
+    "image": "/images/digimons/1760464942889_image.webp",
+    "level": 4,
+    "typeId": 1,
+    "evolution": "[503]",
+    "active": 1,
+    "boss": 0,
+    "effectId": 1,
+    "description": "",
+    "hp": 2150,
+    "atk": 1160,
+    "def": 1135,
+    "attribute_id": null
+  },
+  {
+    "id": 421,
+    "name": "ultimate brachiomon",
+    "image": "/images/digimons/1760465129773_image.webp",
+    "level": 4,
+    "typeId": 1,
+    "evolution": "[]",
+    "active": 1,
+    "boss": 0,
+    "effectId": 1,
+    "description": "",
+    "hp": 2675,
+    "atk": 1550,
+    "def": 1495,
+    "attribute_id": null
   },
   {
     "id": 422,
@@ -4833,12 +5946,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1625,
+    "atk": 840,
+    "def": 1230,
+    "attribute_id": null
   },
   {
     "id": 423,
     "name": "gankoomon",
-    "image": "/images/digimons/1760206715817_image.webp",
+    "image": "/images/digimons/1760464584166_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -4846,12 +5962,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 2715,
+    "atk": 1080,
+    "def": 905,
+    "attribute_id": 1
   },
   {
     "id": 424,
     "name": "kuzuhamon",
-    "image": "/images/digimons/1760208115237_image.webp",
+    "image": "/images/digimons/1760464726348_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -4859,7 +5978,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1555,
+    "atk": 390,
+    "def": 690,
+    "attribute_id": 10
   },
   {
     "id": 425,
@@ -4872,7 +5994,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2665,
+    "atk": 1540,
+    "def": 1490,
+    "attribute_id": null
   },
   {
     "id": 426,
@@ -4885,12 +6010,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1985,
+    "atk": 1035,
+    "def": 1025,
+    "attribute_id": null
   },
   {
     "id": 427,
     "name": "ceresmon",
-    "image": "/images/digimons/1760205332868_image.webp",
+    "image": "/images/digimons/1760464259976_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[428]",
@@ -4898,7 +6026,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1730,
+    "atk": 615,
+    "def": 1050,
+    "attribute_id": null
   },
   {
     "id": 428,
@@ -4911,12 +6042,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1190,
+    "atk": 525,
+    "def": 615,
+    "attribute_id": null
   },
   {
     "id": 429,
     "name": "saber leomon",
-    "image": "/images/digimons/1760211002306_image.webp",
+    "image": "/images/digimons/1760464970599_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -4924,7 +6058,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 2010,
+    "atk": 1050,
+    "def": 1040,
+    "attribute_id": 8
   },
   {
     "id": 430,
@@ -4937,12 +6074,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 1170,
+    "atk": 475,
+    "def": 605,
+    "attribute_id": 9
   },
   {
     "id": 431,
     "name": "jesmon",
-    "image": "/images/digimons/1760207308419_image.webp",
+    "image": "/images/digimons/1760464658645_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -4950,12 +6090,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1645,
+    "atk": 1165,
+    "def": 905,
+    "attribute_id": 11
   },
   {
     "id": 432,
     "name": "jumbo gamemon",
-    "image": "/images/digimons/1760207391768_image.webp",
+    "image": "/images/digimons/1760464704484_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -4963,12 +6106,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1315,
+    "atk": 535,
+    "def": 565,
+    "attribute_id": null
   },
   {
     "id": 433,
     "name": "dianamon",
-    "image": "/images/digimons/1760206158772_image.webp",
+    "image": "/images/digimons/1760464505611_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[500]",
@@ -4976,12 +6122,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 1225,
+    "atk": 330,
+    "def": 850,
+    "attribute_id": 2
   },
   {
     "id": 434,
     "name": "dynasmon",
-    "image": "/images/digimons/1760206619389_image.webp",
+    "image": "/images/digimons/1760464562989_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -4989,7 +6138,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 2010,
+    "atk": 1295,
+    "def": 735,
+    "attribute_id": 8
   },
   {
     "id": 435,
@@ -5002,12 +6154,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2655,
+    "atk": 2100,
+    "def": 1020,
+    "attribute_id": null
   },
   {
     "id": 436,
     "name": "duftmon: leopard mode",
-    "image": "/images/digimons/1760206321652_image.webp",
+    "image": "/images/digimons/1760462330352_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[435]",
@@ -5015,12 +6170,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1760,
+    "atk": 870,
+    "def": 870,
+    "attribute_id": null
   },
   {
     "id": 437,
     "name": "dorugoramon",
-    "image": "/images/digimons/1760206243660_image.webp",
+    "image": "/images/digimons/1760464539198_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -5028,12 +6186,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 2100,
+    "atk": 1440,
+    "def": 775,
+    "attribute_id": 10
   },
   {
     "id": 438,
     "name": "pile volcamon",
-    "image": "/images/digimons/1760210333945_image.webp",
+    "image": "/images/digimons/1760464873707_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -5041,12 +6202,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 2715,
+    "atk": 1580,
+    "def": 1525,
+    "attribute_id": 1
   },
   {
     "id": 439,
     "name": "prince mamemon",
-    "image": "/images/digimons/1760210606221_image.webp",
+    "image": "/images/digimons/1760464929910_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -5054,12 +6218,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 2445,
+    "atk": 1375,
+    "def": 1340,
+    "attribute_id": 11
   },
   {
     "id": 440,
     "name": "plesiomon",
-    "image": "/images/digimons/1760210536343_image.webp",
+    "image": "/images/digimons/1760464903436_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -5067,12 +6234,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 2100,
+    "atk": 300,
+    "def": 560,
+    "attribute_id": 2
   },
   {
     "id": 441,
     "name": "boltmon",
-    "image": "/images/digimons/1760205166853_image.webp",
+    "image": "/images/digimons/1760464217344_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -5080,12 +6250,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1825,
+    "atk": 1165,
+    "def": 905,
+    "attribute_id": 5
   },
   {
     "id": 442,
     "name": "mirage gaogamon",
-    "image": "/images/digimons/1760209818538_image.webp",
+    "image": "/images/digimons/1760464834178_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[505]",
@@ -5093,7 +6266,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 1535,
+    "atk": 700,
+    "def": 720,
+    "attribute_id": 8
   },
   {
     "id": 443,
@@ -5106,12 +6282,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 1150,
+    "atk": 415,
+    "def": 455,
+    "attribute_id": 2
   },
   {
     "id": 444,
     "name": "metal seadramon",
-    "image": "/images/digimons/1760209594026_image.webp",
+    "image": "/images/digimons/1760464819797_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[515]",
@@ -5119,12 +6298,15 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 1650,
+    "atk": 785,
+    "def": 795,
+    "attribute_id": 2
   },
   {
     "id": 445,
     "name": "medieval dukemon",
-    "image": "/images/digimons/1760209066086_image.webp",
+    "image": "/images/digimons/1760464786690_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -5132,12 +6314,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2670,
+    "atk": 1550,
+    "def": 1495,
+    "attribute_id": null
   },
   {
     "id": 446,
     "name": "rosemon",
-    "image": "/images/digimons/1760210824796_image.webp",
+    "image": "/images/digimons/1760464961842_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[506]",
@@ -5145,12 +6330,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 1465,
+    "atk": 820,
+    "def": 690,
+    "attribute_id": 3
   },
   {
     "id": 447,
     "name": "lotusmon",
-    "image": "/images/digimons/1760208445200_image.webp",
+    "image": "/images/digimons/1760464758167_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -5158,25 +6346,31 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2710,
+    "atk": 1575,
+    "def": 1520,
+    "attribute_id": null
   },
   {
     "id": 448,
     "name": "avenge kidmon",
-    "image": "/images/digimons/1760203982598_image.webp",
+    "image": "/images/digimons/1760463949944_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1405,
+    "atk": 605,
+    "def": 630,
+    "attribute_id": null
   },
   {
     "id": 449,
     "name": "ebemon",
-    "image": "/images/digimons/1760206658303_image.webp",
+    "image": "/images/digimons/1760464575443_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[]",
@@ -5184,77 +6378,95 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1280,
+    "atk": 300,
+    "def": 560,
+    "attribute_id": 5
   },
   {
     "id": 450,
     "name": "venom vamdemon",
-    "image": "/images/digimons/1760211935554_image.webp",
+    "image": "/images/digimons/1760465165429_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1495,
+    "atk": 670,
+    "def": 690,
+    "attribute_id": null
   },
   {
     "id": 451,
     "name": "ancient wisemon",
-    "image": "/images/digimons/1760203841963_image.webp",
+    "image": "/images/digimons/1760463866992_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1995,
+    "atk": 1045,
+    "def": 1030,
+    "attribute_id": null
   },
   {
     "id": 452,
     "name": "chaos dukemon",
-    "image": "/images/digimons/1760205504772_image.webp",
+    "image": "/images/digimons/1760464269190_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1315,
+    "atk": 535,
+    "def": 565,
+    "attribute_id": null
   },
   {
     "id": 453,
     "name": "callismon",
-    "image": "/images/digimons/1760205261523_image.webp",
+    "image": "/images/digimons/1760464240727_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1630,
+    "atk": 1235,
+    "def": 560,
+    "attribute_id": null
   },
   {
     "id": 454,
     "name": "gundramon",
-    "image": "/images/digimons/1760206955726_image.webp",
+    "image": "/images/digimons/1760464625476_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1545,
+    "atk": 1310,
+    "def": 890,
+    "attribute_id": null
   },
   {
     "id": 455,
     "name": "king etemon",
-    "image": "/images/digimons/1760207825931_image.webp",
+    "image": "/images/digimons/1760464718961_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[]",
@@ -5262,64 +6474,79 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 2280,
+    "atk": 1255,
+    "def": 1225,
+    "attribute_id": 6
   },
   {
     "id": 456,
     "name": "grand dracumon",
-    "image": "/images/digimons/1760206861165_image.webp",
+    "image": "/images/digimons/1760464610982_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2125,
+    "atk": 1140,
+    "def": 1120,
+    "attribute_id": null
   },
   {
     "id": 457,
     "name": "chronomon destroy",
     "image": "/images/digimons/1760205717365_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2700,
+    "atk": 1570,
+    "def": 1515,
+    "attribute_id": null
   },
   {
     "id": 458,
     "name": "zanbamon",
-    "image": "/images/digimons/1760212604347_image.webp",
+    "image": "/images/digimons/1760465190405_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1735,
+    "atk": 1335,
+    "def": 880,
+    "attribute_id": null
   },
   {
     "id": 459,
     "name": "undead plutomon",
-    "image": "/images/digimons/1760211841370_image.webp",
+    "image": "/images/digimons/1760465138342_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2390,
+    "atk": 1340,
+    "def": 1305,
+    "attribute_id": null
   },
   {
     "id": 460,
     "name": "darkdramon",
-    "image": "/images/digimons/1760205940248_image.webp",
+    "image": "/images/digimons/1760464391395_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[498]",
@@ -5327,12 +6554,15 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1825,
+    "atk": 1080,
+    "def": 775,
+    "attribute_id": 5
   },
   {
     "id": 461,
     "name": "tiger vespamon",
-    "image": "/images/digimons/1760211505247_image.webp",
+    "image": "/images/digimons/1760465094882_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[]",
@@ -5340,12 +6570,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 2555,
+    "atk": 1460,
+    "def": 1415,
+    "attribute_id": 5
   },
   {
     "id": 462,
     "name": "titamon",
-    "image": "/images/digimons/1760211551178_image.webp",
+    "image": "/images/digimons/1760465106884_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[507]",
@@ -5353,12 +6586,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 2375,
+    "atk": 1120,
+    "def": 645,
+    "attribute_id": 6
   },
   {
     "id": 463,
     "name": "tyrant kabuterimon",
-    "image": "/images/digimons/1760211591403_image.webp",
+    "image": "/images/digimons/1760465115681_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[]",
@@ -5366,51 +6602,63 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 1405,
+    "atk": 605,
+    "def": 630,
+    "attribute_id": 3
   },
   {
     "id": 464,
     "name": "demon",
-    "image": "/images/digimons/1760206073201_image.webp",
+    "image": "/images/digimons/1760464413004_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1120,
+    "atk": 390,
+    "def": 435,
+    "attribute_id": null
   },
   {
     "id": 465,
     "name": "dukemon",
     "image": "/images/digimons/1760206535705_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[508]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2460,
+    "atk": 1390,
+    "def": 1350,
+    "attribute_id": null
   },
   {
     "id": 466,
     "name": "bacchusmon",
-    "image": "/images/digimons/1760204069965_image.webp",
+    "image": "/images/digimons/1760463964584_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2060,
+    "atk": 990,
+    "def": 880,
+    "attribute_id": null
   },
   {
     "id": 468,
     "name": "barbamon",
-    "image": "/images/digimons/1760204693739_image.webp",
+    "image": "/images/digimons/1760463993321_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[]",
@@ -5418,51 +6666,63 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1280,
+    "atk": 340,
+    "def": 660,
+    "attribute_id": 10
   },
   {
     "id": 469,
     "name": "piemon",
-    "image": "/images/digimons/1760210270088_image.webp",
+    "image": "/images/digimons/1760464848316_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[515]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2270,
+    "atk": 1245,
+    "def": 1220,
+    "attribute_id": null
   },
   {
     "id": 470,
     "name": "pinochimon",
-    "image": "/images/digimons/1760210388889_image.webp",
+    "image": "/images/digimons/1760464880556_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[515]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2715,
+    "atk": 1580,
+    "def": 1525,
+    "attribute_id": null
   },
   {
     "id": 471,
     "name": "pharaohmon",
-    "image": "/images/digimons/1760210231205_image.webp",
+    "image": "/images/digimons/1760464842015_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1540,
+    "atk": 350,
+    "def": 350,
+    "attribute_id": null
   },
   {
     "id": 472,
     "name": "platinum numemon",
-    "image": "/images/digimons/1760210490703_image.webp",
+    "image": "/images/digimons/1760464893305_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[]",
@@ -5470,103 +6730,127 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 2705,
+    "atk": 1575,
+    "def": 1520,
+    "attribute_id": 11
   },
   {
     "id": 473,
     "name": "plutomon",
-    "image": "/images/digimons/1760210568026_image.webp",
+    "image": "/images/digimons/1760464917893_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[459]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1605,
+    "atk": 1230,
+    "def": 765,
+    "attribute_id": null
   },
   {
     "id": 474,
     "name": "breakdramon",
-    "image": "/images/digimons/1760205218330_image.webp",
+    "image": "/images/digimons/1760464228089_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[504]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2375,
+    "atk": 1295,
+    "def": 950,
+    "attribute_id": null
   },
   {
     "id": 475,
     "name": "belial vamdemon",
-    "image": "/images/digimons/1760204942411_image.webp",
+    "image": "/images/digimons/1760464181040_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 2255,
+    "atk": 1240,
+    "def": 1210,
+    "attribute_id": null
   },
   {
     "id": 476,
     "name": "beel starmon",
-    "image": "/images/digimons/1760204750701_image.webp",
+    "image": "/images/digimons/1760464143517_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2045,
+    "atk": 1080,
+    "def": 1065,
+    "attribute_id": null
   },
   {
     "id": 477,
     "name": "beelzebumon",
-    "image": "/images/digimons/1760213909161_image.webp",
+    "image": "/images/digimons/1760464159253_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[509]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2485,
+    "atk": 1405,
+    "def": 1365,
+    "attribute_id": null
   },
   {
     "id": 478,
     "name": "belphemon: sleep mode",
-    "image": "/images/digimons/1760205015403_image.webp",
+    "image": "/images/digimons/1760464191649_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[510]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2685,
+    "atk": 1560,
+    "def": 1505,
+    "attribute_id": null
   },
   {
     "id": 479,
     "name": "magna kidmon",
-    "image": "/images/digimons/1760208917856_image.webp",
+    "image": "/images/digimons/1760464764571_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 9
+    "hp": 2055,
+    "atk": 1090,
+    "def": 1075,
+    "attribute_id": null
   },
   {
     "id": 480,
     "name": "minervamon",
-    "image": "/images/digimons/1760209726248_image.webp",
+    "image": "/images/digimons/1760464826837_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[511]",
@@ -5574,12 +6858,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1825,
+    "atk": 1250,
+    "def": 605,
+    "attribute_id": 11
   },
   {
     "id": 481,
     "name": "megidramon",
-    "image": "/images/digimons/1760209108287_image.webp",
+    "image": "/images/digimons/1760464793021_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[]",
@@ -5587,12 +6874,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 2280,
+    "atk": 1295,
+    "def": 715,
+    "attribute_id": 1
   },
   {
     "id": 482,
     "name": "metal etemon",
-    "image": "/images/digimons/1760209355585_image.webp",
+    "image": "/images/digimons/1760464807845_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[515]",
@@ -5600,38 +6890,47 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 2710,
+    "atk": 1575,
+    "def": 1520,
+    "attribute_id": 6
   },
   {
     "id": 483,
     "name": "mercurymon",
     "image": "/images/digimons/1760209227999_image.webp",
     "level": 8,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 11
+    "hp": 1305,
+    "atk": 955,
+    "def": 615,
+    "attribute_id": null
   },
   {
     "id": 484,
     "name": "junomon",
     "image": "/images/digimons/1760207492998_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1265,
+    "atk": 845,
+    "def": 595,
+    "attribute_id": null
   },
   {
     "id": 487,
     "name": "leviamon",
-    "image": "/images/digimons/1760208263035_image.webp",
+    "image": "/images/digimons/1760464732969_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[]",
@@ -5639,12 +6938,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 2010,
+    "atk": 1040,
+    "def": 955,
+    "attribute_id": 2
   },
   {
     "id": 488,
     "name": "lilithmon",
-    "image": "/images/digimons/1760208329741_image.webp",
+    "image": "/images/digimons/1760464747428_image.webp",
     "level": 4,
     "typeId": 3,
     "evolution": "[114]",
@@ -5652,51 +6954,63 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1230,
+    "atk": 515,
+    "def": 515,
+    "attribute_id": 10
   },
   {
     "id": 489,
     "name": "lord knightmon",
-    "image": "/images/digimons/1760208398692_image.webp",
+    "image": "/images/digimons/1760464752517_image.webp",
     "level": 4,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2565,
+    "atk": 1470,
+    "def": 1425,
+    "attribute_id": null
   },
   {
     "id": 490,
     "name": "imperialdramon: dragon mode",
     "image": "/images/digimons/1760303442378_image.webp",
     "level": 4,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[491,497]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1595,
+    "atk": 745,
+    "def": 755,
+    "attribute_id": null
   },
   {
     "id": 491,
     "name": "imperialdramon: fighter mode",
-    "image": "/images/digimons/1760207258808_image.webp",
+    "image": "/images/digimons/1760464652396_image.webp",
     "level": 4,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[497,490]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1520,
+    "atk": 690,
+    "def": 710,
+    "attribute_id": null
   },
   {
     "id": 492,
     "name": "valkyrimon",
-    "image": "/images/digimons/1760211911904_image.webp",
+    "image": "/images/digimons/1760465158306_image.webp",
     "level": 4,
     "typeId": 4,
     "evolution": "[]",
@@ -5704,12 +7018,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 1370,
+    "atk": 735,
+    "def": 735,
+    "attribute_id": 8
   },
   {
     "id": 493,
     "name": "gran kuwagamon",
-    "image": "/images/digimons/1760206818558_image.webp",
+    "image": "/images/digimons/1760464593707_image.webp",
     "level": 4,
     "typeId": 4,
     "evolution": "[]",
@@ -5717,20 +7034,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 1480,
+    "atk": 660,
+    "def": 680,
+    "attribute_id": 3
   },
   {
     "id": 494,
     "name": "diablomon",
-    "image": "/images/digimons/1760206112924_image.webp",
+    "image": "/images/digimons/1760464424304_image.webp",
     "level": 4,
-    "typeId": 6,
+    "typeId": 1,
     "evolution": "[513]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1405,
+    "atk": 605,
+    "def": 630,
+    "attribute_id": null
   },
   {
     "id": 495,
@@ -5743,20 +7066,26 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2210,
+    "atk": 1525,
+    "def": 1020,
+    "attribute_id": 11
   },
   {
     "id": 497,
     "name": "imperialdramon: paladin mode",
     "image": "/images/digimons/1760302616487_image.webp",
     "level": 5,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[59]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1980,
+    "atk": 1315,
+    "def": 730,
+    "attribute_id": null
   },
   {
     "id": 498,
@@ -5769,59 +7098,74 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1105,
+    "atk": 2100,
+    "def": 510,
+    "attribute_id": 11
   },
   {
     "id": 499,
     "name": "chaosmon: valdur arm",
     "image": "/images/digimons/1760303272582_image.webp",
     "level": 5,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[521]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1105,
+    "atk": 1500,
+    "def": 355,
+    "attribute_id": null
   },
   {
     "id": 500,
     "name": "grace novamon",
     "image": "/images/digimons/1760302600970_image.webp",
     "level": 5,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2540,
+    "atk": 1970,
+    "def": 970,
+    "attribute_id": null
   },
   {
     "id": 501,
     "name": "shine greymon: burst mode",
     "image": "/images/digimons/1760302714623_image.webp",
     "level": 5,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 2505,
+    "atk": 1925,
+    "def": 955,
+    "attribute_id": null
   },
   {
     "id": 503,
     "name": "ravmon: burst mode",
     "image": "/images/digimons/1760215486544_image.webp",
     "level": 5,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1755,
+    "atk": 1055,
+    "def": 635,
+    "attribute_id": null
   },
   {
     "id": 504,
@@ -5834,7 +7178,10 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 2655,
+    "atk": 1325,
+    "def": 920,
+    "attribute_id": 8
   },
   {
     "id": 505,
@@ -5847,7 +7194,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2005,
+    "atk": 1345,
+    "def": 740,
+    "attribute_id": null
   },
   {
     "id": 506,
@@ -5860,111 +7210,138 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 2655,
+    "atk": 2100,
+    "def": 1020,
+    "attribute_id": null
   },
   {
     "id": 507,
     "name": "skull baluchimon titamon",
     "image": "/images/digimons/1760302924736_image.webp",
     "level": 5,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1130,
+    "atk": 325,
+    "def": 365,
+    "attribute_id": null
   },
   {
     "id": 508,
     "name": "dukemon: crimson mode",
     "image": "/images/digimons/1760302983464_image.webp",
     "level": 5,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1285,
+    "atk": 505,
+    "def": 430,
+    "attribute_id": null
   },
   {
     "id": 509,
     "name": "beelzebumon: blast mode",
     "image": "/images/digimons/1760302520906_image.webp",
     "level": 5,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1820,
+    "atk": 1125,
+    "def": 660,
+    "attribute_id": null
   },
   {
     "id": 510,
     "name": "belphemon: rage mode",
     "image": "/images/digimons/1760302491766_image.webp",
     "level": 5,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2565,
+    "atk": 1995,
+    "def": 980,
+    "attribute_id": null
   },
   {
     "id": 511,
     "name": "mervamon",
     "image": "/images/digimons/1760302665869_image.webp",
     "level": 5,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2020,
+    "atk": 1690,
+    "def": 810,
+    "attribute_id": null
   },
   {
     "id": 512,
     "name": "lucemon: satan mode",
     "image": "/images/digimons/1760302674097_image.webp",
     "level": 5,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2645,
+    "atk": 2085,
+    "def": 1015,
+    "attribute_id": null
   },
   {
     "id": 513,
     "name": "armagemon",
     "image": "/images/digimons/1760303034002_image.webp",
     "level": 5,
-    "typeId": 6,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2320,
+    "atk": 1710,
+    "def": 875,
+    "attribute_id": null
   },
   {
     "id": 514,
     "name": "agumon -yuki no kizuna-",
     "image": "/images/digimons/1760213321160_image.webp",
     "level": 5,
-    "typeId": 6,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1960,
+    "atk": 1290,
+    "def": 720,
+    "attribute_id": null
   },
   {
     "id": 515,
@@ -5977,33 +7354,42 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 1
+    "hp": 1525,
+    "atk": 295,
+    "def": 845,
+    "attribute_id": 11
   },
   {
     "id": 516,
     "name": "gabumon -yujo no kizuna-",
     "image": "/images/digimons/1760302552520_image.webp",
     "level": 5,
-    "typeId": 6,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1240,
+    "atk": 455,
+    "def": 415,
+    "attribute_id": null
   },
   {
     "id": 517,
     "name": "agumon virus",
     "image": "/images/digimons/1760145654402_image.webp",
     "level": 1,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[213,143,26]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 935,
+    "atk": 295,
+    "def": 250,
+    "attribute_id": null
   },
   {
     "id": 518,
@@ -6016,12 +7402,15 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1370,
+    "atk": 990,
+    "def": 1250,
+    "attribute_id": 6
   },
   {
     "id": 519,
     "name": "bancho mamemon",
-    "image": "/images/digimons/1760155786562_image.webp",
+    "image": "/images/digimons/1760463979929_image.webp",
     "level": 4,
     "typeId": 1,
     "evolution": "[]",
@@ -6029,12 +7418,15 @@
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 2450,
+    "atk": 1385,
+    "def": 1345,
+    "attribute_id": null
   },
   {
     "id": 520,
     "name": "shoutmon x4",
-    "image": "/images/digimons/1760157517703_image.webp",
+    "image": "/images/digimons/1760459820526_image.webp",
     "level": 2,
     "typeId": 1,
     "evolution": "[324]",
@@ -6042,33 +7434,42 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 860,
+    "atk": 325,
+    "def": 355,
+    "attribute_id": null
   },
   {
     "id": 521,
     "name": "ultimate chaosmon",
     "image": "/images/digimons/1760302440415_image.webp",
     "level": 6,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 1,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "attribute_id": null
   },
   {
     "id": 522,
     "name": "sagittarimon",
     "image": "/images/digimons/1760299333229_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1025,
+    "atk": 615,
+    "def": 735,
+    "attribute_id": null
   },
   {
     "id": 523,
@@ -6081,228 +7482,282 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 845,
+    "atk": 500,
+    "def": 340,
+    "attribute_id": 1
   },
   {
     "id": 524,
     "name": "raidramon",
     "image": "/images/digimons/1760299315597_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1320,
+    "atk": 935,
+    "def": 1175,
+    "attribute_id": null
   },
   {
     "id": 525,
     "name": "shurimon",
     "image": "/images/digimons/1760299594253_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 835,
+    "atk": 430,
+    "def": 220,
+    "attribute_id": null
   },
   {
     "id": 526,
     "name": "nefertimon",
     "image": "/images/digimons/1760299545777_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 775,
+    "atk": 310,
+    "def": 390,
+    "attribute_id": null
   },
   {
     "id": 527,
     "name": "shadramon",
     "image": "/images/digimons/1760299502757_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1320,
+    "atk": 935,
+    "def": 1175,
+    "attribute_id": null
   },
   {
     "id": 528,
     "name": "quetzalmon",
     "image": "/images/digimons/1760299387091_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1345,
+    "atk": 965,
+    "def": 1215,
+    "attribute_id": null
   },
   {
     "id": 529,
     "name": "yasyamon",
     "image": "/images/digimons/1760299429472_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1355,
+    "atk": 975,
+    "def": 1225,
+    "attribute_id": null
   },
   {
     "id": 531,
     "name": "lynxmon",
     "image": "/images/digimons/1760297958801_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 990,
+    "atk": 575,
+    "def": 675,
+    "attribute_id": null
   },
   {
     "id": 532,
     "name": "togemogumon",
     "image": "/images/digimons/1760297910419_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1225,
+    "atk": 835,
+    "def": 1035,
+    "attribute_id": null
   },
   {
     "id": 533,
     "name": "mantaraymon",
     "image": "/images/digimons/1760299371392_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 910,
+    "atk": 490,
+    "def": 560,
+    "attribute_id": null
   },
   {
     "id": 534,
     "name": "sheepmon",
     "image": "/images/digimons/1760297806383_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1235,
+    "atk": 845,
+    "def": 1050,
+    "attribute_id": null
   },
   {
     "id": 535,
     "name": "harpymon",
     "image": "/images/digimons/1760299415690_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1370,
+    "atk": 990,
+    "def": 1245,
+    "attribute_id": null
   },
   {
     "id": 536,
     "name": "sethmon",
     "image": "/images/digimons/1760297777161_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1040,
+    "atk": 635,
+    "def": 755,
+    "attribute_id": null
   },
   {
     "id": 537,
     "name": "pipismon",
     "image": "/images/digimons/1760297744193_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1095,
+    "atk": 695,
+    "def": 840,
+    "attribute_id": null
   },
   {
     "id": 538,
     "name": "submarimon",
     "image": "/images/digimons/1760297817704_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 860,
+    "atk": 450,
+    "def": 450,
+    "attribute_id": null
   },
   {
     "id": 539,
     "name": "goldveedramon",
     "image": "/images/digimons/1760297701903_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1125,
+    "atk": 725,
+    "def": 885,
+    "attribute_id": null
   },
   {
     "id": 540,
     "name": "maildramon",
     "image": "/images/digimons/1760297714128_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1340,
+    "atk": 960,
+    "def": 1210,
+    "attribute_id": null
   },
   {
     "id": 541,
     "name": "thunderbirmon",
     "image": "/images/digimons/1760231814078_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1370,
+    "atk": 990,
+    "def": 1250,
+    "attribute_id": null
   },
   {
     "id": 542,
@@ -6315,72 +7770,90 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 970,
+    "atk": 530,
+    "def": 320,
+    "attribute_id": 1
   },
   {
     "id": 543,
     "name": "kumamon",
     "image": "/images/digimons/1760300674661_image.webp",
     "level": 8,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 4
+    "hp": 960,
+    "atk": 535,
+    "def": 360,
+    "attribute_id": null
   },
   {
     "id": 544,
     "name": "korikakumon",
     "image": "/images/digimons/1760300565614_image.webp",
     "level": 8,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 4
+    "hp": 1435,
+    "atk": 1115,
+    "def": 715,
+    "attribute_id": null
   },
   {
     "id": 545,
     "name": "kazemon",
     "image": "/images/digimons/1760300545811_image.webp",
     "level": 8,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 865,
+    "atk": 415,
+    "def": 285,
+    "attribute_id": null
   },
   {
     "id": 546,
     "name": "zephyrmon",
     "image": "/images/digimons/1760301476572_image.webp",
     "level": 8,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 1460,
+    "atk": 1145,
+    "def": 730,
+    "attribute_id": null
   },
   {
     "id": 547,
     "name": "beetlemon",
     "image": "/images/digimons/1760300133716_image.webp",
     "level": 8,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 805,
+    "atk": 350,
+    "def": 245,
+    "attribute_id": null
   },
   {
     "id": 548,
@@ -6393,345 +7866,426 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 8
+    "hp": 1225,
+    "atk": 860,
+    "def": 560,
+    "attribute_id": null
   },
   {
     "id": 549,
     "name": "lowemon",
     "image": "/images/digimons/1760300691911_image.webp",
     "level": 8,
-    "typeId": 5,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1225,
+    "atk": 860,
+    "def": 555,
+    "attribute_id": null
   },
   {
     "id": 550,
     "name": "jagerlowemon",
     "image": "/images/digimons/1760300332895_image.webp",
     "level": 8,
-    "typeId": 5,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1435,
+    "atk": 1115,
+    "def": 715,
+    "attribute_id": null
   },
   {
     "id": 551,
     "name": "boarmon",
     "image": "/images/digimons/1760283085946_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1195,
+    "atk": 800,
+    "def": 985,
+    "attribute_id": null
   },
   {
     "id": 552,
     "name": "allomon",
     "image": "/images/digimons/1760283237279_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 695,
+    "atk": 260,
+    "def": 240,
+    "attribute_id": null
   },
   {
     "id": 553,
     "name": "baromon",
     "image": "/images/digimons/1760283490394_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1195,
+    "atk": 800,
+    "def": 985,
+    "attribute_id": null
   },
   {
     "id": 554,
     "name": "sepikmon",
     "image": "/images/digimons/1760283784224_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 835,
+    "atk": 410,
+    "def": 445,
+    "attribute_id": null
   },
   {
     "id": 555,
     "name": "rinkmon",
     "image": "/images/digimons/1760283893952_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1040,
+    "atk": 635,
+    "def": 755,
+    "attribute_id": null
   },
   {
     "id": 556,
     "name": "stegomon",
     "image": "/images/digimons/1760284068370_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1015,
+    "atk": 605,
+    "def": 720,
+    "attribute_id": null
   },
   {
     "id": 557,
     "name": "rabbitmon",
     "image": "/images/digimons/1760284153121_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 810,
+    "atk": 385,
+    "def": 410,
+    "attribute_id": null
   },
   {
     "id": 558,
     "name": "pteramon",
     "image": "/images/digimons/1760284341635_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 835,
+    "atk": 410,
+    "def": 445,
+    "attribute_id": null
   },
   {
     "id": 559,
     "name": "aurumon",
     "image": "/images/digimons/1760284440651_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1250,
+    "atk": 860,
+    "def": 1070,
+    "attribute_id": null
   },
   {
     "id": 560,
     "name": "swanmon",
     "image": "/images/digimons/1760284530663_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1345,
+    "atk": 965,
+    "def": 1215,
+    "attribute_id": null
   },
   {
     "id": 561,
     "name": "frogmon",
-    "image": "/images/digimons/1760284760911_image.webp",
+    "image": "/images/digimons/1760459035337_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 865,
+    "atk": 440,
+    "def": 490,
+    "attribute_id": null
   },
   {
     "id": 562,
     "name": "ponchomon",
     "image": "/images/digimons/1760284863110_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 710,
+    "atk": 270,
+    "def": 255,
+    "attribute_id": null
   },
   {
     "id": 563,
     "name": "kabukimon",
     "image": "/images/digimons/1760284931432_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 905,
+    "atk": 485,
+    "def": 550,
+    "attribute_id": null
   },
   {
     "id": 564,
     "name": "honeybeemon",
     "image": "/images/digimons/1760285036414_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1295,
+    "atk": 910,
+    "def": 1135,
+    "attribute_id": null
   },
   {
     "id": 565,
     "name": "mothmon",
     "image": "/images/digimons/1760285091783_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 895,
+    "atk": 470,
+    "def": 535,
+    "attribute_id": null
   },
   {
     "id": 566,
     "name": "butterflymon",
     "image": "/images/digimons/1760285164880_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 945,
+    "atk": 530,
+    "def": 610,
+    "attribute_id": null
   },
   {
     "id": 567,
     "name": "flybeemon",
     "image": "/images/digimons/1760285223015_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 905,
+    "atk": 485,
+    "def": 550,
+    "attribute_id": null
   },
   {
     "id": 568,
     "name": "moosemon",
     "image": "/images/digimons/1760285502544_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1010,
+    "atk": 600,
+    "def": 710,
+    "attribute_id": null
   },
   {
     "id": 569,
     "name": "bullmon",
     "image": "/images/digimons/1760285665917_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1145,
+    "atk": 745,
+    "def": 910,
+    "attribute_id": null
   },
   {
     "id": 570,
     "name": "oryxmon",
     "image": "/images/digimons/1760285865615_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1320,
+    "atk": 935,
+    "def": 1170,
+    "attribute_id": null
   },
   {
     "id": 571,
     "name": "manbomon",
     "image": "/images/digimons/1760285973258_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1005,
+    "atk": 595,
+    "def": 700,
+    "attribute_id": null
   },
   {
     "id": 572,
     "name": "gargoylemon",
     "image": "/images/digimons/1760286031184_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1000,
+    "atk": 590,
+    "def": 695,
+    "attribute_id": null
   },
   {
     "id": 573,
     "name": "prairiemon",
     "image": "/images/digimons/1760286167835_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 6
+    "hp": 975,
+    "atk": 560,
+    "def": 655,
+    "attribute_id": null
   },
   {
     "id": 574,
     "name": "rhinomon",
     "image": "/images/digimons/1760286258255_image.webp",
     "level": 0,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 1095,
+    "atk": 690,
+    "def": 835,
+    "attribute_id": null
   },
   {
     "id": 575,
@@ -6744,7 +8298,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 12
+    "hp": 965,
+    "atk": 550,
+    "def": 645,
+    "attribute_id": null
   },
   {
     "id": 576,
@@ -6757,7 +8314,10 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1235,
+    "atk": 870,
+    "def": 565,
+    "attribute_id": null
   },
   {
     "id": 577,
@@ -6770,98 +8330,122 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 7
+    "hp": 1485,
+    "atk": 1175,
+    "def": 750,
+    "attribute_id": null
   },
   {
     "id": 578,
     "name": "arbormon",
     "image": "/images/digimons/1760299947379_image.webp",
     "level": 8,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 820,
+    "atk": 365,
+    "def": 255,
+    "attribute_id": null
   },
   {
     "id": 579,
     "name": "petaldramon",
     "image": "/images/digimons/1760301095391_image.webp",
     "level": 8,
-    "typeId": 2,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 5
+    "hp": 805,
+    "atk": 350,
+    "def": 245,
+    "attribute_id": null
   },
   {
     "id": 580,
     "name": "ranamon",
     "image": "/images/digimons/1760301327099_image.webp",
     "level": 8,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 985,
+    "atk": 565,
+    "def": 375,
+    "attribute_id": null
   },
   {
     "id": 581,
     "name": "calmaramon",
     "image": "/images/digimons/1760300078779_image.webp",
     "level": 8,
-    "typeId": 4,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 3
+    "hp": 775,
+    "atk": 310,
+    "def": 390,
+    "attribute_id": null
   },
   {
     "id": 582,
     "name": "sephirotmon",
     "image": "/images/digimons/1760301384355_image.webp",
     "level": 8,
-    "typeId": 5,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 11
+    "hp": 1485,
+    "atk": 1175,
+    "def": 750,
+    "attribute_id": null
   },
   {
     "id": 583,
     "name": "duskmon",
     "image": "/images/digimons/1760300185146_image.webp",
     "level": 8,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 1225,
+    "atk": 860,
+    "def": 555,
+    "attribute_id": null
   },
   {
     "id": 584,
     "name": "velgemon",
     "image": "/images/digimons/1760301465229_image.webp",
     "level": 8,
-    "typeId": 3,
+    "typeId": 1,
     "evolution": "[]",
     "active": 1,
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 10
+    "hp": 920,
+    "atk": 485,
+    "def": 325,
+    "attribute_id": null
   },
   {
     "id": 585,
@@ -6874,6 +8458,9 @@
     "boss": 0,
     "effectId": 1,
     "description": "",
-    "attributeId": 2
+    "hp": 1155,
+    "atk": 775,
+    "def": 505,
+    "attribute_id": 1
   }
 ]

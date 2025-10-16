@@ -7,7 +7,6 @@ export async function GET() {
     const effects = getAllEffects();
     return NextResponse.json(effects);
   } catch (error) {
-    console.error("Erro ao buscar efeitos:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -38,7 +37,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(newEffect, { status: 201 });
   } catch (error) {
-    console.error("Erro ao criar efeito:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

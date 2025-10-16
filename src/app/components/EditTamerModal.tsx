@@ -50,7 +50,6 @@ export default function EditTamerModal({
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      console.log("📸 Arquivo selecionado:", file.name, file.size, "bytes");
 
       // Validar tipo de arquivo
       if (!file.type.startsWith("image/")) {
@@ -68,20 +67,17 @@ export default function EditTamerModal({
         return;
       }
 
-      console.log("🎨 Abrindo cropper...");
       // Criar preview para crop
       const reader = new FileReader();
       reader.onloadend = () => {
         setImageToCrop(reader.result as string);
         setShowCropper(true);
-        console.log("✅ Cropper aberto");
       };
       reader.readAsDataURL(file);
     }
   };
 
   const handleCropComplete = (croppedBlob: Blob) => {
-    console.log("✂️ Imagem recortada:", croppedBlob.size, "bytes");
 
     // Converter blob para File (WebP ou JPEG)
     const extension = croppedBlob.type === "image/webp" ? "webp" : "jpg";
@@ -89,13 +85,11 @@ export default function EditTamerModal({
       type: croppedBlob.type,
     });
     setImageFile(croppedFile);
-    console.log("📁 Arquivo criado:", croppedFile.name, croppedFile.size);
 
     // Criar preview da imagem recortada
     const reader = new FileReader();
     reader.onloadend = () => {
       setImagePreview(reader.result as string);
-      console.log("🖼️ Preview criado com sucesso");
     };
     reader.readAsDataURL(croppedBlob);
 
@@ -122,7 +116,6 @@ export default function EditTamerModal({
 
       // Se há uma nova imagem, fazer upload
       if (imageFile) {
-        console.log("📤 Fazendo upload da imagem...");
         const formDataUpload = new FormData();
         formDataUpload.append("file", imageFile);
         formDataUpload.append("type", "tamer");
@@ -133,23 +126,16 @@ export default function EditTamerModal({
           body: formDataUpload,
         });
 
-        console.log("📥 Resposta do upload:", uploadResponse.status);
 
         if (uploadResponse.ok) {
           const uploadResult = await uploadResponse.json();
           imagePath = uploadResult.path;
-          console.log("✅ Imagem enviada com sucesso:", imagePath);
         } else {
           const errorText = await uploadResponse.text();
-          console.error("❌ Erro no upload:", errorText);
           throw new Error("Erro ao fazer upload da imagem");
         }
       }
 
-      console.log("💾 Atualizando tamer com dados:", {
-        name: formData.name,
-        image: imagePath,
-      });
 
       // Atualizar o tamer
       const response = await fetch(`/api/tamers/${tamer.id}`, {
@@ -163,11 +149,9 @@ export default function EditTamerModal({
         }),
       });
 
-      console.log("📥 Resposta da API:", response.status);
 
       if (response.ok) {
         const result = await response.json();
-        console.log("✅ Tamer atualizado:", result);
         enqueueSnackbar("Tamer atualizado com sucesso!", {
           variant: "success",
         });
@@ -175,11 +159,9 @@ export default function EditTamerModal({
         onClose();
       } else {
         const error = await response.json();
-        console.error("❌ Erro da API:", error);
         enqueueSnackbar(`Erro: ${error.error}`, { variant: "error" });
       }
     } catch (error) {
-      console.error("❌ Erro ao atualizar tamer:", error);
       enqueueSnackbar("Erro ao atualizar tamer", { variant: "error" });
     } finally {
       setLoading(false);
@@ -249,13 +231,9 @@ export default function EditTamerModal({
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      console.log("🖱️ Imagem clicada!");
-                      console.log("📎 Ref atual:", fileInputRef.current);
                       if (fileInputRef.current) {
-                        console.log("✅ Ref existe, chamando click()");
                         fileInputRef.current.click();
                       } else {
-                        console.error("❌ Ref não encontrado!");
                       }
                     }}
                     className="relative w-32 h-32 bg-gray-700 rounded-full flex items-center justify-center overflow-hidden cursor-pointer group hover:ring-4 hover:ring-blue-500/50 transition-all"

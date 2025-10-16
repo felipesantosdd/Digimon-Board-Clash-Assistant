@@ -7,7 +7,6 @@ export async function GET() {
     const digimons = getAllDigimons();
     return NextResponse.json(digimons);
   } catch (error) {
-    console.error("Erro ao buscar Digimons:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }
@@ -66,7 +65,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(savedDigimon, { status: 201 });
   } catch (error) {
-    console.error("Erro ao criar Digimon:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

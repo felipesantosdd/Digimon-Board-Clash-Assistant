@@ -55,16 +55,12 @@ export default function ImageCropper({
   );
 
   const createCroppedImage = useCallback(async () => {
-    console.log("🎯 Botão de recortar clicado!");
-    console.log("📏 Área de recorte:", croppedAreaPixels);
 
     if (!croppedAreaPixels) {
-      console.warn("⚠️ Nenhuma área selecionada!");
       return;
     }
 
     try {
-      console.log("✂️ Iniciando recorte e otimização...");
       const croppedImage = await getCroppedImg(
         image,
         croppedAreaPixels,
@@ -73,7 +69,6 @@ export default function ImageCropper({
       );
       onCropComplete(croppedImage);
     } catch (e) {
-      console.error("❌ Erro ao recortar imagem:", e);
     }
   }, [croppedAreaPixels, image, onCropComplete]);
 
@@ -165,9 +160,6 @@ async function getCroppedImg(
     const ratio = Math.min(maxSize / outputWidth, maxSize / outputHeight);
     outputWidth = Math.round(outputWidth * ratio);
     outputHeight = Math.round(outputHeight * ratio);
-    console.log(
-      `🔄 Redimensionando de ${pixelCrop.width}x${pixelCrop.height} para ${outputWidth}x${outputHeight}`
-    );
   }
 
   canvas.width = outputWidth;
@@ -196,23 +188,12 @@ async function getCroppedImg(
     canvas.toBlob(
       (blob) => {
         if (blob) {
-          console.log(
-            `📦 WebP: ${outputWidth}x${outputHeight}px, ${(
-              blob.size / 1024
-            ).toFixed(2)}KB (qualidade: ${quality})`
-          );
           resolve(blob);
         } else {
           // Fallback para JPEG se navegador não suportar WebP
-          console.log("⚠️ WebP não suportado, usando JPEG");
           canvas.toBlob(
             (jpegBlob) => {
               if (jpegBlob) {
-                console.log(
-                  `📦 JPEG: ${outputWidth}x${outputHeight}px, ${(
-                    jpegBlob.size / 1024
-                  ).toFixed(2)}KB (qualidade: ${quality})`
-                );
                 resolve(jpegBlob);
               } else {
                 reject(new Error("Falha ao criar blob da imagem"));
