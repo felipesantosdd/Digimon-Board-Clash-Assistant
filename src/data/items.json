@@ -4,72 +4,87 @@
     "name": "Poção de Vida P",
     "description": "Restaura 2000 Pontos de Vida",
     "image": "/images/items/1759941795057_8586614.webp",
-    "effectId": 2,
+    "effect": "heal_2000",
     "dropChance": 0,
     "targetDigimons": [],
-    "active": 1
+    "effectId": 2,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 22,
     "name": "Ovo da Coragem",
     "description": "O ovo do valor e bravura. Veemon usa para se tornar Flamedramon.",
     "image": "/images/items/1760295017798_image.webp",
-    "effectId": 17,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       523,
       531,
       527
     ],
-    "active": 1
+    "effectId": 17,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 23,
     "name": "Ovo da Amizade",
     "description": "O ovo dos laços eternos. Veemon usa para se tornar Raidramon.",
     "image": "/images/items/1760295132579_image.webp",
-    "effectId": 17,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       524,
       541,
       532
     ],
-    "active": 1
+    "effectId": 17,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 24,
     "name": "Ovo do Amor",
     "description": "O ovo da compaixão e cuidado. Gatomon usa para se tornar Nefertimon.",
     "image": "/images/items/1760294846491_image.webp",
-    "effectId": 17,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       151,
       537,
       536
     ],
-    "active": 1
+    "effectId": 17,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 25,
     "name": "Ovo da Pureza",
     "description": "O ovo da inocência e sinceridade. Gatomon usa para se tornar Pegasusmon em algumas versões.",
     "image": "/images/items/1760295103894_image.webp",
-    "effectId": 17,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       525,
       529
     ],
-    "active": 1
+    "effectId": 17,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 26,
     "name": "Ovo do Conhecimento",
     "description": "O ovo da sabedoria e estratégia. Armadillomon usa para se tornar Digmon.",
     "image": "/images/items/1760294621268_image.webp",
-    "effectId": 17,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       132,
@@ -78,508 +93,923 @@
       566,
       567
     ],
-    "active": 1
+    "effectId": 17,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 27,
     "name": "Ovo da Confiabilidade",
     "description": "O ovo da lealdade inabalável. Armadillomon usa para se tornar Submarimon.",
     "image": "/images/items/1760294892820_image.webp",
-    "effectId": 17,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       533,
       538
     ],
-    "active": 1
+    "effectId": 17,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 28,
     "name": "Ovo da Esperança",
     "description": "O ovo da luz e renovação. Patamon usa para se tornar Pegasusmon.",
     "image": "/images/items/1760294931673_image.webp",
-    "effectId": 17,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       98,
       534,
       522
     ],
-    "active": 1
+    "effectId": 17,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 29,
     "name": "Ovo da Luz",
     "description": "O ovo que dissipa as trevas. Usado por diversos Digimons.",
     "image": "/images/items/1760294682149_image.webp",
-    "effectId": 17,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       535,
       526,
       528
     ],
-    "active": 1
+    "effectId": 17,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 30,
     "name": "Ovo da Gentileza",
     "description": "O ovo da bondade e empatia. Wormmon usa para se tornar Shurimon.",
     "image": "/images/items/1760294476750_image.webp",
-    "effectId": 17,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       573
     ],
-    "active": 1
+    "effectId": 17,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 31,
     "name": "Ovo dos Milagres",
     "description": "O ovo lendário e raro. Veemon usa para se tornar Magnamon.",
     "image": "/images/items/1760294457932_image.webp",
-    "effectId": 17,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       518,
       540
     ],
-    "active": 1
+    "effectId": 17,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 32,
     "name": "Ovo do Destino",
     "description": "O ovo do potencial oculto. Usado por diversos Digimons para formas únicas.",
     "image": "/images/items/1760294588031_image.webp",
-    "effectId": 17,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       317,
       539
     ],
-    "active": 1
+    "effectId": 17,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 33,
     "name": "Espírito Humano do Fogo",
     "description": "O espírito lendário do elemento Fogo. Permite a transformação em Agunimon.",
     "image": "/images/items/1760292035442_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       542
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 34,
     "name": "Espírito Bestial do Fogo",
     "description": "O espírito bestial do Fogo. Transforma em BurningGreymon/Vritramon.",
     "image": "/images/items/1760291806274_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       85
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 35,
     "name": "Espírito Humano da Luz",
     "description": "O espírito lendário da Luz. Permite a transformação em Lobomon.",
     "image": "/images/items/1760292003735_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       75
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 36,
     "name": "Espírito Bestial da Luz",
     "description": "O espírito bestial da Luz. Transforma em KendoGarurumon/Garmmon.",
     "image": "/images/items/1760292211696_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       82
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 37,
     "name": "Espírito Humano do Gelo",
     "description": "O espírito lendário do Gelo. Permite a transformação em Kumamon.",
     "image": "/images/items/1760291924709_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       543
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 38,
     "name": "Espírito Bestial do Gelo",
     "description": "O espírito bestial do Gelo. Transforma em Korikakumon.",
     "image": "/images/items/1760291617305_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       544
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 39,
     "name": "Espírito Humano do Vento",
     "description": "O espírito lendário do Vento. Permite a transformação em Kazemon.",
     "image": "/images/items/1760292072721_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       545
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 40,
     "name": "Espírito Bestial do Vento",
     "description": "O espírito bestial do Vento. Transforma em Zephyrmon.",
     "image": "/images/items/1760316726570_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       546
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 41,
     "name": "Espírito Humano do Trovão",
     "description": "O espírito lendário do Trovão. Permite a transformação em Beetlemon.",
     "image": "/images/items/1760291898544_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       547
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 42,
     "name": "Espírito Bestial do Trovão",
     "description": "O espírito bestial do Trovão. Transforma em MetalKabuterimon.",
     "image": "/images/items/1760291833284_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       548
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 43,
     "name": "Espírito Humano das Trevas",
     "description": "O espírito lendário das Trevas. Permite a transformação em Lowemon.",
     "image": "/images/items/1760291956419_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       549
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 44,
     "name": "Espírito Bestial das Trevas",
     "description": "O espírito bestial das Trevas. Transforma em JagerLowemon/KaiserLeomon.",
     "image": "/images/items/1760292158351_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       550
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 45,
     "name": "Emblema da Coragem",
     "description": "O emblema de Tai Kamiya. Permite evolução para formas supremas do fogo e dragão.",
     "image": "/images/items/1760296452838_image.webp",
-    "effectId": 21,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [],
-    "active": 1
+    "effectId": 21,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 46,
     "name": "Emblema da Amizade",
     "description": "O emblema de Matt Ishida. Permite evolução para lobos supremos de gelo.",
     "image": "/images/items/1760295381021_image.webp",
-    "effectId": 21,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [],
-    "active": 1
+    "effectId": 21,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 47,
     "name": "Emblema do Amor",
     "description": "O emblema de Sora Takenouchi. Permite evolução para aves supremas.",
     "image": "/images/items/1760295926308_image.webp",
-    "effectId": 21,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       295
     ],
-    "active": 1
+    "effectId": 21,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 48,
     "name": "Emblema do Conhecimento",
     "description": "O emblema de Izzy Izumi. Permite evolução para insetos supremos.",
     "image": "/images/items/1760296206627_image.webp",
-    "effectId": 21,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [],
-    "active": 1
+    "effectId": 21,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 49,
     "name": "Emblema da Sinceridade",
     "description": "O emblema de Mimi Tachikawa. Permite evolução para formas supremas da natureza.",
     "image": "/images/items/1760295966967_image.webp",
-    "effectId": 21,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       446,
       506
     ],
-    "active": 1
+    "effectId": 21,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 50,
     "name": "Emblema da Confiabilidade",
     "description": "O emblema de Joe Kido. Permite evolução para guerreiros supremos do mar.",
     "image": "/images/items/1760295281253_image.webp",
-    "effectId": 21,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       302,
       107
     ],
-    "active": 1
+    "effectId": 21,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 51,
     "name": "Emblema da Esperança",
     "description": "O emblema de T.K. Takaishi. Permite evolução para anjos supremos.",
     "image": "/images/items/1760296363338_image.webp",
-    "effectId": 21,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       106,
       142
     ],
-    "active": 1
+    "effectId": 21,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 52,
     "name": "Emblema da Luz",
     "description": "O emblema de Kari Kamiya. Permite evolução para seres divinos da luz.",
     "image": "/images/items/1760295629493_image.webp",
-    "effectId": 21,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       109,
       111,
       112
     ],
-    "active": 1
+    "effectId": 21,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 53,
     "name": "Espírito Humano da Terra",
     "description": "O espírito lendário da Terra. Transforma em Grumblemon.",
     "image": "/images/items/1760294262333_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       576
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 54,
     "name": "Espírito Bestial da Terra",
     "description": "O espírito bestial da Terra. Transforma em Gigasmon.",
     "image": "/images/items/1760294214453_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       577
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 55,
     "name": "Espírito Humano da Madeira",
     "description": "O espírito lendário da Madeira. Transforma em Arbormon.",
     "image": "/images/items/1760292398251_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       578
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 56,
     "name": "Espírito Bestial da Madeira",
     "description": "O espírito bestial da Madeira. Transforma em Petaldramon.",
     "image": "/images/items/1760294318443_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       579
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 57,
     "name": "Espírito Humano da Água",
     "description": "O espírito lendário da Água. Transforma em Ranamon.",
     "image": "/images/items/1760294276430_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       580
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 58,
     "name": "Espírito Bestial da Água",
     "description": "O espírito bestial da Água. Transforma em Calmaramon.",
     "image": "/images/items/1760294159831_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       581
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 59,
     "name": "Espírito Humano do Aço",
     "description": "O espírito lendário do Aço. Transforma em Mercurymon.",
     "image": "/images/items/1760292481824_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       483
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 60,
     "name": "Espírito Bestial do Aço",
     "description": "O espírito bestial do Aço. Transforma em Sephirotmon.",
     "image": "/images/items/1760293836705_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       582
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 61,
     "name": "Espírito Humano das Trevas Corrompidas",
     "description": "O espírito corrompido das Trevas. Transforma em Duskmon.",
     "image": "/images/items/1760292307479_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       583
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 62,
     "name": "Espírito Bestial das Trevas Corrompidas",
     "description": "O espírito bestial corrompido. Transforma em Velgemon.",
     "image": "/images/items/1760294123402_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       584
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 63,
     "name": "Espírito do Dragão Supremo",
     "description": "Fusão dos 5 Espíritos do Fogo. Transforma em KaiserGreymon.",
     "image": "/images/items/1760293795669_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       585
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 64,
     "name": "Espírito do Lobo Supremo",
     "description": "Fusão dos 5 Espíritos da Luz. Transforma em MagnaGarurumon.",
     "image": "/images/items/1760294349659_image.webp",
-    "effectId": 20,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [
       91
     ],
-    "active": 1
+    "effectId": 20,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 65,
     "name": "Digivice",
     "description": "Digivice",
     "image": "/images/items/1760294034950_image.webp",
-    "effectId": 22,
+    "effect": "",
     "dropChance": 3,
     "targetDigimons": [],
-    "active": 1
+    "effectId": 22,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 66,
     "name": "Emblema dos Milagres",
     "description": "O emblema dos eventos raros e extraordinários. Permite evolução para formas Mega lendárias.",
     "image": "/images/items/1760296007918_image.webp",
-    "effectId": 21,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [],
-    "active": 1
+    "effectId": 21,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 67,
     "name": "Emblema do Destino",
     "description": "O emblema do potencial oculto. Permite evolução para formas Mega únicas.",
     "image": "/images/items/1760296291367_image.webp",
-    "effectId": 21,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [],
-    "active": 1
+    "effectId": 21,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   },
   {
     "id": 68,
     "name": "Emblema da Gentileza",
     "description": "O emblema da bondade e empatia. Permite evolução para formas Mega compassivas.",
     "image": "/images/items/1760296160176_image.webp",
-    "effectId": 21,
+    "effect": "",
     "dropChance": 15,
     "targetDigimons": [],
-    "active": 1
+    "effectId": 21,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 69,
+    "name": "Portão Dimensional",
+    "description": "Permite movimento instantâneo. O Digimon pode andar 10 casas a mais no tabuleiro.",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 8,
+    "targetDigimons": [],
+    "effectId": 23,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 70,
+    "name": "Chip de Recuperação Pequeno",
+    "description": "Restaura 2.000 HP",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 40,
+    "targetDigimons": [],
+    "effectId": null,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 71,
+    "name": "Chip de Recuperação Médio I",
+    "description": "Restaura 4.000 HP",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 35,
+    "targetDigimons": [],
+    "effectId": null,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 72,
+    "name": "Chip de Recuperação Médio II",
+    "description": "Restaura 6.000 HP",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 30,
+    "targetDigimons": [],
+    "effectId": null,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 73,
+    "name": "Chip de Recuperação Grande I",
+    "description": "Restaura 8.000 HP",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 25,
+    "targetDigimons": [],
+    "effectId": null,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 74,
+    "name": "Chip de Recuperação Grande II",
+    "description": "Restaura 10.000 HP",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 20,
+    "targetDigimons": [],
+    "effectId": null,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 75,
+    "name": "Chip de Recuperação Super I",
+    "description": "Restaura 12.000 HP",
+    "image": "/images/items/1760318878233_image.webp",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [],
+    "effectId": 1,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 76,
+    "name": "Chip de Recuperação Super II",
+    "description": "Restaura 14.000 HP",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 12,
+    "targetDigimons": [],
+    "effectId": null,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 77,
+    "name": "Chip de Recuperação Mega",
+    "description": "Restaura 16.000 HP",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 7,
+    "targetDigimons": [],
+    "effectId": null,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 78,
+    "name": "Chip de Recuperação Ultra",
+    "description": "Restaura 20.000 HP",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 10,
+    "targetDigimons": [],
+    "effectId": null,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 79,
+    "name": "Chip de Recuperação Total",
+    "description": "Restaura 24.000 HP (HP máximo do sistema)",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [],
+    "effectId": null,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 80,
+    "name": "Chip de Força P",
+    "description": "Bônus permanente: +5 nos dados de ataque",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 40,
+    "targetDigimons": [],
+    "effectId": 24,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 81,
+    "name": "Chip de Força M",
+    "description": "Bônus permanente: +10 nos dados de ataque",
+    "image": "/images/items/1760318858226_image.webp",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [],
+    "effectId": 24,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 82,
+    "name": "Chip de Força G",
+    "description": "Bônus permanente: +15 nos dados de ataque",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 7,
+    "targetDigimons": [],
+    "effectId": 24,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 83,
+    "name": "Chip de Defesa P",
+    "description": "Bônus permanente: +5 nos dados de defesa",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 40,
+    "targetDigimons": [],
+    "effectId": 25,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 84,
+    "name": "Chip de Defesa M",
+    "description": "Bônus permanente: +10 nos dados de defesa",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 15,
+    "targetDigimons": [],
+    "effectId": 25,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 85,
+    "name": "Chip de Defesa G",
+    "description": "Bônus permanente: +15 nos dados de defesa",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 7,
+    "targetDigimons": [],
+    "effectId": 25,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 86,
+    "name": "Chip de Velocidade I",
+    "description": "Permite andar +1 casa adicional no tabuleiro",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 40,
+    "targetDigimons": [],
+    "effectId": 23,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 87,
+    "name": "Chip de Velocidade III",
+    "description": "Permite andar +2 casas adicionais no tabuleiro",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 20,
+    "targetDigimons": [],
+    "effectId": 23,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 88,
+    "name": "Chip de Velocidade II",
+    "description": "Permite andar +3 casas adicionais no tabuleiro",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 30,
+    "targetDigimons": [],
+    "effectId": 23,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 89,
+    "name": "Chip de Velocidade IV",
+    "description": "Permite andar +4 casas adicionais no tabuleiro",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 10,
+    "targetDigimons": [],
+    "effectId": 23,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
+  },
+  {
+    "id": 90,
+    "name": "Chip de Velocidade V",
+    "description": "Permite andar +5 casas adicionais no tabuleiro",
+    "image": "/images/items/1760317992697_image.webp",
+    "effect": "",
+    "dropChance": 5,
+    "targetDigimons": [],
+    "effectId": 23,
+    "active": 1,
+    "effectValue": 0,
+    "unique_item": 0
   }
 ]

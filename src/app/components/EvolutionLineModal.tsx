@@ -90,7 +90,7 @@ export default function EvolutionLineModal({
       const nextEvolutions: Digimon[] = [];
 
       currentDigimons.forEach((current) => {
-        const evolutions = current.evolution || [];
+        const evolutions = Array.isArray(current.evolution) ? current.evolution : [];
 
         evolutions.forEach((evoId) => {
           const evo = allDigimons.find((d) => d.id === evoId);

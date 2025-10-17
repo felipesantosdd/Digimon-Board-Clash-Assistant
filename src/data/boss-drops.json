@@ -3,6 +3,8 @@
     "id": 19,
     "bossId": 4,
     "itemId": 9,
-    "dropChance": 100
+    "dropChance": 100,
+    "minQuantity": 1,
+    "maxQuantity": 1
   }
 ]
