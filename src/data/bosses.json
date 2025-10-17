@@ -4,9 +4,8 @@
     "name": "Devimon",
     "image": "/images/bosses/1760065150107_image.webp",
     "description": "Um Digimon Anjo Caído do tipo Vírus. Extremamente perigoso!",
-    "effect": "boss_dark_aura",
+    "effectId": null,
     "dp": 5000,
-    "typeId": 3,
-    "effectId": null
+    "typeId": 3
   }
 ]

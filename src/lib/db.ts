@@ -28,6 +28,7 @@ if (isProduction) {
       name TEXT NOT NULL,
       image TEXT NOT NULL,
       level INTEGER NOT NULL,
+      dp INTEGER DEFAULT 0,
       typeId INTEGER NOT NULL,
       evolution TEXT DEFAULT '[]',
       active INTEGER DEFAULT 1,
@@ -86,6 +87,13 @@ if (isProduction) {
       dropChance INTEGER NOT NULL CHECK(dropChance >= 1 AND dropChance <= 100),
       FOREIGN KEY (bossId) REFERENCES bosses(id),
       FOREIGN KEY (itemId) REFERENCES items(id)
+    );
+
+    CREATE TABLE IF NOT EXISTS attributes (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      color TEXT,
+      icon TEXT
     );
   `);
 }
