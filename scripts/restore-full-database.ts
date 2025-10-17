@@ -158,6 +158,16 @@ const digimonStmt = db.prepare(`
 `);
 
 for (const digimon of digimonsData) {
+  // Tratar evolução: se já é string, usar diretamente; se é array, converter para string
+  let evolutionStr = '';
+  if (typeof digimon.evolution === 'string') {
+    evolutionStr = digimon.evolution;
+  } else if (Array.isArray(digimon.evolution)) {
+    evolutionStr = JSON.stringify(digimon.evolution);
+  } else {
+    evolutionStr = '[]';
+  }
+
   digimonStmt.run(
     digimon.id,
     digimon.name,
@@ -165,7 +175,7 @@ for (const digimon of digimonsData) {
     digimon.level,
     digimon.dp || 0,
     digimon.typeId,
-    JSON.stringify(digimon.evolution || []),
+    evolutionStr,
     digimon.active !== false ? 1 : 0,
     digimon.boss === true ? 1 : 0,
     digimon.effectId || null,
@@ -194,6 +204,16 @@ const itemStmt = db.prepare(`
 `);
 
 for (const item of itemsData) {
+  // Tratar targetDigimons: se já é string, usar diretamente; se é array, converter para string
+  let targetDigimonsStr = '';
+  if (typeof item.targetDigimons === 'string') {
+    targetDigimonsStr = item.targetDigimons;
+  } else if (Array.isArray(item.targetDigimons)) {
+    targetDigimonsStr = JSON.stringify(item.targetDigimons);
+  } else {
+    targetDigimonsStr = '[]';
+  }
+
   itemStmt.run(
     item.id,
     item.name,
@@ -201,7 +221,7 @@ for (const item of itemsData) {
     item.image,
     item.effectId || null,
     item.dropChance || 0,
-    JSON.stringify(item.targetDigimons || []),
+    targetDigimonsStr,
     item.active !== false ? 1 : 0
   );
 }
